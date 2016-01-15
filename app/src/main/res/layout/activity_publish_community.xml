@@ -1,0 +1,271 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout android:id="@+id/lay_root"
+              xmlns:android="http://schemas.android.com/apk/res/android"
+              xmlns:emojIcon="http://schemas.android.com/apk/res-auto"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              android:background="@color/colorBg"
+              android:clipToPadding="true"
+              android:fitsSystemWindows="true"
+              android:orientation="vertical"
+    >
+
+    <include layout="@layout/toolbar_layout"/>
+
+    <TextView android:layout_width="match_parent"
+              android:layout_height="0.8dp"
+              android:background="@color/colorBg"
+              android:visibility="visible"/>
+
+    <FrameLayout android:layout_width="match_parent"
+                 android:layout_height="0dp"
+                 android:layout_weight="1">
+
+
+        <LinearLayout android:layout_width="match_parent"
+                      android:layout_height="match_parent"
+                      android:layout_marginBottom="8dp"
+                      android:orientation="vertical">
+
+            <EditText
+                android:id="@+id/edt_title"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:background="@color/colorListBg"
+                android:hint="标题"
+                android:paddingLeft="20dp"
+                android:textColorHint="@color/colorLine"
+                android:textSize="18sp"
+
+                />
+            <TextView
+                android:id="@+id/tv_line"
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="@color/colorBgFocus"/>
+
+
+            <LinearLayout android:id="@+id/lay_select_topic"
+                          android:layout_width="match_parent"
+                          android:layout_height="wrap_content"
+                          android:background="@color/colorListBg"
+                          android:orientation="horizontal">
+                <TextView
+                    android:id="@+id/tv_category"
+                    android:layout_width="0dp"
+                    android:layout_height="50dp"
+                    android:layout_weight="1"
+                    android:background="@null"
+                    android:gravity="center_vertical"
+                    android:hint="发帖内容"
+                    android:paddingLeft="20dp"
+                    android:textColorHint="@color/colorLine"
+                    android:textSize="18sp"/>
+
+                <ImageView android:layout_width="50dp"
+                           android:layout_height="50dp"
+                           android:padding="14dp"
+                           android:src="@mipmap/icon_arrow_right"/>
+
+
+            </LinearLayout>
+
+
+            <com.hewuzhe.ui.widget.EmojiEditText
+                android:id="@+id/edt_content"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_marginTop="6dp"
+                android:layout_weight="1"
+                android:background="@color/colorListBg"
+                android:gravity="top|left"
+                android:hint="发帖内容"
+                android:paddingBottom="15dp"
+                android:paddingLeft="20dp"
+                android:paddingRight="20dp"
+                android:paddingTop="10dp"
+                android:textColorHint="@color/colorLine"
+                android:textSize="18sp"
+                emojIcon:emojIconSize="22sp"
+
+                />
+
+            <TextView android:layout_width="match_parent"
+                      android:layout_height="1dp"
+                      android:background="@color/colorBg"/>
+            <LinearLayout
+                android:id="@+id/lay_address"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center_vertical"
+                android:orientation="horizontal"
+                android:paddingLeft="12dp"
+                android:visibility="gone">
+                <ImageView android:layout_width="20dp"
+                           android:layout_height="20dp"
+                    />
+
+                <TextView
+                    android:id="@+id/tv_address"
+                    android:layout_width="match_parent"
+                    android:layout_height="40dp"
+                    android:background="@color/white"
+                    android:gravity="center_vertical"
+                    android:paddingLeft="10dp"
+                    android:textSize="17sp"
+                    />
+
+            </LinearLayout>
+
+
+            <TextView android:layout_width="match_parent"
+                      android:layout_height="1dp"
+                      android:background="@color/colorBg"/>
+
+            <LinearLayout android:layout_width="match_parent"
+                          android:layout_height="wrap_content"
+                          android:background="@color/colorBg">
+
+
+                <!--<it.sephiroth.android.library.widget.HListView-->
+                    <!--android:id="@+id/list_imgs"-->
+                    <!--android:layout_width="match_parent"-->
+                    <!--android:layout_height="60dp"-->
+                    <!--android:layout_margin="10dp"-->
+                    <!--android:listSelector="@color/transparent_two"-->
+                    <!--android:numColumns="auto_fit"-->
+                    <!--android:visibility="gone"-->
+                    <!--app:hlv_dividerWidth="5dip"-->
+                    <!-->-->
+                <!--</it.sephiroth.android.library.widget.HListView>-->
+
+            </LinearLayout>
+
+            <TextView android:layout_width="match_parent"
+                      android:layout_height="1.5dp"
+                      android:background="@color/colorBg"/>
+
+            <LinearLayout
+                android:id="@+id/lay_cb"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center_vertical"
+                android:orientation="horizontal"
+                android:visibility="gone">
+
+                <CheckBox
+                    android:id="@+id/cb_show_in_forum"
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
+                    android:layout_margin="10dp"
+                    android:gravity="center_vertical"
+                    android:textColor="@color/colorLine"
+                    android:textSize="15sp"/>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="center_vertical"
+                    android:text="显示在论坛"
+                    android:textColor="@color/colorLine"
+                    android:textSize="15sp"/>
+
+
+            </LinearLayout>
+
+            <TextView android:layout_width="match_parent"
+                      android:layout_height="1dp"
+                      android:background="@color/colorBg"/>
+
+        </LinearLayout>
+
+        <RelativeLayout
+            android:id="@+id/lay_comment_view"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_gravity="bottom"
+            android:visibility="visible">
+
+            <ImageView
+                android:id="@+id/img_emoj"
+                android:layout_width="45dp"
+                android:layout_height="match_parent"
+                android:padding="10dp"
+                android:src="@drawable/icon_emoj"/>
+
+            <TextView
+                android:id="@+id/tv_line_one"
+                android:layout_width="1dp"
+                android:layout_height="match_parent"
+                android:layout_toRightOf="@id/img_emoj"
+                android:background="@color/colorBg"/>
+
+            <ImageView
+                android:id="@+id/img_selectpic"
+                android:layout_width="45dp"
+                android:layout_height="match_parent"
+                android:layout_toRightOf="@id/tv_line_one"
+                android:padding="10dp"
+                android:src="@drawable/icon_selectpic"/>
+
+            <TextView
+                android:id="@+id/tv_line_two"
+                android:layout_width="1dp"
+                android:layout_height="match_parent"
+                android:layout_toRightOf="@id/img_selectpic"
+                android:background="@color/colorBg"/>
+            <ImageView
+                android:id="@+id/img_takepic"
+                android:layout_width="45dp"
+                android:layout_height="match_parent"
+                android:layout_toRightOf="@id/tv_line_two"
+                android:padding="10dp"
+                android:src="@drawable/icon_takepic"/>
+
+            <TextView
+                android:id="@+id/tv_line_three"
+                android:layout_width="1dp"
+                android:layout_height="match_parent"
+                android:layout_toRightOf="@id/img_takepic"
+                android:background="@color/colorBg"/>
+
+            <ImageView
+                android:id="@+id/img_back"
+                android:layout_width="45dp"
+                android:layout_height="match_parent"
+                android:layout_alignParentRight="true"
+                android:padding="12dp"
+                android:src="@drawable/icon_arrow_down"/>
+
+        </RelativeLayout>
+
+    </FrameLayout>
+
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/colorBg"/>
+
+    <GridView
+        android:id="@+id/grid_emojs"
+        android:layout_width="match_parent"
+        android:layout_height="130dp"
+        android:listSelector="@color/transparent"
+        android:numColumns="7"
+        android:visibility="gone"
+        >
+
+
+    </GridView>
+
+
+    <!--<FrameLayout-->
+    <!--android:id="@+id/emojicons"-->
+    <!--android:layout_width="match_parent"-->
+    <!--android:layout_height="200dp"-->
+    <!--android:layout_alignParentBottom="true"-->
+    <!--android:visibility="gone"/>-->
+
+
+</LinearLayout>
+

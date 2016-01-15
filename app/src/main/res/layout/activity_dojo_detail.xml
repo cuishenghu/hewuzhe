@@ -1,0 +1,234 @@
+<android.support.design.widget.CoordinatorLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/colorBg"
+    tools:context="com.hewuzhe.ui.fragment.OneFragment">
+
+
+    <include layout="@layout/toolbar_layout"/>
+
+
+    <android.support.v4.widget.NestedScrollView
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior">
+
+        <LinearLayout android:layout_width="match_parent"
+                      android:layout_height="wrap_content"
+                      android:orientation="vertical">
+
+            <ImageView android:id="@+id/img"
+                       android:layout_width="match_parent"
+                       android:layout_height="350px"
+                       android:scaleType="fitXY"
+                       android:src="@mipmap/img_bg_videio"/>
+
+
+            <RelativeLayout android:layout_width="match_parent"
+                            android:layout_height="95px"
+                            android:background="@color/colorListBg"
+                            android:paddingBottom="15px"
+                            android:paddingLeft="20px"
+                            android:paddingRight="20px"
+                            android:paddingTop="15px">
+
+
+                <TextView android:id="@+id/tv_name"
+                          android:layout_width="wrap_content"
+                          android:layout_height="wrap_content"
+                          android:layout_centerVertical="true"
+                          android:layout_marginLeft="18px"
+                          android:text="精武门武馆"
+                          android:textColor="@color/white"
+                          android:textSize="30px"/>
+
+                <LinearLayout android:id="@+id/lay_collect"
+                              android:layout_width="wrap_content"
+                              android:layout_height="match_parent"
+                              android:layout_alignParentRight="true"
+                              android:layout_marginBottom="10px"
+                              android:layout_marginLeft="20px"
+                              android:gravity="center_horizontal"
+                              android:orientation="vertical"
+                              android:visibility="gone">
+
+                    <ImageView
+                        android:id="@+id/img_collect"
+                        android:layout_width="30px"
+                        android:layout_height="30px"
+                        android:src="@mipmap/icon_share"/>
+
+                    <TextView android:layout_width="wrap_content"
+                              android:layout_height="wrap_content"
+                              android:layout_marginTop="2px"
+                              android:layout_weight="1"
+                              android:gravity="bottom"
+                              android:text="转发"
+                              android:textColor="@color/white"
+                              android:textSize="20px"/>
+
+                </LinearLayout>
+
+                <LinearLayout android:id="@+id/lay_praise"
+                              android:layout_width="wrap_content"
+                              android:layout_height="match_parent"
+                              android:layout_marginBottom="10px"
+                              android:layout_marginLeft="20px"
+                              android:layout_toLeftOf="@id/lay_collect"
+                              android:gravity="center_horizontal"
+                              android:orientation="vertical"
+                              android:visibility="gone">
+
+                    <ImageView
+                        android:id="@+id/img_praise"
+                        android:layout_width="30px"
+                        android:layout_height="30px"
+                        android:src="@mipmap/icon_share_2"/>
+
+                    <TextView android:layout_width="wrap_content"
+                              android:layout_height="wrap_content"
+                              android:layout_marginTop="2px"
+                              android:layout_weight="1"
+                              android:gravity="bottom"
+                              android:text="分享"
+                              android:textColor="@color/white"
+                              android:textSize="20px"/>
+
+
+                </LinearLayout>
+
+
+            </RelativeLayout>
+            <LinearLayout android:layout_width="match_parent"
+                          android:layout_height="95px"
+                          android:layout_marginTop="2px"
+                          android:background="@color/colorListBg"
+                          android:gravity="center_vertical"
+                          android:orientation="horizontal"
+                          android:paddingLeft="38px">
+                <ImageView android:layout_width="35px"
+                           android:layout_height="35px"
+                           android:src="@mipmap/icon_loc"/>
+                <TextView android:id="@+id/tv_address"
+                          style="@style/text_30_colorLine"
+                          android:layout_width="wrap_content"
+                          android:layout_height="wrap_content"
+                          android:layout_weight="1"
+                          android:text="山东省临沂市人民广场"/>
+
+                <TextView android:layout_width="2px"
+                          android:layout_height="match_parent"
+                          android:layout_marginBottom="10px"
+                          android:layout_marginTop="10px"
+                          android:background="@color/colorBg"/>
+
+                <ImageView android:id="@+id/tv_call"
+                           android:layout_width="115px"
+                           android:layout_height="match_parent"
+                           android:padding="30px"
+                           android:src="@mipmap/icon_call"/>
+
+
+            </LinearLayout>
+
+            <LinearLayout android:layout_width="match_parent"
+                          android:layout_height="wrap_content"
+                          android:layout_marginTop="10px"
+                          android:background="@color/colorListBg"
+                          android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="95px"
+                    android:background="@color/colorListBg"
+                    android:gravity="center_vertical"
+                    android:paddingLeft="38px"
+                    android:text="武馆介绍"
+                    android:textColor="@color/white"
+                    android:textSize="30px"/>
+                <TextView android:layout_width="match_parent"
+                          android:layout_height="2px"
+                          android:layout_marginLeft="38px"
+                          android:background="@color/colorBg"/>
+
+
+                <TextView android:id="@+id/tv_desc"
+                          android:layout_width="match_parent"
+                          android:layout_height="wrap_content"
+                          android:layout_marginTop="15px"
+                          android:background="@color/colorListBg"
+                          android:paddingLeft="38px"
+                          android:paddingRight="38px"
+                          android:text="简介：..."
+                          android:textColor="@color/white"
+                          android:textSize="25px"/>
+
+            </LinearLayout>
+
+            <LinearLayout android:layout_width="match_parent"
+                          android:layout_height="wrap_content"
+                          android:layout_marginTop="10px"
+                          android:background="@color/colorListBg"
+                          android:orientation="vertical">
+                <LinearLayout android:layout_width="match_parent"
+                              android:layout_height="80px"
+                              android:background="@color/colorListBg"
+                              android:gravity="center_vertical"
+                              android:paddingLeft="20px"
+                              android:paddingRight="20px">
+
+                    <TextView android:layout_width="wrap_content"
+                              android:layout_height="wrap_content"
+                              android:layout_weight="1"
+                              android:paddingLeft="18px"
+                              android:text="武馆展示"
+                              android:textColor="@color/white"
+                              android:textSize="25px"/>
+
+                    <TextView android:layout_width="2dp"
+                              android:layout_height="match_parent"
+                              android:layout_marginBottom="15px"
+                              android:layout_marginTop="15px"
+                              android:background="@color/colorBg"/>
+
+                    <TextView android:id="@+id/tv_comment_count"
+                              android:layout_width="wrap_content"
+                              android:layout_height="wrap_content"
+                              android:layout_marginLeft="10px"
+                              android:text="共100条"
+                              android:textColor="@color/white"
+                              android:textSize="25px"/>
+
+                </LinearLayout>
+
+                <TextView android:layout_width="match_parent"
+                          android:layout_height="2px"
+                          android:layout_marginLeft="38px"
+                          android:background="@color/colorBg"/>
+
+
+                <android.support.v7.widget.RecyclerView
+                    android:id="@+id/recycler_view"
+                    android:layout_width="match_parent"
+                    android:layout_height="220px"
+                    android:orientation="horizontal"
+                    android:paddingBottom="10px"
+                    android:paddingLeft="20px"
+                    android:paddingTop="15px">
+
+
+                </android.support.v7.widget.RecyclerView>
+
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+    </android.support.v4.widget.NestedScrollView>
+
+
+</android.support.design.widget.CoordinatorLayout>

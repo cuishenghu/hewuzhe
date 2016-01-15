@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent" android:layout_height="match_parent"
+    android:background="@color/colorListBg"
+    android:orientation="vertical"
+    tools:context="com.hewuzhe.ui.activity.ProfileActivity">
+
+    <include layout="@layout/toolbar_layout"/>
+
+
+    <FrameLayout android:layout_width="match_parent"
+                 android:layout_height="260px">
+
+        <ImageView android:id="@+id/img"
+                   android:layout_width="300px"
+                   android:layout_height="220px"
+                   android:layout_gravity="center_vertical"
+                   android:layout_marginLeft="20px"
+                   android:scaleType="fitXY"
+                   android:src="@mipmap/img_bg_videio"/>
+
+
+        <EditText android:id="@+id/tv_name"
+                  android:layout_width="match_parent"
+                  android:layout_height="220px"
+                  android:layout_gravity="center_vertical"
+                  android:layout_marginLeft="310px"
+                  android:background="@null"
+                  android:gravity="top"
+                  android:hint="请写下视频的标题"
+                  android:paddingLeft="20px"
+                  android:textColorHint="@color/colorLine"/>
+
+        <TextView android:layout_width="wrap_content"
+                  android:layout_height="wrap_content"
+                  android:layout_gravity="bottom|right"
+                  android:layout_marginBottom="40px"
+                  android:layout_marginRight="10px"
+                  android:text="字数在20字以内"
+                  android:textColor="@color/colorLine"
+                  android:textSize="20px"/>
+
+    </FrameLayout>
+
+    <TextView android:layout_width="match_parent"
+              android:layout_height="2px"
+              android:background="@color/colorBg"/>
+
+    <LinearLayout android:id="@+id/lay_select_topic"
+                  android:layout_width="match_parent"
+                  android:layout_height="85px"
+                  android:orientation="horizontal">
+        <TextView style="@style/text_30_colorLine"
+                  android:layout_width="wrap_content"
+                  android:layout_height="wrap_content"
+                  android:layout_gravity="center_vertical"
+                  android:layout_marginLeft="20px"
+                  android:layout_weight="1"
+                  android:text="选择视频分类"/>
+
+        <TextView android:id="@+id/tv_cate"
+                  style="@style/text_30_colorLine"
+                  android:layout_width="wrap_content"
+                  android:layout_height="wrap_content"
+                  android:layout_gravity="center_vertical"
+                  android:layout_marginLeft="20px"
+                  android:text=""/>
+
+
+        <ImageView android:layout_width="85px"
+                   android:layout_height="85px"
+                   android:padding="20px"
+                   android:src="@mipmap/icon_arrow_right"/>
+
+
+    </LinearLayout>
+
+    <TextView android:layout_width="match_parent"
+              android:layout_height="4dp"
+              android:background="@color/colorBg"/>
+
+
+    <EditText android:id="@+id/tv_desc"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              android:layout_gravity="center_vertical"
+              android:background="@null"
+              android:gravity="top"
+              android:hint="请写下视频的介绍"
+              android:paddingLeft="20px"
+              android:paddingTop="20px"
+              android:textColorHint="@color/colorLine"/>
+
+
+</LinearLayout>

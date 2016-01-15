@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/colorBg"
+    android:orientation="vertical"
+    tools:context="com.hewuzhe.ui.activity.MegaGameVideosActivity">
+
+    <include layout="@layout/toolbar_layout"/>
+
+
+    <LinearLayout android:layout_width="match_parent"
+                  android:layout_height="90px"
+                  android:layout_marginBottom="10px"
+                  android:layout_marginTop="10px"
+                  android:background="@color/colorListBg"
+                  android:gravity="center_vertical"
+                  android:orientation="horizontal">
+
+        <ImageView android:layout_width="70px"
+                   android:layout_height="70px"
+                   android:layout_marginLeft="20px"
+                   android:padding="18px"
+                   android:src="@mipmap/icon_search"/>
+
+        <EditText android:id="@+id/edt_search_content"
+                  android:layout_width="match_parent"
+                  android:layout_height="70px"
+                  android:layout_marginLeft="20px"
+                  android:background="@null"
+                  android:hint="搜索参赛者的编号"
+                  android:imeActionId="@+id/edt_search_content_actionid"
+                  android:imeOptions="actionSearch"
+                  android:inputType="text"
+                  android:textColor="@color/colorLine"
+                  android:textColorHint="@color/colorLine"/>
+
+
+    </LinearLayout>
+
+    <com.hewuzhe.ui.widget.MultiSwipeRefreshLayout
+        android:id="@+id/swipe_refresh_layout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/recycler_view"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+
+        </android.support.v7.widget.RecyclerView>
+
+
+    </com.hewuzhe.ui.widget.MultiSwipeRefreshLayout>
+
+</LinearLayout>

@@ -1,0 +1,330 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              xmlns:tools="http://schemas.android.com/tools"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              android:background="@color/colorBg"
+              android:orientation="vertical"
+              tools:context="com.hewuzhe.ui.fragment.WarriorFragment">
+
+    <include layout="@layout/toolbar_federal"/>
+    <!-- TODO: Update blank fragment layout -->
+
+
+    <LinearLayout android:layout_width="match_parent"
+                  android:layout_height="wrap_content"
+                  android:layout_marginTop="8px"
+                  android:background="@color/colorListBg"
+                  android:orientation="vertical">
+
+
+        <LinearLayout
+            android:id="@+id/lay_friends_condition"
+            android:layout_width="match_parent"
+            android:layout_height="80px"
+            android:gravity="center_vertical"
+            android:orientation="horizontal"
+            >
+            <ImageView android:layout_width="40dp"
+                       android:layout_height="40dp"
+                       android:padding="8dp"
+                       android:src="@mipmap/icon_11"/>
+
+            <TextView android:layout_width="wrap_content"
+                      android:layout_height="wrap_content"
+                      android:layout_weight="1"
+                      android:text="武友动态"
+                      android:textColor="@color/white"
+                      android:textSize="30px"/>
+
+            <ImageView android:layout_width="40dp"
+                       android:layout_height="40dp"
+                       android:padding="12dp"
+                       android:src="@mipmap/icon_arrow_right"/>
+
+
+        </LinearLayout>
+
+        <TextView android:layout_width="match_parent"
+                  android:layout_height="1dp"
+                  android:layout_marginLeft="8dp"
+                  android:background="@color/colorBg"/>
+
+
+        <LinearLayout android:id="@+id/lay_group_condition"
+                      android:layout_width="match_parent"
+                      android:layout_height="80px"
+                      android:gravity="center_vertical"
+                      android:orientation="horizontal"
+            >
+            <ImageView android:layout_width="40dp"
+                       android:layout_height="40dp"
+                       android:padding="8dp"
+                       android:src="@mipmap/icon_17"/>
+
+            <TextView android:layout_width="wrap_content"
+                      android:layout_height="wrap_content"
+                      android:layout_weight="1"
+                      android:text="战队动态"
+                      android:textColor="@color/white"
+                      android:textSize="30px"/>
+
+            <ImageView android:layout_width="40dp"
+                       android:layout_height="40dp"
+                       android:padding="12dp"
+                       android:src="@mipmap/icon_arrow_right"/>
+
+
+        </LinearLayout>
+
+
+        <TextView android:layout_width="match_parent"
+                  android:layout_height="1dp"
+                  android:layout_marginLeft="8dp"
+                  android:background="@color/colorBg"/>
+
+
+        <LinearLayout android:id="@+id/federal_confition"
+                      android:layout_width="match_parent"
+                      android:layout_height="80px"
+                      android:gravity="center_vertical"
+                      android:orientation="horizontal"
+            >
+            <ImageView android:layout_width="40dp"
+                       android:layout_height="40dp"
+                       android:padding="8dp"
+                       android:src="@mipmap/icon_19"/>
+
+            <TextView android:layout_width="wrap_content"
+                      android:layout_height="wrap_content"
+                      android:layout_weight="1"
+                      android:text="联盟动态"
+                      android:textColor="@color/white"
+                      android:textSize="30px"/>
+
+            <ImageView android:layout_width="40dp"
+                       android:layout_height="40dp"
+                       android:padding="12dp"
+                       android:src="@mipmap/icon_arrow_right"/>
+
+
+        </LinearLayout>
+
+
+    </LinearLayout>
+
+
+    <LinearLayout android:layout_width="match_parent"
+                  android:layout_height="wrap_content"
+                  android:layout_marginTop="8px"
+                  android:background="@color/colorListBg"
+                  android:orientation="vertical">
+
+
+        <LinearLayout android:id="@+id/lay_make_warriors"
+                      android:layout_width="match_parent"
+                      android:layout_height="80px"
+                      android:gravity="center_vertical"
+                      android:orientation="horizontal"
+            >
+            <ImageView android:layout_width="40dp"
+                       android:layout_height="40dp"
+                       android:padding="8dp"
+                       android:src="@mipmap/icon_21"/>
+
+            <TextView android:layout_width="wrap_content"
+                      android:layout_height="wrap_content"
+                      android:layout_weight="1"
+                      android:text="结交武者"
+                      android:textColor="@color/white"
+                      android:textSize="30px"/>
+
+            <ImageView android:layout_width="40dp"
+                       android:layout_height="40dp"
+                       android:padding="12dp"
+                       android:src="@mipmap/icon_arrow_right"/>
+
+
+        </LinearLayout>
+
+        <TextView android:layout_width="match_parent"
+                  android:layout_height="1dp"
+                  android:layout_marginLeft="8dp"
+                  android:background="@color/colorBg"/>
+
+
+        <LinearLayout android:id="@+id/lay_join_group"
+                      android:layout_width="match_parent"
+                      android:layout_height="80px"
+
+                      android:gravity="center_vertical"
+                      android:orientation="horizontal"
+            >
+            <ImageView android:layout_width="40dp"
+                       android:layout_height="40dp"
+                       android:padding="8dp"
+                       android:src="@mipmap/icon_23"/>
+
+            <TextView android:layout_width="wrap_content"
+                      android:layout_height="wrap_content"
+                      android:layout_weight="1"
+                      android:text="加入战队"
+                      android:textColor="@color/white"
+                      android:textSize="30px"/>
+
+            <ImageView android:layout_width="40dp"
+                       android:layout_height="40dp"
+                       android:padding="12dp"
+                       android:src="@mipmap/icon_arrow_right"/>
+
+
+        </LinearLayout>
+
+
+    </LinearLayout>
+
+
+    <LinearLayout android:layout_width="match_parent"
+                  android:layout_height="wrap_content"
+                  android:layout_marginTop="8px"
+                  android:background="@color/colorListBg"
+                  android:orientation="vertical">
+
+
+        <LinearLayout android:id="@+id/lay_megagame"
+                      android:layout_width="match_parent"
+                      android:layout_height="80px"
+                      android:gravity="center_vertical"
+                      android:orientation="horizontal"
+            >
+            <ImageView android:layout_width="40dp"
+                       android:layout_height="40dp"
+                       android:padding="8dp"
+                       android:src="@mipmap/icon_25"/>
+
+            <TextView android:layout_width="wrap_content"
+                      android:layout_height="wrap_content"
+                      android:layout_weight="1"
+                      android:text="武者大赛"
+                      android:textColor="@color/white"
+                      android:textSize="30px"/>
+
+            <ImageView android:layout_width="40dp"
+                       android:layout_height="40dp"
+                       android:padding="12dp"
+                       android:src="@mipmap/icon_arrow_right"/>
+
+
+        </LinearLayout>
+
+        <TextView android:layout_width="match_parent"
+                  android:layout_height="1dp"
+                  android:layout_marginLeft="8dp"
+                  android:background="@color/colorBg"/>
+
+
+        <LinearLayout android:id="@+id/lay_story"
+                      android:layout_width="match_parent"
+                      android:layout_height="80px"
+                      android:gravity="center_vertical"
+                      android:orientation="horizontal"
+            >
+            <ImageView android:layout_width="40dp"
+                       android:layout_height="40dp"
+                       android:padding="8dp"
+                       android:src="@mipmap/icon_27"/>
+
+            <TextView android:layout_width="wrap_content"
+                      android:layout_height="wrap_content"
+                      android:layout_weight="1"
+                      android:text="江湖故事"
+                      android:textColor="@color/white"
+                      android:textSize="30px"/>
+
+            <ImageView android:layout_width="40dp"
+                       android:layout_height="40dp"
+                       android:padding="12dp"
+                       android:src="@mipmap/icon_arrow_right"/>
+
+
+        </LinearLayout>
+
+
+        <TextView android:layout_width="match_parent"
+                  android:layout_height="1dp"
+                  android:layout_marginLeft="8dp"
+                  android:background="@color/colorBg"/>
+
+
+        <LinearLayout android:id="@+id/lay_coorperation"
+                      android:layout_width="match_parent"
+                      android:layout_height="80px"
+                      android:gravity="center_vertical"
+                      android:orientation="horizontal"
+            >
+            <ImageView android:layout_width="40dp"
+                       android:layout_height="40dp"
+                       android:padding="8dp"
+                       android:src="@mipmap/icon_29"/>
+
+            <TextView android:layout_width="wrap_content"
+                      android:layout_height="wrap_content"
+                      android:layout_weight="1"
+                      android:text="招聘合作"
+                      android:textColor="@color/white"
+                      android:textSize="30px"/>
+
+            <ImageView android:layout_width="40dp"
+                       android:layout_height="40dp"
+                       android:padding="12dp"
+                       android:src="@mipmap/icon_arrow_right"/>
+
+
+        </LinearLayout>
+
+
+    </LinearLayout>
+
+
+    <LinearLayout android:layout_width="match_parent"
+                  android:layout_height="wrap_content"
+                  android:layout_marginTop="8px"
+                  android:background="@color/colorListBg"
+                  android:orientation="vertical">
+
+
+        <LinearLayout android:id="@+id/lay_scan"
+                      android:layout_width="match_parent"
+                      android:layout_height="80px"
+                      android:gravity="center_vertical"
+                      android:orientation="horizontal"
+            >
+            <ImageView android:layout_width="40dp"
+                       android:layout_height="40dp"
+                       android:padding="8dp"
+                       android:src="@mipmap/icon_31"/>
+
+            <TextView android:layout_width="wrap_content"
+                      android:layout_height="wrap_content"
+                      android:layout_weight="1"
+                      android:text="扫一扫"
+                      android:textColor="@color/white"
+                      android:textSize="30px"/>
+
+            <ImageView android:layout_width="40dp"
+                       android:layout_height="40dp"
+                       android:padding="12dp"
+                       android:src="@mipmap/icon_arrow_right"/>
+
+
+        </LinearLayout>
+
+        <TextView android:layout_width="match_parent"
+                  android:layout_height="1dp"
+                  android:layout_marginLeft="8dp"
+                  android:background="@color/colorBg"/>
+
+
+    </LinearLayout>
+
+
+</LinearLayout>

@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent" android:layout_height="match_parent"
+    android:background="@color/colorBg"
+    android:orientation="vertical"
+    tools:context="com.hewuzhe.ui.activity.ProfileActivity">
+
+    <include layout="@layout/toolbar_layout"/>
+
+
+    <com.hewuzhe.ui.widget.MovieRecorderView
+        android:id="@+id/movieRecorderView"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_margin="3dp"
+        android:layout_weight="1"/>
+
+    <RelativeLayout android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_weight="1.1"
+        >
+        <Button
+            android:id="@+id/shoot_button"
+            android:layout_width="200px"
+            android:layout_height="200px"
+            android:layout_centerInParent="true"
+            android:background="@drawable/circle_black_line"
+            android:text="按住拍摄"
+            android:textColor="@drawable/text_selectable_background"/>
+
+        <LinearLayout
+            android:id="@+id/lay_btns"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:visibility="gone"
+            android:layout_centerInParent="true"
+            android:orientation="vertical">
+
+            <Button android:id="@+id/btn_save"
+                    style="@style/text_30_white"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="10px"
+                    android:background="@color/colorYellow"
+                    android:text="保存"/>
+
+            <Button android:id="@+id/btn_record_again"
+                    style="@style/text_30_white"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/btn_save"
+                    android:layout_marginTop="10px"
+                    android:background="@color/colorYellow"
+                    android:text="重录"/>
+
+        </LinearLayout>
+
+    </RelativeLayout>
+
+
+</LinearLayout>

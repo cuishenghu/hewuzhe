@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:layout_width="match_parent"
+              android:layout_height="wrap_content"
+              android:background="@color/colorListBg"
+              android:orientation="vertical">
+
+    <RelativeLayout android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="20px">
+
+        <ImageView
+            android:id="@+id/img_avatar"
+            android:layout_width="45px"
+            android:layout_height="45px"
+            android:layout_marginTop="10px"
+            android:src="@mipmap/icon_announce"
+            />
+
+
+        <TextView android:id="@+id/tv_name"
+                  android:layout_width="wrap_content"
+                  android:layout_height="wrap_content"
+                  android:layout_marginLeft="20px"
+                  android:layout_marginTop="3px"
+                  android:layout_toRightOf="@id/img_avatar"
+                  android:text="2015-10-11"
+                  android:textColor="@color/colorLine"
+                  android:textSize="28px"/>
+
+        <TextView android:id="@+id/tv_content"
+                  android:layout_width="wrap_content"
+                  android:layout_height="wrap_content"
+                  android:layout_below="@id/tv_name"
+                  android:layout_marginLeft="20px"
+                  android:layout_marginTop="5px"
+                  android:layout_toRightOf="@id/img_avatar"
+                  android:ellipsize="end"
+                  android:maxLines="2"
+                  android:text="来源：评论了一条信息"
+                  android:textColor="@color/colorLine"
+                  android:textSize="28px"/>
+
+
+        <TextView android:id="@+id/tv_add_time"
+                  android:layout_width="wrap_content"
+                  android:layout_height="wrap_content"
+                  android:layout_below="@id/tv_content"
+                  android:layout_centerVertical="true"
+                  android:layout_marginLeft="20px"
+                  android:layout_marginTop="10px"
+                  android:layout_toRightOf="@id/img_avatar"
+                  android:text="+10个"
+                  android:textColor="@color/colorLine"
+                  android:textSize="27px"/>
+
+    </RelativeLayout>
+
+    <TextView android:layout_width="match_parent"
+              android:layout_height="1dp"
+              android:layout_marginLeft="100px"
+              android:background="@color/colorBg"/>
+
+
+</LinearLayout>

@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:layout_width="match_parent"
+              android:layout_height="wrap_content"
+              android:background="@color/colorListBg"
+              android:orientation="vertical"
+    >
+
+    <RelativeLayout android:layout_width="match_parent"
+                    android:layout_height="120px"
+                    android:orientation="horizontal">
+
+        <ImageView android:id="@+id/img_avatar"
+                   android:layout_width="85px"
+                   android:layout_height="85px"
+                   android:layout_centerVertical="true"
+                   android:layout_marginLeft="18px"
+                   android:src="@mipmap/img_avatar"/>
+
+        <LinearLayout android:id="@id/lay_content"
+                      android:layout_width="match_parent"
+                      android:layout_height="wrap_content"
+                      android:layout_centerVertical="true"
+                      android:layout_toRightOf="@id/img_avatar"
+                      android:gravity="center_vertical"
+                      android:orientation="vertical">
+            <TextView android:id="@+id/tv_user_name"
+                      style="@style/text_27_white"
+                      android:layout_width="match_parent"
+                      android:layout_height="wrap_content"
+                      android:layout_marginLeft="20px"
+                      android:singleLine="true"
+                      android:text="成龙徒弟"
+                />
+
+            <TextView android:id="@+id/tv_join_time"
+                      style="@style/text_27_white"
+                      android:layout_width="match_parent"
+                      android:layout_height="wrap_content"
+                      android:layout_marginLeft="20px"
+                      android:layout_marginTop="6px"
+                      android:text="报名时间："
+                />
+        </LinearLayout>
+        <TextView android:id="@+id/tv_code"
+                  style="@style/text_27_white"
+                  android:layout_width="wrap_content"
+                  android:layout_height="wrap_content"
+                  android:layout_alignBottom="@id/lay_content"
+                  android:layout_alignParentRight="true"
+                  android:paddingRight="10px"
+                  android:text="编号："
+            />
+
+    </RelativeLayout>
+
+
+    <TextView android:layout_width="match_parent"
+              android:layout_height="2px"
+              android:layout_marginLeft="40px"
+              android:background="@color/colorBg"/>
+
+
+</LinearLayout>

@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout android:id="@+id/square_layout"
+             xmlns:android="http://schemas.android.com/apk/res/android"
+             xmlns:app="http://schemas.android.com/apk/res-auto"
+             android:layout_width="match_parent"
+             android:layout_height="match_parent"
+             android:background="@color/colorBg"
+    >
+
+    <io.vov.vitamio.widget.CenterLayout android:layout_width="match_parent"
+                                        android:layout_height="match_parent">
+
+        <io.vov.vitamio.widget.VideoView
+            android:id="@+id/videoView"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_centerHorizontal="true"
+            android:layout_centerVertical="true"/>
+
+        <materialdesign.views.ProgressWheel
+            android:id="@+id/progressWheel"
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            android:layout_centerInParent="true"
+            android:layout_gravity="center"
+            app:pwBarColor="@color/colorBg"
+            app:pwBarLength="60dp"
+            app:pwBarWidth="5dp"
+            app:pwRimColor="@color/colorYellow"
+            app:pwRimWidth="2dp"
+            app:pwSpinSpeed="10dp"
+            app:pwText="缓冲..."
+            app:pwTextColor="#FFF"
+            app:pwTextSize="8sp"/>
+
+        <ImageButton
+            android:id="@+id/button_play_center"
+            android:layout_width="65px"
+            android:layout_height="65px"
+            android:layout_centerInParent="true"
+            android:layout_gravity="center"
+            android:background="#00000000"
+            android:src="@mipmap/icon_pause"
+            android:visibility="gone"/>
+
+
+    </io.vov.vitamio.widget.CenterLayout>
+
+
+    <FrameLayout android:id="@+id/lay_menus"
+                 android:layout_width="match_parent"
+                 android:layout_height="80px"
+                 android:layout_gravity="bottom">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="80px"
+            android:background="@color/colorListBg"
+            android:visibility="visible">
+
+            <ImageButton
+                android:id="@+id/button_play"
+                android:layout_width="45px"
+                android:layout_height="45px"
+                android:layout_centerVertical="true"
+                android:layout_gravity="center"
+                android:layout_marginLeft="16px"
+                android:background="#00000000"
+                android:src="@mipmap/icon_pause"
+                android:visibility="visible"/>
+
+            <ImageButton
+                android:id="@+id/btn_full_screen"
+                android:layout_width="45px"
+                android:layout_height="45px"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:layout_gravity="center"
+                android:layout_marginRight="16px"
+                android:background="#00000000"
+                android:src="@mipmap/icon_full_screen"
+                android:visibility="visible"/>
+
+            <materialdesign.views.Slider
+                android:id="@+id/slider"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_toLeftOf="@id/btn_full_screen"
+                android:layout_toRightOf="@id/button_play"
+                android:background="@color/colorYellow"
+                android:visibility="visible"
+                app:showNumberIndicator="true"
+                app:value="1"
+                />
+
+        </RelativeLayout>
+
+        <TextView
+            android:id="@+id/tv_ducration"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom|right"
+            android:layout_marginBottom="10px"
+            android:layout_marginRight="66px"
+            android:text="/100:00"
+
+            android:textColor="@color/colorBg"
+            android:textSize="22px"/>
+
+
+        <TextView
+            android:id="@+id/tv_cur_duration"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom|right"
+            android:layout_marginBottom="10px"
+            android:layout_marginRight="136px"
+            android:text="09:00"
+
+            android:textColor="@color/colorLine"
+            android:textSize="22px"/>
+
+    </FrameLayout>
+
+</FrameLayout>

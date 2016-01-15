@@ -1,0 +1,174 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/colorBg"
+    android:orientation="vertical"
+    tools:context="com.hewuzhe.ui.activity.SettingsActivity">
+
+    <include layout="@layout/toolbar_layout"/>
+
+
+    <LinearLayout android:layout_width="match_parent"
+                  android:layout_height="wrap_content"
+                  android:layout_marginTop="8px"
+                  android:background="@color/colorListBg"
+                  android:orientation="vertical"
+                  android:paddingLeft="15dp">
+
+
+        <LinearLayout
+            android:id="@+id/lay_friends_condition"
+            android:layout_width="match_parent"
+            android:layout_height="80px"
+
+            android:gravity="center_vertical"
+            android:orientation="horizontal"
+            >
+
+            <TextView android:layout_width="wrap_content"
+                      android:layout_height="wrap_content"
+                      android:layout_weight="1"
+                      android:text="朋友圈评论提示"
+                      android:textColor="@color/white"
+                      android:textSize="30px"/>
+
+            <com.hewuzhe.ui.widget.SwitchView
+                android:layout_width="80px"
+                android:layout_height="50px"
+                android:layout_centerInParent="true"
+                android:layout_marginRight="20px"
+                />
+
+
+        </LinearLayout>
+
+
+        <LinearLayout
+            android:id="@+id/lay_settings"
+            android:layout_width="match_parent"
+            android:layout_height="80px"
+
+            android:gravity="center_vertical"
+            android:orientation="horizontal"
+            >
+
+            <TextView android:id="@+id/lay_noti"
+                      android:layout_width="wrap_content"
+                      android:layout_height="wrap_content"
+                      android:layout_weight="1"
+                      android:text="接收新的聊天"
+                      android:textColor="@color/white"
+                      android:textSize="30px"/>
+
+            <com.hewuzhe.ui.widget.SwitchView
+                android:layout_width="80px"
+                android:layout_height="50px"
+                android:layout_centerInParent="true"
+                android:layout_marginRight="20px"
+                />
+
+
+        </LinearLayout>
+
+        <TextView android:layout_width="match_parent"
+                  android:layout_height="1dp"
+                  android:layout_marginLeft="8dp"
+                  android:background="@color/colorBg"/>
+
+
+        <LinearLayout android:id="@+id/lay_sound"
+                      android:layout_width="match_parent"
+                      android:layout_height="80px"
+
+                      android:gravity="center_vertical"
+                      android:orientation="horizontal"
+            >
+
+            <TextView android:layout_width="wrap_content"
+                      android:layout_height="wrap_content"
+                      android:layout_weight="1"
+                      android:text="声音"
+                      android:textColor="@color/white"
+                      android:textSize="30px"/>
+
+            <com.hewuzhe.ui.widget.SwitchView
+                android:layout_width="80px"
+                android:layout_height="50px"
+                android:layout_centerInParent="true"
+                android:layout_marginRight="20px"
+                />
+
+
+        </LinearLayout>
+
+        <TextView android:layout_width="match_parent"
+                  android:layout_height="1dp"
+                  android:layout_marginLeft="8dp"
+                  android:background="@color/colorBg"/>
+
+
+        <LinearLayout
+            android:id="@+id/lay_vibrate"
+            android:layout_width="match_parent"
+
+            android:layout_height="80px"
+            android:gravity="center_vertical"
+            android:orientation="horizontal"
+            >
+
+            <TextView android:layout_width="wrap_content"
+                      android:layout_height="wrap_content"
+                      android:layout_weight="1"
+                      android:text="震动"
+                      android:textColor="@color/white"
+                      android:textSize="30px"/>
+
+            <com.hewuzhe.ui.widget.SwitchView
+                android:layout_width="80px"
+                android:layout_height="50px"
+                android:layout_centerInParent="true"
+                android:layout_marginRight="20px"
+                />
+
+
+        </LinearLayout>
+
+        <TextView android:layout_width="match_parent"
+                  android:layout_height="1dp"
+                  android:layout_marginLeft="8dp"
+                  android:background="@color/colorBg"/>
+
+
+        <LinearLayout
+            android:id="@+id/lay_shield_list"
+            android:layout_width="match_parent"
+            android:layout_height="80px"
+            android:gravity="center_vertical"
+            android:orientation="horizontal"
+            >
+
+            <TextView android:layout_width="wrap_content"
+                      android:layout_height="wrap_content"
+                      android:layout_weight="1"
+                      android:text="屏蔽列表"
+                      android:textColor="@color/white"
+                      android:textSize="30px"/>
+
+
+            <ImageView android:layout_width="40dp"
+                       android:layout_height="40dp"
+                       android:layout_marginRight="10px"
+                       android:padding="12dp"
+                       android:src="@mipmap/icon_arrow_right"/>
+
+
+        </LinearLayout>
+
+
+    </LinearLayout>
+
+
+</LinearLayout>

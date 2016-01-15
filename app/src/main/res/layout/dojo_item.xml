@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:layout_width="match_parent"
+              android:layout_height="wrap_content"
+              android:background="@color/colorBg"
+              android:gravity="center_vertical"
+              android:orientation="horizontal">
+
+    <LinearLayout android:layout_width="match_parent"
+                  android:layout_height="wrap_content"
+                  android:layout_marginBottom="10px"
+                  android:background="@color/colorListBg"
+                  android:orientation="horizontal"
+                  android:padding="10px">
+
+        <ImageView android:id="@+id/img"
+                   android:layout_width="200px"
+                   android:layout_height="150px"
+                   android:scaleType="fitXY"
+                   android:src="@mipmap/img_bg_videio"/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="150px"
+            android:orientation="vertical"
+            android:paddingBottom="10px"
+            android:paddingLeft="10px"
+            android:paddingTop="10px">
+            <TextView android:id="@+id/tv_name"
+                      style="@style/text_30_white"
+                      android:layout_width="wrap_content"
+                      android:layout_height="wrap_content"
+                      android:singleLine="true"
+                      android:ellipsize="end"
+                      android:text="临沂核武者"/>
+
+            <TextView android:id="@+id/tv_desc"
+                      style="@style/text_27_colorLine"
+                      android:layout_width="wrap_content"
+                      android:layout_height="wrap_content"
+                      android:ellipsize="end"
+                      android:singleLine="true"
+                      android:text="临沂核武者"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="22px"
+                android:gravity="center_vertical"
+                android:singleLine="true"
+                android:text="·································································································"
+                android:textColor="@color/colorLine"/>
+
+            <LinearLayout android:layout_width="match_parent"
+                          android:layout_height="match_parent"
+                          android:layout_marginTop="10px"
+                          android:gravity="center_vertical"
+                          android:orientation="horizontal">
+
+                <ImageView android:layout_width="30px"
+                           android:layout_height="30px"
+                           android:src="@mipmap/icon_loc"/>
+
+                <TextView android:id="@+id/tv_loc"
+                          style="@style/text_25_colorLine"
+                          android:layout_width="wrap_content"
+                          android:layout_height="wrap_content"
+                          android:layout_marginLeft="8px"
+                          android:ellipsize="end"
+                          android:maxLength="6"
+                          android:singleLine="true"
+                          android:text="临沂市..."/>
+
+                <ImageView android:layout_width="30px"
+                           android:layout_height="30px"
+                           android:layout_marginLeft="15px"
+                           android:src="@mipmap/icon_call"/>
+
+                <TextView android:id="@+id/tv_call"
+                          style="@style/text_25_colorLine"
+                          android:layout_width="wrap_content"
+                          android:layout_height="wrap_content"
+                          android:layout_marginLeft="8px"
+                          android:singleLine="true"
+                          android:text="0539-123456"/>
+
+            </LinearLayout>
+
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+
+</LinearLayout>

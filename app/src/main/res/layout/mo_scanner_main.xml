@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+                android:background="@color/transparent"
+    >
+    <include layout="@layout/toolbar_layout"/>
+
+    <SurfaceView
+        android:id="@+id/mo_scanner_preview_view"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:layout_gravity="center"
+        android:background="@color/transparent"/>
+
+
+    <ImageView
+        android:id="@+id/img_above"
+        android:layout_width="match_parent"
+        android:layout_height="150dp"
+        android:background="@color/colorBg"
+
+        />
+
+    <FrameLayout
+        android:layout_below="@id/img_above"
+        android:id="@+id/lay_scanner_viewfinder_view"
+        android:layout_width="200dp"
+        android:layout_height="200dp"
+        android:layout_centerHorizontal="true"
+        android:layout_gravity="center"
+        >
+
+        <com.Zxing.view.ViewfinderView
+            android:id="@+id/mo_scanner_viewfinder_view"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@drawable/scan_container"
+            />
+
+        <ImageView
+            android:id="@+id/capture_scan_mask"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:scaleType="fitXY"
+            android:src="@mipmap/scan_mask"/>
+
+    </FrameLayout>
+
+    <ImageView android:layout_width="match_parent"
+               android:layout_height="match_parent"
+               android:layout_toLeftOf="@id/lay_scanner_viewfinder_view"
+               android:background="@color/colorBg"
+        />
+
+
+    <ImageView android:layout_width="match_parent"
+               android:layout_height="match_parent"
+               android:layout_below="@id/lay_scanner_viewfinder_view"
+               android:background="@color/colorBg"
+        />
+
+    <ImageView android:layout_width="match_parent"
+               android:layout_height="match_parent"
+               android:layout_toRightOf="@id/lay_scanner_viewfinder_view"
+               android:background="@color/colorBg"
+        />
+
+
+    <TextView android:layout_width="wrap_content"
+              android:text="请对准二维码"
+              android:layout_centerHorizontal="true"
+              android:textColor="@color/white"
+              android:layout_below="@id/lay_scanner_viewfinder_view"
+              android:layout_marginTop="8dp"
+              android:textSize="18sp"
+              android:layout_height="wrap_content"/>
+
+</RelativeLayout>

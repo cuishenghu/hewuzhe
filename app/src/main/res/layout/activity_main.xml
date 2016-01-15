@@ -1,0 +1,142 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context="com.hewuzhe.ui.activity.MainActivity">
+
+    <FrameLayout
+        android:id="@+id/fram_content"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_weight="1">
+
+    </FrameLayout>
+
+    <LinearLayout android:layout_width="match_parent"
+                  android:layout_height="wrap_content"
+                  android:orientation="horizontal">
+        <LinearLayout
+            android:id="@+id/menu_one"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:background="@color/colorPrimary"
+            android:gravity="center_horizontal"
+            android:orientation="vertical"
+            android:paddingTop="10px"
+        android:paddingBottom="2px"
+        >
+            
+            <ImageView android:layout_width="45px"
+                       android:layout_height="45px"
+                       android:src="@mipmap/menu_warrior"/>
+
+            <TextView android:layout_width="wrap_content"
+                      android:layout_height="wrap_content"
+                      android:layout_marginTop="5px"
+                      android:text="核武者"
+                      android:textColor="@color/white"/>
+
+
+        </LinearLayout>
+
+        <LinearLayout android:id="@+id/menu_two"
+                      android:layout_width="match_parent"
+                      android:layout_height="match_parent"
+                      android:layout_weight="1"
+                      android:paddingBottom="2px"
+
+                      android:background="@color/colorPrimary"
+                      android:gravity="center_horizontal"
+                      android:orientation="vertical"
+                      android:paddingTop="10px">
+            <ImageView android:layout_width="45px"
+                       android:layout_height="45px"
+                       android:src="@mipmap/menu_federal"/>
+
+            <TextView android:layout_width="wrap_content"
+                      android:layout_height="wrap_content"
+                      android:layout_marginTop="5px"
+                      android:text="核联盟"
+
+                      android:textColor="@color/white"/>
+
+
+        </LinearLayout>
+        <LinearLayout android:id="@+id/menu_three"
+                      android:layout_width="match_parent"
+                      android:layout_height="match_parent"
+                      android:layout_weight="1"
+                      android:background="@color/colorPrimary"
+                      android:paddingBottom="2px"
+
+                      android:gravity="center_horizontal"
+                      android:orientation="vertical"
+                      android:paddingTop="10px">
+            <ImageView android:layout_width="45px"
+                       android:layout_height="45px"
+                       android:src="@mipmap/menu_power"/>
+
+            <TextView android:layout_width="wrap_content"
+                      android:layout_height="wrap_content"
+                      android:layout_marginTop="5px"
+                      android:text="核动力"
+
+                      android:textColor="@color/white"/>
+
+
+        </LinearLayout>
+        <LinearLayout android:id="@+id/menu_four"
+                      android:layout_width="match_parent"
+                      android:layout_height="match_parent"
+                      android:layout_weight="1"
+                      android:background="@color/colorPrimary"
+                      android:paddingBottom="2px"
+
+                      android:gravity="center_horizontal"
+                      android:orientation="vertical"
+                      android:paddingTop="10px">
+            <ImageView android:layout_width="45px"
+                       android:layout_height="45px"
+                       android:src="@mipmap/menu_equipment"/>
+
+            <TextView android:layout_width="wrap_content"
+                      android:layout_height="wrap_content"
+
+                      android:layout_marginTop="5px"
+                      android:text="核装备"
+                      android:textColor="@color/white"/>
+
+
+        </LinearLayout>
+        <LinearLayout android:id="@+id/menu_five"
+                      android:layout_width="match_parent"
+                      android:layout_height="match_parent"
+                      android:layout_weight="1"
+                      android:background="@color/colorPrimary"
+                      android:gravity="center_horizontal"
+                      android:paddingBottom="2px"
+
+                      android:orientation="vertical"
+                      android:paddingTop="10px">
+            <ImageView android:layout_width="45px"
+                       android:layout_height="45px"
+                       android:src="@mipmap/menu_more"/>
+
+            <TextView android:layout_width="wrap_content"
+                      android:layout_height="wrap_content"
+                      android:layout_marginTop="5px"
+                      android:text="更多"
+
+                      android:textColor="@color/white"/>
+
+        </LinearLayout>
+
+
+    </LinearLayout>
+
+
+</LinearLayout>

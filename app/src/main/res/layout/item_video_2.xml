@@ -1,0 +1,132 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:layout_width="match_parent"
+              android:layout_height="wrap_content"
+              android:background="@color/colorListBg"
+              android:orientation="vertical"
+    >
+
+    <FrameLayout android:layout_width="match_parent"
+                 android:layout_height="240px">
+        <ImageView
+            android:id="@+id/img_bg"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:scaleType="fitXY"
+            android:src="@mipmap/img_bg_videio"/>
+
+        <TextView
+            android:id="@+id/tv_add_time"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10px"
+            android:layout_marginTop="18px"
+            android:text="刚刚发布"
+            android:textColor="@color/white"
+            android:textSize="25px"/>
+
+        <TextView
+            android:id="@+id/tv_is_free"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="right"
+            android:layout_marginRight="10px"
+            android:layout_marginTop="18px"
+            android:background="@color/colorYellow"
+            android:paddingBottom="5px"
+            android:paddingLeft="8px"
+            android:paddingRight="8px"
+            android:paddingTop="5px"
+            android:text="付费"
+            android:textColor="@color/white"
+            android:textSize="25px"/>
+
+
+    </FrameLayout>
+
+    <TextView android:id="@+id/tv_title"
+              style="@style/text_30_white"
+              android:layout_width="match_parent"
+              android:layout_height="wrap_content"
+              android:layout_marginLeft="20px"
+              android:text="创新理念"
+        />
+
+    <TextView android:id="@+id/tv_desc"
+              style="@style/text_27_colorLine"
+              android:layout_width="match_parent"
+              android:layout_height="wrap_content"
+              android:layout_marginLeft="20px"
+              android:lines="2"
+              android:text="跆拳道。。。。。"
+        />
+
+    <LinearLayout android:layout_width="match_parent"
+                  android:layout_height="wrap_content"
+                  android:layout_gravity="bottom"
+                  android:gravity="center_vertical"
+                  android:orientation="horizontal"
+                  android:paddingLeft="20px"
+                  android:paddingRight="30px"
+        >
+
+
+        <ImageView android:id="@+id/img_praise"
+                   android:layout_width="30px"
+                   android:layout_height="30px"
+                   android:src="@mipmap/icon_praise_gray"/>
+        <TextView
+            android:id="@+id/tv_praise_count"
+            style="@style/text_25_colorLine"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10px"
+            android:text="100"
+            />
+
+
+        <ImageView android:id="@+id/img_collect"
+                   android:layout_width="30px"
+                   android:layout_height="30px"
+                   android:layout_marginLeft="38px"
+                   android:src="@mipmap/icon_collect_gray"/>
+
+        <TextView
+            android:id="@+id/tv_collect_count"
+            style="@style/text_25_colorLine"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10px"
+            android:text="100"
+
+            />
+
+        <TextView android:layout_width="wrap_content"
+                  android:layout_height="wrap_content"
+                  android:layout_weight="1"/>
+
+
+        <ImageView android:id="@+id/img_repeat"
+                   android:layout_width="30px"
+                   android:layout_height="30px"
+                   android:layout_marginLeft="38px"
+                   android:src="@mipmap/icon_share_gray"/>
+
+        <TextView
+            android:id="@+id/tv_repeat_count"
+            style="@style/text_25_colorLine"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10px"
+            android:text="100"
+            />
+
+
+    </LinearLayout>
+
+    <TextView android:layout_width="match_parent"
+              android:layout_height="22px"
+              android:background="@color/colorBg"/>
+
+
+</LinearLayout>

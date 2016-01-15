@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent" xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="@color/colorListBg"
+    android:orientation="vertical"
+    tools:context="com.hewuzhe.ui.activity.ProfileActivity">
+
+    <include layout="@layout/toolbar_layout"/>
+
+
+    <android.support.v4.widget.NestedScrollView
+        app:layout_behavior="@string/appbar_scrolling_view_behavior"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:scrollbars="none">
+
+
+        <LinearLayout android:layout_width="match_parent"
+                      android:layout_height="wrap_content"
+                      android:orientation="vertical">
+
+
+            <ImageView android:layout_width="match_parent"
+                       android:layout_height="400px"
+                       android:scaleType="fitXY"
+                       android:id="@+id/img"
+                       android:src="@mipmap/img_bg"/>
+
+
+            <TextView android:layout_width="match_parent"
+                      android:layout_height="wrap_content"
+                      android:padding="10px"
+                      android:id="@+id/tv_desc"
+                      android:text=""
+                      android:textColor="@color/white"/>
+
+            <TextView android:layout_width="match_parent"
+                      android:layout_height="5dp"
+                      android:background="@color/colorBg"
+                      android:textColor="@color/white"/>
+
+
+            <LinearLayout android:layout_width="match_parent"
+                          android:layout_height="wrap_content"
+                          android:layout_marginTop="20px"
+                          android:orientation="horizontal"
+                          android:paddingLeft="20px">
+
+                <TextView android:layout_width="wrap_content"
+                          android:layout_height="wrap_content"
+                          android:layout_gravity="top"
+                          android:text="我的\n梦想    "
+                          android:textColor="@color/white"
+                          android:textSize="30px"/>
+
+                <EditText android:layout_width="match_parent"
+                          android:layout_height="wrap_content"
+                          android:layout_marginRight="20px"
+                          android:id="@+id/edt_my_dream"
+                          android:background="@color/colorBg"
+                          android:foregroundGravity="top"
+                          android:hint="只要有梦，总会实现，开启梦想"
+                          android:minLines="3"
+                          android:padding="10px"
+                          android:textColorHint="@color/colorLine"/>
+
+
+            </LinearLayout>
+
+
+            <LinearLayout android:layout_width="match_parent"
+                          android:layout_height="wrap_content"
+                          android:layout_marginTop="20px"
+                          android:orientation="horizontal"
+                          android:paddingLeft="20px">
+
+                <TextView android:layout_width="wrap_content"
+                          android:layout_height="wrap_content"
+                          android:layout_gravity="top"
+                          android:text="如何\n实现    "
+                          android:textColor="@color/white"
+                          android:textSize="30px"/>
+
+                <EditText android:layout_width="match_parent"
+                          android:layout_height="wrap_content"
+                          android:layout_marginRight="20px"
+                          android:background="@color/colorBg"
+                          android:id="@+id/edt_to_do"
+                          android:hint="只要努力，总会实现，请输入"
+                          android:minLines="5"
+                          android:padding="10px"
+                          android:textColorHint="@color/colorLine"/>
+
+
+            </LinearLayout>
+
+
+        </LinearLayout>
+
+    </android.support.v4.widget.NestedScrollView>
+
+</LinearLayout>

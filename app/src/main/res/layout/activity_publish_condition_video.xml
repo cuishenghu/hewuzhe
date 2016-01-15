@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent" android:layout_height="match_parent"
+    android:background="@color/colorListBg"
+    android:orientation="vertical"
+    tools:context="com.hewuzhe.ui.activity.ProfileActivity">
+
+    <include layout="@layout/toolbar_layout"/>
+
+
+    <FrameLayout android:layout_width="match_parent"
+                 android:layout_height="420px"
+                 android:padding="10px">
+
+        <ImageView android:id="@+id/img"
+                   android:layout_width="match_parent"
+                   android:layout_height="420px"
+                   android:layout_gravity="center_vertical"
+                   android:scaleType="fitXY"
+                   android:src="@mipmap/img_bg_videio"/>
+
+
+    </FrameLayout>
+
+
+    <TextView android:layout_width="match_parent"
+              android:layout_height="4dp"
+              android:background="@color/colorBg"/>
+
+
+    <EditText android:id="@+id/tv_desc"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              android:layout_gravity="center_vertical"
+              android:background="@null"
+              android:gravity="top"
+              android:hint="请写下视频的介绍"
+              android:paddingLeft="20px"
+              android:paddingTop="20px"
+              android:textColorHint="@color/colorLine"/>
+
+
+</LinearLayout>

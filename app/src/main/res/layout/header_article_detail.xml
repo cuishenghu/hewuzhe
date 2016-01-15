@@ -1,0 +1,180 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:layout_width="match_parent"
+              android:layout_height="wrap_content"
+              android:background="@color/colorBg"
+              android:orientation="vertical"
+    >
+
+    <RelativeLayout android:layout_width="match_parent"
+                    android:background="@color/colorListBg"
+                    android:layout_height="wrap_content">
+
+    <LinearLayout android:layout_width="match_parent"
+                  android:layout_height="wrap_content"
+                  android:orientation="vertical"
+                  android:paddingLeft="20px"
+                  android:paddingRight="20px">
+
+        <TextView android:id="@+id/tv_name"
+                  style="@style/text_35_white"
+                  android:layout_width="match_parent"
+                  android:layout_height="wrap_content"
+                  android:layout_marginTop="20px"
+                  android:gravity="center"
+                  android:text="核武着联盟详情"/>
+
+
+        <TextView android:id="@+id/tv_froms"
+                  style="@style/text_25_colorLine"
+                  android:layout_width="match_parent"
+                  android:layout_height="wrap_content"
+                  android:layout_marginTop="10px"
+                  android:gravity="center"
+                  android:text="来自：公益培训 2013232332"/>
+
+        <TextView android:id="@+id/tv_content"
+                  style="@style/text_30_white"
+                  android:layout_width="match_parent"
+                  android:layout_height="wrap_content"
+                  android:layout_marginTop="10px"
+                  android:lineSpacingExtra="2dp"
+                  android:text="来自：公益培训 2013232332"/>
+
+        <LinearLayout android:id="@+id/lay_pics"
+                      android:layout_width="match_parent"
+                      android:layout_height="wrap_content"
+                      android:orientation="vertical">
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="85px"
+            android:gravity="center_vertical"
+            android:orientation="horizontal">
+            <ImageView android:id="@+id/img_praise"
+                       android:layout_width="30px"
+                       android:layout_height="30px"
+                       android:src="@mipmap/icon_collect"/>
+
+            <TextView android:id="@+id/tv_praise_count"
+                      style="@style/text_25_white"
+                      android:layout_width="wrap_content"
+                      android:layout_height="wrap_content"
+                      android:layout_weight="1"
+                      android:text="100"/>
+
+            <TextView android:id="@+id/tv_page_views"
+                      style="@style/text_25_white"
+                      android:layout_width="wrap_content"
+                      android:layout_height="wrap_content"
+                      android:text="阅读 100"/>
+
+            <TextView android:id="@+id/tv_comment_count"
+                      style="@style/text_25_white"
+                      android:layout_width="wrap_content"
+                      android:layout_height="wrap_content"
+                      android:layout_marginLeft="15px"
+                      android:text="评论 100"/>
+
+
+        </LinearLayout>
+    </LinearLayout>
+    </RelativeLayout>
+
+    <TextView android:layout_width="match_parent"
+              android:layout_height="10px"
+              android:background="@color/colorBg"/>
+
+
+    <LinearLayout android:layout_width="match_parent"
+                  android:layout_height="wrap_content"
+                  android:layout_marginTop="10px"
+                  android:background="@color/colorListBg"
+                  android:orientation="vertical">
+
+
+        <LinearLayout android:layout_width="match_parent"
+                      android:layout_height="80px"
+                      android:background="@color/colorListBg"
+                      android:gravity="center_vertical"
+                      android:paddingLeft="20px"
+                      android:paddingRight="20px">
+
+            <TextView android:layout_width="wrap_content"
+                      android:layout_height="wrap_content"
+                      android:layout_weight="1"
+                      android:text="用户评论"
+                      android:textColor="@color/white"
+                      android:textSize="30px"/>
+
+            <TextView android:layout_width="2dp"
+                      android:layout_height="match_parent"
+                      android:layout_marginBottom="15px"
+                      android:layout_marginTop="15px"
+                      android:background="@color/colorBg"/>
+
+            <TextView android:id="@+id/tv_comment_count_one"
+                      android:layout_width="wrap_content"
+                      android:layout_height="wrap_content"
+                      android:layout_marginLeft="10px"
+                      android:text="共100条"
+                      android:textColor="@color/white"
+                      android:textSize="30px"/>
+
+
+        </LinearLayout>
+
+        <TextView android:layout_width="match_parent"
+                  android:layout_height="2px"
+                  android:layout_marginLeft="30px"
+                  android:background="@color/colorBg"/>
+
+
+        <LinearLayout android:layout_width="match_parent"
+                      android:layout_height="110px"
+                      android:layout_marginLeft="30px"
+                      android:orientation="horizontal"
+                      android:visibility="visible">
+
+            <ImageView android:id="@+id/img_avatar_2"
+                       android:layout_width="85px"
+                       android:layout_height="85px"
+                       android:layout_gravity="center_vertical"
+                       android:src="@mipmap/img_avatar"/>
+            <EditText android:id="@+id/edt_comment"
+                      android:layout_width="match_parent"
+                      android:layout_height="70px"
+                      android:layout_gravity="center_vertical"
+                      android:layout_marginLeft="30px"
+                      android:layout_marginRight="10px"
+                      android:layout_weight="1"
+                      android:background="@color/colorBg"
+                      android:hint="我也说两句"
+                      android:paddingLeft="10px"
+                      android:textColor="@color/white"
+                      android:textColorHint="@color/white"
+                      android:textSize="30px"/>
+
+
+            <Button android:id="@+id/btn_publish"
+                    style="@style/text_30_white"
+                    android:layout_width="130px"
+                    android:layout_height="65px"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginRight="15px"
+                    android:background="@drawable/select_yellow"
+                    android:text="发布"/>
+
+
+        </LinearLayout>
+
+
+    </LinearLayout>
+    <TextView android:layout_width="match_parent"
+              android:layout_height="2px"
+              android:layout_marginLeft="30px"
+              android:background="@color/colorBg"/>
+
+</LinearLayout>

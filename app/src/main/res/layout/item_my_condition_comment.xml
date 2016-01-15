@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="120px"
+        android:background="@color/colorListBg"
+        android:gravity="center_vertical"
+        android:orientation="horizontal">
+
+        <ImageView android:id="@+id/img_avatar"
+                   android:layout_width="95px"
+                   android:layout_height="95px"
+                   android:layout_centerVertical="true"
+                   android:layout_marginLeft="10px"
+                   android:scaleType="fitXY"
+                   android:src="@mipmap/img_bg_videio"/>
+
+
+        <LinearLayout android:id="@+id/lay_content"
+                      android:layout_width="match_parent"
+                      android:layout_height="wrap_content"
+                      android:layout_centerVertical="true"
+                      android:layout_marginLeft="18px"
+                      android:layout_toLeftOf="@id/lay_img"
+                      android:layout_toRightOf="@id/img_avatar"
+                      android:layout_weight="1"
+                      android:gravity="center_vertical"
+                      android:orientation="vertical">
+
+            <TextView android:id="@+id/tv_username"
+                      style="@style/text_30_yellow"
+                      android:layout_width="wrap_content"
+                      android:layout_height="wrap_content"
+                      android:text="成龙"
+                />
+
+            <TextView android:id="@+id/tv_content"
+                      style="@style/text_27_white"
+                      android:layout_width="wrap_content"
+                      android:layout_height="wrap_content"
+                      android:text="成龙"/>
+
+
+            <TextView android:id="@+id/tv_add_time"
+                      style="@style/text_25_colorLine"
+                      android:layout_width="wrap_content"
+                      android:layout_height="wrap_content"
+                      android:text="成龙"/>
+
+        </LinearLayout>
+
+        <FrameLayout android:id="@+id/lay_img"
+                     android:layout_width="wrap_content"
+                     android:layout_height="wrap_content"
+                     android:layout_alignParentRight="true"
+                     android:layout_centerVertical="true"
+            >
+
+            <TextView android:id="@+id/tv_content_two"
+                      style="@style/text_25_colorLine"
+                      android:layout_width="95px"
+                      android:layout_height="95px"
+                      android:background="@color/colorBg"
+                      android:text=""/>
+
+
+            <ImageView android:id="@+id/img_content"
+                       android:layout_width="95px"
+                       android:layout_height="95px"
+                       android:layout_marginRight="10px"
+                       android:scaleType="fitXY"
+                       android:src="@mipmap/img_bg_videio"
+                       android:visibility="gone"/>
+        </FrameLayout>
+
+
+    </RelativeLayout>
+
+    <TextView android:layout_width="match_parent"
+              android:layout_height="2px"
+              android:background="@color/colorBg"/>
+</LinearLayout>

@@ -1,0 +1,127 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/colorBg"
+    android:orientation="vertical"
+    tools:context="com.hewuzhe.ui.activity.PublishConditionActivity">
+
+    <include layout="@layout/toolbar_layout"/>
+
+    <LinearLayout android:layout_width="match_parent"
+                  android:layout_height="match_parent"
+                  android:background="@color/colorListBg"
+                  android:orientation="vertical">
+
+        <EditText android:id="@+id/edt_title"
+                  style="@style/text_35_white"
+                  android:layout_width="match_parent"
+                  android:layout_height="85px"
+                  android:background="@null"
+                  android:gravity="top"
+                  android:hint="标题"
+                  android:padding="15px"
+                  android:textColorHint="@color/colorLine"/>
+
+        <TextView android:layout_width="match_parent"
+                  android:layout_height="2px"
+                  android:background="@color/colorBg"/>
+
+        <LinearLayout android:id="@+id/lay_select_topic"
+                      android:layout_width="match_parent"
+                      android:layout_height="85px"
+                      android:orientation="horizontal">
+            <TextView style="@style/text_30_colorLine"
+                      android:layout_width="wrap_content"
+                      android:layout_height="wrap_content"
+                      android:layout_gravity="center_vertical"
+                      android:layout_marginLeft="20px"
+                      android:layout_weight="1"
+                      android:text="选择周期"/>
+
+            <TextView android:id="@+id/tv_cate"
+                      style="@style/text_30_colorLine"
+                      android:layout_width="wrap_content"
+                      android:layout_height="wrap_content"
+                      android:layout_gravity="center_vertical"
+                      android:layout_marginLeft="20px"
+                      android:text=""/>
+
+
+            <ImageView android:layout_width="85px"
+                       android:layout_height="85px"
+                       android:padding="20px"
+                       android:src="@mipmap/icon_arrow_right"/>
+
+
+        </LinearLayout>
+
+        <TextView android:layout_width="match_parent"
+                  android:layout_height="8px"
+                  android:background="@color/colorBg"/>
+
+
+        <EditText android:id="@+id/edt_content"
+                  style="@style/text_35_white"
+                  android:layout_width="match_parent"
+                  android:layout_height="match_parent"
+                  android:layout_weight="1"
+                  android:background="@null"
+                  android:gravity="top"
+                  android:hint="内容"
+                  android:padding="15px"
+                  android:textColorHint="@color/colorLine"/>
+
+
+        <TextView android:layout_width="match_parent"
+                  android:layout_height="8px"
+                  android:background="@color/colorBg"/>
+
+
+        <TextView style="@style/text_30_white"
+                  android:layout_width="match_parent"
+                  android:layout_height="wrap_content"
+                  android:layout_marginLeft="30px"
+                  android:layout_marginTop="10px"
+                  android:text="文章图片"/>
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/recycler_view"
+            android:layout_width="match_parent"
+            android:layout_height="200px"
+            android:layout_marginBottom="10px"
+            android:layout_marginLeft="30px"
+            android:layout_marginTop="20px"
+            >
+
+        </android.support.v7.widget.RecyclerView>
+
+        <TextView android:layout_width="match_parent"
+                  android:layout_height="8px"
+                  android:background="@color/colorBg"/>
+
+        <LinearLayout android:layout_width="match_parent"
+                      android:layout_height="85px"
+                      android:gravity="center_vertical"
+                      android:orientation="horizontal">
+
+            <ImageView android:id="@+id/img_select_pic"
+                       android:layout_width="70px"
+                       android:layout_height="50px"
+                       android:layout_marginLeft="30px"
+                       android:src="@mipmap/icon_selectpic"/>
+
+            <ImageView android:id="@+id/img_take_pic"
+                       android:layout_width="70px"
+                       android:layout_height="50px"
+                       android:layout_marginLeft="30px"
+                       android:src="@mipmap/icon_takepic"/>
+
+
+        </LinearLayout>
+    </LinearLayout>
+
+
+</LinearLayout>

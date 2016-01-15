@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              android:background="@color/colorBg"
+              android:orientation="vertical">
+
+    <TextView
+    android:id="@+id/tv_local_video"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@color/colorListBg"
+        android:paddingBottom="15px"
+        android:paddingLeft="28px"
+        android:paddingRight="28px"
+        android:paddingTop="15px"
+        android:text="本地视频"
+        android:textColor="@color/white"
+        android:textSize="28px"/>
+
+    <TextView
+        android:id="@+id/tv_take_video"
+        android:layout_width="wrap_content"
+              android:layout_height="wrap_content"
+              android:layout_marginTop="1dp"
+              android:background="@color/colorListBg"
+              android:paddingBottom="15px"
+              android:paddingLeft="28px"
+              android:paddingRight="28px"
+              android:paddingTop="15px"
+              android:text="拍摄视频"
+              android:textColor="@color/white"
+              android:textSize="28px"/>
+
+
+</LinearLayout>

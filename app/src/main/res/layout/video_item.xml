@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                android:layout_width="match_parent"
+                android:layout_height="460px"
+                android:background="@color/colorBg"
+                android:orientation="vertical"
+                android:paddingBottom="20px">
+
+    <FrameLayout android:layout_width="match_parent"
+                 android:layout_height="match_parent">
+
+
+        <ImageView
+            android:id="@+id/img_bg"
+            android:layout_width="match_parent"
+            android:layout_height="460px"
+            android:scaleType="fitXY"
+            android:src="@mipmap/img_bg_videio"/>
+
+        <TextView android:id="@+id/tv_title"
+                  android:layout_width="match_parent"
+                  android:layout_height="wrap_content"
+                  android:layout_gravity="bottom"
+                  android:layout_marginBottom="110px"
+                  android:layout_marginLeft="30px"
+                  android:text="咏春拳最快制服敌人的拳法"
+                  android:textColor="@color/white"
+                  android:textSize="30px"
+            />
+
+        <ImageView
+            android:id="@+id/img_share"
+            android:layout_width="30px"
+            android:layout_height="30px"
+            android:layout_gravity="bottom|right"
+            android:layout_marginBottom="110px"
+            android:layout_marginRight="30px"
+            android:src="@mipmap/icon_share"
+            />
+
+
+        <TextView android:layout_width="match_parent"
+                  android:layout_height="1dp"
+                  android:layout_gravity="bottom"
+                  android:layout_marginBottom="101px"
+                  android:layout_marginLeft="30px"
+                  android:background="@color/colorLine"/>
+
+
+        <LinearLayout android:layout_width="match_parent"
+                      android:layout_height="100px"
+                      android:layout_gravity="bottom"
+                      android:gravity="center_vertical"
+                      android:orientation="horizontal"
+                      android:paddingLeft="30px"
+                      android:paddingRight="30px"
+            >
+
+            <ImageView
+                android:id="@+id/img_avatar"
+                android:layout_width="80px"
+                android:layout_height="80px"
+                android:src="@mipmap/img_avatar"
+                />
+            <TextView android:id="@+id/tv_username"
+                      android:layout_width="wrap_content"
+                      android:layout_height="wrap_content"
+                      android:layout_marginLeft="10px"
+                      android:layout_weight="1"
+                      android:singleLine="true"
+                      android:text="成龙"
+                      android:textColor="@color/white"
+                      android:textSize="25px"/>
+
+            <ImageView android:layout_width="30px"
+                       android:layout_height="30px"
+                       android:layout_marginLeft="18px"
+                       android:src="@mipmap/icon_comment"/>
+
+            <TextView
+                android:id="@+id/tv_comment_count"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10px"
+                android:text="100条评论"
+                android:textColor="@color/white"
+                android:textSize="25px"/>
+
+
+            <ImageView android:layout_width="30px"
+                       android:layout_height="30px"
+                       android:layout_marginLeft="38px"
+                       android:src="@mipmap/icon_nearly"/>
+
+            <TextView
+                android:id="@+id/tv_add_time"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10px"
+                android:text="刚刚发布"
+                android:textColor="@color/white"
+                android:textSize="25px"/>
+
+
+        </LinearLayout>
+
+    </FrameLayout>
+
+</RelativeLayout>

@@ -1,0 +1,285 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent" android:layout_height="match_parent"
+    android:background="@color/colorListBg"
+    android:orientation="vertical"
+    tools:context="com.hewuzhe.ui.activity.FriendProfileActivity">
+
+    <include layout="@layout/toolbar_layout_two"/>
+
+    <android.support.v4.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior"
+        >
+        <FrameLayout android:layout_width="match_parent"
+                     android:layout_height="match_parent">
+
+            <ImageView android:id="@+id/img"
+                       android:layout_width="match_parent"
+                       android:layout_height="280px"
+                       android:scaleType="fitXY"
+                       android:src="@mipmap/bg_friends_condition"/>
+
+            <LinearLayout android:layout_width="match_parent"
+                          android:layout_height="match_parent"
+                          android:layout_marginTop="300px"
+                          android:background="@color/colorBg"
+                          android:orientation="vertical">
+
+                <LinearLayout android:layout_width="match_parent"
+                              android:layout_height="wrap_content"
+                              android:background="@color/colorListBg"
+                              android:orientation="vertical"
+                              android:paddingLeft="30px"
+                              android:paddingTop="10px">
+
+                    <TextView android:id="@+id/tv_username"
+                              style="@style/text_30_yellow"
+                              android:layout_width="wrap_content"
+                              android:layout_height="wrap_content"
+                              android:layout_marginLeft="130px"
+                              android:text="成龙"/>
+
+                    <TextView android:id="@+id/tv_info"
+                              style="@style/text_27_white"
+                              android:layout_width="wrap_content"
+                              android:layout_height="wrap_content"
+                              android:layout_marginLeft="120px"
+                              android:layout_marginTop="5px"
+                              android:text="男 26岁 山东 临沂 兰山区"/>
+
+                    <TextView android:layout_width="match_parent"
+                              android:layout_height="2px"
+                              android:layout_marginTop="15px"
+                              android:background="@color/colorBg"/>
+
+                    <LinearLayout android:id="@+id/lay_friends_condition"
+                                  android:layout_width="match_parent"
+                                  android:layout_height="85px"
+                                  android:gravity="center_vertical"
+                                  android:orientation="horizontal"
+                                  android:paddingRight="10px"
+                        >
+
+                        <TextView style="@style/text_32_white"
+                                  android:layout_width="wrap_content"
+                                  android:layout_height="wrap_content"
+                                  android:text="好友动态"/>
+
+                        <TextView
+                            style="@style/text_27_colorLine"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:gravity="right"
+                            android:text=""/>
+
+                        <ImageView android:layout_width="40dp"
+                                   android:layout_height="40dp"
+                                   android:padding="12dp"
+                                   android:src="@mipmap/icon_arrow_right"/>
+
+
+                    </LinearLayout>
+
+
+                    <TextView android:id="@+id/tv_line"
+                              android:layout_width="match_parent"
+                              android:layout_height="2px"
+                              android:background="@color/colorBg"/>
+
+                    <LinearLayout android:id="@+id/lay_friends_team"
+                                  android:layout_width="match_parent"
+                                  android:layout_height="85px"
+                                  android:gravity="center_vertical"
+                                  android:orientation="horizontal"
+                                  android:paddingRight="10px"
+                        >
+
+                        <TextView style="@style/text_32_white"
+                                  android:layout_width="wrap_content"
+                                  android:layout_height="wrap_content"
+                                  android:text="好友战队"/>
+
+                        <TextView
+                            style="@style/text_27_colorLine"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:gravity="right"
+                            android:text=""/>
+
+                        <ImageView android:layout_width="40dp"
+                                   android:layout_height="40dp"
+                                   android:padding="12dp"
+                                   android:src="@mipmap/icon_arrow_right"/>
+
+
+                    </LinearLayout>
+
+                    <TextView android:layout_width="match_parent"
+                              android:layout_height="2px"
+                              android:background="@color/colorBg"/>
+
+                    <LinearLayout android:layout_width="match_parent"
+                                  android:layout_height="wrap_content"
+                                  android:orientation="horizontal">
+
+
+                        <LinearLayout android:layout_width="wrap_content"
+                                      android:layout_height="85px"
+                                      android:layout_weight="1"
+                                      android:gravity="center_vertical"
+
+                                      android:orientation="horizontal"
+                                      android:paddingRight="30px">
+
+                            <TextView style="@style/text_32_white"
+                                      android:layout_width="wrap_content"
+                                      android:layout_height="wrap_content"
+                                      android:text="体重："/>
+
+                            <TextView android:id="@+id/tv_weight"
+                                      style="@style/text_27_colorLine"
+                                      android:layout_width="wrap_content"
+                                      android:layout_height="wrap_content"
+                                      android:layout_weight="1"
+                                      android:gravity="right"
+                                      android:text=""/>
+
+
+                        </LinearLayout>
+
+
+                        <TextView android:layout_width="5px"
+                                  android:layout_height="match_parent"
+                                  android:layout_marginBottom="5px"
+                                  android:layout_marginRight="30px"
+                                  android:layout_marginTop="5px"
+                                  android:background="@color/colorBg"/>
+
+
+                        <LinearLayout android:layout_width="wrap_content"
+                                      android:layout_height="85px"
+                                      android:layout_weight="1"
+                                      android:gravity="center_vertical"
+                                      android:orientation="horizontal"
+                                      android:paddingRight="30px">
+
+                            <TextView style="@style/text_32_white"
+                                      android:layout_width="wrap_content"
+                                      android:layout_height="wrap_content"
+                                      android:text="身高："/>
+
+                            <TextView android:id="@+id/tv_height"
+                                      style="@style/text_27_colorLine"
+                                      android:layout_width="wrap_content"
+                                      android:layout_height="wrap_content"
+                                      android:layout_weight="1"
+                                      android:gravity="right"
+                                      android:text=""/>
+
+
+                        </LinearLayout>
+
+                    </LinearLayout>
+
+                    <TextView android:layout_width="match_parent"
+                              android:layout_height="2px"
+                              android:background="@color/colorBg"/>
+
+                    <LinearLayout android:layout_width="match_parent"
+                                  android:layout_height="85px"
+                                  android:gravity="center_vertical"
+                                  android:orientation="horizontal"
+
+                                  android:paddingRight="30px">
+
+                        <TextView style="@style/text_32_white"
+                                  android:layout_width="wrap_content"
+                                  android:layout_height="wrap_content"
+                                  android:text="习武时间："/>
+
+                        <TextView android:id="@+id/tv_time"
+                                  style="@style/text_27_colorLine"
+                                  android:layout_width="wrap_content"
+                                  android:layout_height="wrap_content"
+                                  android:layout_weight="1"
+                                  android:gravity="right"
+                                  android:text=""/>
+
+
+                    </LinearLayout>
+
+
+                    <TextView android:layout_width="match_parent"
+                              android:layout_height="2px"
+                              android:background="@color/colorBg"/>
+
+                    <LinearLayout android:layout_width="match_parent"
+                                  android:layout_height="wrap_content"
+                                  android:gravity="center_vertical"
+                                  android:orientation="vertical">
+
+                        <TextView style="@style/text_32_white"
+                                  android:layout_width="wrap_content"
+                                  android:layout_height="85px"
+                                  android:gravity="center_vertical"
+                                  android:text="个人简历："/>
+
+                        <TextView android:id="@+id/tv_desc"
+                                  style="@style/text_27_colorLine"
+                                  android:layout_width="wrap_content"
+                                  android:layout_height="wrap_content"
+                                  android:layout_weight="1"
+                                  android:lineSpacingExtra="2dp"
+                                  android:maxLines="2"
+                                  android:minLines="4"
+                                  android:paddingRight="20px"
+                                  android:text="sdffs"/>
+
+                    </LinearLayout>
+
+                </LinearLayout>
+                <LinearLayout android:layout_width="match_parent"
+                              android:layout_height="200px"
+                              android:gravity="center_vertical"
+                              android:orientation="horizontal">
+
+                    <Button android:id="@+id/btn"
+                            style="@style/text_35_white"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="20px"
+                            android:layout_marginRight="20px"
+                            android:layout_weight="1"
+                            android:background="@drawable/select_yellow"
+                            android:text=""/>
+
+
+                </LinearLayout>
+            </LinearLayout>
+
+            <ImageView android:id="@+id/img_avatar"
+                       android:layout_width="120px"
+                       android:layout_height="120px"
+                       android:layout_marginLeft="30px"
+                       android:layout_marginTop="220px"
+                       android:src="@mipmap/img_avatar"/>
+
+
+        </FrameLayout>
+    </android.support.v4.widget.NestedScrollView>
+
+    <LinearLayout android:layout_width="match_parent"
+                  android:layout_height="200px"
+                  android:layout_gravity="bottom"
+                  android:background="@color/colorBg">
+
+    </LinearLayout>
+
+</LinearLayout>

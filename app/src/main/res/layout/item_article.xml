@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:layout_width="match_parent"
+              android:layout_height="wrap_content"
+              android:background="@color/colorListBg"
+              android:orientation="vertical">
+
+    <RelativeLayout android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="15px">
+
+        <ImageView
+            android:id="@+id/img"
+            android:layout_width="200px"
+            android:layout_height="150px"
+            android:src="@mipmap/img_bg_videio"/>
+
+        <TextView
+            android:id="@+id/tv_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="8px"
+            android:layout_toRightOf="@id/img"
+            android:text="咏春拳公益演出"
+            android:textColor="@color/white"
+            android:textSize="28px"/>
+
+        <TextView
+            android:id="@+id/tv_add_time"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_marginLeft="8px"
+            android:text="4月20日"
+            android:textColor="@color/colorLine"
+            android:textSize="25px"/>
+
+        <TextView android:id="@+id/tv_conent"
+                  android:layout_width="wrap_content"
+                  android:layout_height="wrap_content"
+                  android:layout_below="@id/tv_title"
+                  android:layout_marginLeft="8px"
+                  android:layout_marginTop="12px"
+                  android:layout_toRightOf="@id/img"
+                  android:maxLines="2"
+                  android:text="我是内容............"
+                  android:textColor="@color/colorLine"
+                  android:textSize="25px"/>
+
+
+        <ImageView
+            android:id="@+id/img_collect"
+            android:layout_width="25px"
+            android:layout_height="25px"
+            android:layout_alignBottom="@id/img"
+            android:layout_alignParentRight="true"
+            android:layout_marginLeft="8px"
+            android:src="@mipmap/icon_collect_gray"
+            />
+
+        <TextView
+            android:id="@+id/tv_collect"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBottom="@id/img"
+            android:layout_marginLeft="8px"
+            android:layout_toLeftOf="@id/img_collect"
+            android:text="200"
+            android:textColor="@color/colorLine"
+            android:textSize="25px"
+            />
+
+
+        <ImageView
+            android:id="@+id/img_praise"
+            android:layout_width="25px"
+            android:layout_height="25px"
+            android:layout_alignBottom="@id/img"
+            android:layout_marginLeft="8px"
+            android:layout_toLeftOf="@id/tv_collect"
+            android:src="@mipmap/icon_praise_gray"
+            />
+
+
+        <TextView
+            android:id="@+id/tv_praise"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBottom="@id/img"
+            android:layout_marginLeft="8px"
+            android:layout_toLeftOf="@id/img_praise"
+            android:text="200"
+            android:textColor="@color/colorLine"
+            android:textSize="25px"
+            />
+    </RelativeLayout>
+
+    <TextView android:layout_width="match_parent"
+              android:layout_height="1px"
+              android:layout_marginLeft="120px"
+              android:background="@color/colorLine"/>
+
+
+</LinearLayout>

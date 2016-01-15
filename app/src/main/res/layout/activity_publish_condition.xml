@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/colorBg"
+    android:orientation="vertical"
+    tools:context="com.hewuzhe.ui.activity.PublishConditionActivity">
+
+    <include layout="@layout/toolbar_layout"/>
+
+    <LinearLayout android:layout_width="match_parent"
+                  android:layout_height="wrap_content"
+                  android:background="@color/colorListBg"
+                  android:orientation="vertical">
+
+        <EditText android:id="@+id/edt_content"
+                  android:layout_width="match_parent"
+                  android:layout_height="300px"
+                  android:background="@null"
+                  style="@style/text_35_white"
+                  android:gravity="top"
+                  android:hint="说点什么吧"
+                  android:padding="15px"
+                  android:textColorHint="@color/colorLine"/>
+
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/recycler_view"
+            android:layout_width="match_parent"
+            android:layout_height="200px"
+            android:layout_marginLeft="20px">
+        </android.support.v7.widget.RecyclerView>
+
+        <TextView android:layout_width="match_parent"
+                  android:layout_height="2px"
+                  android:layout_marginBottom="40px"
+                  android:layout_marginLeft="20px"
+                  android:layout_marginTop="20px"
+                  android:background="@color/colorBg"
+        />
+
+
+    </LinearLayout>
+
+
+</LinearLayout>

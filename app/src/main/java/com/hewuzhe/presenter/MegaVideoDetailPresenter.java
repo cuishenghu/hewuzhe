@@ -7,7 +7,6 @@ import com.hewuzhe.model.Group;
 import com.hewuzhe.model.MegaComment;
 import com.hewuzhe.model.Res;
 import com.hewuzhe.model.User;
-import com.hewuzhe.model.Video;
 import com.hewuzhe.presenter.adapter.CommentPresenter;
 import com.hewuzhe.ui.activity.MegaGameActivity;
 import com.hewuzhe.ui.cons.C;
@@ -19,9 +18,6 @@ import com.hewuzhe.view.MegaVideoDetailView;
 
 import java.util.ArrayList;
 
-import retrofit.Callback;
-import retrofit.Response;
-import retrofit.Retrofit;
 import rx.Subscription;
 import rx.android.schedulers.AndroidSchedulers;
 import rx.functions.Action0;
@@ -51,7 +47,6 @@ public class MegaVideoDetailPresenter extends CommentPresenter<MegaVideoDetailVi
                     public void next(Res<MegaVideo> res) {
                         if (res.code == C.OK) {
                             view.setData(res.data);
-                            view.setDataCount(res.recordcount);
                         }
                     }
 
@@ -69,51 +64,6 @@ public class MegaVideoDetailPresenter extends CommentPresenter<MegaVideoDetailVi
     }
 
 
-    /**
-     * 获取其他视频
-     */
-    public void getOtherVideos(int id) {
-
-//        Subscription subscription = NetEngine.getService()
-//                .GetOtherVideo(new SessionUtil(view.getContext()).getUser().Id, 3, id)
-//                .subscribeOn(Schedulers.io())
-//                .observeOn(AndroidSchedulers.mainThread())
-//                .subscribe(new SB<Res<ArrayList<Video>>>() {
-//                    @Override
-//                    public void next(Res<ArrayList<Video>> res) {
-//                        view.setOtherVideos(res.data);
-//                    }
-//
-//                    @Override
-//                    public void onCompleted() {
-//
-//                    }
-//
-//                    @Override
-//                    public void onError(Throwable e) {
-//
-//                    }
-//                });
-
-//        addSubscription(subscription);
-
-        NetEngine.getService()
-                .GetOtherVideo(new SessionUtil(view.getContext()).getUser().Id, 3, id)
-                .enqueue(new Callback<Res<ArrayList<Video>>>() {
-                    @Override
-                    public void onResponse(Response<Res<ArrayList<Video>>> response, Retrofit retrofit) {
-                        Res<ArrayList<Video>> res = response.body();
-                        view.setOtherVideos(res.data);
-
-                    }
-
-                    @Override
-                    public void onFailure(Throwable t) {
-
-                    }
-                });
-    }
-
     public void getData(final int page, final int count) {
         int id = view.getData();
 
@@ -126,6 +76,7 @@ public class MegaVideoDetailPresenter extends CommentPresenter<MegaVideoDetailVi
                     public void next(Res<ArrayList<MegaComment>> res) {
                         if (res.code == C.OK) {
                             view.bindData(res.data);
+                            view.setDataCount(res.recordcount);
                             setDataStatus(page, count, res);
                         }
                     }

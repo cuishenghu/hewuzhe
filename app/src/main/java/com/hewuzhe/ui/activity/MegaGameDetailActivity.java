@@ -5,6 +5,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
@@ -14,6 +15,7 @@ import com.hewuzhe.presenter.MegaGameDetailPresenter;
 import com.hewuzhe.ui.base.ToolBarActivity;
 import com.hewuzhe.ui.cons.C;
 import com.hewuzhe.utils.Bun;
+import com.hewuzhe.utils.SessionUtil;
 import com.hewuzhe.utils.TimeUtil;
 import com.hewuzhe.view.base.SetView;
 
@@ -45,6 +47,10 @@ public class MegaGameDetailActivity extends ToolBarActivity<MegaGameDetailPresen
     Button _BtnOthers;
     @Bind(R.id.img)
     ImageView _Img;
+    @Bind(R.id.lay_address)
+    LinearLayout _LayAddress;
+    @Bind(R.id.tv_line)
+    TextView _TvLine;
     private int id;
     private TextView action_1;
     private TextView action_2;
@@ -98,11 +104,12 @@ public class MegaGameDetailActivity extends ToolBarActivity<MegaGameDetailPresen
         if (TimeUtil.timeComparedNow(megaGame.MatchTimeStart)) {
             //比赛未开始
             megaGame.status = MegaGame.STATUS_READY;
-            _BtnMyVideo.setText("我的视频");
+            _BtnMyVideo.setText("我要报名");
             _BtnMyVideo.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    startActivity(MegaVideoDetailActivity.class);
+                    //报名
+
                 }
             });
             _BtnOthers.setText("查看已报名选手");
@@ -115,7 +122,6 @@ public class MegaGameDetailActivity extends ToolBarActivity<MegaGameDetailPresen
             megaGame.status = MegaGame.STATUS_ING;
 
             imgAction.setVisibility(View.VISIBLE);
-
             imgAction.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
@@ -123,6 +129,8 @@ public class MegaGameDetailActivity extends ToolBarActivity<MegaGameDetailPresen
                 }
             });
 
+            _TvLine.setVisibility(View.GONE);
+            _LayAddress.setVisibility(View.VISIBLE);
         }
 
         if (!TimeUtil.timeComparedNow(megaGame.MatchTimeStart) && TimeUtil.timeComparedNow(megaGame.MatchTimeEnd)) {
@@ -132,7 +140,7 @@ public class MegaGameDetailActivity extends ToolBarActivity<MegaGameDetailPresen
             _BtnMyVideo.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    startActivity(MegaVideoDetailActivity.class);
+                    startActivity(MegaVideoDetailActivity.class, new Bun().putInt("id", getIntentData().getInt("id")).putInt("teamid", -1).putInt("userid", new SessionUtil(getContext()).getUserId()).ok());
                 }
             });
 
@@ -151,7 +159,6 @@ public class MegaGameDetailActivity extends ToolBarActivity<MegaGameDetailPresen
             //比赛已经结束
 
             megaGame.status = MegaGame.STATUS_FINISHED;
-
             _BtnMyVideo.setText("活动结束");
             _BtnMyVideo.setEnabled(false);
             _BtnOthers.setText("投票结果");
@@ -161,10 +168,7 @@ public class MegaGameDetailActivity extends ToolBarActivity<MegaGameDetailPresen
                     startActivity(MegaGameVideosActivity.class, new Bun().putInt("id", id).ok());
                 }
             });
-
-
         }
-
 
         _TvName.setText(megaGame.Name);
         _TvDesc.setText(megaGame.Introduction);

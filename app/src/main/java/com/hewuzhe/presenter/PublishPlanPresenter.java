@@ -11,6 +11,7 @@ import com.hewuzhe.presenter.base.ListPresenter;
 import com.hewuzhe.ui.cons.C;
 import com.hewuzhe.utils.Encoder;
 import com.hewuzhe.utils.NetEngine;
+import com.hewuzhe.utils.SB;
 import com.hewuzhe.utils.SessionUtil;
 import com.hewuzhe.utils.StringUtil;
 import com.hewuzhe.view.PublishPlanView;
@@ -20,6 +21,10 @@ import java.util.ArrayList;
 import retrofit.Callback;
 import retrofit.Response;
 import retrofit.Retrofit;
+import rx.Subscription;
+import rx.android.schedulers.AndroidSchedulers;
+import rx.functions.Action0;
+import rx.schedulers.Schedulers;
 
 /**
  * Created by xianguangjin on 16/1/2.
@@ -153,49 +158,20 @@ public class PublishPlanPresenter extends ListPresenter<PublishPlanView> {
                 }
 
             } else {
-//                Subscription subscription = NetEngine.getService()
-//                        .UpLoadImage(Encoder.getFileName(pickImg.filePath), Encoder.encodeBase64File(pickImg.filePath))
-//                        .subscribeOn(Schedulers.io())
-//                        .doOnSubscribe(() -> view.showDialog())
-//                        .subscribeOn(AndroidSchedulers.mainThread())
-//                        .observeOn(AndroidSchedulers.mainThread())
-//                        .subscribe(new SB<Res<UploadImage>>() {
-//                            @Override
-//                            public void next(Res<UploadImage> res) {
-//                                if (res.code == C.OK) {
-//                                    picCount++;
-//                                    pathList += res.data.ImagePath + "&";
-//                                    if (picCount >= neeCount) {
-//                                        publishTwo(pathList);
-//                                    }
-//                                } else {
-//                                    neeCount--;
-//                                }
-//
-//                            }
-//
-//                            @Override
-//                            public void onCompleted() {
-//
-//                            }
-//
-//                            @Override
-//                            public void onError(Throwable e) {
-//                                neeCount--;
-//                            }
-//                        });
-//                addSubscription(subscription);
-
-
-                view.showDialog();
-
-                NetEngine.getService()
+                Subscription subscription = NetEngine.getService()
                         .UpLoadImage(Encoder.getFileName(pickImg.filePath), Encoder.encodeBase64File(pickImg.filePath))
-                        .enqueue(new Callback<Res<UploadImage>>() {
+                        .subscribeOn(Schedulers.io())
+                        .doOnSubscribe(new Action0() {
                             @Override
-                            public void onResponse(Response<Res<UploadImage>> response, Retrofit retrofit) {
-                                Res<UploadImage> res = response.body();
-
+                            public void call() {
+                                view.showDialog();
+                            }
+                        })
+                        .subscribeOn(AndroidSchedulers.mainThread())
+                        .observeOn(AndroidSchedulers.mainThread())
+                        .subscribe(new SB<Res<UploadImage>>() {
+                            @Override
+                            public void next(Res<UploadImage> res) {
                                 if (res.code == C.OK) {
                                     picCount++;
                                     pathList += res.data.ImagePath + "&";
@@ -209,11 +185,19 @@ public class PublishPlanPresenter extends ListPresenter<PublishPlanView> {
                             }
 
                             @Override
-                            public void onFailure(Throwable t) {
-                                neeCount--;
+                            public void onCompleted() {
 
                             }
+
+                            @Override
+                            public void onError(Throwable e) {
+                                neeCount--;
+                            }
                         });
+                addSubscription(subscription);
+
+
+
             }
         }
     }

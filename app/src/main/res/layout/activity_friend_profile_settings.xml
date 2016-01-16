@@ -9,7 +9,6 @@
     .hewuzhe.ui.activity.FriendProfileSettingsActivity">
     <include layout="@layout/toolbar_layout"/>
 
-
     <LinearLayout android:layout_width="match_parent"
                   android:layout_height="match_parent"
                   android:background="@color/colorBg"
@@ -113,6 +112,7 @@
                           android:layout_width="wrap_content"
                           android:layout_height="wrap_content"
                           android:layout_weight="1"
+                          android:background="@null"
                           android:gravity="right"
                           android:text="龙的传人"/>
 

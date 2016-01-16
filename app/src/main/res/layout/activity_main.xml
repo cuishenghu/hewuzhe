@@ -37,7 +37,7 @@
             <TextView android:layout_width="wrap_content"
                       android:layout_height="wrap_content"
                       android:layout_marginTop="5px"
-                      android:text="核武者"
+                      android:text="功夫派"
                       android:textColor="@color/white"/>
 
 
@@ -60,7 +60,7 @@
             <TextView android:layout_width="wrap_content"
                       android:layout_height="wrap_content"
                       android:layout_marginTop="5px"
-                      android:text="核联盟"
+                      android:text="功夫圈"
 
                       android:textColor="@color/white"/>
 
@@ -83,7 +83,7 @@
             <TextView android:layout_width="wrap_content"
                       android:layout_height="wrap_content"
                       android:layout_marginTop="5px"
-                      android:text="核动力"
+                      android:text="功夫汇"
 
                       android:textColor="@color/white"/>
 
@@ -107,7 +107,7 @@
                       android:layout_height="wrap_content"
 
                       android:layout_marginTop="5px"
-                      android:text="核装备"
+                      android:text="功夫库"
                       android:textColor="@color/white"/>
 
 

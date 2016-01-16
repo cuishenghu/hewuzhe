@@ -12,4 +12,7 @@ public interface FollowedFriendsView extends LoadMoreView, ListView<Friend>, Get
 
 
     void updatePosItem(int pos, boolean b);
+
+    void isWuYou(Boolean data);
+
 }

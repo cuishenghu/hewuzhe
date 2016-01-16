@@ -1,9 +1,12 @@
 package com.hewuzhe.model;
 
+import android.os.Parcel;
+import android.os.Parcelable;
+
 /**
  * Created by xianguangjin on 15/12/31.
  */
-public class MegaGame {
+public class MegaGame implements Parcelable{
 
 
     public static final int STATUS_READY = 1;
@@ -35,4 +38,68 @@ public class MegaGame {
     public String MatchTimeStart;
     public String Name;
     public int status;
+
+
+    /**
+     * IsJoin : true
+     * Phone : 15265104981
+     */
+
+    public boolean IsJoin;
+    public String Phone;
+
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeInt(this.Id);
+        dest.writeString(this.EnrollTimeEnd);
+        dest.writeString(this.EnrollTimeStart);
+        dest.writeString(this.Introduction);
+        dest.writeString(this.MatchAddress);
+        dest.writeString(this.MatchHost);
+        dest.writeString(this.MatchImage);
+        dest.writeString(this.MatchRule);
+        dest.writeString(this.MatchTimeEnd);
+        dest.writeString(this.MatchTimeStart);
+        dest.writeString(this.Name);
+        dest.writeInt(this.status);
+        dest.writeByte(IsJoin ? (byte) 1 : (byte) 0);
+        dest.writeString(this.Phone);
+    }
+
+    public MegaGame() {
+    }
+
+    protected MegaGame(Parcel in) {
+        this.Id = in.readInt();
+        this.EnrollTimeEnd = in.readString();
+        this.EnrollTimeStart = in.readString();
+        this.Introduction = in.readString();
+        this.MatchAddress = in.readString();
+        this.MatchHost = in.readString();
+        this.MatchImage = in.readString();
+        this.MatchRule = in.readString();
+        this.MatchTimeEnd = in.readString();
+        this.MatchTimeStart = in.readString();
+        this.Name = in.readString();
+        this.status = in.readInt();
+        this.IsJoin = in.readByte() != 0;
+        this.Phone = in.readString();
+    }
+
+    public static final Creator<MegaGame> CREATOR = new Creator<MegaGame>() {
+        public MegaGame createFromParcel(Parcel source) {
+            return new MegaGame(source);
+        }
+
+        public MegaGame[] newArray(int size) {
+            return new MegaGame[size];
+        }
+    };
 }
+

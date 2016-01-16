@@ -67,7 +67,7 @@ public class EquipmentFragment extends BaseFragment {
         tvTitle = (TextView) rootView.findViewById(R.id.tv_title);
         tvAction = (TextView) rootView.findViewById(R.id.tv_action);
         appBar = (AppBarLayout) rootView.findViewById(R.id.app_bar_layout);
-        tvTitle.setText("核装备");
+        tvTitle.setText("功夫库");
         tvAction.setVisibility(View.GONE);
         imgBack.setVisibility(View.GONE);
 

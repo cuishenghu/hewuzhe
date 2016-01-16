@@ -2,10 +2,12 @@ package com.hewuzhe.ui.base;
 
 import android.os.Bundle;
 
+import com.hewuzhe.presenter.base.BasePresenterImp;
+
 /**
  * Created by xianguangjin on 15/12/17.
  */
-public abstract class TabToolBarActivity extends ToolBarActivity {
+public abstract class TabToolBarActivity<P extends BasePresenterImp> extends ToolBarActivity<P> {
 
     /**
      * 初始化Tabs

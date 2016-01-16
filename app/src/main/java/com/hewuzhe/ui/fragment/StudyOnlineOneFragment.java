@@ -2,149 +2,94 @@ package com.hewuzhe.ui.fragment;
 
 
 import android.content.Intent;
+import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.View;
-import android.widget.FrameLayout;
-import android.widget.LinearLayout;
 
+import com.adhamenaya.listeners.OnItemClickListener;
+import com.adhamenaya.views.BlockPattern;
+import com.adhamenaya.views.MosaicLayout;
 import com.hewuzhe.R;
-import com.hewuzhe.presenter.base.BasePresenterImp;
+import com.hewuzhe.model.StudyOnlineCatItem;
+import com.hewuzhe.presenter.StudyOnlineFragPresenter;
 import com.hewuzhe.ui.activity.Videos_2Activity;
+import com.hewuzhe.ui.adapter.MyAdapter;
 import com.hewuzhe.ui.base.BaseFragment;
+import com.hewuzhe.view.StudyOnlineFragView;
+
+import java.util.ArrayList;
 
 import butterknife.Bind;
 
 /**
  * A simple {@link Fragment} subclass.
  */
-public class StudyOnlineOneFragment extends BaseFragment {
+public class StudyOnlineOneFragment extends BaseFragment<StudyOnlineFragPresenter> implements StudyOnlineFragView {
 
 
-    private static StudyOnlineOneFragment instance = null;
-    @Bind(R.id.lay_one)
-    FrameLayout layOne;
-    @Bind(R.id.lay_two)
-    FrameLayout layTwo;
-    @Bind(R.id.lay_three)
-    FrameLayout layThree;
-    @Bind(R.id.lay_four)
-    FrameLayout layFour;
-    @Bind(R.id.lay_five)
-    FrameLayout layFive;
-    @Bind(R.id.lay_six)
-    FrameLayout laySix;
-    @Bind(R.id.lay_seven)
-    FrameLayout laySeven;
-    @Bind(R.id.lay_eight)
-    FrameLayout layEight;
-    @Bind(R.id.lay_view_group)
-    LinearLayout layViewGroup;
-    private View view;
-    private Intent intent;
+    @Bind(R.id.layout)
+    MosaicLayout _Layout;
 
-    public static StudyOnlineOneFragment newInstance() {
-        if (instance == null) {
-            instance = new StudyOnlineOneFragment();
-        }
+    private int id;
+
+
+    BlockPattern.BLOCK_PATTERN pattern1[] = {BlockPattern.BLOCK_PATTERN.BIG, BlockPattern.BLOCK_PATTERN.BIG, BlockPattern.BLOCK_PATTERN.HORIZONTAL, BlockPattern.BLOCK_PATTERN.HORIZONTAL,
+            BlockPattern.BLOCK_PATTERN.BIG, BlockPattern.BLOCK_PATTERN.BIG, BlockPattern.BLOCK_PATTERN.HORIZONTAL, BlockPattern.BLOCK_PATTERN.HORIZONTAL};
+
+    BlockPattern.BLOCK_PATTERN pattern2[] = {BlockPattern.BLOCK_PATTERN.HORIZONTAL, BlockPattern.BLOCK_PATTERN.HORIZONTAL, BlockPattern.BLOCK_PATTERN.BIG, BlockPattern.BLOCK_PATTERN.BIG, BlockPattern.BLOCK_PATTERN.HORIZONTAL,
+            BlockPattern.BLOCK_PATTERN.HORIZONTAL, BlockPattern.BLOCK_PATTERN.BIG, BlockPattern.BLOCK_PATTERN.BIG};
+
+
+    public static StudyOnlineOneFragment newInstance(Bundle args) {
+        StudyOnlineOneFragment instance = new StudyOnlineOneFragment();
+        args.putInt("id", args.getInt("id"));
+        instance.setArguments(args);
         return instance;
     }
 
     public StudyOnlineOneFragment() {
-        // Required empty public constructor
+
     }
 
 
+    /**
+     * 初始化事件监听者
+     */
     @Override
     public void initListeners() {
-        layOne.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                intent = new Intent(getActivity(), Videos_2Activity.class);
-                intent.putExtra("title", "坚毅");
-                intent.putExtra("id", 15);
-                getActivity().startActivity(intent);
-            }
-        });
 
-        layTwo.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                intent = new Intent(getActivity(), Videos_2Activity.class);
-                intent.putExtra("title", "激情");
-                intent.putExtra("id", 16);
-
-                getActivity().startActivity(intent);
-            }
-        });
-
-        layThree.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                intent = new Intent(getActivity(), Videos_2Activity.class);
-                intent.putExtra("title", "自制");
-                intent.putExtra("id", 17);
-
-                getActivity().startActivity(intent);
-            }
-        });
-        layFour.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                intent = new Intent(getActivity(), Videos_2Activity.class);
-                intent.putExtra("title", "好奇");
-                intent.putExtra("id", 18);
-
-                getActivity().startActivity(intent);
-            }
-        });
-        layFive.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                intent = new Intent(getActivity(), Videos_2Activity.class);
-                intent.putExtra("title", "乐观");
-                intent.putExtra("id", 20);
-
-                getActivity().startActivity(intent);
-            }
-        });
-        laySix.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                intent = new Intent(getActivity(), Videos_2Activity.class);
-                intent.putExtra("title", "感恩");
-                intent.putExtra("id", 22);
-
-                getActivity().startActivity(intent);
-            }
-        });
-        laySeven.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                intent = new Intent(getActivity(), Videos_2Activity.class);
-                intent.putExtra("title", "社交");
-                intent.putExtra("id", 21);
-
-                getActivity().startActivity(intent);
-            }
-        });
-        layEight.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                intent = new Intent(getActivity(), Videos_2Activity.class);
-                intent.putExtra("title", "野心");
-                intent.putExtra("id", 14);
-                getActivity().startActivity(intent);
-            }
-        });
     }
 
     /**
      * 初始化一些事情
      *
-     * @param v
+     * @param view
      */
     @Override
-    protected void initThings(View v) {
+    protected void initThings(View view) {
+        id = getArguments().getInt("id");
+        presenter.getCates(id);
+
+        orderedSelectedPatterns();
+
+    }
+
+    private void randomAllPatters() {
+        _Layout.chooseRandomPattern(true);
+
+    }
+
+    private void randomSelectedPatterns() {
+        _Layout.addPattern(pattern1);
+        _Layout.addPattern(pattern2);
+        _Layout.chooseRandomPattern(true);
+
+    }
+
+    private void orderedSelectedPatterns() {
+        _Layout.addPattern(pattern1);
+        _Layout.addPattern(pattern2);
+        _Layout.chooseRandomPattern(false);
 
     }
 
@@ -160,9 +105,31 @@ public class StudyOnlineOneFragment extends BaseFragment {
      * 绑定Presenter
      */
     @Override
-    public BasePresenterImp createPresenter() {
-        return null;
+    public StudyOnlineFragPresenter createPresenter() {
+        return new StudyOnlineFragPresenter();
     }
 
 
+    @Override
+    public void bindData(final ArrayList<StudyOnlineCatItem> data) {
+
+        MyAdapter adapter = new MyAdapter(getContext());
+        adapter.setData(data);
+        _Layout.setAdapter(adapter);
+
+        _Layout.setOnItemClickListener(new OnItemClickListener() {
+
+            @Override
+            public void onClick(int position) {
+                StudyOnlineCatItem item = data.get(position);
+                Intent intent = new Intent(getActivity(), Videos_2Activity.class);
+                intent.putExtra("title", item.Name);
+                intent.putExtra("id", item.Id);
+                getActivity().startActivity(intent);
+
+            }
+        });
+
+
+    }
 }

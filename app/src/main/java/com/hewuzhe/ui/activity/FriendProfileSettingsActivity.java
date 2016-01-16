@@ -15,11 +15,13 @@ import com.hewuzhe.ui.base.ToolBarActivity;
 import com.hewuzhe.ui.cons.C;
 import com.hewuzhe.ui.widget.GlideCircleTransform;
 import com.hewuzhe.ui.widget.SwitchView;
+import com.hewuzhe.ui.widget.YsnowEditDialog;
 import com.hewuzhe.utils.StringUtil;
 import com.hewuzhe.utils.TimeUtil;
 import com.hewuzhe.view.ProfileSettingsView;
 
 import butterknife.Bind;
+import io.rong.imkit.RongIM;
 
 public class FriendProfileSettingsActivity extends ToolBarActivity<ProfileSettingsPresenter> implements ProfileSettingsView {
 
@@ -74,6 +76,66 @@ public class FriendProfileSettingsActivity extends ToolBarActivity<ProfileSettin
      */
     @Override
     public void initListeners() {
+        _LayRecord.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                RongIM.getInstance().startPrivateChat(getContext(), friend.Id + "", friend.NicName);
+            }
+        });
+
+        _LayReport.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                final YsnowEditDialog ysnowEditDialog = new YsnowEditDialog(getContext(), "举报事由", "");
+
+                ysnowEditDialog.negative.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        ysnowEditDialog.dismiss();
+                    }
+                });
+                ysnowEditDialog.positive.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        ysnowEditDialog.dismiss();
+                        presenter.collectAndOther(getData(), 3, _LayReport, ysnowEditDialog.content.getText().toString());
+
+                    }
+                });
+
+                ysnowEditDialog.show();
+
+            }
+        });
+
+
+        _TvRemark.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                final YsnowEditDialog ysnowEditDialog = new YsnowEditDialog(getContext(), "好友备注", "请输入好友备注");
+
+                ysnowEditDialog.negative.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        ysnowEditDialog.dismiss();
+                    }
+                });
+                ysnowEditDialog.positive.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        ysnowEditDialog.dismiss();
+                        String content = ysnowEditDialog.content.getText().toString();
+                        presenter.ChangeFriendRName(content);
+                        _TvRemark.setText(content);
+
+                    }
+                });
+
+                ysnowEditDialog.show();
+
+            }
+        });
+
 
     }
 
@@ -81,14 +143,53 @@ public class FriendProfileSettingsActivity extends ToolBarActivity<ProfileSettin
     @Override
     protected void initThings(Bundle savedInstanceState) {
         super.initThings(savedInstanceState);
+        presenter.getFriendProfile();
 
-        initData();
     }
 
-    private void initData() {
-        friend = getIntentData().getParcelable("user");
+
+    /**
+     * 绑定Presenter
+     */
+    @Override
+    public ProfileSettingsPresenter createPresenter() {
+        return new ProfileSettingsPresenter();
+    }
+
+    @Override
+    public Integer getData() {
+        return getIntentData().getInt("id");
+    }
+
+    @Override
+    public void followSuccess(boolean b) {
+        if (b) {
+            _BtnFollow.setText("已关注");
+            _BtnFollow.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    presenter.unFollow(_BtnFollow);
+                }
+            });
+
+        } else {
+            _BtnFollow.setText("取消关注");
+            _BtnFollow.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    presenter.follow(_BtnFollow);
+                }
+            });
+
+        }
+    }
+
+    @Override
+    public void setData(User user) {
+        friend = user;
         _TvUsername.setText(friend.NicName + "");
         _TvInfo.setText(StringUtil.getGender(friend.Sexuality) + " " + TimeUtil.timeHaved(friend.Birthday) + "岁 " + "   " + friend.HomeAreaprovinceName + " " + friend.HomeAreaCityName + " " + friend.HomeAreaCountyName);
+        _TvRemark.setText(friend.RemarkName);
 
         Glide.with(getContext())
                 .load(C.BASE_URL + friend.PhotoPath)
@@ -104,42 +205,31 @@ public class FriendProfileSettingsActivity extends ToolBarActivity<ProfileSettin
             }
         });
 
-    }
+        _SwitchCondition.setChecked(user.IsShield);
+        _SwitchMsg.setChecked(false);
 
-    /**
-     * 绑定Presenter
-     */
-    @Override
-    public ProfileSettingsPresenter createPresenter() {
-        return new ProfileSettingsPresenter();
-    }
 
-    @Override
-    public Integer getData() {
-        return friend.Id;
-    }
-
-    @Override
-    public void followSuccess(boolean b) {
-        if (b) {
-            _BtnFollow.setText("已关注");
-            _BtnFollow.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    presenter.unFollow(_BtnFollow);
+        _SwitchCondition.setOnCheckedChangeListener(new SwitchView.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(View view, boolean isChecked) {
+                if (isChecked) {
+                    presenter.ShieldFriend();
+                } else {
+                    presenter.UnShieldFriend();
                 }
-            });
-
-
-        } else {
-            _BtnFollow.setText("取消关注");
-            _BtnFollow.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    presenter.follow(_BtnFollow);
+            }
+        });
+        _SwitchMsg.setOnCheckedChangeListener(new SwitchView.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(View view, boolean isChecked) {
+                if (isChecked) {
+                    presenter.ShieldFriendNews();
+                } else {
+                    presenter.UnShieldFriendNews();
                 }
-            });
+            }
+        });
 
-        }
+
     }
 }

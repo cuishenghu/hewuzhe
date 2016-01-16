@@ -10,7 +10,6 @@ import com.hewuzhe.view.base.SetView;
 public interface FriendProfileView extends GetView<Integer>, SetView<User> {
 
 
-    void setIsWuyou(boolean b);
 
     void followSuccess();
 }

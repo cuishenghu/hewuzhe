@@ -510,6 +510,8 @@
         </activity>
         <activity android:name=".ui.activity.FriendProfileSettingsActivity">
         </activity>
+        <activity android:name=".ui.activity.StrangerProfileSettingsActivity">
+        </activity>
         <activity
             android:name=".ui.activity.BasicVideoActivity"
             android:configChanges="keyboardHidden|orientation|screenSize">
@@ -573,6 +575,8 @@
         <activity android:name=".ui.activity.CondtionCommetnsActivity">
         </activity>
         <activity android:name=".ui.activity.TeamManagerActivity">
+        </activity>
+        <activity android:name=".ui.activity.MegaGameApplyActivity">
         </activity>
     </application>
 

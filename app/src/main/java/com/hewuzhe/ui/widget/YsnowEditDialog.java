@@ -11,14 +11,14 @@ import android.widget.EditText;
 import android.widget.TextView;
 
 import com.hewuzhe.R;
+import com.hewuzhe.utils.StringUtil;
 
 
 public class YsnowEditDialog {
 
+    public TextView tvTitle;
     public EditText content;
-    private Dialog mDialog;
-    private TextView dialog_title;
-    private TextView dialog_message;
+    public Dialog mDialog;
     public TextView positive;
     public TextView negative;
 
@@ -48,8 +48,17 @@ public class YsnowEditDialog {
 
 
         positive = (TextView) layout.findViewById(R.id.choosePhotoTv);
+        tvTitle = (TextView) layout.findViewById(R.id.takePhotoTv);
         negative = (TextView) layout.findViewById(R.id.cancelTv);
         content = (EditText) layout.findViewById(R.id.edt_content);
+
+        if (!StringUtil.isEmpty(title)) {
+            tvTitle.setText(title);
+        }
+
+        if (!StringUtil.isEmpty(message)) {
+            content.setHint(message);
+        }
     }
 
     public void show() {

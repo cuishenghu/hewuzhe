@@ -111,5 +111,6 @@ public class C {
     public static final int GENDER_UN_KNOWN = 0;
 
     public static final String CACHE_DIR_PATH = "/hewuzhe/cache";
-    public static final Object MSG_CLOSE_GROUP_CONDITION = 20000;
+    public static final int MSG_CLOSE_GROUP_CONDITION = 20000;
+    public static final int MSG_REFRESH_MEGA_GAME_DETAIL = 20001;
 }

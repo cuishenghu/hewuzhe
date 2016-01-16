@@ -18,8 +18,8 @@ public class SwitchView extends View {
     private static final float mStrokeWidth = 1;
     public static final int CHECK_COLOR = Color.parseColor("#ef9c00");
     public static final int UNCHECK_COLOR = Color.parseColor("#818181");
-    public static final int INNER_BACK_COLOR = Color.parseColor("#818181");;
-
+    public static final int INNER_BACK_COLOR = Color.parseColor("#818181");
+    ;
 
 
     private long mStartTime;
@@ -70,7 +70,6 @@ public class SwitchView extends View {
             @Override
             public void onClick(View v) {
                 setChecked(!isChecked);
-                initAnimator();
             }
         });
 
@@ -92,12 +91,13 @@ public class SwitchView extends View {
         invalidate();
     }
 
-
     public void setChecked(boolean check) {
-        if (mOnCheckedlistener!=null && check!=isChecked) {
+        if (mOnCheckedlistener != null && check != isChecked) {
             mOnCheckedlistener.onCheckedChanged(this, check);
         }
+
         isChecked = check;
+        initAnimator();
 
     }
 
@@ -115,9 +115,9 @@ public class SwitchView extends View {
     protected void onLayout(boolean changed, int left, int top, int right, int bottom) {
         super.onLayout(changed, left, top, right, bottom);
         if (changed) {
-            mEdgeWidth = getWidth()/30;
-            mLeftStartX = getWidth()/3;
-            mLeftTargetX = getWidth()*2/3;
+            mEdgeWidth = getWidth() / 30;
+            mLeftStartX = getWidth() / 3;
+            mLeftTargetX = getWidth() * 2 / 3;
             mRightStartX = mLeftStartX;
             mRightTargetX = mLeftTargetX;
         }
@@ -143,22 +143,22 @@ public class SwitchView extends View {
     private int getInnerBackR() {
         if (isPlayingRight || isPlaying) {
             long duration = isChecked ? Math.min(mDuration, mRightDuration) * 2 / 3 : Math.max(mDuration, mRightDuration);
-            if (System.currentTimeMillis() >= duration+mStartTime) {
-                return isChecked ? 0: getWidth() / 3 - mEdgeWidth;
+            if (System.currentTimeMillis() >= duration + mStartTime) {
+                return isChecked ? 0 : getWidth() / 3 - mEdgeWidth;
             }
-            float ratio = (float)(System.currentTimeMillis() - mStartTime) / duration;
+            float ratio = (float) (System.currentTimeMillis() - mStartTime) / duration;
             ratio = Math.min(ratio, 1);
-            ratio = isChecked ? (1-ratio) : ratio;
-            return (int)((getWidth()/3 - mEdgeWidth) * ratio);
+            ratio = isChecked ? (1 - ratio) : ratio;
+            return (int) ((getWidth() / 3 - mEdgeWidth) * ratio);
         } else {
-            return isChecked ? 0: getWidth() / 3 - mEdgeWidth;
+            return isChecked ? 0 : getWidth() / 3 - mEdgeWidth;
         }
     }
 
     private int getInnerLeftCenterX() {
         int innerRadius = getInnerBackR();
-        float ratio = (float)innerRadius / (getWidth()/3 -mEdgeWidth);
-        int leftX = (int) (getWidth()/2 - (getWidth()/4) * ratio);
+        float ratio = (float) innerRadius / (getWidth() / 3 - mEdgeWidth);
+        int leftX = (int) (getWidth() / 2 - (getWidth() / 4) * ratio);
         leftX = Math.max(leftX, getWidth() / 3);
         return leftX;
     }
@@ -168,13 +168,13 @@ public class SwitchView extends View {
         int curColor = UNCHECK_COLOR;
         if (isPlayingRight || isPlaying) {
             long duration = Math.min(mDuration, mRightDuration);
-            if (System.currentTimeMillis() >= duration+mStartTime) {
+            if (System.currentTimeMillis() >= duration + mStartTime) {
                 return isChecked ? CHECK_COLOR : UNCHECK_COLOR;
             }
-            float ratio = (float)(System.currentTimeMillis() - mStartTime) / duration;
+            float ratio = (float) (System.currentTimeMillis() - mStartTime) / duration;
             ratio = Math.min(ratio, 1);
             ratio = isChecked ? ratio : 1 - ratio;
-            int curAlpha =(int) (0xff * ratio);
+            int curAlpha = (int) (0xff * ratio);
             curColor = Color.argb(curAlpha, Color.red(CHECK_COLOR), Color.green(CHECK_COLOR), Color.blue(CHECK_COLOR));
 
         } else {
@@ -188,10 +188,10 @@ public class SwitchView extends View {
         int currentLeftCenerX = isChecked ? mLeftStartX : mLeftTargetX;
 
         if (isPlaying) {
-            float ratio = ((float)(System.currentTimeMillis()-mStartTime) / mDuration) * (isChecked ? 1 : -1);
+            float ratio = ((float) (System.currentTimeMillis() - mStartTime) / mDuration) * (isChecked ? 1 : -1);
             currentLeftCenerX += (mLeftTargetX - mLeftStartX) * ratio;
-            if ((isChecked && currentLeftCenerX >= mLeftTargetX ) ||
-                    !isChecked && currentLeftCenerX <= mLeftStartX ) {
+            if ((isChecked && currentLeftCenerX >= mLeftTargetX) ||
+                    !isChecked && currentLeftCenerX <= mLeftStartX) {
                 isPlaying = false;
             }
         } else {
@@ -204,18 +204,17 @@ public class SwitchView extends View {
     private int getRightCenterX() {
         int currentRightX = isChecked ? mRightStartX : mRightTargetX;
         if (isPlayingRight) {
-            float ratio = ((float)(System.currentTimeMillis()-mRightStartTime) / mRightDuration) * (isChecked ? 1 : -1);
+            float ratio = ((float) (System.currentTimeMillis() - mRightStartTime) / mRightDuration) * (isChecked ? 1 : -1);
             currentRightX += (mRightTargetX - mRightStartX) * ratio;
             if ((isChecked && currentRightX >= mRightTargetX) ||
-                !isChecked && currentRightX <= mRightStartX ) {
+                    !isChecked && currentRightX <= mRightStartX) {
                 isPlayingRight = false;
             }
         } else {
-            return isChecked ?  mRightTargetX : mRightStartX;
+            return isChecked ? mRightTargetX : mRightStartX;
         }
         return currentRightX;
     }
-
 
 
     private void drawRectCir(Canvas canvas, int radius, int leftCenterX, int rightCenterX, int centerY, Paint paint) {
@@ -227,12 +226,12 @@ public class SwitchView extends View {
 //        if (rightCenterX > leftCenterX) {
 //            canvas.drawRect(leftCenterX, centerY - radius, rightCenterX, centerY + radius, paint);
 //        }
-        canvas.drawRoundRect(new RectF(leftCenterX-radius, centerY-radius, rightCenterX+radius, centerY+radius), radius, radius, paint);
+        canvas.drawRoundRect(new RectF(leftCenterX - radius, centerY - radius, rightCenterX + radius, centerY + radius), radius, radius, paint);
     }
 
     @Override
     public boolean onTouchEvent(MotionEvent event) {
-        if (isPlaying||isPlayingRight) {
+        if (isPlaying || isPlayingRight) {
             return true;
         }
         return super.onTouchEvent(event);

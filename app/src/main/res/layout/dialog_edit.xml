@@ -41,7 +41,6 @@
                 android:textSize="18sp"
                 />
 
-
             <EditText
                 android:id="@+id/edt_content"
                 android:layout_width="match_parent"
@@ -60,11 +59,11 @@
 
 
             <LinearLayout android:layout_width="match_parent"
-                          android:layout_height="wrap_content"
+                          android:layout_height="78px"
                           android:background="@color/colorListBg"
                           android:gravity="center_vertical|right"
                           android:orientation="horizontal"
-                          android:padding="15dp">
+                >
 
 
                 <TextView

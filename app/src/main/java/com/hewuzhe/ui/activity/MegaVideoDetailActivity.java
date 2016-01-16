@@ -77,7 +77,7 @@ public class MegaVideoDetailActivity extends RecycleViewActivity<MegaVideoDetail
 
     /**
      * @param savedInstanceState 缓存数据
-     *                           <p>
+     *                           <p/>
      */
     @Override
     protected void initThings(Bundle savedInstanceState) {
@@ -92,7 +92,7 @@ public class MegaVideoDetailActivity extends RecycleViewActivity<MegaVideoDetail
 //      presenter.getOtherVideos(id);
         presenter.getData(page, count);
 
-        if (teamid != -1) {
+        if (MegaGameActivity.PAGE == 1) {
             presenter.getBasicInfo(teamid);
         } else {
             presenter.getUserData(userid);

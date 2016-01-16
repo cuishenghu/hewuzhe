@@ -7,7 +7,6 @@ import com.hewuzhe.presenter.adapter.ConditionPresenter;
 import com.hewuzhe.ui.cons.C;
 import com.hewuzhe.utils.NetEngine;
 import com.hewuzhe.utils.SB;
-import com.hewuzhe.utils.SessionUtil;
 import com.hewuzhe.view.FriendsConditionView;
 
 import java.util.ArrayList;
@@ -24,7 +23,7 @@ public class MyConditionPresenter extends ConditionPresenter<FriendsConditionVie
     public void getData(final int page, final int count) {
 
         Subscription subscription = NetEngine.getService()
-                .GetDongtaiPageByFriends((page - 1) * count, count, new SessionUtil(view.getContext()).getUserId())
+                .GetDongtaiPageByFriends((page - 1) * count, count, view.getData())
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new SB<Res<ArrayList<FriendCondition>>>() {

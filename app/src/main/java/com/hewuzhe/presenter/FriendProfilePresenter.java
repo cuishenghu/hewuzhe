@@ -69,7 +69,7 @@ public class FriendProfilePresenter extends BasePresenterImp<FriendProfileView> 
                     @Override
                     public void next(Res res) {
                         if (res.code == C.OK) {
-                            view.setIsWuyou(true);
+
                         }
                     }
 

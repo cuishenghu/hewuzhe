@@ -16,4 +16,5 @@ public interface MakeWarriorsView extends GetView<Friend>,AreaView,ListView<Frie
      */
     void updatePosItem(int pos, boolean IsFriend);
 
+    void isWuYou(Boolean data);
 }

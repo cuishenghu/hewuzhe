@@ -79,4 +79,9 @@ public class Video {
     public boolean IsRepeat=false;
 
 
+    /**
+     * UpLoadType : 0
+     */
+
+    public int UpLoadType=0;//0是你选择手机中的视频
 }

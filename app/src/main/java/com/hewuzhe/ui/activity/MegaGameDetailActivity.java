@@ -1,5 +1,7 @@
 package com.hewuzhe.ui.activity;
 
+import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -11,18 +13,19 @@ import android.widget.TextView;
 import com.bumptech.glide.Glide;
 import com.hewuzhe.R;
 import com.hewuzhe.model.MegaGame;
+import com.hewuzhe.model.User;
 import com.hewuzhe.presenter.MegaGameDetailPresenter;
 import com.hewuzhe.ui.base.ToolBarActivity;
 import com.hewuzhe.ui.cons.C;
 import com.hewuzhe.utils.Bun;
 import com.hewuzhe.utils.SessionUtil;
 import com.hewuzhe.utils.TimeUtil;
-import com.hewuzhe.view.base.SetView;
+import com.hewuzhe.view.MegaGameDetailView;
 
 import butterknife.Bind;
 import cn.xm.weidongjian.popuphelper.PopupWindowHelper;
 
-public class MegaGameDetailActivity extends ToolBarActivity<MegaGameDetailPresenter> implements SetView<MegaGame> {
+public class MegaGameDetailActivity extends ToolBarActivity<MegaGameDetailPresenter> implements MegaGameDetailView {
 
 
     @Bind(R.id.tv_name)
@@ -51,9 +54,12 @@ public class MegaGameDetailActivity extends ToolBarActivity<MegaGameDetailPresen
     LinearLayout _LayAddress;
     @Bind(R.id.tv_line)
     TextView _TvLine;
+    @Bind(R.id.btn_call)
+    Button _BtnCall;
     private int id;
     private TextView action_1;
     private TextView action_2;
+    private MegaGame _MegaGame;
 
 
     /**
@@ -79,6 +85,7 @@ public class MegaGameDetailActivity extends ToolBarActivity<MegaGameDetailPresen
         id = getIntentData().getInt("id");
         presenter.getDetail(id);
 
+
     }
 
     /**
@@ -99,27 +106,100 @@ public class MegaGameDetailActivity extends ToolBarActivity<MegaGameDetailPresen
     }
 
     @Override
-    public void setData(MegaGame megaGame) {
-
+    public void setData(final MegaGame megaGame) {
+        _MegaGame = megaGame;
         if (TimeUtil.timeComparedNow(megaGame.MatchTimeStart)) {
             //比赛未开始
             megaGame.status = MegaGame.STATUS_READY;
-            _BtnMyVideo.setText("我要报名");
-            _BtnMyVideo.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    //报名
+            if (megaGame.IsJoin) {
+                if (MegaGameActivity.PAGE == 0) {
+                    _BtnMyVideo.setText("我的视频");
+                } else {
+                    _BtnMyVideo.setText("战队视频");
+                }
+
+                _BtnMyVideo.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        User user = new SessionUtil(getContext()).getUser();
+                        startActivity(MegaVideoDetailActivity.class, new Bun().putInt("id", getIntentData().getInt("id")).putInt("teamid", user.TeamId).putInt("userid", user.Id).ok());
+                    }
+                });
+
+                imgAction.setVisibility(View.VISIBLE);
+                imgAction.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        showPop();
+                    }
+                });
+
+            } else {
+
+                imgAction.setVisibility(View.GONE);
+
+                if (MegaGameActivity.PAGE == 0) {
+
+                    _BtnMyVideo.setText("我要报名");
+
+                    _BtnMyVideo.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View view) {
+                            //报名
+                            startActivity(MegaGameApplyActivity.class, new Bun().putInt("id", id).putBoolean("isJoin", _MegaGame.IsJoin).ok());
+                        }
+                    });
+
+                } else {
+                    _BtnMyVideo.setVisibility(View.GONE);
+                    _BtnOthers.setVisibility(View.GONE);
+                    _BtnCall.setVisibility(View.VISIBLE);
+                    _BtnCall.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View view) {
+                            Intent intent = new Intent(Intent.ACTION_DIAL);
+                            intent.setData(Uri.parse("tel:" + megaGame.Phone));
+                            startActivity(intent);
+                        }
+                    });
 
                 }
-            });
-            _BtnOthers.setText("查看已报名选手");
+
+
+            }
+
+            if (MegaGameActivity.PAGE == 0) {
+                _BtnOthers.setText("查看已报名选手");
+            } else {
+                _BtnOthers.setText("查看已报名战队");
+            }
+
             _BtnOthers.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
                     startActivity(MegaGameVideosTwoActivity.class, new Bun().putInt("id", id).ok());
                 }
             });
+
+        }
+
+        if (!TimeUtil.timeComparedNow(megaGame.MatchTimeStart) && TimeUtil.timeComparedNow(megaGame.MatchTimeEnd)) {
+            //比赛进行中
             megaGame.status = MegaGame.STATUS_ING;
+//            if (megaGame.IsJoin) {
+            if (MegaGameActivity.PAGE == 0) {
+                _BtnMyVideo.setText("我的视频");
+            } else {
+                _BtnMyVideo.setText("战队视频");
+            }
+
+            _BtnMyVideo.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    User user = new SessionUtil(getContext()).getUser();
+                    startActivity(MegaVideoDetailActivity.class, new Bun().putInt("id", getIntentData().getInt("id")).putInt("teamid", user.TeamId).putInt("userid", user.Id).ok());
+                }
+            });
 
             imgAction.setVisibility(View.VISIBLE);
             imgAction.setOnClickListener(new View.OnClickListener() {
@@ -129,29 +209,52 @@ public class MegaGameDetailActivity extends ToolBarActivity<MegaGameDetailPresen
                 }
             });
 
-            _TvLine.setVisibility(View.GONE);
-            _LayAddress.setVisibility(View.VISIBLE);
-        }
+//            } else {
+//
+//                imgAction.setVisibility(View.GONE);
+//
+//                if (MegaGameActivity.PAGE == 0) {
+//
+//                    _BtnMyVideo.setText("我要报名");
+//
+//                    _BtnMyVideo.setOnClickListener(new View.OnClickListener() {
+//                        @Override
+//                        public void onClick(View view) {
+//                            //报名
+//                            startActivity(MegaGameApplyActivity.class, new Bun().putInt("id", id).putBoolean("isJoin", _MegaGame.IsJoin).ok());
+//                        }
+//                    });
+//
+//                } else {
+//                    _BtnMyVideo.setVisibility(View.GONE);
+//                    _BtnOthers.setVisibility(View.GONE);
+//                    _BtnCall.setVisibility(View.VISIBLE);
+//                    _BtnCall.setOnClickListener(new View.OnClickListener() {
+//                        @Override
+//                        public void onClick(View view) {
+//                            Intent intent = new Intent(Intent.ACTION_DIAL);
+//                            intent.setData(Uri.parse("tel:" + megaGame.Phone));
+//                            startActivity(intent);
+//                        }
+//                    });
+//
+//                }
+//
+//
+//            }
 
-        if (!TimeUtil.timeComparedNow(megaGame.MatchTimeStart) && TimeUtil.timeComparedNow(megaGame.MatchTimeEnd)) {
-            //比赛未结束,正在进行中
+            if (MegaGameActivity.PAGE == 0) {
+                _BtnOthers.setText("查看已报名选手");
+            } else {
+                _BtnOthers.setText("查看已报名战队");
+            }
 
-            _BtnMyVideo.setText("我的视频");
-            _BtnMyVideo.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    startActivity(MegaVideoDetailActivity.class, new Bun().putInt("id", getIntentData().getInt("id")).putInt("teamid", -1).putInt("userid", new SessionUtil(getContext()).getUserId()).ok());
-                }
-            });
-
-            _BtnOthers.setText("已报名选手详情");
             _BtnOthers.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
                     startActivity(MegaGameVideosTwoActivity.class, new Bun().putInt("id", id).ok());
                 }
             });
-            megaGame.status = MegaGame.STATUS_ING;
 
         }
 
@@ -184,30 +287,46 @@ public class MegaGameDetailActivity extends ToolBarActivity<MegaGameDetailPresen
                 .into(_Img);
     }
 
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (resultCode == RESULT_OK) {
+            refresh();
+        }
+    }
+
+
     private void showPop() {
         View view = LayoutInflater.from(getContext()).inflate(R.layout.popview, null);
         final PopupWindowHelper popupWindowHelper = new PopupWindowHelper(view);
 
         action_1 = (TextView) view.findViewById(R.id.tv_local_video);
         action_2 = (TextView) view.findViewById(R.id.tv_take_video);
-        action_1.setText("修改作品");
-        action_2.setText("取消作品");
+        action_1.setText("取消报名");
+        action_2.setText("修改作品");
         action_1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startActivity(PublishConditionActivity.class);
                 popupWindowHelper.dismiss();
+                presenter.CancleJoinMatch(id, action_1);
             }
         });
 
         action_2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startActivity(TakeVideoActivity.class, new Bun().putInt(C.WHITCH, C.WHITCH_ONE).ok());
                 popupWindowHelper.dismiss();
+                startActivity(MegaGameApplyActivity.class, new Bun().putInt("id", id).putBoolean("isJoin", _MegaGame.IsJoin).ok());
             }
         });
 
         popupWindowHelper.showAsDropDown(imgAction);
     }
+
+    @Override
+    public void refresh() {
+        presenter.getDetail(id);
+    }
+
 }

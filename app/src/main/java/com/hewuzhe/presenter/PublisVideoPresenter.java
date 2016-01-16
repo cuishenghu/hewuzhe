@@ -8,12 +8,17 @@ import com.hewuzhe.presenter.base.BasePresenterImp;
 import com.hewuzhe.ui.cons.C;
 import com.hewuzhe.utils.Encoder;
 import com.hewuzhe.utils.NetEngine;
+import com.hewuzhe.utils.SB;
 import com.hewuzhe.utils.SessionUtil;
 import com.hewuzhe.view.PublistVideoVIew;
 
 import retrofit.Callback;
 import retrofit.Response;
 import retrofit.Retrofit;
+import rx.Subscription;
+import rx.android.schedulers.AndroidSchedulers;
+import rx.functions.Action0;
+import rx.schedulers.Schedulers;
 
 /**
  * Created by xianguangjin on 15/12/28.
@@ -88,58 +93,41 @@ public class PublisVideoPresenter extends BasePresenterImp<PublistVideoVIew> {
 
         String fileName = path.substring(path.lastIndexOf("/") + 1, path.length());
         try {
-//            Subscription subscription = NetEngine.getService()
-//                    .UpLoadVideo(fileName, Encoder.encodeBase64File(path))
-//                    .subscribeOn(Schedulers.io())
-//                    .doOnSubscribe(() -> view.showDialog())
-//                    .observeOn(AndroidSchedulers.mainThread())
-//                    .subscribe(new SB<Res<Video>>() {
-//                        @Override
-//                        public void next(Res<Video> res) {
-//                            if (res.code == C.OK) {
-//                                publistVideo(res.data.VideoName, res.data.ImageName, res.data.VideoDuration, cateId);
-//                            } else {
-//                                view.dismissDialog();
-//
-//                            }
-//
-//                        }
-//
-//                        @Override
-//                        public void onCompleted() {
-//
-//                        }
-//
-//                        @Override
-//                        public void onError(Throwable e) {
-//                            view.dismissDialog();
-//
-//                        }
-//                    });
-//            addSubscription(subscription);
-
-            NetEngine.getService()
+            Subscription subscription = NetEngine.getService()
                     .UpLoadVideo(fileName, Encoder.encodeBase64File(path))
-                    .enqueue(new Callback<Res<Video>>() {
+                    .subscribeOn(Schedulers.io())
+                    .doOnSubscribe(new Action0() {
                         @Override
-                        public void onResponse(Response<Res<Video>> response, Retrofit retrofit) {
-                            Res<Video> res = response.body();
+                        public void call() {
+                            view.showDialog();
+                        }
+                    })
+                    .observeOn(AndroidSchedulers.mainThread())
+                    .subscribe(new SB<Res<Video>>() {
+                        @Override
+                        public void next(Res<Video> res) {
                             if (res.code == C.OK) {
                                 publistVideo(res.data.VideoName, res.data.ImageName, res.data.VideoDuration, cateId);
                             } else {
                                 view.dismissDialog();
 
                             }
-                            view.dismissDialog();
 
                         }
 
                         @Override
-                        public void onFailure(Throwable t) {
+                        public void onCompleted() {
+
+                        }
+
+                        @Override
+                        public void onError(Throwable e) {
                             view.dismissDialog();
 
                         }
                     });
+            addSubscription(subscription);
+
         } catch (Exception e) {
             e.printStackTrace();
         }

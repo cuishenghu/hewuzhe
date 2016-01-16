@@ -136,21 +136,19 @@ public class ContactsActivity extends ToolBarActivity<FriendsPresenter> implemen
     @Override
     public void onItemChildClick(ViewGroup viewGroup, View view, int i) {
         Friend friend = mAdapter.getItem(i);
-//        RongIM.getInstance().startPrivateChat(getContext(), friend.Id + "", friend.NicName);
-
         startActivity(FriendProfileActivity.class, new Bun().putInt("id", friend.Id).ok());
+
     }
 
     @Override
     public boolean canAction() {
-        return true;
+        return false;
     }
 
     @Override
     protected void action() {
         super.action();
         startActivity(MakeWarriorsActivity.class);
-
 
     }
 

@@ -21,6 +21,8 @@ import com.hewuzhe.model.OtherImage;
 import com.hewuzhe.model.Plan;
 import com.hewuzhe.model.Record;
 import com.hewuzhe.model.Res;
+import com.hewuzhe.model.StudyOnlineCatItem;
+import com.hewuzhe.model.StudyOnlineCate;
 import com.hewuzhe.model.TeamAnnounce;
 import com.hewuzhe.model.TeamIntroduce;
 import com.hewuzhe.model.UploadImage;
@@ -59,7 +61,7 @@ public interface ApiService {
 
     @FormUrlEncoded
     @POST("Helianmeng.asmx/UpLoadImage")
-    Call<Res<UploadImage>> UpLoadImage(@Field("fileName") String fileName, @Field("filestream") String filestream);
+    Observable<Res<UploadImage>> UpLoadImage(@Field("fileName") String fileName, @Field("filestream") String filestream);
 
     @GET("Hewuzhe.asmx/SaveMyDream")
     Call<Res> SavetMyDream(@Query("userid") int userid, @Query("mydream") String mydream, @Query("realizedream") String realizedream);
@@ -103,7 +105,7 @@ public interface ApiService {
 
     @FormUrlEncoded
     @POST("Hewuzhe.asmx/UpLoadVideo")
-    Call<Res<Video>> UpLoadVideo(@Field("fileName") String fileName, @Field("filestream") String filestream);
+    Observable<Res<Video>> UpLoadVideo(@Field("fileName") String fileName, @Field("filestream") String filestream);
 
 
     @GET("Hedongli.asmx/GetOtherVideo")
@@ -156,6 +158,12 @@ public interface ApiService {
 
     @GET("Hewuzhe.asmx/GetCreditRecord")
     Call<Res<ArrayList<IntegralRecord>>> GetCreditRecord(@Query("startRowIndex") int startRowIndex, @Query("maximumRows") int maximumRows, @Query("userid") int userid);
+
+    @GET("Hewuzhe.asmx/GetBigCateForOnlineStudy")
+    Observable<Res<ArrayList<StudyOnlineCate>>> GetBigCateForOnlineStudy();
+
+    @GET("Hewuzhe.asmx/GetSmallCateForOnlineStudy")
+    Observable<Res<ArrayList<StudyOnlineCatItem>>> GetSmallCateForOnlineStudy(@Query("categoryid") int categoryid);
 
 
     @GET("Hewuzhe.asmx/SelectWuGuanPageByCityId")
@@ -212,17 +220,37 @@ public interface ApiService {
     Observable<Res<ArrayList<Group>>> SelectTeamPage(@Query("startRowIndex") int startRowIndex, @Query("maximumRows") int maximumRows, @Query("citycode") int citycode, @Query("name") String name);
 
     @GET("Helianmeng.asmx/{path}")
-    Call<Res<ArrayList<MegaGame>>> getGames(@Path("path") String path, @Query("startRowIndex") int startRowIndex, @Query("maximumRows") int maximumRows);
+    Observable<Res<ArrayList<MegaGame>>> getGames(@Path("path") String path, @Query("startRowIndex") int startRowIndex, @Query("maximumRows") int maximumRows);
 
     @GET("Helianmeng.asmx/SelectMatchDetail")
     Call<Res<MegaGame>> SelectMatchDetail(@Query("matchId") int matchId);
 
+    @GET("Helianmeng.asmx/SelectMatchDetailWithIsJoin")
+    Observable<Res<MegaGame>> SelectMatchDetailWithIsJoin(@Query("userid") int userid, @Query("matchId") int matchId);
+
     @GET("Helianmeng.asmx/GetLianmengDongtai")
     Call<Res<Article>> GetLianmengDongtai(@Query("id") int id);
 
+    @GET("Helianmeng.asmx/ShieldFriend")
+    Observable<Res> ShieldFriend(@Query("friendid") int id, @Query("userid") int userid);
+
+    @GET("Helianmeng.asmx/UnShieldFriend")
+    Observable<Res> UnShieldFriend(@Query("friendid") int id, @Query("userid") int userid);
+
+    @GET("Helianmeng.asmx/ShieldFriendNews")
+    Observable<Res> ShieldFriendNews(@Query("friendid") int id, @Query("userid") int userid);
+
+    @GET("Helianmeng.asmx/UnShieldFriendNews")
+    Observable<Res> UnShieldFriendNews(@Query("friendid") int id, @Query("userid") int userid);
+
+    @GET("LoginAndRegister.asmx/SelectMyFriend")
+    Observable<Res<User>> SelectMyFriend(@Query("friend") int id, @Query("userid") int userid);
+
+    @GET("LoginAndRegister.asmx/ChangeFriendRName")
+    Observable<Res> ChangeFriendRName(@Query("friend") int id, @Query("userid") int userid, @Query("rname") String rname);
+
     @GET("Hewuzhe.asmx/DeletePlan")
     Call<Res> DeletePlan(@Query("id") int id);
-
 
     @GET("Helianmeng.asmx/GetDongtaiPageByFriends")
     Observable<Res<ArrayList<FriendCondition>>> GetDongtaiPageByFriends(@Query("startRowIndex") int startRowIndex, @Query("maximumRows") int maximumRows, @Query("userid") int userid);
@@ -282,6 +310,9 @@ public interface ApiService {
     @GET("Helianmeng.asmx/VotePerso")
     Observable<Res> VotePerso(@Query("userid") int userid, @Query("matchId") int matchId, @Query("voterId") int voterId);
 
+    @GET("Helianmeng.asmx/JoinMatch")
+    Observable<Res> JoinMatch(@Query("userid") int userid, @Query("matchId") int matchId, @Query("matchVideo") String matchVideo, @Query("videoDuration") String videoDuration, @Query("matchDescription") String matchDescription, @Query("matchImage") String matchImage, @Query("title") String title);
+
     @GET("Helianmeng.asmx/{path}")
     Observable<Res<MegaVideo>> SelectMatchDetail(@Path("path") String path, @Query("userid") int userid, @Query("myId") int myId, @Query("matchId") int matchId, @Query("teamid") int teamid);
 
@@ -290,5 +321,8 @@ public interface ApiService {
 
     @GET("LoginAndRegister.asmx/GetCharge")
     Observable<Res<String>> GetCharge(@Query("userid") int userid, @Query("channel") String channel, @Query("amount") int amount, @Query("description") String description, @Query("flg") int flg);
+
+    @GET("Helianmeng.asmx/CancleJoinMatch")
+    Observable<Res> CancleJoinMatch(@Query("userid") int userid, @Query("matchId") int matchId);
 
 }

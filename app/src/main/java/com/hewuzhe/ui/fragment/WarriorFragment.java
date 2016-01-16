@@ -112,7 +112,7 @@ public class WarriorFragment extends ToolBarFragment<WarriorFragmentPresenter> i
 
     @Override
     protected String provideTitle() {
-        return "核武者";
+        return "功夫派";
     }
 
     /**

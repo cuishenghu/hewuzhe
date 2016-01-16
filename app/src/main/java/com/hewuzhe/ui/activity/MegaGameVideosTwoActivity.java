@@ -50,7 +50,7 @@ public class MegaGameVideosTwoActivity extends SwipeRecycleViewActivity<MegaGame
      */
     @Override
     protected String provideTitle() {
-        return "参赛人员";
+        return MegaGameActivity.PAGE == 0 ? "参赛人员" : "参赛战队";
     }
 
     /**
@@ -68,7 +68,13 @@ public class MegaGameVideosTwoActivity extends SwipeRecycleViewActivity<MegaGame
     @Override
     public void initListeners() {
 
-        _EdtSearchContent.setHint("搜索用户昵称、编号");
+        if (MegaGameActivity.PAGE == 0) {
+            _EdtSearchContent.setHint("搜索用户昵称、编号");
+
+        } else {
+            _EdtSearchContent.setHint("搜索战队昵称、编号");
+
+        }
 
         _EdtSearchContent.setOnEditorActionListener(new TextView.OnEditorActionListener() {
             @Override
@@ -87,7 +93,6 @@ public class MegaGameVideosTwoActivity extends SwipeRecycleViewActivity<MegaGame
     @Override
     protected void initThings(Bundle savedInstanceState) {
         super.initThings(savedInstanceState);
-        tvAction.setText("赛事详情");
         presenter.getData(page, count);
     }
 

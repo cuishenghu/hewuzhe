@@ -65,7 +65,8 @@
         <android.support.design.widget.CollapsingToolbarLayout
             android:layout_width="match_parent"
             android:layout_height="520px"
-            app:layout_scrollFlags="scroll|exitUntilCollapsed">
+            app:layout_scrollFlags="scroll|exitUntilCollapsed"
+            tools:visibility="gone">
             <ImageView android:id="@+id/img"
                        android:layout_width="match_parent"
                        android:layout_height="520px"
@@ -88,13 +89,13 @@
 
 
             <TextView android:id="@+id/tv_name"
-                      style="@style/text_35_white"
+                      style="@style/text_30_white"
                       android:layout_width="wrap_content"
                       android:layout_height="75px"
                       android:gravity="center_vertical"
                       android:paddingLeft="20px"
                       android:text="临沂第一届"
-                      android:visibility="gone"/>
+                      android:visibility="visible"/>
 
             <LinearLayout android:id="@+id/lay_address"
                           android:layout_width="match_parent"
@@ -102,7 +103,7 @@
                           android:layout_marginBottom="10px"
                           android:orientation="horizontal"
                           android:paddingLeft="20px"
-                          android:visibility="gone">
+                          android:visibility="visible">
 
                 <ImageView android:layout_width="35px"
                            android:layout_height="35px"
@@ -110,7 +111,7 @@
 
 
                 <TextView android:id="@+id/tv_address"
-                          style="@style/text_30_white"
+                          style="@style/text_27_white"
                           android:layout_width="wrap_content"
                           android:layout_height="wrap_content"
                           android:layout_marginLeft="8px"
@@ -125,7 +126,7 @@
                 android:layout_height="10px"
                 android:background="@color/colorBg"
                 android:text=""
-                android:visibility="gone"/>
+                android:visibility="visible"/>
 
             <TextView
                 style="@style/text_30_white"
@@ -155,16 +156,15 @@
                           android:layout_height="wrap_content"
                           android:layout_marginBottom="10px"
                           android:orientation="horizontal"
-                          android:visibility="gone">
+                          android:visibility="visible">
 
                 <LinearLayout android:layout_width="match_parent"
                               android:layout_height="wrap_content"
                               android:layout_weight="1"
                               android:orientation="vertical"
                               android:paddingLeft="30px">
-
                     <TextView
-                        style="@style/text_30_white"
+                        style="@style/text_27_white"
                         android:layout_width="wrap_content"
                         android:layout_height="75px"
                         android:gravity="center_vertical"
@@ -173,7 +173,7 @@
 
 
                     <TextView android:id="@+id/tv_time_start"
-                              style="@style/text_30_yellow"
+                              style="@style/text_25_yellow"
                               android:layout_width="wrap_content"
                               android:layout_height="wrap_content"
                               android:paddingLeft="20px"
@@ -188,7 +188,7 @@
                               android:paddingLeft="30px">
 
                     <TextView
-                        style="@style/text_30_white"
+                        style="@style/text_27_white"
                         android:layout_width="wrap_content"
                         android:layout_height="75px"
                         android:gravity="center_vertical"
@@ -197,7 +197,7 @@
 
 
                     <TextView android:id="@+id/tv_apply_end"
-                              style="@style/text_30_yellow"
+                              style="@style/text_25_yellow"
                               android:layout_width="wrap_content"
                               android:layout_height="wrap_content"
                               android:paddingLeft="20px"
@@ -215,7 +215,7 @@
                 android:background="@color/colorBg"
                 android:lineSpacingExtra="1.5dp"
                 android:text=""
-                android:visibility="gone"/>
+                android:visibility="visible"/>
 
             <LinearLayout android:layout_width="match_parent"
                           android:layout_height="wrap_content"
@@ -316,7 +316,8 @@
                         android:layout_height="wrap_content"
                         android:layout_marginRight="80px"
                         android:background="@drawable/bg_selector_colorbg"
-                        android:text=" 我要报名 "/>
+                        android:text=" 我要报名 "
+                        tools:visibility="gone"/>
 
                 <Button android:id="@+id/btn_others"
                         style="@style/text_30_white"
@@ -324,7 +325,17 @@
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="80px"
                         android:background="@drawable/bg_selector_colorbg"
-                        android:text="查看报名选手"/>
+                        android:text="查看报名选手"
+                        tools:visibility="gone"/>
+
+
+                <Button android:id="@+id/btn_call"
+                        style="@style/text_30_white"
+                        android:layout_width="460px"
+                        android:layout_height="wrap_content"
+                        android:visibility="gone"
+                        android:background="@drawable/bg_selector_colorbg"
+                        android:text="联系电话"/>
 
 
             </LinearLayout>

@@ -83,7 +83,6 @@ public class FriendProfileActivity extends ToolBarActivity<FriendProfilePresente
 
         imgAction.setImageResource(R.mipmap.icon_more);
         presenter.getUserData();
-        presenter.isWuyou();
 
     }
 
@@ -145,39 +144,28 @@ public class FriendProfileActivity extends ToolBarActivity<FriendProfilePresente
                 .crossFade()
                 .transform(new GlideCircleTransform(getContext()))
                 .into(_ImgAvatar);
+
+
+        _Btn.setText("发送消息");
+        _Btn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                RongIM.getInstance().startPrivateChat(getContext(), _Friend.Id + "", _Friend.NicName);
+            }
+        });
+
     }
 
     @Override
-    public void setIsWuyou(boolean b) {
-        isWy = b;
-        if (b) {
-            imgAction.setVisibility(View.VISIBLE);
-            _Btn.setText("发送消息");
-            _Btn.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    RongIM.getInstance().startPrivateChat(getContext(), _Friend.Id + "", _Friend.NicName);
-                }
-            });
-            imgAction.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    startActivity(FriendProfileSettingsActivity.class, new Bun().putString("title", "聊天设置").putP("user", _Friend).ok());
-                }
-            });
+    public boolean canAction() {
+        return true;
+    }
 
-        } else {
-            imgAction.setVisibility(View.GONE);
-            tvTitle.setText("陌生人资料");
-            _Btn.setText("关注好友");
-            _Btn.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    presenter.follow(view);
-                }
-            });
+    @Override
+    protected void action() {
+        super.action();
 
-        }
+        startActivity(FriendProfileSettingsActivity.class, new Bun().putString("title", "聊天设置").putInt("id", _Friend.Id).ok());
     }
 
     @Override

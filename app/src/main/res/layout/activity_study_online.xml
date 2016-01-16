@@ -66,11 +66,10 @@
             android:layout_height="wrap_content"
             android:background="@color/colorListBg"
             app:tabGravity="fill"
+            app:tabIndicatorColor="@color/colorYellow"
             app:tabMode="fixed"
             app:tabSelectedTextColor="@color/colorYellow"
-            app:tabIndicatorColor="@color/colorYellow"
             app:tabTextColor="@color/white"/>
-
 
     </android.support.design.widget.AppBarLayout>
 

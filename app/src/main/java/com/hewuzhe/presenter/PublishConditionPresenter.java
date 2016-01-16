@@ -12,6 +12,7 @@ import com.hewuzhe.ui.cons.C;
 import com.hewuzhe.utils.Alist;
 import com.hewuzhe.utils.Encoder;
 import com.hewuzhe.utils.NetEngine;
+import com.hewuzhe.utils.SB;
 import com.hewuzhe.utils.SessionUtil;
 import com.hewuzhe.utils.StringUtil;
 import com.hewuzhe.view.PublishConditionView;
@@ -21,6 +22,10 @@ import java.util.ArrayList;
 import retrofit.Callback;
 import retrofit.Response;
 import retrofit.Retrofit;
+import rx.Subscription;
+import rx.android.schedulers.AndroidSchedulers;
+import rx.functions.Action0;
+import rx.schedulers.Schedulers;
 
 /**
  * Created by xianguangjin on 16/1/2.
@@ -79,47 +84,20 @@ public class PublishConditionPresenter extends ListPresenter<PublishConditionVie
     private void uploadImg(ArrayList<PickImg> list) {
         neeCount = list.size();
         for (PickImg pickImg : list) {
-//            Subscription subscription = NetEngine.getService()
-//                    .UpLoadImage(Encoder.getFileName(pickImg.filePath), Encoder.encodeBase64File(pickImg.filePath))
-//                    .subscribeOn(Schedulers.io())
-//                    .doOnSubscribe(() -> view.showDialog())
-//                    .subscribeOn(AndroidSchedulers.mainThread())
-//                    .observeOn(AndroidSchedulers.mainThread())
-//                    .subscribe(new SB<Res<UploadImage>>() {
-//                        @Override
-//                        public void next(Res<UploadImage> res) {
-//                            if (res.code == C.OK) {
-//                                picCount++;
-//                                pathList += res.data.ImagePath + "&";
-//                                if (picCount >= neeCount) {
-//                                    publishTwo(pathList);
-//                                }
-//
-//                            } else {
-//                                neeCount--;
-//                            }
-//
-//                        }
-//
-//                        @Override
-//                        public void onCompleted() {
-//
-//                        }
-//
-//                        @Override
-//                        public void onError(Throwable e) {
-//                            neeCount--;
-//                        }
-//                    });
-//            addSubscription(subscription);
-
-            view.showDialog();
-            NetEngine.getService()
+            Subscription subscription = NetEngine.getService()
                     .UpLoadImage(Encoder.getFileName(pickImg.filePath), Encoder.encodeBase64File(pickImg.filePath))
-                    .enqueue(new Callback<Res<UploadImage>>() {
+                    .subscribeOn(Schedulers.io())
+                    .doOnSubscribe(new Action0() {
                         @Override
-                        public void onResponse(Response<Res<UploadImage>> response, Retrofit retrofit) {
-                            Res<UploadImage> res = response.body();
+                        public void call() {
+                            view.showDialog();
+                        }
+                    })
+                    .subscribeOn(AndroidSchedulers.mainThread())
+                    .observeOn(AndroidSchedulers.mainThread())
+                    .subscribe(new SB<Res<UploadImage>>() {
+                        @Override
+                        public void next(Res<UploadImage> res) {
                             if (res.code == C.OK) {
                                 picCount++;
                                 pathList += res.data.ImagePath + "&";
@@ -134,11 +112,17 @@ public class PublishConditionPresenter extends ListPresenter<PublishConditionVie
                         }
 
                         @Override
-                        public void onFailure(Throwable t) {
-                            neeCount--;
+                        public void onCompleted() {
 
                         }
+
+                        @Override
+                        public void onError(Throwable e) {
+                            neeCount--;
+                        }
                     });
+            addSubscription(subscription);
+
         }
     }
 
@@ -223,65 +207,42 @@ public class PublishConditionPresenter extends ListPresenter<PublishConditionVie
         String fileName = path.substring(path.lastIndexOf("/") + 1, path.length());
 
         try {
-//            Subscription subscription = NetEngine.getService()
-//                    .UpLoadVideo(fileName, Encoder.encodeBase64File(path))
-//                    .subscribeOn(Schedulers.io())
-//                    .doOnSubscribe(() -> view.showDialog())
-//                    .observeOn(AndroidSchedulers.mainThread())
-//                    .subscribe(new SB<Res<Video>>() {
-//                        @Override
-//                        public void next(Res<Video> res) {
-//                            if (res.code == C.OK) {
-//                                videopath = res.data.VideoName;
-//                                publishTwo("");
-//                            } else {
-//                                view.dismissDialog();
-//                            }
-//
-//                        }
-//
-//                        @Override
-//                        public void onCompleted() {
-//
-//                        }
-//
-//                        @Override
-//                        public void onError(Throwable e) {
-//                            view.dismissDialog();
-//
-//                        }
-//                    });
-//            addSubscription(subscription);
-
-
-            view.showDialog();
-            NetEngine.getService()
+            Subscription subscription = NetEngine.getService()
                     .UpLoadVideo(fileName, Encoder.encodeBase64File(path))
-                    .enqueue(new Callback<Res<Video>>() {
+                    .subscribeOn(Schedulers.io())
+                    .doOnSubscribe(new Action0() {
                         @Override
-                        public void onResponse(Response<Res<Video>> response, Retrofit retrofit) {
-                            Res<Video> res = response.body();
-
+                        public void call() {
+                            view.showDialog();
+                        }
+                    })
+                    .observeOn(AndroidSchedulers.mainThread())
+                    .subscribe(new SB<Res<Video>>() {
+                        @Override
+                        public void next(Res<Video> res) {
                             if (res.code == C.OK) {
                                 videopath = res.data.VideoName;
                                 publishTwo("");
                             } else {
+                                view.dismissDialog();
                             }
-
-                            view.dismissDialog();
 
                         }
 
                         @Override
-                        public void onFailure(Throwable t) {
+                        public void onCompleted() {
+
+                        }
+
+                        @Override
+                        public void onError(Throwable e) {
                             view.dismissDialog();
 
                         }
                     });
+            addSubscription(subscription);
         } catch (Exception e) {
             e.printStackTrace();
         }
-
     }
-
 }

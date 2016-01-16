@@ -242,7 +242,6 @@ public class PublishPlanActivity extends ListActivity<PublishPlanPresenter, Pick
 
     }
 
-
     private void chooseImage() {
         chooserType = ChooserType.REQUEST_PICK_PICTURE;
         imageChooserManager = new ImageChooserManager(this,

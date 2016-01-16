@@ -27,6 +27,11 @@ public class Bun {
         return this;
     }
 
+    public Bun putBoolean(String name, boolean value) {
+        this.bundle.putBoolean(name, value);
+        return this;
+    }
+
     public Bun putSR(String name, Serializable value) {
         this.bundle.putSerializable(name, value);
         return this;
@@ -39,8 +44,7 @@ public class Bun {
 
 
     /**
-     * @return
-     * 操作完成
+     * @return 操作完成
      */
     public Bundle ok() {
         return this.bundle;

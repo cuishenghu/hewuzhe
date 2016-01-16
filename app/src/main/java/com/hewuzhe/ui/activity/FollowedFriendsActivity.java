@@ -18,6 +18,8 @@ import java.util.ArrayList;
 
 public class FollowedFriendsActivity extends RecycleViewActivity<FollowedFriendsPresenter, FollowedFriendAdapter, Friend> implements FollowedFriendsView {
 
+    private Friend _Item;
+
     /**
      * @return 提供LayoutId
      */
@@ -91,7 +93,8 @@ public class FollowedFriendsActivity extends RecycleViewActivity<FollowedFriends
      */
     @Override
     public void onItemClick(View view, int pos, Friend item) {
-        startActivity(FriendProfileActivity.class, new Bun().putInt("id", item.UserId).ok());
+        _Item = item;
+        presenter.isWuyou();
 
     }
 
@@ -99,5 +102,14 @@ public class FollowedFriendsActivity extends RecycleViewActivity<FollowedFriends
     public void updatePosItem(int pos, boolean b) {
         adapter.data.get(pos).IsFriend = b;
         adapter.notifyItemChanged(pos);
+    }
+
+    @Override
+    public void isWuYou(Boolean data) {
+        if (data) {
+            startActivity(FriendProfileActivity.class, new Bun().putInt("id", _Item.UserId).ok());
+        } else {
+            startActivity(StrangerProfileSettingsActivity.class, new Bun().putInt("id", _Item.UserId).ok());
+        }
     }
 }

@@ -1,69 +1,95 @@
 package com.hewuzhe.presenter;
 
+import android.view.View;
+
 import com.hewuzhe.model.MegaGame;
 import com.hewuzhe.model.Res;
 import com.hewuzhe.presenter.base.BasePresenterImp;
 import com.hewuzhe.ui.cons.C;
 import com.hewuzhe.utils.NetEngine;
-import com.hewuzhe.view.base.SetView;
+import com.hewuzhe.utils.SB;
+import com.hewuzhe.utils.SessionUtil;
+import com.hewuzhe.view.MegaGameDetailView;
 
-import retrofit.Callback;
-import retrofit.Response;
-import retrofit.Retrofit;
+import rx.Subscription;
+import rx.android.schedulers.AndroidSchedulers;
+import rx.functions.Action0;
+import rx.schedulers.Schedulers;
 
 /**
  * Created by xianguangjin on 15/12/31.
  */
-public class MegaGameDetailPresenter extends BasePresenterImp<SetView<MegaGame>> {
+public class MegaGameDetailPresenter extends BasePresenterImp<MegaGameDetailView> {
 
     public void getDetail(int id) {
-//        Subscription subscription = NetEngine.getService()
-//                .SelectMatchDetail(id)
-//                .subscribeOn(Schedulers.io())
-//                .doOnSubscribe(() -> view.showDialog())
-//                .subscribeOn(AndroidSchedulers.mainThread())
-//                .observeOn(AndroidSchedulers.mainThread())
-//                .subscribe(new SB<Res<MegaGame>>() {
-//                    @Override
-//                    public void next(Res<MegaGame> res) {
-//                        if (res.code == C.OK) {
-//                            view.setData(res.data);
-//                        }
-//
-//                    }
-//
-//                    @Override
-//                    public void onCompleted() {
-//                        view.dismissDialog();
-//                    }
-//
-//                    @Override
-//                    public void onError(Throwable e) {
-//                        view.dismissDialog();
-//                    }
-//                });
-//        addSubscription(subscription);
-
-        NetEngine.getService()
-                .SelectMatchDetail(id)
-                .enqueue(new Callback<Res<MegaGame>>() {
+        Subscription subscription = NetEngine.getService()
+                .SelectMatchDetailWithIsJoin(new SessionUtil(view.getContext()).getUserId(), id)
+                .subscribeOn(Schedulers.io())
+                .doOnSubscribe(new Action0() {
                     @Override
-                    public void onResponse(Response<Res<MegaGame>> response, Retrofit retrofit) {
-                        Res<MegaGame> res = response.body();
+                    public void call() {
+                        view.showDialog();
+                    }
+                })
+                .subscribeOn(AndroidSchedulers.mainThread())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new SB<Res<MegaGame>>() {
+                    @Override
+                    public void next(Res<MegaGame> res) {
                         if (res.code == C.OK) {
                             view.setData(res.data);
                         }
-                        view.dismissDialog();
+                    }
 
+                    @Override
+                    public void onCompleted() {
+                        view.dismissDialog();
+                    }
+
+                    @Override
+                    public void onError(Throwable e) {
+                        view.dismissDialog();
+                    }
+                });
+        addSubscription(subscription);
+
+    }
+
+    public void CancleJoinMatch(int id, final View v) {
+        Subscription subscription = NetEngine.getService()
+                .CancleJoinMatch(new SessionUtil(view.getContext()).getUserId(), id)
+                .subscribeOn(Schedulers.io())
+                .doOnSubscribe(new Action0() {
+                    @Override
+                    public void call() {
+                        view.showDialog();
+                    }
+                })
+                .subscribeOn(AndroidSchedulers.mainThread())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new SB<Res>() {
+                    @Override
+                    public void next(Res res) {
+                        if (res.code == C.OK) {
+                            view.refresh();
+                        } else {
+                        }
+                    }
+
+                    @Override
+                    public void onCompleted() {
+                        view.dismissDialog();
 
                     }
 
                     @Override
-                    public void onFailure(Throwable t) {
+                    public void onError(Throwable e) {
                         view.dismissDialog();
 
                     }
                 });
+
+        addSubscription(subscription);
 
     }
 }

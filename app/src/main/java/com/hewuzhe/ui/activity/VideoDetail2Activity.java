@@ -72,6 +72,7 @@ public class VideoDetail2Activity extends RecycleViewActivity<VideoDetailPresent
     private View headerView;
     private Button btnPublish;
     private EditText edtComment;
+    private TextView tvReport;
 
     @Override
     protected int provideContentViewId() {
@@ -85,8 +86,6 @@ public class VideoDetail2Activity extends RecycleViewActivity<VideoDetailPresent
     @Override
     protected void initThings(Bundle savedInstanceState) {
         super.initThings(savedInstanceState);
-
-        tvAction.setText("举报");
 
         initHeader();
         windowManager = (WindowManager) getSystemService(Context.WINDOW_SERVICE);
@@ -109,6 +108,7 @@ public class VideoDetail2Activity extends RecycleViewActivity<VideoDetailPresent
         layPraise = (LinearLayout) headerView.findViewById(R.id.lay_praise);
         imgPraise = (ImageView) headerView.findViewById(R.id.img_praise);
         tvTitle = (TextView) headerView.findViewById(R.id.tv_title);
+        tvReport = (TextView) headerView.findViewById(R.id.tv_report);
         tvDesc = (TextView) headerView.findViewById(R.id.tv_desc);
         tvOtherCount = (TextView) headerView.findViewById(R.id.tv_other_count);
         reOthers = (RecyclerView) headerView.findViewById(R.id.re_others);
@@ -143,42 +143,6 @@ public class VideoDetail2Activity extends RecycleViewActivity<VideoDetailPresent
         return new VideoDetailPresenter();
     }
 
-
-    @Override
-    public boolean canAction() {
-        return true;
-    }
-
-    @Override
-    protected void action() {
-        super.action();
-
-
-        final YsnowEditDialog ysnowEditDialog = new YsnowEditDialog(getContext(), "举报事由", "");
-        ysnowEditDialog.positive.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                ysnowEditDialog.dismiss();
-
-                String conent = ysnowEditDialog.content.getText().toString().trim();
-                if (StringUtil.isEmpty(conent)) {
-                    toast("举报内容不能为空");
-                    return;
-                }
-                presenter.collectAndOther(id, 3, tvAction, 1, conent);
-            }
-        });
-
-        ysnowEditDialog.negative.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                ysnowEditDialog.dismiss();
-            }
-        });
-
-
-        ysnowEditDialog.show();
-    }
 
     /**
      * 初始化事件监听者
@@ -226,12 +190,44 @@ public class VideoDetail2Activity extends RecycleViewActivity<VideoDetailPresent
         });
 
         imgShare.setOnClickListener(new View.OnClickListener() {
+
             @Override
             public void onClick(View view) {
                 showShare();
             }
         });
 
+
+        tvReport.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                final YsnowEditDialog ysnowEditDialog = new YsnowEditDialog(getContext(), "举报事由", "");
+                ysnowEditDialog.positive.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        ysnowEditDialog.dismiss();
+
+                        String conent = ysnowEditDialog.content.getText().toString().trim();
+                        if (StringUtil.isEmpty(conent)) {
+                            toast("举报内容不能为空");
+                            return;
+                        }
+                        presenter.collectAndOther(id, 3, tvAction, 1, conent);
+                    }
+                });
+
+                ysnowEditDialog.negative.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        ysnowEditDialog.dismiss();
+                    }
+                });
+
+
+                ysnowEditDialog.show();
+            }
+        });
     }
 
     private void showShare() {
@@ -353,6 +349,23 @@ public class VideoDetail2Activity extends RecycleViewActivity<VideoDetailPresent
 
         if (!LibsChecker.checkVitamioLibs(this))
             return;
+
+
+        if (video.UpLoadType == 0) {
+            ViewGroup.LayoutParams params = videoController.getLayoutParams();
+            params.height = StringUtil.dip2px(getContext(), 300);
+            params.width = windowManager.getDefaultDisplay().getWidth();
+            videoController.setLayoutParams(params);
+            videoController.btnFullScreen.setVisibility(View.GONE);
+
+        } else {
+            ViewGroup.LayoutParams params = videoController.getLayoutParams();
+            params.height = StringUtil.dip2px(getContext(), 200);
+            params.width = windowManager.getDefaultDisplay().getWidth();
+            videoController.setLayoutParams(params);
+            videoController.btnFullScreen.setVisibility(View.VISIBLE);
+
+        }
 
         videoController.setVideoPath(C.BASE_URL + video.VideoPath);
         videoController.start();

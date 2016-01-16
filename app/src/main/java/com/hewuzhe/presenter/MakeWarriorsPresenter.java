@@ -164,4 +164,34 @@ public class MakeWarriorsPresenter extends AreaPresenter<MakeWarriorsView> {
     }
 
 
+    public void isWuyou(int userid) {
+        Subscription subscription = NetEngine.getService()
+                .IsWuyou(new SessionUtil(view.getContext()).getUserId(), userid)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new SB<Res<Boolean>>() {
+                    @Override
+                    public void next(Res<Boolean> res) {
+                        if (res.code == C.OK) {
+                            view.isWuYou(res.data);
+
+                        }
+                    }
+
+                    @Override
+                    public void onCompleted() {
+
+                    }
+
+                    @Override
+                    public void onError(Throwable e) {
+
+                    }
+                });
+
+        addSubscription(subscription);
+
+    }
+
+
 }

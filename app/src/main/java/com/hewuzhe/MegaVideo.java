@@ -28,7 +28,7 @@ public class MegaVideo {
     public int MatchNum;
     public double MatchScore;
     public String MatchVideo;
-    public String VideoDuration;
+    public String VideoDuration="";
     public int VisitNum;
     public int VoteNum;
     public int VoteScore;

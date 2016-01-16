@@ -47,6 +47,7 @@ public class MakeWarriorsActivity extends RecycleViewActivity<MakeWarriorsPresen
     private AddressAdapter cityDialogAdapter;
     private AddressAdapter disctrictAdapter;
     private int mAreaId = 0;
+    private Friend _item;
 
     @Override
     protected int provideContentViewId() {
@@ -203,9 +204,8 @@ public class MakeWarriorsActivity extends RecycleViewActivity<MakeWarriorsPresen
      */
     @Override
     public void onItemClick(View view, int pos, Friend item) {
-
-        startActivity(FriendProfileActivity.class, new Bun().putInt("id", item.Id).ok());
-
+        _item = item;
+        presenter.isWuyou(item.Id);
     }
 
 
@@ -225,6 +225,16 @@ public class MakeWarriorsActivity extends RecycleViewActivity<MakeWarriorsPresen
     public void updatePosItem(int pos, boolean IsFriend) {
         adapter.data.get(pos).IsFriend = IsFriend;
         adapter.notifyItemChanged(pos);
+    }
+
+    @Override
+    public void isWuYou(Boolean data) {
+
+        if (data) {
+            startActivity(FriendProfileActivity.class, new Bun().putInt("id", _item.Id).ok());
+        } else {
+            startActivity(StrangerProfileSettingsActivity.class, new Bun().putInt("id", _item.Id).ok());
+        }
     }
 
 

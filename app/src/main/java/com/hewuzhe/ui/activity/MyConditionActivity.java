@@ -74,22 +74,24 @@ public class MyConditionActivity extends SwipeRecycleViewActivity<MyConditionPre
 
 
     @Override
-    public boolean canAction() {
-        return true;
-    }
-
-    @Override
-    protected void action() {
-        super.action();
-        startActivity(CondtionCommetnsActivity.class);
-    }
-
-
-    @Override
     protected void initThings(Bundle savedInstanceState) {
         super.initThings(savedInstanceState);
         presenter.getUserInfo();
         presenter.getData(page, count);
+
+        if (getData() == new SessionUtil(getContext()).getUserId()) {
+            tvAction.setVisibility(View.VISIBLE);
+            tvAction.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    startActivity(CondtionCommetnsActivity.class);
+                }
+            });
+        } else {
+            tvAction.setVisibility(View.GONE);
+
+        }
+
     }
 
 
@@ -236,6 +238,7 @@ public class MyConditionActivity extends SwipeRecycleViewActivity<MyConditionPre
 
     @Override
     public void setUserData(User data) {
+
         if (data != null) {
             Glide.with(getContext())
                     .load(C.BASE_URL + data.PhotoPath)

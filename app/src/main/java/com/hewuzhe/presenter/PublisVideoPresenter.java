@@ -12,9 +12,6 @@ import com.hewuzhe.utils.SB;
 import com.hewuzhe.utils.SessionUtil;
 import com.hewuzhe.view.PublistVideoVIew;
 
-import retrofit.Callback;
-import retrofit.Response;
-import retrofit.Retrofit;
 import rx.Subscription;
 import rx.android.schedulers.AndroidSchedulers;
 import rx.functions.Action0;
@@ -34,58 +31,36 @@ public class PublisVideoPresenter extends BasePresenterImp<PublistVideoVIew> {
      */
     public void publistVideo(String videoName, String imageName, String videoDuration, int cateId) {
         Video video = view.getData();
-//        Subscription subscription = NetEngine.getService()
-//                .SaveOrEditVideoMessage(0, video.Title, imageName, video.Content, videoName, "TRUE", "FALSE", cateId, new SessionUtil(view.getContext()).getUser().Id, videoDuration)
-//                .subscribeOn(Schedulers.io())
-//                .observeOn(AndroidSchedulers.mainThread())
-//                .subscribe(new SB<Res>() {
-//                    @Override
-//                    public void next(Res res) {
-//                        if (res.code == C.OK) {
-//                            view.toast("发布成功");
-//                            view.finishActivity();
-//                        } else {
-//
-//                        }
-//
-//                    }
-//
-//                    @Override
-//                    public void onCompleted() {
-//                        view.dismissDialog();
-//
-//                    }
-//
-//                    @Override
-//                    public void onError(Throwable e) {
-//                        view.dismissDialog();
-//
-//                    }
-//                });
-//        addSubscription(subscription);
-
-        NetEngine.getService()
+        Subscription subscription = NetEngine.getService()
                 .SaveOrEditVideoMessage(0, video.Title, imageName, video.Content, videoName, "TRUE", "FALSE", cateId, new SessionUtil(view.getContext()).getUser().Id, videoDuration)
-                .enqueue(new Callback<Res>() {
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new SB<Res>() {
                     @Override
-                    public void onResponse(Response<Res> response, Retrofit retrofit) {
-                        Res res = response.body();
+                    public void next(Res res) {
                         if (res.code == C.OK) {
                             view.toast("发布成功");
                             view.finishActivity();
                         } else {
 
                         }
+
+                    }
+
+                    @Override
+                    public void onCompleted() {
                         view.dismissDialog();
 
                     }
 
                     @Override
-                    public void onFailure(Throwable t) {
+                    public void onError(Throwable e) {
                         view.dismissDialog();
 
                     }
                 });
+        addSubscription(subscription);
+
     }
 
 

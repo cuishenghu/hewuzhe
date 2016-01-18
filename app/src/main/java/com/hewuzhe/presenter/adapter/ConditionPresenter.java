@@ -7,6 +7,7 @@ import com.hewuzhe.model.Res;
 import com.hewuzhe.presenter.base.RefreshAndLoadMorePresenter;
 import com.hewuzhe.ui.cons.C;
 import com.hewuzhe.utils.NetEngine;
+import com.hewuzhe.utils.SB;
 import com.hewuzhe.utils.SessionUtil;
 import com.hewuzhe.utils.StringUtil;
 import com.hewuzhe.view.adapter.ConditionView;
@@ -14,6 +15,10 @@ import com.hewuzhe.view.adapter.ConditionView;
 import retrofit.Callback;
 import retrofit.Response;
 import retrofit.Retrofit;
+import rx.Subscription;
+import rx.android.schedulers.AndroidSchedulers;
+import rx.functions.Action0;
+import rx.schedulers.Schedulers;
 
 /**
  * Created by xianguangjin on 16/1/1.
@@ -91,47 +96,21 @@ public abstract class ConditionPresenter<V extends ConditionView> extends Refres
             return;
         }
 
-//        Subscription subscription = NetEngine.getService()
-//                .MessageCommentDT(id, new SessionUtil(view.getContext()).getUser().Id, content)
-//                .subscribeOn(Schedulers.io())
-//                .doOnSubscribe(() -> view.showDialog())
-//                .subscribeOn(AndroidSchedulers.mainThread())
-//                .observeOn(AndroidSchedulers.mainThread())
-//                .subscribe(new SB<Res>() {
-//                    @Override
-//                    public void next(Res res) {
-//                        if (res.code == C.OK) {
-//                            view.snb("评论成功", v);
-//                            Comment comment = new Comment();
-//                            comment.Content = content;
-//                            comment.Id = res.insertid;
-//                            view.commentSuccess(position, comment);
-//                        } else {
-//                            view.snb("评论失败", v);
-//                        }
-//                    }
-//
-//                    @Override
-//                    public void onCompleted() {
-//                        view.dismissDialog();
-//                    }
-//
-//                    @Override
-//                    public void onError(Throwable e) {
-//                        view.dismissDialog();
-//                        view.snb("评论失败", v);
-//                    }
-//                });
-//        addSubscription(subscription);
-
-
-        view.showDialog();
-        NetEngine.getService()
+        Subscription subscription = NetEngine.getService()
                 .MessageCommentDT(id, new SessionUtil(view.getContext()).getUser().Id, content)
-                .enqueue(new Callback<Res>() {
+                .subscribeOn(Schedulers.io())
+                .doOnSubscribe(new Action0() {
                     @Override
-                    public void onResponse(Response<Res> response, Retrofit retrofit) {
-                        Res res = response.body();
+                    public void call() {
+
+                        view.showDialog();
+                    }
+                })
+                .subscribeOn(AndroidSchedulers.mainThread())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new SB<Res>() {
+                    @Override
+                    public void next(Res res) {
                         if (res.code == C.OK) {
                             view.snb("评论成功", v);
                             Comment comment = new Comment();
@@ -141,16 +120,22 @@ public abstract class ConditionPresenter<V extends ConditionView> extends Refres
                         } else {
                             view.snb("评论失败", v);
                         }
+                    }
 
+                    @Override
+                    public void onCompleted() {
                         view.dismissDialog();
                     }
 
                     @Override
-                    public void onFailure(Throwable t) {
+                    public void onError(Throwable e) {
                         view.dismissDialog();
                         view.snb("评论失败", v);
                     }
                 });
+        addSubscription(subscription);
+
+
     }
 
 

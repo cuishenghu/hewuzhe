@@ -28,6 +28,7 @@ import com.hewuzhe.ui.inter.OnItemClickListener;
 import com.hewuzhe.ui.widget.GlideCircleTransform;
 import com.hewuzhe.ui.widget.VideoControllerView;
 import com.hewuzhe.ui.widget.YsnowEditDialog;
+import com.hewuzhe.utils.Bun;
 import com.hewuzhe.utils.StringUtil;
 import com.hewuzhe.view.VideoDetailView;
 
@@ -73,6 +74,7 @@ public class VideoDetail2Activity extends RecycleViewActivity<VideoDetailPresent
     private Button btnPublish;
     private EditText edtComment;
     private TextView tvReport;
+    private Video _Video;
 
     @Override
     protected int provideContentViewId() {
@@ -228,6 +230,23 @@ public class VideoDetail2Activity extends RecycleViewActivity<VideoDetailPresent
                 ysnowEditDialog.show();
             }
         });
+
+
+        imgAvatar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                presenter.isWuyou(_Video.UserId);
+            }
+        });
+
+        imgAvatar2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(ProfileActivity.class);
+            }
+        });
+
+
     }
 
     private void showShare() {
@@ -259,19 +278,18 @@ public class VideoDetail2Activity extends RecycleViewActivity<VideoDetailPresent
 // 启动分享GUI
         oks.show(this);
 
-
     }
 
 
     @Override
     protected String provideTitle() {
-        return "视频详情";
+        return "";
 //        return getIntent().getStringExtra("title");
     }
 
     @Override
     public void setData(Video video) {
-
+        _Video = video;
         final int position = 0;
 
         Glide.with(getContext())
@@ -350,22 +368,25 @@ public class VideoDetail2Activity extends RecycleViewActivity<VideoDetailPresent
         if (!LibsChecker.checkVitamioLibs(this))
             return;
 
+//
+//        if (video.UpLoadType == 0) {
+//            ViewGroup.LayoutParams params = videoController.getLayoutParams();
+//            params.height = StringUtil.dip2px(getContext(), 350);
+//            params.width = windowManager.getDefaultDisplay().getWidth();
+//            videoController.setLayoutParams(params);
+//            videoController.btnFullScreen.setVisibility(View.GONE);
+//
+//        }
+//        else {
+//            ViewGroup.LayoutParams params = videoController.getLayoutParams();
+//            params.height = StringUtil.dip2px(getContext(), 200);
+//            params.width = windowManager.getDefaultDisplay().getWidth();
+//            videoController.setLayoutParams(params);
+//            videoController.btnFullScreen.setVisibility(View.VISIBLE);
+//
+//        }
 
-        if (video.UpLoadType == 0) {
-            ViewGroup.LayoutParams params = videoController.getLayoutParams();
-            params.height = StringUtil.dip2px(getContext(), 300);
-            params.width = windowManager.getDefaultDisplay().getWidth();
-            videoController.setLayoutParams(params);
-            videoController.btnFullScreen.setVisibility(View.GONE);
-
-        } else {
-            ViewGroup.LayoutParams params = videoController.getLayoutParams();
-            params.height = StringUtil.dip2px(getContext(), 200);
-            params.width = windowManager.getDefaultDisplay().getWidth();
-            videoController.setLayoutParams(params);
-            videoController.btnFullScreen.setVisibility(View.VISIBLE);
-
-        }
+        videoController.btnFullScreen.setVisibility(View.GONE);
 
         videoController.setVideoPath(C.BASE_URL + video.VideoPath);
         videoController.start();
@@ -483,6 +504,18 @@ public class VideoDetail2Activity extends RecycleViewActivity<VideoDetailPresent
         presenter.getData(page, count);
     }
 
+
+    @Override
+    public void isWuYou(Boolean data, int userid) {
+        if (data) {
+            startActivity(FriendProfileActivity.class, new Bun().putInt("id", userid).ok());
+        } else {
+            startActivity(StrangerProfileSettingsActivity.class, new Bun().putInt("id", userid).ok());
+        }
+
+    }
+
+
     @Override
     public void onConfigurationChanged(Configuration newConfig) {
         super.onConfigurationChanged(newConfig);
@@ -513,6 +546,7 @@ public class VideoDetail2Activity extends RecycleViewActivity<VideoDetailPresent
      */
     @Override
     public void onItemClick(View view, int pos, Comment item) {
+
 
     }
 

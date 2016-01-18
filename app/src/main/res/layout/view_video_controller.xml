@@ -123,4 +123,28 @@
 
     </FrameLayout>
 
+
+    <LinearLayout android:id="@+id/lay_no_vip"
+                  android:layout_width="match_parent"
+                  android:layout_height="match_parent"
+                  android:background="@color/colorListBg"
+                  android:gravity="center"
+                  android:orientation="vertical"
+                  android:visibility="gone">
+
+        <TextView style="@style/text_27_white"
+                  android:layout_width="wrap_content"
+                  android:layout_height="wrap_content"
+                  android:text="此视频是付费视频，只有会员才可观看"/>
+
+        <Button android:id="@+id/btn_to_member"
+                style="@style/text_30_white"
+                android:layout_width="220px"
+                android:layout_height="80px"
+                android:layout_marginTop="10px"
+                android:background="@drawable/select_yellow"
+                android:text="点击付费"/>
+
+
+    </LinearLayout>
 </FrameLayout>

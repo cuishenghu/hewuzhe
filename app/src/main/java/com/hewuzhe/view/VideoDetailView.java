@@ -21,4 +21,6 @@ public interface VideoDetailView extends CommentView,GetView<Integer> {
     void collectAndOther(boolean b, int flag, int position);
 
     void commentSuccess();
+
+    void isWuYou(Boolean data, int userid);
 }

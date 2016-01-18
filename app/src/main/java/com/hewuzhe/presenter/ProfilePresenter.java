@@ -2,6 +2,7 @@ package com.hewuzhe.presenter;
 
 import android.content.Intent;
 import android.graphics.Bitmap;
+import android.net.Uri;
 import android.view.View;
 
 import com.hewuzhe.model.Res;
@@ -23,11 +24,11 @@ import java.util.Set;
 
 import cn.jpush.android.api.JPushInterface;
 import cn.jpush.android.api.TagAliasCallback;
-import retrofit.Callback;
-import retrofit.Response;
-import retrofit.Retrofit;
+import io.rong.imkit.RongIM;
+import io.rong.imlib.model.UserInfo;
 import rx.Subscription;
 import rx.android.schedulers.AndroidSchedulers;
+import rx.functions.Action0;
 import rx.schedulers.Schedulers;
 
 /**
@@ -52,55 +53,28 @@ public class ProfilePresenter extends AreaPresenter<ProfileView> {
 
             String fileStream = Encoder.getEnocodeStr(name);
 
-//            Subscription subscription = NetEngine.getService()
-//                    .UpLoadPhoto(name, fileStream, new SessionUtil(view.getContext()).getUser().Id)
-//                    .subscribeOn(Schedulers.io())
-//                    .doOnSubscribe(() -> view.showDialog())
-//                    .subscribeOn(AndroidSchedulers.mainThread())
-//                    .observeOn(AndroidSchedulers.mainThread())
-//                    .subscribe(new SB<Res<UploadImage>>() {
-//                        @Override
-//                        public void next(Res<UploadImage> res) {
-//                            if (res.code == C.OK) {
-//                                view.snb("上传成功", v);
-//                                User user = new SessionUtil(view.getContext()).getUser();
-//                                user.PhotoPath = res.date.ImageName;
-//                                new SessionUtil(view.getContext())
-//                                        .putUser(user);
-//
-//                                view.setData();
-//
-//                            } else {
-//                                view.snb("上传失败", v);
-//                            }
-//                        }
-//
-//                        @Override
-//                        public void onCompleted() {
-//                            view.dismissDialog();
-//
-//                        }
-//
-//                        @Override
-//                        public void onError(Throwable e) {
-//                            view.dismissDialog();
-//
-//                        }
-//                    });
-
-//            addSubscription(subscription);
-
-            view.showDialog();
-            NetEngine.getService()
+            Subscription subscription = NetEngine.getService()
                     .UpLoadPhoto(name, fileStream, new SessionUtil(view.getContext()).getUser().Id)
-                    .enqueue(new Callback<Res<UploadImage>>() {
+                    .subscribeOn(Schedulers.io())
+                    .doOnSubscribe(new Action0() {
                         @Override
-                        public void onResponse(Response<Res<UploadImage>> response, Retrofit retrofit) {
-                            Res<UploadImage> res = response.body();
+                        public void call() {
+                            view.showDialog();
+                        }
+                    })
+                    .subscribeOn(AndroidSchedulers.mainThread())
+                    .observeOn(AndroidSchedulers.mainThread())
+                    .subscribe(new SB<Res<UploadImage>>() {
+                        @Override
+                        public void next(Res<UploadImage> res) {
                             if (res.code == C.OK) {
                                 view.snb("上传成功", v);
                                 User user = new SessionUtil(view.getContext()).getUser();
                                 user.PhotoPath = res.date.ImageName;
+
+                                updateRongImInfo(res.data.ImageName);
+
+
                                 new SessionUtil(view.getContext())
                                         .putUser(user);
 
@@ -109,126 +83,93 @@ public class ProfilePresenter extends AreaPresenter<ProfileView> {
                             } else {
                                 view.snb("上传失败", v);
                             }
+                        }
 
+                        @Override
+                        public void onCompleted() {
                             view.dismissDialog();
 
                         }
 
                         @Override
-                        public void onFailure(Throwable t) {
+                        public void onError(Throwable e) {
                             view.dismissDialog();
 
                         }
                     });
+
+            addSubscription(subscription);
+
         } catch (Exception e) {
             e.printStackTrace();
         }
     }
 
+    private void updateRongImInfo(String imageName) {
+
+
+        RongIM.getInstance().refreshUserInfoCache(new UserInfo("", "啊明", Uri.parse("http://rongcloud-web.qiniudn.com/docs_demo_rongcloud_logo.png")));
+
+
+    }
+
     public void saveData(final View v) {
         User user = view.getData();
 
-//        Subscription subscription = NetEngine.getService()
-//                .ChangeInfor(user.Id, user.NicName, user.Sexuality, user.Height, user.Weight, user.HomeAreaId, user.Experience, user.Description, user.Birthday)
-//                .subscribeOn(Schedulers.io())
-//                .doOnSubscribe(() -> view.showDialog())
-//                .subscribeOn(AndroidSchedulers.mainThread())
-//                .observeOn(AndroidSchedulers.mainThread())
-//                .subscribe(new SB<Res>() {
-//                    @Override
-//                    public void next(Res res) {
-//                        if (res.code == C.OK) {
-//                            view.snb("修改成功", v);
-//                            getUserData();
-//                        } else {
-//                            view.snb("修改失败", v);
-//                        }
-//                    }
-//
-//                    @Override
-//                    public void onCompleted() {
-//                        view.dismissDialog();
-//                    }
-//
-//                    @Override
-//                    public void onError(Throwable e) {
-//                        view.dismissDialog();
-//                    }
-//                });
-//        addSubscription(subscription);
-
-        view.showDialog();
-        NetEngine.getService()
+        Subscription subscription = NetEngine.getService()
                 .ChangeInfor(user.Id, user.NicName, user.Sexuality, user.Height, user.Weight, user.HomeAreaId, user.Experience, user.Description, user.Birthday)
-                .enqueue(new Callback<Res>() {
+                .subscribeOn(Schedulers.io())
+                .doOnSubscribe(new Action0() {
                     @Override
-                    public void onResponse(Response<Res> response, Retrofit retrofit) {
-                        Res res = response.body();
+                    public void call() {
+                        view.showDialog();
+                    }
+                })
+                .subscribeOn(AndroidSchedulers.mainThread())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new SB<Res>() {
+                    @Override
+                    public void next(Res res) {
                         if (res.code == C.OK) {
                             view.snb("修改成功", v);
                             getUserData();
                         } else {
                             view.snb("修改失败", v);
                         }
-                        view.dismissDialog();
-
                     }
 
                     @Override
-                    public void onFailure(Throwable t) {
+                    public void onCompleted() {
                         view.dismissDialog();
+                    }
 
+                    @Override
+                    public void onError(Throwable e) {
+                        view.dismissDialog();
                     }
                 });
+        addSubscription(subscription);
+
     }
 
 
     public void saveDataSignup(final View v) {
         User user = view.getData();
 
-//        Subscription subscription = NetEngine.getService()
-//                .ChangeInfor(user.Id, user.NicName, user.Sexuality, user.Height, user.Weight, user.HomeAreaId, user.Experience, user.Description, user.Birthday)
-//                .subscribeOn(Schedulers.io())
-//                .doOnSubscribe(() -> view.showDialog())
-//                .subscribeOn(AndroidSchedulers.mainThread())
-//                .observeOn(AndroidSchedulers.mainThread())
-//                .subscribe(new SB<Res>() {
-//                    @Override
-//                    public void next(Res res) {
-//                        if (res.code == C.OK) {
-//                            view.snb("修改成功", v);
-//                            /**
-//                             * 进入主页*/
-//                            Intent intent = new Intent(view.getContext(), MainActivity.class);
-//                            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-//                            intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
-//                            view.getContext().startActivity(intent);
-//
-//                        } else {
-//                            view.snb("修改失败", v);
-//                        }
-//                    }
-//
-//                    @Override
-//                    public void onCompleted() {
-//                        view.dismissDialog();
-//                    }
-//
-//                    @Override
-//                    public void onError(Throwable e) {
-//                        view.dismissDialog();
-//                    }
-//                });
-//        addSubscription(subscription);
-
-        view.showDialog();
-        NetEngine.getService()
+        Subscription subscription = NetEngine.getService()
                 .ChangeInfor(user.Id, user.NicName, user.Sexuality, user.Height, user.Weight, user.HomeAreaId, user.Experience, user.Description, user.Birthday)
-                .enqueue(new Callback<Res>() {
+                .subscribeOn(Schedulers.io())
+                .doOnSubscribe(new Action0() {
                     @Override
-                    public void onResponse(Response<Res> response, Retrofit retrofit) {
-
-                        Res res = response.body();
+                    public void call() {
+                        view.showDialog();
+                    }
+                })
+                .subscribeOn(AndroidSchedulers.mainThread())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new SB<Res>() {
+                    @Override
+                    public void next(Res res) {
                         if (res.code == C.OK) {
                             view.snb("修改成功", v);
                             /**
@@ -241,16 +182,20 @@ public class ProfilePresenter extends AreaPresenter<ProfileView> {
                         } else {
                             view.snb("修改失败", v);
                         }
-                        view.dismissDialog();
-
                     }
 
                     @Override
-                    public void onFailure(Throwable t) {
+                    public void onCompleted() {
                         view.dismissDialog();
+                    }
 
+                    @Override
+                    public void onError(Throwable e) {
+                        view.dismissDialog();
                     }
                 });
+        addSubscription(subscription);
+
     }
 
 

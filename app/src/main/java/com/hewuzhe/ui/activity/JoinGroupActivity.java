@@ -139,6 +139,11 @@ public class JoinGroupActivity extends RecycleViewActivity<JoinPresenter, JoinGr
      */
     @Override
     public void setProvinces(final ArrayList<Address> address) {
+        Address address1 = new Address();
+        address1.Id = 1000000000;
+        address1.Name = "全部";
+        address1.Code = "1000000000";
+        address.add(0, address1);
         showListDialog(new AddressAdapter(getContext(), address), new MaterialDialog.ListCallback() {
             @Override
             public void onSelection(MaterialDialog dialog, View itemView, int which, CharSequence text) {
@@ -147,6 +152,7 @@ public class JoinGroupActivity extends RecycleViewActivity<JoinPresenter, JoinGr
                 provinceId = Integer.parseInt(ad.Code);
                 presenter.getCitys(provinceId);
                 dialog.dismiss();
+
             }
         });
     }
@@ -158,10 +164,13 @@ public class JoinGroupActivity extends RecycleViewActivity<JoinPresenter, JoinGr
      */
     @Override
     public void setCitys(ArrayList<Address> address) {
-        if (address != null && address.size() > 0) {
-            cityDialogAdapter = new AddressAdapter(getContext(), address);
-            _TvCity.setText(address.get(0).Name);
-        }
+        Address address1 = new Address();
+        address1.Id = 1000000000;
+        address1.Name = "全部";
+        address1.Code = "1000000000";
+        address.add(0, address1);
+        cityDialogAdapter = new AddressAdapter(getContext(), address);
+        _TvCity.setText(address.get(0).Name);
 
     }
 
@@ -172,10 +181,14 @@ public class JoinGroupActivity extends RecycleViewActivity<JoinPresenter, JoinGr
      */
     @Override
     public void setDistricts(ArrayList<Address> address) {
-        if (address != null && address.size() > 0) {
-            disctrictAdapter = new AddressAdapter(getContext(), address);
-            _TvDistrict.setText(address.get(0).Name);
-        }
+        Address address1 = new Address();
+        address1.Id = 0;
+        address1.Name = "全部";
+        address1.Code = "0";
+        address.add(0, address1);
+
+        disctrictAdapter = new AddressAdapter(getContext(), address);
+        _TvDistrict.setText(address.get(0).Name);
     }
 
     @Override

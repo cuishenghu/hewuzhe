@@ -1,16 +1,21 @@
 package com.hewuzhe.ui.activity;
 
+import android.os.Bundle;
 import android.support.design.widget.TabLayout;
 import android.support.v4.view.ViewPager;
 
 import com.hewuzhe.R;
-import com.hewuzhe.presenter.base.BasePresenterImp;
+import com.hewuzhe.model.Cate;
+import com.hewuzhe.presenter.FederalConditionPresenter;
 import com.hewuzhe.ui.adapter.MyViewPagerAdapter;
-import com.hewuzhe.ui.base.TabToolBarActivity;
+import com.hewuzhe.ui.base.ToolBarActivity;
 import com.hewuzhe.ui.fragment.FederalConditionFragment;
 import com.hewuzhe.utils.Bun;
+import com.hewuzhe.view.FederalConditionView;
 
-public class CoorperationActivity extends TabToolBarActivity {
+import java.util.ArrayList;
+
+public class CoorperationActivity extends ToolBarActivity<FederalConditionPresenter> implements FederalConditionView {
 
 
     @Override
@@ -26,12 +31,22 @@ public class CoorperationActivity extends TabToolBarActivity {
 
     }
 
+
+    @Override
+    protected void initThings(Bundle savedInstanceState) {
+        super.initThings(savedInstanceState);
+
+        presenter.getCates("GetCateForHezuo");
+
+    }
+
+
     /**
      * 绑定Presenter
      */
     @Override
-    public BasePresenterImp createPresenter() {
-        return null;
+    public FederalConditionPresenter createPresenter() {
+        return new FederalConditionPresenter();
     }
 
     @Override
@@ -40,22 +55,21 @@ public class CoorperationActivity extends TabToolBarActivity {
     }
 
 
-    /**
-     * 初始化Tabs
-     */
     @Override
-    public void initTabs() {
+    public void bindData(ArrayList<Cate> data) {
         ViewPager mViewPager = (ViewPager) findViewById(R.id.viewpager);
         MyViewPagerAdapter viewPagerAdapter = new MyViewPagerAdapter(getSupportFragmentManager());
-        viewPagerAdapter.addFragment(FederalConditionFragment.newInstance(new Bun().putInt("catid", 76).ok()), "招聘");//添加Fragment
-        viewPagerAdapter.addFragment(FederalConditionFragment.newInstance(new Bun().putInt("catid", 77).ok()), "合作");
-        mViewPager.setAdapter(viewPagerAdapter);
-
         TabLayout mTabLayout = (TabLayout) findViewById(R.id.tabLayout);
-        mTabLayout.addTab(mTabLayout.newTab().setText("招聘"));//给TabLayout添加Tab
-        mTabLayout.addTab(mTabLayout.newTab().setText("合作"));
-        mTabLayout.setupWithViewPager(mViewPager);//给TabLayout设置关联ViewPager，如果设置了ViewPager，那么ViewPagerAdapter中的getPageTitle()方法返回的就是Tab上的标题
 
+        for (Cate cate : data) {
+            viewPagerAdapter.addFragment(FederalConditionFragment.newInstance(new Bun().putInt("catid", cate.Id).ok()), cate.Name);//添加Fragment
+            mTabLayout.addTab(mTabLayout.newTab());//给TabLayout添加Tab
+        }
+
+
+        mViewPager.setOffscreenPageLimit(4);
+        mViewPager.setAdapter(viewPagerAdapter);
+        mTabLayout.setupWithViewPager(mViewPager);//给TabLayout设置关联ViewPager，如果设置了ViewPager，那么ViewPagerAdapter中的getPageTitle()方法返回的就是Tab上的标题
     }
 
 

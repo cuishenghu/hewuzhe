@@ -60,4 +60,13 @@ public class FriendCondition {
      * 是否是显示全部评论状态
      */
     public boolean isShowingAll=false;
+    /**
+     * UserId : 2
+     * IsFavorite : false
+     * IsRepeat : true
+     */
+
+    public int UserId;
+    public boolean IsFavorite;
+    public boolean IsRepeat;
 }

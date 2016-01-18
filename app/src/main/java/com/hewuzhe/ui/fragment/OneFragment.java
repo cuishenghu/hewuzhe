@@ -10,6 +10,7 @@ import com.hewuzhe.R;
 import com.hewuzhe.model.Video;
 import com.hewuzhe.presenter.OneFragmentPresenter;
 import com.hewuzhe.ui.activity.VideoDetail2Activity;
+import com.hewuzhe.ui.activity.VideoDetailActivity;
 import com.hewuzhe.ui.adapter.VideoAdapter;
 import com.hewuzhe.ui.base.SwipeRecycleViewFragment;
 import com.hewuzhe.utils.Bun;
@@ -95,7 +96,11 @@ public class OneFragment extends SwipeRecycleViewFragment<OneFragmentPresenter, 
      */
     @Override
     public void onItemClick(View view, int pos, Video item) {
-        startActivity(VideoDetail2Activity.class, new Bun().putInt("Id", item.Id).ok());
+        if (item.IsFree) {
+            startActivity(VideoDetail2Activity.class, new Bun().putInt("Id", item.Id).ok());
+        } else {
+            startActivity(VideoDetailActivity.class, new Bun().putInt("Id", item.Id).ok());
+        }
     }
 
     @Override

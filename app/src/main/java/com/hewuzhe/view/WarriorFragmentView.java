@@ -9,4 +9,5 @@ public interface WarriorFragmentView extends BaseView {
 
     public  void setUserData();
 
+    void isWuYou(Boolean data, int userid);
 }

@@ -14,9 +14,6 @@ import com.hewuzhe.view.ArticleView;
 
 import java.util.ArrayList;
 
-import retrofit.Callback;
-import retrofit.Response;
-import retrofit.Retrofit;
 import rx.Subscription;
 import rx.android.schedulers.AndroidSchedulers;
 import rx.functions.Action0;
@@ -33,53 +30,37 @@ public class ArticlePresenter extends CommentPresenter<ArticleView> {
      * @param id
      */
     public void getArticleDetail(int id) {
-//        Subscription subscription = NetEngine.getService()
-//                .GetLianmengDongtai(id)
-//                .subscribeOn(Schedulers.io())
-//                .doOnSubscribe(() -> view.showDialog())
-//                .subscribeOn(AndroidSchedulers.mainThread())
-//                .observeOn(AndroidSchedulers.mainThread())
-//                .subscribe(new SB<Res<Article>>() {
-//                    @Override
-//                    public void next(Res<Article> res) {
-//                        if (res.code == C.OK) {
-//                            view.setData(res.data);
-//                        }
-//                    }
-//
-//                    @Override
-//                    public void onCompleted() {
-//                        view.dismissDialog();
-//                    }
-//
-//                    @Override
-//                    public void onError(Throwable e) {
-//                        view.dismissDialog();
-//                    }
-//                });
-//        addSubscription(subscription);
-
-        view.showDialog();
-        NetEngine.getService()
+        Subscription subscription = NetEngine.getService()
                 .GetLianmengDongtai(id)
-                .enqueue(new Callback<Res<Article>>() {
+                .subscribeOn(Schedulers.io())
+                .doOnSubscribe(new Action0() {
                     @Override
-                    public void onResponse(Response<Res<Article>> response, Retrofit retrofit) {
-                        Res<Article> res = response.body();
+                    public void call() {
+                        view.showDialog();
+                    }
+                })
+                .subscribeOn(AndroidSchedulers.mainThread())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new SB<Res<Article>>() {
+                    @Override
+                    public void next(Res<Article> res) {
                         if (res.code == C.OK) {
                             view.setData(res.data);
                         }
-                        view.dismissDialog();
-
-
                     }
 
                     @Override
-                    public void onFailure(Throwable t) {
+                    public void onCompleted() {
                         view.dismissDialog();
+                    }
 
+                    @Override
+                    public void onError(Throwable e) {
+                        view.dismissDialog();
                     }
                 });
+        addSubscription(subscription);
+
     }
 
 
@@ -87,63 +68,42 @@ public class ArticlePresenter extends CommentPresenter<ArticleView> {
      * 评论
      */
     public void publisComment(int id, String content, final View v) {
-//        Subscription subscription = NetEngine.getService()
-//                .MessageCommentDT(id, new SessionUtil(view.getContext()).getUser().Id, content)
-//                .subscribeOn(Schedulers.io())
-//                .doOnSubscribe(() -> view.showDialog())
-//                .subscribeOn(AndroidSchedulers.mainThread())
-//                .observeOn(AndroidSchedulers.mainThread())
-//                .subscribe(new SB<Res>() {
-//                    @Override
-//                    public void next(Res res) {
-//                        if (res.code == C.OK) {
-//                            view.snb("评论成功", v);
-//                            view.commentSuccess(0, null);
-//                        } else {
-//                            view.snb("评论失败", v);
-//                        }
-//                    }
-//
-//                    @Override
-//                    public void onCompleted() {
-//                        view.dismissDialog();
-//                    }
-//
-//                    @Override
-//                    public void onError(Throwable e) {
-//                        view.dismissDialog();
-//                        view.snb("评论失败", v);
-//                    }
-//                });
-//        addSubscription(subscription);
-
-
-        view.showDialog();
-
-
-        NetEngine.getService()
+        Subscription subscription = NetEngine.getService()
                 .MessageCommentDT(id, new SessionUtil(view.getContext()).getUser().Id, content)
-                .enqueue(new Callback<Res>() {
+                .subscribeOn(Schedulers.io())
+                .doOnSubscribe(new Action0() {
                     @Override
-                    public void onResponse(Response<Res> response, Retrofit retrofit) {
-                        Res res = response.body();
+                    public void call() {
+                        view.showDialog();
+                    }
+                })
+                .subscribeOn(AndroidSchedulers.mainThread())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new SB<Res>() {
+                    @Override
+                    public void next(Res res) {
                         if (res.code == C.OK) {
                             view.snb("评论成功", v);
                             view.commentSuccess(0, null);
                         } else {
                             view.snb("评论失败", v);
                         }
-
-                        view.dismissDialog();
-
                     }
 
                     @Override
-                    public void onFailure(Throwable t) {
+                    public void onCompleted() {
                         view.dismissDialog();
+                    }
 
+                    @Override
+                    public void onError(Throwable e) {
+                        view.dismissDialog();
+                        view.snb("评论失败", v);
                     }
                 });
+        addSubscription(subscription);
+
+
     }
 
 
@@ -246,6 +206,36 @@ public class ArticlePresenter extends CommentPresenter<ArticleView> {
 
                     }
                 });
+
+    }
+
+
+    public void isWuyou(final int userid) {
+        Subscription subscription = NetEngine.getService()
+                .IsWuyou(new SessionUtil(view.getContext()).getUserId(), userid)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new SB<Res<Boolean>>() {
+                    @Override
+                    public void next(Res<Boolean> res) {
+                        if (res.code == C.OK) {
+                            view.isWuYou(res.data, userid);
+
+                        }
+                    }
+
+                    @Override
+                    public void onCompleted() {
+
+                    }
+
+                    @Override
+                    public void onError(Throwable e) {
+
+                    }
+                });
+
+        addSubscription(subscription);
 
     }
 

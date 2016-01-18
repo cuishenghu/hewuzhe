@@ -64,12 +64,22 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
-                android:layout_marginBottom="120px"
                 android:layout_marginTop="120px"
                 android:background="@drawable/select_yellow"
                 android:paddingLeft="80px"
                 android:paddingRight="80px"
                 android:text="成为会员"/>
+
+
+        <TextView android:id="@+id/tv_over_time"
+                  style="@style/text_30_white"
+                  android:layout_width="wrap_content"
+                  android:layout_height="wrap_content"
+                  android:layout_gravity="center_horizontal"
+                  android:layout_marginBottom="120px"
+                  android:layout_marginTop="10px"
+                  android:text=""
+                  android:visibility="invisible"/>
 
 
     </LinearLayout>

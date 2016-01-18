@@ -18,6 +18,7 @@ import com.hewuzhe.model.MegaGame;
 import com.hewuzhe.model.MegaGameVideo;
 import com.hewuzhe.model.MyDream;
 import com.hewuzhe.model.OtherImage;
+import com.hewuzhe.model.OverTime;
 import com.hewuzhe.model.Plan;
 import com.hewuzhe.model.Record;
 import com.hewuzhe.model.Res;
@@ -49,15 +50,18 @@ public interface ApiService {
     @GET("LoginAndRegister.asmx/Login")
     Observable<Res<User>> Login(@Query("username") String usernmae, @Query("password") String password);
 
+    @GET("LoginAndRegister.asmx/GetPayOverTime")
+    Observable<Res<OverTime>> GetPayOverTime(@Query("userid") int userid);
+
     @GET("LoginAndRegister.asmx/Register")
-    Call<Res> RegisterAndLogin(@Query("phone") String usernmae, @Query("password") String password);
+    Observable<Res> RegisterAndLogin(@Query("phone") String usernmae, @Query("password") String password);
 
     @GET("LoginAndRegister.asmx/LoginByOther")
     Observable<Res<User>> LoginByOther(@Query("openid") String openid, @Query("nicname") String nicname);
 
     @FormUrlEncoded
     @POST("LoginAndRegister.asmx/UpLoadPhoto")
-    Call<Res<UploadImage>> UpLoadPhoto(@Field("fileName") String fileName, @Field("filestream") String filestream, @Field("userid") int userid);
+    Observable<Res<UploadImage>> UpLoadPhoto(@Field("fileName") String fileName, @Field("filestream") String filestream, @Field("userid") int userid);
 
     @FormUrlEncoded
     @POST("Helianmeng.asmx/UpLoadImage")
@@ -81,14 +85,14 @@ public interface ApiService {
 
 
     @GET("Hewuzhe.asmx/GetOnlineStudy")
-    Call<Res<Video>> GetOnlineStudy(@Query("id") int id, @Query("userid") int userid);
+    Observable<Res<Video>> GetOnlineStudy(@Query("id") int id, @Query("userid") int userid);
 
     @GET("Hedongli.asmx/{path}")
     Call<Res<ArrayList<Video>>> getVideos(@Path("path") String path, @Query("startRowIndex") int startRowIndex, @Query("maximumRows") int maximumRows);
 
 
     @GET("Hewuzhe.asmx/GetPlanByCate")
-    Call<Res<ArrayList<Plan>>> GetPlanByCate(@Query("userid") int userId, @Query("cateid") int cateId, @Query("startRowIndex") int startRowIndex, @Query("maximumRows") int maximumRows);
+    Observable<Res<ArrayList<Plan>>> GetPlanByCate(@Query("userid") int userId, @Query("cateid") int cateId, @Query("startRowIndex") int startRowIndex, @Query("maximumRows") int maximumRows);
 
 
     @GET("Hedongli.asmx/GetChannel")
@@ -100,7 +104,7 @@ public interface ApiService {
 
     @FormUrlEncoded
     @POST("Hewuzhe.asmx/SaveOrEditVideoMessage")
-    Call<Res> SaveOrEditVideoMessage(@Field("id") int id, @Field("Title") String Title, @Field("ImagePath") String ImagePath, @Field("Content") String Content, @Field("VideoPath") String VideoPath, @Field("IsOriginal") String IsOriginal, @Field("IsFree") String IsFree, @Field("CategoryId") int CategoryId, @Field("UserId") int UserId, @Field("VideoDuration") String VideoDuration);
+    Observable<Res> SaveOrEditVideoMessage(@Field("id") int id, @Field("Title") String Title, @Field("ImagePath") String ImagePath, @Field("Content") String Content, @Field("VideoPath") String VideoPath, @Field("IsOriginal") String IsOriginal, @Field("IsFree") String IsFree, @Field("CategoryId") int CategoryId, @Field("UserId") int UserId, @Field("VideoDuration") String VideoDuration);
 
 
     @FormUrlEncoded
@@ -109,7 +113,7 @@ public interface ApiService {
 
 
     @GET("Hedongli.asmx/GetOtherVideo")
-    Call<Res<ArrayList<Video>>> GetOtherVideo(@Query("userid") int userid, @Query("num") int num, @Query("id") int id);
+    Observable<Res<ArrayList<Video>>> GetOtherVideo(@Query("userid") int userid, @Query("num") int num, @Query("id") int id);
 
     @GET("Hewuzhe.asmx/SelectCommentByMessageId")
     Observable<Res<ArrayList<Comment>>> SelectCommentByMessageId(@Query("messageId") int messageId);
@@ -129,10 +133,10 @@ public interface ApiService {
     Call<Res> MessageRepeatAndFavorite(@Query("id") int id, @Query("userid") int userid, @Query("flg") int flg);
 
     @GET("Hewuzhe.asmx/MessageComment")
-    Call<Res> MessageComment(@Query("id") int id, @Query("userid") int userid, @Query("comment") String comment);
+    Observable<Res> MessageComment(@Query("id") int id, @Query("userid") int userid, @Query("comment") String comment);
 
     @GET("Helianmeng.asmx/MessageComment")
-    Call<Res> MessageCommentDT(@Query("id") int id, @Query("userid") int userid, @Query("comment") String comment);
+    Observable<Res> MessageCommentDT(@Query("id") int id, @Query("userid") int userid, @Query("comment") String comment);
 
     @GET("Helianmeng.asmx/CommentComment")
     Call<Res> CommentComment(@Query("id") int id, @Query("userid") int userid, @Query("comment") String comment);
@@ -148,12 +152,15 @@ public interface ApiService {
     @GET("LoginAndRegister.asmx/UpdateUser")
     Observable<Res<User>> UpdateUser(@Query("userid") int userid);
 
+    @GET("Helianmeng.asmx/{path}")
+    Observable<Res<ArrayList<Cate>>> GetLianmengCate(@Path("path") String path);
+
     @GET("Helianmeng.asmx/GetMyDongtaiPage")
     Observable<Res<ArrayList<ConditionComment>>> GetMyDongtaiPage(@Query("userid") int userid, @Query("startRowIndex") int startRowIndex, @Query("maximumRows") int maximumRows);
 
 
     @GET("LoginAndRegister.asmx/ChangeInfor")
-    Call<Res> ChangeInfor(@Query("userid") int userid, @Query("nicname") String nicname, @Query("sexuality") int sexuality, @Query("height") int height, @Query("weight") int weight, @Query("homeAreaId") int homeAreaId, @Query("experience") int experience, @Query("description") String description, @Query("birthday") String birthday);
+    Observable<Res> ChangeInfor(@Query("userid") int userid, @Query("nicname") String nicname, @Query("sexuality") int sexuality, @Query("height") int height, @Query("weight") int weight, @Query("homeAreaId") int homeAreaId, @Query("experience") int experience, @Query("description") String description, @Query("birthday") String birthday);
 
 
     @GET("Hewuzhe.asmx/GetCreditRecord")
@@ -198,7 +205,7 @@ public interface ApiService {
 
 
     @GET("Helianmeng.asmx/GetFriendBySearch")
-    Call<Res<ArrayList<Friend>>> GetFriendBySearch(@Query("startRowIndex") int startRowIndex, @Query("maximumRows") int maximumRows, @Query("areaId") int areaId, @Query("nicName") String nicName, @Query("age") int age, @Query("sexuality") int sexuality, @Query("userid") int userid);
+    Observable<Res<ArrayList<Friend>>> GetFriendBySearch(@Query("startRowIndex") int startRowIndex, @Query("maximumRows") int maximumRows, @Query("areaId") int areaId, @Query("nicName") String nicName, @Query("age") int age, @Query("sexuality") int sexuality, @Query("userid") int userid);
 
     @GET("Helianmeng.asmx/SaveFriend")
     Observable<Res> SaveFriend(@Query("userid") int userid, @Query("friendid") int friendid);
@@ -229,7 +236,7 @@ public interface ApiService {
     Observable<Res<MegaGame>> SelectMatchDetailWithIsJoin(@Query("userid") int userid, @Query("matchId") int matchId);
 
     @GET("Helianmeng.asmx/GetLianmengDongtai")
-    Call<Res<Article>> GetLianmengDongtai(@Query("id") int id);
+    Observable<Res<Article>> GetLianmengDongtai(@Query("id") int id);
 
     @GET("Helianmeng.asmx/ShieldFriend")
     Observable<Res> ShieldFriend(@Query("friendid") int id, @Query("userid") int userid);
@@ -250,7 +257,7 @@ public interface ApiService {
     Observable<Res> ChangeFriendRName(@Query("friend") int id, @Query("userid") int userid, @Query("rname") String rname);
 
     @GET("Hewuzhe.asmx/DeletePlan")
-    Call<Res> DeletePlan(@Query("id") int id);
+    Observable<Res> DeletePlan(@Query("id") int id);
 
     @GET("Helianmeng.asmx/GetDongtaiPageByFriends")
     Observable<Res<ArrayList<FriendCondition>>> GetDongtaiPageByFriends(@Query("startRowIndex") int startRowIndex, @Query("maximumRows") int maximumRows, @Query("userid") int userid);
@@ -277,7 +284,7 @@ public interface ApiService {
     Observable<Res<Group>> SelectTeam(@Query("teamid") int id);
 
     @GET("Helianmeng.asmx/SelectTeamMember")
-    Call<Res<ArrayList<Friend>>> SelectTeamMember(@Query("teamid") int id, @Query("userid") int userId);
+    Observable<Res<ArrayList<Friend>>> SelectTeamMember(@Query("teamid") int id, @Query("userid") int userId);
 
     @GET("Hewuzhe.asmx/SelectWuGuan")
     Call<Res<Dojo>> SelectWuGuan(@Query("id") int id);

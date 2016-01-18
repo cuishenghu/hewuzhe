@@ -1,19 +1,26 @@
 package com.hewuzhe.ui.activity;
 
+import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.TextView;
 
 import com.hewuzhe.R;
-import com.hewuzhe.presenter.base.BasePresenterImp;
+import com.hewuzhe.presenter.MemberPresenter;
 import com.hewuzhe.ui.base.ToolBarActivity;
+import com.hewuzhe.utils.SessionUtil;
+import com.hewuzhe.view.MemberView;
 
 import butterknife.Bind;
 
-public class MemberActivity extends ToolBarActivity {
+public class MemberActivity extends ToolBarActivity<MemberPresenter> implements MemberView {
 
 
     @Bind(R.id.btn_to_member)
     Button _BtnToMember;
+    @Bind(R.id.tv_over_time)
+    TextView _TvOverTime;
+    private boolean _IsVip;
 
     /**
      * @return 提供标题
@@ -29,6 +36,19 @@ public class MemberActivity extends ToolBarActivity {
     @Override
     protected int provideContentViewId() {
         return R.layout.activity_member;
+    }
+
+    @Override
+    protected void initThings(Bundle savedInstanceState) {
+        super.initThings(savedInstanceState);
+        _IsVip = new SessionUtil(getContext()).getUser().isVip();
+        _BtnToMember.setText(_IsVip ? "点击续费" : "成为会员");
+        _TvOverTime.setVisibility(_IsVip ? View.VISIBLE : View.INVISIBLE);
+
+        if (_IsVip) {
+            presenter.GetPayOverTime();
+        }
+
     }
 
     /**
@@ -49,8 +69,13 @@ public class MemberActivity extends ToolBarActivity {
      * 绑定Presenter
      */
     @Override
-    public BasePresenterImp createPresenter() {
-        return null;
+    public MemberPresenter createPresenter() {
+        return new MemberPresenter();
     }
 
+    @Override
+    public void setData(String s) {
+        _TvOverTime.setText(s);
+
+    }
 }

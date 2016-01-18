@@ -13,27 +13,26 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.hewuzhe.R;
 import com.hewuzhe.model.Article;
 import com.hewuzhe.model.Comment;
-import com.hewuzhe.model.Pic;
 import com.hewuzhe.presenter.ArticlePresenter;
-import com.hewuzhe.ui.adapter.CommentAdapter;
+import com.hewuzhe.ui.adapter.ArticleCommentAdapter;
 import com.hewuzhe.ui.base.RecycleViewActivity;
 import com.hewuzhe.ui.cons.C;
 import com.hewuzhe.ui.widget.GlideCircleTransform;
 import com.hewuzhe.utils.AsyncImageLoader;
+import com.hewuzhe.utils.Bun;
 import com.hewuzhe.utils.SessionUtil;
 import com.hewuzhe.view.ArticleView;
 
 import java.io.File;
 import java.util.ArrayList;
 
-public class FederalConditionDetailActivity extends RecycleViewActivity<ArticlePresenter, CommentAdapter, Comment> implements ArticleView {
+public class FederalConditionDetailActivity extends RecycleViewActivity<ArticlePresenter, ArticleCommentAdapter, Comment> implements ArticleView {
 
 
     private int id;
@@ -42,7 +41,6 @@ public class FederalConditionDetailActivity extends RecycleViewActivity<ArticleP
     private TextView tvName;
     private TextView tvFroms;
     private TextView tvContent;
-    private LinearLayout layPics;
     private ImageView imgPraise;
     private TextView tvPraiseCount;
     private TextView tvPageViews;
@@ -87,10 +85,10 @@ public class FederalConditionDetailActivity extends RecycleViewActivity<ArticleP
     }
 
     private void initHeader() {
+
         tvName = (TextView) header.findViewById(R.id.tv_name);
         tvFroms = (TextView) header.findViewById(R.id.tv_froms);
         tvContent = (TextView) header.findViewById(R.id.tv_content);
-        layPics = (LinearLayout) header.findViewById(R.id.lay_pics);
         imgPraise = (ImageView) header.findViewById(R.id.img_praise);
         tvPraiseCount = (TextView) header.findViewById(R.id.tv_praise_count);
         tvPageViews = (TextView) header.findViewById(R.id.tv_page_views);
@@ -107,9 +105,9 @@ public class FederalConditionDetailActivity extends RecycleViewActivity<ArticleP
      * @return 提供Adapter
      */
     @Override
-    protected CommentAdapter provideAdapter() {
+    protected ArticleCommentAdapter provideAdapter() {
         header = getLayoutInflater().inflate(R.layout.header_article_detail, null);
-        return new CommentAdapter(getContext(), presenter, header, C.WHITCH_ONE);
+        return new ArticleCommentAdapter(getContext(), presenter, header, C.WHITCH_ONE);
     }
 
     /**
@@ -162,6 +160,7 @@ public class FederalConditionDetailActivity extends RecycleViewActivity<ArticleP
         tvName.setText(article.Title);
         _content = article.Content;
         tvContent.setText(Html.fromHtml(_content, new MyImageGetter(), null));
+//       tvContent.loadUrl("http://www.baidu.com");
 
         tvFroms.setText("来自：" + article.Category + "  " + article.PublishTime);
         tvPraiseCount.setText(article.LikeNum + "");
@@ -178,17 +177,17 @@ public class FederalConditionDetailActivity extends RecycleViewActivity<ArticleP
                 .transform(new GlideCircleTransform(getContext()))
                 .into(imgAvatar2);
 
-        if (article.PicList != null && article.PicList.size() > 0) {
-            for (Pic pic : article.PicList) {
-                ImageView img = (ImageView) getLayoutInflater().inflate(R.layout.component_article_detiail_img, null);
-                Glide.with(getContext())
-                        .load(C.BASE_URL + pic.ImagePath)
-                        .fitCenter()
-                        .crossFade()
-                        .into(img);
-                layPics.addView(img);
-            }
-        }
+//        if (article.PicList != null && article.PicList.size() > 0) {
+//            for (Pic pic : article.PicList) {
+//                ImageView img = (ImageView) getLayoutInflater().inflate(R.layout.component_article_detiail_img, null);
+//                Glide.with(getContext())
+//                        .load(C.BASE_URL + pic.ImagePath)
+//                        .fitCenter()
+//                        .crossFade()
+//                        .into(img);
+//                layPics.addView(img);
+//            }
+//        }
     }
 
     /**
@@ -322,6 +321,17 @@ public class FederalConditionDetailActivity extends RecycleViewActivity<ArticleP
 
             return null;
         }
+    }
+
+
+    @Override
+    public void isWuYou(Boolean data, int userid) {
+        if (data) {
+            startActivity(FriendProfileActivity.class, new Bun().putInt("id", userid).ok());
+        } else {
+            startActivity(StrangerProfileSettingsActivity.class, new Bun().putInt("id", userid).ok());
+        }
+
     }
 
 }

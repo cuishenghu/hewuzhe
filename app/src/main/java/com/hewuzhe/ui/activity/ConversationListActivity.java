@@ -33,6 +33,7 @@ public class ConversationListActivity extends ToolBarActivity {
     protected void initThings(Bundle savedInstanceState) {
         super.initThings(savedInstanceState);
         enterFragment();
+
     }
 
     /**

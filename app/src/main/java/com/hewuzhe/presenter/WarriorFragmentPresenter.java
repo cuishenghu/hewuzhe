@@ -1,5 +1,8 @@
 package com.hewuzhe.presenter;
 
+import android.net.Uri;
+
+import com.hewuzhe.model.Group;
 import com.hewuzhe.model.Res;
 import com.hewuzhe.model.User;
 import com.hewuzhe.presenter.base.BasePresenterImp;
@@ -9,6 +12,8 @@ import com.hewuzhe.utils.SB;
 import com.hewuzhe.utils.SessionUtil;
 import com.hewuzhe.view.WarriorFragmentView;
 
+import io.rong.imkit.RongIM;
+import io.rong.imlib.model.UserInfo;
 import rx.Subscription;
 import rx.android.schedulers.AndroidSchedulers;
 import rx.schedulers.Schedulers;
@@ -50,5 +55,101 @@ public class WarriorFragmentPresenter extends BasePresenterImp<WarriorFragmentVi
         }
 
     }
+
+
+    public void getUserInfo(int userid) {
+        Subscription subscription = NetEngine.getService()
+                .UpdateUser(userid)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new SB<Res<User>>() {
+                    @Override
+                    public void next(Res<User> res) {
+                        if (res.code == C.OK) {
+                            RongIM.getInstance().refreshUserInfoCache(new UserInfo(res.data.Id + "", res.data.NicName, Uri.parse(C.BASE_URL + res.data.PhotoPath)));
+
+//                            res.data.save();
+
+                        }
+                    }
+
+                    @Override
+                    public void onCompleted() {
+
+                    }
+
+                    @Override
+                    public void onError(Throwable e) {
+
+                    }
+                });
+        addSubscription(subscription);
+
+
+    }
+
+
+    public void getGroup(int groupid) {
+
+        Subscription subscription = NetEngine.getService()
+                .SelectTeam(groupid)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new SB<Res<Group>>() {
+                    @Override
+                    public void next(Res<Group> res) {
+                        if (res.code == C.OK) {
+
+                            RongIM.getInstance().refreshGroupInfoCache(new io.rong.imlib.model.Group(res.data.Id + "", res.data.Name, Uri.parse(C.BASE_URL + res.data.ImagePath)));
+//                            res.data.save();
+
+                        }
+                    }
+
+                    @Override
+                    public void onCompleted() {
+
+                    }
+
+                    @Override
+                    public void onError(Throwable e) {
+
+                    }
+                });
+
+        addSubscription(subscription);
+
+    }
+
+
+    public void isWuyou(final int userid) {
+        Subscription subscription = NetEngine.getService()
+                .IsWuyou(new SessionUtil(view.getContext()).getUserId(), userid)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new SB<Res<Boolean>>() {
+                    @Override
+                    public void next(Res<Boolean> res) {
+                        if (res.code == C.OK) {
+                            view.isWuYou(res.data, userid);
+
+                        }
+                    }
+
+                    @Override
+                    public void onCompleted() {
+
+                    }
+
+                    @Override
+                    public void onError(Throwable e) {
+
+                    }
+                });
+
+        addSubscription(subscription);
+
+    }
+
 
 }

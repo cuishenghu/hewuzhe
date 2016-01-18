@@ -164,7 +164,7 @@ public class FriendProfileSettingsActivity extends ToolBarActivity<ProfileSettin
     @Override
     public void followSuccess(boolean b) {
         if (b) {
-            _BtnFollow.setText("已关注");
+            _BtnFollow.setText("取消关注");
             _BtnFollow.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
@@ -173,7 +173,7 @@ public class FriendProfileSettingsActivity extends ToolBarActivity<ProfileSettin
             });
 
         } else {
-            _BtnFollow.setText("取消关注");
+            _BtnFollow.setText("关注好友");
             _BtnFollow.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {

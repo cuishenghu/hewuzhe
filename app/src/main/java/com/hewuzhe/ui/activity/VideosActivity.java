@@ -79,7 +79,11 @@ public class VideosActivity extends SwipeRecycleViewActivity<VideosPresenter, Vi
      */
     @Override
     public void onItemClick(View view, int pos, Video item) {
-        startActivity(VideoDetail2Activity.class, new Bun().putInt("Id", item.Id).ok());
+        if (item.IsFree) {
+            startActivity(VideoDetail2Activity.class, new Bun().putInt("Id", item.Id).ok());
+        } else {
+            startActivity(VideoDetailActivity.class, new Bun().putInt("Id", item.Id).ok());
+        }
     }
 
     /**

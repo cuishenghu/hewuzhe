@@ -18,6 +18,4 @@ public interface ProfileView extends AreaView {
     void showAvatarUpdateDialog();
 
 
-
-
 }

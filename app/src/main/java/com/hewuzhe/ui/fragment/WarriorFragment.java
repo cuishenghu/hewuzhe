@@ -1,6 +1,8 @@
 package com.hewuzhe.ui.fragment;
 
+import android.content.Context;
 import android.content.Intent;
+import android.net.Uri;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.ActivityOptionsCompat;
 import android.support.v4.app.Fragment;
@@ -19,17 +21,20 @@ import com.hewuzhe.presenter.WarriorFragmentPresenter;
 import com.hewuzhe.ui.App;
 import com.hewuzhe.ui.activity.DoJoRecommendActivity;
 import com.hewuzhe.ui.activity.FlyDreamActivity;
+import com.hewuzhe.ui.activity.FriendProfileActivity;
 import com.hewuzhe.ui.activity.IntegralActivity;
 import com.hewuzhe.ui.activity.LiveVideoActivity;
 import com.hewuzhe.ui.activity.MemberActivity;
 import com.hewuzhe.ui.activity.MyCollectionsActivity;
 import com.hewuzhe.ui.activity.ProfileActivity;
 import com.hewuzhe.ui.activity.RecordActivity;
+import com.hewuzhe.ui.activity.StrangerProfileSettingsActivity;
 import com.hewuzhe.ui.activity.StudyOnlineActivity;
 import com.hewuzhe.ui.activity.TrainActivity;
 import com.hewuzhe.ui.base.ToolBarFragment;
 import com.hewuzhe.ui.cons.C;
 import com.hewuzhe.ui.widget.GlideCircleTransform;
+import com.hewuzhe.utils.Bun;
 import com.hewuzhe.utils.SessionUtil;
 import com.hewuzhe.view.WarriorFragmentView;
 import com.zhy.http.okhttp.OkHttpUtils;
@@ -42,6 +47,10 @@ import org.json.JSONObject;
 import butterknife.Bind;
 import io.rong.imkit.RongIM;
 import io.rong.imlib.RongIMClient;
+import io.rong.imlib.model.Conversation;
+import io.rong.imlib.model.Group;
+import io.rong.imlib.model.Message;
+import io.rong.imlib.model.UserInfo;
 import okhttp3.Request;
 
 //import com.amap.api.location.AMapLocation;
@@ -52,7 +61,7 @@ import okhttp3.Request;
 /**
  * A simple {@link Fragment} subclass.
  */
-public class WarriorFragment extends ToolBarFragment<WarriorFragmentPresenter> implements WarriorFragmentView {
+public class WarriorFragment extends ToolBarFragment<WarriorFragmentPresenter> implements WarriorFragmentView, RongIM.LocationProvider, RongIM.UserInfoProvider, RongIM.GroupInfoProvider, RongIM.ConversationBehaviorListener {
 
     @Bind(R.id.img_avatar)
     ImageView imgAvatar;
@@ -288,19 +297,15 @@ public class WarriorFragment extends ToolBarFragment<WarriorFragmentPresenter> i
         tvId.setText("ID:" + user.Id);
         tvLevel.setText("lv" + user.Rank);
         tvIntegral.setText(user.Credit + "");
-        tvLevelName.setText(user.isVip() ? user.UserRankName : "成为会员");
+        tvLevelName.setText(user.isVip() ? "会员" : "成为会员");
 
-        if (user.isVip()) {
+        layLevel.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(MemberActivity.class);
+            }
+        });
 
-
-        } else {
-            layLevel.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    startActivity(MemberActivity.class);
-                }
-            });
-        }
 
         Glide.with(getActivity())
                 .load(C.BASE_URL + user.PhotoPath)
@@ -310,12 +315,18 @@ public class WarriorFragment extends ToolBarFragment<WarriorFragmentPresenter> i
                 .transform(new GlideCircleTransform(getContext()))
                 .into(imgAvatar);
 
-        if (!isHasSetRongIM) {
+        connect(user.Token);
 
-            connect(user.Token);
-            isHasSetRongIM = true;
+
+    }
+
+    @Override
+    public void isWuYou(Boolean data, int userid) {
+        if (data) {
+            startActivity(FriendProfileActivity.class, new Bun().putInt("id", userid).ok());
+        } else {
+            startActivity(StrangerProfileSettingsActivity.class, new Bun().putInt("id", userid).ok());
         }
-
     }
 
     @Override
@@ -338,11 +349,10 @@ public class WarriorFragment extends ToolBarFragment<WarriorFragmentPresenter> i
      */
     private void connect(String token) {
 
+        /**
+         * IMKit SDK调用第二步,建立与服务器的连接
+         */
         if (getActivity().getApplicationInfo().packageName.equals(App.getCurProcessName(getActivity().getApplicationContext()))) {
-
-            /**
-             * IMKit SDK调用第二步,建立与服务器的连接
-             */
             RongIM.connect(token, new RongIMClient.ConnectCallback() {
 
                 /**
@@ -356,6 +366,7 @@ public class WarriorFragment extends ToolBarFragment<WarriorFragmentPresenter> i
 
                 /**
                  * 连接融云成功
+                 *
                  * @param userid 当前 token
                  */
                 @Override
@@ -364,10 +375,18 @@ public class WarriorFragment extends ToolBarFragment<WarriorFragmentPresenter> i
                     Log.d("LoginActivity", "--onSuccess" + userid);
 //                    startActivity(new Intent(LoginActivity.this, MainActivity.class));
 //                    finish();
+
+
+                    RongIM.setUserInfoProvider(WarriorFragment.this, true);//设置用户信息提供者。
+                    RongIM.setGroupInfoProvider(WarriorFragment.this, true);//设置群组信息提供者。
+                    RongIM.setConversationBehaviorListener(WarriorFragment.this);//设置会话界面操作的监听器。
+                    RongIM.setLocationProvider(WarriorFragment.this);//设置地理位置提供者,不用位置的同学可以注掉此行代码
+
                 }
 
                 /**
                  * 连接融云失败
+                 *
                  * @param errorCode 错误码，可到官网 查看错误码对应的注释
                  */
                 @Override
@@ -377,6 +396,70 @@ public class WarriorFragment extends ToolBarFragment<WarriorFragmentPresenter> i
                 }
             });
         }
+    }
+
+    @Override
+    public void onStartLocation(Context context, LocationCallback locationCallback) {
+
+    }
+
+    @Override
+    public UserInfo getUserInfo(String s) {
+//        User u = new Select().from(User.class).where("Id=" + s).executeSingle();
+        User u = null;
+
+        if (u == null) {
+            presenter.getUserInfo(Integer.parseInt(s));
+            return null;
+        } else {
+
+            return new UserInfo(s, u.NicName, Uri.parse(C.BASE_URL + u.PhotoPath));
+        }
+
+    }
+
+
+    @Override
+    public Group getGroupInfo(String s) {
+//        User u = new Select().from(com.hewuzhe.model.Group.class).where("Id=" + s).executeSingle();
+        User u = null;
+
+        if (u == null) {
+
+            presenter.getGroup(Integer.parseInt(s));
+            return null;
+        } else {
+
+            return new Group(s, u.NicName, Uri.parse(C.BASE_URL + u.PhotoPath));
+        }
+    }
+
+    @Override
+    public boolean onUserPortraitClick(Context context, Conversation.ConversationType conversationType, UserInfo userInfo) {
+
+        presenter.isWuyou(Integer.parseInt(userInfo.getUserId()));
+
+        return false;
+    }
+
+    @Override
+    public boolean onUserPortraitLongClick(Context context, Conversation.ConversationType conversationType, UserInfo userInfo) {
+        return false;
+    }
+
+    @Override
+    public boolean onMessageClick(Context context, View view, Message message) {
+        return false;
+    }
+
+    @Override
+    public boolean onMessageLinkClick(Context context, String s) {
+        return false;
+    }
+
+    @Override
+    public boolean onMessageLongClick(Context context, View view, Message message) {
+        return false;
     }
 
 

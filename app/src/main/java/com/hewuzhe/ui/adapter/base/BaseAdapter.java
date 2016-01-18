@@ -182,7 +182,6 @@ public abstract class BaseAdapter<VH extends RecyclerView.ViewHolder, M, P exten
         if (viewType == C.VIEW_TYPE_HEADER) {
             AutoUtils.auto(header);
             return createVH(parent, viewType, header);
-
         } else if (viewType == C.VIEW_TYPE_FOOTER) {
             AutoUtils.auto(footer);
             return createVH(parent, viewType, footer);
@@ -201,12 +200,13 @@ public abstract class BaseAdapter<VH extends RecyclerView.ViewHolder, M, P exten
                 holder.itemView.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
-                        mOnItemClickListener.onItemClick(view, position, data.get(position));
+                        mOnItemClickListener.onItemClick(view, header == null ? position : position - 1, data.get(header == null ? position : position - 1));
                     }
                 });
             } else {
                 holder.itemView.setOnClickListener(null);
             }
+
             bindData(holder, header == null ? position : position - 1);
         }
     }

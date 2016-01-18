@@ -11,7 +11,7 @@ android {
         targetSdkVersion 23
         versionCode 1
         versionName "1.0"
-
+        multiDexEnabled true
     }
 
     buildTypes {
@@ -20,11 +20,13 @@ android {
             minifyEnabled false
             shrinkResources false
 
+
+
         }
 
         release {
             minifyEnabled false
-            debuggable true
+            debuggable false
             shrinkResources false
 
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
@@ -61,6 +63,7 @@ android {
 dependencies {
     compile fileTree(include: ['*.jar'], dir: 'libs')
     compile files('libs/zxing.jar')
+    compile files('libs/activeandroid-3.1-beta.jar')
     compile files('libs/pgyer_sdk_2.2.2.jar')
     compile files('libs/MobTools.jar')
     compile files('libs/MobCommons.jar')
@@ -102,4 +105,5 @@ dependencies {
     compile 'com.zhy:okhttputils:2.1.0'
     compile 'com.nineoldandroids:library:2.4.0'
     compile 'me.zhanghai.android.materialprogressbar:library:1.1.4'
+
 }

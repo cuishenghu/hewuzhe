@@ -11,8 +11,7 @@ import android.widget.TextView;
 import com.bumptech.glide.Glide;
 import com.hewuzhe.R;
 import com.hewuzhe.model.Comment;
-import com.hewuzhe.presenter.adapter.CommentPresenter;
-import com.hewuzhe.presenter.base.BasePresenterImp;
+import com.hewuzhe.presenter.VideoDetailPresenter;
 import com.hewuzhe.ui.adapter.base.BaseAdapter;
 import com.hewuzhe.ui.cons.C;
 import com.hewuzhe.ui.widget.GlideCircleTransform;
@@ -24,18 +23,18 @@ import butterknife.ButterKnife;
 /**
  * Created by xianguangjin on 15/12/29.
  */
-public class CommentAdapter extends BaseAdapter<CommentAdapter.ViewHolder, Comment, BasePresenterImp> {
+public class CommentAdapter extends BaseAdapter<CommentAdapter.ViewHolder, Comment, VideoDetailPresenter> {
 
     private int whitch = C.WHITCH_DEFAUT;
 
-    public CommentAdapter(Context context, CommentPresenter commentPresenter, View header, int whitch) {
-        super(context, commentPresenter, header);
+    public CommentAdapter(Context context, VideoDetailPresenter videoDetailPresenter, View header, int whitch) {
+        super(context, videoDetailPresenter, header);
         this.whitch = whitch;
 
     }
 
-    public CommentAdapter(Context context, CommentPresenter commentPresenter, View header) {
-        super(context, commentPresenter, header);
+    public CommentAdapter(Context context, VideoDetailPresenter videoDetailPresenter, View header) {
+        super(context, videoDetailPresenter, header);
     }
 
 
@@ -65,7 +64,7 @@ public class CommentAdapter extends BaseAdapter<CommentAdapter.ViewHolder, Comme
     @Override
     public void bindData(ViewHolder holder, int position) {
 
-        Comment comment = data.get(position);
+        final Comment comment = data.get(position);
         if (whitch == C.WHITCH_DEFAUT) {
             holder.tvName.setText(comment.CommenterNicName);
             holder.tvAddTime.setText(TimeUtil.timeAgo(comment.PublishTime));
@@ -94,6 +93,12 @@ public class CommentAdapter extends BaseAdapter<CommentAdapter.ViewHolder, Comme
                     .placeholder(R.mipmap.img_avatar)
                     .into(holder.imgAvatar);
 
+            holder.imgAvatar.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    _presenter.isWuyou(comment.CommenterId);
+                }
+            });
         }
 
     }

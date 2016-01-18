@@ -2,6 +2,7 @@ package com.hewuzhe.ui.widget;
 
 import android.annotation.TargetApi;
 import android.content.Context;
+import android.content.Intent;
 import android.os.Handler;
 import android.os.Message;
 import android.util.AttributeSet;
@@ -9,11 +10,14 @@ import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.FrameLayout;
 import android.widget.ImageButton;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.hewuzhe.R;
+import com.hewuzhe.ui.activity.MemberActivity;
 import com.hewuzhe.utils.DataTypeUtils;
 import com.hewuzhe.utils.MediaPlayerUtils;
 import com.hewuzhe.utils.TimeUtil;
@@ -59,6 +63,8 @@ public class VideoControllerView extends FrameLayout implements View.OnTouchList
     public ImageButton btnFullScreen;
     private OnFullScreenBtnClick clickListener;
     private ImageButton viewPlayCenter;
+    public LinearLayout _LayNoVip;
+    private Button _BtnToMember;
 
     private void setProgress() {
         slider.setValue(DataTypeUtils.toInt(mVideoView.getCurrentPosition()));
@@ -82,7 +88,7 @@ public class VideoControllerView extends FrameLayout implements View.OnTouchList
         initView(context);
     }
 
-    private void initView(Context context) {
+    private void initView(final Context context) {
         this.context = context;
         Vitamio.isInitialized(context);
         View v = LayoutInflater.from(context).inflate(R.layout.view_video_controller, null);
@@ -102,6 +108,10 @@ public class VideoControllerView extends FrameLayout implements View.OnTouchList
         viewPlay = findView(R.id.button_play);
         viewPlayCenter = findView(R.id.button_play_center);
         btnFullScreen = findView(R.id.btn_full_screen);
+
+        _BtnToMember = findView(R.id.btn_to_member);
+        _LayNoVip = findView(R.id.lay_no_vip);
+
         slider = findView(R.id.slider);
         layMenus = findView(R.id.lay_menus);
         slider.setOnValueChangedListener(this);
@@ -118,6 +128,13 @@ public class VideoControllerView extends FrameLayout implements View.OnTouchList
                 {
                     clickListener.onClick(view);
                 }
+            }
+        });
+
+        _BtnToMember.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                context.startActivity(new Intent(context, MemberActivity.class));
             }
         });
 

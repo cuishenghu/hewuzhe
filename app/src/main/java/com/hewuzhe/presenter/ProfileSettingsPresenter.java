@@ -30,12 +30,19 @@ public class ProfileSettingsPresenter extends BasePresenterImp<ProfileSettingsVi
         Subscription subscription = NetEngine.getService()
                 .SaveFriend(new SessionUtil(view.getContext()).getUser().Id, view.getData())
                 .subscribeOn(Schedulers.io())
+                .doOnSubscribe(new Action0() {
+                    @Override
+                    public void call() {
+                        view.showDialog();
+                    }
+                })
+                .subscribeOn(AndroidSchedulers.mainThread())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new SB<Res>() {
                     @Override
                     public void next(Res res) {
                         if (res.code == C.OK) {
-                            view.followSuccess(false);
+                            view.followSuccess(true);
                         } else {
 
                         }
@@ -66,6 +73,13 @@ public class ProfileSettingsPresenter extends BasePresenterImp<ProfileSettingsVi
         Subscription subscription = NetEngine.getService()
                 .DeleteFriend(new SessionUtil(view.getContext()).getUser().Id, view.getData())
                 .subscribeOn(Schedulers.io())
+                .doOnSubscribe(new Action0() {
+                    @Override
+                    public void call() {
+                        view.showDialog();
+                    }
+                })
+                .subscribeOn(AndroidSchedulers.mainThread())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new SB<Res>() {
                     @Override

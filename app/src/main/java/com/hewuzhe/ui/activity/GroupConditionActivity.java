@@ -70,8 +70,10 @@ public class GroupConditionActivity extends SwipeRecycleViewActivity<GroupCondit
     private TextView action_2;
     private User user;
     private int teamId = -1;
+
     private String _NickName = "";
     private int myTeamId;
+    private String _PhotoPath = "";
 
 
     @Override
@@ -225,9 +227,7 @@ public class GroupConditionActivity extends SwipeRecycleViewActivity<GroupCondit
      */
     @Override
     public void onItemClick(View view, int pos, FriendCondition item) {
-
-        startActivity(ConditionDetialActivity.class, new Bun().putInt("id", item.Id).ok());
-
+        startActivity(ConditionDetialActivity.class, new Bun().putInt("id", item.Id).putString("_NickName", _NickName).putString("_PhotoPath", _PhotoPath).ok());
     }
 
     /**
@@ -377,6 +377,7 @@ public class GroupConditionActivity extends SwipeRecycleViewActivity<GroupCondit
         adapter._NickName = group.Name;
         _NickName = group.Name;
         adapter._PhotoPath = group.ImagePath;
+        _PhotoPath = group.ImagePath;
 
         Glide.with(getContext())
                 .load(C.BASE_URL + group.ImagePath)

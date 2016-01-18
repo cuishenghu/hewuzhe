@@ -154,15 +154,16 @@ public class ConditionDetialActivity extends SwipeRecycleViewActivity<ConditonDe
     @Override
     public void setData(final FriendCondition condition) {
         this._condition = condition;
-        _TvUsername.setText(condition.NicName);
+        _TvUsername.setText(getIntentData().getString("_NickName"));
         _TvContent.setText(condition.Content);
         _TvAddTime.setText(TimeUtil.timeAgo(condition.PublishTime));
         _TvPraise.setText(condition.LikeNum + "");
 
         Glide.with(getContext())
-                .load(C.BASE_URL + condition.PhotoPath)
+                .load(C.BASE_URL + getIntentData().getString("_PhotoPath"))
                 .fitCenter()
                 .crossFade()
+                .placeholder(R.mipmap.img_avatar)
                 .transform(new GlideCircleTransform(getContext()))
                 .into(_Img);
 

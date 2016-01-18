@@ -23,6 +23,7 @@ public class App extends Application {
 
     public LinkedList<OnLocListener> onLocListeners = new LinkedList<>();
 
+
     /**
      *
      */
@@ -76,6 +77,8 @@ public class App extends Application {
              * IMKit SDK调用第一步 初始化
              */
             RongIM.init(this);
+
+
         }
 
 

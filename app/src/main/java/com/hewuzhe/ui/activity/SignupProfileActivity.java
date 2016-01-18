@@ -19,17 +19,21 @@ import com.hewuzhe.R;
 import com.hewuzhe.model.Address;
 import com.hewuzhe.model.User;
 import com.hewuzhe.presenter.ProfilePresenter;
+import com.hewuzhe.ui.adapter.AddressAdapter;
 import com.hewuzhe.ui.base.ToolBarActivity;
 import com.hewuzhe.ui.cons.C;
 import com.hewuzhe.ui.widget.GlideCircleTransform;
 import com.hewuzhe.ui.widget.YsnowDialog;
 import com.hewuzhe.utils.FileUtil;
 import com.hewuzhe.utils.SessionUtil;
+import com.hewuzhe.utils.TimeUtil;
 import com.hewuzhe.view.ProfileView;
 
 import java.util.ArrayList;
 
 import butterknife.Bind;
+import framework.picker.DatePicker;
+import materialdialogs.MaterialDialog;
 
 public class SignupProfileActivity extends ToolBarActivity<ProfilePresenter> implements ProfileView {
 
@@ -75,6 +79,16 @@ public class SignupProfileActivity extends ToolBarActivity<ProfilePresenter> imp
     TextView tvSave;
     private User user;
     private YsnowDialog ysnowDialog;
+
+
+    private AddressAdapter cityDialogAdapter;
+    private AddressAdapter disctrictAdapter;
+    private int mAreaId = -1;
+    private int cityId;
+    private int countyId;
+    private int provinceId;
+    private String birthDay;
+
 
     @Override
     protected int provideContentViewId() {
@@ -158,10 +172,7 @@ public class SignupProfileActivity extends ToolBarActivity<ProfilePresenter> imp
         layAge.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                edtAge.setSelection(edtAge.getText().length());
-                edtAge.requestFocus();
-                showInputMethod(edtAge);
-
+                showDatePicker();
             }
         });
         layLong.setOnClickListener(new View.OnClickListener() {
@@ -179,7 +190,72 @@ public class SignupProfileActivity extends ToolBarActivity<ProfilePresenter> imp
                 presenter.saveDataSignup(view);
             }
         });
+
+        tvProvince.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                presenter.getProvinces();
+            }
+        });
+
+        tvCity.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                showListDialog(cityDialogAdapter, new MaterialDialog.ListCallback() {
+                    @Override
+                    public void onSelection(MaterialDialog dialog, View itemView, int which, CharSequence text) {
+                        Address ad = cityDialogAdapter.dataList.get(which);
+                        tvCity.setText(ad.Name);
+                        cityId = Integer.parseInt(ad.Code);
+                        presenter.getDistricts(cityId);
+                        dialog.dismiss();
+                    }
+                });
+
+            }
+        });
+        tvDistrict.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                showListDialog(disctrictAdapter, new MaterialDialog.ListCallback() {
+                    @Override
+                    public void onSelection(MaterialDialog dialog, View itemView, int which, CharSequence text) {
+                        Address ad = disctrictAdapter.dataList.get(which);
+                        tvDistrict.setText(ad.Name);
+                        countyId = Integer.parseInt(ad.Code);
+                        mAreaId = ad.Id;
+                        dialog.dismiss();
+                    }
+                });
+            }
+        });
     }
+
+
+    private void showDatePicker() {
+        DatePicker picker = new DatePicker(this);
+        picker.setRange(1980, 2015);//年份范围
+        String yearStr = user.Birthday.substring(0, 4);
+        String monthStr = user.Birthday.substring(5, 7);
+        String dayStr = user.Birthday.substring(8, 10);
+
+        int year = Integer.parseInt(yearStr);
+        int month = Integer.parseInt(monthStr);
+        int day = Integer.parseInt(dayStr);
+
+        picker.setSelectedItem(year, month, day);
+
+        picker.setOnDatePickListener(new DatePicker.OnYearMonthDayPickListener() {
+            @Override
+            public void onDatePicked(String year, String month, String day) {
+                birthDay = year + "-" + month + "-" + day;
+                user.Birthday = birthDay;
+                edtAge.setText(TimeUtil.timeHaved(birthDay) + "");
+            }
+        });
+        picker.show();
+    }
+
 
     /**
      * @param savedInstanceState 缓存数据
@@ -231,7 +307,6 @@ public class SignupProfileActivity extends ToolBarActivity<ProfilePresenter> imp
 
     @Override
     public User getData() {
-        user = new SessionUtil(getContext()).getUser();
 
         user.NicName = edtUsername.getText().toString().trim();
 //        if (StringUtil.isEmpty(user.NicName)) {
@@ -253,6 +328,8 @@ public class SignupProfileActivity extends ToolBarActivity<ProfilePresenter> imp
 //        String tStr = edtWeight.getText().toString().trim();
 //        user. = Integer.parseInt(heightStr.substring(0, weightStr.length() - 3));
         user.Description = edtDesc.getText().toString().trim();
+
+        user.HomeAreaId = mAreaId == -1 ? user.HomeAreaId : mAreaId;
 
         return user;
 
@@ -315,14 +392,25 @@ public class SignupProfileActivity extends ToolBarActivity<ProfilePresenter> imp
         inputMethodManager.hideSoftInputFromWindow(v.getWindowToken(), InputMethodManager.HIDE_NOT_ALWAYS);
     }
 
+
     /**
      * 设置province
      *
      * @param address
      */
     @Override
-    public void setProvinces(ArrayList<Address> address) {
+    public void setProvinces(final ArrayList<Address> address) {
+        showListDialog(new AddressAdapter(getContext(), address), new MaterialDialog.ListCallback() {
+            @Override
+            public void onSelection(MaterialDialog dialog, View itemView, int which, CharSequence text) {
+                Address ad = address.get(which);
+                tvProvince.setText(ad.Name);
+                provinceId = Integer.parseInt(ad.Code);
+                presenter.getCitys(provinceId);
+                dialog.dismiss();
 
+            }
+        });
     }
 
     /**
@@ -332,6 +420,10 @@ public class SignupProfileActivity extends ToolBarActivity<ProfilePresenter> imp
      */
     @Override
     public void setCitys(ArrayList<Address> address) {
+        if (address != null && address.size() > 0) {
+            cityDialogAdapter = new AddressAdapter(getContext(), address);
+            tvCity.setText(address.get(0).Name);
+        }
 
     }
 
@@ -342,8 +434,12 @@ public class SignupProfileActivity extends ToolBarActivity<ProfilePresenter> imp
      */
     @Override
     public void setDistricts(ArrayList<Address> address) {
-
+        if (address != null && address.size() > 0) {
+            disctrictAdapter = new AddressAdapter(getContext(), address);
+            tvDistrict.setText(address.get(0).Name);
+        }
     }
+
 
     /**
      * 加载更多

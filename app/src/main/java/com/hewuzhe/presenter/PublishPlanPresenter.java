@@ -67,56 +67,39 @@ public class PublishPlanPresenter extends ListPresenter<PublishPlanView> {
 
 
     public void deletePlan(int id) {
-//        Subscription subscription = NetEngine.getService()
-//                .DeletePlan(id)
-//                .subscribeOn(Schedulers.io())
-//                .doOnSubscribe(() -> {
-//                    if (!view.isShowingDialog()) {
-//                        view.showDialog();
-//                    }
-//                })
-//                .observeOn(AndroidSchedulers.mainThread())
-//                .subscribe(new SB<Res>() {
-//                    @Override
-//                    public void next(Res res) {
-//
-//
-//                    }
-//
-//                    @Override
-//                    public void onCompleted() {
-//
-//                        beforePublish();
-//                    }
-//
-//                    @Override
-//                    public void onError(Throwable e) {
-//                        beforePublish();
-//                    }
-//                });
-
-//        addSubscription(subscription);
-
-        if (!view.isShowingDialog()) {
-            view.showDialog();
-        }
-
-        NetEngine.getService()
+        Subscription subscription = NetEngine.getService()
                 .DeletePlan(id)
-                .enqueue(new Callback<Res>() {
+                .subscribeOn(Schedulers.io())
+                .doOnSubscribe(new Action0() {
                     @Override
-                    public void onResponse(Response<Res> response, Retrofit retrofit) {
-                        Res res = response.body();
-                        beforePublish();
+                    public void call() {
+                        if (!view.isShowingDialog()) {
+                            view.showDialog();
+                        }
+                    }
+                })
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new SB<Res>() {
+                    @Override
+                    public void next(Res res) {
+
 
                     }
 
                     @Override
-                    public void onFailure(Throwable t) {
-                        beforePublish();
+                    public void onCompleted() {
 
+                        beforePublish();
+                    }
+
+                    @Override
+                    public void onError(Throwable e) {
+                        beforePublish();
                     }
                 });
+
+        addSubscription(subscription);
+
     }
 
 
@@ -195,7 +178,6 @@ public class PublishPlanPresenter extends ListPresenter<PublishPlanView> {
                             }
                         });
                 addSubscription(subscription);
-
 
 
             }

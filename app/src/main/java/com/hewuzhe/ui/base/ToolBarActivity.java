@@ -3,7 +3,6 @@ package com.hewuzhe.ui.base;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.design.widget.AppBarLayout;
-import android.support.v7.app.ActionBar;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.view.animation.DecelerateInterpolator;
@@ -19,7 +18,6 @@ import com.hewuzhe.presenter.base.BasePresenterImp;
 public abstract class ToolBarActivity<P extends BasePresenterImp> extends BaseActivity<P> {
 
     protected Toolbar toolBar;
-    protected ActionBar actionBar;
     protected ImageView imgBack;
     protected TextView tvTitle;
     protected
@@ -41,7 +39,7 @@ public abstract class ToolBarActivity<P extends BasePresenterImp> extends BaseAc
 
     /**
      * @param savedInstanceState 缓存数据
-     *                           <p>
+     *                           <p/>
      *                           初始化一些事情
      */
     @Override
@@ -118,7 +116,10 @@ public abstract class ToolBarActivity<P extends BasePresenterImp> extends BaseAc
      * @param alpha 设置标题栏的透明度
      */
     protected void setAppBarAlpha(float alpha) {
-        appBar.setAlpha(alpha);
+        if (appBar != null) {
+            appBar.setAlpha(alpha);
+        }
+
     }
 
 
@@ -126,12 +127,15 @@ public abstract class ToolBarActivity<P extends BasePresenterImp> extends BaseAc
      * 隐藏和显示Toolbar
      */
     protected void hideOrShowToolbar() {
-        appBar.animate()
-                .translationY(mIsHidden ? 0 : -appBar.getHeight())
-                .setInterpolator(new DecelerateInterpolator(2))
-                .start();
+        if (appBar != null) {
+            appBar.animate()
+                    .translationY(mIsHidden ? 0 : -appBar.getHeight())
+                    .setInterpolator(new DecelerateInterpolator(2))
+                    .start();
 
-        mIsHidden = !mIsHidden;
+            mIsHidden = !mIsHidden;
+        }
+
     }
 
     /**

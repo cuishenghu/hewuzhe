@@ -1,10 +1,11 @@
 package com.hewuzhe.model;
 
+
 /**
  * Created by xianguangjin on 15/12/14.
  */
-public class User {
 
+public class User {
 
     public int Id = -1;
     public String UserName;
@@ -63,6 +64,8 @@ public class User {
     }
 
 
+    public User() {
+    }
 }
 
 

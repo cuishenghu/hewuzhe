@@ -5,15 +5,18 @@ import android.net.Uri;
 import android.os.Bundle;
 
 import com.hewuzhe.R;
-import com.hewuzhe.presenter.base.BasePresenterImp;
+import com.hewuzhe.presenter.ConversationPresenter;
 import com.hewuzhe.ui.base.ToolBarActivity;
+import com.hewuzhe.utils.Bun;
+import com.hewuzhe.view.ConversationView;
 
 import java.util.Locale;
 
 import io.rong.imkit.fragment.ConversationFragment;
 import io.rong.imlib.model.Conversation;
 
-public class ConversationActivity extends ToolBarActivity {
+public class ConversationActivity extends ToolBarActivity<ConversationPresenter> implements ConversationView {
+
 
     /**
      * 目标 Id
@@ -62,14 +65,15 @@ public class ConversationActivity extends ToolBarActivity {
     @Override
     public void initListeners() {
 
+
     }
 
     /**
      * 绑定Presenter
      */
     @Override
-    public BasePresenterImp createPresenter() {
-        return null;
+    public ConversationPresenter createPresenter() {
+        return new ConversationPresenter();
     }
 
     /**
@@ -102,4 +106,14 @@ public class ConversationActivity extends ToolBarActivity {
         fragment.setUri(uri);
     }
 
+
+    @Override
+    public void isWuYou(Boolean data, int userid) {
+        if (data) {
+            startActivity(FriendProfileActivity.class, new Bun().putInt("id", userid).ok());
+        } else {
+            startActivity(StrangerProfileSettingsActivity.class, new Bun().putInt("id", userid).ok());
+        }
+
+    }
 }

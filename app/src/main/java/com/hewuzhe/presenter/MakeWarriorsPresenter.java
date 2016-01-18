@@ -11,9 +11,6 @@ import com.hewuzhe.view.MakeWarriorsView;
 
 import java.util.ArrayList;
 
-import retrofit.Callback;
-import retrofit.Response;
-import retrofit.Retrofit;
 import rx.Subscription;
 import rx.android.schedulers.AndroidSchedulers;
 import rx.functions.Action0;
@@ -27,52 +24,32 @@ public class MakeWarriorsPresenter extends AreaPresenter<MakeWarriorsView> {
     public void getData(final int page, final int count) {
 
         Friend friend = view.getData();
-//        Subscription subscription = NetEngine.getService()
-//                .GetFriendBySearch((page - 1) * count, count, friend.areaId, friend.nicName, friend.age, friend.sexuality, new SessionUtil(view.getContext()).getUser().Id)
-//                .subscribeOn(Schedulers.io())
-//                .observeOn(AndroidSchedulers.mainThread())
-//                .subscribe(new SB<Res<ArrayList<Friend>>>() {
-//                    @Override
-//                    public void next(Res<ArrayList<Friend>> res) {
-//                        if (res.code == C.OK) {
-//                            view.bindData(res.data);
-//                            setDataStatus(page, count, res);
-//                        }
-//
-//                    }
-//
-//                    @Override
-//                    public void onCompleted() {
-//                        view.dismissDialog();
-//                    }
-//
-//                    @Override
-//                    public void onError(Throwable e) {
-//                        view.dismissDialog();
-//                    }
-//                });
-//        addSubscription(subscription);
-
-        NetEngine.getService()
+        Subscription subscription = NetEngine.getService()
                 .GetFriendBySearch((page - 1) * count, count, friend.areaId, friend.nicName, friend.age, friend.sexuality, new SessionUtil(view.getContext()).getUser().Id)
-                .enqueue(new Callback<Res<ArrayList<Friend>>>() {
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new SB<Res<ArrayList<Friend>>>() {
                     @Override
-                    public void onResponse(Response<Res<ArrayList<Friend>>> response, Retrofit retrofit) {
-                        Res<ArrayList<Friend>> res = response.body();
+                    public void next(Res<ArrayList<Friend>> res) {
                         if (res.code == C.OK) {
                             view.bindData(res.data);
                             setDataStatus(page, count, res);
                         }
-                        view.dismissDialog();
 
                     }
 
                     @Override
-                    public void onFailure(Throwable t) {
+                    public void onCompleted() {
                         view.dismissDialog();
+                    }
 
+                    @Override
+                    public void onError(Throwable e) {
+                        view.dismissDialog();
                     }
                 });
+        addSubscription(subscription);
+
     }
 
     /**
@@ -164,7 +141,7 @@ public class MakeWarriorsPresenter extends AreaPresenter<MakeWarriorsView> {
     }
 
 
-    public void isWuyou(int userid) {
+    public void isWuyou(final int userid) {
         Subscription subscription = NetEngine.getService()
                 .IsWuyou(new SessionUtil(view.getContext()).getUserId(), userid)
                 .subscribeOn(Schedulers.io())
@@ -173,7 +150,7 @@ public class MakeWarriorsPresenter extends AreaPresenter<MakeWarriorsView> {
                     @Override
                     public void next(Res<Boolean> res) {
                         if (res.code == C.OK) {
-                            view.isWuYou(res.data);
+                            view.isWuYou(res.data,userid);
 
                         }
                     }

@@ -15,4 +15,6 @@ public interface ArticleView extends SetView<Article>, CommentView, ConditionVie
 
 
     void collectAndOther(boolean b, int flag);
+
+    void isWuYou(Boolean data, int userid);
 }

@@ -18,6 +18,7 @@ import java.util.Collections;
 
 import rx.Subscription;
 import rx.android.schedulers.AndroidSchedulers;
+import rx.functions.Action0;
 import rx.schedulers.Schedulers;
 
 /**
@@ -31,6 +32,14 @@ public class FriendsPresenter extends BasePresenterImp<FriendsView> {
         Subscription subscription = NetEngine.getService()
                 .GetFriendForKeyValue(view.getData())
                 .subscribeOn(Schedulers.io())
+                .doOnSubscribe(new Action0() {
+                    @Override
+                    public void call() {
+                        view.showDialog();
+
+                    }
+                })
+                .subscribeOn(AndroidSchedulers.mainThread())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new SB<Res<ArrayList<WrapFriend>>>() {
                     @Override
@@ -44,18 +53,16 @@ public class FriendsPresenter extends BasePresenterImp<FriendsView> {
                             }
                             bindData();
                         }
-
                     }
 
                     @Override
                     public void onCompleted() {
-
-
+                        view.dismissDialog();
                     }
 
                     @Override
                     public void onError(Throwable e) {
-
+                        view.dismissDialog();
                     }
                 });
 

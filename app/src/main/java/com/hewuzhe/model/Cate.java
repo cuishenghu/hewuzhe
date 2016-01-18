@@ -17,4 +17,7 @@ public class Cate {
     public int Id;
     public String ImagePath;
     public String Name;
+
+
+
 }

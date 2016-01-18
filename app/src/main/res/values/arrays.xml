@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string-array name="age">
-        <item>不限</item>
+        <item>全部</item>
         <item>18岁以下</item>
         <item>18-22岁</item>
         <item>23-26岁</item>
@@ -9,7 +9,7 @@
         <item>35以上</item>
     </string-array>
     <string-array name="gender">
-        <item>不限</item>
+        <item>全部</item>
         <item>男</item>
         <item>女</item>
     </string-array>

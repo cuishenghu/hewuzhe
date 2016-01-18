@@ -85,7 +85,7 @@ public class GroupMembersActivity extends RecycleViewActivity<GroupMembersPresen
 
     @Override
     protected String provideTitle() {
-        return "结交武者";
+        return "战队成员";
     }
 
 
@@ -109,11 +109,22 @@ public class GroupMembersActivity extends RecycleViewActivity<GroupMembersPresen
      */
     @Override
     public void onItemClick(View view, int pos, Friend item) {
+
         startActivity(FriendProfileActivity.class, new Bun().putInt("id", item.Id).ok());
     }
 
     @Override
     public Integer getData() {
         return getIntentData().getInt("id");
+    }
+
+    @Override
+    public void isWuYou(Boolean data, int userid) {
+        if (data) {
+            startActivity(FriendProfileActivity.class, new Bun().putInt("id", userid).ok());
+        } else {
+            startActivity(StrangerProfileSettingsActivity.class, new Bun().putInt("id", userid).ok());
+        }
+
     }
 }

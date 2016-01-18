@@ -11,4 +11,5 @@ import com.hewuzhe.view.base.LoadMoreView;
 public interface GroupMembersView extends GetView<Integer>, ListView<Friend>, LoadMoreView {
 
 
+    void isWuYou(Boolean data, int userid);
 }

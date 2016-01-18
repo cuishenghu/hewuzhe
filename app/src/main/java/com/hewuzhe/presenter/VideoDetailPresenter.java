@@ -14,9 +14,6 @@ import com.hewuzhe.view.VideoDetailView;
 
 import java.util.ArrayList;
 
-import retrofit.Callback;
-import retrofit.Response;
-import retrofit.Retrofit;
 import rx.Subscription;
 import rx.android.schedulers.AndroidSchedulers;
 import rx.functions.Action0;
@@ -29,53 +26,37 @@ public class VideoDetailPresenter extends CommentPresenter<VideoDetailView> {
 
     public void getVideoDetail(int id) {
 
-//        Subscription subscription = NetEngine.getService()
-//                .GetOnlineStudy(id, new SessionUtil(view.getContext()).getUserId())
-//                .subscribeOn(Schedulers.io())
-//                .doOnSubscribe(() -> view.showDialog())
-//                .subscribeOn(AndroidSchedulers.mainThread())
-//                .observeOn(AndroidSchedulers.mainThread())
-//                .subscribe(new SB<Res<Video>>() {
-//                    @Override
-//                    public void next(Res<Video> res) {
-//                        if (res.code == C.OK) {
-//                            view.setData(res.data);
-//                        }
-//                    }
-//
-//                    @Override
-//                    public void onCompleted() {
-//                        view.dismissDialog();
-//                    }
-//
-//                    @Override
-//                    public void onError(Throwable e) {
-//                        view.dismissDialog();
-//                    }
-//                });
-//        addSubscription(subscription);
-
-
-        view.showDialog();
-        NetEngine.getService()
+        Subscription subscription = NetEngine.getService()
                 .GetOnlineStudy(id, new SessionUtil(view.getContext()).getUserId())
-                .enqueue(new Callback<Res<Video>>() {
+                .subscribeOn(Schedulers.io())
+                .doOnSubscribe(new Action0() {
                     @Override
-                    public void onResponse(Response<Res<Video>> response, Retrofit retrofit) {
-                        Res<Video> res = response.body();
+                    public void call() {
+                        view.showDialog();
+                    }
+                })
+                .subscribeOn(AndroidSchedulers.mainThread())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new SB<Res<Video>>() {
+                    @Override
+                    public void next(Res<Video> res) {
                         if (res.code == C.OK) {
                             view.setData(res.data);
                         }
-                        view.dismissDialog();
-
                     }
 
                     @Override
-                    public void onFailure(Throwable t) {
+                    public void onCompleted() {
                         view.dismissDialog();
+                    }
 
+                    @Override
+                    public void onError(Throwable e) {
+                        view.dismissDialog();
                     }
                 });
+        addSubscription(subscription);
+
     }
 
 
@@ -84,72 +65,35 @@ public class VideoDetailPresenter extends CommentPresenter<VideoDetailView> {
      */
     public void getOtherVideos(int id) {
 
-//        Subscription subscription = NetEngine.getService()
-//                .GetOtherVideo(new SessionUtil(view.getContext()).getUser().Id, 3, id)
-//                .subscribeOn(Schedulers.io())
-//                .observeOn(AndroidSchedulers.mainThread())
-//                .subscribe(new SB<Res<ArrayList<Video>>>() {
-//                    @Override
-//                    public void next(Res<ArrayList<Video>> res) {
-//                        view.setOtherVideos(res.data);
-//                    }
-//
-//                    @Override
-//                    public void onCompleted() {
-//
-//                    }
-//
-//                    @Override
-//                    public void onError(Throwable e) {
-//
-//                    }
-//                });
-
-//        addSubscription(subscription);
-
-        NetEngine.getService()
+        Subscription subscription = NetEngine.getService()
                 .GetOtherVideo(new SessionUtil(view.getContext()).getUser().Id, 3, id)
-                .enqueue(new Callback<Res<ArrayList<Video>>>() {
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new SB<Res<ArrayList<Video>>>() {
                     @Override
-                    public void onResponse(Response<Res<ArrayList<Video>>> response, Retrofit retrofit) {
-                        Res<ArrayList<Video>> res = response.body();
+                    public void next(Res<ArrayList<Video>> res) {
                         view.setOtherVideos(res.data);
+                    }
+
+                    @Override
+                    public void onCompleted() {
 
                     }
 
                     @Override
-                    public void onFailure(Throwable t) {
+                    public void onError(Throwable e) {
 
                     }
                 });
+
+        addSubscription(subscription);
+
     }
 
     public void getData(final int page, final int count) {
         int id = view.getData();
-//        Subscription subscription = NetEngine.getService()
-//                .SelectCommentByMessageId(id)
-//                .subscribeOn(Schedulers.io())
-//                .observeOn(AndroidSchedulers.mainThread())
-//                .subscribe(new SB<Res<ArrayList<Comment>>>() {
-//                    @Override
-//                    public void next(Res<ArrayList<Comment>> res) {
-//                        view.setCommentsData(res.data);
-//                        setDataStatus(page, count, res);
-//                    }
-//
-//                    @Override
-//                    public void onCompleted() {
-//
-//                    }
-//
-//                    @Override
-//                    public void onError(Throwable e) {
-//
-//                    }
-//                });
-//        addSubscription(subscription);
 
-        NetEngine.getService()
+        Subscription subscription = NetEngine.getService()
                 .SelectCommentByMessageId(id)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
@@ -173,6 +117,8 @@ public class VideoDetailPresenter extends CommentPresenter<VideoDetailView> {
 
                     }
                 });
+
+        addSubscription(subscription);
     }
 
 
@@ -211,10 +157,10 @@ public class VideoDetailPresenter extends CommentPresenter<VideoDetailView> {
     }
 
 
-    public void collectAndOther(int id, final int flag, final View v, final int position,String content) {
+    public void collectAndOther(int id, final int flag, final View v, final int position, String content) {
 
         Subscription subscription = NetEngine.getService()
-                .SelectCommentByMessageId(id, new SessionUtil(view.getContext()).getUser().Id, flag,content)
+                .SelectCommentByMessageId(id, new SessionUtil(view.getContext()).getUser().Id, flag, content)
                 .subscribeOn(Schedulers.io())
                 .doOnSubscribe(new Action0() {
                     @Override
@@ -252,61 +198,71 @@ public class VideoDetailPresenter extends CommentPresenter<VideoDetailView> {
     }
 
     public void publisComment(int id, String content, final View v) {
-//        Subscription subscription = NetEngine.getService()
-//                .MessageComment(id, new SessionUtil(view.getContext()).getUser().Id, content)
-//                .subscribeOn(Schedulers.io())
-//                .doOnSubscribe(() -> view.showDialog())
-//                .subscribeOn(AndroidSchedulers.mainThread())
-//                .observeOn(AndroidSchedulers.mainThread())
-//                .subscribe(new SB<Res>() {
-//                    @Override
-//                    public void next(Res res) {
-//                        if (res.code == C.OK) {
-//                            view.snb("评论成功", v);
-//                            view.commentSuccess();
-//                        } else {
-//                            view.snb("评论失败", v);
-//                        }
-//                    }
-//
-//                    @Override
-//                    public void onCompleted() {
-//                        view.dismissDialog();
-//                    }
-//
-//                    @Override
-//                    public void onError(Throwable e) {
-//                        view.dismissDialog();
-//                        view.snb("评论失败", v);
-//                    }
-//                });
-
-//        addSubscription(subscription);
-
-
-        view.showDialog();
-        NetEngine.getService()
+        Subscription subscription = NetEngine.getService()
                 .MessageComment(id, new SessionUtil(view.getContext()).getUser().Id, content)
-                .enqueue(new Callback<Res>() {
+                .subscribeOn(Schedulers.io())
+                .doOnSubscribe(new Action0() {
                     @Override
-                    public void onResponse(Response<Res> response, Retrofit retrofit) {
-                        Res res = response.body();
+                    public void call() {
+
+                        view.showDialog();
+                    }
+                })
+                .subscribeOn(AndroidSchedulers.mainThread())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new SB<Res>() {
+                    @Override
+                    public void next(Res res) {
                         if (res.code == C.OK) {
                             view.snb("评论成功", v);
                             view.commentSuccess();
                         } else {
                             view.snb("评论失败", v);
                         }
-                        view.dismissDialog();
-
                     }
 
                     @Override
-                    public void onFailure(Throwable t) {
+                    public void onCompleted() {
+                        view.dismissDialog();
+                    }
+
+                    @Override
+                    public void onError(Throwable e) {
                         view.dismissDialog();
                         view.snb("评论失败", v);
                     }
                 });
+
+        addSubscription(subscription);
+
     }
 
+    public void isWuyou(final int userid) {
+        Subscription subscription = NetEngine.getService()
+                .IsWuyou(new SessionUtil(view.getContext()).getUserId(), userid)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new SB<Res<Boolean>>() {
+                    @Override
+                    public void next(Res<Boolean> res) {
+                        if (res.code == C.OK) {
+                            view.isWuYou(res.data,userid);
+
+                        }
+                    }
+
+                    @Override
+                    public void onCompleted() {
+
+                    }
+
+                    @Override
+                    public void onError(Throwable e) {
+
+                    }
+                });
+
+        addSubscription(subscription);
+
+    }
 }

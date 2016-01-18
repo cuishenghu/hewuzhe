@@ -1,7 +1,6 @@
 package com.hewuzhe.ui.activity;
 
 import android.os.Bundle;
-import android.support.annotation.NonNull;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
@@ -13,13 +12,9 @@ import com.hewuzhe.ui.adapter.GridItemDecoration;
 import com.hewuzhe.ui.adapter.Videos2Adapter;
 import com.hewuzhe.ui.base.SwipeRecycleViewActivity;
 import com.hewuzhe.utils.Bun;
-import com.hewuzhe.utils.SessionUtil;
 import com.hewuzhe.view.Videos2View;
 
 import java.util.ArrayList;
-
-import materialdialogs.DialogAction;
-import materialdialogs.MaterialDialog;
 
 public class Videos_2Activity extends SwipeRecycleViewActivity<Videos2Presenter, Videos2Adapter, Video> implements Videos2View {
 
@@ -117,21 +112,10 @@ public class Videos_2Activity extends SwipeRecycleViewActivity<Videos2Presenter,
      */
     @Override
     public void onItemClick(View view, int pos, Video item) {
-
         if (item.IsFree) {
             startActivity(VideoDetail2Activity.class, new Bun().putInt("Id", item.Id).ok());
         } else {
-            if (new SessionUtil(getContext()).getUser().isVip()) {
-                startActivity(VideoDetail2Activity.class, new Bun().putInt("Id", item.Id).ok());
-            } else {
-
-                showDefautInfoDialog("温馨提示", "只有会员才可以观看", new MaterialDialog.SingleButtonCallback() {
-                    @Override
-                    public void onClick(@NonNull MaterialDialog dialog, @NonNull DialogAction which) {
-                        dialog.dismiss();
-                    }
-                });
-            }
+            startActivity(VideoDetailActivity.class, new Bun().putInt("Id", item.Id).ok());
         }
 
     }

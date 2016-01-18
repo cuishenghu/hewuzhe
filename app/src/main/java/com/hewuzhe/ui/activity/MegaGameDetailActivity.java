@@ -61,7 +61,6 @@ public class MegaGameDetailActivity extends ToolBarActivity<MegaGameDetailPresen
     private TextView action_2;
     private MegaGame _MegaGame;
 
-
     /**
      * @return 提供标题
      */
@@ -133,7 +132,6 @@ public class MegaGameDetailActivity extends ToolBarActivity<MegaGameDetailPresen
                         showPop();
                     }
                 });
-
             } else {
 
                 imgAction.setVisibility(View.GONE);
@@ -146,7 +144,7 @@ public class MegaGameDetailActivity extends ToolBarActivity<MegaGameDetailPresen
                         @Override
                         public void onClick(View view) {
                             //报名
-                            startActivity(MegaGameApplyActivity.class, new Bun().putInt("id", id).putBoolean("isJoin", _MegaGame.IsJoin).ok());
+                            startActivityForResult(MegaGameApplyActivity.class, new Bun().putInt("id", id).putBoolean("isJoin", _MegaGame.IsJoin).ok(), C.REQUEST_SELECT_CATE);
                         }
                     });
 
@@ -208,6 +206,7 @@ public class MegaGameDetailActivity extends ToolBarActivity<MegaGameDetailPresen
                     showPop();
                 }
             });
+
 
 //            } else {
 //
@@ -280,13 +279,13 @@ public class MegaGameDetailActivity extends ToolBarActivity<MegaGameDetailPresen
         _TvApplyEndTwo.setText(megaGame.EnrollTimeEnd);
         _TvTimeEnd.setText(TimeUtil.timeFormatTwo(megaGame.MatchTimeEnd));
         _TvTimeStart.setText(TimeUtil.timeFormatTwo(megaGame.MatchTimeStart));
+
         Glide.with(getContext())
                 .load(C.BASE_URL + megaGame.MatchImage)
                 .centerCrop()
                 .crossFade()
                 .into(_Img);
     }
-
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
@@ -295,7 +294,6 @@ public class MegaGameDetailActivity extends ToolBarActivity<MegaGameDetailPresen
             refresh();
         }
     }
-
 
     private void showPop() {
         View view = LayoutInflater.from(getContext()).inflate(R.layout.popview, null);

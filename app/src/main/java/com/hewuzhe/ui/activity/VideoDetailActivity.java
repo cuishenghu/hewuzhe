@@ -542,7 +542,7 @@ public class VideoDetailActivity extends RecycleViewActivity<VideoDetailPresente
             videoController.setLayoutParams(params);
 
         } else if (newConfig.orientation == Configuration.ORIENTATION_PORTRAIT) {
-            mLayout = VideoView.VIDEO_LAYOUT_FIT_PARENT;//原始尺寸
+            mLayout = VideoView.VIDEO_LAYOUT_STRETCH;//原始尺寸
 
             ViewGroup.LayoutParams params = videoController.getLayoutParams();
             params.height = StringUtil.dip2px(getContext(), 200);

@@ -1,23 +1,23 @@
 [
     {
-        "merged": "/Users/xianguangjin/Desktop/Hewuzhe3/IMKit/build/intermediates/res/merged/androidTest/debug/layout/rc_ac_preview.xml",
-        "source": "/Users/xianguangjin/Desktop/Hewuzhe3/IMKit/build/intermediates/bundles/debug/res/layout/rc_ac_preview.xml"
-    },
-    {
         "merged": "/Users/xianguangjin/Desktop/Hewuzhe3/IMKit/build/intermediates/res/merged/androidTest/debug/layout/rc_item_base_conversation.xml",
         "source": "/Users/xianguangjin/Desktop/Hewuzhe3/IMKit/build/intermediates/bundles/debug/res/layout/rc_item_base_conversation.xml"
     },
     {
-        "merged": "/Users/xianguangjin/Desktop/Hewuzhe3/IMKit/build/intermediates/res/merged/androidTest/debug/layout/rc_wi_emoji_txt.xml",
-        "source": "/Users/xianguangjin/Desktop/Hewuzhe3/IMKit/build/intermediates/bundles/debug/res/layout/rc_wi_emoji_txt.xml"
+        "merged": "/Users/xianguangjin/Desktop/Hewuzhe3/IMKit/build/intermediates/res/merged/androidTest/debug/layout/rc_ac_preview.xml",
+        "source": "/Users/xianguangjin/Desktop/Hewuzhe3/IMKit/build/intermediates/bundles/debug/res/layout/rc_ac_preview.xml"
+    },
+    {
+        "merged": "/Users/xianguangjin/Desktop/Hewuzhe3/IMKit/build/intermediates/res/merged/androidTest/debug/layout/rc_fr_test.xml",
+        "source": "/Users/xianguangjin/Desktop/Hewuzhe3/IMKit/build/intermediates/bundles/debug/res/layout/rc_fr_test.xml"
     },
     {
         "merged": "/Users/xianguangjin/Desktop/Hewuzhe3/IMKit/build/intermediates/res/merged/androidTest/debug/layout/rc_item_public_service_input_menu_item.xml",
         "source": "/Users/xianguangjin/Desktop/Hewuzhe3/IMKit/build/intermediates/bundles/debug/res/layout/rc_item_public_service_input_menu_item.xml"
     },
     {
-        "merged": "/Users/xianguangjin/Desktop/Hewuzhe3/IMKit/build/intermediates/res/merged/androidTest/debug/layout/rc_fr_test.xml",
-        "source": "/Users/xianguangjin/Desktop/Hewuzhe3/IMKit/build/intermediates/bundles/debug/res/layout/rc_fr_test.xml"
+        "merged": "/Users/xianguangjin/Desktop/Hewuzhe3/IMKit/build/intermediates/res/merged/androidTest/debug/layout/rc_wi_emoji_txt.xml",
+        "source": "/Users/xianguangjin/Desktop/Hewuzhe3/IMKit/build/intermediates/bundles/debug/res/layout/rc_wi_emoji_txt.xml"
     },
     {
         "merged": "/Users/xianguangjin/Desktop/Hewuzhe3/IMKit/build/intermediates/res/merged/androidTest/debug/layout/rc_calledside_layout.xml",

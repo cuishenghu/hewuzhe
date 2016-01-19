@@ -24,12 +24,12 @@
         "source": "/Users/xianguangjin/Desktop/Hewuzhe3/IMKit/src/main/res/drawable/rc_btn_voice.xml"
     },
     {
-        "merged": "/Users/xianguangjin/Desktop/Hewuzhe3/IMKit/build/intermediates/res/merged/release/drawable/rc_switch_btn.xml",
-        "source": "/Users/xianguangjin/Desktop/Hewuzhe3/IMKit/src/main/res/drawable/rc_switch_btn.xml"
-    },
-    {
         "merged": "/Users/xianguangjin/Desktop/Hewuzhe3/IMKit/build/intermediates/res/merged/release/drawable/rc_btn_send.xml",
         "source": "/Users/xianguangjin/Desktop/Hewuzhe3/IMKit/src/main/res/drawable/rc_btn_send.xml"
+    },
+    {
+        "merged": "/Users/xianguangjin/Desktop/Hewuzhe3/IMKit/build/intermediates/res/merged/release/drawable/rc_switch_btn.xml",
+        "source": "/Users/xianguangjin/Desktop/Hewuzhe3/IMKit/src/main/res/drawable/rc_switch_btn.xml"
     },
     {
         "merged": "/Users/xianguangjin/Desktop/Hewuzhe3/IMKit/build/intermediates/res/merged/release/drawable/rc_btn_input.xml",

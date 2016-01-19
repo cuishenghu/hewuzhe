@@ -113,6 +113,27 @@ public abstract class BaseFragment<P extends BasePresenterImp> extends Fragment 
 
     }
 
+
+    @Override
+    public void showDialog(String title, String content) {
+        if (dialog == null) {
+            dialog = new MaterialDialog.Builder(getActivity())
+                    .title(title)
+                    .titleGravity(GravityEnum.CENTER)
+                    .titleColor(Color.WHITE)
+                    .contentColor(Color.WHITE)
+                    .positiveColor(C.COLOR_YELLOW)
+                    .negativeColor(C.COLOR_YELLOW)
+                    .content(content)
+                    .backgroundColor(C.COLOR_BG)
+                    .progress(true, 0)
+                    .build();
+        }
+        dialog.show();
+
+    }
+
+
     @Override
     public void showListDialog(BeeBaseAdapter adapter, MaterialDialog.ListCallback callback, String title) {
 

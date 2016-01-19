@@ -10,6 +10,7 @@ import com.hewuzhe.R;
 import com.hewuzhe.model.Video;
 import com.hewuzhe.presenter.VideoCollectionPresenter;
 import com.hewuzhe.ui.activity.VideoDetail2Activity;
+import com.hewuzhe.ui.activity.VideoDetailActivity;
 import com.hewuzhe.ui.adapter.GridItemDecoration;
 import com.hewuzhe.ui.adapter.Videos2Adapter;
 import com.hewuzhe.ui.base.SwipeRecycleViewFragment;
@@ -92,7 +93,12 @@ public class VideoCollectionsFragment extends SwipeRecycleViewFragment<VideoColl
      */
     @Override
     public void onItemClick(View view, int pos, Video item) {
-        startActivity(VideoDetail2Activity.class, new Bun().putInt("Id", item.Id).ok());
+
+        if (item.UserId != 0) {
+            startActivity(VideoDetail2Activity.class, new Bun().putInt("Id", item.Id).ok());
+        } else {
+            startActivity(VideoDetailActivity.class, new Bun().putInt("Id", item.Id).ok());
+        }
     }
 
     @Override

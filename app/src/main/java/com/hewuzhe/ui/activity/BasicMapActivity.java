@@ -6,24 +6,17 @@ import com.hewuzhe.R;
 import com.hewuzhe.presenter.base.BasePresenterImp;
 import com.hewuzhe.ui.base.ToolBarActivity;
 
-//import com.amap.api.maps2d.AMap;
-//import com.amap.api.maps2d.CameraUpdate;
-//import com.amap.api.maps2d.CameraUpdateFactory;
-//import com.amap.api.maps2d.MapView;
-//import com.amap.api.maps2d.model.LatLng;
-//import com.amap.api.maps2d.model.Marker;
-//import com.amap.api.maps2d.model.MarkerOptions;
 
 public class BasicMapActivity extends ToolBarActivity {
 
-//    @Bind(R.id.map)
-//    MapView mapView;
-//    private AMap aMap;
-//    private LatLng position;
-//    private String lat;
-//    private String lng;
-//    private String address;
-//    private MarkerOptions markerOption;
+
+//    @Bind(R.id.bmapView)
+//    MapView mMapView;
+
+    private String lat = "";
+    private String lng = "";
+    private String address = "";
+//    private BaiduMap mBaiduMap;
 
     /**
      * @return 提供标题
@@ -34,39 +27,31 @@ public class BasicMapActivity extends ToolBarActivity {
     }
 
     @Override
+    protected void onStart() {
+        super.onStart();
+//        SDKInitializer.initialize(getApplicationContext());
+    }
+
+    @Override
     protected void initThings(Bundle savedInstanceState) {
         super.initThings(savedInstanceState);
-//        mapView.onCreate(savedInstanceState);// 必须要写
-//        aMap = mapView.getMap();
-//        lat = getIntentData().getString("lat");
-//        lng = getIntentData().getString("lng");
-//        address = getIntentData().getString("address");
-//
-//        position = new LatLng(Double.parseDouble(lat), Double.parseDouble(lng));
-//
-//
-//        MarkerOptions markerOptions = new MarkerOptions().anchor(0.5f, 0.5f)
-//                .position(position).title(address)
-//                .draggable(true);
-//        Marker mark = aMap.addMarker(markerOptions);
-//        mark.showInfoWindow();
+        lat = getIntentData().getString("lat");
+        lng = getIntentData().getString("lng");
+        address = getIntentData().getString("address");
 
+//        mBaiduMap = mMapView.getMap();
 
-//        markerOption = new MarkerOptions();
-//        markerOption.position(C.XIAN);
-//        markerOption.title("西安市").snippet("西安市：34.341568, 108.940174");
-//        markerOption.draggable(true);
-//        markerOption.icon(BitmapDescriptorFactory
-//                .fromResource(R.drawable.arrow));
-//        marker2 = aMap.addMarker(markerOption);
-//        marker2.showInfoWindow();
-//         marker旋转90度
-//        marker2.setRotateAngle(90)
+//        MyLocationData locData = new MyLocationData.Builder()
+//                .accuracy(10)
+//                         此处设置开发者获取到的方向信息，顺时针0-360
+//                .direction(100).latitude(Double.parseDouble(lat))
+//                .longitude(Double.parseDouble(lng)).build();
+//        mBaiduMap.setMyLocationData(locData);
 //
-
-//
-//        CameraUpdate update = CameraUpdateFactory.newLatLngZoom(position, 15);
-//        aMap.moveCamera(update);
+//        LatLng ll = new LatLng(Double.parseDouble(lng),
+//                Double.parseDouble(lat));
+//        MapStatusUpdate u = MapStatusUpdateFactory.newLatLng(ll);
+//        mBaiduMap.animateMapStatus(u);
     }
 
     /**
@@ -100,7 +85,7 @@ public class BasicMapActivity extends ToolBarActivity {
     @Override
     protected void onResume() {
         super.onResume();
-//        mapView.onResume();
+//        mMapView.onResume();
     }
 
     /**
@@ -109,7 +94,7 @@ public class BasicMapActivity extends ToolBarActivity {
     @Override
     protected void onPause() {
         super.onPause();
-//        mapView.onPause();
+//        mMapView.onPause();
     }
 
     /**
@@ -118,7 +103,6 @@ public class BasicMapActivity extends ToolBarActivity {
     @Override
     protected void onSaveInstanceState(Bundle outState) {
         super.onSaveInstanceState(outState);
-//        mapView.onSaveInstanceState(outState);
     }
 
     /**
@@ -126,8 +110,12 @@ public class BasicMapActivity extends ToolBarActivity {
      */
     @Override
     protected void onDestroy() {
-//        mapView.onDestroy();
         super.onDestroy();
+//        mMapView.onDestroy();
+
+//        mBaiduMap.setMyLocationEnabled(false);
+//        mMapView.onDestroy();
+//        mMapView = null;
     }
 
 

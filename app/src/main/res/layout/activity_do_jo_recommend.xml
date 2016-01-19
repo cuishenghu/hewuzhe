@@ -81,12 +81,32 @@
         android:layout_height="match_parent"
         app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
-        <android.support.v7.widget.RecyclerView
-            android:id="@+id/recycler_view"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent">
+        <RelativeLayout android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:orientation="vertical">
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/recycler_view"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:visibility="visible">
 
-        </android.support.v7.widget.RecyclerView>
+            </android.support.v7.widget.RecyclerView>
+
+            <LinearLayout android:id="@+id/lay_no_loc"
+                          android:layout_width="match_parent"
+                          android:layout_height="match_parent"
+                          android:background="@color/colorBg"
+                          android:gravity="center"
+                          android:visibility="gone">
+                <TextView style="@style/text_30_white"
+                          android:layout_width="wrap_content"
+                          android:layout_height="wrap_content"
+                          android:text="没有武馆(若定位失败请手动选择城市)"/>
+
+
+            </LinearLayout>
+
+        </RelativeLayout>
 
 
     </com.hewuzhe.ui.widget.MultiSwipeRefreshLayout>

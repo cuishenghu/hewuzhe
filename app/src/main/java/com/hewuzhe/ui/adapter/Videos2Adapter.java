@@ -61,7 +61,7 @@ public class Videos2Adapter extends BaseAdapter<Videos2Adapter.ViewHolder, Video
                 .placeholder(R.mipmap.img_default)
                 .into(holder.imgBg);
 
-        holder.tvAddTime.setText(TimeUtil.timeAgo(video.PublishTime) + "发布");
+        holder.tvAddTime.setText(TimeUtil.timeAgo(video.OperateTime));
         holder.tvCollectCount.setText(video.FavoriteNum + "");
         holder.tvPraiseCount.setText(video.LikeNum + "");
         holder.tvRepeatCount.setText(video.RepeatNum + "");

@@ -122,6 +122,7 @@ public class VideoControllerView extends FrameLayout implements View.OnTouchList
             }
         });
         setVideoPlayButton();
+
         btnFullScreen.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -159,9 +160,11 @@ public class VideoControllerView extends FrameLayout implements View.OnTouchList
 
     }
 
+
     private boolean isVideoPause() {
         return !mVideoView.isPlaying();
     }
+
 
     private void updateTimeTask() {
         slider.setValue(DataTypeUtils.toInt(mVideoView.getCurrentPosition()));
@@ -235,7 +238,7 @@ public class VideoControllerView extends FrameLayout implements View.OnTouchList
         slider.setMax(DataTypeUtils.toInt(mediaPlayer.getDuration()));
         tvDuration.setText("/" + TimeUtil.timeFormat(mediaPlayer.getDuration()));
         mediaPlayer.setPlaybackSpeed(1.0f);
-        updateTimeTask();
+//      updateTimeTask();
         handler.sendEmptyMessage(MSG_PROGRESS_CHANGE);
     }
 
@@ -251,13 +254,14 @@ public class VideoControllerView extends FrameLayout implements View.OnTouchList
         //视频暂停中不显示缓冲进度
 //        if (isVideoPause())
 //            return;
-        if (percent >= 30) {
+        if (percent >= 30 || percent <= 0) {
             mProgressWheel.setVisibility(View.INVISIBLE);
         } else {
             mProgressWheel.setVisibility(View.VISIBLE);
             mProgressWheel.setText(percent + "%");
         }
     }
+
 
     @TargetApi(21)
     @Override

@@ -42,6 +42,8 @@ public interface BaseView {
 
     void dismissDialog();
 
+    void showDialog(String title, String content);
+
     /**
      * 用自定义的adapter显示listDialog
      *

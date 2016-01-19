@@ -5,6 +5,7 @@ import com.hewuzhe.model.Address;
 import com.hewuzhe.model.Article;
 import com.hewuzhe.model.ArticleCollection;
 import com.hewuzhe.model.Cate;
+import com.hewuzhe.model.Charge;
 import com.hewuzhe.model.Comment;
 import com.hewuzhe.model.ConditionComment;
 import com.hewuzhe.model.Dojo;
@@ -146,7 +147,7 @@ public interface ApiService {
     Call<Res> SaveDongtai(@Query("pathlist") String pathlist, @Query("userid") int userid, @Query("content") String content, @Query("videoImage") String videoImage, @Query("videopath") String videopath, @Query("videoDuration") int videoDuration);
 
     @GET("Hewuzhe.asmx/SavePlan")
-    Call<Res> SavePlan(@Query("piclist") String piclist, @Query("userid") int userid, @Query("content") String content, @Query("title") String title, @Query("cateid") int cateid, @Query("starttime") String starttime, @Query("endtime") String endtime);
+    Observable<Res> SavePlan(@Query("piclist") String piclist, @Query("userid") int userid, @Query("content") String content, @Query("title") String title, @Query("cateid") int cateid, @Query("starttime") String starttime, @Query("endtime") String endtime);
 
 
     @GET("LoginAndRegister.asmx/UpdateUser")
@@ -177,7 +178,7 @@ public interface ApiService {
     Observable<Res<ArrayList<Dojo>>> SelectWuGuanPageByCityId(@Query("startRowIndex") int startRowIndex, @Query("maximumRows") int maximumRows, @Query("cityid") int cityid);
 
     @GET("Hewuzhe.asmx/SelectWuGuanPageByCityName")
-    Call<Res<ArrayList<Dojo>>> SelectWuGuanPageByCityName(@Query("startRowIndex") int startRowIndex, @Query("maximumRows") int maximumRows, @Query("areaname") String areaname, @Query("lat") String lat, @Query("lng") String lng);
+    Observable<Res<ArrayList<Dojo>>> SelectWuGuanPageByCityName(@Query("startRowIndex") int startRowIndex, @Query("maximumRows") int maximumRows, @Query("areaname") String areaname, @Query("lat") String lat, @Query("lng") String lng);
 
     @GET("LoginAndRegister.asmx/GetProvince")
     Call<Res<ArrayList<Address>>> getProvince();
@@ -278,7 +279,7 @@ public interface ApiService {
     Call<Res<ArrayList<TeamAnnounce>>> SelectTeamAnnouncement(@Query("startRowIndex") int startRowIndex, @Query("maximumRows") int maximumRows, @Query("teamid") int teamid);
 
     @GET("Hewuzhe.asmx/GetPlan")
-    Call<Res<Plan>> getPlanDetail(@Query("id") int id);
+    Observable<Res<Plan>> getPlanDetail(@Query("id") int id);
 
     @GET("Helianmeng.asmx/SelectTeam")
     Observable<Res<Group>> SelectTeam(@Query("teamid") int id);
@@ -327,7 +328,7 @@ public interface ApiService {
     Call<Res<FlyDreamHeader>> GetDreamHeader();
 
     @GET("LoginAndRegister.asmx/GetCharge")
-    Observable<Res<String>> GetCharge(@Query("userid") int userid, @Query("channel") String channel, @Query("amount") int amount, @Query("description") String description, @Query("flg") int flg);
+    Observable<Charge> GetCharge(@Query("userid") int userid, @Query("channel") String channel, @Query("amount") int amount, @Query("description") String description, @Query("flg") int flg);
 
     @GET("Helianmeng.asmx/CancleJoinMatch")
     Observable<Res> CancleJoinMatch(@Query("userid") int userid, @Query("matchId") int matchId);

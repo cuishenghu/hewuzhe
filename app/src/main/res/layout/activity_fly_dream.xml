@@ -90,7 +90,7 @@
                           android:background="@color/colorBg"
                           android:id="@+id/edt_to_do"
                           android:hint="只要努力，总会实现，请输入"
-                          android:minLines="5"
+                          android:minLines="7"
                           android:padding="10px"
                           android:textColorHint="@color/colorLine"/>
 

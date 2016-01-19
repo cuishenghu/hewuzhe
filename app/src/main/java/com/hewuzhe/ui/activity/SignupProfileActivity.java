@@ -422,7 +422,10 @@ public class SignupProfileActivity extends ToolBarActivity<ProfilePresenter> imp
     public void setCitys(ArrayList<Address> address) {
         if (address != null && address.size() > 0) {
             cityDialogAdapter = new AddressAdapter(getContext(), address);
-            tvCity.setText(address.get(0).Name);
+            Address ad = address.get(0);
+            tvCity.setText(ad.Name);
+            cityId = Integer.parseInt(ad.Code);
+            presenter.getDistricts(cityId);
         }
 
     }

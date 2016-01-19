@@ -26,6 +26,7 @@ import com.hewuzhe.ui.widget.YsnowDialog;
 import com.hewuzhe.utils.Bun;
 import com.hewuzhe.utils.FileUtil;
 import com.hewuzhe.utils.SessionUtil;
+import com.hewuzhe.utils.StringUtil;
 import com.hewuzhe.utils.TimeUtil;
 import com.hewuzhe.view.ProfileView;
 
@@ -204,7 +205,6 @@ public class ProfileActivity extends ToolBarActivity<ProfilePresenter> implement
             }
         });
 
-
         tvProvince.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -316,7 +316,7 @@ public class ProfileActivity extends ToolBarActivity<ProfilePresenter> implement
     public void setData() {
         user = new SessionUtil(getContext()).getUser();
         tvUsername.setText("昵称：" + user.NicName);
-        tvId.setText("ID：" + user.Id);
+        tvId.setText("ID：" + getUserId());
         tvIntegral.setText("积分：" + user.Credit + "");
         Glide.with(getContext())
                 .load(C.BASE_URL + user.PhotoPath)
@@ -341,6 +341,11 @@ public class ProfileActivity extends ToolBarActivity<ProfilePresenter> implement
         tvDistrict.setText(user.HomeAreaCountyName);
 
         checkGender(user.Sexuality);
+    }
+
+
+    private String getUserId() {
+        return StringUtil.isEmpty(user.Phone) ? "000000" + user.Id : user.Phone;
     }
 
     @Override
@@ -457,7 +462,10 @@ public class ProfileActivity extends ToolBarActivity<ProfilePresenter> implement
     public void setCitys(ArrayList<Address> address) {
         if (address != null && address.size() > 0) {
             cityDialogAdapter = new AddressAdapter(getContext(), address);
-            tvCity.setText(address.get(0).Name);
+            Address ad = address.get(0);
+            tvCity.setText(ad.Name);
+            cityId = Integer.parseInt(ad.Code);
+            presenter.getDistricts(cityId);
         }
 
     }

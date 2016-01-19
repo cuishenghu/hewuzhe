@@ -60,7 +60,8 @@ public abstract class ToolBarActivity<P extends BasePresenterImp> extends BaseAc
             imgBack.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    finishActivity();
+
+                    onBackPressed();
                 }
             });
         } else {

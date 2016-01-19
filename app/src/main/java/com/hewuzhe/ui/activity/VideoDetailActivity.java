@@ -296,9 +296,8 @@ public class VideoDetailActivity extends RecycleViewActivity<VideoDetailPresente
         final int position = 0;
 
 
-        layCollect.setVisibility(View.GONE);
-        layPraise.setVisibility(View.GONE);
-
+        layShare.setVisibility(View.GONE);
+        layTranspond.setVisibility(View.GONE);
 
         Glide.with(getContext())
                 .load(C.BASE_URL + video.PhotoPath)
@@ -393,17 +392,21 @@ public class VideoDetailActivity extends RecycleViewActivity<VideoDetailPresente
 //
 //        }
 
-        videoController.setVideoPath(C.BASE_URL + video.VideoPath);
 
-        if (new SessionUtil(getContext()).getUser().isVip()) {
+        if (video.IsFree) {
+            videoController.setVideoPath(C.BASE_URL + video.VideoPath);
             videoController._LayNoVip.setVisibility(View.GONE);
-            videoController.start();
         } else {
+            if (new SessionUtil(getContext()).getUser().isVip()) {
+                videoController.setVideoPath(C.BASE_URL + video.VideoPath);
 
-            videoController._LayNoVip.setVisibility(View.VISIBLE);
+                videoController._LayNoVip.setVisibility(View.GONE);
+//                videoController.start();
+            } else {
+                videoController._LayNoVip.setVisibility(View.VISIBLE);
+                videoController.pause();
+            }
         }
-
-
     }
 
     /**

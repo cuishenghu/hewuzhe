@@ -16,6 +16,7 @@ import com.hewuzhe.ui.cons.C;
 import com.hewuzhe.utils.SessionUtil;
 import com.hewuzhe.view.BuyView;
 import com.pingplusplus.android.PaymentActivity;
+import com.socks.library.KLog;
 
 import butterknife.Bind;
 
@@ -44,7 +45,7 @@ public class MemberBuyActivity extends ToolBarActivity<BuyPresenter> implements 
      */
     private String _payWay = C.CHANNEL_ALIPAY;
     private int _anount = 1200 * 10 * 10;
-    private String _desc="";
+    private String _desc = "1";
 
     /**
      * @return 提供标题
@@ -191,21 +192,24 @@ public class MemberBuyActivity extends ToolBarActivity<BuyPresenter> implements 
             /* 处理返回值
              * "success" - payment succeed
              * "fail"    - payment failed
-             * "cancel"  - user canceld
+            * "cancel"  - user canceld
              * "invalid" - payment plugin not installed
              *
              * 如果是银联渠道返回 invalid，调用 UPPayAssistEx.installUPPayPlugin(this); 安装银联安全支付控件。
              */
-                snb(result, _BtnEnsure);
+//                snb(result, _BtnEnsure);
                 String errorMsg = data.getExtras().getString("error_msg"); // 错误信息
                 String extraMsg = data.getExtras().getString("extra_msg"); // 错误信息
-//                toast(errorMsg+"---"+extraMsg);
+                toast(errorMsg + "---" + extraMsg);
+
+                KLog.d(errorMsg + "---" + extraMsg);
             }
         }
     }
 
     @Override
     public void toPay(String charge) {
+
         Intent intent = new Intent();
         String packageName = getPackageName();
         ComponentName componentName = new ComponentName(packageName, packageName + ".wxapi.WXPayEntryActivity");
@@ -219,7 +223,7 @@ public class MemberBuyActivity extends ToolBarActivity<BuyPresenter> implements 
         GetChargeRequest request = new GetChargeRequest();
         request.userId = new SessionUtil(getContext()).getUserId();
         request.channel = _payWay;
-        request.amount = _anount;
+        request.amount = 1;
         request.description = _desc;
         return request;
     }

@@ -36,6 +36,7 @@ import com.hewuzhe.ui.cons.C;
 import com.hewuzhe.ui.widget.GlideCircleTransform;
 import com.hewuzhe.utils.Bun;
 import com.hewuzhe.utils.SessionUtil;
+import com.hewuzhe.utils.StringUtil;
 import com.hewuzhe.view.WarriorFragmentView;
 import com.zhy.http.okhttp.OkHttpUtils;
 import com.zhy.http.okhttp.callback.StringCallback;
@@ -112,6 +113,7 @@ public class WarriorFragment extends ToolBarFragment<WarriorFragmentPresenter> i
     private double _Lat;
     private double _Lng;
     private String cityId = "CN101120901";
+    private String userId;
 
 
     public WarriorFragment() {
@@ -294,7 +296,7 @@ public class WarriorFragment extends ToolBarFragment<WarriorFragmentPresenter> i
         user = new SessionUtil(getContext()).getUser();
 
         tvUsername.setText(user.NicName);
-        tvId.setText("ID:" + user.Id);
+        tvId.setText("ID:" + getUserId());
         tvLevel.setText("lv" + user.Rank);
         tvIntegral.setText(user.Credit + "");
         tvLevelName.setText(user.isVip() ? "会员" : "成为会员");
@@ -319,6 +321,11 @@ public class WarriorFragment extends ToolBarFragment<WarriorFragmentPresenter> i
 
 
     }
+
+    private String getUserId() {
+        return StringUtil.isEmpty(user.Phone) ? "000000" + user.Id : user.Phone;
+    }
+
 
     @Override
     public void isWuYou(Boolean data, int userid) {

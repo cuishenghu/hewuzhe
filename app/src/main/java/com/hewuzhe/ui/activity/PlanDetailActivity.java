@@ -1,5 +1,6 @@
 package com.hewuzhe.ui.activity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -10,6 +11,7 @@ import com.hewuzhe.model.Plan;
 import com.hewuzhe.presenter.PlanDetailPresenter;
 import com.hewuzhe.ui.adapter.common.PlanImgsAdapter;
 import com.hewuzhe.ui.base.ToolBarActivity;
+import com.hewuzhe.ui.cons.C;
 import com.hewuzhe.utils.Bun;
 import com.hewuzhe.utils.TimeUtil;
 import com.hewuzhe.view.PlanDetialView;
@@ -55,19 +57,16 @@ public class PlanDetailActivity extends ToolBarActivity<PlanDetailPresenter> imp
     @Override
     protected void action() {
         super.action();
-
-        startActivity(PublishPlanActivity.class, new Bun().putP("item", item).ok());
+        startActivityForResult(PublishPlanActivity.class, new Bun().putP("item", item).ok(), C.REQUEST_SELECT_CATE);
     }
 
     @Override
     protected void initThings(Bundle savedInstanceState) {
         super.initThings(savedInstanceState);
         tvAction.setText("编辑");
-        item = getIntentData().getParcelable("item");
+        id = getIntentData().getInt("id");
 
-//        presenter.getPlanDetail();
-
-        setData(item);
+        presenter.getPlanDetail();
     }
 
     /**
@@ -76,6 +75,17 @@ public class PlanDetailActivity extends ToolBarActivity<PlanDetailPresenter> imp
     @Override
     public void initListeners() {
 
+
+    }
+
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (resultCode == RESULT_OK) {
+            presenter.getPlanDetail();
+
+        }
 
     }
 
@@ -90,6 +100,7 @@ public class PlanDetailActivity extends ToolBarActivity<PlanDetailPresenter> imp
 
     @Override
     public void setData(Plan plan) {
+        item = plan;
         _TvName.setText(plan.Title);
         _TvContent.setText(plan.Content);
         _TvTime.setText(TimeUtil.timeFormatTwo(plan.StartTime) + "-" + TimeUtil.timeFormatTwo(plan.EndTime));

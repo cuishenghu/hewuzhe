@@ -18,9 +18,6 @@ import com.hewuzhe.view.PublishPlanView;
 
 import java.util.ArrayList;
 
-import retrofit.Callback;
-import retrofit.Response;
-import retrofit.Retrofit;
 import rx.Subscription;
 import rx.android.schedulers.AndroidSchedulers;
 import rx.functions.Action0;
@@ -189,58 +186,41 @@ public class PublishPlanPresenter extends ListPresenter<PublishPlanView> {
             pathList = pathList.substring(0, pathList.length() - 1);
         }
 
-//        Subscription subscription = NetEngine.getService()
-//                .SavePlan(pathList, new SessionUtil(view.getContext()).getUserId(), data.m.Content, data.m.Title, data.m.catId, data.m.StartTime, data.m.EndTime)
-//                .subscribeOn(Schedulers.io())
-//                .doOnSubscribe(() -> {
-//                    if (!view.isShowingDialog()) {
-//                        view.showDialog();
-//                    }
-//                })
-//                .subscribeOn(AndroidSchedulers.mainThread())
-//                .observeOn(AndroidSchedulers.mainThread())
-//                .subscribe(new SB<Res>() {
-//                    @Override
-//                    public void next(Res res) {
-//                        if (res.code == C.OK) {
-//                            view.snb("发布成功", v);
-//                            view.finishActivity();
-//                        }
-//
-//                    }
-//
-//                    @Override
-//                    public void onCompleted() {
-//                        view.dismissDialog();
-//
-//                    }
-//
-//                    @Override
-//                    public void onError(Throwable e) {
-//                        view.dismissDialog();
-//                    }
-//                });
-//        addSubscription(subscription);
-
-        NetEngine.getService()
+        Subscription subscription = NetEngine.getService()
                 .SavePlan(pathList, new SessionUtil(view.getContext()).getUserId(), data.m.Content, data.m.Title, data.m.catId, data.m.StartTime, data.m.EndTime)
-                .enqueue(new Callback<Res>() {
+                .subscribeOn(Schedulers.io())
+                .doOnSubscribe(new Action0() {
                     @Override
-                    public void onResponse(Response<Res> response, Retrofit retrofit) {
-                        Res res = response.body();
+                    public void call() {
+                        if (!view.isShowingDialog()) {
+                            view.showDialog();
+                        }
+                    }
+                })
+                .subscribeOn(AndroidSchedulers.mainThread())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new SB<Res>() {
+                    @Override
+                    public void next(Res res) {
                         if (res.code == C.OK) {
                             view.snb("发布成功", v);
-                            view.finishActivity();
+                            view.publishSuccess();
                         }
+
+                    }
+
+                    @Override
+                    public void onCompleted() {
                         view.dismissDialog();
 
                     }
 
                     @Override
-                    public void onFailure(Throwable t) {
+                    public void onError(Throwable e) {
                         view.dismissDialog();
-
                     }
                 });
+        addSubscription(subscription);
+
     }
 }

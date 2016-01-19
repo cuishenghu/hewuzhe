@@ -317,7 +317,7 @@ public abstract class BaseAdapter<VH extends RecyclerView.ViewHolder, M, P exten
     public void noMore() {
         STATUS = STATUS_NOMORE;
         if (NU.notNull(tvStatus)) {
-            tvStatus.setText("没有更多数据了");
+            tvStatus.setText("已经全部加载完毕");
             progressView.setVisibility(View.GONE);
         }
     }

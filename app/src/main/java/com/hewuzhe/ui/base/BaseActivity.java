@@ -17,7 +17,6 @@ import com.hewuzhe.ui.cons.C;
 import com.hewuzhe.utils.NU;
 import com.hewuzhe.utils.StringUtil;
 import com.hewuzhe.view.base.BaseView;
-import com.pgyersdk.crash.PgyCrashManager;
 import com.zhy.autolayout.AutoLayoutActivity;
 
 import butterknife.ButterKnife;
@@ -76,8 +75,7 @@ public abstract class BaseActivity<P extends BasePresenterImp> extends AutoLayou
         setContentView(provideContentViewId());
         ButterKnife.bind(this);
 
-        PgyCrashManager.register(this);
-
+//        PgyCrashManager.register(this);
 
         this.presenter = createPresenter();
         if (presenter != null) {
@@ -88,7 +86,6 @@ public abstract class BaseActivity<P extends BasePresenterImp> extends AutoLayou
         initListeners();
 
     }
-
 
     @Override
     public Context getContext() {
@@ -119,6 +116,25 @@ public abstract class BaseActivity<P extends BasePresenterImp> extends AutoLayou
                     .positiveColor(C.COLOR_YELLOW)
                     .negativeColor(C.COLOR_YELLOW)
                     .content("请稍候...")
+                    .backgroundColor(C.COLOR_BG)
+                    .progress(true, 0)
+                    .build();
+        }
+        dialog.show();
+
+    }
+
+    @Override
+    public void showDialog(String title, String content) {
+        if (dialog == null) {
+            dialog = new MaterialDialog.Builder(this)
+                    .title(title)
+                    .titleGravity(GravityEnum.CENTER)
+                    .titleColor(Color.WHITE)
+                    .contentColor(Color.WHITE)
+                    .positiveColor(C.COLOR_YELLOW)
+                    .negativeColor(C.COLOR_YELLOW)
+                    .content(content)
                     .backgroundColor(C.COLOR_BG)
                     .progress(true, 0)
                     .build();

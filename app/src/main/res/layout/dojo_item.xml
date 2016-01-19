@@ -30,8 +30,8 @@
                       style="@style/text_30_white"
                       android:layout_width="wrap_content"
                       android:layout_height="wrap_content"
-                      android:singleLine="true"
                       android:ellipsize="end"
+                      android:singleLine="true"
                       android:text="临沂核武者"/>
 
             <TextView android:id="@+id/tv_desc"
@@ -65,6 +65,7 @@
                           android:layout_width="wrap_content"
                           android:layout_height="wrap_content"
                           android:layout_marginLeft="8px"
+                          android:layout_weight="1"
                           android:ellipsize="end"
                           android:maxLength="6"
                           android:singleLine="true"
@@ -80,6 +81,7 @@
                           android:layout_width="wrap_content"
                           android:layout_height="wrap_content"
                           android:layout_marginLeft="8px"
+                          android:layout_weight="1"
                           android:singleLine="true"
                           android:text="0539-123456"/>
 

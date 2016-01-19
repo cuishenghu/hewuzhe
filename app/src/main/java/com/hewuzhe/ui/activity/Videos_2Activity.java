@@ -29,7 +29,7 @@ public class Videos_2Activity extends SwipeRecycleViewActivity<Videos2Presenter,
 
     /**
      * @param savedInstanceState 缓存数据
-     *                           <p/>
+     *                           <p>
      */
     @Override
     protected void initThings(Bundle savedInstanceState) {
@@ -112,7 +112,7 @@ public class Videos_2Activity extends SwipeRecycleViewActivity<Videos2Presenter,
      */
     @Override
     public void onItemClick(View view, int pos, Video item) {
-        if (item.IsFree) {
+        if (item.UserId != 0) {
             startActivity(VideoDetail2Activity.class, new Bun().putInt("Id", item.Id).ok());
         } else {
             startActivity(VideoDetailActivity.class, new Bun().putInt("Id", item.Id).ok());

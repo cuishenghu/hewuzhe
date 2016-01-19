@@ -346,7 +346,6 @@ public class VideoDetail2Activity extends RecycleViewActivity<VideoDetailPresent
 
         }
 
-
         imgTranspond.setImageResource(R.mipmap.icon_share);
         imgTranspond.setOnClickListener(new View.OnClickListener() {
             @Override

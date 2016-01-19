@@ -155,7 +155,8 @@ public class PublishPlanActivity extends ListActivity<PublishPlanPresenter, Pick
     @Override
     public void publishSuccess() {
 
-
+        setResult(RESULT_OK);
+        finishActivity();
     }
 
     @Override

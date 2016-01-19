@@ -28,7 +28,6 @@
 -keepattributes Exceptions,InnerClasses
 
 -keep class io.rong.** {*;}
--keep class com.mob.** {*;}
 
 -dontwarn io.rong.**
 
@@ -69,6 +68,11 @@
 -keepclasseswithmembernames class * {
     @butterknife.* <methods>;
 }
+
+
+-keep class com.baidu.** {*;}
+-keep class vi.com.** {*;}
+-dontwarn com.baidu.**
 
 
 -keepattributes *Annotation*
@@ -123,14 +127,4 @@
     public <init>(org.json.JSONObject);
  }
 
- -keep class com.umeng.** { *; }
- -keep public class * extends com.umeng.**
-
- -assumenosideeffects class android.util.Log {
-     public static boolean isLoggable(java.lang.String, int);
-     public static int d(...);
-     public static int w(...);
-     public static int v(...);
-     public static int i(...);
- }
 

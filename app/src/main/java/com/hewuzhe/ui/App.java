@@ -7,7 +7,6 @@ import android.support.multidex.MultiDex;
 
 import com.hewuzhe.BuildConfig;
 import com.hewuzhe.ui.inter.OnLocListener;
-import com.pgyersdk.crash.PgyCrashManager;
 import com.socks.library.KLog;
 
 import java.util.LinkedList;
@@ -40,6 +39,7 @@ public class App extends Application {
 //                                Stetho.defaultInspectorModulesProvider(this))
 //                        .build());
 
+
         /**
          * KLog初始化
          * */
@@ -51,7 +51,7 @@ public class App extends Application {
         JPushInterface.init(this);
 
 
-        PgyCrashManager.register(this);
+//        PgyCrashManager.register(this);
 
         /**
          * OnCreate 会被多个进程重入，这段保护代码，确保只有您需要使用 RongIM 的进程和 Push 进程执行了 init。

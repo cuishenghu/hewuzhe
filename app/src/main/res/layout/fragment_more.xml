@@ -56,16 +56,14 @@
             <TextView android:layout_width="wrap_content"
                       android:layout_height="wrap_content"
                       android:layout_weight="1"
-                      android:text="版本更新"
+                      android:text="关于@功夫"
                       android:textColor="@color/white"
                       android:textSize="30px"/>
 
-            <TextView android:layout_width="wrap_content"
-                      android:layout_height="wrap_content"
-                      android:paddingRight="30px"
-                      android:text="V1.0.1"
-                      android:textColor="@color/white"
-                      android:textSize="30px"/>
+            <ImageView android:layout_width="40dp"
+                       android:layout_height="40dp"
+                       android:padding="12dp"
+                       android:src="@mipmap/icon_arrow_right"/>
 
 
         </LinearLayout>

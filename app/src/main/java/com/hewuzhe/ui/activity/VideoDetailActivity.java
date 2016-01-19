@@ -89,6 +89,10 @@ public class VideoDetailActivity extends RecycleViewActivity<VideoDetailPresente
      */
     @Override
     protected void initThings(Bundle savedInstanceState) {
+
+        io.vov.vitamio.LibsChecker.checkVitamioLibs(this);
+
+
         super.initThings(savedInstanceState);
 
         initHeader();
@@ -237,7 +241,11 @@ public class VideoDetailActivity extends RecycleViewActivity<VideoDetailPresente
         imgAvatar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                presenter.isWuyou(_Video.UserId);
+                if (_Video.UserId == 0) {
+                    startActivity(AboutActivity.class);
+                } else {
+                    presenter.isWuyou(_Video.UserId);
+                }
             }
         });
 
@@ -306,6 +314,14 @@ public class VideoDetailActivity extends RecycleViewActivity<VideoDetailPresente
                 .crossFade()
                 .transform(new GlideCircleTransform(getContext()))
                 .into(imgAvatar);
+
+        Glide.with(getContext())
+                .load(C.BASE_URL + new SessionUtil(getContext()).getUser().PhotoPath)
+                .placeholder(R.mipmap.img_avatar)
+                .centerCrop()
+                .crossFade()
+                .transform(new GlideCircleTransform(getContext()))
+                .into(imgAvatar2);
 
         tvUsername.setText(video.UserNicName);
 
@@ -392,21 +408,26 @@ public class VideoDetailActivity extends RecycleViewActivity<VideoDetailPresente
 //
 //        }
 
+        mLayout = VideoView.VIDEO_LAYOUT_FIT_PARENT;
+        videoController.getVideoView().setVideoLayout(mLayout, 0);
 
         if (video.IsFree) {
             videoController.setVideoPath(C.BASE_URL + video.VideoPath);
             videoController._LayNoVip.setVisibility(View.GONE);
+            videoController.start();
         } else {
             if (new SessionUtil(getContext()).getUser().isVip()) {
                 videoController.setVideoPath(C.BASE_URL + video.VideoPath);
-
                 videoController._LayNoVip.setVisibility(View.GONE);
-//                videoController.start();
+                videoController.start();
             } else {
                 videoController._LayNoVip.setVisibility(View.VISIBLE);
                 videoController.pause();
             }
         }
+
+
+
     }
 
     /**
@@ -542,7 +563,7 @@ public class VideoDetailActivity extends RecycleViewActivity<VideoDetailPresente
             videoController.setLayoutParams(params);
 
         } else if (newConfig.orientation == Configuration.ORIENTATION_PORTRAIT) {
-            mLayout = VideoView.VIDEO_LAYOUT_STRETCH;//原始尺寸
+            mLayout = VideoView.VIDEO_LAYOUT_FIT_PARENT;//原始尺寸
 
             ViewGroup.LayoutParams params = videoController.getLayoutParams();
             params.height = StringUtil.dip2px(getContext(), 200);

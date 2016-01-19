@@ -140,12 +140,12 @@
         "source": "/Users/xianguangjin/Desktop/Hewuzhe3/IMKit/src/main/res/drawable-xhdpi/rc_ic_bubble_no_right.9.png"
     },
     {
-        "merged": "/Users/xianguangjin/Desktop/Hewuzhe3/IMKit/build/intermediates/res/merged/debug/drawable-xhdpi-v4/rc_btn_pub_service_follow_hover.png",
-        "source": "/Users/xianguangjin/Desktop/Hewuzhe3/IMKit/src/main/res/drawable-xhdpi/rc_btn_pub_service_follow_hover.png"
-    },
-    {
         "merged": "/Users/xianguangjin/Desktop/Hewuzhe3/IMKit/build/intermediates/res/merged/debug/drawable-xhdpi-v4/rc_ic_volume_2.png",
         "source": "/Users/xianguangjin/Desktop/Hewuzhe3/IMKit/src/main/res/drawable-xhdpi/rc_ic_volume_2.png"
+    },
+    {
+        "merged": "/Users/xianguangjin/Desktop/Hewuzhe3/IMKit/build/intermediates/res/merged/debug/drawable-xhdpi-v4/rc_btn_pub_service_follow_hover.png",
+        "source": "/Users/xianguangjin/Desktop/Hewuzhe3/IMKit/src/main/res/drawable-xhdpi/rc_btn_pub_service_follow_hover.png"
     },
     {
         "merged": "/Users/xianguangjin/Desktop/Hewuzhe3/IMKit/build/intermediates/res/merged/debug/drawable-xhdpi-v4/u1f61c.png",
@@ -168,28 +168,28 @@
         "source": "/Users/xianguangjin/Desktop/Hewuzhe3/IMKit/src/main/res/drawable-xhdpi/u1f608.png"
     },
     {
-        "merged": "/Users/xianguangjin/Desktop/Hewuzhe3/IMKit/build/intermediates/res/merged/debug/drawable-xhdpi-v4/u2b50.png",
-        "source": "/Users/xianguangjin/Desktop/Hewuzhe3/IMKit/src/main/res/drawable-xhdpi/u2b50.png"
+        "merged": "/Users/xianguangjin/Desktop/Hewuzhe3/IMKit/build/intermediates/res/merged/debug/drawable-xhdpi-v4/rc_voice_icon_right.png",
+        "source": "/Users/xianguangjin/Desktop/Hewuzhe3/IMKit/src/main/res/drawable-xhdpi/rc_voice_icon_right.png"
     },
     {
         "merged": "/Users/xianguangjin/Desktop/Hewuzhe3/IMKit/build/intermediates/res/merged/debug/drawable-xhdpi-v4/u1f621.png",
         "source": "/Users/xianguangjin/Desktop/Hewuzhe3/IMKit/src/main/res/drawable-xhdpi/u1f621.png"
     },
     {
-        "merged": "/Users/xianguangjin/Desktop/Hewuzhe3/IMKit/build/intermediates/res/merged/debug/drawable-xhdpi-v4/rc_voice_icon_right.png",
-        "source": "/Users/xianguangjin/Desktop/Hewuzhe3/IMKit/src/main/res/drawable-xhdpi/rc_voice_icon_right.png"
+        "merged": "/Users/xianguangjin/Desktop/Hewuzhe3/IMKit/build/intermediates/res/merged/debug/drawable-xhdpi-v4/u2b50.png",
+        "source": "/Users/xianguangjin/Desktop/Hewuzhe3/IMKit/src/main/res/drawable-xhdpi/u2b50.png"
     },
     {
         "merged": "/Users/xianguangjin/Desktop/Hewuzhe3/IMKit/build/intermediates/res/merged/debug/drawable-xhdpi-v4/u2615.png",
         "source": "/Users/xianguangjin/Desktop/Hewuzhe3/IMKit/src/main/res/drawable-xhdpi/u2615.png"
     },
     {
-        "merged": "/Users/xianguangjin/Desktop/Hewuzhe3/IMKit/build/intermediates/res/merged/debug/drawable-xhdpi-v4/rc_ic_voice_receive_play2.png",
-        "source": "/Users/xianguangjin/Desktop/Hewuzhe3/IMKit/src/main/res/drawable-xhdpi/rc_ic_voice_receive_play2.png"
-    },
-    {
         "merged": "/Users/xianguangjin/Desktop/Hewuzhe3/IMKit/build/intermediates/res/merged/debug/drawable-xhdpi-v4/u1f60f.png",
         "source": "/Users/xianguangjin/Desktop/Hewuzhe3/IMKit/src/main/res/drawable-xhdpi/u1f60f.png"
+    },
+    {
+        "merged": "/Users/xianguangjin/Desktop/Hewuzhe3/IMKit/build/intermediates/res/merged/debug/drawable-xhdpi-v4/rc_ic_voice_receive_play2.png",
+        "source": "/Users/xianguangjin/Desktop/Hewuzhe3/IMKit/src/main/res/drawable-xhdpi/rc_ic_voice_receive_play2.png"
     },
     {
         "merged": "/Users/xianguangjin/Desktop/Hewuzhe3/IMKit/build/intermediates/res/merged/debug/drawable-xhdpi-v4/u1f004.png",
@@ -204,16 +204,16 @@
         "source": "/Users/xianguangjin/Desktop/Hewuzhe3/IMKit/src/main/res/drawable-xhdpi/u1f382.png"
     },
     {
-        "merged": "/Users/xianguangjin/Desktop/Hewuzhe3/IMKit/build/intermediates/res/merged/debug/drawable-xhdpi-v4/rc_ic_extend_selected.png",
-        "source": "/Users/xianguangjin/Desktop/Hewuzhe3/IMKit/src/main/res/drawable-xhdpi/rc_ic_extend_selected.png"
+        "merged": "/Users/xianguangjin/Desktop/Hewuzhe3/IMKit/build/intermediates/res/merged/debug/drawable-xhdpi-v4/rc_unread_remind_without_count.png",
+        "source": "/Users/xianguangjin/Desktop/Hewuzhe3/IMKit/src/main/res/drawable-xhdpi/rc_unread_remind_without_count.png"
     },
     {
         "merged": "/Users/xianguangjin/Desktop/Hewuzhe3/IMKit/build/intermediates/res/merged/debug/drawable-xhdpi-v4/rc_checkbox_normal.png",
         "source": "/Users/xianguangjin/Desktop/Hewuzhe3/IMKit/src/main/res/drawable-xhdpi/rc_checkbox_normal.png"
     },
     {
-        "merged": "/Users/xianguangjin/Desktop/Hewuzhe3/IMKit/build/intermediates/res/merged/debug/drawable-xhdpi-v4/rc_unread_remind_without_count.png",
-        "source": "/Users/xianguangjin/Desktop/Hewuzhe3/IMKit/src/main/res/drawable-xhdpi/rc_unread_remind_without_count.png"
+        "merged": "/Users/xianguangjin/Desktop/Hewuzhe3/IMKit/build/intermediates/res/merged/debug/drawable-xhdpi-v4/rc_ic_extend_selected.png",
+        "source": "/Users/xianguangjin/Desktop/Hewuzhe3/IMKit/src/main/res/drawable-xhdpi/rc_ic_extend_selected.png"
     },
     {
         "merged": "/Users/xianguangjin/Desktop/Hewuzhe3/IMKit/build/intermediates/res/merged/debug/drawable-xhdpi-v4/rc_ic_notice_loading.png",
@@ -224,16 +224,16 @@
         "source": "/Users/xianguangjin/Desktop/Hewuzhe3/IMKit/src/main/res/drawable-xhdpi/u1f618.png"
     },
     {
-        "merged": "/Users/xianguangjin/Desktop/Hewuzhe3/IMKit/build/intermediates/res/merged/debug/drawable-xhdpi-v4/rc_btn_send_hover.9.png",
-        "source": "/Users/xianguangjin/Desktop/Hewuzhe3/IMKit/src/main/res/drawable-xhdpi/rc_btn_send_hover.9.png"
+        "merged": "/Users/xianguangjin/Desktop/Hewuzhe3/IMKit/build/intermediates/res/merged/debug/drawable-xhdpi-v4/rc_ic_menu_keyboard.png",
+        "source": "/Users/xianguangjin/Desktop/Hewuzhe3/IMKit/src/main/res/drawable-xhdpi/rc_ic_menu_keyboard.png"
     },
     {
         "merged": "/Users/xianguangjin/Desktop/Hewuzhe3/IMKit/build/intermediates/res/merged/debug/drawable-xhdpi-v4/u1f381.png",
         "source": "/Users/xianguangjin/Desktop/Hewuzhe3/IMKit/src/main/res/drawable-xhdpi/u1f381.png"
     },
     {
-        "merged": "/Users/xianguangjin/Desktop/Hewuzhe3/IMKit/build/intermediates/res/merged/debug/drawable-xhdpi-v4/rc_ic_menu_keyboard.png",
-        "source": "/Users/xianguangjin/Desktop/Hewuzhe3/IMKit/src/main/res/drawable-xhdpi/rc_ic_menu_keyboard.png"
+        "merged": "/Users/xianguangjin/Desktop/Hewuzhe3/IMKit/build/intermediates/res/merged/debug/drawable-xhdpi-v4/rc_btn_send_hover.9.png",
+        "source": "/Users/xianguangjin/Desktop/Hewuzhe3/IMKit/src/main/res/drawable-xhdpi/rc_btn_send_hover.9.png"
     },
     {
         "merged": "/Users/xianguangjin/Desktop/Hewuzhe3/IMKit/build/intermediates/res/merged/debug/drawable-xhdpi-v4/rc_ic_portrait_voip.png",
@@ -812,12 +812,12 @@
         "source": "/Users/xianguangjin/Desktop/Hewuzhe3/IMKit/src/main/res/drawable-xhdpi/u1f3b2.png"
     },
     {
-        "merged": "/Users/xianguangjin/Desktop/Hewuzhe3/IMKit/build/intermediates/res/merged/debug/drawable-xhdpi-v4/u1f35a.png",
-        "source": "/Users/xianguangjin/Desktop/Hewuzhe3/IMKit/src/main/res/drawable-xhdpi/u1f35a.png"
-    },
-    {
         "merged": "/Users/xianguangjin/Desktop/Hewuzhe3/IMKit/build/intermediates/res/merged/debug/drawable-xhdpi-v4/rc_volume_one.png",
         "source": "/Users/xianguangjin/Desktop/Hewuzhe3/IMKit/src/main/res/drawable-xhdpi/rc_volume_one.png"
+    },
+    {
+        "merged": "/Users/xianguangjin/Desktop/Hewuzhe3/IMKit/build/intermediates/res/merged/debug/drawable-xhdpi-v4/u1f35a.png",
+        "source": "/Users/xianguangjin/Desktop/Hewuzhe3/IMKit/src/main/res/drawable-xhdpi/u1f35a.png"
     },
     {
         "merged": "/Users/xianguangjin/Desktop/Hewuzhe3/IMKit/build/intermediates/res/merged/debug/drawable-xhdpi-v4/rc_ic_keyboard_normal.png",

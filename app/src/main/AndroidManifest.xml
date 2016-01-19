@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest package="com.hewuzhe"
-          xmlns:android="http://schemas.android.com/apk/res/android"
-    >
+          xmlns:android="http://schemas.android.com/apk/res/android">
 
     <uses-permission android:name="android.permission.CAMERA"/>
     <uses-permission android:name="android.permission.FLASHLIGHT"/>
@@ -104,18 +103,17 @@
             android:value="ce73a5d040f864fe9cee2e1b89065be8">
         </meta-data>
 
-        <!--<service android:name="com.amap.api.location.APSService"/>-->
-
+        <!-- <service android:name="com.amap.api.location.APSService"/> -->
 
         <meta-data
             android:name="com.baidu.lbsapi.API_KEY"
-            android:value="Nz8Ftc7VG9QbB3l2zaQW5itV" />
+            android:value="Nz8Ftc7VG9QbB3l2zaQW5itV"/>
 
-
-        <service android:name="com.baidu.location.f" android:enabled="true"
-                 android:process=":remote">
+        <service
+            android:name="com.baidu.location.f"
+            android:enabled="true"
+            android:process=":remote">
         </service>
-
 
         <activity android:name=".ui.activity.MainActivity">
         </activity>
@@ -210,25 +208,25 @@
         <!-- Ping++ SDK 注册 -->
         <activity
             android:name="com.pingplusplus.android.PaymentActivity"
-            android:launchMode="singleTop"
             android:configChanges="orientation|screenSize"
-            android:theme="@android:style/Theme.Translucent.NoTitleBar" />
+            android:launchMode="singleTop"
+            android:theme="@android:style/Theme.Translucent.NoTitleBar"/>
         <!-- 微信支付注册 -->
         <activity-alias
             android:name=".wxapi.WXPayEntryActivity"
             android:exported="true"
-            android:targetActivity="com.pingplusplus.android.PaymentActivity" />
+            android:targetActivity="com.pingplusplus.android.PaymentActivity"/>
         <!-- 支付宝注册 -->
         <activity
             android:name="com.alipay.sdk.app.H5PayActivity"
             android:configChanges="orientation|keyboardHidden|navigation"
             android:exported="false"
-            android:screenOrientation="behind" />
+            android:screenOrientation="behind"/>
         <activity
             android:name="com.alipay.sdk.auth.AuthActivity"
             android:configChanges="orientation|keyboardHidden|navigation"
             android:exported="false"
-            android:screenOrientation="behind" />
+            android:screenOrientation="behind"/>
         <activity
             android:name=".ui.activity.CitySelectActivity"
             android:windowSoftInputMode="stateHidden|adjustPan">
@@ -589,6 +587,8 @@
         <activity android:name=".ui.activity.TeamManagerActivity">
         </activity>
         <activity android:name=".ui.activity.MegaGameApplyActivity">
+        </activity>
+        <activity android:name=".ui.activity.AboutActivity">
         </activity>
     </application>
 

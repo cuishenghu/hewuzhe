@@ -3,7 +3,6 @@ package com.hewuzhe.ui.fragment;
 import android.content.Intent;
 import android.graphics.Color;
 import android.net.Uri;
-import android.os.Handler;
 import android.support.annotation.NonNull;
 import android.view.View;
 import android.widget.Button;
@@ -11,6 +10,7 @@ import android.widget.LinearLayout;
 
 import com.hewuzhe.R;
 import com.hewuzhe.presenter.base.BasePresenterImp;
+import com.hewuzhe.ui.activity.AboutActivity;
 import com.hewuzhe.ui.activity.SettingsActivity;
 import com.hewuzhe.ui.activity.SignInActivity;
 import com.hewuzhe.ui.base.ToolBarFragment;
@@ -87,26 +87,9 @@ public class MoreFragment extends ToolBarFragment {
         layCheckUpdate.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                final MaterialDialog materialDialog = new MaterialDialog.Builder(getActivity())
-                        .title("检查更新")
-                        .titleGravity(GravityEnum.CENTER)
-                        .titleColor(Color.WHITE)
-                        .contentColor(Color.WHITE)
-                        .positiveColor(C.COLOR_YELLOW)
-                        .negativeColor(C.COLOR_YELLOW)
-                        .content("正在检查更新...")
-                        .backgroundColor(C.COLOR_BG)
-                        .progress(true, 0)
-                        .build();
-                materialDialog.show();
 
-                new Handler().postDelayed(new Runnable() {
-                    @Override
-                    public void run() {
-                        materialDialog.dismiss();
-                        snb("当前已是最新版本", layCheckUpdate);
-                    }
-                }, 1000);
+                startActivity(AboutActivity.class);
+
             }
         });
 

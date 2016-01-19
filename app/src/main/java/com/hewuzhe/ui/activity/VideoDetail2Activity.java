@@ -29,6 +29,7 @@ import com.hewuzhe.ui.widget.GlideCircleTransform;
 import com.hewuzhe.ui.widget.VideoControllerView;
 import com.hewuzhe.ui.widget.YsnowEditDialog;
 import com.hewuzhe.utils.Bun;
+import com.hewuzhe.utils.SessionUtil;
 import com.hewuzhe.utils.StringUtil;
 import com.hewuzhe.view.VideoDetailView;
 
@@ -83,12 +84,14 @@ public class VideoDetail2Activity extends RecycleViewActivity<VideoDetailPresent
 
     /**
      * @param savedInstanceState 缓存数据
-     *                           <p/>
+     *                           <p>
      */
     @Override
     protected void initThings(Bundle savedInstanceState) {
-        super.initThings(savedInstanceState);
 
+        io.vov.vitamio.LibsChecker.checkVitamioLibs(this);
+
+        super.initThings(savedInstanceState);
         initHeader();
         windowManager = (WindowManager) getSystemService(Context.WINDOW_SERVICE);
         id = getIntentData().getInt("Id");
@@ -235,7 +238,13 @@ public class VideoDetail2Activity extends RecycleViewActivity<VideoDetailPresent
         imgAvatar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                presenter.isWuyou(_Video.UserId);
+                if (_Video.UserId == 0) {
+
+                    startActivity(AboutActivity.class);
+
+                } else {
+                    presenter.isWuyou(_Video.UserId);
+                }
             }
         });
 
@@ -293,12 +302,22 @@ public class VideoDetail2Activity extends RecycleViewActivity<VideoDetailPresent
         final int position = 0;
 
         Glide.with(getContext())
-                .load(C.BASE_URL + video.PhotoPath)
+                .load(C.BASE_URL + _Video.PhotoPath)
                 .placeholder(R.mipmap.img_avatar)
                 .centerCrop()
                 .crossFade()
                 .transform(new GlideCircleTransform(getContext()))
                 .into(imgAvatar);
+
+
+        Glide.with(getContext())
+                .load(C.BASE_URL + new SessionUtil(getContext()).getUser().PhotoPath)
+                .placeholder(R.mipmap.img_avatar)
+                .centerCrop()
+                .crossFade()
+                .transform(new GlideCircleTransform(getContext()))
+                .into(imgAvatar2);
+
 
         tvUsername.setText(video.UserNicName);
 
@@ -385,11 +404,13 @@ public class VideoDetail2Activity extends RecycleViewActivity<VideoDetailPresent
 //
 //        }
 
-        videoController.btnFullScreen.setVisibility(View.GONE);
+        mLayout = VideoView.VIDEO_LAYOUT_FIT_PARENT;
+        videoController.getVideoView().setVideoLayout(mLayout, 0);
 
+
+        videoController.btnFullScreen.setVisibility(View.GONE);
         videoController.setVideoPath(C.BASE_URL + video.VideoPath);
         videoController.start();
-
 
     }
 
@@ -526,7 +547,7 @@ public class VideoDetail2Activity extends RecycleViewActivity<VideoDetailPresent
             videoController.setLayoutParams(params);
 
         } else if (newConfig.orientation == Configuration.ORIENTATION_PORTRAIT) {
-            mLayout = VideoView.VIDEO_LAYOUT_FIT_PARENT;//原始尺寸
+            mLayout = VideoView.VIDEO_LAYOUT_SCALE;//原始尺寸
 
             ViewGroup.LayoutParams params = videoController.getLayoutParams();
             params.height = StringUtil.dip2px(getContext(), 200);

@@ -36,12 +36,12 @@
         "source": "/Users/xianguangjin/Desktop/Hewuzhe3/IMKit/build/intermediates/bundles/debug/res/drawable/rc_ic_extend.xml"
     },
     {
-        "merged": "/Users/xianguangjin/Desktop/Hewuzhe3/IMKit/build/intermediates/res/merged/androidTest/debug/drawable/rc_btn_sound_off_selector.xml",
-        "source": "/Users/xianguangjin/Desktop/Hewuzhe3/IMKit/build/intermediates/bundles/debug/res/drawable/rc_btn_sound_off_selector.xml"
-    },
-    {
         "merged": "/Users/xianguangjin/Desktop/Hewuzhe3/IMKit/build/intermediates/res/merged/androidTest/debug/drawable/rc_btn_finish_selector.xml",
         "source": "/Users/xianguangjin/Desktop/Hewuzhe3/IMKit/build/intermediates/bundles/debug/res/drawable/rc_btn_finish_selector.xml"
+    },
+    {
+        "merged": "/Users/xianguangjin/Desktop/Hewuzhe3/IMKit/build/intermediates/res/merged/androidTest/debug/drawable/rc_btn_sound_off_selector.xml",
+        "source": "/Users/xianguangjin/Desktop/Hewuzhe3/IMKit/build/intermediates/bundles/debug/res/drawable/rc_btn_sound_off_selector.xml"
     },
     {
         "merged": "/Users/xianguangjin/Desktop/Hewuzhe3/IMKit/build/intermediates/res/merged/androidTest/debug/drawable/rc_btn_refuse_selector.xml",

@@ -47,4 +47,6 @@ public class StudyOnlineCatItem {
     public boolean IndexPosition_IsDirty;
     public boolean PositionOrder_IsDirty;
     public boolean ChannelType_IsDirty;
+
+
 }

@@ -4,57 +4,47 @@ package com.hewuzhe.ui.fragment;
 import android.content.Intent;
 import android.support.v4.app.Fragment;
 import android.view.View;
-import android.widget.FrameLayout;
-import android.widget.LinearLayout;
 
+import com.adhamenaya.listeners.OnItemClickListener;
+import com.adhamenaya.views.BlockPattern;
+import com.adhamenaya.views.MosaicLayout;
 import com.hewuzhe.R;
-import com.hewuzhe.presenter.base.BasePresenterImp;
+import com.hewuzhe.model.StudyOnlineCatItem;
+import com.hewuzhe.presenter.StudyOnlineFragPresenter;
 import com.hewuzhe.ui.activity.VideosActivity;
+import com.hewuzhe.ui.adapter.MyAdapter;
 import com.hewuzhe.ui.base.BaseFragment;
 import com.hewuzhe.utils.Bun;
+import com.hewuzhe.view.StudyOnlineFragView;
+
+import java.util.ArrayList;
 
 import butterknife.Bind;
 
 /**
  * A simple {@link Fragment} subclass.
  */
-public class FiveFragment extends BaseFragment {
+public class FiveFragment extends BaseFragment<StudyOnlineFragPresenter> implements StudyOnlineFragView {
+
+    @Bind(R.id.layout)
+    MosaicLayout _Layout;
 
 
-    private static FiveFragment instance = null;
-    @Bind(R.id.lay_view_group)
-    LinearLayout layViewGroup;
-    @Bind(R.id.lay_video)
-    FrameLayout layVideo;
-    @Bind(R.id.lay_encouragement)
-    FrameLayout layEncouragement;
-    @Bind(R.id.lay_performance)
-    FrameLayout layPerformance;
-    @Bind(R.id.lay_theory)
-    FrameLayout layTheory;
-    @Bind(R.id.lay_megagame)
-    FrameLayout layMegagame;
-    @Bind(R.id.lay_manage)
-    FrameLayout layManage;
-    @Bind(R.id.lay_tec)
-    FrameLayout layTec;
-    @Bind(R.id.lay_teach)
-    FrameLayout layTeach;
-    @Bind(R.id.lay_master)
-    FrameLayout layMaster;
+    BlockPattern.BLOCK_PATTERN pattern1[] = {BlockPattern.BLOCK_PATTERN.BIG, BlockPattern.BLOCK_PATTERN.BIG, BlockPattern.BLOCK_PATTERN.HORIZONTAL, BlockPattern.BLOCK_PATTERN.HORIZONTAL,
+            BlockPattern.BLOCK_PATTERN.BIG, BlockPattern.BLOCK_PATTERN.BIG, BlockPattern.BLOCK_PATTERN.HORIZONTAL, BlockPattern.BLOCK_PATTERN.HORIZONTAL};
 
-    private Intent intent;
-
+    BlockPattern.BLOCK_PATTERN pattern2[] = {BlockPattern.BLOCK_PATTERN.HORIZONTAL, BlockPattern.BLOCK_PATTERN.HORIZONTAL, BlockPattern.BLOCK_PATTERN.BIG, BlockPattern.BLOCK_PATTERN.BIG, BlockPattern.BLOCK_PATTERN.HORIZONTAL,
+            BlockPattern.BLOCK_PATTERN.HORIZONTAL, BlockPattern.BLOCK_PATTERN.BIG, BlockPattern.BLOCK_PATTERN.BIG};
 
     public static FiveFragment newInstance() {
-        if (instance == null) {
-            instance = new FiveFragment();
-        }
+        FiveFragment instance = new FiveFragment();
         return instance;
     }
 
     public FiveFragment() {
+
     }
+
 
     /**
      * 初始化事件监听者
@@ -62,79 +52,37 @@ public class FiveFragment extends BaseFragment {
     @Override
     public void initListeners() {
 
-        layVideo.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                startActivity(VideosActivity.class, new Bun().putInt("id", 63).putString("title", "电影").ok());
-            }
-        });
-
-        layEncouragement.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                startActivity(VideosActivity.class, new Bun().putInt("id", 64).putString("title", "励志").ok());
-            }
-        });
-
-        layManage.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                startActivity(VideosActivity.class, new Bun().putInt("id", 1).putString("title", "管理").ok());
-
-            }
-        });
-        layMaster.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                startActivity(VideosActivity.class, new Bun().putInt("id", 1).putString("title", "大师").ok());
-
-            }
-        });
-        layMegagame.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                startActivity(VideosActivity.class, new Bun().putInt("id", 67).putString("title", "赛事").ok());
-
-            }
-        });
-        layPerformance.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                startActivity(VideosActivity.class, new Bun().putInt("id", 1).putString("title", "表演").ok());
-
-            }
-        });
-        layTeach.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                startActivity(VideosActivity.class, new Bun().putInt("id", 1).putString("title", "教学").ok());
-
-            }
-        });
-        layTec.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                startActivity(VideosActivity.class, new Bun().putInt("id", 69).putString("title", "技术").ok());
-
-            }
-        });
-
-        layTheory.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                startActivity(VideosActivity.class, new Bun().putInt("id", 66).putString("title", "理念").ok());
-            }
-        });
-
     }
 
     /**
      * 初始化一些事情
      *
-     * @param v
+     * @param view
      */
     @Override
-    protected void initThings(View v) {
+    protected void initThings(View view) {
+
+        presenter.GetChannel();
+        orderedSelectedPatterns();
+
+    }
+
+    private void randomAllPatters() {
+        _Layout.chooseRandomPattern(true);
+
+    }
+
+    private void randomSelectedPatterns() {
+        _Layout.addPattern(pattern1);
+        _Layout.addPattern(pattern2);
+        _Layout.chooseRandomPattern(true);
+
+    }
+
+    private void orderedSelectedPatterns() {
+        _Layout.addPattern(pattern1);
+        _Layout.addPattern(pattern2);
+        _Layout.chooseRandomPattern(false);
 
     }
 
@@ -143,16 +91,37 @@ public class FiveFragment extends BaseFragment {
      */
     @Override
     public int provideLayoutId() {
-        return R.layout.fragment_five;
+        return R.layout.fragment_study_online_one;
     }
 
     /**
      * 绑定Presenter
      */
     @Override
-    public BasePresenterImp createPresenter() {
-        return null;
+    public StudyOnlineFragPresenter createPresenter() {
+        return new StudyOnlineFragPresenter();
     }
 
+
+    @Override
+    public void bindData(final ArrayList<StudyOnlineCatItem> data) {
+
+        MyAdapter adapter = new MyAdapter(getContext());
+        adapter.setData(data);
+        _Layout.setAdapter(adapter);
+
+        _Layout.setOnItemClickListener(new OnItemClickListener() {
+
+            @Override
+            public void onClick(int position) {
+                StudyOnlineCatItem item = data.get(position);
+                Intent intent = new Intent(getActivity(), VideosActivity.class);
+                intent.putExtra("data", new Bun().putInt("id", item.Id).putString("title", item.Name).ok());
+                getActivity().startActivity(intent);
+            }
+        });
+
+
+    }
 
 }

@@ -23,7 +23,6 @@ import com.hewuzhe.utils.MediaPlayerUtils;
 import com.hewuzhe.utils.TimeUtil;
 
 import io.vov.vitamio.MediaPlayer;
-import io.vov.vitamio.Vitamio;
 import io.vov.vitamio.widget.VideoView;
 import materialdesign.views.ProgressWheel;
 import materialdesign.views.Slider;
@@ -90,17 +89,15 @@ public class VideoControllerView extends FrameLayout implements View.OnTouchList
 
     private void initView(final Context context) {
         this.context = context;
-        Vitamio.isInitialized(context);
         View v = LayoutInflater.from(context).inflate(R.layout.view_video_controller, null);
         addView(v);
         mVideoView = findView(R.id.videoView);
         mVideoView.setOnTouchListener(this);
         mVideoView.setOnPreparedListener(this);
         mVideoView.setHardwareDecoder(true);
-        mVideoView.setVideoLayout(VideoView.VIDEO_LAYOUT_FIT_PARENT,0);
         mVideoView.setBufferSize(3048);
-
         mVideoView.setOnBufferingUpdateListener(this);
+
         mVideoView.setOnCompletionListener(this);
         tvCurDuration = findView(R.id.tv_cur_duration);
         tvDuration = findView(R.id.tv_ducration);
@@ -139,8 +136,6 @@ public class VideoControllerView extends FrameLayout implements View.OnTouchList
                 context.startActivity(new Intent(context, MemberActivity.class));
             }
         });
-
-
     }
 
     private void setVideoPlayButton() {
@@ -240,7 +235,7 @@ public class VideoControllerView extends FrameLayout implements View.OnTouchList
         slider.setMax(DataTypeUtils.toInt(mediaPlayer.getDuration()));
         tvDuration.setText("/" + TimeUtil.timeFormat(mediaPlayer.getDuration()));
         mediaPlayer.setPlaybackSpeed(1.0f);
-//      updateTimeTask();
+        updateTimeTask();
         handler.sendEmptyMessage(MSG_PROGRESS_CHANGE);
     }
 
@@ -253,9 +248,6 @@ public class VideoControllerView extends FrameLayout implements View.OnTouchList
 
     @Override
     public void onBufferingUpdate(MediaPlayer mp, int percent) {
-        //视频暂停中不显示缓冲进度
-//        if (isVideoPause())
-//            return;
         if (percent >= 30 || percent <= 0) {
             mProgressWheel.setVisibility(View.INVISIBLE);
         } else {

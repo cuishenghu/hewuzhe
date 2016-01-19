@@ -32,7 +32,7 @@
             <TextView android:layout_width="wrap_content"
                       android:layout_height="wrap_content"
                       android:layout_weight="1"
-                      android:text="武友动态"
+                      android:text="武者动态"
                       android:textColor="@color/white"
                       android:textSize="30px"/>
 
@@ -269,7 +269,7 @@
             <TextView android:layout_width="wrap_content"
                       android:layout_height="wrap_content"
                       android:layout_weight="1"
-                      android:text="招聘合作"
+                      android:text="行业资讯"
                       android:textColor="@color/white"
                       android:textSize="30px"/>
 

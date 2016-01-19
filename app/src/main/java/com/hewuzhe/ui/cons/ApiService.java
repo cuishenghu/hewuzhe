@@ -173,6 +173,9 @@ public interface ApiService {
     @GET("Hewuzhe.asmx/GetSmallCateForOnlineStudy")
     Observable<Res<ArrayList<StudyOnlineCatItem>>> GetSmallCateForOnlineStudy(@Query("categoryid") int categoryid);
 
+    @GET("Hedongli.asmx/GetChannel")
+    Observable<Res<ArrayList<StudyOnlineCatItem>>> GetChannel();
+
 
     @GET("Hewuzhe.asmx/SelectWuGuanPageByCityId")
     Observable<Res<ArrayList<Dojo>>> SelectWuGuanPageByCityId(@Query("startRowIndex") int startRowIndex, @Query("maximumRows") int maximumRows, @Query("cityid") int cityid);

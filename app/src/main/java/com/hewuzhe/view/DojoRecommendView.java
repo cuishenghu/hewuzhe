@@ -12,4 +12,5 @@ import com.hewuzhe.view.common.SwipeRefreshView;
 public interface DojoRecommendView extends LoadMoreView, GetView<Integer>,SwipeRefreshView,ListView<Dojo> {
 
 
+    void setNodata(int recordcount);
 }

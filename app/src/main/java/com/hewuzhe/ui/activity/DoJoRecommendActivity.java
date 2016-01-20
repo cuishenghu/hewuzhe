@@ -206,6 +206,18 @@ public class DoJoRecommendActivity extends SwipeRecycleViewActivity<DojoRecommen
         super.onStop();
     }
 
+    @Override
+    public void setNodata(int recordcount) {
+        if (recordcount <= 0) {
+            _LayNoLoc.setVisibility(View.VISIBLE);
+            recyclerView.setVisibility(View.GONE);
+        } else {
+            _LayNoLoc.setVisibility(View.GONE);
+            recyclerView.setVisibility(View.VISIBLE);
+        }
+
+    }
+
 
     public class MyLocationListener implements BDLocationListener {
 

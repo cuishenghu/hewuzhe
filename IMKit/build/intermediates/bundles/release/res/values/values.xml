@@ -274,7 +274,7 @@
     <color name="rc_notification_bg">#3e3e40</color>
     <color name="rc_plugins_bg">#3e3e40</color>
     <color name="rc_text_color_primary">#353535</color>
-    <color name="rc_text_color_primary_inverse">@android:color/white</color>
+    <color name="rc_text_color_primary_inverse">#3e3e40</color>
     <color name="rc_text_color_secondary">#999999</color>
     <color name="rc_text_color_tertiary">#d7d7d7</color>
     <color name="rc_text_voice">#7f7f7f</color>

@@ -40,6 +40,7 @@ public class DojoRecommendPresenter extends RefreshAndLoadMorePresenter<DojoReco
                         if (res.code == C.OK) {
                             view.bindData(res.data);
                             setDataStatus(page, count, res);
+                            view.setNodata(res.recordcount);
                         }
                     }
 
@@ -71,6 +72,8 @@ public class DojoRecommendPresenter extends RefreshAndLoadMorePresenter<DojoReco
                         if (res.code == C.OK) {
                             view.bindData(res.data);
                             setDataStatus(page, count, res);
+                            view.setNodata(res.recordcount);
+
                         }
                     }
 

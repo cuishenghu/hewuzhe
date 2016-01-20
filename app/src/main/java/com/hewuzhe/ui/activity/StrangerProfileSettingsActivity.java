@@ -65,7 +65,7 @@ public class StrangerProfileSettingsActivity extends ToolBarActivity<ProfileSett
      */
     @Override
     protected String provideTitle() {
-        return getIntentData().getString("title");
+        return "陌生人资料";
     }
 
     /**

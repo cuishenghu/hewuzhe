@@ -279,7 +279,7 @@
                 <category android:name="android.intent.category.DEFAULT"/>
 
                 <data
-                    android:host="io.rong.imkit"
+                    android:host="com.hewuzhe"
                     android:pathPrefix="/VoIPCall"
                     android:scheme="rong"/>
             </intent-filter>
@@ -294,7 +294,7 @@
                 <category android:name="android.intent.category.DEFAULT"/>
 
                 <data
-                    android:host="io.rong.imkit"
+                    android:host="com.hewuzhe"
                     android:pathPrefix="/VoIPAccept"
                     android:scheme="rong"/>
             </intent-filter>
@@ -440,6 +440,10 @@
                 <action android:name="cn.jpush.android.intent.PUSH_TIME"/>
             </intent-filter>
         </service>
+
+
+
+
 
         <!-- since 1.8.0 option 可选项。用于同一设备中不同应用的JPush服务相互拉起的功能。 -->
         <!-- 若不启用该功能可删除该组件，将不拉起其他应用也不能被其他应用拉起 -->

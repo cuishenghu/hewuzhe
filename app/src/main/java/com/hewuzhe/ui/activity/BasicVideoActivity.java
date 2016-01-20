@@ -103,7 +103,6 @@ public class BasicVideoActivity extends ToolBarActivity {
     }
 
 
-
     @Override
     public void onConfigurationChanged(Configuration newConfig) {
         super.onConfigurationChanged(newConfig);

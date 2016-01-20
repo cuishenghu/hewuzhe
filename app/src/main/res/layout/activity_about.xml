@@ -13,8 +13,22 @@
     <TextView style="@style/text_30_white"
               android:layout_width="match_parent"
               android:layout_height="wrap_content"
+              android:lineSpacingExtra="2px"
               android:padding="20px"
-              android:text="专为武术、功夫，跆拳道。。。。。"/>
+              android:text="@string/about"/>
+
+    <ImageView android:layout_width="match_parent"
+               android:layout_height="300px"
+               android:scaleType="fitXY"
+               android:src="@mipmap/img_bg"/>
+
+
+    <TextView style="@style/text_30_white"
+              android:layout_width="match_parent"
+              android:layout_height="wrap_content"
+              android:lineSpacingExtra="2px"
+              android:padding="20px"
+              android:text="@string/about2"/>
 
 
 </LinearLayout>

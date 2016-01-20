@@ -1,6 +1,8 @@
 package com.hewuzhe.ui.fragment;
 
 
+import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
@@ -20,6 +22,8 @@ import com.hewuzhe.view.PlanView;
 
 import java.util.ArrayList;
 import java.util.LinkedList;
+
+import de.greenrobot.event.EventBus;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -54,6 +58,7 @@ public class PlanFragment extends SwipeRecycleViewFragment<PlanPresenter, PlanAd
     @Override
     protected void initThings(View view) {
         super.initThings(view);
+        EventBus.getDefault().register(this);
         id = getArguments().getInt("id");
         presenter.getData(page, count);
     }
@@ -122,11 +127,23 @@ public class PlanFragment extends SwipeRecycleViewFragment<PlanPresenter, PlanAd
              * */
 
             item.catId = id;
-            startActivity(PlanDetailActivity.class, new Bun().putInt("id", item.Id).ok());
+            startActivityForResult(PlanDetailActivity.class, new Bun().putInt("id", item.Id).ok(), C.RESULT_ONE);
         }
 
     }
 
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+
+        if (resultCode == Activity.RESULT_OK) {
+
+            page = 1;
+            presenter.getData(page, count);
+
+        }
+    }
 
     @Override
     public void onReceive(Integer msg) {
@@ -157,5 +174,12 @@ public class PlanFragment extends SwipeRecycleViewFragment<PlanPresenter, PlanAd
     @Override
     public Boolean getMsg() {
         return NU.isNull(adapter) ? false : adapter.getCheckShowStatus();
+    }
+
+    public void onEvent(Integer msg) {
+        if (msg == C.MSG_REFRESH_PLAN_LIST) {
+            page = 1;
+            presenter.getData(page, count);
+        }
     }
 }

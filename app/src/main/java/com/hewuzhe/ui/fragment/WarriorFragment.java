@@ -392,6 +392,7 @@ public class WarriorFragment extends ToolBarFragment<WarriorFragmentPresenter> i
                     RongIM.setConversationBehaviorListener(WarriorFragment.this);//设置会话界面操作的监听器。
                     RongIM.setLocationProvider(WarriorFragment.this);//设置地理位置提供者,不用位置的同学可以注掉此行代码
 
+
                 }
 
                 /**
@@ -410,6 +411,7 @@ public class WarriorFragment extends ToolBarFragment<WarriorFragmentPresenter> i
 
     @Override
     public void onStartLocation(Context context, LocationCallback locationCallback) {
+
 
     }
 
@@ -459,6 +461,9 @@ public class WarriorFragment extends ToolBarFragment<WarriorFragmentPresenter> i
 
     @Override
     public boolean onMessageClick(Context context, View view, Message message) {
+
+        toast(message.getExtra());
+
         return false;
     }
 

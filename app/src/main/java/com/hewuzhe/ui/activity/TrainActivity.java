@@ -1,5 +1,6 @@
 package com.hewuzhe.ui.activity;
 
+import android.content.Intent;
 import android.support.design.widget.TabLayout;
 import android.support.v4.view.ViewPager;
 import android.view.LayoutInflater;
@@ -17,10 +18,12 @@ import com.hewuzhe.utils.Bun;
 import com.hewuzhe.utils.NU;
 
 import cn.xm.weidongjian.popuphelper.PopupWindowHelper;
+import de.greenrobot.event.EventBus;
 
 public class TrainActivity extends TabToolBarActivity {
 
 
+    public static int PAGE = 0;
     private TextView action_1;
     private TextView action_2;
     private ViewPager mViewPager;
@@ -75,7 +78,7 @@ public class TrainActivity extends TabToolBarActivity {
             action_1.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    startActivity(PublishPlanActivity.class);
+                    startActivityForResult(PublishPlanActivity.class, C.RESULT_ONE);
                     popupWindowHelper.dismiss();
                 }
             });
@@ -105,6 +108,16 @@ public class TrainActivity extends TabToolBarActivity {
         popupWindowHelper.showAsDropDown(imgAction);
     }
 
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (resultCode == RESULT_OK) {
+            EventBus.getDefault().post(C.MSG_REFRESH_PLAN_LIST);
+
+        }
+
+    }
+
     /**
      * 初始化Tabs
      */
@@ -126,6 +139,24 @@ public class TrainActivity extends TabToolBarActivity {
         mTabLayout.addTab(mTabLayout.newTab());
         mTabLayout.addTab(mTabLayout.newTab());
         mTabLayout.setupWithViewPager(mViewPager);//给TabLayout设置关联ViewPager，如果设置了ViewPager，那么ViewPagerAdapter中的getPageTitle()方法返回的就是Tab上的标题
+
+        mViewPager.setOnPageChangeListener(new ViewPager.OnPageChangeListener() {
+            @Override
+            public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
+
+            }
+
+            @Override
+            public void onPageSelected(int position) {
+
+                PAGE = position;
+            }
+
+            @Override
+            public void onPageScrollStateChanged(int state) {
+
+            }
+        });
 
     }
 }

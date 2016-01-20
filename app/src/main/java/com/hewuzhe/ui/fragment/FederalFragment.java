@@ -10,7 +10,6 @@ import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.Zxing.CaptureActivity;
 import com.hewuzhe.R;
@@ -34,7 +33,13 @@ import com.hewuzhe.utils.SessionUtil;
 
 import butterknife.Bind;
 import de.greenrobot.event.EventBus;
+import io.rong.imkit.RongContext;
 import io.rong.imkit.RongIM;
+import io.rong.imkit.widget.provider.CameraInputProvider;
+import io.rong.imkit.widget.provider.ImageInputProvider;
+import io.rong.imkit.widget.provider.InputProvider;
+import io.rong.imkit.widget.provider.LocationInputProvider;
+import io.rong.imlib.model.Conversation;
 
 /**
  * Created by xianguangjin on 15/12/8.
@@ -186,20 +191,32 @@ public class FederalFragment extends BaseFragment {
                 .postDelayed(new Runnable() {
                     @Override
                     public void run() {
+
                         RongIM.getInstance().setOnReceiveUnreadCountChangedListener(new RongIM.OnReceiveUnreadCountChangedListener() {
                             @Override
                             public void onMessageIncreased(int i) {
-                                Toast.makeText(getActivity(), "i:" + i, Toast.LENGTH_SHORT).show();
-
                                 NotiMsg msg = new NotiMsg();
                                 msg.what = C.MSG_UNREAD_COUNT;
                                 msg.msg1 = i;
                                 EventBus.getDefault().post(msg);
                             }
-                        });
+                        }, Conversation.ConversationType.PRIVATE, Conversation.ConversationType.GROUP);
+
+
+                        //扩展功能自定义
+                        InputProvider.ExtendProvider[] provider = {
+                                new ImageInputProvider(RongContext.getInstance()),//图片
+                                new CameraInputProvider(RongContext.getInstance()),//相机
+                                new LocationInputProvider(RongContext.getInstance()),//地理位置
+                        };
+
+                        RongIM.getInstance().resetInputExtensionProvider(Conversation.ConversationType.PRIVATE, provider);
+                        RongIM.getInstance().resetInputExtensionProvider(Conversation.ConversationType.GROUP, provider);
+
 
                     }
                 }, 1000);
+
 
     }
 

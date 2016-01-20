@@ -33,13 +33,15 @@
                       android:layout_width="match_parent"
                       android:layout_height="85px"
                       android:orientation="horizontal">
-            <TextView style="@style/text_30_colorLine"
+
+            <TextView android:id="@+id/tv_time"
+                      style="@style/text_27_white"
                       android:layout_width="wrap_content"
                       android:layout_height="wrap_content"
                       android:layout_gravity="center_vertical"
                       android:layout_marginLeft="20px"
                       android:layout_weight="1"
-                      android:text="选择周期"/>
+                      android:text=""/>
 
             <TextView android:id="@+id/tv_cate"
                       style="@style/text_30_colorLine"

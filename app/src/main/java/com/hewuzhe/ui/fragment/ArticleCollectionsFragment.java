@@ -98,7 +98,7 @@ public class ArticleCollectionsFragment extends SwipeRecycleViewFragment<Article
     @Override
     public void onItemClick(View view, int pos, ArticleCollection item) {
 
-        startActivity(FederalConditionDetailActivity.class, new Bun().putInt("id", item.Id).ok());
+        startActivity(FederalConditionDetailActivity.class, new Bun().putInt("id", item.MessageId).ok());
     }
 
     @Override

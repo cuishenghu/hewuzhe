@@ -20,6 +20,7 @@ import com.hewuzhe.ui.adapter.common.PickImgsAdapter;
 import com.hewuzhe.ui.base.ListActivity;
 import com.hewuzhe.ui.cons.C;
 import com.hewuzhe.utils.NU;
+import com.hewuzhe.utils.TimeUtil;
 import com.hewuzhe.view.PublishPlanView;
 
 import java.util.ArrayList;
@@ -44,6 +45,8 @@ public class PublishPlanActivity extends ListActivity<PublishPlanPresenter, Pick
     ImageView _ImgSelectPic;
     @Bind(R.id.img_take_pic)
     ImageView _ImgTakePic;
+    @Bind(R.id.tv_time)
+    TextView _TvTime;
     private boolean isActivityResultOver = false;
 
     private int chooserType;
@@ -58,6 +61,7 @@ public class PublishPlanActivity extends ListActivity<PublishPlanPresenter, Pick
     public static final int STATUS_EDIT = 1;//编辑
     private int status = STATUS_NEW;
     private int id = -1;
+    private int days = 30;
 
 
     /**
@@ -109,13 +113,42 @@ public class PublishPlanActivity extends ListActivity<PublishPlanPresenter, Pick
         item = getIntentData().getParcelable("item");
         tvAction.setText("发布");
 
+        if (TrainActivity.PAGE == 0) {
+            days = 7;
+            catId = 51;
+            catName = "周计划";
+        } else if (TrainActivity.PAGE == 1) {
+            days = 30;
+            catId = 50;
+
+            catName = "月计划";
+
+        }
+        if (TrainActivity.PAGE == 2) {
+            days = 90;
+            catId = 49;
+
+            catName = "季计划";
+
+        }
+        if (TrainActivity.PAGE == 3) {
+            days = 365;
+            catId = 48;
+            catName = "年计划";
+
+        }
+
+        start = TimeUtil.getCurrentDayFormat();
+        end = TimeUtil.getDayAfterFormat(days);
+
+        _TvTime.setText(start + "-" + end);
+        _TvCate.setText(catName);
+
         if (NU.notNull(item)) {
             tvAction.setText("保存");
             status = STATUS_EDIT;
             _EdtContent.setText(item.Content);
             _EdtTitle.setText(item.Title);
-            _TvCate.setText(item.getCateName());
-            catId = item.catId;
             start = item.StartTime;
             end = item.EndTime;
             id = item.Id;
@@ -223,6 +256,9 @@ public class PublishPlanActivity extends ListActivity<PublishPlanPresenter, Pick
             start = data.getBundleExtra("data").getString("start");
             end = data.getBundleExtra("data").getString("end");
             _TvCate.setText(catName);
+
+            _TvTime.setText(start + "-" + end);
+
         }
     }
 
@@ -275,7 +311,6 @@ public class PublishPlanActivity extends ListActivity<PublishPlanPresenter, Pick
         }
     }
 
-
     // Should be called if for some reason the ImageChooserManager is null (Due
     // to destroying of activity for low memory situations)
     public void reinitializeImageChooser() {
@@ -283,6 +318,4 @@ public class PublishPlanActivity extends ListActivity<PublishPlanPresenter, Pick
         imageChooserManager.setImageChooserListener((ImageChooserListener) this);
         imageChooserManager.reinitialize(filePath);
     }
-
-
 }

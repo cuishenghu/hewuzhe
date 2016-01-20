@@ -39,7 +39,7 @@ public class FollowedFriendAdapter extends BaseAdapter<FollowedFriendAdapter.VHo
      */
     @Override
     public int provideItemLayoutId() {
-        return R.layout.item_warrior_list_search;
+        return R.layout.item_friends_followed;
     }
 
     /**
@@ -61,7 +61,6 @@ public class FollowedFriendAdapter extends BaseAdapter<FollowedFriendAdapter.VHo
     public void bindData(VHolder holder, final int position) {
         final Friend friend = data.get(position);
         holder._TvUsername.setText(friend.NicName);
-        holder._TvLevel.setTextSize(20);
         holder._TvLevel.setText(friend.JoinTime + "关注了你");
 
         Glide.with(context)
@@ -73,8 +72,8 @@ public class FollowedFriendAdapter extends BaseAdapter<FollowedFriendAdapter.VHo
                 .into(holder._ImgAvatar);
 
         if (friend.IsFriend) {
-            holder._TvFollow.setText("已关注");
-            holder._TvFollow.setBackgroundResource(R.color.colorYellow);
+            holder._TvFollow.setText("取消关注");
+            holder._TvFollow.setBackgroundResource(R.color.colorBg);
             holder._TvFollow.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
@@ -84,7 +83,7 @@ public class FollowedFriendAdapter extends BaseAdapter<FollowedFriendAdapter.VHo
 
         } else {
             holder._TvFollow.setText("关注");
-            holder._TvFollow.setBackgroundResource(R.color.colorBg);
+            holder._TvFollow.setBackgroundResource(R.color.colorYellow);
             holder._TvFollow.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {

@@ -84,7 +84,6 @@ public abstract class BaseActivity<P extends BasePresenterImp> extends AutoLayou
 
         initThings(savedInstanceState);
         initListeners();
-
     }
 
     @Override
@@ -107,38 +106,33 @@ public abstract class BaseActivity<P extends BasePresenterImp> extends AutoLayou
 
     @Override
     public void showDialog() {
-        if (dialog == null) {
-            dialog = new MaterialDialog.Builder(this)
-                    .title("请稍候")
-                    .titleGravity(GravityEnum.CENTER)
-                    .titleColor(Color.WHITE)
-                    .contentColor(Color.WHITE)
-                    .positiveColor(C.COLOR_YELLOW)
-                    .negativeColor(C.COLOR_YELLOW)
-                    .content("请稍候...")
-                    .backgroundColor(C.COLOR_BG)
-                    .progress(true, 0)
-                    .build();
-        }
+        dialog = new MaterialDialog.Builder(this)
+                .title("请稍候")
+                .titleGravity(GravityEnum.CENTER)
+                .titleColor(Color.WHITE)
+                .contentColor(Color.WHITE)
+                .positiveColor(C.COLOR_YELLOW)
+                .negativeColor(C.COLOR_YELLOW)
+                .content("请稍候...")
+                .backgroundColor(C.COLOR_BG)
+                .progress(true, 0)
+                .build();
         dialog.show();
-
     }
 
     @Override
     public void showDialog(String title, String content) {
-        if (dialog == null) {
-            dialog = new MaterialDialog.Builder(this)
-                    .title(title)
-                    .titleGravity(GravityEnum.CENTER)
-                    .titleColor(Color.WHITE)
-                    .contentColor(Color.WHITE)
-                    .positiveColor(C.COLOR_YELLOW)
-                    .negativeColor(C.COLOR_YELLOW)
-                    .content(content)
-                    .backgroundColor(C.COLOR_BG)
-                    .progress(true, 0)
-                    .build();
-        }
+        dialog = new MaterialDialog.Builder(this)
+                .title(title)
+                .titleGravity(GravityEnum.CENTER)
+                .titleColor(Color.WHITE)
+                .contentColor(Color.WHITE)
+                .positiveColor(C.COLOR_YELLOW)
+                .negativeColor(C.COLOR_YELLOW)
+                .content(content)
+                .backgroundColor(C.COLOR_BG)
+                .progress(true, 0)
+                .build();
         dialog.show();
 
     }
@@ -146,7 +140,7 @@ public abstract class BaseActivity<P extends BasePresenterImp> extends AutoLayou
     @Override
     public void showListDialog(BeeBaseAdapter adapter, MaterialDialog.ListCallback callback, String title) {
 
-        new MaterialDialog.Builder(this)
+        dialog = new MaterialDialog.Builder(this)
                 .title(title)
                 .titleGravity(GravityEnum.CENTER)
                 .titleColor(Color.WHITE)

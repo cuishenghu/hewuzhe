@@ -1,13 +1,16 @@
 package com.hewuzhe.ui.fragment;
 
 import android.content.Intent;
+import android.os.Handler;
 import android.support.design.widget.AppBarLayout;
 import android.support.v7.app.ActionBar;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
+import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.Zxing.CaptureActivity;
 import com.hewuzhe.R;
@@ -24,10 +27,14 @@ import com.hewuzhe.ui.activity.MakeWarriorsActivity;
 import com.hewuzhe.ui.activity.MegaGameActivity;
 import com.hewuzhe.ui.activity.StoryActivity;
 import com.hewuzhe.ui.base.BaseFragment;
+import com.hewuzhe.ui.cons.C;
 import com.hewuzhe.utils.Bun;
+import com.hewuzhe.utils.NotiMsg;
 import com.hewuzhe.utils.SessionUtil;
 
 import butterknife.Bind;
+import de.greenrobot.event.EventBus;
+import io.rong.imkit.RongIM;
 
 /**
  * Created by xianguangjin on 15/12/8.
@@ -60,6 +67,10 @@ public class FederalFragment extends BaseFragment {
     LinearLayout layCoorperation;
     @Bind(R.id.lay_scan)
     LinearLayout layScan;
+    @Bind(R.id.tv_unread_count)
+    TextView _TvUnreadCount;
+    @Bind(R.id.lay_msg)
+    FrameLayout _LayMsg;
     private ImageView imgBack;
     private TextView tvTitle;
     private AppBarLayout appBar;
@@ -146,13 +157,18 @@ public class FederalFragment extends BaseFragment {
                 startActivity(ConversationListActivity.class);
             }
         });
+        _LayMsg.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(ConversationListActivity.class);
+            }
+        });
         imgBack.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 startActivity(ContactsActivity.class);
             }
         });
-
     }
 
     /**
@@ -162,7 +178,28 @@ public class FederalFragment extends BaseFragment {
      */
     @Override
     protected void initThings(View v) {
+        EventBus.getDefault().register(this);
         initToolBar(v);
+
+
+        new Handler()
+                .postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        RongIM.getInstance().setOnReceiveUnreadCountChangedListener(new RongIM.OnReceiveUnreadCountChangedListener() {
+                            @Override
+                            public void onMessageIncreased(int i) {
+                                Toast.makeText(getActivity(), "i:" + i, Toast.LENGTH_SHORT).show();
+
+                                NotiMsg msg = new NotiMsg();
+                                msg.what = C.MSG_UNREAD_COUNT;
+                                msg.msg1 = i;
+                                EventBus.getDefault().post(msg);
+                            }
+                        });
+
+                    }
+                }, 1000);
 
     }
 
@@ -180,6 +217,20 @@ public class FederalFragment extends BaseFragment {
     @Override
     public BasePresenterImp createPresenter() {
         return null;
+    }
+
+
+    public void onEvent(NotiMsg msg) {
+        if (msg.what == C.MSG_UNREAD_COUNT) {
+            if (msg.msg1 <= 0) {
+                _TvUnreadCount.setVisibility(View.GONE);
+
+            } else {
+                _TvUnreadCount.setVisibility(View.VISIBLE);
+                _TvUnreadCount.setText(msg.msg1 + "");
+            }
+
+        }
     }
 
 

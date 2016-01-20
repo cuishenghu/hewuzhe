@@ -11,6 +11,7 @@ import com.hewuzhe.ui.widget.PinyinFriendComparator;
 import com.hewuzhe.utils.NetEngine;
 import com.hewuzhe.utils.SB;
 import com.hewuzhe.utils.SessionUtil;
+import com.hewuzhe.utils.StringUtil;
 import com.hewuzhe.view.FriendsView;
 
 import java.util.ArrayList;
@@ -45,7 +46,6 @@ public class FriendsPresenter extends BasePresenterImp<FriendsView> {
                     @Override
                     public void next(Res<ArrayList<WrapFriend>> res) {
                         if (res.code == C.OK) {
-
                             for (WrapFriend wrapFriend : res.data) {
                                 Friend friend = wrapFriend.Value;
                                 friend.Id = wrapFriend.Key;
@@ -66,25 +66,26 @@ public class FriendsPresenter extends BasePresenterImp<FriendsView> {
                     }
                 });
 
-
         addSubscription(subscription);
-
     }
 
     private void bindData() {
         PinyinFriendComparator mPinyinComparator = new PinyinFriendComparator();
         CharacterParser mCharacterParser = CharacterParser.getInstance();
+
         for (Friend friend : friends) {
-            friend.topc = mCharacterParser.getSelling(friend.NicName).substring(0, 1).toUpperCase();
-            if (friend.NicName.equals("重庆")) {
-                friend.topc = "C";
+            if (StringUtil.isEmpty(friend.NicName)) {
+                friend.topc = "A";
+            } else {
+                friend.topc = mCharacterParser.getSelling(friend.NicName).substring(0, 1).toUpperCase();
+                if (friend.NicName.equals("重庆")) {
+                    friend.topc = "C";
+                }
             }
         }
 
         Collections.sort(friends, mPinyinComparator);
-        if (view != null) {
-            view.bindData(friends);
-        }
+        view.bindData(friends);
     }
 
     public void getGroup() {

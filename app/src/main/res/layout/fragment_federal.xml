@@ -6,8 +6,77 @@
               android:orientation="vertical"
               tools:context="com.hewuzhe.ui.fragment.WarriorFragment">
 
-    <include layout="@layout/toolbar_federal"/>
-    <!-- TODO: Update blank fragment layout -->
+    <android.support.design.widget.AppBarLayout
+        android:id="@+id/app_bar_layout"
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:theme="@style/AppTheme.AppBarOverlay"
+        app:elevation="4dp">
+        <android.support.v7.widget.Toolbar
+            android:id="@+id/toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            android:background="?attr/colorPrimary"
+            app:contentInsetLeft="0dp"
+            app:contentInsetStart="0dp"
+            app:layout_scrollFlags="scroll|enterAlways"
+            >
+
+            <FrameLayout android:layout_width="match_parent"
+                         android:layout_height="match_parent"
+                         android:orientation="horizontal">
+
+                <ImageView
+                    android:id="@+id/img_back"
+                    android:layout_width="48dp"
+                    android:layout_height="48dp"
+                    android:layout_gravity="center_vertical"
+                    android:padding="13dp"
+                    android:src="@mipmap/icon_person"
+                    />
+
+                <TextView
+                    android:id="@+id/tv_title"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:text=""
+                    android:textColor="@android:color/white"
+                    android:textSize="20sp"/>
+
+
+                <FrameLayout
+                    android:id="@+id/lay_msg"
+                    android:layout_width="48dp"
+                    android:layout_height="48dp"
+                    android:layout_gravity="center_vertical|right">
+                    <ImageView
+                        android:id="@+id/img_msg"
+                        android:layout_width="48dp"
+                        android:layout_height="48dp"
+                        android:padding="13dp"
+                        android:src="@mipmap/icon_msg"
+                        />
+
+                    <TextView android:id="@+id/tv_unread_count"
+                              style="@style/text_25_white"
+                              android:layout_width="18dp"
+                              android:layout_height="18dp"
+                              android:layout_gravity="top|right"
+                              android:layout_marginRight="2dp"
+                              android:layout_marginTop="2dp"
+                              android:background="@drawable/circle_red"
+                              android:gravity="center"
+                              android:text=""
+                              android:visibility="gone"/>
+
+                </FrameLayout>
+            </FrameLayout>
+
+        </android.support.v7.widget.Toolbar>
+    </android.support.design.widget.AppBarLayout>
 
 
     <LinearLayout android:layout_width="match_parent"
@@ -236,7 +305,7 @@
             <TextView android:layout_width="wrap_content"
                       android:layout_height="wrap_content"
                       android:layout_weight="1"
-                      android:text="江湖故事"
+                      android:text="行业资讯"
                       android:textColor="@color/white"
                       android:textSize="30px"/>
 
@@ -269,7 +338,7 @@
             <TextView android:layout_width="wrap_content"
                       android:layout_height="wrap_content"
                       android:layout_weight="1"
-                      android:text="行业资讯"
+                      android:text="招聘合作"
                       android:textColor="@color/white"
                       android:textSize="30px"/>
 

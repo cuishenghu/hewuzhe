@@ -261,4 +261,7 @@ public class Friend {
     public int sexuality;
 
 
+
+
+
 }

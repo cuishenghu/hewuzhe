@@ -20,7 +20,6 @@ import butterknife.Bind;
 
 public class PlanDetailActivity extends ToolBarActivity<PlanDetailPresenter> implements PlanDetialView {
 
-
     @Bind(R.id.tv_name)
     TextView _TvName;
     @Bind(R.id.tv_time)
@@ -38,7 +37,6 @@ public class PlanDetailActivity extends ToolBarActivity<PlanDetailPresenter> imp
     @Override
     protected String provideTitle() {
         return "计划详情";
-
     }
 
     /**
@@ -64,7 +62,6 @@ public class PlanDetailActivity extends ToolBarActivity<PlanDetailPresenter> imp
     protected void initThings(Bundle savedInstanceState) {
         super.initThings(savedInstanceState);
         tvAction.setText("编辑");
-        id = getIntentData().getInt("id");
 
         presenter.getPlanDetail();
     }
@@ -109,12 +106,10 @@ public class PlanDetailActivity extends ToolBarActivity<PlanDetailPresenter> imp
         PlanImgsAdapter planImgsAdapter = new PlanImgsAdapter(getContext());
         _RecyclerView.setAdapter(planImgsAdapter);
         planImgsAdapter.addDatas(plan.ImageList);
-
-
     }
 
     @Override
     public Integer getData() {
-        return id;
+        return getIntentData().getInt("id");
     }
 }

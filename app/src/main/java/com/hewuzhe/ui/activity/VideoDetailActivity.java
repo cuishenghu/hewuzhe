@@ -124,6 +124,7 @@ public class VideoDetailActivity extends RecycleViewActivity<VideoDetailPresente
         imgAvatar2 = (ImageView) headerView.findViewById(R.id.img_avatar_2);
         btnPublish = (Button) headerView.findViewById(R.id.btn_publish);
         edtComment = (EditText) headerView.findViewById(R.id.edt_comment);
+
     }
 
     /**
@@ -173,8 +174,8 @@ public class VideoDetailActivity extends RecycleViewActivity<VideoDetailPresente
                     getWindow().addFlags(WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS);
 
                     videoController.btnFullScreen.setImageResource(R.mipmap.icon_origin_screen);
-
                 }
+
                 if (mCurrentOrientation == Configuration.ORIENTATION_LANDSCAPE) {
                     VideoDetailActivity.this.setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
                     attrs.flags &= (~WindowManager.LayoutParams.FLAG_FULLSCREEN);
@@ -189,6 +190,7 @@ public class VideoDetailActivity extends RecycleViewActivity<VideoDetailPresente
                 }
             }
         });
+
 
         btnPublish.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -408,8 +410,6 @@ public class VideoDetailActivity extends RecycleViewActivity<VideoDetailPresente
 //
 //        }
 
-        mLayout = VideoView.VIDEO_LAYOUT_FIT_PARENT;
-        videoController.getVideoView().setVideoLayout(mLayout, 0);
 
         if (video.IsFree) {
             videoController.setVideoPath(C.BASE_URL + video.VideoPath);
@@ -420,14 +420,14 @@ public class VideoDetailActivity extends RecycleViewActivity<VideoDetailPresente
                 videoController.setVideoPath(C.BASE_URL + video.VideoPath);
                 videoController._LayNoVip.setVisibility(View.GONE);
                 videoController.start();
+
             } else {
                 videoController._LayNoVip.setVisibility(View.VISIBLE);
                 videoController.pause();
             }
         }
 
-
-
+//      videoController.getVideoView().setVideoLayout(VideoView.VIDEO_LAYOUT_FIT_PARENT, 0);
     }
 
     /**
@@ -551,7 +551,6 @@ public class VideoDetailActivity extends RecycleViewActivity<VideoDetailPresente
 
     }
 
-
     @Override
     public void onConfigurationChanged(Configuration newConfig) {
         super.onConfigurationChanged(newConfig);
@@ -566,7 +565,7 @@ public class VideoDetailActivity extends RecycleViewActivity<VideoDetailPresente
             mLayout = VideoView.VIDEO_LAYOUT_FIT_PARENT;//原始尺寸
 
             ViewGroup.LayoutParams params = videoController.getLayoutParams();
-            params.height = StringUtil.dip2px(getContext(), 200);
+            params.height = StringUtil.dip2px(getContext(), 180);
             params.width = windowManager.getDefaultDisplay().getWidth();
             videoController.setLayoutParams(params);
         }

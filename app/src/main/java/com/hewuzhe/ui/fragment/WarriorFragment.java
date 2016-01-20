@@ -216,11 +216,14 @@ public class WarriorFragment extends ToolBarFragment<WarriorFragmentPresenter> i
             }
         });
 
-
         tvFlyDream.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 startActivity(new Intent(getActivity(), FlyDreamActivity.class));
+
+//                startActivity(SignupProfileActivity.class);
+
+
             }
         });
         tvStudyOnline.setOnClickListener(new View.OnClickListener() {

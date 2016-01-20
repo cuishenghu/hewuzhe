@@ -122,7 +122,7 @@ public class PlanFragment extends SwipeRecycleViewFragment<PlanPresenter, PlanAd
              * */
 
             item.catId = id;
-            startActivity(PlanDetailActivity.class, new Bun().putP("item", item).ok());
+            startActivity(PlanDetailActivity.class, new Bun().putInt("id", item.Id).ok());
         }
 
     }

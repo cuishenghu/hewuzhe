@@ -74,7 +74,6 @@ public class SignUpActivity extends ToolBarActivity<SignUpPresenter> implements 
         return R.layout.activity_sign_up;
     }
 
-
     @Override
     protected String provideTitle() {
         return "注册";

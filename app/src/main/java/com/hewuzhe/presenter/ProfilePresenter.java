@@ -2,7 +2,6 @@ package com.hewuzhe.presenter;
 
 import android.content.Intent;
 import android.graphics.Bitmap;
-import android.net.Uri;
 import android.view.View;
 
 import com.hewuzhe.model.Res;
@@ -24,8 +23,6 @@ import java.util.Set;
 
 import cn.jpush.android.api.JPushInterface;
 import cn.jpush.android.api.TagAliasCallback;
-import io.rong.imkit.RongIM;
-import io.rong.imlib.model.UserInfo;
 import rx.Subscription;
 import rx.android.schedulers.AndroidSchedulers;
 import rx.functions.Action0;
@@ -72,14 +69,9 @@ public class ProfilePresenter extends AreaPresenter<ProfileView> {
                                 User user = new SessionUtil(view.getContext()).getUser();
                                 user.PhotoPath = res.date.ImageName;
 
-                                updateRongImInfo(res.data.ImageName);
-
-
                                 new SessionUtil(view.getContext())
                                         .putUser(user);
-
                                 view.setData();
-
                             } else {
                                 view.snb("上传失败", v);
                             }
@@ -105,13 +97,6 @@ public class ProfilePresenter extends AreaPresenter<ProfileView> {
         }
     }
 
-    private void updateRongImInfo(String imageName) {
-
-
-        RongIM.getInstance().refreshUserInfoCache(new UserInfo("", "啊明", Uri.parse("http://rongcloud-web.qiniudn.com/docs_demo_rongcloud_logo.png")));
-
-
-    }
 
     public void saveData(final View v) {
         User user = view.getData();

@@ -28,11 +28,11 @@
         "source": "/Users/xianguangjin/Desktop/Hewuzhe3/vitamio/build/intermediates/bundles/debug/res/drawable-xhdpi-v4/mediacontroller_play.png"
     },
     {
-        "merged": "/Users/xianguangjin/Desktop/Hewuzhe3/vitamio/build/intermediates/res/merged/androidTest/debug/drawable-xhdpi-v4/scrubber_control_focused_holo.png",
-        "source": "/Users/xianguangjin/Desktop/Hewuzhe3/vitamio/build/intermediates/bundles/debug/res/drawable-xhdpi-v4/scrubber_control_focused_holo.png"
-    },
-    {
         "merged": "/Users/xianguangjin/Desktop/Hewuzhe3/vitamio/build/intermediates/res/merged/androidTest/debug/drawable-xhdpi-v4/scrubber_control_disabled_holo.png",
         "source": "/Users/xianguangjin/Desktop/Hewuzhe3/vitamio/build/intermediates/bundles/debug/res/drawable-xhdpi-v4/scrubber_control_disabled_holo.png"
+    },
+    {
+        "merged": "/Users/xianguangjin/Desktop/Hewuzhe3/vitamio/build/intermediates/res/merged/androidTest/debug/drawable-xhdpi-v4/scrubber_control_focused_holo.png",
+        "source": "/Users/xianguangjin/Desktop/Hewuzhe3/vitamio/build/intermediates/bundles/debug/res/drawable-xhdpi-v4/scrubber_control_focused_holo.png"
     }
 ]

@@ -44,9 +44,6 @@ public class PublishPlanPresenter extends ListPresenter<PublishPlanView> {
 //        view.bindData(new Alist().add(new PickImg()).ok());
     }
 
-    /**
-     * 发布动态
-     */
 
     public void publish(View v) {
 
@@ -55,7 +52,6 @@ public class PublishPlanPresenter extends ListPresenter<PublishPlanView> {
 
         if (data.m.Id != -1) {
             deletePlan(data.m.Id);
-
         } else {
             beforePublish();
         }

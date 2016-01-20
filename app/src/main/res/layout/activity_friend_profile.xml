@@ -21,12 +21,13 @@
             <ImageView android:id="@+id/img"
                        android:layout_width="match_parent"
                        android:layout_height="280px"
+                       android:visibility="gone"
                        android:scaleType="fitXY"
                        android:src="@mipmap/bg_friends_condition"/>
 
             <LinearLayout android:layout_width="match_parent"
                           android:layout_height="match_parent"
-                          android:layout_marginTop="300px"
+                          android:layout_marginTop="120px"
                           android:background="@color/colorBg"
                           android:orientation="vertical">
 
@@ -268,7 +269,7 @@
                        android:layout_width="120px"
                        android:layout_height="120px"
                        android:layout_marginLeft="30px"
-                       android:layout_marginTop="220px"
+                       android:layout_marginTop="60px"
                        android:src="@mipmap/img_avatar"/>
 
 

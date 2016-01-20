@@ -208,12 +208,12 @@
         "source": "/Users/xianguangjin/Desktop/Hewuzhe3/IMKit/src/main/res/drawable-xhdpi/u1f366.png"
     },
     {
-        "merged": "/Users/xianguangjin/Desktop/Hewuzhe3/IMKit/build/intermediates/res/merged/release/drawable-xhdpi-v4/u1f3c0.png",
-        "source": "/Users/xianguangjin/Desktop/Hewuzhe3/IMKit/src/main/res/drawable-xhdpi/u1f3c0.png"
-    },
-    {
         "merged": "/Users/xianguangjin/Desktop/Hewuzhe3/IMKit/build/intermediates/res/merged/release/drawable-xhdpi-v4/rc_ic_warning.png",
         "source": "/Users/xianguangjin/Desktop/Hewuzhe3/IMKit/src/main/res/drawable-xhdpi/rc_ic_warning.png"
+    },
+    {
+        "merged": "/Users/xianguangjin/Desktop/Hewuzhe3/IMKit/build/intermediates/res/merged/release/drawable-xhdpi-v4/u1f3c0.png",
+        "source": "/Users/xianguangjin/Desktop/Hewuzhe3/IMKit/src/main/res/drawable-xhdpi/u1f3c0.png"
     },
     {
         "merged": "/Users/xianguangjin/Desktop/Hewuzhe3/IMKit/build/intermediates/res/merged/release/drawable-xhdpi-v4/rc_ic_extend_selected.png",
@@ -740,12 +740,12 @@
         "source": "/Users/xianguangjin/Desktop/Hewuzhe3/IMKit/src/main/res/drawable-xhdpi/rc_bg_albums_spinner.9.png"
     },
     {
-        "merged": "/Users/xianguangjin/Desktop/Hewuzhe3/IMKit/build/intermediates/res/merged/release/drawable-xhdpi-v4/rc_receive_voice_two.png",
-        "source": "/Users/xianguangjin/Desktop/Hewuzhe3/IMKit/src/main/res/drawable-xhdpi/rc_receive_voice_two.png"
-    },
-    {
         "merged": "/Users/xianguangjin/Desktop/Hewuzhe3/IMKit/build/intermediates/res/merged/release/drawable-xhdpi-v4/u1f3a4.png",
         "source": "/Users/xianguangjin/Desktop/Hewuzhe3/IMKit/src/main/res/drawable-xhdpi/u1f3a4.png"
+    },
+    {
+        "merged": "/Users/xianguangjin/Desktop/Hewuzhe3/IMKit/build/intermediates/res/merged/release/drawable-xhdpi-v4/rc_receive_voice_two.png",
+        "source": "/Users/xianguangjin/Desktop/Hewuzhe3/IMKit/src/main/res/drawable-xhdpi/rc_receive_voice_two.png"
     },
     {
         "merged": "/Users/xianguangjin/Desktop/Hewuzhe3/IMKit/build/intermediates/res/merged/release/drawable-xhdpi-v4/rc_ic_notice_point.png",

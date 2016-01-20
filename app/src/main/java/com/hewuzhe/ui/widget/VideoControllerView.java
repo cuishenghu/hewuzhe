@@ -94,7 +94,6 @@ public class VideoControllerView extends FrameLayout implements View.OnTouchList
         mVideoView = findView(R.id.videoView);
         mVideoView.setOnTouchListener(this);
         mVideoView.setOnPreparedListener(this);
-        mVideoView.setHardwareDecoder(true);
         mVideoView.setBufferSize(3048);
         mVideoView.setOnBufferingUpdateListener(this);
 
@@ -237,6 +236,8 @@ public class VideoControllerView extends FrameLayout implements View.OnTouchList
         mediaPlayer.setPlaybackSpeed(1.0f);
         updateTimeTask();
         handler.sendEmptyMessage(MSG_PROGRESS_CHANGE);
+
+        mVideoView.setVideoLayout(VideoView.VIDEO_LAYOUT_FIT_PARENT, 0);
     }
 
 

@@ -404,9 +404,8 @@ public class VideoDetail2Activity extends RecycleViewActivity<VideoDetailPresent
 //
 //        }
 
-        mLayout = VideoView.VIDEO_LAYOUT_FIT_PARENT;
-        videoController.getVideoView().setVideoLayout(mLayout, 0);
-
+//        mLayout = VideoView.VIDEO_LAYOUT_FIT_PARENT;
+//        videoController.getVideoView().setVideoLayout(mLayout, 0);
 
         videoController.btnFullScreen.setVisibility(View.GONE);
         videoController.setVideoPath(C.BASE_URL + video.VideoPath);
@@ -547,10 +546,10 @@ public class VideoDetail2Activity extends RecycleViewActivity<VideoDetailPresent
             videoController.setLayoutParams(params);
 
         } else if (newConfig.orientation == Configuration.ORIENTATION_PORTRAIT) {
-            mLayout = VideoView.VIDEO_LAYOUT_SCALE;//原始尺寸
+            mLayout = VideoView.VIDEO_LAYOUT_FIT_PARENT;//原始尺寸
 
             ViewGroup.LayoutParams params = videoController.getLayoutParams();
-            params.height = StringUtil.dip2px(getContext(), 200);
+            params.height = StringUtil.dip2px(getContext(), 180);
             params.width = windowManager.getDefaultDisplay().getWidth();
             videoController.setLayoutParams(params);
         }

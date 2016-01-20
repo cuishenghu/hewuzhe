@@ -3,8 +3,13 @@ package com.hewuzhe.ui.activity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.text.Editable;
+import android.text.TextWatcher;
+import android.view.KeyEvent;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.inputmethod.EditorInfo;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -48,8 +53,13 @@ public class ContactsActivity extends ToolBarActivity<FriendsPresenter> implemen
     LinearLayout _LayGroup;
     @Bind(R.id.lay_followed)
     LinearLayout _LayFollowed;
+    @Bind(R.id.edt_search_content)
+    EditText _EdtSearchContent;
     private RecyclerIndexFriendsAdapter mAdapter;
     private LinearLayoutManager mLayoutManager;
+    private ArrayList<Friend> _Friends = new ArrayList<>();
+    private ArrayList<Friend> _NewFriends = new ArrayList<>();
+
 
     /**
      * @return 提供标题
@@ -122,6 +132,63 @@ public class ContactsActivity extends ToolBarActivity<FriendsPresenter> implemen
                 startActivity(FollowedFriendsActivity.class);
             }
         });
+
+        _EdtSearchContent.setOnEditorActionListener(new TextView.OnEditorActionListener() {
+            @Override
+            public boolean onEditorAction(TextView textView, int i, KeyEvent keyEvent) {
+                if (i == EditorInfo.IME_ACTION_SEARCH) {
+                    String keyWord = _EdtSearchContent.getText().toString().trim();
+                    search(keyWord);
+                }
+                return false;
+            }
+        });
+
+        _EdtSearchContent.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable editable) {
+                if (_EdtSearchContent.getText().toString().trim().length() == 0) {
+                    if (_Friends.size() > 0) {
+                        mAdapter.setDatas(_Friends);
+                        _RecyclerView.setAdapter(mAdapter);
+                    }
+
+                }
+
+
+            }
+        });
+
+    }
+
+    private void search(String keyWord) {
+
+        hideSoftMethod(_EdtSearchContent);
+
+        for (Friend friend : _Friends) {
+
+            if (friend.NicName.contains(keyWord)) {
+                _NewFriends.add(friend);
+            }
+        }
+
+        _RecyclerView.setAdapter(mAdapter);
+        mAdapter.setDatas(_NewFriends);
+        if (_NewFriends.size() > 0) {
+            _TvRecyclerindexviewTopc.setText(mAdapter.getItem(0).topc);
+        }
+
+
     }
 
     /**
@@ -154,8 +221,9 @@ public class ContactsActivity extends ToolBarActivity<FriendsPresenter> implemen
 
     @Override
     public void bindData(ArrayList<Friend> friends) {
-        _RecyclerView.setAdapter(mAdapter);
+        _Friends = friends;
         mAdapter.setDatas(friends);
+        _RecyclerView.setAdapter(mAdapter);
         _TvRecyclerindexviewTopc.setText(mAdapter.getItem(0).topc);
     }
 
@@ -185,4 +253,5 @@ public class ContactsActivity extends ToolBarActivity<FriendsPresenter> implemen
     public Integer getData() {
         return new SessionUtil(getContext()).getUserId();
     }
+
 }

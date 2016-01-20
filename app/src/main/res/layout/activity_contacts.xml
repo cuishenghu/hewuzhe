@@ -24,11 +24,15 @@
                    android:padding="18px"
                    android:src="@mipmap/icon_search"/>
 
-        <EditText android:layout_width="match_parent"
+        <EditText android:id="@+id/edt_search_content"
+                  android:layout_width="match_parent"
                   android:layout_height="70px"
                   android:layout_marginLeft="20px"
                   android:background="@null"
-                  android:hint="搜索战队昵称、id号"
+                  android:hint="搜索好友昵称"
+                  android:imeActionId="@+id/edt_search_content_actionid"
+                  android:imeOptions="actionSearch"
+                  android:inputType="text"
                   android:textColor="@color/colorLine"
                   android:textColorHint="@color/colorLine"/>
 

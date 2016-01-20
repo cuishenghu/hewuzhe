@@ -234,7 +234,6 @@
 
         <!-- 即时通讯 -->
 
-
         <!-- 会话列表 -->
         <activity
             android:name=".ui.activity.ConversationListActivity"
@@ -512,7 +511,7 @@
             android:value="developer-default"/>
         <meta-data
             android:name="JPUSH_APPKEY"
-            android:value="ed22cf3dd4e950e773deba55"/>
+            android:value="49d7a0a24aae94c23009fc21"/>
         <!-- </>值来自开发者平台取得的AppKey -->
 
         <activity android:name=".ui.activity.TestActivity"/>

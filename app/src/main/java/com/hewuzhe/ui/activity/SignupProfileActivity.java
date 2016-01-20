@@ -270,7 +270,6 @@ public class SignupProfileActivity extends ToolBarActivity<ProfilePresenter> imp
         tvAction.setText("保存");
         presenter.getUserData();
 
-
     }
 
     /**
@@ -285,7 +284,8 @@ public class SignupProfileActivity extends ToolBarActivity<ProfilePresenter> imp
     @Override
     public void setData() {
         user = new SessionUtil(getContext()).getUser();
-        tvId.setText("ID：" + user.Id);
+        tvId.setText(user.Phone);
+
         Glide.with(getContext())
                 .load(C.BASE_URL + user.PhotoPath)
                 .placeholder(R.mipmap.img_avatar)
@@ -302,7 +302,6 @@ public class SignupProfileActivity extends ToolBarActivity<ProfilePresenter> imp
         edtDesc.setText(user.Description);
 
         checkGender(user.Sexuality);
-
     }
 
     @Override
@@ -369,7 +368,6 @@ public class SignupProfileActivity extends ToolBarActivity<ProfilePresenter> imp
                 Bitmap bitmap = bundle.getParcelable("data");
                 String fileName = FileUtil.getTempImage().getPath();
                 presenter.saveImgAvatar(imgAvatar, bitmap, fileName);
-
             } else if (requestCode == C.CHOOSE_PIC) {
                 Bundle extras2 = data.getExtras();
                 if (extras2 != null) {
@@ -377,7 +375,6 @@ public class SignupProfileActivity extends ToolBarActivity<ProfilePresenter> imp
                     presenter.saveImgAvatar(imgAvatar, yourSelectedImage, FileUtil.getTempImage().getPath());
                 }
             }
-
         }
     }
 

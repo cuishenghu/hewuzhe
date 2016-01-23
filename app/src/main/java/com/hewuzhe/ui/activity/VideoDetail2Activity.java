@@ -386,7 +386,10 @@ public class VideoDetail2Activity extends RecycleViewActivity<VideoDetailPresent
         if (!LibsChecker.checkVitamioLibs(this))
             return;
 
-//
+        if (!video.IsFree) {
+            layShare.setVisibility(View.GONE);
+            layTranspond.setVisibility(View.GONE);
+        }
 //        if (video.UpLoadType == 0) {
 //            ViewGroup.LayoutParams params = videoController.getLayoutParams();
 //            params.height = StringUtil.dip2px(getContext(), 350);
@@ -445,7 +448,7 @@ public class VideoDetail2Activity extends RecycleViewActivity<VideoDetailPresent
             tvOtherCount.setText("共" + videos.size() + "部");
             otherAdapter.data.addAll(videos);
             otherAdapter.notifyDataSetChanged();
-        }else {
+        } else {
             reOthers.setVisibility(View.GONE);
         }
     }
@@ -470,6 +473,7 @@ public class VideoDetail2Activity extends RecycleViewActivity<VideoDetailPresent
                 break;
             case 1:
                 if (b) {
+                    snb("收藏成功", imgAvatar);
                     imgCollect.setImageResource(R.mipmap.icon_collect_focus);
                     imgCollect.setOnClickListener(new View.OnClickListener() {
                         @Override
@@ -480,6 +484,8 @@ public class VideoDetail2Activity extends RecycleViewActivity<VideoDetailPresent
                     });
 
                 } else {
+                    snb("取消收藏", imgAvatar);
+
                     imgCollect.setImageResource(R.mipmap.icon_collect);
                     imgCollect.setOnClickListener(new View.OnClickListener() {
                         @Override
@@ -494,6 +500,8 @@ public class VideoDetail2Activity extends RecycleViewActivity<VideoDetailPresent
                 break;
             case 2:
                 if (b) {
+                    snb("点赞+1", imgAvatar);
+
                     imgPraise.setImageResource(R.mipmap.icon_praise_focus);
                     imgPraise.setOnClickListener(new View.OnClickListener() {
                         @Override
@@ -503,6 +511,8 @@ public class VideoDetail2Activity extends RecycleViewActivity<VideoDetailPresent
                     });
 
                 } else {
+                    snb("取消点赞", imgAvatar);
+
                     imgPraise.setImageResource(R.mipmap.icon_praise);
                     imgPraise.setOnClickListener(new View.OnClickListener() {
                         @Override
@@ -510,11 +520,9 @@ public class VideoDetail2Activity extends RecycleViewActivity<VideoDetailPresent
                             presenter.collectAndOther(id, 2, view, position, "");
                         }
                     });
-
                 }
 
                 break;
-
             case 3:
                 if (b) {
 //                    imgPraise.setImageResource(R.mipmap.icon_praise_focus);

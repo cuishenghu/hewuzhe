@@ -31,7 +31,6 @@ import com.hewuzhe.view.FriendsView;
 import java.util.ArrayList;
 
 import butterknife.Bind;
-import butterknife.ButterKnife;
 import cn.bingoogolapple.androidcommon.adapter.BGAOnItemChildClickListener;
 import io.rong.imkit.RongIM;
 
@@ -62,6 +61,7 @@ public class ContactsActivity extends ToolBarActivity<FriendsPresenter> implemen
     private LinearLayoutManager mLayoutManager;
     private ArrayList<Friend> _Friends = new ArrayList<>();
     private ArrayList<Friend> _NewFriends = new ArrayList<>();
+    private boolean isFirstRun = true;
 
 
     /**
@@ -93,6 +93,8 @@ public class ContactsActivity extends ToolBarActivity<FriendsPresenter> implemen
         mLayoutManager.setOrientation(LinearLayoutManager.VERTICAL);
         _RecyclerView.setLayoutManager(mLayoutManager);
         mAdapter = new RecyclerIndexFriendsAdapter(_RecyclerView);
+
+        showDialog();
         presenter.getFriends();
 
         if (new SessionUtil(getContext()).getUser().TeamId == 0) {
@@ -252,13 +254,9 @@ public class ContactsActivity extends ToolBarActivity<FriendsPresenter> implemen
             @Override
             public void onClick(View view) {
                 RongIM.getInstance().startGroupChat(getContext(), data.Id + "", data.Name);
-
             }
         });
-
-
     }
-
 
     @Override
     public Integer getData() {
@@ -266,9 +264,13 @@ public class ContactsActivity extends ToolBarActivity<FriendsPresenter> implemen
     }
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        // TODO: add setContentView(...) invocation
-        ButterKnife.bind(this);
+    protected void onResume() {
+        super.onResume();
+
+        if (!isFirstRun) {
+            presenter.getFriends();
+        } else {
+            isFirstRun = false;
+        }
     }
 }

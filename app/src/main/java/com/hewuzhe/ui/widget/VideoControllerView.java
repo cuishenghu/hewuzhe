@@ -235,7 +235,9 @@ public class VideoControllerView extends FrameLayout implements View.OnTouchList
         updateTimeTask();
         handler.sendEmptyMessage(MSG_PROGRESS_CHANGE);
 
-        this._OnPreparedListener.onPrepared();
+        if (this._OnPreparedListener != null) {
+            this._OnPreparedListener.onPrepared();
+        }
     }
 
     @Override

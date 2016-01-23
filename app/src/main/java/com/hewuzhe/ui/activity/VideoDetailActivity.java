@@ -310,9 +310,6 @@ public class VideoDetailActivity extends RecycleViewActivity<VideoDetailPresente
         final int position = 0;
 
 
-        layShare.setVisibility(View.GONE);
-        layTranspond.setVisibility(View.GONE);
-
         Glide.with(getContext())
                 .load(C.BASE_URL + video.PhotoPath)
                 .placeholder(R.mipmap.img_avatar)
@@ -425,6 +422,10 @@ public class VideoDetailActivity extends RecycleViewActivity<VideoDetailPresente
             videoController._LayNoVip.setVisibility(View.GONE);
             videoController.start();
         } else {
+
+            layShare.setVisibility(View.GONE);
+            layTranspond.setVisibility(View.GONE);
+
             if (new SessionUtil(getContext()).getUser().isVip()) {
                 videoController.setVideoPath(C.BASE_URL + video.VideoPath);
                 videoController._LayNoVip.setVisibility(View.GONE);
@@ -488,7 +489,7 @@ public class VideoDetailActivity extends RecycleViewActivity<VideoDetailPresente
                 break;
             case 1:
                 if (b) {
-                    snb("收藏成功",imgAvatar);
+                    snb("收藏成功", imgAvatar);
                     imgCollect.setImageResource(R.mipmap.icon_collect_focus);
                     imgCollect.setOnClickListener(new View.OnClickListener() {
                         @Override
@@ -499,7 +500,7 @@ public class VideoDetailActivity extends RecycleViewActivity<VideoDetailPresente
                     });
 
                 } else {
-                    snb("取消收藏",imgAvatar);
+                    snb("取消收藏", imgAvatar);
 
                     imgCollect.setImageResource(R.mipmap.icon_collect);
                     imgCollect.setOnClickListener(new View.OnClickListener() {
@@ -515,7 +516,7 @@ public class VideoDetailActivity extends RecycleViewActivity<VideoDetailPresente
                 break;
             case 2:
                 if (b) {
-                    snb("点赞+1",imgAvatar);
+                    snb("点赞+1", imgAvatar);
 
                     imgPraise.setImageResource(R.mipmap.icon_praise_focus);
                     imgPraise.setOnClickListener(new View.OnClickListener() {
@@ -526,7 +527,7 @@ public class VideoDetailActivity extends RecycleViewActivity<VideoDetailPresente
                     });
 
                 } else {
-                    snb("取消点赞",imgAvatar);
+                    snb("取消点赞", imgAvatar);
 
                     imgPraise.setImageResource(R.mipmap.icon_praise);
                     imgPraise.setOnClickListener(new View.OnClickListener() {

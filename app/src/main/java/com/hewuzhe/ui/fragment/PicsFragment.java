@@ -10,6 +10,7 @@ import com.hewuzhe.R;
 import com.hewuzhe.presenter.base.BasePresenterImp;
 import com.hewuzhe.ui.base.BaseFragment;
 import com.hewuzhe.ui.cons.C;
+import com.hewuzhe.utils.StringUtil;
 
 import butterknife.Bind;
 import it.sephiroth.android.library.imagezoom.ImageViewTouch;
@@ -50,13 +51,23 @@ public class PicsFragment extends BaseFragment {
     @Override
     protected void initThings(View view) {
         String picUrl = getArguments().getString("picUrl");
+        String imagePath = getArguments().getString("imagePath");
         _Img.setDisplayType(ImageViewTouchBase.DisplayType.FIT_TO_SCREEN);
-        Glide.with(getActivity())
-                .load(C.BASE_URL + picUrl)
-                .fitCenter()
-                .crossFade()
-                .into(_Img);
 
+        if (!StringUtil.isEmpty(picUrl)) {
+            Glide.with(getActivity())
+                    .load(C.BASE_URL + picUrl)
+                    .fitCenter()
+                    .crossFade()
+                    .into(_Img);
+        } else {
+            Glide.with(getActivity())
+                    .load(imagePath)
+                    .fitCenter()
+                    .crossFade()
+                    .into(_Img);
+
+        }
         _Img.setSingleTapListener(new ImageViewTouch.OnImageViewTouchSingleTapListener() {
             @Override
             public void onSingleTapConfirmed() {

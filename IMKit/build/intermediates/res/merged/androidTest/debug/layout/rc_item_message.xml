@@ -44,7 +44,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@id/rc_time"
-        android:layout_marginTop="-3dp"
+        android:layout_marginTop="3dp"
         android:layout_toLeftOf="@id/rc_right"
         android:layout_toRightOf="@id/rc_left"
         android:gravity="center_vertical"

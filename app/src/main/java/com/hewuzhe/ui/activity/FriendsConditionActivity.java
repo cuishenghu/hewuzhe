@@ -171,9 +171,7 @@ public class FriendsConditionActivity extends SwipeRecycleViewActivity<FriendCon
      */
     @Override
     public void onItemClick(View view, int pos, FriendCondition item) {
-
-        startActivity(ConditionDetialActivity.class, new Bun().putInt("id", item.Id).putInt("whitch",C.WHITCH_TWO).ok());
-
+        startActivity(ConditionDetialActivity.class, new Bun().putInt("id", item.Id).putInt("whitch", C.WHITCH_ONE).ok());
     }
 
 

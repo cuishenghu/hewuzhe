@@ -90,6 +90,7 @@ public class BasicVideoActivity extends ToolBarActivity {
         String videoPath = getIntentData().getString("videoPath");
         windowManager = (WindowManager) getSystemService(Context.WINDOW_SERVICE);
 
+        videoController.btnFullScreen.setVisibility(View.GONE);
         videoController.setVideoPath(C.BASE_URL + videoPath);
         videoController.start();
     }

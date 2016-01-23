@@ -4,17 +4,24 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.view.View;
 import android.widget.TextView;
 
+import com.google.gson.Gson;
 import com.hewuzhe.R;
+import com.hewuzhe.model.Pic;
 import com.hewuzhe.model.Plan;
+import com.hewuzhe.model.UploadImage;
 import com.hewuzhe.presenter.PlanDetailPresenter;
 import com.hewuzhe.ui.adapter.common.PlanImgsAdapter;
 import com.hewuzhe.ui.base.ToolBarActivity;
 import com.hewuzhe.ui.cons.C;
+import com.hewuzhe.ui.inter.OnItemClickListener;
 import com.hewuzhe.utils.Bun;
 import com.hewuzhe.utils.TimeUtil;
 import com.hewuzhe.view.PlanDetialView;
+
+import java.util.ArrayList;
 
 import butterknife.Bind;
 
@@ -30,6 +37,7 @@ public class PlanDetailActivity extends ToolBarActivity<PlanDetailPresenter> imp
     RecyclerView _RecyclerView;
     private Integer id = 0;
     private Plan item;
+    private ArrayList<Pic> pics = new ArrayList<>();
 
     /**
      * @return 提供标题
@@ -103,9 +111,23 @@ public class PlanDetailActivity extends ToolBarActivity<PlanDetailPresenter> imp
         _TvTime.setText(TimeUtil.timeFormatTwo(plan.StartTime) + "-" + TimeUtil.timeFormatTwo(plan.EndTime));
 
         _RecyclerView.setLayoutManager(new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, false));
-        PlanImgsAdapter planImgsAdapter = new PlanImgsAdapter(getContext());
+        final PlanImgsAdapter planImgsAdapter = new PlanImgsAdapter(getContext());
         _RecyclerView.setAdapter(planImgsAdapter);
         planImgsAdapter.addDatas(plan.ImageList);
+
+        planImgsAdapter.setOnItemClickListener(new OnItemClickListener() {
+            @Override
+            public void onItemClick(View view, int pos, Object item) {
+
+                for (UploadImage pickImg : planImgsAdapter.data) {
+                    Pic pic = new Pic();
+                    pic.PictureUrl = pickImg.ImagePath;
+                    pics.add(pic);
+                }
+
+                startActivity(PicsActivity.class, new Bun().putInt("pos", pos).putString("pics", new Gson().toJson(pics)).ok());
+            }
+        });
     }
 
     @Override

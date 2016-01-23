@@ -22,6 +22,7 @@ import com.hewuzhe.utils.TimeUtil;
 import com.hewuzhe.view.ProfileSettingsView;
 
 import butterknife.Bind;
+import de.greenrobot.event.EventBus;
 import io.rong.imkit.RongIM;
 
 public class FriendProfileSettingsActivity extends ToolBarActivity<ProfileSettingsPresenter> implements ProfileSettingsView {
@@ -188,8 +189,9 @@ public class FriendProfileSettingsActivity extends ToolBarActivity<ProfileSettin
 //                }
 //            });
 
-
+            EventBus.getDefault().post(C.MSG_CLOSE_FRIEND_PROFILE);
             startActivity(StrangerProfileSettingsActivity.class, new Bun().putInt("id", friend.Id).ok());
+            finishActivity();
 
         }
     }

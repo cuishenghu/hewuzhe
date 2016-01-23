@@ -7,14 +7,20 @@ import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.EditText;
 
+import com.google.gson.Gson;
 import com.hewuzhe.R;
+import com.hewuzhe.model.Pic;
 import com.hewuzhe.model.common.DataModel;
 import com.hewuzhe.model.common.PickImg;
 import com.hewuzhe.presenter.PublishConditionPresenter;
 import com.hewuzhe.ui.adapter.common.PickImgAdapter;
 import com.hewuzhe.ui.base.ListActivity;
 import com.hewuzhe.ui.widget.PicPickDialog;
+import com.hewuzhe.utils.Bun;
+import com.hewuzhe.utils.StringUtil;
 import com.hewuzhe.view.PublishConditionView;
+import com.yancy.imageselector.ImageSelector;
+import com.yancy.imageselector.ImageSelectorActivity;
 
 import java.util.ArrayList;
 
@@ -29,6 +35,7 @@ public class PublishConditionActivity extends ListActivity<PublishConditionPrese
     EditText _EdtContent;
     private PicPickDialog picPickDialog;
     private boolean isActivityResultOver = false;
+    private ArrayList<Pic> pics = new ArrayList<>();
 
     /**
      * @return 提供标题
@@ -125,6 +132,21 @@ public class PublishConditionActivity extends ListActivity<PublishConditionPrese
     @Override
     public void onItemClick(View view, int pos, PickImg item) {
 
+        if (item.status == PickImg.STATUS_EMPTY) {
+            showPIckDialog();
+        } else {
+            for (PickImg pickImg : adapter.data) {
+                Pic pic = new Pic();
+                if (!StringUtil.isEmpty(pickImg.filePath)) {
+                    pic.ImagePath = pickImg.filePath;
+                    pic.PictureUrl = pickImg.picUrl;
+                    pics.add(pic);
+                }
+            }
+
+            PicsActivity.isLocal = true;
+            startActivity(PicsActivity.class, new Bun().putInt("pos", pos).putString("pics", new Gson().toJson(pics)).ok());
+        }
 
     }
 
@@ -154,6 +176,17 @@ public class PublishConditionActivity extends ListActivity<PublishConditionPrese
                 picPickDialog.reinitializeImageChooser();
             }
             picPickDialog.imageChooserManager.submit(requestCode, data);
+        } else if (requestCode == ImageSelector.IMAGE_REQUEST_CODE && resultCode == RESULT_OK && data != null) {
+            // Get Image Path List
+            ArrayList<String> pathList = data.getStringArrayListExtra(ImageSelectorActivity.EXTRA_RESULT);
+            adapter.removeLastData();
+
+            for (String s : pathList) {
+                adapter.addLastData(new PickImg(s, PickImg.STATUS_PICKED));
+            }
+
+            adapter.addLastData(new PickImg());
+
         } else {
 //            pbar.setVisibility(View.GONE);
         }

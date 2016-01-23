@@ -10,18 +10,24 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.google.gson.Gson;
 import com.hewuzhe.R;
+import com.hewuzhe.model.Pic;
 import com.hewuzhe.model.Plan;
 import com.hewuzhe.model.UploadImage;
 import com.hewuzhe.model.common.DataModel;
 import com.hewuzhe.model.common.PickImg;
 import com.hewuzhe.presenter.PublishPlanPresenter;
+import com.hewuzhe.ui.App;
 import com.hewuzhe.ui.adapter.common.PickImgsAdapter;
 import com.hewuzhe.ui.base.ListActivity;
 import com.hewuzhe.ui.cons.C;
+import com.hewuzhe.utils.Bun;
 import com.hewuzhe.utils.NU;
 import com.hewuzhe.utils.TimeUtil;
 import com.hewuzhe.view.PublishPlanView;
+import com.yancy.imageselector.ImageSelector;
+import com.yancy.imageselector.ImageSelectorActivity;
 
 import java.util.ArrayList;
 
@@ -62,6 +68,7 @@ public class PublishPlanActivity extends ListActivity<PublishPlanPresenter, Pick
     private int status = STATUS_NEW;
     private int id = -1;
     private int days = 30;
+    private ArrayList<Pic> pics = new ArrayList<>();
 
 
     /**
@@ -92,12 +99,14 @@ public class PublishPlanActivity extends ListActivity<PublishPlanPresenter, Pick
                 chooseImage();
             }
         });
+
         _ImgTakePic.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 takePicture();
             }
         });
+
         _LaySelectTopic.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -232,7 +241,14 @@ public class PublishPlanActivity extends ListActivity<PublishPlanPresenter, Pick
     @Override
     public void onItemClick(View view, int pos, PickImg item) {
 
+        for (PickImg pickImg : adapter.data) {
+            Pic pic = new Pic();
+            pic.ImagePath = pickImg.filePath;
+            pic.PictureUrl = pickImg.picUrl;
+            pics.add(pic);
+        }
 
+        startActivity(PicsActivity.class, new Bun().putInt("pos", pos).putString("pics", new Gson().toJson(pics)).ok());
     }
 
     @Override
@@ -259,6 +275,14 @@ public class PublishPlanActivity extends ListActivity<PublishPlanPresenter, Pick
 
             _TvTime.setText(start + "-" + end);
 
+        } else if (requestCode == ImageSelector.IMAGE_REQUEST_CODE && resultCode == RESULT_OK && data != null) {
+            // Get Image Path List
+            ArrayList<String> pathList = data.getStringArrayListExtra(ImageSelectorActivity.EXTRA_RESULT);
+
+            for (String s : pathList) {
+                adapter.addLastData(new PickImg(s, PickImg.STATUS_PICKED));
+            }
+
         }
     }
 
@@ -280,19 +304,23 @@ public class PublishPlanActivity extends ListActivity<PublishPlanPresenter, Pick
     }
 
     private void chooseImage() {
-        chooserType = ChooserType.REQUEST_PICK_PICTURE;
-        imageChooserManager = new ImageChooserManager(this,
-                ChooserType.REQUEST_PICK_PICTURE, true);
-        imageChooserManager.setImageChooserListener(this);
-        imageChooserManager.clearOldFiles();
-        try {
-//            pbar.setVisibility(View.VISIBLE);
-            filePath = imageChooserManager.choose();
-        } catch (IllegalArgumentException e) {
-            e.printStackTrace();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+
+//
+//        chooserType = ChooserType.REQUEST_PICK_PICTURE;
+//        imageChooserManager = new ImageChooserManager(this,
+//                ChooserType.REQUEST_PICK_PICTURE, true);
+//        imageChooserManager.setImageChooserListener(this);
+//        imageChooserManager.clearOldFiles();
+//        try {
+////            pbar.setVisibility(View.VISIBLE);
+//            filePath = imageChooserManager.choose();
+//        } catch (IllegalArgumentException e) {
+//            e.printStackTrace();
+//        } catch (Exception e) {
+//            e.printStackTrace();
+//        }
+
+        ImageSelector.open(PublishPlanActivity.this, App.imageConfig);   // 开启图片选择器
     }
 
 

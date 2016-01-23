@@ -117,20 +117,29 @@
                           style="@style/text_30_colorLine"
                           android:layout_width="wrap_content"
                           android:layout_height="wrap_content"
+                          android:layout_marginLeft="5px"
                           android:layout_weight="1"
-                          android:text="山东省临沂市人民广场"/>
+                          android:text=""/>
 
-                <TextView android:layout_width="2px"
-                          android:layout_height="match_parent"
-                          android:layout_marginBottom="10px"
-                          android:layout_marginTop="10px"
-                          android:background="@color/colorBg"/>
 
+            </LinearLayout>
+            <LinearLayout android:layout_width="match_parent"
+                          android:layout_height="95px"
+                          android:layout_marginTop="2px"
+                          android:background="@color/colorListBg"
+                          android:gravity="center_vertical"
+                          android:orientation="horizontal"
+                          android:paddingLeft="38px">
                 <ImageView android:id="@+id/tv_call"
-                           android:layout_width="115px"
-                           android:layout_height="match_parent"
-                           android:padding="30px"
+                           android:layout_width="35px"
+                           android:layout_height="35px"
                            android:src="@mipmap/icon_call"/>
+                <TextView android:id="@+id/img_call"
+                          style="@style/text_30_colorLine"
+                          android:layout_width="wrap_content"
+                          android:layout_height="wrap_content"
+                          android:layout_weight="1"
+                          android:text=""/>
 
 
             </LinearLayout>

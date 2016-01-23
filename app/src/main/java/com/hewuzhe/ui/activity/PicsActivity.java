@@ -25,6 +25,9 @@ public class PicsActivity extends ToolBarActivity {
     private ArrayList<Pic> pics;
     private String picsStr;
 
+    public static boolean isLocal = false;
+
+
     @Bind(R.id.viewpager)
     ViewPager _ViewPage;
 
@@ -33,7 +36,6 @@ public class PicsActivity extends ToolBarActivity {
      */
     @Override
     protected String provideTitle() {
-
         return "图片";
     }
 
@@ -55,8 +57,9 @@ public class PicsActivity extends ToolBarActivity {
         }.getType());
 
         MyViewPagerAdapter adapter = new MyViewPagerAdapter(getSupportFragmentManager());
+
         for (Pic pic : pics) {
-            adapter.addFragment(PicsFragment.newInstance(new Bun().putString("picUrl", pic.ImagePath).ok()));
+            adapter.addFragment(PicsFragment.newInstance(new Bun().putString("picUrl", pic.PictureUrl).putString("imagePath", pic.ImagePath).ok()));
         }
         _ViewPage.setAdapter(adapter);
 

@@ -268,6 +268,11 @@ public class GroupConditionAdapter extends BaseAdapter<GroupConditionAdapter.VHo
                     /**
                      * 到图片集页
                      * */
+                    for (Pic pic1 : condition.PicList) {
+                        pic1.PictureUrl = pic1.ImagePath;
+                    }
+
+
                     Intent intent = new Intent(context, PicsActivity.class);
                     intent.putExtra("data", new Bun().putInt("pos", finalI + (page * count)).
                             putString("pics", new Gson().toJson(condition.PicList)).ok());

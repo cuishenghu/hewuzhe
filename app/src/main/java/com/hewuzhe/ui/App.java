@@ -6,8 +6,11 @@ import android.content.Context;
 import android.support.multidex.MultiDex;
 
 import com.hewuzhe.BuildConfig;
+import com.hewuzhe.R;
 import com.hewuzhe.ui.inter.OnLocListener;
+import com.hewuzhe.utils.GlideLoader;
 import com.socks.library.KLog;
+import com.yancy.imageselector.ImageConfig;
 
 import java.util.LinkedList;
 
@@ -21,6 +24,7 @@ public class App extends Application {
 
 
     public LinkedList<OnLocListener> onLocListeners = new LinkedList<>();
+    public static ImageConfig imageConfig;
 
 
     /**
@@ -81,7 +85,23 @@ public class App extends Application {
 
         }
 
-
+        imageConfig
+                = new ImageConfig.Builder(new GlideLoader())
+                .steepToolBarColor(getResources().getColor(R.color.colorPrimary))
+                .titleBgColor(getResources().getColor(R.color.colorPrimary))
+                .titleSubmitTextColor(getResources().getColor(R.color.white))
+                .titleTextColor(getResources().getColor(R.color.white))
+                        // 开启多选   （默认为多选）
+                .mutiSelect()
+                        // 多选时的最大数量   （默认 9 张）
+                .mutiSelectMaxSize(6)
+                        // 开启拍照功能 （默认关闭）
+                .showCamera()
+                        // 已选择的图片路径
+//                .pathList(path)
+                        // 拍照后存放的图片路径（默认 /temp/picture） （会自动创建）
+                .filePath("/ImageSelector/Pictures")
+                .build();
     }
 
     public static String getCurProcessName(Context context) {

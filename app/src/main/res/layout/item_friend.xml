@@ -37,6 +37,7 @@
         <TextView android:id="@+id/tv_username"
                   android:layout_width="wrap_content"
                   android:layout_height="wrap_content"
+                  android:layout_centerVertical="true"
                   android:layout_marginLeft="20px"
                   android:layout_marginTop="10px"
                   android:layout_toRightOf="@id/img_avatar"
@@ -53,7 +54,8 @@
                   android:layout_toRightOf="@id/img_avatar"
                   android:text="等级：lv1"
                   android:textColor="@color/white"
-                  android:textSize="28px"/>
+                  android:textSize="28px"
+                  android:visibility="gone"/>
 
 
     </RelativeLayout>

@@ -4,18 +4,20 @@
              android:layout_width="wrap_content"
              android:layout_height="wrap_content"
              android:orientation="vertical"
-
              android:paddingRight="10px">
+
 
     <ImageView android:id="@+id/img"
                android:layout_width="190px"
                android:layout_height="190px"
+               android:padding="5px"
                android:src="@mipmap/img_add_pic"/>
+
 
     <ImageView android:id="@+id/img_del"
                android:layout_width="35px"
                android:layout_height="35px"
-               android:layout_gravity="center"
+               android:layout_gravity="left|top"
                android:src="@mipmap/icon_del"
                android:visibility="gone"
                tools:visibility="visible"

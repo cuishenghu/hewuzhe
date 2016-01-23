@@ -47,6 +47,8 @@ public class DojoDetailActivity extends ToolBarActivity<DojoDetailPresenter> imp
     TextView _TvAddress;
     @Bind(R.id.tv_call)
     ImageView _TvCall;
+    @Bind(R.id.img_call)
+    TextView _ImgCall;
     @Bind(R.id.tv_desc)
     TextView _TvDesc;
     @Bind(R.id.tv_comment_count)
@@ -95,7 +97,6 @@ public class DojoDetailActivity extends ToolBarActivity<DojoDetailPresenter> imp
         return new DojoDetailPresenter();
     }
 
-
     @Override
     public Integer getData() {
         return id;
@@ -109,11 +110,18 @@ public class DojoDetailActivity extends ToolBarActivity<DojoDetailPresenter> imp
                 .crossFade()
                 .into(_Img);
 
-
         _TvName.setText(dojo.Title);
+        _ImgCall.setText(dojo.TelePhone);
+
         _TvAddress.setText(dojo.Address);
         _TvDesc.setText(dojo.Content);
         _TvCall.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(Intent.ACTION_DIAL, Uri.parse("tel:" + dojo.TelePhone)));
+            }
+        });
+        _ImgCall.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 startActivity(new Intent(Intent.ACTION_DIAL, Uri.parse("tel:" + dojo.TelePhone)));

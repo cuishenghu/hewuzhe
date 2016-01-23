@@ -115,4 +115,5 @@ public class C {
     public static final int MSG_REFRESH_MEGA_GAME_DETAIL = 20001;
     public static final int MSG_UNREAD_COUNT = 20002;
     public static final int MSG_REFRESH_PLAN_LIST = 20003;
+    public static final int MSG_CLOSE_FRIEND_PROFILE = 20004;
 }

@@ -36,7 +36,7 @@ public class RecyclerIndexFriendsAdapter extends BGARecyclerViewAdapter<Friend> 
         } else {
             viewHolderHelper.setVisibility(R.id.tv_item_indexview_catalog, View.GONE);
         }
-        viewHolderHelper.setText(R.id.tv_username, model.NicName);
+        viewHolderHelper.setText(R.id.tv_username, model.RemarkName);
 
         Glide.with(mContext)
                 .load(C.BASE_URL + model.PhotoPath)

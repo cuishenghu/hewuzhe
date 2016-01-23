@@ -59,12 +59,7 @@ public class PickImgAdapter extends BaseAdapter<PickImgAdapter.VHolder, PickImg,
         if (pickImg.status == PickImg.STATUS_EMPTY) {
             holder._Img.setImageResource(R.mipmap.img_add_pic);
             holder._ImgDel.setVisibility(View.GONE);
-            holder._Img.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    _presenter.showPickDialog(view);
-                }
-            });
+
         } else {
             Glide.with(context)
                     .load(Uri.fromFile(new File(pickImg.filePath)))

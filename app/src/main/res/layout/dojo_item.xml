@@ -46,8 +46,10 @@
                 android:layout_width="wrap_content"
                 android:layout_height="22px"
                 android:gravity="center_vertical"
+                android:letterSpacing="5"
+                android:paddingLeft="8px"
                 android:singleLine="true"
-                android:text="·································································································"
+                android:text="····························································································"
                 android:textColor="@color/colorLine"/>
 
             <LinearLayout android:layout_width="match_parent"

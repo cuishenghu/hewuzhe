@@ -92,6 +92,7 @@ public class ConversationActivity extends ToolBarActivity<ConversationPresenter>
 
         enterFragment(mConversationType, mTargetId);
 
+
     }
 
     /**
@@ -110,7 +111,7 @@ public class ConversationActivity extends ToolBarActivity<ConversationPresenter>
 
         fragment.setUri(uri);
 
-
+        //隐藏输入框
         if (!isNeedShowInput) {
             fragment.getChildFragmentManager().getFragments().get(0).getView().setVisibility(View.GONE);
             isNeedShowInput = true;
@@ -132,11 +133,17 @@ public class ConversationActivity extends ToolBarActivity<ConversationPresenter>
 
     @Override
     public void isWuYouTitle(Boolean data) {
-        if (data) {
+        if (mConversationType == Conversation.ConversationType.PRIVATE) {
+            if (data) {
+                title = getIntent().getData().getQueryParameter("title");
+                tvTitle.setText(title);
+            } else {
+                tvTitle.setText("陌生人");
+            }
+
+        } else {
             title = getIntent().getData().getQueryParameter("title");
             tvTitle.setText(title);
-        } else {
-            tvTitle.setText("陌生人");
         }
 
     }

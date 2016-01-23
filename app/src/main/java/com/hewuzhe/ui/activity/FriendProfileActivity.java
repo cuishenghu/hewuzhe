@@ -20,6 +20,7 @@ import com.hewuzhe.utils.TimeUtil;
 import com.hewuzhe.view.FriendProfileView;
 
 import butterknife.Bind;
+import de.greenrobot.event.EventBus;
 import io.rong.imkit.RongIM;
 
 public class FriendProfileActivity extends ToolBarActivity<FriendProfilePresenter> implements FriendProfileView {
@@ -59,6 +60,7 @@ public class FriendProfileActivity extends ToolBarActivity<FriendProfilePresente
      */
     private boolean isWy;
     private User _Friend;
+    private boolean isFirstRun = true;
 
     /**
      * @return 提供标题
@@ -80,7 +82,7 @@ public class FriendProfileActivity extends ToolBarActivity<FriendProfilePresente
     protected void initThings(Bundle savedInstanceState) {
         super.initThings(savedInstanceState);
         id = getIntentData().getInt("id");
-
+        EventBus.getDefault().register(this);
         imgAction.setImageResource(R.mipmap.icon_more);
         presenter.getUserData();
 
@@ -110,9 +112,8 @@ public class FriendProfileActivity extends ToolBarActivity<FriendProfilePresente
 
     @Override
     public void setData(final User friend) {
-
         _Friend = friend;
-        _TvUsername.setText(friend.NicName + "");
+        _TvUsername.setText(friend.RemarkName + "");
         _TvDesc.setText(friend.Description);
         _TvHeight.setText(friend.Height + "cm");
         _TvWeight.setText(friend.Weight + "kg");
@@ -173,4 +174,19 @@ public class FriendProfileActivity extends ToolBarActivity<FriendProfilePresente
         _Btn.setText("已关注");
     }
 
+    public void onEvent(Integer msg) {
+        if (msg == C.MSG_CLOSE_FRIEND_PROFILE) {
+            finishActivity();
+        }
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        if (!isFirstRun) {
+            presenter.getUserData();
+        } else {
+            isFirstRun = false;
+        }
+    }
 }

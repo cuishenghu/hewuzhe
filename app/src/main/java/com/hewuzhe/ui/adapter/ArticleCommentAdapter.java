@@ -86,7 +86,7 @@ public class ArticleCommentAdapter extends BaseAdapter<ArticleCommentAdapter.Vie
             holder.tvPraiseCount.setText(10 + "");
 
             Glide.with(context)
-                    .load(C.BASE_URL + comment.PhotoPath)
+                    .load(C.BASE_URL + comment.CommenterPhotoPath)
                     .centerCrop()
                     .crossFade()
                     .transform(new GlideCircleTransform(context))

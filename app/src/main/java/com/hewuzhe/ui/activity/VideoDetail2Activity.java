@@ -84,7 +84,7 @@ public class VideoDetail2Activity extends RecycleViewActivity<VideoDetailPresent
 
     /**
      * @param savedInstanceState 缓存数据
-     *                           <p>
+     *                           <p/>
      */
     @Override
     protected void initThings(Bundle savedInstanceState) {
@@ -407,6 +407,14 @@ public class VideoDetail2Activity extends RecycleViewActivity<VideoDetailPresent
 //        mLayout = VideoView.VIDEO_LAYOUT_FIT_PARENT;
 //        videoController.getVideoView().setVideoLayout(mLayout, 0);
 
+
+        videoController.setonPreparedListener(new VideoControllerView.OnPreparedListener() {
+            @Override
+            public void onPrepared() {
+                videoController.getVideoView().setVideoLayout(VideoView.VIDEO_LAYOUT_FIT_PARENT, 0);
+            }
+        });
+
         videoController.btnFullScreen.setVisibility(View.GONE);
         videoController.setVideoPath(C.BASE_URL + video.VideoPath);
         videoController.start();
@@ -433,9 +441,12 @@ public class VideoDetail2Activity extends RecycleViewActivity<VideoDetailPresent
         });
         reOthers.setAdapter(otherAdapter);
         if (videos != null && videos.size() > 0) {
+            reOthers.setVisibility(View.VISIBLE);
             tvOtherCount.setText("共" + videos.size() + "部");
             otherAdapter.data.addAll(videos);
             otherAdapter.notifyDataSetChanged();
+        }else {
+            reOthers.setVisibility(View.GONE);
         }
     }
 
@@ -579,5 +590,14 @@ public class VideoDetail2Activity extends RecycleViewActivity<VideoDetailPresent
         videoController.release();
         ShareSDK.stopSDK(this);
         super.onDestroy();
+    }
+
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        if (videoController.getVideoView().isPlaying()) {
+            videoController.pause();
+        }
     }
 }

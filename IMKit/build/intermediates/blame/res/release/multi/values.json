@@ -205,14 +205,7 @@
                     "endOffset": 10005
                 },
                 "from": {
-                    "file": "/Users/xianguangjin/Desktop/Hewuzhe3/IMKit/src/main/res/values/rc_color.xml",
-                    "position": {
-                        "startLine": 5,
-                        "startColumn": 4,
-                        "startOffset": 226,
-                        "endColumn": 63,
-                        "endOffset": 285
-                    }
+                    "file": "/Users/xianguangjin/Desktop/Hewuzhe3/IMKit/src/main/res/values/rc_color.xml"
                 }
             },
             {
@@ -1072,8 +1065,8 @@
                     "startLine": 352,
                     "startColumn": 4,
                     "startOffset": 14719,
-                    "endColumn": 70,
-                    "endOffset": 14785
+                    "endColumn": 68,
+                    "endOffset": 14783
                 },
                 "from": {
                     "file": "/Users/xianguangjin/Desktop/Hewuzhe3/IMKit/src/main/res/values/rc_string.xml"
@@ -1083,9 +1076,9 @@
                 "to": {
                     "startLine": 353,
                     "startColumn": 4,
-                    "startOffset": 14790,
+                    "startOffset": 14788,
                     "endColumn": 66,
-                    "endOffset": 14852
+                    "endOffset": 14850
                 },
                 "from": {
                     "file": "/Users/xianguangjin/Desktop/Hewuzhe3/IMKit/src/main/res/values/rc_string.xml"
@@ -1095,9 +1088,9 @@
                 "to": {
                     "startLine": 354,
                     "startColumn": 4,
-                    "startOffset": 14857,
+                    "startOffset": 14855,
                     "endColumn": 73,
-                    "endOffset": 14926
+                    "endOffset": 14924
                 },
                 "from": {
                     "file": "/Users/xianguangjin/Desktop/Hewuzhe3/IMKit/src/main/res/values/rc_string.xml"
@@ -1107,9 +1100,9 @@
                 "to": {
                     "startLine": 355,
                     "startColumn": 4,
-                    "startOffset": 14931,
+                    "startOffset": 14929,
                     "endColumn": 68,
-                    "endOffset": 14995
+                    "endOffset": 14993
                 },
                 "from": {
                     "file": "/Users/xianguangjin/Desktop/Hewuzhe3/IMKit/src/main/res/values/rc_string.xml"
@@ -1119,9 +1112,9 @@
                 "to": {
                     "startLine": 356,
                     "startColumn": 4,
-                    "startOffset": 15000,
+                    "startOffset": 14998,
                     "endColumn": 62,
-                    "endOffset": 15058
+                    "endOffset": 15056
                 },
                 "from": {
                     "file": "/Users/xianguangjin/Desktop/Hewuzhe3/IMKit/src/main/res/values/rc_string.xml"
@@ -1131,9 +1124,9 @@
                 "to": {
                     "startLine": 357,
                     "startColumn": 4,
-                    "startOffset": 15063,
+                    "startOffset": 15061,
                     "endColumn": 79,
-                    "endOffset": 15138
+                    "endOffset": 15136
                 },
                 "from": {
                     "file": "/Users/xianguangjin/Desktop/Hewuzhe3/IMKit/src/main/res/values/rc_string.xml"
@@ -1143,9 +1136,9 @@
                 "to": {
                     "startLine": 358,
                     "startColumn": 4,
-                    "startOffset": 15143,
+                    "startOffset": 15141,
                     "endColumn": 70,
-                    "endOffset": 15209
+                    "endOffset": 15207
                 },
                 "from": {
                     "file": "/Users/xianguangjin/Desktop/Hewuzhe3/IMKit/src/main/res/values/rc_string.xml"
@@ -1155,9 +1148,9 @@
                 "to": {
                     "startLine": 359,
                     "startColumn": 4,
-                    "startOffset": 15214,
+                    "startOffset": 15212,
                     "endColumn": 70,
-                    "endOffset": 15280
+                    "endOffset": 15278
                 },
                 "from": {
                     "file": "/Users/xianguangjin/Desktop/Hewuzhe3/IMKit/src/main/res/values/rc_string.xml"
@@ -1167,9 +1160,9 @@
                 "to": {
                     "startLine": 360,
                     "startColumn": 4,
-                    "startOffset": 15285,
+                    "startOffset": 15283,
                     "endColumn": 66,
-                    "endOffset": 15347
+                    "endOffset": 15345
                 },
                 "from": {
                     "file": "/Users/xianguangjin/Desktop/Hewuzhe3/IMKit/src/main/res/values/rc_string.xml"
@@ -1179,9 +1172,9 @@
                 "to": {
                     "startLine": 361,
                     "startColumn": 4,
-                    "startOffset": 15352,
+                    "startOffset": 15350,
                     "endColumn": 68,
-                    "endOffset": 15416
+                    "endOffset": 15414
                 },
                 "from": {
                     "file": "/Users/xianguangjin/Desktop/Hewuzhe3/IMKit/src/main/res/values/rc_string.xml"
@@ -1191,9 +1184,9 @@
                 "to": {
                     "startLine": 362,
                     "startColumn": 4,
-                    "startOffset": 15421,
+                    "startOffset": 15419,
                     "endColumn": 73,
-                    "endOffset": 15490
+                    "endOffset": 15488
                 },
                 "from": {
                     "file": "/Users/xianguangjin/Desktop/Hewuzhe3/IMKit/src/main/res/values/rc_string.xml"
@@ -1203,9 +1196,9 @@
                 "to": {
                     "startLine": 363,
                     "startColumn": 4,
-                    "startOffset": 15495,
+                    "startOffset": 15493,
                     "endColumn": 47,
-                    "endOffset": 15538
+                    "endOffset": 15536
                 },
                 "from": {
                     "file": "/Users/xianguangjin/Desktop/Hewuzhe3/IMKit/src/main/res/values/rc_string.xml"
@@ -1215,9 +1208,9 @@
                 "to": {
                     "startLine": 364,
                     "startColumn": 4,
-                    "startOffset": 15543,
+                    "startOffset": 15541,
                     "endColumn": 60,
-                    "endOffset": 15599
+                    "endOffset": 15597
                 },
                 "from": {
                     "file": "/Users/xianguangjin/Desktop/Hewuzhe3/IMKit/src/main/res/values/rc_string.xml"
@@ -1227,9 +1220,9 @@
                 "to": {
                     "startLine": 365,
                     "startColumn": 4,
-                    "startOffset": 15604,
+                    "startOffset": 15602,
                     "endColumn": 62,
-                    "endOffset": 15662
+                    "endOffset": 15660
                 },
                 "from": {
                     "file": "/Users/xianguangjin/Desktop/Hewuzhe3/IMKit/src/main/res/values/rc_string.xml"
@@ -1239,9 +1232,9 @@
                 "to": {
                     "startLine": 366,
                     "startColumn": 4,
-                    "startOffset": 15667,
+                    "startOffset": 15665,
                     "endColumn": 43,
-                    "endOffset": 15706
+                    "endOffset": 15704
                 },
                 "from": {
                     "file": "/Users/xianguangjin/Desktop/Hewuzhe3/IMKit/src/main/res/values/rc_string.xml"
@@ -1251,9 +1244,9 @@
                 "to": {
                     "startLine": 367,
                     "startColumn": 4,
-                    "startOffset": 15711,
+                    "startOffset": 15709,
                     "endColumn": 80,
-                    "endOffset": 15787
+                    "endOffset": 15785
                 },
                 "from": {
                     "file": "/Users/xianguangjin/Desktop/Hewuzhe3/IMKit/src/main/res/values/rc_string.xml"
@@ -1263,9 +1256,9 @@
                 "to": {
                     "startLine": 368,
                     "startColumn": 4,
-                    "startOffset": 15792,
+                    "startOffset": 15790,
                     "endColumn": 80,
-                    "endOffset": 15868
+                    "endOffset": 15866
                 },
                 "from": {
                     "file": "/Users/xianguangjin/Desktop/Hewuzhe3/IMKit/src/main/res/values/rc_string.xml"
@@ -1275,9 +1268,9 @@
                 "to": {
                     "startLine": 369,
                     "startColumn": 4,
-                    "startOffset": 15873,
+                    "startOffset": 15871,
                     "endColumn": 71,
-                    "endOffset": 15940
+                    "endOffset": 15938
                 },
                 "from": {
                     "file": "/Users/xianguangjin/Desktop/Hewuzhe3/IMKit/src/main/res/values/rc_string.xml"
@@ -1287,9 +1280,9 @@
                 "to": {
                     "startLine": 370,
                     "startColumn": 4,
-                    "startOffset": 15945,
+                    "startOffset": 15943,
                     "endColumn": 88,
-                    "endOffset": 16029
+                    "endOffset": 16027
                 },
                 "from": {
                     "file": "/Users/xianguangjin/Desktop/Hewuzhe3/IMKit/src/main/res/values/rc_string.xml"
@@ -1299,9 +1292,9 @@
                 "to": {
                     "startLine": 371,
                     "startColumn": 4,
-                    "startOffset": 16034,
+                    "startOffset": 16032,
                     "endColumn": 87,
-                    "endOffset": 16117
+                    "endOffset": 16115
                 },
                 "from": {
                     "file": "/Users/xianguangjin/Desktop/Hewuzhe3/IMKit/src/main/res/values/rc_string.xml"
@@ -1311,9 +1304,9 @@
                 "to": {
                     "startLine": 372,
                     "startColumn": 4,
-                    "startOffset": 16122,
+                    "startOffset": 16120,
                     "endColumn": 77,
-                    "endOffset": 16195
+                    "endOffset": 16193
                 },
                 "from": {
                     "file": "/Users/xianguangjin/Desktop/Hewuzhe3/IMKit/src/main/res/values/rc_string.xml"
@@ -1323,9 +1316,9 @@
                 "to": {
                     "startLine": 373,
                     "startColumn": 4,
-                    "startOffset": 16200,
+                    "startOffset": 16198,
                     "endColumn": 80,
-                    "endOffset": 16276
+                    "endOffset": 16274
                 },
                 "from": {
                     "file": "/Users/xianguangjin/Desktop/Hewuzhe3/IMKit/src/main/res/values/rc_string.xml"
@@ -1335,9 +1328,9 @@
                 "to": {
                     "startLine": 374,
                     "startColumn": 4,
-                    "startOffset": 16281,
+                    "startOffset": 16279,
                     "endColumn": 85,
-                    "endOffset": 16362
+                    "endOffset": 16360
                 },
                 "from": {
                     "file": "/Users/xianguangjin/Desktop/Hewuzhe3/IMKit/src/main/res/values/rc_string.xml"
@@ -1347,9 +1340,9 @@
                 "to": {
                     "startLine": 375,
                     "startColumn": 4,
-                    "startOffset": 16367,
+                    "startOffset": 16365,
                     "endColumn": 60,
-                    "endOffset": 16423
+                    "endOffset": 16421
                 },
                 "from": {
                     "file": "/Users/xianguangjin/Desktop/Hewuzhe3/IMKit/src/main/res/values/rc_string.xml"
@@ -1359,9 +1352,9 @@
                 "to": {
                     "startLine": 376,
                     "startColumn": 4,
-                    "startOffset": 16428,
+                    "startOffset": 16426,
                     "endColumn": 53,
-                    "endOffset": 16477
+                    "endOffset": 16475
                 },
                 "from": {
                     "file": "/Users/xianguangjin/Desktop/Hewuzhe3/IMKit/src/main/res/values/rc_string.xml"
@@ -1371,9 +1364,9 @@
                 "to": {
                     "startLine": 377,
                     "startColumn": 4,
-                    "startOffset": 16482,
+                    "startOffset": 16480,
                     "endColumn": 51,
-                    "endOffset": 16529
+                    "endOffset": 16527
                 },
                 "from": {
                     "file": "/Users/xianguangjin/Desktop/Hewuzhe3/IMKit/src/main/res/values/rc_string.xml"
@@ -1383,9 +1376,9 @@
                 "to": {
                     "startLine": 378,
                     "startColumn": 4,
-                    "startOffset": 16534,
+                    "startOffset": 16532,
                     "endColumn": 65,
-                    "endOffset": 16595
+                    "endOffset": 16593
                 },
                 "from": {
                     "file": "/Users/xianguangjin/Desktop/Hewuzhe3/IMKit/src/main/res/values/rc_string.xml"
@@ -1395,9 +1388,9 @@
                 "to": {
                     "startLine": 379,
                     "startColumn": 4,
-                    "startOffset": 16600,
+                    "startOffset": 16598,
                     "endColumn": 64,
-                    "endOffset": 16660
+                    "endOffset": 16658
                 },
                 "from": {
                     "file": "/Users/xianguangjin/Desktop/Hewuzhe3/IMKit/src/main/res/values/rc_string.xml"
@@ -1407,9 +1400,9 @@
                 "to": {
                     "startLine": 380,
                     "startColumn": 4,
-                    "startOffset": 16665,
+                    "startOffset": 16663,
                     "endColumn": 59,
-                    "endOffset": 16720
+                    "endOffset": 16718
                 },
                 "from": {
                     "file": "/Users/xianguangjin/Desktop/Hewuzhe3/IMKit/src/main/res/values/rc_string.xml"
@@ -1419,9 +1412,9 @@
                 "to": {
                     "startLine": 381,
                     "startColumn": 4,
-                    "startOffset": 16725,
+                    "startOffset": 16723,
                     "endColumn": 61,
-                    "endOffset": 16782
+                    "endOffset": 16780
                 },
                 "from": {
                     "file": "/Users/xianguangjin/Desktop/Hewuzhe3/IMKit/src/main/res/values/rc_string.xml"
@@ -1431,9 +1424,9 @@
                 "to": {
                     "startLine": 382,
                     "startColumn": 4,
-                    "startOffset": 16787,
+                    "startOffset": 16785,
                     "endColumn": 54,
-                    "endOffset": 16837
+                    "endOffset": 16835
                 },
                 "from": {
                     "file": "/Users/xianguangjin/Desktop/Hewuzhe3/IMKit/src/main/res/values/rc_string.xml"
@@ -1443,9 +1436,9 @@
                 "to": {
                     "startLine": 383,
                     "startColumn": 4,
-                    "startOffset": 16842,
+                    "startOffset": 16840,
                     "endColumn": 44,
-                    "endOffset": 16882
+                    "endOffset": 16880
                 },
                 "from": {
                     "file": "/Users/xianguangjin/Desktop/Hewuzhe3/IMKit/src/main/res/values/rc_string.xml"
@@ -1455,9 +1448,9 @@
                 "to": {
                     "startLine": 384,
                     "startColumn": 4,
-                    "startOffset": 16887,
+                    "startOffset": 16885,
                     "endColumn": 48,
-                    "endOffset": 16931
+                    "endOffset": 16929
                 },
                 "from": {
                     "file": "/Users/xianguangjin/Desktop/Hewuzhe3/IMKit/src/main/res/values/rc_string.xml"
@@ -1467,9 +1460,9 @@
                 "to": {
                     "startLine": 385,
                     "startColumn": 4,
-                    "startOffset": 16936,
+                    "startOffset": 16934,
                     "endColumn": 60,
-                    "endOffset": 16992
+                    "endOffset": 16990
                 },
                 "from": {
                     "file": "/Users/xianguangjin/Desktop/Hewuzhe3/IMKit/src/main/res/values/rc_string.xml"
@@ -1479,9 +1472,9 @@
                 "to": {
                     "startLine": 386,
                     "startColumn": 4,
-                    "startOffset": 16997,
+                    "startOffset": 16995,
                     "endColumn": 57,
-                    "endOffset": 17050
+                    "endOffset": 17048
                 },
                 "from": {
                     "file": "/Users/xianguangjin/Desktop/Hewuzhe3/IMKit/src/main/res/values/rc_string.xml"
@@ -1491,9 +1484,9 @@
                 "to": {
                     "startLine": 387,
                     "startColumn": 4,
-                    "startOffset": 17055,
+                    "startOffset": 17053,
                     "endColumn": 57,
-                    "endOffset": 17108
+                    "endOffset": 17106
                 },
                 "from": {
                     "file": "/Users/xianguangjin/Desktop/Hewuzhe3/IMKit/src/main/res/values/rc_string.xml"
@@ -1503,9 +1496,9 @@
                 "to": {
                     "startLine": 388,
                     "startColumn": 4,
-                    "startOffset": 17113,
+                    "startOffset": 17111,
                     "endColumn": 60,
-                    "endOffset": 17169
+                    "endOffset": 17167
                 },
                 "from": {
                     "file": "/Users/xianguangjin/Desktop/Hewuzhe3/IMKit/src/main/res/values/rc_string.xml"
@@ -1515,9 +1508,9 @@
                 "to": {
                     "startLine": 389,
                     "startColumn": 4,
-                    "startOffset": 17174,
+                    "startOffset": 17172,
                     "endColumn": 61,
-                    "endOffset": 17231
+                    "endOffset": 17229
                 },
                 "from": {
                     "file": "/Users/xianguangjin/Desktop/Hewuzhe3/IMKit/src/main/res/values/rc_string.xml"
@@ -1527,9 +1520,9 @@
                 "to": {
                     "startLine": 390,
                     "startColumn": 4,
-                    "startOffset": 17236,
+                    "startOffset": 17234,
                     "endColumn": 57,
-                    "endOffset": 17289
+                    "endOffset": 17287
                 },
                 "from": {
                     "file": "/Users/xianguangjin/Desktop/Hewuzhe3/IMKit/src/main/res/values/rc_string.xml"
@@ -1539,9 +1532,9 @@
                 "to": {
                     "startLine": 391,
                     "startColumn": 4,
-                    "startOffset": 17294,
+                    "startOffset": 17292,
                     "endColumn": 60,
-                    "endOffset": 17350
+                    "endOffset": 17348
                 },
                 "from": {
                     "file": "/Users/xianguangjin/Desktop/Hewuzhe3/IMKit/src/main/res/values/rc_string.xml"
@@ -1551,9 +1544,9 @@
                 "to": {
                     "startLine": 392,
                     "startColumn": 4,
-                    "startOffset": 17355,
+                    "startOffset": 17353,
                     "endColumn": 57,
-                    "endOffset": 17408
+                    "endOffset": 17406
                 },
                 "from": {
                     "file": "/Users/xianguangjin/Desktop/Hewuzhe3/IMKit/src/main/res/values/rc_string.xml"
@@ -1563,9 +1556,9 @@
                 "to": {
                     "startLine": 393,
                     "startColumn": 4,
-                    "startOffset": 17413,
+                    "startOffset": 17411,
                     "endColumn": 38,
-                    "endOffset": 17447
+                    "endOffset": 17445
                 },
                 "from": {
                     "file": "/Users/xianguangjin/Desktop/Hewuzhe3/IMKit/src/main/res/values/rc_string.xml"
@@ -1575,9 +1568,9 @@
                 "to": {
                     "startLine": 394,
                     "startColumn": 4,
-                    "startOffset": 17452,
+                    "startOffset": 17450,
                     "endColumn": 51,
-                    "endOffset": 17499
+                    "endOffset": 17497
                 },
                 "from": {
                     "file": "/Users/xianguangjin/Desktop/Hewuzhe3/IMKit/src/main/res/values/rc_string.xml"
@@ -1587,9 +1580,9 @@
                 "to": {
                     "startLine": 395,
                     "startColumn": 4,
-                    "startOffset": 17504,
+                    "startOffset": 17502,
                     "endColumn": 58,
-                    "endOffset": 17558
+                    "endOffset": 17556
                 },
                 "from": {
                     "file": "/Users/xianguangjin/Desktop/Hewuzhe3/IMKit/src/main/res/values/rc_string.xml"
@@ -1599,9 +1592,9 @@
                 "to": {
                     "startLine": 396,
                     "startColumn": 4,
-                    "startOffset": 17563,
+                    "startOffset": 17561,
                     "endColumn": 51,
-                    "endOffset": 17610
+                    "endOffset": 17608
                 },
                 "from": {
                     "file": "/Users/xianguangjin/Desktop/Hewuzhe3/IMKit/src/main/res/values/rc_string.xml"
@@ -1611,9 +1604,9 @@
                 "to": {
                     "startLine": 397,
                     "startColumn": 4,
-                    "startOffset": 17615,
+                    "startOffset": 17613,
                     "endColumn": 56,
-                    "endOffset": 17667
+                    "endOffset": 17665
                 },
                 "from": {
                     "file": "/Users/xianguangjin/Desktop/Hewuzhe3/IMKit/src/main/res/values/rc_string.xml"
@@ -1623,9 +1616,9 @@
                 "to": {
                     "startLine": 398,
                     "startColumn": 4,
-                    "startOffset": 17672,
+                    "startOffset": 17670,
                     "endColumn": 63,
-                    "endOffset": 17731
+                    "endOffset": 17729
                 },
                 "from": {
                     "file": "/Users/xianguangjin/Desktop/Hewuzhe3/IMKit/src/main/res/values/rc_string.xml"
@@ -1635,9 +1628,9 @@
                 "to": {
                     "startLine": 399,
                     "startColumn": 4,
-                    "startOffset": 17736,
+                    "startOffset": 17734,
                     "endColumn": 68,
-                    "endOffset": 17800
+                    "endOffset": 17798
                 },
                 "from": {
                     "file": "/Users/xianguangjin/Desktop/Hewuzhe3/IMKit/src/main/res/values/rc_string.xml"
@@ -1647,9 +1640,9 @@
                 "to": {
                     "startLine": 400,
                     "startColumn": 4,
-                    "startOffset": 17805,
+                    "startOffset": 17803,
                     "endColumn": 59,
-                    "endOffset": 17860
+                    "endOffset": 17858
                 },
                 "from": {
                     "file": "/Users/xianguangjin/Desktop/Hewuzhe3/IMKit/src/main/res/values/rc_string.xml"
@@ -1659,9 +1652,9 @@
                 "to": {
                     "startLine": 401,
                     "startColumn": 4,
-                    "startOffset": 17865,
+                    "startOffset": 17863,
                     "endColumn": 57,
-                    "endOffset": 17918
+                    "endOffset": 17916
                 },
                 "from": {
                     "file": "/Users/xianguangjin/Desktop/Hewuzhe3/IMKit/src/main/res/values/rc_string.xml"
@@ -1671,9 +1664,9 @@
                 "to": {
                     "startLine": 402,
                     "startColumn": 4,
-                    "startOffset": 17923,
+                    "startOffset": 17921,
                     "endColumn": 57,
-                    "endOffset": 17976
+                    "endOffset": 17974
                 },
                 "from": {
                     "file": "/Users/xianguangjin/Desktop/Hewuzhe3/IMKit/src/main/res/values/rc_string.xml"
@@ -1683,9 +1676,9 @@
                 "to": {
                     "startLine": 403,
                     "startColumn": 4,
-                    "startOffset": 17981,
+                    "startOffset": 17979,
                     "endColumn": 58,
-                    "endOffset": 18035
+                    "endOffset": 18033
                 },
                 "from": {
                     "file": "/Users/xianguangjin/Desktop/Hewuzhe3/IMKit/src/main/res/values/rc_string.xml"
@@ -1695,9 +1688,9 @@
                 "to": {
                     "startLine": 404,
                     "startColumn": 4,
-                    "startOffset": 18040,
+                    "startOffset": 18038,
                     "endColumn": 69,
-                    "endOffset": 18105
+                    "endOffset": 18103
                 },
                 "from": {
                     "file": "/Users/xianguangjin/Desktop/Hewuzhe3/IMKit/src/main/res/values/rc_string.xml"
@@ -1707,9 +1700,9 @@
                 "to": {
                     "startLine": 405,
                     "startColumn": 4,
-                    "startOffset": 18110,
+                    "startOffset": 18108,
                     "endColumn": 59,
-                    "endOffset": 18165
+                    "endOffset": 18163
                 },
                 "from": {
                     "file": "/Users/xianguangjin/Desktop/Hewuzhe3/IMKit/src/main/res/values/rc_string.xml"
@@ -1719,9 +1712,9 @@
                 "to": {
                     "startLine": 406,
                     "startColumn": 4,
-                    "startOffset": 18170,
+                    "startOffset": 18168,
                     "endColumn": 65,
-                    "endOffset": 18231
+                    "endOffset": 18229
                 },
                 "from": {
                     "file": "/Users/xianguangjin/Desktop/Hewuzhe3/IMKit/src/main/res/values/rc_string.xml"
@@ -1731,9 +1724,9 @@
                 "to": {
                     "startLine": 407,
                     "startColumn": 4,
-                    "startOffset": 18236,
+                    "startOffset": 18234,
                     "endColumn": 74,
-                    "endOffset": 18306
+                    "endOffset": 18304
                 },
                 "from": {
                     "file": "/Users/xianguangjin/Desktop/Hewuzhe3/IMKit/src/main/res/values/rc_string.xml"
@@ -1743,9 +1736,9 @@
                 "to": {
                     "startLine": 408,
                     "startColumn": 4,
-                    "startOffset": 18311,
+                    "startOffset": 18309,
                     "endColumn": 55,
-                    "endOffset": 18362
+                    "endOffset": 18360
                 },
                 "from": {
                     "file": "/Users/xianguangjin/Desktop/Hewuzhe3/IMKit/src/main/res/values/rc_string.xml"
@@ -1755,9 +1748,9 @@
                 "to": {
                     "startLine": 409,
                     "startColumn": 4,
-                    "startOffset": 18367,
+                    "startOffset": 18365,
                     "endColumn": 66,
-                    "endOffset": 18429
+                    "endOffset": 18427
                 },
                 "from": {
                     "file": "/Users/xianguangjin/Desktop/Hewuzhe3/IMKit/src/main/res/values/rc_string.xml"
@@ -1767,9 +1760,9 @@
                 "to": {
                     "startLine": 410,
                     "startColumn": 4,
-                    "startOffset": 18434,
+                    "startOffset": 18432,
                     "endColumn": 77,
-                    "endOffset": 18507
+                    "endOffset": 18505
                 },
                 "from": {
                     "file": "/Users/xianguangjin/Desktop/Hewuzhe3/IMKit/src/main/res/values/rc_string.xml"
@@ -1779,9 +1772,9 @@
                 "to": {
                     "startLine": 411,
                     "startColumn": 4,
-                    "startOffset": 18512,
+                    "startOffset": 18510,
                     "endColumn": 64,
-                    "endOffset": 18572
+                    "endOffset": 18570
                 },
                 "from": {
                     "file": "/Users/xianguangjin/Desktop/Hewuzhe3/IMKit/src/main/res/values/rc_string.xml"
@@ -1791,9 +1784,9 @@
                 "to": {
                     "startLine": 412,
                     "startColumn": 4,
-                    "startOffset": 18577,
+                    "startOffset": 18575,
                     "endColumn": 48,
-                    "endOffset": 18621
+                    "endOffset": 18619
                 },
                 "from": {
                     "file": "/Users/xianguangjin/Desktop/Hewuzhe3/IMKit/src/main/res/values/rc_string.xml"
@@ -1803,9 +1796,9 @@
                 "to": {
                     "startLine": 413,
                     "startColumn": 4,
-                    "startOffset": 18626,
+                    "startOffset": 18624,
                     "endColumn": 47,
-                    "endOffset": 18669
+                    "endOffset": 18667
                 },
                 "from": {
                     "file": "/Users/xianguangjin/Desktop/Hewuzhe3/IMKit/src/main/res/values/rc_string.xml"
@@ -1815,9 +1808,9 @@
                 "to": {
                     "startLine": 414,
                     "startColumn": 4,
-                    "startOffset": 18674,
+                    "startOffset": 18672,
                     "endColumn": 50,
-                    "endOffset": 18720
+                    "endOffset": 18718
                 },
                 "from": {
                     "file": "/Users/xianguangjin/Desktop/Hewuzhe3/IMKit/src/main/res/values/rc_string.xml"
@@ -1827,9 +1820,9 @@
                 "to": {
                     "startLine": 415,
                     "startColumn": 4,
-                    "startOffset": 18725,
+                    "startOffset": 18723,
                     "endColumn": 48,
-                    "endOffset": 18769
+                    "endOffset": 18767
                 },
                 "from": {
                     "file": "/Users/xianguangjin/Desktop/Hewuzhe3/IMKit/src/main/res/values/rc_string.xml"
@@ -1839,9 +1832,9 @@
                 "to": {
                     "startLine": 416,
                     "startColumn": 4,
-                    "startOffset": 18774,
+                    "startOffset": 18772,
                     "endColumn": 64,
-                    "endOffset": 18834
+                    "endOffset": 18832
                 },
                 "from": {
                     "file": "/Users/xianguangjin/Desktop/Hewuzhe3/IMKit/src/main/res/values/rc_string.xml"
@@ -1851,9 +1844,9 @@
                 "to": {
                     "startLine": 417,
                     "startColumn": 4,
-                    "startOffset": 18839,
+                    "startOffset": 18837,
                     "endColumn": 64,
-                    "endOffset": 18899
+                    "endOffset": 18897
                 },
                 "from": {
                     "file": "/Users/xianguangjin/Desktop/Hewuzhe3/IMKit/src/main/res/values/rc_string.xml"
@@ -1863,9 +1856,9 @@
                 "to": {
                     "startLine": 418,
                     "startColumn": 4,
-                    "startOffset": 18904,
+                    "startOffset": 18902,
                     "endColumn": 59,
-                    "endOffset": 18959
+                    "endOffset": 18957
                 },
                 "from": {
                     "file": "/Users/xianguangjin/Desktop/Hewuzhe3/IMKit/src/main/res/values/rc_string.xml"
@@ -1875,9 +1868,9 @@
                 "to": {
                     "startLine": 419,
                     "startColumn": 4,
-                    "startOffset": 18964,
+                    "startOffset": 18962,
                     "endColumn": 57,
-                    "endOffset": 19017
+                    "endOffset": 19015
                 },
                 "from": {
                     "file": "/Users/xianguangjin/Desktop/Hewuzhe3/IMKit/src/main/res/values/rc_string.xml"
@@ -1887,9 +1880,9 @@
                 "to": {
                     "startLine": 420,
                     "startColumn": 4,
-                    "startOffset": 19022,
+                    "startOffset": 19020,
                     "endColumn": 61,
-                    "endOffset": 19079
+                    "endOffset": 19077
                 },
                 "from": {
                     "file": "/Users/xianguangjin/Desktop/Hewuzhe3/IMKit/src/main/res/values/rc_string.xml"
@@ -1899,9 +1892,9 @@
                 "to": {
                     "startLine": 421,
                     "startColumn": 4,
-                    "startOffset": 19084,
+                    "startOffset": 19082,
                     "endColumn": 44,
-                    "endOffset": 19124
+                    "endOffset": 19122
                 },
                 "from": {
                     "file": "/Users/xianguangjin/Desktop/Hewuzhe3/IMKit/src/main/res/values/rc_string.xml"
@@ -1911,9 +1904,9 @@
                 "to": {
                     "startLine": 422,
                     "startColumn": 4,
-                    "startOffset": 19129,
+                    "startOffset": 19127,
                     "endColumn": 75,
-                    "endOffset": 19200
+                    "endOffset": 19198
                 },
                 "from": {
                     "file": "/Users/xianguangjin/Desktop/Hewuzhe3/IMKit/src/main/res/values/rc_string.xml"
@@ -1923,9 +1916,9 @@
                 "to": {
                     "startLine": 423,
                     "startColumn": 4,
-                    "startOffset": 19205,
+                    "startOffset": 19203,
                     "endColumn": 51,
-                    "endOffset": 19252
+                    "endOffset": 19250
                 },
                 "from": {
                     "file": "/Users/xianguangjin/Desktop/Hewuzhe3/IMKit/src/main/res/values/rc_string.xml"
@@ -1935,9 +1928,9 @@
                 "to": {
                     "startLine": 424,
                     "startColumn": 4,
-                    "startOffset": 19257,
+                    "startOffset": 19255,
                     "endColumn": 60,
-                    "endOffset": 19313
+                    "endOffset": 19311
                 },
                 "from": {
                     "file": "/Users/xianguangjin/Desktop/Hewuzhe3/IMKit/src/main/res/values/rc_string.xml"
@@ -1947,9 +1940,9 @@
                 "to": {
                     "startLine": 425,
                     "startColumn": 4,
-                    "startOffset": 19318,
+                    "startOffset": 19316,
                     "endColumn": 60,
-                    "endOffset": 19374
+                    "endOffset": 19372
                 },
                 "from": {
                     "file": "/Users/xianguangjin/Desktop/Hewuzhe3/IMKit/src/main/res/values/rc_string.xml"
@@ -1959,9 +1952,9 @@
                 "to": {
                     "startLine": 426,
                     "startColumn": 4,
-                    "startOffset": 19379,
+                    "startOffset": 19377,
                     "endColumn": 68,
-                    "endOffset": 19443
+                    "endOffset": 19441
                 },
                 "from": {
                     "file": "/Users/xianguangjin/Desktop/Hewuzhe3/IMKit/src/main/res/values/rc_string.xml"
@@ -1971,9 +1964,9 @@
                 "to": {
                     "startLine": 427,
                     "startColumn": 4,
-                    "startOffset": 19448,
+                    "startOffset": 19446,
                     "endColumn": 63,
-                    "endOffset": 19507
+                    "endOffset": 19505
                 },
                 "from": {
                     "file": "/Users/xianguangjin/Desktop/Hewuzhe3/IMKit/src/main/res/values/rc_string.xml"
@@ -1983,9 +1976,9 @@
                 "to": {
                     "startLine": 428,
                     "startColumn": 4,
-                    "startOffset": 19512,
+                    "startOffset": 19510,
                     "endColumn": 64,
-                    "endOffset": 19572
+                    "endOffset": 19570
                 },
                 "from": {
                     "file": "/Users/xianguangjin/Desktop/Hewuzhe3/IMKit/src/main/res/values/rc_string.xml"
@@ -1995,9 +1988,9 @@
                 "to": {
                     "startLine": 429,
                     "startColumn": 4,
-                    "startOffset": 19577,
+                    "startOffset": 19575,
                     "endColumn": 73,
-                    "endOffset": 19646
+                    "endOffset": 19644
                 },
                 "from": {
                     "file": "/Users/xianguangjin/Desktop/Hewuzhe3/IMKit/src/main/res/values/rc_string.xml"
@@ -2007,9 +2000,9 @@
                 "to": {
                     "startLine": 430,
                     "startColumn": 4,
-                    "startOffset": 19651,
+                    "startOffset": 19649,
                     "endColumn": 77,
-                    "endOffset": 19724
+                    "endOffset": 19722
                 },
                 "from": {
                     "file": "/Users/xianguangjin/Desktop/Hewuzhe3/IMKit/src/main/res/values/rc_string.xml"
@@ -2019,9 +2012,9 @@
                 "to": {
                     "startLine": 431,
                     "startColumn": 4,
-                    "startOffset": 19729,
+                    "startOffset": 19727,
                     "endColumn": 46,
-                    "endOffset": 19771
+                    "endOffset": 19769
                 },
                 "from": {
                     "file": "/Users/xianguangjin/Desktop/Hewuzhe3/IMKit/src/main/res/values/rc_string.xml"
@@ -2031,9 +2024,9 @@
                 "to": {
                     "startLine": 432,
                     "startColumn": 4,
-                    "startOffset": 19776,
+                    "startOffset": 19774,
                     "endColumn": 49,
-                    "endOffset": 19821
+                    "endOffset": 19819
                 },
                 "from": {
                     "file": "/Users/xianguangjin/Desktop/Hewuzhe3/IMKit/src/main/res/values/rc_string.xml"
@@ -2043,9 +2036,9 @@
                 "to": {
                     "startLine": 433,
                     "startColumn": 4,
-                    "startOffset": 19826,
+                    "startOffset": 19824,
                     "endColumn": 58,
-                    "endOffset": 19880
+                    "endOffset": 19878
                 },
                 "from": {
                     "file": "/Users/xianguangjin/Desktop/Hewuzhe3/IMKit/src/main/res/values/rc_string.xml"
@@ -2055,9 +2048,9 @@
                 "to": {
                     "startLine": 434,
                     "startColumn": 4,
-                    "startOffset": 19885,
+                    "startOffset": 19883,
                     "endColumn": 53,
-                    "endOffset": 19934
+                    "endOffset": 19932
                 },
                 "from": {
                     "file": "/Users/xianguangjin/Desktop/Hewuzhe3/IMKit/src/main/res/values/rc_string.xml"
@@ -2067,9 +2060,9 @@
                 "to": {
                     "startLine": 435,
                     "startColumn": 4,
-                    "startOffset": 19939,
+                    "startOffset": 19937,
                     "endColumn": 65,
-                    "endOffset": 20000
+                    "endOffset": 19998
                 },
                 "from": {
                     "file": "/Users/xianguangjin/Desktop/Hewuzhe3/IMKit/src/main/res/values/rc_string.xml"
@@ -2079,9 +2072,9 @@
                 "to": {
                     "startLine": 436,
                     "startColumn": 4,
-                    "startOffset": 20005,
+                    "startOffset": 20003,
                     "endColumn": 59,
-                    "endOffset": 20060
+                    "endOffset": 20058
                 },
                 "from": {
                     "file": "/Users/xianguangjin/Desktop/Hewuzhe3/IMKit/src/main/res/values/rc_string.xml"
@@ -2091,9 +2084,9 @@
                 "to": {
                     "startLine": 437,
                     "startColumn": 4,
-                    "startOffset": 20065,
+                    "startOffset": 20063,
                     "endColumn": 61,
-                    "endOffset": 20122
+                    "endOffset": 20120
                 },
                 "from": {
                     "file": "/Users/xianguangjin/Desktop/Hewuzhe3/IMKit/src/main/res/values/rc_string.xml"
@@ -2103,9 +2096,9 @@
                 "to": {
                     "startLine": 438,
                     "startColumn": 4,
-                    "startOffset": 20127,
+                    "startOffset": 20125,
                     "endColumn": 50,
-                    "endOffset": 20173
+                    "endOffset": 20171
                 },
                 "from": {
                     "file": "/Users/xianguangjin/Desktop/Hewuzhe3/IMKit/src/main/res/values/rc_string.xml"
@@ -2115,9 +2108,9 @@
                 "to": {
                     "startLine": 439,
                     "startColumn": 4,
-                    "startOffset": 20178,
+                    "startOffset": 20176,
                     "endColumn": 50,
-                    "endOffset": 20224
+                    "endOffset": 20222
                 },
                 "from": {
                     "file": "/Users/xianguangjin/Desktop/Hewuzhe3/IMKit/src/main/res/values/rc_string.xml"
@@ -2127,9 +2120,9 @@
                 "to": {
                     "startLine": 440,
                     "startColumn": 4,
-                    "startOffset": 20229,
+                    "startOffset": 20227,
                     "endColumn": 49,
-                    "endOffset": 20274
+                    "endOffset": 20272
                 },
                 "from": {
                     "file": "/Users/xianguangjin/Desktop/Hewuzhe3/IMKit/src/main/res/values/rc_string.xml"
@@ -2139,9 +2132,9 @@
                 "to": {
                     "startLine": 441,
                     "startColumn": 4,
-                    "startOffset": 20279,
+                    "startOffset": 20277,
                     "endColumn": 62,
-                    "endOffset": 20337
+                    "endOffset": 20335
                 },
                 "from": {
                     "file": "/Users/xianguangjin/Desktop/Hewuzhe3/IMKit/src/main/res/values/rc_string.xml"
@@ -2151,9 +2144,9 @@
                 "to": {
                     "startLine": 442,
                     "startColumn": 4,
-                    "startOffset": 20342,
+                    "startOffset": 20340,
                     "endColumn": 42,
-                    "endOffset": 20380
+                    "endOffset": 20378
                 },
                 "from": {
                     "file": "/Users/xianguangjin/Desktop/Hewuzhe3/IMKit/src/main/res/values/rc_string.xml"
@@ -2163,9 +2156,9 @@
                 "to": {
                     "startLine": 443,
                     "startColumn": 4,
-                    "startOffset": 20385,
+                    "startOffset": 20383,
                     "endColumn": 36,
-                    "endOffset": 20417
+                    "endOffset": 20415
                 },
                 "from": {
                     "file": "/Users/xianguangjin/Desktop/Hewuzhe3/IMKit/src/main/res/values/rc_string.xml"
@@ -2175,9 +2168,9 @@
                 "to": {
                     "startLine": 444,
                     "startColumn": 4,
-                    "startOffset": 20422,
+                    "startOffset": 20420,
                     "endColumn": 55,
-                    "endOffset": 20473
+                    "endOffset": 20471
                 },
                 "from": {
                     "file": "/Users/xianguangjin/Desktop/Hewuzhe3/IMKit/src/main/res/values/rc_string.xml"
@@ -2187,10 +2180,10 @@
                 "to": {
                     "startLine": 445,
                     "startColumn": 4,
-                    "startOffset": 20478,
+                    "startOffset": 20476,
                     "endLine": 453,
                     "endColumn": 12,
-                    "endOffset": 21104
+                    "endOffset": 21102
                 },
                 "from": {
                     "file": "/Users/xianguangjin/Desktop/Hewuzhe3/IMKit/src/main/res/values/rc_theme.xml"
@@ -2200,10 +2193,10 @@
                 "to": {
                     "startLine": 454,
                     "startColumn": 4,
-                    "startOffset": 21109,
+                    "startOffset": 21107,
                     "endLine": 457,
                     "endColumn": 12,
-                    "endOffset": 21326
+                    "endOffset": 21324
                 },
                 "from": {
                     "file": "/Users/xianguangjin/Desktop/Hewuzhe3/IMKit/src/main/res/values/rc_theme.xml"
@@ -2213,10 +2206,10 @@
                 "to": {
                     "startLine": 458,
                     "startColumn": 4,
-                    "startOffset": 21331,
+                    "startOffset": 21329,
                     "endLine": 461,
                     "endColumn": 12,
-                    "endOffset": 21542
+                    "endOffset": 21540
                 },
                 "from": {
                     "file": "/Users/xianguangjin/Desktop/Hewuzhe3/IMKit/src/main/res/values/rc_theme.xml"
@@ -2226,10 +2219,10 @@
                 "to": {
                     "startLine": 462,
                     "startColumn": 4,
-                    "startOffset": 21547,
+                    "startOffset": 21545,
                     "endLine": 466,
                     "endColumn": 12,
-                    "endOffset": 21819
+                    "endOffset": 21810
                 },
                 "from": {
                     "file": "/Users/xianguangjin/Desktop/Hewuzhe3/IMKit/src/main/res/values/rc_theme.xml"
@@ -2239,23 +2232,31 @@
                 "to": {
                     "startLine": 467,
                     "startColumn": 4,
-                    "startOffset": 21824,
+                    "startOffset": 21815,
                     "endLine": 475,
                     "endColumn": 12,
-                    "endOffset": 22314
+                    "endOffset": 22298
                 },
                 "from": {
-                    "file": "/Users/xianguangjin/Desktop/Hewuzhe3/IMKit/src/main/res/values/rc_theme.xml"
+                    "file": "/Users/xianguangjin/Desktop/Hewuzhe3/IMKit/src/main/res/values/rc_theme.xml",
+                    "position": {
+                        "startLine": 56,
+                        "startColumn": 4,
+                        "startOffset": 2154,
+                        "endLine": 64,
+                        "endColumn": 12,
+                        "endOffset": 2637
+                    }
                 }
             },
             {
                 "to": {
                     "startLine": 476,
                     "startColumn": 4,
-                    "startOffset": 22319,
+                    "startOffset": 22303,
                     "endLine": 478,
                     "endColumn": 12,
-                    "endOffset": 22397
+                    "endOffset": 22381
                 },
                 "from": {
                     "file": "/Users/xianguangjin/Desktop/Hewuzhe3/IMKit/src/main/res/values/rc_theme.xml"
@@ -2265,10 +2266,10 @@
                 "to": {
                     "startLine": 479,
                     "startColumn": 4,
-                    "startOffset": 22402,
+                    "startOffset": 22386,
                     "endLine": 481,
                     "endColumn": 12,
-                    "endOffset": 22479
+                    "endOffset": 22463
                 },
                 "from": {
                     "file": "/Users/xianguangjin/Desktop/Hewuzhe3/IMKit/src/main/res/values/rc_theme.xml"
@@ -2278,10 +2279,10 @@
                 "to": {
                     "startLine": 482,
                     "startColumn": 4,
-                    "startOffset": 22484,
+                    "startOffset": 22468,
                     "endLine": 484,
                     "endColumn": 12,
-                    "endOffset": 22657
+                    "endOffset": 22641
                 },
                 "from": {
                     "file": "/Users/xianguangjin/Desktop/Hewuzhe3/IMKit/src/main/res/values/rc_theme.xml"
@@ -2291,10 +2292,10 @@
                 "to": {
                     "startLine": 485,
                     "startColumn": 4,
-                    "startOffset": 22662,
+                    "startOffset": 22646,
                     "endLine": 487,
                     "endColumn": 12,
-                    "endOffset": 22740
+                    "endOffset": 22724
                 },
                 "from": {
                     "file": "/Users/xianguangjin/Desktop/Hewuzhe3/IMKit/src/main/res/values/rc_theme.xml"
@@ -2304,10 +2305,10 @@
                 "to": {
                     "startLine": 488,
                     "startColumn": 4,
-                    "startOffset": 22745,
+                    "startOffset": 22729,
                     "endLine": 492,
                     "endColumn": 12,
-                    "endOffset": 23028
+                    "endOffset": 23012
                 },
                 "from": {
                     "file": "/Users/xianguangjin/Desktop/Hewuzhe3/IMKit/src/main/res/values/rc_theme.xml"
@@ -2317,10 +2318,10 @@
                 "to": {
                     "startLine": 493,
                     "startColumn": 4,
-                    "startOffset": 23033,
+                    "startOffset": 23017,
                     "endLine": 495,
                     "endColumn": 12,
-                    "endOffset": 23110
+                    "endOffset": 23094
                 },
                 "from": {
                     "file": "/Users/xianguangjin/Desktop/Hewuzhe3/IMKit/src/main/res/values/rc_theme.xml"
@@ -2330,10 +2331,10 @@
                 "to": {
                     "startLine": 496,
                     "startColumn": 4,
-                    "startOffset": 23115,
+                    "startOffset": 23099,
                     "endLine": 503,
                     "endColumn": 12,
-                    "endOffset": 23572
+                    "endOffset": 23556
                 },
                 "from": {
                     "file": "/Users/xianguangjin/Desktop/Hewuzhe3/IMKit/src/main/res/values/rc_theme.xml"
@@ -2343,10 +2344,10 @@
                 "to": {
                     "startLine": 504,
                     "startColumn": 4,
-                    "startOffset": 23577,
+                    "startOffset": 23561,
                     "endLine": 506,
                     "endColumn": 12,
-                    "endOffset": 23750
+                    "endOffset": 23734
                 },
                 "from": {
                     "file": "/Users/xianguangjin/Desktop/Hewuzhe3/IMKit/src/main/res/values/rc_style.xml"
@@ -2356,10 +2357,10 @@
                 "to": {
                     "startLine": 507,
                     "startColumn": 4,
-                    "startOffset": 23755,
+                    "startOffset": 23739,
                     "endLine": 509,
                     "endColumn": 12,
-                    "endOffset": 23927
+                    "endOffset": 23911
                 },
                 "from": {
                     "file": "/Users/xianguangjin/Desktop/Hewuzhe3/IMKit/src/main/res/values/rc_style.xml"

@@ -33,7 +33,7 @@ public class ConversationListActivity extends ToolBarActivity {
     protected void initThings(Bundle savedInstanceState) {
         super.initThings(savedInstanceState);
         enterFragment();
-
+        imgAction.setImageResource(R.mipmap.icon_person);
     }
 
     /**
@@ -41,6 +41,18 @@ public class ConversationListActivity extends ToolBarActivity {
      */
     @Override
     public void initListeners() {
+
+    }
+
+    @Override
+    public boolean canAction() {
+        return true;
+    }
+
+    @Override
+    protected void action() {
+        super.action();
+        startActivity(ContactsActivity.class);
 
     }
 

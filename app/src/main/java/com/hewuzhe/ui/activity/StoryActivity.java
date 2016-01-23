@@ -50,7 +50,7 @@ public class StoryActivity extends ToolBarActivity<FederalConditionPresenter> im
 
     @Override
     protected String provideTitle() {
-        return "江湖故事";
+        return "行业资讯";
     }
 
 
@@ -61,7 +61,7 @@ public class StoryActivity extends ToolBarActivity<FederalConditionPresenter> im
         TabLayout mTabLayout = (TabLayout) findViewById(R.id.tabLayout);
 
         for (Cate cate : data) {
-            viewPagerAdapter.addFragment(FederalConditionFragment.newInstance(new Bun().putInt("catid", cate.Id).ok()), cate.Name);//添加Fragment
+            viewPagerAdapter.addFragment(FederalConditionFragment.newInstance(new Bun().putInt("catid", cate.Id).putString("name", cate.Name).ok()), cate.Name);//添加Fragment
             mTabLayout.addTab(mTabLayout.newTab());//给TabLayout添加Tab
         }
 

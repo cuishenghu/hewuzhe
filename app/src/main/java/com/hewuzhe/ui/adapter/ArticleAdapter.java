@@ -14,6 +14,8 @@ import com.hewuzhe.model.ArticleCollection;
 import com.hewuzhe.presenter.ArticlesPresenter;
 import com.hewuzhe.ui.adapter.base.BaseAdapter;
 import com.hewuzhe.ui.cons.C;
+import com.hewuzhe.utils.StringUtil;
+import com.hewuzhe.utils.TimeUtil;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
@@ -56,6 +58,10 @@ public class ArticleAdapter extends BaseAdapter<ArticleAdapter.VHolder, ArticleC
 
         ArticleCollection articleCollection = data.get(position);
 
+        if (!StringUtil.isEmpty(articleCollection.OperateTime)) {
+            holder._TvAddTime.setText(TimeUtil.timeAgo(articleCollection.OperateTime));
+        }
+
         Glide.with(context)
                 .load(C.BASE_URL + articleCollection.ImagePath)
                 .fitCenter()
@@ -74,12 +80,10 @@ public class ArticleAdapter extends BaseAdapter<ArticleAdapter.VHolder, ArticleC
         }
 
         if (articleCollection.IsLike) {
-            holder._ImgCollect.setImageResource(R.mipmap.icon_praise_focus);
+            holder._ImgCollect.setImageResource(R.mipmap.icon_collect_focus);
         } else {
-            holder._ImgCollect.setImageResource(R.mipmap.icon_praise_gray);
-
+            holder._ImgCollect.setImageResource(R.mipmap.icon_collect_gray);
         }
-
     }
 
 

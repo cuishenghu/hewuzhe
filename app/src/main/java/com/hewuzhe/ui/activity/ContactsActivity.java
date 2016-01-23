@@ -31,6 +31,7 @@ import com.hewuzhe.view.FriendsView;
 import java.util.ArrayList;
 
 import butterknife.Bind;
+import butterknife.ButterKnife;
 import cn.bingoogolapple.androidcommon.adapter.BGAOnItemChildClickListener;
 import io.rong.imkit.RongIM;
 
@@ -55,6 +56,8 @@ public class ContactsActivity extends ToolBarActivity<FriendsPresenter> implemen
     LinearLayout _LayFollowed;
     @Bind(R.id.edt_search_content)
     EditText _EdtSearchContent;
+    @Bind(R.id.tv_group)
+    TextView _TvGroup;
     private RecyclerIndexFriendsAdapter mAdapter;
     private LinearLayoutManager mLayoutManager;
     private ArrayList<Friend> _Friends = new ArrayList<>();
@@ -92,8 +95,16 @@ public class ContactsActivity extends ToolBarActivity<FriendsPresenter> implemen
         mAdapter = new RecyclerIndexFriendsAdapter(_RecyclerView);
         presenter.getFriends();
 
-        presenter.getGroup();
+        if (new SessionUtil(getContext()).getUser().TeamId == 0) {
+            _LayGroup.setVisibility(View.GONE);
+            _TvGroup.setVisibility(View.GONE);
 
+        } else {
+            _LayGroup.setVisibility(View.VISIBLE);
+            _TvGroup.setVisibility(View.VISIBLE);
+
+            presenter.getGroup();
+        }
     }
 
     /**
@@ -254,4 +265,10 @@ public class ContactsActivity extends ToolBarActivity<FriendsPresenter> implemen
         return new SessionUtil(getContext()).getUserId();
     }
 
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        // TODO: add setContentView(...) invocation
+        ButterKnife.bind(this);
+    }
 }

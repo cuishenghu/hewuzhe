@@ -54,9 +54,18 @@ public class User {
      * IsShieldNews : false
      */
 
+
+
     public String RemarkName;
     public boolean IsShield;
     public boolean IsShieldNews;
+    /**
+     * Key : 47
+     * RongCloudName : ZNZHn18pgN4lUl04R0bqhtmtUQO68oZZTfDfApE02UPvvJjqerz3sx3gq4MKvNdF7d0Bet25AOaBwvKkubus3g==
+     */
+
+    public int Key;
+    public String RongCloudName;
 
 
     public boolean isVip() {

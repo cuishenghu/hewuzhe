@@ -8,8 +8,6 @@
 
 package cn.sharesdk.onekeyshare;
 
-import static cn.sharesdk.framework.utils.ShareSDKR.getBitmapRes;
-import static cn.sharesdk.framework.utils.ShareSDKR.getStringRes;
 import android.app.Activity;
 import android.content.Context;
 import android.hardware.Sensor;
@@ -22,6 +20,9 @@ import android.widget.ImageView.ScaleType;
 import android.widget.Toast;
 
 import com.mob.tools.FakeActivity;
+
+import static cn.sharesdk.framework.utils.ShareSDKR.getBitmapRes;
+import static cn.sharesdk.framework.utils.ShareSDKR.getStringRes;
 
 /** 摇一摇启动分享的例子 */
 public class Shake2Share extends FakeActivity implements SensorEventListener {

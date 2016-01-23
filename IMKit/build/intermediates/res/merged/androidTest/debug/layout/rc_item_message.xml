@@ -48,7 +48,8 @@
         android:layout_toLeftOf="@id/rc_right"
         android:layout_toRightOf="@id/rc_left"
         android:gravity="center_vertical"
-        android:visibility="gone"/>
+        android:textColor="@color/rc_text_color_tertiary"
+        android:visibility="visible"/>
 
     <FrameLayout
         android:layout_width="match_parent"

@@ -73,6 +73,7 @@ public class JoinGroupAdapter extends BaseAdapter<JoinGroupAdapter.VHolder, Grou
                 }
             });
 
+
         } else {
             holder._TvJoin.setText("加入");
             holder._TvJoin.setBackgroundResource(R.color.colorBg);

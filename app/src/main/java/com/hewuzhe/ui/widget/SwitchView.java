@@ -73,8 +73,7 @@ public class SwitchView extends View {
             }
         });
 
-        setChecked(true);
-
+        setChecked(false);
 
     }
 

@@ -169,16 +169,17 @@ public class DoJoRecommendActivity extends SwipeRecycleViewActivity<DojoRecommen
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        if (resultCode == C.RESULT_ONE) {
-            Bundle bun = data.getBundleExtra("data");
-            if (bun != null) {
-
-                name = bun.getString("name");
-                id = bun.getInt("id");
-                tvTitle.setText(name);
-                page = 1;
-                cityId = id;
-                presenter.getData(page, count);
+        if (resultCode == C.RESULT_ONE && requestCode == C.REQUEST_SELECT_CATE) {
+            if (data != null) {
+                Bundle bun = data.getBundleExtra("data");
+                if (bun != null) {
+                    name = bun.getString("name");
+                    id = bun.getInt("id");
+                    tvTitle.setText(name);
+                    page = 1;
+                    cityId = id;
+                    presenter.getData(page, count);
+                }
             }
 
         } else if (resultCode == C.RESULT_TWO) {

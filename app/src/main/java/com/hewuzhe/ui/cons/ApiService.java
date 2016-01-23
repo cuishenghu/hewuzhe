@@ -211,6 +211,9 @@ public interface ApiService {
     @GET("Helianmeng.asmx/GetFriendBySearch")
     Observable<Res<ArrayList<Friend>>> GetFriendBySearch(@Query("startRowIndex") int startRowIndex, @Query("maximumRows") int maximumRows, @Query("areaId") int areaId, @Query("nicName") String nicName, @Query("age") int age, @Query("sexuality") int sexuality, @Query("userid") int userid);
 
+    @GET("Helianmeng.asmx/GetFriendByAreaCodeAndSearch")
+    Observable<Res<ArrayList<Friend>>> GetFriendByAreaCodeAndSearch(@Query("startRowIndex") int startRowIndex, @Query("maximumRows") int maximumRows, @Query("areaCode") int areaId, @Query("nicName") String nicName, @Query("age") int age, @Query("sexuality") int sexuality, @Query("userid") int userid);
+
     @GET("Helianmeng.asmx/SaveFriend")
     Observable<Res> SaveFriend(@Query("userid") int userid, @Query("friendid") int friendid);
 

@@ -29,33 +29,6 @@ public class GroupConditionPresenter extends ConditionPresenter<GroupConditionVi
 
     public void getData(final int page, final int count) {
 
-//        Subscription subscription = NetEngine.getService()
-//                .GetDongtaiPageByFriends((page - 1) * count, count, new SessionUtil(view.getContext()).getUserId())
-//                .subscribeOn(Schedulers.io())
-//                .observeOn(AndroidSchedulers.mainThread())
-//                .subscribe(new SB<Res<ArrayList<FriendCondition>>>() {
-//                    @Override
-//                    public void next(Res<ArrayList<FriendCondition>> res) {
-//                        if (res.code == C.OK) {
-//                            view.bindData(res.data);
-//                            setDataStatus(page, count, res);
-//                        }
-//                    }
-//
-//                    @Override
-//                    public void onCompleted() {
-//                        view.refresh(false);
-//
-//                    }
-//
-//                    @Override
-//                    public void onError(Throwable e) {
-//                        view.refresh(false);
-//
-//                    }
-//                });
-//        addSubscription(subscription);
-
         if (view.getData() == new SessionUtil(view.getContext()).getUser().TeamId) {
             //获取自己的战队
             Subscription subscription = NetEngine.getService()
@@ -87,7 +60,6 @@ public class GroupConditionPresenter extends ConditionPresenter<GroupConditionVi
 
             addSubscription(subscription);
         } else {
-
             Subscription subscription = NetEngine.getService()
                     .GetTeamDongtaiPageByTeamId((page - 1) * count, count, view.getData())
                     .subscribeOn(Schedulers.io())
@@ -99,7 +71,6 @@ public class GroupConditionPresenter extends ConditionPresenter<GroupConditionVi
                                 view.bindData(res.data);
                                 setDataStatus(page, count, res);
                             }
-
                         }
 
                         @Override

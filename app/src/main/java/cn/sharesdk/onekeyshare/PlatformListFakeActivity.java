@@ -5,11 +5,12 @@ import android.content.Intent;
 import android.view.KeyEvent;
 import android.view.View;
 
+import com.mob.tools.FakeActivity;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
-import com.mob.tools.FakeActivity;
 import cn.sharesdk.framework.Platform;
 import cn.sharesdk.framework.ShareSDK;
 

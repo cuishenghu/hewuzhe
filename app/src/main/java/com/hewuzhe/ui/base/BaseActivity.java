@@ -72,6 +72,7 @@ public abstract class BaseActivity<P extends BasePresenterImp> extends AutoLayou
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        beforeSetCView(savedInstanceState);
         setContentView(provideContentViewId());
         ButterKnife.bind(this);
 
@@ -84,6 +85,11 @@ public abstract class BaseActivity<P extends BasePresenterImp> extends AutoLayou
 
         initThings(savedInstanceState);
         initListeners();
+    }
+
+    public void beforeSetCView(Bundle savedInstanceState) {
+
+
     }
 
     @Override

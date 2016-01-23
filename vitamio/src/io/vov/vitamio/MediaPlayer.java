@@ -674,7 +674,7 @@ public class MediaPlayer {
   public native Bitmap getCurrentFrame();
 
   /**
-   * Gets the duration of the file.
+   * Gets the duration of  thefile.
    *
    * @return the duration in milliseconds
    */

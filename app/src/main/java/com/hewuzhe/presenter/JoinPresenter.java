@@ -1,5 +1,7 @@
 package com.hewuzhe.presenter;
 
+import android.support.annotation.NonNull;
+
 import com.hewuzhe.model.Group;
 import com.hewuzhe.model.Res;
 import com.hewuzhe.model.User;
@@ -16,6 +18,8 @@ import java.util.Set;
 
 import cn.jpush.android.api.JPushInterface;
 import cn.jpush.android.api.TagAliasCallback;
+import materialdialogs.DialogAction;
+import materialdialogs.MaterialDialog;
 import rx.Subscription;
 import rx.android.schedulers.AndroidSchedulers;
 import rx.functions.Action0;
@@ -58,113 +62,126 @@ public class JoinPresenter extends AreaPresenter<JoinGroupView> {
 
     }
 
-    public void joinGroup(final int id, String name, final int pos) {
+    public void joinGroup(final int id, final String name, final int pos) {
 
-        User user = new SessionUtil(view.getContext()).getUser();
-        if (user.TeamId != 0) {
-            view.toast("请先退出当前战队");
-            return;
-        }
+        view.showDefautInfoDialog("提示", "确定加入战队？", new MaterialDialog.SingleButtonCallback() {
+            @Override
+            public void onClick(@NonNull MaterialDialog dialog, @NonNull DialogAction which) {
 
-        Subscription subscription = NetEngine.getService()
-                .JoinTeam(user.Id, id, name)
-                .subscribeOn(Schedulers.io())
-                .doOnSubscribe(new Action0() {
-                    @Override
-                    public void call() {
-                        view.showDialog();
-                    }
-                })
-                .subscribeOn(AndroidSchedulers.mainThread())
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new SB<Res>() {
-                    @Override
-                    public void next(Res res) {
-                        if (res.code == C.OK) {
-                            User user = new SessionUtil(view.getContext()).getUser();
-                            user.TeamId = id;
-                            new SessionUtil(view.getContext()).putUser(user);
 
-                            HashSet<String> sets = new HashSet<>();
-                            sets.add("TeamId_" + user.TeamId);
-                            JPushInterface.setTags(view.getContext(), sets, new TagAliasCallback() {
-                                @Override
-                                public void gotResult(int i, String s, Set<String> set) {
+                User user = new SessionUtil(view.getContext()).getUser();
+                if (user.TeamId != 0) {
+                    view.toast("请先退出当前战队");
+                    return;
+                }
 
+                Subscription subscription = NetEngine.getService()
+                        .JoinTeam(user.Id, id, name)
+                        .subscribeOn(Schedulers.io())
+                        .doOnSubscribe(new Action0() {
+                            @Override
+                            public void call() {
+                                view.showDialog();
+                            }
+                        })
+                        .subscribeOn(AndroidSchedulers.mainThread())
+                        .observeOn(AndroidSchedulers.mainThread())
+                        .subscribe(new SB<Res>() {
+                            @Override
+                            public void next(Res res) {
+                                if (res.code == C.OK) {
+                                    User user = new SessionUtil(view.getContext()).getUser();
+                                    user.TeamId = id;
+                                    new SessionUtil(view.getContext()).putUser(user);
+
+                                    HashSet<String> sets = new HashSet<>();
+                                    sets.add("TeamId_" + user.TeamId);
+                                    JPushInterface.setTags(view.getContext(), sets, new TagAliasCallback() {
+                                        @Override
+                                        public void gotResult(int i, String s, Set<String> set) {
+
+                                        }
+                                    });
+
+                                    view.updateItem(true, pos);
                                 }
-                            });
+                            }
 
-                            view.updateItem(true, pos);
-                        }
-                    }
+                            @Override
+                            public void onCompleted() {
 
-                    @Override
-                    public void onCompleted() {
+                                view.dismissDialog();
+                            }
 
-                        view.dismissDialog();
-                    }
+                            @Override
+                            public void onError(Throwable e) {
+                                view.dismissDialog();
 
-                    @Override
-                    public void onError(Throwable e) {
-                        view.dismissDialog();
+                            }
+                        });
 
-                    }
-                });
+                addSubscription(subscription);
 
-        addSubscription(subscription);
+            }
+        });
+
+
     }
 
-    public void quitGroup(int id, final int position) {
+    public void quitGroup(final int id, final int position) {
+        view.showDefautInfoDialog("提示", "确定退出战队？", new MaterialDialog.SingleButtonCallback() {
+            @Override
+            public void onClick(@NonNull MaterialDialog dialog, @NonNull DialogAction which) {
+                Subscription subscription = NetEngine.getService()
+                        .QuitGroup(new SessionUtil(view.getContext()).getUser().Id, id)
+                        .subscribeOn(Schedulers.io())
+                        .doOnSubscribe(new Action0() {
+                            @Override
+                            public void call() {
+                                view.showDialog();
 
-        Subscription subscription = NetEngine.getService()
-                .QuitGroup(new SessionUtil(view.getContext()).getUser().Id, id)
-                .subscribeOn(Schedulers.io())
-                .doOnSubscribe(new Action0() {
-                    @Override
-                    public void call() {
-                        view.showDialog();
+                            }
+                        })
+                        .subscribeOn(AndroidSchedulers.mainThread())
+                        .observeOn(AndroidSchedulers.mainThread())
+                        .subscribe(new SB<Res>() {
+                            @Override
+                            public void next(Res res) {
+                                if (res.code == C.OK) {
 
-                    }
-                })
-                .subscribeOn(AndroidSchedulers.mainThread())
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new SB<Res>() {
-                    @Override
-                    public void next(Res res) {
-                        if (res.code == C.OK) {
-
-                            User user = new SessionUtil(view.getContext()).getUser();
-                            user.TeamId = 0;
-                            new SessionUtil(view.getContext()).putUser(user);
+                                    User user = new SessionUtil(view.getContext()).getUser();
+                                    user.TeamId = 0;
+                                    new SessionUtil(view.getContext()).putUser(user);
 
 
-                            HashSet<String> sets = new HashSet<>();
-                            sets.add("TeamId_" + "0");
-                            JPushInterface.setTags(view.getContext(), sets, new TagAliasCallback() {
-                                @Override
-                                public void gotResult(int i, String s, Set<String> set) {
+                                    HashSet<String> sets = new HashSet<>();
+                                    sets.add("TeamId_" + "0");
+                                    JPushInterface.setTags(view.getContext(), sets, new TagAliasCallback() {
+                                        @Override
+                                        public void gotResult(int i, String s, Set<String> set) {
 
+                                        }
+                                    });
+
+                                    view.updateItem(false, position);
                                 }
-                            });
+                            }
 
-                            view.updateItem(false, position);
-                        }
-                    }
+                            @Override
+                            public void onCompleted() {
 
-                    @Override
-                    public void onCompleted() {
+                                view.dismissDialog();
+                            }
 
-                        view.dismissDialog();
-                    }
+                            @Override
+                            public void onError(Throwable e) {
+                                view.dismissDialog();
 
-                    @Override
-                    public void onError(Throwable e) {
-                        view.dismissDialog();
-
-                    }
-                });
-
-        addSubscription(subscription);
+                            }
+                        });
+                addSubscription(subscription);
+            }
+        });
 
 
     }

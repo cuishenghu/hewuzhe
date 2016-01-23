@@ -123,7 +123,7 @@ public class FederalConditionFragment extends SwipeRecycleViewFragment<ArticlesP
      */
     @Override
     public void onItemClick(View view, int pos, Article item) {
-        startActivity(FederalConditionDetailActivity.class, new Bun().putString("title", item.Title).putInt("id", item.Id).ok());
+        startActivity(FederalConditionDetailActivity.class, new Bun().putString("title", getArguments().getString("name")).putInt("id", item.Id).ok());
     }
 
     @Override

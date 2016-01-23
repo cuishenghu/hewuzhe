@@ -64,12 +64,14 @@
                       android:textColor="@color/white"
                       android:textSize="30px"/>
 
-            <com.hewuzhe.ui.widget.SwitchView
+            <CheckBox
                 android:id="@+id/switch_msg"
                 android:layout_width="80px"
                 android:layout_height="50px"
                 android:layout_centerInParent="true"
                 android:layout_marginRight="20px"
+                android:background="@drawable/bg_selector_switch"
+                android:button="@null"
                 />
 
 
@@ -96,12 +98,14 @@
                       android:textColor="@color/white"
                       android:textSize="30px"/>
 
-            <com.hewuzhe.ui.widget.SwitchView
+            <CheckBox
                 android:id="@+id/switch_sound"
                 android:layout_width="80px"
                 android:layout_height="50px"
                 android:layout_centerInParent="true"
                 android:layout_marginRight="20px"
+                android:background="@drawable/bg_selector_switch"
+                android:button="@null"
                 />
 
 
@@ -129,12 +133,14 @@
                       android:textColor="@color/white"
                       android:textSize="30px"/>
 
-            <com.hewuzhe.ui.widget.SwitchView
+            <CheckBox
                 android:id="@+id/switch_vibrate"
                 android:layout_width="80px"
                 android:layout_height="50px"
                 android:layout_centerInParent="true"
                 android:layout_marginRight="20px"
+                android:background="@drawable/bg_selector_switch"
+                android:button="@null"
                 />
 
 

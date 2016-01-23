@@ -93,7 +93,7 @@ public class VideoCollectionsFragment extends SwipeRecycleViewFragment<VideoColl
      */
     @Override
     public void onItemClick(View view, int pos, Video item) {
-        if (item.UserId != 0) {
+        if (item.PublisherId != 0) {
             startActivity(VideoDetail2Activity.class, new Bun().putInt("Id", item.MessageId).ok());
         } else {
             startActivity(VideoDetailActivity.class, new Bun().putInt("Id", item.MessageId).ok());

@@ -14,6 +14,7 @@ import com.bumptech.glide.Glide;
 import com.hewuzhe.R;
 import com.hewuzhe.model.Comment;
 import com.hewuzhe.model.FriendCondition;
+import com.hewuzhe.model.Res;
 import com.hewuzhe.model.User;
 import com.hewuzhe.presenter.MyConditionPresenter;
 import com.hewuzhe.presenter.adapter.ConditionPresenter;
@@ -246,6 +247,18 @@ public class MyConditionActivity extends SwipeRecycleViewActivity<MyConditionPre
                     .crossFade()
                     .into(_ImgAvatar);
             _TvUsername.setText(data.NicName);
+        }
+    }
+
+
+    @Override
+    public void setDataStatus(int page, int count, Res<ArrayList<FriendCondition>> res) {
+        if (page * count >= res.recordcount) {
+            //没有更多了
+            adapter.noMore("还没留下任何动态");
+        } else {
+            //还有更多
+            adapter.hasMore();
         }
     }
 }

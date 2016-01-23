@@ -216,8 +216,7 @@ public class MakeWarriorsActivity extends RecycleViewActivity<MakeWarriorsPresen
         friend.nicName = _EdtSearchContent.getText().toString().trim();
         friend.age = age;
         friend.sexuality = gender;
-        friend.areaId = mAreaId;
-
+        friend.areaId = countyId;
         return friend;
     }
 

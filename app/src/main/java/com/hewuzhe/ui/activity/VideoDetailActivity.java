@@ -29,6 +29,7 @@ import com.hewuzhe.ui.widget.GlideCircleTransform;
 import com.hewuzhe.ui.widget.VideoControllerView;
 import com.hewuzhe.ui.widget.YsnowEditDialog;
 import com.hewuzhe.utils.Bun;
+import com.hewuzhe.utils.DataTypeUtils;
 import com.hewuzhe.utils.SessionUtil;
 import com.hewuzhe.utils.StringUtil;
 import com.hewuzhe.utils.TimeUtil;
@@ -161,6 +162,9 @@ public class VideoDetailActivity extends RecycleViewActivity<VideoDetailPresente
         videoController.setOnFullScreenBtnClickListener(new VideoControllerView.OnFullScreenBtnClick() {
             @Override
             public void onClick(View v) {
+
+                videoController.slider.setMax(DataTypeUtils.toInt(videoController.getVideoView().getDuration()));
+
                 int mCurrentOrientation = VideoDetailActivity.this.getResources().getConfiguration().orientation;
                 WindowManager.LayoutParams attrs = getWindow().getAttributes();
                 if (mCurrentOrientation == Configuration.ORIENTATION_PORTRAIT) {
@@ -172,8 +176,8 @@ public class VideoDetailActivity extends RecycleViewActivity<VideoDetailPresente
                     toolBar.setVisibility(View.GONE);
 //                    v.setSystemUiVisibility(View.SYSTEM_UI_FLAG_HIDE_NAVIGATION);
                     getWindow().addFlags(WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS);
-
                     videoController.btnFullScreen.setImageResource(R.mipmap.icon_origin_screen);
+
                 }
 
                 if (mCurrentOrientation == Configuration.ORIENTATION_LANDSCAPE) {
@@ -410,7 +414,12 @@ public class VideoDetailActivity extends RecycleViewActivity<VideoDetailPresente
 //
 //        }
 
-
+        videoController.setonPreparedListener(new VideoControllerView.OnPreparedListener() {
+            @Override
+            public void onPrepared() {
+                videoController.getVideoView().setVideoLayout(VideoView.VIDEO_LAYOUT_FIT_PARENT, 2);
+            }
+        });
         if (video.IsFree) {
             videoController.setVideoPath(C.BASE_URL + video.VideoPath);
             videoController._LayNoVip.setVisibility(View.GONE);
@@ -450,9 +459,12 @@ public class VideoDetailActivity extends RecycleViewActivity<VideoDetailPresente
         });
         reOthers.setAdapter(otherAdapter);
         if (videos != null && videos.size() > 0) {
+            reOthers.setVisibility(View.VISIBLE);
             tvOtherCount.setText("共" + videos.size() + "部");
             otherAdapter.data.addAll(videos);
             otherAdapter.notifyDataSetChanged();
+        } else {
+            reOthers.setVisibility(View.GONE);
         }
     }
 
@@ -476,6 +488,7 @@ public class VideoDetailActivity extends RecycleViewActivity<VideoDetailPresente
                 break;
             case 1:
                 if (b) {
+                    snb("收藏成功",imgAvatar);
                     imgCollect.setImageResource(R.mipmap.icon_collect_focus);
                     imgCollect.setOnClickListener(new View.OnClickListener() {
                         @Override
@@ -486,6 +499,8 @@ public class VideoDetailActivity extends RecycleViewActivity<VideoDetailPresente
                     });
 
                 } else {
+                    snb("取消收藏",imgAvatar);
+
                     imgCollect.setImageResource(R.mipmap.icon_collect);
                     imgCollect.setOnClickListener(new View.OnClickListener() {
                         @Override
@@ -500,6 +515,8 @@ public class VideoDetailActivity extends RecycleViewActivity<VideoDetailPresente
                 break;
             case 2:
                 if (b) {
+                    snb("点赞+1",imgAvatar);
+
                     imgPraise.setImageResource(R.mipmap.icon_praise_focus);
                     imgPraise.setOnClickListener(new View.OnClickListener() {
                         @Override
@@ -509,6 +526,8 @@ public class VideoDetailActivity extends RecycleViewActivity<VideoDetailPresente
                     });
 
                 } else {
+                    snb("取消点赞",imgAvatar);
+
                     imgPraise.setImageResource(R.mipmap.icon_praise);
                     imgPraise.setOnClickListener(new View.OnClickListener() {
                         @Override
@@ -520,7 +539,6 @@ public class VideoDetailActivity extends RecycleViewActivity<VideoDetailPresente
                 }
 
                 break;
-
             case 3:
                 if (b) {
 //                    imgPraise.setImageResource(R.mipmap.icon_praise_focus);
@@ -561,16 +579,20 @@ public class VideoDetailActivity extends RecycleViewActivity<VideoDetailPresente
             params.width = windowManager.getDefaultDisplay().getWidth();
             videoController.setLayoutParams(params);
 
+            videoController.getVideoView().invalidate();
+            videoController.getVideoView().setVideoLayout(VideoView.VIDEO_LAYOUT_STRETCH, 2);
+
         } else if (newConfig.orientation == Configuration.ORIENTATION_PORTRAIT) {
             mLayout = VideoView.VIDEO_LAYOUT_FIT_PARENT;//原始尺寸
-
             ViewGroup.LayoutParams params = videoController.getLayoutParams();
             params.height = StringUtil.dip2px(getContext(), 180);
             params.width = windowManager.getDefaultDisplay().getWidth();
             videoController.setLayoutParams(params);
+            videoController.getVideoView().setVideoLayout(VideoView.VIDEO_LAYOUT_FIT_PARENT, 3);
+
         }
-        if (videoController.getVideoView() != null)
-            videoController.getVideoView().setVideoLayout(mLayout, 0);
+
+
     }
 
 
@@ -595,5 +617,15 @@ public class VideoDetailActivity extends RecycleViewActivity<VideoDetailPresente
         videoController.release();
         ShareSDK.stopSDK(this);
         super.onDestroy();
+    }
+
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        if (videoController.getVideoView().isPlaying()) {
+            videoController.pause();
+        }
+
     }
 }

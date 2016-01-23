@@ -195,11 +195,7 @@ public class GroupConditionActivity extends SwipeRecycleViewActivity<GroupCondit
 
     @Override
     public void bindData(ArrayList<FriendCondition> data) {
-        if (page == 1) {
-            adapter.addDatas(data);
-        } else {
-            adapter.addMore(data);
-        }
+        bd(data);
     }
 
 
@@ -227,7 +223,7 @@ public class GroupConditionActivity extends SwipeRecycleViewActivity<GroupCondit
      */
     @Override
     public void onItemClick(View view, int pos, FriendCondition item) {
-        startActivity(ConditionDetialActivity.class, new Bun().putInt("id", item.Id).putString("_NickName", _NickName).putString("_PhotoPath", _PhotoPath).ok());
+        startActivity(ConditionDetialActivity.class, new Bun().putInt("id", item.Id).putString("_NickName", _NickName).putString("_PhotoPath", _PhotoPath).putInt("whitch", C.WHITCH_TWO).ok());
     }
 
     /**

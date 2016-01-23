@@ -31,7 +31,7 @@
         android:layout_marginTop="7dp"
         android:ellipsize="end"
         android:singleLine="true"
-        android:textColor="#999999"
+        android:textColor="@color/rc_text_color_tertiary"
         android:textSize="14sp"></TextView>
 
 

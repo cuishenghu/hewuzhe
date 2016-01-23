@@ -84,4 +84,5 @@ public class Video {
      */
 
     public int UpLoadType=0;//0是你选择手机中的视频
+    public int PublisherId;
 }

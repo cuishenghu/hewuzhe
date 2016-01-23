@@ -15,6 +15,7 @@ import com.bumptech.glide.Glide;
 import com.hewuzhe.R;
 import com.hewuzhe.model.Comment;
 import com.hewuzhe.model.FriendCondition;
+import com.hewuzhe.model.Res;
 import com.hewuzhe.model.User;
 import com.hewuzhe.presenter.FriendConditionPresenter;
 import com.hewuzhe.presenter.adapter.ConditionPresenter;
@@ -171,7 +172,7 @@ public class FriendsConditionActivity extends SwipeRecycleViewActivity<FriendCon
     @Override
     public void onItemClick(View view, int pos, FriendCondition item) {
 
-        startActivity(ConditionDetialActivity.class, new Bun().putInt("id", item.Id).ok());
+        startActivity(ConditionDetialActivity.class, new Bun().putInt("id", item.Id).putInt("whitch",C.WHITCH_TWO).ok());
 
     }
 
@@ -284,6 +285,11 @@ public class FriendsConditionActivity extends SwipeRecycleViewActivity<FriendCon
 
     @Override
     public void setUserData(User data) {
+
+    }
+
+    @Override
+    public void setDataStatus(int page, int count, Res<ArrayList<FriendCondition>> res) {
 
     }
 }

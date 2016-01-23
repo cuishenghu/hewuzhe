@@ -114,7 +114,7 @@ public class ConditionDetialActivity extends SwipeRecycleViewActivity<ConditonDe
      */
     @Override
     protected String provideTitle() {
-        return "动态详情";
+        return "";
     }
 
     /**
@@ -154,18 +154,33 @@ public class ConditionDetialActivity extends SwipeRecycleViewActivity<ConditonDe
     @Override
     public void setData(final FriendCondition condition) {
         this._condition = condition;
-        _TvUsername.setText(getIntentData().getString("_NickName"));
         _TvContent.setText(condition.Content);
         _TvAddTime.setText(TimeUtil.timeAgo(condition.PublishTime));
         _TvPraise.setText(condition.LikeNum + "");
 
-        Glide.with(getContext())
-                .load(C.BASE_URL + getIntentData().getString("_PhotoPath"))
-                .fitCenter()
-                .crossFade()
-                .placeholder(R.mipmap.img_avatar)
-                .transform(new GlideCircleTransform(getContext()))
-                .into(_Img);
+        if (getIntentData().getInt("whitch") == C.WHITCH_TWO) {
+            tvTitle.setText("战队动态详情");
+
+            _TvUsername.setText(getIntentData().getString("_NickName"));
+            Glide.with(getContext())
+                    .load(C.BASE_URL + getIntentData().getString("_PhotoPath"))
+                    .fitCenter()
+                    .crossFade()
+                    .placeholder(R.mipmap.img_avatar)
+                    .transform(new GlideCircleTransform(getContext()))
+                    .into(_Img);
+
+        } else {
+            tvTitle.setText("个人动态详情");
+            _TvUsername.setText(condition.NicName);
+            Glide.with(getContext())
+                    .load(C.BASE_URL + condition.PhotoPath)
+                    .fitCenter()
+                    .crossFade()
+                    .placeholder(R.mipmap.img_avatar)
+                    .transform(new GlideCircleTransform(getContext()))
+                    .into(_Img);
+        }
 
 
 //        _Img.setOnClickListener(v->startActivity(FriendProfileActivity.class,new Bun().putInt("id",_condition.)));

@@ -129,7 +129,6 @@ public class CitySelectActivity extends ToolBarActivity<CitySelectPresenter> imp
         Address item = mAdapter.getDatas().get(i);
         setResult(C.RESULT_ONE, new Intent().putExtra("data", new Bun().putString("name", item.Name).putInt("id", item.Id).ok()));
         finishActivity();
-
     }
 
     @Override

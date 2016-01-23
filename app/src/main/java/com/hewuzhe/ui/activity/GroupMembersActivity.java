@@ -35,6 +35,8 @@ public class GroupMembersActivity extends RecycleViewActivity<GroupMembersPresen
     private AddressAdapter cityDialogAdapter;
     private AddressAdapter disctrictAdapter;
     private int mAreaId = 0;
+    private ArrayList<Friend> data = new ArrayList<>();
+    private ArrayList<Friend> _NewFriends = new ArrayList<>();
 
     @Override
     protected int provideContentViewId() {
@@ -60,19 +62,34 @@ public class GroupMembersActivity extends RecycleViewActivity<GroupMembersPresen
      */
     @Override
     public void initListeners() {
-
         _EdtSearchContent.setOnEditorActionListener(new TextView.OnEditorActionListener() {
             @Override
             public boolean onEditorAction(TextView textView, int i, KeyEvent keyEvent) {
                 if (i == EditorInfo.IME_ACTION_SEARCH) {
-                    showDialog();
-                    presenter.getData(page, count);
+                    String keyWord = _EdtSearchContent.getText().toString().trim();
+                    search(keyWord);
                 }
                 return false;
             }
         });
 
     }
+
+
+    private void search(String keyWord) {
+
+        hideSoftMethod(_EdtSearchContent);
+
+        for (Friend friend : data) {
+            if (friend.NicName.contains(keyWord)) {
+                _NewFriends.add(friend);
+            }
+        }
+
+        adapter.addDatas(_NewFriends);
+
+    }
+
 
     /**
      * 绑定Presenter
@@ -99,6 +116,7 @@ public class GroupMembersActivity extends RecycleViewActivity<GroupMembersPresen
 
     @Override
     public void bindData(ArrayList<Friend> data) {
+        this.data = data;
         bd(data);
     }
 
@@ -109,8 +127,7 @@ public class GroupMembersActivity extends RecycleViewActivity<GroupMembersPresen
      */
     @Override
     public void onItemClick(View view, int pos, Friend item) {
-
-        startActivity(FriendProfileActivity.class, new Bun().putInt("id", item.Id).ok());
+        presenter.isWuyou(item.Id);
     }
 
     @Override
@@ -125,6 +142,5 @@ public class GroupMembersActivity extends RecycleViewActivity<GroupMembersPresen
         } else {
             startActivity(StrangerProfileSettingsActivity.class, new Bun().putInt("id", userid).ok());
         }
-
     }
 }

@@ -8,12 +8,11 @@
     android:orientation="vertical"
     tools:context="com.hewuzhe.ui.activity.ConversationListActivity">
 
-    <include layout="@layout/toolbar_layout"/>
+    <include layout="@layout/toolbar_layout_two"/>
     <fragment
         android:id="@+id/conversationlist"
         android:name="io.rong.imkit.fragment.ConversationListFragment"
         android:layout_width="match_parent"
         android:layout_height="match_parent"/>
-
 
 </LinearLayout>

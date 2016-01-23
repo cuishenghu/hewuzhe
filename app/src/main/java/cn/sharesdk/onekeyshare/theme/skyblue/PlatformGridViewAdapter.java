@@ -27,10 +27,10 @@ import cn.sharesdk.framework.Platform;
 import cn.sharesdk.onekeyshare.CustomerLogo;
 import cn.sharesdk.onekeyshare.ShareCore;
 
-import static cn.sharesdk.framework.utils.ShareSDKR.getStringRes;
 import static cn.sharesdk.framework.utils.ShareSDKR.getBitmapRes;
 import static cn.sharesdk.framework.utils.ShareSDKR.getIdRes;
 import static cn.sharesdk.framework.utils.ShareSDKR.getLayoutRes;
+import static cn.sharesdk.framework.utils.ShareSDKR.getStringRes;
 
 public class PlatformGridViewAdapter extends BaseAdapter implements View.OnClickListener {
 

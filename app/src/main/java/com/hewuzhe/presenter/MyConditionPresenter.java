@@ -31,7 +31,7 @@ public class MyConditionPresenter extends ConditionPresenter<FriendsConditionVie
                     public void next(Res<ArrayList<FriendCondition>> res) {
                         if (res.code == C.OK) {
                             view.bindData(res.data);
-                            setDataStatus(page, count, res);
+                            view.setDataStatus(page, count, res);
                         }
                     }
 

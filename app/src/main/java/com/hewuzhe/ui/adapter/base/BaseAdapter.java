@@ -322,6 +322,15 @@ public abstract class BaseAdapter<VH extends RecyclerView.ViewHolder, M, P exten
         }
     }
 
+    public void noMore(String tip) {
+        STATUS = STATUS_NOMORE;
+        if (NU.notNull(tvStatus)) {
+            tvStatus.setText(tip);
+            progressView.setVisibility(View.GONE);
+        }
+    }
+
+
     /**
      * 获取当前状态
      *

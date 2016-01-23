@@ -25,7 +25,7 @@ public class MakeWarriorsPresenter extends AreaPresenter<MakeWarriorsView> {
 
         Friend friend = view.getData();
         Subscription subscription = NetEngine.getService()
-                .GetFriendBySearch((page - 1) * count, count, friend.areaId, friend.nicName, friend.age, friend.sexuality, new SessionUtil(view.getContext()).getUser().Id)
+                .GetFriendByAreaCodeAndSearch((page - 1) * count, count, friend.areaId, friend.nicName, friend.age, friend.sexuality, new SessionUtil(view.getContext()).getUser().Id)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new SB<Res<ArrayList<Friend>>>() {
@@ -150,7 +150,7 @@ public class MakeWarriorsPresenter extends AreaPresenter<MakeWarriorsView> {
                     @Override
                     public void next(Res<Boolean> res) {
                         if (res.code == C.OK) {
-                            view.isWuYou(res.data,userid);
+                            view.isWuYou(res.data, userid);
 
                         }
                     }

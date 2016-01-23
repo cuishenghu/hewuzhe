@@ -73,12 +73,7 @@ public class SearchWarriorsAdapter extends BaseAdapter<SearchWarriorsAdapter.VHo
         if (friend.IsFriend) {
             holder._TvFollow.setText("已关注");
             holder._TvFollow.setBackgroundResource(R.color.colorYellow);
-            holder._TvFollow.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    _presenter.unFollow(friend.Id, position);
-                }
-            });
+            holder._TvFollow.setOnClickListener(null);
 
         } else {
             holder._TvFollow.setText("关注");
@@ -90,7 +85,6 @@ public class SearchWarriorsAdapter extends BaseAdapter<SearchWarriorsAdapter.VHo
                 }
             });
         }
-
     }
 
     /**

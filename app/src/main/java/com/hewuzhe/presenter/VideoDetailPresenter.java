@@ -10,6 +10,7 @@ import com.hewuzhe.ui.cons.C;
 import com.hewuzhe.utils.NetEngine;
 import com.hewuzhe.utils.SB;
 import com.hewuzhe.utils.SessionUtil;
+import com.hewuzhe.utils.StringUtil;
 import com.hewuzhe.view.VideoDetailView;
 
 import java.util.ArrayList;
@@ -198,6 +199,11 @@ public class VideoDetailPresenter extends CommentPresenter<VideoDetailView> {
     }
 
     public void publisComment(int id, String content, final View v) {
+        if (StringUtil.isEmpty(content)) {
+            view.snb("内容不能为空", v);
+            return;
+        }
+
         Subscription subscription = NetEngine.getService()
                 .MessageComment(id, new SessionUtil(view.getContext()).getUser().Id, content)
                 .subscribeOn(Schedulers.io())
@@ -246,7 +252,7 @@ public class VideoDetailPresenter extends CommentPresenter<VideoDetailView> {
                     @Override
                     public void next(Res<Boolean> res) {
                         if (res.code == C.OK) {
-                            view.isWuYou(res.data,userid);
+                            view.isWuYou(res.data, userid);
 
                         }
                     }

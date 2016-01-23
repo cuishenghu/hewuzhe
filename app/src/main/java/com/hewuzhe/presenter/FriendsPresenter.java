@@ -49,7 +49,9 @@ public class FriendsPresenter extends BasePresenterImp<FriendsView> {
                             for (WrapFriend wrapFriend : res.data) {
                                 Friend friend = wrapFriend.Value;
                                 friend.Id = wrapFriend.Key;
-                                friends.add(friend);
+                                if (!StringUtil.isEmpty(friend.RemarkName)) {
+                                    friends.add(friend);
+                                }
                             }
                             bindData();
                         }
@@ -74,11 +76,11 @@ public class FriendsPresenter extends BasePresenterImp<FriendsView> {
         CharacterParser mCharacterParser = CharacterParser.getInstance();
 
         for (Friend friend : friends) {
-            if (StringUtil.isEmpty(friend.NicName)) {
+            if (StringUtil.isEmpty(friend.RemarkName)) {
                 friend.topc = "A";
             } else {
-                friend.topc = mCharacterParser.getSelling(friend.NicName).substring(0, 1).toUpperCase();
-                if (friend.NicName.equals("重庆")) {
+                friend.topc = mCharacterParser.getSelling(friend.RemarkName).substring(0, 1).toUpperCase();
+                if (friend.RemarkName.equals("重庆")) {
                     friend.topc = "C";
                 }
             }
@@ -89,7 +91,6 @@ public class FriendsPresenter extends BasePresenterImp<FriendsView> {
     }
 
     public void getGroup() {
-
         Subscription subscription = NetEngine.getService()
                 .SelectTeam(new SessionUtil(view.getContext()).getUser().TeamId)
                 .subscribeOn(Schedulers.io())

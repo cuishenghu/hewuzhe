@@ -67,7 +67,8 @@
 
             </LinearLayout>
 
-            <TextView style="@style/text_35_white"
+            <TextView android:id="@+id/tv_group"
+                      style="@style/text_35_white"
                       android:layout_width="match_parent"
                       android:layout_height="85px"
                       android:gravity="center_vertical"

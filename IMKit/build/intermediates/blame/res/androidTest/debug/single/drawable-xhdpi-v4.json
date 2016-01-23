@@ -200,12 +200,12 @@
         "source": "/Users/xianguangjin/Desktop/Hewuzhe3/IMKit/build/intermediates/bundles/debug/res/drawable-xhdpi-v4/rc_ic_albums_checked.png"
     },
     {
-        "merged": "/Users/xianguangjin/Desktop/Hewuzhe3/IMKit/build/intermediates/res/merged/androidTest/debug/drawable-xhdpi-v4/u1f6bf.png",
-        "source": "/Users/xianguangjin/Desktop/Hewuzhe3/IMKit/build/intermediates/bundles/debug/res/drawable-xhdpi-v4/u1f6bf.png"
-    },
-    {
         "merged": "/Users/xianguangjin/Desktop/Hewuzhe3/IMKit/build/intermediates/res/merged/androidTest/debug/drawable-xhdpi-v4/u1f6b2.png",
         "source": "/Users/xianguangjin/Desktop/Hewuzhe3/IMKit/build/intermediates/bundles/debug/res/drawable-xhdpi-v4/u1f6b2.png"
+    },
+    {
+        "merged": "/Users/xianguangjin/Desktop/Hewuzhe3/IMKit/build/intermediates/res/merged/androidTest/debug/drawable-xhdpi-v4/u1f6bf.png",
+        "source": "/Users/xianguangjin/Desktop/Hewuzhe3/IMKit/build/intermediates/bundles/debug/res/drawable-xhdpi-v4/u1f6bf.png"
     },
     {
         "merged": "/Users/xianguangjin/Desktop/Hewuzhe3/IMKit/build/intermediates/res/merged/androidTest/debug/drawable-xhdpi-v4/u1f4a4.png",

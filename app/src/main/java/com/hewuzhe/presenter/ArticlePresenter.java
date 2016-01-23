@@ -111,7 +111,7 @@ public class ArticlePresenter extends CommentPresenter<ArticleView> {
     public void getData(final int page, final int count) {
         int id = view.getData();
         Subscription subscription = NetEngine.getService()
-                .SelectCommentByMessageIdDT(id)
+                .SelectCommentByMessageId(id)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new SB<Res<ArrayList<Comment>>>() {

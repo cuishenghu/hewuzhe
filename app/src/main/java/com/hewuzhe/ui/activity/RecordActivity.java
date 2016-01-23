@@ -1,6 +1,7 @@
 package com.hewuzhe.ui.activity;
 
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
@@ -17,6 +18,9 @@ import com.hewuzhe.view.RecordView;
 
 import java.util.ArrayList;
 import java.util.LinkedList;
+
+import materialdialogs.DialogAction;
+import materialdialogs.MaterialDialog;
 
 public class RecordActivity extends SwipeRecycleViewActivity<RecordPresenter, RecordAdapter, Record> implements RecordView {
 
@@ -71,19 +75,31 @@ public class RecordActivity extends SwipeRecycleViewActivity<RecordPresenter, Re
         if (adapter.getCheckShowStatus()) {
             tvAction.setText("编辑");
 
-            /**
-             * 执行删除操作
-             * */
+            showInfoDialog("温馨提示", "确定要删除吗？", "确定", "取消", new MaterialDialog.SingleButtonCallback() {
+                @Override
+                public void onClick(@NonNull MaterialDialog dialog, @NonNull DialogAction which) {
+                    dialog.dismiss();
 
-            LinkedList<Record> checkedList = adapter.getCheckedList();
-            if (checkedList.size() > 0) {
-                presenter.deleteViedeo(checkedList);
-            } else {
-                adapter.showCheck(false);
-            }
+                    /**
+                     * 执行删除操作
+                     * */
+
+                    LinkedList<Record> checkedList = adapter.getCheckedList();
+                    if (checkedList.size() > 0) {
+                        presenter.deleteViedeo(checkedList);
+                    } else {
+                        adapter.showCheck(false);
+                    }
+                }
+            }, new MaterialDialog.SingleButtonCallback() {
+                @Override
+                public void onClick(@NonNull MaterialDialog dialog, @NonNull DialogAction which) {
+                    dialog.dismiss();
+                    adapter.showCheck(false);
+                }
+            });
 
         } else {
-
 
             tvAction.setText("删除");
             adapter.showCheck(true);

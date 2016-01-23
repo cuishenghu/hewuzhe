@@ -60,7 +60,7 @@ public class FederalConditionActivity extends ToolBarActivity<FederalConditionPr
         TabLayout mTabLayout = (TabLayout) findViewById(R.id.tabLayout);
 
         for (Cate cate : data) {
-            viewPagerAdapter.addFragment(FederalConditionFragment.newInstance(new Bun().putInt("catid", cate.Id).ok()), cate.Name);//添加Fragment
+            viewPagerAdapter.addFragment(FederalConditionFragment.newInstance(new Bun().putInt("catid", cate.Id).putString("name", cate.Name).ok()), cate.Name);//添加Fragment
             mTabLayout.addTab(mTabLayout.newTab());//给TabLayout添加Tab
         }
 

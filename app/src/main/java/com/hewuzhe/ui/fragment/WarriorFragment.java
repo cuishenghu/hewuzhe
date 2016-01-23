@@ -19,13 +19,16 @@ import com.hewuzhe.model.User;
 import com.hewuzhe.model.Weather;
 import com.hewuzhe.presenter.WarriorFragmentPresenter;
 import com.hewuzhe.ui.App;
+import com.hewuzhe.ui.activity.BasicMapActivity;
 import com.hewuzhe.ui.activity.DoJoRecommendActivity;
 import com.hewuzhe.ui.activity.FlyDreamActivity;
 import com.hewuzhe.ui.activity.FriendProfileActivity;
 import com.hewuzhe.ui.activity.IntegralActivity;
 import com.hewuzhe.ui.activity.LiveVideoActivity;
+import com.hewuzhe.ui.activity.LocationActivity;
 import com.hewuzhe.ui.activity.MemberActivity;
 import com.hewuzhe.ui.activity.MyCollectionsActivity;
+import com.hewuzhe.ui.activity.PhotoActivity;
 import com.hewuzhe.ui.activity.ProfileActivity;
 import com.hewuzhe.ui.activity.RecordActivity;
 import com.hewuzhe.ui.activity.StrangerProfileSettingsActivity;
@@ -35,6 +38,7 @@ import com.hewuzhe.ui.base.ToolBarFragment;
 import com.hewuzhe.ui.cons.C;
 import com.hewuzhe.ui.widget.GlideCircleTransform;
 import com.hewuzhe.utils.Bun;
+import com.hewuzhe.utils.SPUtil;
 import com.hewuzhe.utils.SessionUtil;
 import com.hewuzhe.utils.StringUtil;
 import com.hewuzhe.view.WarriorFragmentView;
@@ -52,6 +56,9 @@ import io.rong.imlib.model.Conversation;
 import io.rong.imlib.model.Group;
 import io.rong.imlib.model.Message;
 import io.rong.imlib.model.UserInfo;
+import io.rong.message.ImageMessage;
+import io.rong.message.LocationMessage;
+import io.rong.message.RichContentMessage;
 import okhttp3.Request;
 
 //import com.amap.api.location.AMapLocation;
@@ -110,10 +117,13 @@ public class WarriorFragment extends ToolBarFragment<WarriorFragmentPresenter> i
 //    private AMapLocationClient locationClient;
 
     private String _cityName = "临沂市";
-    private double _Lat;
-    private double _Lng;
+    private String _Lat;
+    private String _Lng;
     private String cityId = "CN101120901";
     private String userId;
+    public static LocationCallback _LocationCallback;
+    private String _Address;
+    private SPUtil spUtil;
 
 
     public WarriorFragment() {
@@ -134,6 +144,9 @@ public class WarriorFragment extends ToolBarFragment<WarriorFragmentPresenter> i
     @Override
     protected void initThings(View v) {
         super.initThings(v);
+
+        spUtil = new SPUtil(getContext())
+                .open("settings");
 
         presenter.getUserData();
 
@@ -386,13 +399,18 @@ public class WarriorFragment extends ToolBarFragment<WarriorFragmentPresenter> i
 //                    startActivity(new Intent(LoginActivity.this, MainActivity.class));
 //                    finish();
 
-
                     RongIM.setUserInfoProvider(WarriorFragment.this, true);//设置用户信息提供者。
                     RongIM.setGroupInfoProvider(WarriorFragment.this, true);//设置群组信息提供者。
                     RongIM.setConversationBehaviorListener(WarriorFragment.this);//设置会话界面操作的监听器。
                     RongIM.setLocationProvider(WarriorFragment.this);//设置地理位置提供者,不用位置的同学可以注掉此行代码
 
 
+                    RongIM.setOnReceiveMessageListener(new RongIMClient.OnReceiveMessageListener() {
+                        @Override
+                        public boolean onReceived(Message message, int i) {
+                            return !spUtil.getBoolean("msg");
+                        }
+                    });
                 }
 
                 /**
@@ -411,15 +429,16 @@ public class WarriorFragment extends ToolBarFragment<WarriorFragmentPresenter> i
 
     @Override
     public void onStartLocation(Context context, LocationCallback locationCallback) {
-
-
+        this._LocationCallback = locationCallback;
+        Intent intent = new Intent(getContext(), LocationActivity.class);
+        intent.putExtra("data", new Bun().putString("title", "选择位置").ok());
+        getActivity().startActivity(intent);
     }
 
     @Override
     public UserInfo getUserInfo(String s) {
-//        User u = new Select().from(User.class).where("Id=" + s).executeSingle();
+//      User u = new Select().from(User.class).where("Id=" + s).executeSingle();
         User u = null;
-
         if (u == null) {
             presenter.getUserInfo(Integer.parseInt(s));
             return null;
@@ -433,11 +452,10 @@ public class WarriorFragment extends ToolBarFragment<WarriorFragmentPresenter> i
 
     @Override
     public Group getGroupInfo(String s) {
-//        User u = new Select().from(com.hewuzhe.model.Group.class).where("Id=" + s).executeSingle();
+//      User u = new Select().from(com.hewuzhe.model.Group.class).where("Id=" + s).executeSingle();
         User u = null;
 
         if (u == null) {
-
             presenter.getGroup(Integer.parseInt(s));
             return null;
         } else {
@@ -449,20 +467,54 @@ public class WarriorFragment extends ToolBarFragment<WarriorFragmentPresenter> i
     @Override
     public boolean onUserPortraitClick(Context context, Conversation.ConversationType conversationType, UserInfo userInfo) {
 
-        presenter.isWuyou(Integer.parseInt(userInfo.getUserId()));
+        int id = Integer.parseInt(userInfo.getUserId());
+        if (new SessionUtil(getContext()).getUserId() == id) {
+            startActivity(ProfileActivity.class);
+
+        } else {
+            presenter.isWuyou(id);
+        }
+
 
         return false;
     }
+
 
     @Override
     public boolean onUserPortraitLongClick(Context context, Conversation.ConversationType conversationType, UserInfo userInfo) {
         return false;
     }
 
+    /**
+     * @param context
+     * @param view
+     * @param message
+     * @return
+     */
     @Override
     public boolean onMessageClick(Context context, View view, Message message) {
 
-        toast(message.getExtra());
+        /**
+         * demo 代码  开发者需替换成自己的代码。
+         */
+        if (message.getContent() instanceof LocationMessage) {
+            Intent intent = new Intent(context, BasicMapActivity.class);
+            intent.putExtra("data", new Bun().putString("lat", ((LocationMessage) message.getContent()).getLat() + "").putString("lng", ((LocationMessage) message.getContent()).getLng() + "").putString("address", ((LocationMessage) message.getContent()).getPoi()).putString("name", "").putString("title", "位置信息").ok());
+            context.startActivity(intent);
+        } else if (message.getContent() instanceof RichContentMessage) {
+            RichContentMessage mRichContentMessage = (RichContentMessage) message.getContent();
+            Log.d("Begavior", "extra:" + mRichContentMessage.getExtra());
+
+        } else if (message.getContent() instanceof ImageMessage) {
+            ImageMessage imageMessage = (ImageMessage) message.getContent();
+            Intent intent = new Intent(context, PhotoActivity.class);
+
+            intent.putExtra("photo", imageMessage.getLocalUri() == null ? imageMessage.getRemoteUri() : imageMessage.getLocalUri());
+            if (imageMessage.getThumUri() != null)
+                intent.putExtra("thumbnail", imageMessage.getThumUri());
+
+            context.startActivity(intent);
+        }
 
         return false;
     }

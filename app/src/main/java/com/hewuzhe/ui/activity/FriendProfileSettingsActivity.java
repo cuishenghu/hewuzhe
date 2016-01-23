@@ -16,6 +16,7 @@ import com.hewuzhe.ui.cons.C;
 import com.hewuzhe.ui.widget.GlideCircleTransform;
 import com.hewuzhe.ui.widget.SwitchView;
 import com.hewuzhe.ui.widget.YsnowEditDialog;
+import com.hewuzhe.utils.Bun;
 import com.hewuzhe.utils.StringUtil;
 import com.hewuzhe.utils.TimeUtil;
 import com.hewuzhe.view.ProfileSettingsView;
@@ -55,10 +56,13 @@ public class FriendProfileSettingsActivity extends ToolBarActivity<ProfileSettin
 
     private User friend;
 
+    public static boolean isNeedShowInput = true;
+
     /**
      * @return 提供标题
      */
     @Override
+
     protected String provideTitle() {
         return getIntentData().getString("title");
     }
@@ -79,9 +83,11 @@ public class FriendProfileSettingsActivity extends ToolBarActivity<ProfileSettin
         _LayRecord.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                ConversationActivity.isNeedShowInput = false;
                 RongIM.getInstance().startPrivateChat(getContext(), friend.Id + "", friend.NicName);
             }
         });
+
 
         _LayReport.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -127,6 +133,7 @@ public class FriendProfileSettingsActivity extends ToolBarActivity<ProfileSettin
                         String content = ysnowEditDialog.content.getText().toString();
                         presenter.ChangeFriendRName(content);
                         _TvRemark.setText(content);
+                        _TvUsername.setText(content);
 
                     }
                 });
@@ -173,13 +180,16 @@ public class FriendProfileSettingsActivity extends ToolBarActivity<ProfileSettin
             });
 
         } else {
-            _BtnFollow.setText("关注好友");
-            _BtnFollow.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    presenter.follow(_BtnFollow);
-                }
-            });
+//            _BtnFollow.setText("关注好友");
+//            _BtnFollow.setOnClickListener(new View.OnClickListener() {
+//                @Override
+//                public void onClick(View view) {
+//                    presenter.follow(_BtnFollow);
+//                }
+//            });
+
+
+            startActivity(StrangerProfileSettingsActivity.class, new Bun().putInt("id", friend.Id).ok());
 
         }
     }
@@ -187,7 +197,7 @@ public class FriendProfileSettingsActivity extends ToolBarActivity<ProfileSettin
     @Override
     public void setData(User user) {
         friend = user;
-        _TvUsername.setText(friend.NicName + "");
+        _TvUsername.setText(friend.RemarkName + "");
         _TvInfo.setText(StringUtil.getGender(friend.Sexuality) + " " + TimeUtil.timeHaved(friend.Birthday) + "岁 " + "   " + friend.HomeAreaprovinceName + " " + friend.HomeAreaCityName + " " + friend.HomeAreaCountyName);
         _TvRemark.setText(friend.RemarkName);
 

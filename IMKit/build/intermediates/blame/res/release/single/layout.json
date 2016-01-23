@@ -152,12 +152,12 @@
         "source": "/Users/xianguangjin/Desktop/Hewuzhe3/IMKit/src/main/res/layout/rc_fr_messageinput.xml"
     },
     {
-        "merged": "/Users/xianguangjin/Desktop/Hewuzhe3/IMKit/build/intermediates/res/merged/release/layout/rc_fragment_base_setting.xml",
-        "source": "/Users/xianguangjin/Desktop/Hewuzhe3/IMKit/src/main/res/layout/rc_fragment_base_setting.xml"
-    },
-    {
         "merged": "/Users/xianguangjin/Desktop/Hewuzhe3/IMKit/build/intermediates/res/merged/release/layout/rc_item_location_message.xml",
         "source": "/Users/xianguangjin/Desktop/Hewuzhe3/IMKit/src/main/res/layout/rc_item_location_message.xml"
+    },
+    {
+        "merged": "/Users/xianguangjin/Desktop/Hewuzhe3/IMKit/build/intermediates/res/merged/release/layout/rc_fragment_base_setting.xml",
+        "source": "/Users/xianguangjin/Desktop/Hewuzhe3/IMKit/src/main/res/layout/rc_fragment_base_setting.xml"
     },
     {
         "merged": "/Users/xianguangjin/Desktop/Hewuzhe3/IMKit/build/intermediates/res/merged/release/layout/rc_callside_layout.xml",

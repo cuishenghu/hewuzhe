@@ -350,7 +350,7 @@
     <string name="rc_conversation_list_dialog_cancel_top">取消置顶</string>
     <string name="rc_conversation_list_dialog_remove">从会话列表中移除</string>
     <string name="rc_conversation_list_dialog_set_top">置顶该会话</string>
-    <string name="rc_conversation_list_empty_prompt">"暂无聊天信息"</string>
+    <string name="rc_conversation_list_empty_prompt">"暂无消息"</string>
     <string name="rc_conversation_list_my_chatroom">我的聊天室</string>
     <string name="rc_conversation_list_my_customer_service">客服列表</string>
     <string name="rc_conversation_list_my_discussion">我的讨论组</string>
@@ -462,7 +462,7 @@
     </style>
     <style name="RCTheme.Message.Username.TextView" parent="RCTheme.TextView">
         <item name="android:textSize">14sp</item>
-        <item name="android:textColor">@color/rc_text_color_primary_inverse</item>
+        <item name="android:textColor">@color/rc_text_color_tertiary</item>
         <item name="android:paddingLeft">8dp</item>
     </style>
     <style name="RCTheme.Notification" parent="RCTheme.TextView">
@@ -472,7 +472,7 @@
         <item name="android:paddingRight">8dp</item>
         <item name="android:paddingTop">7dp</item>
         <item name="android:paddingBottom">7dp</item>
-        <item name="android:textColor">@color/rc_text_color_primary_inverse</item>
+        <item name="android:textColor">@color/rc_text_color_tertiary</item>
     </style>
     <style name="RCTheme.TextView" parent="android:Widget.TextView">
 

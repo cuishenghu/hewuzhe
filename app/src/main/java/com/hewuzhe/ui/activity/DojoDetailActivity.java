@@ -123,7 +123,7 @@ public class DojoDetailActivity extends ToolBarActivity<DojoDetailPresenter> imp
         _TvAddress.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startActivity(BasicMapActivity.class, new Bun().putString("lat", dojo.Lat).putString("lng", dojo.Lng).ok());
+                startActivity(BasicMapActivity.class, new Bun().putString("lat", dojo.Lat).putString("lng", dojo.Lng).putString("address", dojo.Address).putString("name", dojo.Title).putString("title", "武馆位置").ok());
             }
         });
 

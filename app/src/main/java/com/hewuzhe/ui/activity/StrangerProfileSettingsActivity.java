@@ -1,6 +1,7 @@
 package com.hewuzhe.ui.activity;
 
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.design.widget.AppBarLayout;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
@@ -19,11 +20,14 @@ import com.hewuzhe.ui.widget.GlideCircleTransform;
 import com.hewuzhe.ui.widget.SwitchView;
 import com.hewuzhe.ui.widget.YsnowEditDialog;
 import com.hewuzhe.utils.Bun;
+import com.hewuzhe.utils.SPUtil;
 import com.hewuzhe.utils.StringUtil;
 import com.hewuzhe.utils.TimeUtil;
 import com.hewuzhe.view.ProfileSettingsView;
 
 import butterknife.Bind;
+import io.rong.imlib.RongIMClient;
+import io.rong.imlib.model.Conversation;
 
 public class StrangerProfileSettingsActivity extends ToolBarActivity<ProfileSettingsPresenter> implements ProfileSettingsView {
 
@@ -145,13 +149,21 @@ public class StrangerProfileSettingsActivity extends ToolBarActivity<ProfileSett
     @Override
     public void followSuccess(boolean b) {
         if (b) {
-            _BtnFollow.setText("取消关注");
-            _BtnFollow.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    presenter.unFollow(_BtnFollow);
-                }
-            });
+            snb("关注成功", _BtnFollow);
+            new Handler()
+                    .postDelayed(new Runnable() {
+                        @Override
+                        public void run() {
+                            finishActivity();
+                        }
+                    }, 500);
+//            _BtnFollow.setText("取消关注");
+//            _BtnFollow.setOnClickListener(new View.OnClickListener() {
+//                @Override
+//                public void onClick(View view) {
+//                    presenter.unFollow(_BtnFollow);
+//                }
+//            });
 
         } else {
             _BtnFollow.setText("关注好友");
@@ -186,21 +198,23 @@ public class StrangerProfileSettingsActivity extends ToolBarActivity<ProfileSett
             }
         });
 
+        final SPUtil spUtil = new SPUtil(getContext()).open("settings");
+
+        _SwitchMsg.setChecked(spUtil.getBoolean(friend.Id + ""));
+
 
         _SwitchMsg.setOnCheckedChangeListener(new SwitchView.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(View view, boolean isChecked) {
+                spUtil.putBoolean(friend.Id + "", isChecked);
                 if (isChecked) {
                     presenter.ShieldFriendNews();
+                    RongIMClient.getInstance().setConversationNotificationStatus(Conversation.ConversationType.PRIVATE, friend.Id + "", Conversation.ConversationNotificationStatus.DO_NOT_DISTURB, null);
                 } else {
                     presenter.UnShieldFriendNews();
+                    RongIMClient.getInstance().setConversationNotificationStatus(Conversation.ConversationType.PRIVATE, friend.Id + "", Conversation.ConversationNotificationStatus.NOTIFY, null);
                 }
             }
         });
-
-
-        _SwitchMsg.setChecked(false);
     }
-
-
 }

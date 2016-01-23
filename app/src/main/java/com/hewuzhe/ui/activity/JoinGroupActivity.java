@@ -238,10 +238,8 @@ public class JoinGroupActivity extends RecycleViewActivity<JoinPresenter, JoinGr
      */
     @Override
     public void updateItem(boolean b, int pos) {
-
 //      adapter.data.get(pos).isJoined = b;
+        snb(b ? "加入成功" : "退出成功", _TvCity);
         adapter.notifyItemChanged(pos);
-
-
     }
 }

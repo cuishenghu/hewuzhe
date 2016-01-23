@@ -31,7 +31,7 @@
             android:layout_height="wrap_content"
             android:layout_alignParentRight="true"
             android:layout_marginLeft="8px"
-            android:text="4月20日"
+            android:text=""
             android:textColor="@color/colorLine"
             android:textSize="25px"/>
 

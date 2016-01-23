@@ -160,14 +160,13 @@ public class FederalConditionDetailActivity extends RecycleViewActivity<ArticleP
         tvName.setText(article.Title);
         _content = article.Content;
         tvContent.setText(Html.fromHtml(_content, new MyImageGetter(), null));
-//       tvContent.loadUrl("http://www.baidu.com");
+//      tvContent.loadUrl("http://www.baidu.com");
 
         tvFroms.setText("来自：" + article.Category + "  " + article.PublishTime);
         tvPraiseCount.setText(article.LikeNum + "");
         tvPageViews.setText("阅读 " + article.FavoriteNum + "");
         tvCommentCount.setText("评论 " + article.CommentNum + "");
         tvCommentCountOne.setText("共" + article.CommentNum + "条");
-
 
         Glide.with(getContext())
                 .load(C.BASE_URL + new SessionUtil(getContext()).getUser().PhotoPath)
@@ -264,7 +263,7 @@ public class FederalConditionDetailActivity extends RecycleViewActivity<ArticleP
         if (b) {
             _Article.LikeNum++;
             tvPraiseCount.setText(_Article.LikeNum + "");
-            imgPraise.setImageResource(R.mipmap.icon_praise_focus);
+            imgPraise.setImageResource(R.mipmap.icon_collect_focus);
             imgPraise.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
@@ -275,7 +274,7 @@ public class FederalConditionDetailActivity extends RecycleViewActivity<ArticleP
         } else {
             _Article.LikeNum--;
             tvPraiseCount.setText(_Article.LikeNum + "");
-            imgPraise.setImageResource(R.mipmap.icon_praise);
+            imgPraise.setImageResource(R.mipmap.icon_collect);
 
             imgPraise.setOnClickListener(new View.OnClickListener() {
                 @Override

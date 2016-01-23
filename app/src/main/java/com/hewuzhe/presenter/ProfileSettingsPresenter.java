@@ -286,7 +286,6 @@ public class ProfileSettingsPresenter extends BasePresenterImp<ProfileSettingsVi
 
     }
 
-
     public void collectAndOther(int id, final int flag, final View v, String content) {
 
         Subscription subscription = NetEngine.getService()
@@ -304,7 +303,7 @@ public class ProfileSettingsPresenter extends BasePresenterImp<ProfileSettingsVi
                     @Override
                     public void next(Res res) {
                         if (res.code == C.OK) {
-                            view.snb("操作成功", v);
+                            view.snb("举报已提交等待后台审核", v);
                         } else {
                             view.snb("操作失败", v);
                         }

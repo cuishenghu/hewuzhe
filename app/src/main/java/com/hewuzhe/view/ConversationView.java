@@ -7,4 +7,6 @@ import com.hewuzhe.view.base.BaseView;
  */
 public interface ConversationView extends BaseView {
     void isWuYou(Boolean data, int userid);
+
+    void isWuYouTitle(Boolean data);
 }

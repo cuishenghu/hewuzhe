@@ -62,7 +62,7 @@ public class CoorperationActivity extends ToolBarActivity<FederalConditionPresen
         TabLayout mTabLayout = (TabLayout) findViewById(R.id.tabLayout);
 
         for (Cate cate : data) {
-            viewPagerAdapter.addFragment(FederalConditionFragment.newInstance(new Bun().putInt("catid", cate.Id).ok()), cate.Name);//添加Fragment
+            viewPagerAdapter.addFragment(FederalConditionFragment.newInstance(new Bun().putInt("catid", cate.Id).putString("name", cate.Name).ok()), cate.Name);//添加Fragment
             mTabLayout.addTab(mTabLayout.newTab());//给TabLayout添加Tab
         }
 
@@ -71,8 +71,6 @@ public class CoorperationActivity extends ToolBarActivity<FederalConditionPresen
         mViewPager.setAdapter(viewPagerAdapter);
         mTabLayout.setupWithViewPager(mViewPager);//给TabLayout设置关联ViewPager，如果设置了ViewPager，那么ViewPagerAdapter中的getPageTitle()方法返回的就是Tab上的标题
     }
-
-
 
 
 }

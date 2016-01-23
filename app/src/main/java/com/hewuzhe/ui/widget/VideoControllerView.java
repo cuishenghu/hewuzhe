@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.os.Handler;
 import android.os.Message;
 import android.util.AttributeSet;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
@@ -14,29 +15,28 @@ import android.widget.Button;
 import android.widget.FrameLayout;
 import android.widget.ImageButton;
 import android.widget.LinearLayout;
+import android.widget.SeekBar;
 import android.widget.TextView;
 
 import com.hewuzhe.R;
 import com.hewuzhe.ui.activity.MemberActivity;
 import com.hewuzhe.utils.DataTypeUtils;
-import com.hewuzhe.utils.MediaPlayerUtils;
 import com.hewuzhe.utils.TimeUtil;
 
 import io.vov.vitamio.MediaPlayer;
 import io.vov.vitamio.widget.VideoView;
 import materialdesign.views.ProgressWheel;
-import materialdesign.views.Slider;
 
 /**
  * Created by sunger on 15/11/7.
  */
-public class VideoControllerView extends FrameLayout implements View.OnTouchListener, Slider.OnValueChangedListener, MediaPlayer.OnBufferingUpdateListener, MediaPlayer.OnPreparedListener, MediaPlayer.OnCompletionListener {
+public class VideoControllerView extends FrameLayout implements View.OnTouchListener, MediaPlayer.OnBufferingUpdateListener, MediaPlayer.OnPreparedListener, MediaPlayer.OnCompletionListener, SeekBar.OnSeekBarChangeListener {
     private static final long delayMillis = 2000;
     private static final int MSG_PROGRESS_CHANGE = 2;
     private VideoView mVideoView;
     private ProgressWheel mProgressWheel;
     private ImageButton viewPlay;
-    private Slider slider;
+    public SeekBar slider;
     private Context context;
     private Runnable runnable = new Runnable() {
         @Override
@@ -64,9 +64,10 @@ public class VideoControllerView extends FrameLayout implements View.OnTouchList
     private ImageButton viewPlayCenter;
     public LinearLayout _LayNoVip;
     private Button _BtnToMember;
+    private OnPreparedListener _OnPreparedListener;
 
     private void setProgress() {
-        slider.setValue(DataTypeUtils.toInt(mVideoView.getCurrentPosition()));
+        slider.setProgress(DataTypeUtils.toInt(mVideoView.getCurrentPosition()));
         tvCurDuration.setText(TimeUtil.timeFormat(mVideoView.getCurrentPosition()));
     }
 
@@ -94,7 +95,7 @@ public class VideoControllerView extends FrameLayout implements View.OnTouchList
         mVideoView = findView(R.id.videoView);
         mVideoView.setOnTouchListener(this);
         mVideoView.setOnPreparedListener(this);
-        mVideoView.setBufferSize(3048);
+        mVideoView.setBufferSize(1024);
         mVideoView.setOnBufferingUpdateListener(this);
 
         mVideoView.setOnCompletionListener(this);
@@ -111,13 +112,13 @@ public class VideoControllerView extends FrameLayout implements View.OnTouchList
 
         slider = findView(R.id.slider);
         layMenus = findView(R.id.lay_menus);
-        slider.setOnValueChangedListener(this);
-        slider.setOnNumberIndicatorConvert(new Slider.OnNumberIndicatorConvert() {
-            @Override
-            public String covert(long val) {
-                return MediaPlayerUtils.getVideoDisplayTime(val);
-            }
-        });
+        slider.setOnSeekBarChangeListener(this);
+//        slider.setOnNumberIndicatorConvert(new Slider.OnNumberIndicatorConvert() {
+//            @Override
+//            public String covert(long val) {
+//                return MediaPlayerUtils.getVideoDisplayTime(val);
+//            }
+//        });
         setVideoPlayButton();
 
         btnFullScreen.setOnClickListener(new OnClickListener() {
@@ -153,17 +154,14 @@ public class VideoControllerView extends FrameLayout implements View.OnTouchList
                 start();
             }
         });
-
     }
-
 
     private boolean isVideoPause() {
         return !mVideoView.isPlaying();
     }
 
-
     private void updateTimeTask() {
-        slider.setValue(DataTypeUtils.toInt(mVideoView.getCurrentPosition()));
+        slider.setProgress(DataTypeUtils.toInt(mVideoView.getCurrentPosition()));
         handler.removeCallbacks(runnable);
         handler.postDelayed(runnable, delayMillis);
     }
@@ -203,7 +201,7 @@ public class VideoControllerView extends FrameLayout implements View.OnTouchList
         if (viewPlayCenter.getVisibility() == VISIBLE) {
             viewPlayCenter.setVisibility(GONE);
         }
-        slider.setValue(DataTypeUtils.toInt(mVideoView.getCurrentPosition()));
+        slider.setProgress(DataTypeUtils.toInt(mVideoView.getCurrentPosition()));
         mVideoView.start();
         viewPlay.setImageResource(R.mipmap.icon_play);
     }
@@ -212,7 +210,7 @@ public class VideoControllerView extends FrameLayout implements View.OnTouchList
      * 暂停播放
      */
     public void pause() {
-        slider.setValue(DataTypeUtils.toInt(mVideoView.getCurrentPosition()));
+        slider.setProgress(DataTypeUtils.toInt(mVideoView.getCurrentPosition()));
         mVideoView.pause();
         viewPlay.setImageResource(R.mipmap.icon_pause);
     }
@@ -230,30 +228,23 @@ public class VideoControllerView extends FrameLayout implements View.OnTouchList
 
     @Override
     public void onPrepared(MediaPlayer mediaPlayer) {
-        slider.setMin(0);
+        Log.d("VideoControllerView", "mediaPlayer.getDuration():" + mediaPlayer.getDuration());
         slider.setMax(DataTypeUtils.toInt(mediaPlayer.getDuration()));
         tvDuration.setText("/" + TimeUtil.timeFormat(mediaPlayer.getDuration()));
         mediaPlayer.setPlaybackSpeed(1.0f);
         updateTimeTask();
         handler.sendEmptyMessage(MSG_PROGRESS_CHANGE);
 
-        mVideoView.setVideoLayout(VideoView.VIDEO_LAYOUT_FIT_PARENT, 0);
-    }
-
-
-    @Override
-    public void onValueChanged(int value) {
-        updateTimeTask();
-        mVideoView.seekTo(value);
+        this._OnPreparedListener.onPrepared();
     }
 
     @Override
     public void onBufferingUpdate(MediaPlayer mp, int percent) {
+        mProgressWheel.setText(percent + "%");
         if (percent >= 30 || percent <= 0) {
             mProgressWheel.setVisibility(View.INVISIBLE);
         } else {
             mProgressWheel.setVisibility(View.VISIBLE);
-            mProgressWheel.setText(percent + "%");
         }
     }
 
@@ -267,12 +258,40 @@ public class VideoControllerView extends FrameLayout implements View.OnTouchList
         setVideoPlayButton();
     }
 
-
     public void setOnFullScreenBtnClickListener(OnFullScreenBtnClick clickListener) {
         this.clickListener = clickListener;
+    }
+
+    public void setonPreparedListener(OnPreparedListener onPreparedListener) {
+        this._OnPreparedListener = onPreparedListener;
+    }
+
+    @Override
+    public void onProgressChanged(SeekBar seekBar, int i, boolean b) {
+        Log.d("VideoControllerView", "i:" + i);
+
+    }
+
+    @Override
+    public void onStartTrackingTouch(SeekBar seekBar) {
+
+
+    }
+
+    @Override
+    public void onStopTrackingTouch(SeekBar seekBar) {
+        mVideoView.seekTo(seekBar.getProgress());
+        updateTimeTask();
+        Log.d("VideoControllerView", "seekBar.getProgress():" + seekBar.getProgress());
     }
 
     public interface OnFullScreenBtnClick {
         public void onClick(View v);
     }
+
+    public interface OnPreparedListener {
+        public void onPrepared();
+    }
+
+
 }

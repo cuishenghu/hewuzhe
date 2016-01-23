@@ -67,9 +67,7 @@ public class WarriorFragmentPresenter extends BasePresenterImp<WarriorFragmentVi
                     public void next(Res<User> res) {
                         if (res.code == C.OK) {
                             RongIM.getInstance().refreshUserInfoCache(new UserInfo(res.data.Id + "", res.data.NicName, Uri.parse(C.BASE_URL + res.data.PhotoPath)));
-
 //                            res.data.save();
-
                         }
                     }
 

@@ -3,6 +3,7 @@ package com.hewuzhe.ui.activity;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
+import android.view.View;
 
 import com.hewuzhe.R;
 import com.hewuzhe.presenter.ConversationPresenter;
@@ -33,6 +34,7 @@ public class ConversationActivity extends ToolBarActivity<ConversationPresenter>
      */
     private Conversation.ConversationType mConversationType;
     private String title;
+    public static boolean isNeedShowInput = true;
 
 
     /**
@@ -40,8 +42,8 @@ public class ConversationActivity extends ToolBarActivity<ConversationPresenter>
      */
     @Override
     protected String provideTitle() {
-        title = getIntent().getData().getQueryParameter("title");
-        return title;
+
+        return "";
     }
 
     /**
@@ -82,11 +84,14 @@ public class ConversationActivity extends ToolBarActivity<ConversationPresenter>
     private void getIntentDate(Intent intent) {
 
         mTargetId = intent.getData().getQueryParameter("targetId");
+        presenter.isWuyouTitle(Integer.parseInt(mTargetId));
+
         mTargetIds = intent.getData().getQueryParameter("targetIds");
         //intent.getData().getLastPathSegment();//获得当前会话类型
         mConversationType = Conversation.ConversationType.valueOf(intent.getData().getLastPathSegment().toUpperCase(Locale.getDefault()));
 
         enterFragment(mConversationType, mTargetId);
+
     }
 
     /**
@@ -104,6 +109,14 @@ public class ConversationActivity extends ToolBarActivity<ConversationPresenter>
                 .appendQueryParameter("targetId", mTargetId).build();
 
         fragment.setUri(uri);
+
+
+        if (!isNeedShowInput) {
+            fragment.getChildFragmentManager().getFragments().get(0).getView().setVisibility(View.GONE);
+            isNeedShowInput = true;
+        }
+
+
     }
 
 
@@ -113,6 +126,17 @@ public class ConversationActivity extends ToolBarActivity<ConversationPresenter>
             startActivity(FriendProfileActivity.class, new Bun().putInt("id", userid).ok());
         } else {
             startActivity(StrangerProfileSettingsActivity.class, new Bun().putInt("id", userid).ok());
+        }
+
+    }
+
+    @Override
+    public void isWuYouTitle(Boolean data) {
+        if (data) {
+            title = getIntent().getData().getQueryParameter("title");
+            tvTitle.setText(title);
+        } else {
+            tvTitle.setText("陌生人");
         }
 
     }

@@ -1,50 +1,42 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout android:id="@+id/square_layout"
-             xmlns:android="http://schemas.android.com/apk/res/android"
-             xmlns:app="http://schemas.android.com/apk/res-auto"
-             android:layout_width="match_parent"
-             android:layout_height="match_parent"
-             android:background="@color/colorListBg"
+<FrameLayout
+    android:id="@+id/square_layout"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/colorListBg"
     >
+    <io.vov.vitamio.widget.VideoView
+        android:id="@+id/videoView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        />
 
-    <io.vov.vitamio.widget.CenterLayout android:layout_width="match_parent"
-                                        android:layout_height="match_parent">
+    <materialdesign.views.ProgressWheel
+        android:id="@+id/progressWheel"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        android:layout_gravity="center"
+        app:pwBarColor="@color/colorBg"
+        app:pwBarLength="60dp"
+        app:pwBarWidth="5dp"
+        app:pwRimColor="@color/colorYellow"
+        app:pwRimWidth="2dp"
+        app:pwSpinSpeed="10dp"
+        app:pwText="0%"
+        app:pwTextColor="#FFF"
+        app:pwTextSize="8sp"/>
 
-        <io.vov.vitamio.widget.VideoView
-            android:id="@+id/videoView"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_centerHorizontal="true"
-            android:layout_centerVertical="true"/>
-
-        <materialdesign.views.ProgressWheel
-            android:id="@+id/progressWheel"
-            android:layout_width="60dp"
-            android:layout_height="60dp"
-            android:layout_centerInParent="true"
-            android:layout_gravity="center"
-            app:pwBarColor="@color/colorBg"
-            app:pwBarLength="60dp"
-            app:pwBarWidth="5dp"
-            app:pwRimColor="@color/colorYellow"
-            app:pwRimWidth="2dp"
-            app:pwSpinSpeed="10dp"
-            app:pwText="缓冲..."
-            app:pwTextColor="#FFF"
-            app:pwTextSize="8sp"/>
-
-        <ImageButton
-            android:id="@+id/button_play_center"
-            android:layout_width="65px"
-            android:layout_height="65px"
-            android:layout_centerInParent="true"
-            android:layout_gravity="center"
-            android:background="#00000000"
-            android:src="@mipmap/icon_pause"
-            android:visibility="gone"/>
-
-
-    </io.vov.vitamio.widget.CenterLayout>
+    <ImageButton
+        android:id="@+id/button_play_center"
+        android:layout_width="65px"
+        android:layout_height="65px"
+        android:layout_gravity="center"
+        android:background="#00000000"
+        android:src="@mipmap/icon_pause"
+        android:visibility="gone"/>
 
 
     <FrameLayout android:id="@+id/lay_menus"
@@ -81,17 +73,23 @@
                 android:src="@mipmap/icon_full_screen"
                 android:visibility="visible"/>
 
-            <materialdesign.views.Slider
+            <SeekBar
                 android:id="@+id/slider"
+                style="@style/Widget.MaterialProgressBar.ProgressBar.Horizontal"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_centerVertical="true"
                 android:layout_toLeftOf="@id/btn_full_screen"
                 android:layout_toRightOf="@id/button_play"
-                android:background="@color/colorYellow"
+                android:max="100"
+                android:maxHeight="4.0dip"
+                android:minHeight="4.0dip"
+                android:paddingLeft="16.0dip"
+                android:paddingRight="16.0dip"
+                android:progress="10"
+                android:progressDrawable="@drawable/po_seekbar"
+                android:thumb="@drawable/seekbar_thumb"
                 android:visibility="visible"
-                app:showNumberIndicator="true"
-                app:value="1"
                 />
 
         </RelativeLayout>
@@ -144,7 +142,6 @@
                 android:layout_marginTop="10px"
                 android:background="@drawable/select_yellow"
                 android:text="点击付费"/>
-
 
     </LinearLayout>
 </FrameLayout>

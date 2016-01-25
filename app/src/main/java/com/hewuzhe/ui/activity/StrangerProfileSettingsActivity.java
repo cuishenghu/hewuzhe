@@ -27,7 +27,6 @@ import com.hewuzhe.view.ProfileSettingsView;
 
 import butterknife.Bind;
 import io.rong.imlib.RongIMClient;
-import io.rong.imlib.model.Conversation;
 
 public class StrangerProfileSettingsActivity extends ToolBarActivity<ProfileSettingsPresenter> implements ProfileSettingsView {
 
@@ -101,7 +100,6 @@ public class StrangerProfileSettingsActivity extends ToolBarActivity<ProfileSett
                     @Override
                     public void onClick(View view) {
                         ysnowEditDialog.dismiss();
-
                         presenter.collectAndOther(getData(), 3, _LayReport, ysnowEditDialog.content.getText().toString());
 
                     }
@@ -154,6 +152,7 @@ public class StrangerProfileSettingsActivity extends ToolBarActivity<ProfileSett
                     .postDelayed(new Runnable() {
                         @Override
                         public void run() {
+                            startActivity(FriendProfileActivity.class, new Bun().putInt("id", friend.Id).ok());
                             finishActivity();
                         }
                     }, 500);
@@ -209,10 +208,31 @@ public class StrangerProfileSettingsActivity extends ToolBarActivity<ProfileSett
                 spUtil.putBoolean(friend.Id + "", isChecked);
                 if (isChecked) {
                     presenter.ShieldFriendNews();
-                    RongIMClient.getInstance().setConversationNotificationStatus(Conversation.ConversationType.PRIVATE, friend.Id + "", Conversation.ConversationNotificationStatus.DO_NOT_DISTURB, null);
+                    RongIMClient.getInstance().addToBlacklist(friend.Id + "", new RongIMClient.OperationCallback() {
+                        @Override
+                        public void onSuccess() {
+
+                        }
+
+                        @Override
+                        public void onError(RongIMClient.ErrorCode errorCode) {
+
+                        }
+                    });
                 } else {
                     presenter.UnShieldFriendNews();
-                    RongIMClient.getInstance().setConversationNotificationStatus(Conversation.ConversationType.PRIVATE, friend.Id + "", Conversation.ConversationNotificationStatus.NOTIFY, null);
+                    RongIMClient.getInstance().removeFromBlacklist(friend.Id + "", new RongIMClient.OperationCallback() {
+                        @Override
+                        public void onSuccess() {
+
+                        }
+
+                        @Override
+                        public void onError(RongIMClient.ErrorCode errorCode) {
+
+
+                        }
+                    });
                 }
             }
         });

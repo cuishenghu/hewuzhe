@@ -4,8 +4,13 @@ import android.content.Context;
 import android.content.SharedPreferences;
 
 import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
+import com.hewuzhe.model.UP;
 import com.hewuzhe.model.User;
 import com.socks.library.KLog;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by xianguangjin on 15/7/1.
@@ -74,6 +79,54 @@ public class SessionUtil {
         return 0;
     }
 
+
+    /**
+     * @param up 登录数据保存
+     */
+    public void putUP(UP up) {
+        ArrayList<UP> ups = getUPs();
+        if (ups == null) {
+            ups = new ArrayList<>();
+        }
+        if (!contains(ups, up)) {
+            ups.add(up);
+            SharedPreferences share = context.getSharedPreferences("user", 0);
+            SharedPreferences.Editor editor = share.edit();
+            editor.putString("up", new Gson().toJson(ups));
+            editor.commit();
+        }
+
+    }
+
+    private boolean contains(ArrayList<UP> ups, UP up) {
+        for (UP up1 : ups) {
+            if (up1.userName.equals(up.userName)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+
+    /**
+     * @return 获取登录数据
+     */
+    public ArrayList<UP> getUPs() {
+        SharedPreferences share = context.getSharedPreferences("user", 0);
+        String up = share.getString("up", "");
+        if ("".equals(up)) {
+            return null;
+        } else {
+            Gson gson = new Gson();
+            return gson.fromJson(up, new TypeToken<List<UP>>() {
+            }.getType());
+        }
+    }
+
+
+    /**
+     * @return
+     */
     public boolean isLogin() {
         return StringUtil.isEmpty(getUserInfoStr()) ? false : true;
     }

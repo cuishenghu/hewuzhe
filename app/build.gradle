@@ -9,7 +9,6 @@ android {
         javaMaxHeapSize "4g"
     }
 
-
     defaultConfig {
         applicationId "com.hewuzhe"
         minSdkVersion 16
@@ -21,7 +20,6 @@ android {
         ndk {
             abiFilters "armeabi", "armeabi-v7a", "x86", "mips"
         }
-
     }
 
     buildTypes {
@@ -33,7 +31,7 @@ android {
 
         release {
             minifyEnabled false
-            debuggable false
+            debuggable true
             shrinkResources false
         }
     }
@@ -65,7 +63,7 @@ android {
 }
 
 dependencies {
-    compile fileTree(include: ['*.jar'], dir: 'libs')
+//    compile fileTree(include: ['*.jar'], dir: 'libs')
     compile files('libs/zxing.jar')
     compile files('libs/MobTools.jar')
     compile files('libs/locSDK_6.22.jar')
@@ -73,6 +71,8 @@ dependencies {
     compile files('libs/baidumapapi_util_v3_6_1.jar')
     compile files('libs/baidumapapi_map_v3_6_1.jar')
     compile files('libs/baidumapapi_base_v3_6_1.jar')
+    compile files('libs/javacpp.jar')
+    compile files('libs/javacv.jar')
     compile files('libs/libammsdk.jar')
     compile files('libs/MobCommons.jar')
     compile files('libs/MobLogCollector.jar')

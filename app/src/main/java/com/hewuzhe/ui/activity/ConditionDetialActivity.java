@@ -239,12 +239,12 @@ public class ConditionDetialActivity extends SwipeRecycleViewActivity<ConditonDe
             });
         }
 
-        _TvShowAll.setText(condition.isShowingAll ? "关闭全部评论" : "显示全部评论");
+        _TvShowAll.setText(condition.isShowingAll ? "显示全部评论" : "关闭全部评论");
         _TvShowAll.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 condition.isShowingAll = condition.isShowingAll ? false : true;
-                _TvShowAll.setText(condition.isShowingAll ? "关闭全部评论" : "显示全部评论");
+                _TvShowAll.setText(condition.isShowingAll ? "显示全部评论" : "关闭全部评论");
                 setComment(_condition);
             }
         });
@@ -271,7 +271,7 @@ public class ConditionDetialActivity extends SwipeRecycleViewActivity<ConditonDe
             _LayComment.setVisibility(View.VISIBLE);
             if (condition.ComList.size() > 3) {
                 _TvShowAll.setVisibility(View.VISIBLE);
-                if (condition.isShowingAll) {
+                if (!condition.isShowingAll) {
                     //显示全部
                     for (int i = 0; i < condition.ComList.size(); i++) {
                         final Comment comment = condition.ComList.get(i);
@@ -297,7 +297,6 @@ public class ConditionDetialActivity extends SwipeRecycleViewActivity<ConditonDe
 
 
                 } else {
-
                     for (int i = 0; i < 3; i++) {
                         final Comment comment = condition.ComList.get(i);
                         View view = getLayoutInflater().inflate(R.layout.item_coment_child, null);

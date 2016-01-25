@@ -29,10 +29,10 @@ public class PublisVideoPresenter extends BasePresenterImp<PublistVideoVIew> {
      * @param imageName
      * @param videoDuration
      */
-    public void publistVideo(String videoName, String imageName, String videoDuration, int cateId) {
+    public void publistVideo(String videoName, String imageName, String videoDuration, int cateId, int uploadType) {
         Video video = view.getData();
         Subscription subscription = NetEngine.getService()
-                .SaveOrEditVideoMessage(0, video.Title, imageName, video.Content, videoName, "TRUE", "FALSE", cateId, new SessionUtil(view.getContext()).getUser().Id, videoDuration)
+                .SaveOrEditVideoMessage(0, video.Title, imageName, video.Content, videoName, "TRUE", "TRUE", cateId, new SessionUtil(view.getContext()).getUser().Id, videoDuration, uploadType)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new SB<Res>() {
@@ -64,8 +64,7 @@ public class PublisVideoPresenter extends BasePresenterImp<PublistVideoVIew> {
     }
 
 
-    public void UpLoadVideo(View v, String path, final int cateId) {
-
+    public void UpLoadVideo(View v, String path, final int cateId, final int uploadType) {
         String fileName = path.substring(path.lastIndexOf("/") + 1, path.length());
         try {
             Subscription subscription = NetEngine.getService()
@@ -82,7 +81,7 @@ public class PublisVideoPresenter extends BasePresenterImp<PublistVideoVIew> {
                         @Override
                         public void next(Res<Video> res) {
                             if (res.code == C.OK) {
-                                publistVideo(res.data.VideoName, res.data.ImageName, res.data.VideoDuration, cateId);
+                                publistVideo(res.data.VideoName, res.data.ImageName, res.data.VideoDuration, cateId, uploadType);
                             } else {
                                 view.dismissDialog();
 

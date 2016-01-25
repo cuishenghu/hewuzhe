@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.view.View;
 
 import com.hewuzhe.model.Res;
+import com.hewuzhe.model.UP;
 import com.hewuzhe.model.User;
 import com.hewuzhe.presenter.base.BasePresenterImp;
 import com.hewuzhe.ui.activity.MainActivity;
@@ -61,15 +62,18 @@ public class SignInPresenter extends BasePresenterImp<SignInView> {
                         public void onError(Throwable e) {
                             view.dismissDialog();
                             view.snb("登录失败", v);
-
                         }
 
                         @Override
                         public void onNext(Res<User> userRes) {
                             if (userRes.code == C.OK) {
                                 /**保存数据**/
+                                SessionUtil sessionUtil = new SessionUtil(view.getContext());
+                                UP up = new UP(user.UserName, user.PassWord);
+                                sessionUtil.putUP(up);
+
                                 user = userRes.data;
-                                new SessionUtil(view.getContext()).putUser(user);
+                                sessionUtil.putUser(user);
 
                                 view.getContext().startActivity(new Intent(view.getContext(), MainActivity.class));
                             } else {

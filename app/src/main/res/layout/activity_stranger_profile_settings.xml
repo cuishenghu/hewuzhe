@@ -144,7 +144,7 @@
                 <TextView style="@style/text_32_white"
                           android:layout_width="wrap_content"
                           android:layout_height="wrap_content"
-                          android:text="屏蔽好友"/>
+                          android:text="屏蔽消息"/>
 
                 <TextView android:id="@+id/tv_time"
                           style="@style/text_27_colorLine"

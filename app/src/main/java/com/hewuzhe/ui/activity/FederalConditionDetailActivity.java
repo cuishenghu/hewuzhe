@@ -27,6 +27,7 @@ import com.hewuzhe.ui.widget.GlideCircleTransform;
 import com.hewuzhe.utils.AsyncImageLoader;
 import com.hewuzhe.utils.Bun;
 import com.hewuzhe.utils.SessionUtil;
+import com.hewuzhe.utils.StringUtil;
 import com.hewuzhe.view.ArticleView;
 
 import java.io.File;
@@ -153,10 +154,10 @@ public class FederalConditionDetailActivity extends RecycleViewActivity<ArticleP
         return getIntentData().getString("title");
     }
 
-
     @Override
     public void setData(Article article) {
         this._Article = article;
+        tvTitle.setText(StringUtil.isEmpty(getIntentData().getString("title")) ? article.Title : getIntentData().getString("title"));
         tvName.setText(article.Title);
         _content = article.Content;
         tvContent.setText(Html.fromHtml(_content, new MyImageGetter(), null));

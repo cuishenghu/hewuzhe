@@ -489,7 +489,7 @@ containing a value of this type.
         public static int follow=0x7f09005f;
         public static int func=0x7f09005c;
         public static int hands_off_id=0x7f090050;
-        public static int introduction=0x7f090069;
+        public static int introduction=0x7f09006a;
         public static int mask_layout=0x7f090051;
         public static int name=0x7f090059;
         public static int portrait=0x7f090058;
@@ -505,18 +505,18 @@ containing a value of this type.
         public static int rc_conversation_status=0x7f090008;
         public static int rc_conversation_time=0x7f090009;
         public static int rc_conversation_title=0x7f09000a;
-        public static int rc_ext=0x7f090074;
-        public static int rc_flow=0x7f09006b;
+        public static int rc_ext=0x7f090075;
+        public static int rc_flow=0x7f09006c;
         public static int rc_fragment=0x7f09000b;
         public static int rc_frame=0x7f09000c;
         public static int rc_icon=0x7f09000d;
         public static int rc_img=0x7f09000e;
-        public static int rc_indicator=0x7f09006c;
+        public static int rc_indicator=0x7f09006d;
         public static int rc_input=0x7f090054;
-        public static int rc_input_custom_menu=0x7f090072;
+        public static int rc_input_custom_menu=0x7f090073;
         public static int rc_input_extension=0x7f09000f;
         public static int rc_input_main=0x7f090010;
-        public static int rc_input_menu=0x7f090070;
+        public static int rc_input_menu=0x7f090071;
         public static int rc_input_switch=0x7f090011;
         public static int rc_item0=0x7f090012;
         public static int rc_item1=0x7f090013;
@@ -533,16 +533,17 @@ containing a value of this type.
         public static int rc_left=0x7f09001e;
         public static int rc_list=0x7f09001f;
         public static int rc_logo=0x7f090020;
-        public static int rc_menu_item_text=0x7f090067;
-        public static int rc_menu_line=0x7f090068;
-        public static int rc_menu_switch=0x7f09006e;
+        public static int rc_menu_item_text=0x7f090068;
+        public static int rc_menu_line=0x7f090069;
+        public static int rc_menu_switch=0x7f09006f;
         public static int rc_message_send_failed=0x7f090021;
         public static int rc_msg=0x7f090022;
+        public static int rc_msg_lay=0x7f090067;
         public static int rc_new=0x7f090023;
         public static int rc_new_message_count=0x7f090056;
         public static int rc_new_message_number=0x7f090057;
         public static int rc_pager=0x7f090024;
-        public static int rc_plugins=0x7f090073;
+        public static int rc_plugins=0x7f090074;
         public static int rc_portrait=0x7f090025;
         public static int rc_portrait_right=0x7f090026;
         public static int rc_progress=0x7f090027;
@@ -553,9 +554,9 @@ containing a value of this type.
         public static int rc_send=0x7f090029;
         public static int rc_sent_status=0x7f09002a;
         public static int rc_setting_item=0x7f090064;
-        public static int rc_switcher=0x7f09006d;
-        public static int rc_switcher1=0x7f09006f;
-        public static int rc_switcher2=0x7f090071;
+        public static int rc_switcher=0x7f09006e;
+        public static int rc_switcher1=0x7f090070;
+        public static int rc_switcher2=0x7f090072;
         public static int rc_time=0x7f09002b;
         public static int rc_title=0x7f09002c;
         public static int rc_title_layout=0x7f09002d;
@@ -565,7 +566,7 @@ containing a value of this type.
         public static int rc_unread_message_icon=0x7f090065;
         public static int rc_unread_message_icon_right=0x7f090066;
         public static int rc_unread_message_right=0x7f090030;
-        public static int rc_voice_unread=0x7f09006a;
+        public static int rc_voice_unread=0x7f09006b;
         public static int rc_voip_called_layout=0x7f090046;
         public static int rc_warning=0x7f090031;
         public static int rc_webview=0x7f090044;
@@ -581,7 +582,7 @@ containing a value of this type.
         public static int user_photo=0x7f09004b;
         public static int user_photo_container=0x7f09004a;
         public static int vioce_control_container=0x7f09004e;
-        public static int volume_animation=0x7f090075;
+        public static int volume_animation=0x7f090076;
     }
     public static final class integer {
         public static int rc_audio_encoding_bit_rate=0x7f0a0000;

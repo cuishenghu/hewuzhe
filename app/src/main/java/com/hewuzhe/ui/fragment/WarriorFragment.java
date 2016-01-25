@@ -124,6 +124,7 @@ public class WarriorFragment extends ToolBarFragment<WarriorFragmentPresenter> i
     public static LocationCallback _LocationCallback;
     private String _Address;
     private SPUtil spUtil;
+    private boolean isFirstRun = true;
 
 
     public WarriorFragment() {
@@ -144,11 +145,10 @@ public class WarriorFragment extends ToolBarFragment<WarriorFragmentPresenter> i
     @Override
     protected void initThings(View v) {
         super.initThings(v);
+        presenter.getUserData();
 
         spUtil = new SPUtil(getContext())
                 .open("settings");
-
-        presenter.getUserData();
 
 //        SQLiteDatabase db = SQLiteDatabase.openOrCreateDatabase(DBManager.DB_PATH + "/" + DBManager.DB_NAME, null);
 //
@@ -200,7 +200,7 @@ public class WarriorFragment extends ToolBarFragment<WarriorFragmentPresenter> i
                             Weather weather = new Gson().fromJson(jsonObject1.toString(), Weather.class);
 
                             tvAirQuality.setText("空气质量：无数据");
-                            tvTemperature.setText(weather.now.tmp + "C");
+                            tvTemperature.setText(weather.now.tmp + "℃");
                             tvPm.setText("PM：无数据");
                             tvAddress.setText(_cityName);
 
@@ -361,8 +361,20 @@ public class WarriorFragment extends ToolBarFragment<WarriorFragmentPresenter> i
     @Override
     public void onResume() {
         super.onResume();
+        if (isFirstRun) {
+            isFirstRun = false;
+        } else {
+            presenter.getUserData();
+        }
+    }
 
-        setUserData();
+    @Override
+    public void onHiddenChanged(boolean hidden) {
+        super.onHiddenChanged(hidden);
+        if (!hidden) {
+            presenter.getUserData();
+        }
+
     }
 
     /**
@@ -383,13 +395,11 @@ public class WarriorFragment extends ToolBarFragment<WarriorFragmentPresenter> i
                  */
                 @Override
                 public void onTokenIncorrect() {
-
                     Log.d("LoginActivity", "--onTokenIncorrect");
                 }
 
                 /**
                  * 连接融云成功
-                 *
                  * @param userid 当前 token
                  */
                 @Override
@@ -404,10 +414,10 @@ public class WarriorFragment extends ToolBarFragment<WarriorFragmentPresenter> i
                     RongIM.setConversationBehaviorListener(WarriorFragment.this);//设置会话界面操作的监听器。
                     RongIM.setLocationProvider(WarriorFragment.this);//设置地理位置提供者,不用位置的同学可以注掉此行代码
 
-
                     RongIM.setOnReceiveMessageListener(new RongIMClient.OnReceiveMessageListener() {
                         @Override
                         public boolean onReceived(Message message, int i) {
+
                             return !spUtil.getBoolean("msg");
                         }
                     });

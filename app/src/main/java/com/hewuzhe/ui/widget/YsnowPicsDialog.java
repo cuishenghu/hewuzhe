@@ -96,7 +96,6 @@ public class YsnowPicsDialog {
         mDialog.dismiss();
     }
 
-
     private void chooseImage() {
         chooserType = ChooserType.REQUEST_PICK_PICTURE;
         imageChooserManager = new ImageChooserManager(context,

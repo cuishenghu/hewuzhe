@@ -1,24 +1,32 @@
 package com.hewuzhe.ui.activity;
 
 import android.content.Intent;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.PopupWindow;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.hewuzhe.R;
+import com.hewuzhe.model.UP;
 import com.hewuzhe.model.User;
 import com.hewuzhe.presenter.SignInPresenter;
 import com.hewuzhe.ui.base.BaseActivity;
 import com.hewuzhe.ui.widget.LoadingDialog;
 import com.hewuzhe.utils.Bun;
+import com.hewuzhe.utils.SessionUtil;
 import com.hewuzhe.view.SignInView;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 
 import butterknife.Bind;
@@ -27,6 +35,7 @@ import cn.sharesdk.framework.PlatformActionListener;
 import cn.sharesdk.framework.ShareSDK;
 import cn.sharesdk.tencent.qzone.QZone;
 import cn.sharesdk.wechat.friends.Wechat;
+import cn.xm.weidongjian.popuphelper.PopupWindowHelper;
 
 
 public class SignInActivity extends BaseActivity<SignInPresenter> implements SignInView, PlatformActionListener, Handler.Callback {
@@ -56,6 +65,10 @@ public class SignInActivity extends BaseActivity<SignInPresenter> implements Sig
     private LoadingDialog loadingDialog;
 
     private Handler handler;
+    private LinearLayout popView;
+    private PopupWindowHelper popupWindowHelper;
+    private ArrayList<UP> ups;
+    private PopupWindow popupWindow;
 
     @Override
     protected int provideContentViewId() {
@@ -87,13 +100,11 @@ public class SignInActivity extends BaseActivity<SignInPresenter> implements Sig
             }
         });
 
-
         layQq.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Platform wechat = ShareSDK.getPlatform(getContext(), QZone.NAME);
                 authorize(wechat);
-
             }
         });
 
@@ -104,6 +115,57 @@ public class SignInActivity extends BaseActivity<SignInPresenter> implements Sig
                 authorize(wechat);
             }
         });
+
+        edtUsername.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+            @Override
+            public void onFocusChange(View view, boolean b) {
+                if (b) {
+                    showUPs();
+                } else {
+                    dismissUPs();
+                }
+
+            }
+        });
+
+    }
+
+    private void dismissUPs() {
+        popupWindow.dismiss();
+    }
+
+    private void showUPs() {
+        if (popupWindow == null) {
+            popView = (LinearLayout) LayoutInflater.from(this).inflate(R.layout.pop_up, null);
+            ups = new SessionUtil(getContext()).getUPs();
+            if (ups != null && ups.size() > 0) {
+                for (final UP up : ups) {
+                    View view = LayoutInflater.from(this).inflate(R.layout.pop_item, null);
+                    final TextView textView = (TextView) view.findViewById(R.id.tv_textview);
+                    textView.setText(up.userName);
+                    textView.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View view) {
+                            dismissUPs();
+                            edtUsername.setText(up.userName);
+                            edtPwd.setText(up.passWord);
+                            presenter.signin(textView);
+
+                        }
+                    });
+                    popView.addView(view);
+                }
+            }
+
+            popupWindow = new PopupWindow(popView, ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+            popupWindow.setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+            popupWindow.setFocusable(false);
+            popupWindow.setOutsideTouchable(true);
+        }
+
+        if (ups != null && ups.size() > 0) {
+            popupWindow.showAsDropDown(edtUsername, 0, 0);
+        }
 
     }
 
@@ -116,9 +178,7 @@ public class SignInActivity extends BaseActivity<SignInPresenter> implements Sig
     @Override
     protected void initThings(Bundle savedInstanceState) {
 //       showAnim();
-
         ShareSDK.initSDK(this);
-
         handler = new Handler(this);
     }
 

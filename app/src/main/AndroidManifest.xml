@@ -87,9 +87,6 @@
             android:name="design_height"
             android:value="1136"/>
         <meta-data
-            android:name="RONG_CLOUD_APP_KEY"
-            android:value="3argexb6r2qhe"/>
-        <meta-data
             android:name="UMENG_APPKEY"
             android:value="568a7ebb67e58eb8c5001055"/>
         <meta-data
@@ -102,6 +99,11 @@
             android:name="PGYER_APPID"
             android:value="ce73a5d040f864fe9cee2e1b89065be8">
         </meta-data>
+
+        <meta-data
+            android:name="RONG_CLOUD_APP_KEY"
+            android:value="3argexb6r2qhe"/>
+
 
         <!-- <service android:name="com.amap.api.location.APSService"/> -->
 
@@ -211,11 +213,13 @@
             android:configChanges="orientation|screenSize"
             android:launchMode="singleTop"
             android:theme="@android:style/Theme.Translucent.NoTitleBar"/>
+
         <!-- 微信支付注册 -->
         <activity-alias
             android:name=".wxapi.WXPayEntryActivity"
             android:exported="true"
             android:targetActivity="com.pingplusplus.android.PaymentActivity"/>
+
         <!-- 支付宝注册 -->
         <activity
             android:name="com.alipay.sdk.app.H5PayActivity"
@@ -270,35 +274,6 @@
 
         <!-- begin imlib request -->
 
-        <activity
-            android:name="io.rong.voipkit.activity.CallSideActivity"
-            android:screenOrientation="portrait">
-            <intent-filter>
-                <action android:name="android.intent.action.VIEW"/>
-
-                <category android:name="android.intent.category.DEFAULT"/>
-
-                <data
-                    android:host="com.hewuzhe"
-                    android:pathPrefix="/VoIPCall"
-                    android:scheme="rong"/>
-            </intent-filter>
-        </activity>
-        <activity
-            android:name="io.rong.voipkit.activity.CalledSideActivity"
-            android:excludeFromRecents="true"
-            android:screenOrientation="portrait">
-            <intent-filter>
-                <action android:name="android.intent.action.VIEW"/>
-
-                <category android:name="android.intent.category.DEFAULT"/>
-
-                <data
-                    android:host="com.hewuzhe"
-                    android:pathPrefix="/VoIPAccept"
-                    android:scheme="rong"/>
-            </intent-filter>
-        </activity>
 
         <service
             android:name="io.rong.push.PushService"
@@ -567,6 +542,8 @@
             android:exported="true"
             android:screenOrientation="portrait"
             android:theme="@android:style/Theme.Translucent.NoTitleBar"/>
+
+
         <activity
             android:name=".ui.activity.MegaGameVideosActivity"
             android:windowSoftInputMode="stateHidden|adjustPan">

@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.res.TypedArray;
 import android.hardware.Camera;
 import android.hardware.Camera.Parameters;
+import android.media.CamcorderProfile;
 import android.media.MediaRecorder;
 import android.media.MediaRecorder.AudioEncoder;
 import android.media.MediaRecorder.AudioSource;
@@ -49,6 +50,7 @@ public class MovieRecorderView extends LinearLayout implements OnErrorListener {
     private int mTimeCount;//
     private File mVecordFile = null;//
     private StopListener mStopListner;
+    private CamcorderProfile mProfile;
 
     public MovieRecorderView(Context context) {
         this(context, null);
@@ -153,6 +155,7 @@ public class MovieRecorderView extends LinearLayout implements OnErrorListener {
             Parameters params = mCamera.getParameters();
             params.setVideoStabilization(true);
             params.set("orientation", "portrait");
+            params.setRotation(90);
             mCamera.setParameters(params);
         }
     }
@@ -202,13 +205,16 @@ public class MovieRecorderView extends LinearLayout implements OnErrorListener {
         mMediaRecorder.setOutputFormat(OutputFormat.DEFAULT);//
         mMediaRecorder.setAudioEncoder(AudioEncoder.DEFAULT);//
         mMediaRecorder.setVideoSize(mWidth, mHeight);//
-        mMediaRecorder.setVideoFrameRate(16);//
-        mMediaRecorder.setVideoEncodingBitRate(1 * 1024 * 512 * 2);//
+//        mProfile = CamcorderProfile.get(0, 6);
+//        mMediaRecorder.setProfile(mProfile);
+//        mMediaRecorder.setVideoFrameRate(16);//
+//        mMediaRecorder.setVideoEncodingBitRate(1 * 1024 * 512 * 2);//
         mMediaRecorder.setOrientationHint(90);
         mMediaRecorder.setVideoEncoder(VideoEncoder.DEFAULT);//
         // mediaRecorder.setMaxDuration(Constant.MAXVEDIOTIME * 1000);
         mMediaRecorder.setOutputFile(mVecordFile.getAbsolutePath());
         mMediaRecorder.prepare();
+
         try {
             mMediaRecorder.start();
         } catch (IllegalStateException e) {

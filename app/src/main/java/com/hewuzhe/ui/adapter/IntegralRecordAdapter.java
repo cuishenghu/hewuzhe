@@ -12,6 +12,7 @@ import com.hewuzhe.R;
 import com.hewuzhe.model.IntegralRecord;
 import com.hewuzhe.presenter.IntegralPresenter;
 import com.hewuzhe.ui.adapter.base.BaseAdapter;
+import com.hewuzhe.utils.TimeUtil;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
@@ -20,7 +21,7 @@ import butterknife.ButterKnife;
  * Created by xianguangjin on 15/12/25.
  */
 
-public class IntegralRecordAdapter extends BaseAdapter<RecyclerView.ViewHolder, IntegralRecord,IntegralPresenter> {
+public class IntegralRecordAdapter extends BaseAdapter<IntegralRecordAdapter.VHolder, IntegralRecord, IntegralPresenter> {
 
     /**
      * RecycleView的头部
@@ -47,8 +48,8 @@ public class IntegralRecordAdapter extends BaseAdapter<RecyclerView.ViewHolder, 
      * @return 创建ViewHolder
      */
     @Override
-    public RecyclerView.ViewHolder createVH(ViewGroup parent, int viewType, View view) {
-        return new ViewHolder(view);
+    public VHolder createVH(ViewGroup parent, int viewType, View view) {
+        return new VHolder(view);
     }
 
     /**
@@ -56,8 +57,11 @@ public class IntegralRecordAdapter extends BaseAdapter<RecyclerView.ViewHolder, 
      * @param position 绑定数据
      */
     @Override
-    public void bindData(RecyclerView.ViewHolder holder, int position) {
-
+    public void bindData(VHolder holder, int position) {
+        IntegralRecord item = data.get(position);
+        holder.tvFrom.setText("来源：" + item.CreditCome);
+        holder.tvAddTime.setText(TimeUtil.timeAgo(item.CreditTime));
+        holder._TvNum.setText("+" + item.CreditNum + "个");
 
     }
 
@@ -68,7 +72,7 @@ public class IntegralRecordAdapter extends BaseAdapter<RecyclerView.ViewHolder, 
      * @author ButterKnifeZelezny, plugin for Android Studio by Avast Developers (http://github.com/avast)
      */
 
-    class ViewHolder extends RecyclerView.ViewHolder {
+    class VHolder extends RecyclerView.ViewHolder {
 
         @Bind(R.id.img_avatar)
         @Nullable
@@ -79,8 +83,11 @@ public class IntegralRecordAdapter extends BaseAdapter<RecyclerView.ViewHolder, 
         @Bind(R.id.tv_from)
         @Nullable
         TextView tvFrom;
+        @Bind(R.id.tv_num)
+        @Nullable
+        TextView _TvNum;
 
-        ViewHolder(View view) {
+        VHolder(View view) {
             super(view);
             ButterKnife.bind(this, view);
         }

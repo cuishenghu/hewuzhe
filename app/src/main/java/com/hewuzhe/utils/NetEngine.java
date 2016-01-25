@@ -23,11 +23,25 @@ public class NetEngine {
     public static ApiService getService() {
         if (retrofit == null) {
             client.setReadTimeout(20, TimeUnit.MINUTES);
+            client.setWriteTimeout(30, TimeUnit.MINUTES);
             retrofit = new Retrofit.Builder()
                     .baseUrl(C.BASE_URL)
                     .client(client)
                     .addConverterFactory(GsonConverterFactory.create())
                     .addCallAdapterFactory(RxJavaCallAdapterFactory.create())
+                    .build();
+        }
+
+        return retrofit.create(ApiService.class);
+    }
+
+    public static ApiService getNormalService() {
+        if (retrofit == null) {
+            client.setReadTimeout(20, TimeUnit.MINUTES);
+            client.setWriteTimeout(30, TimeUnit.MINUTES);
+            retrofit = new Retrofit.Builder()
+                    .baseUrl(C.BASE_URL)
+                    .client(client)
                     .build();
         }
 

@@ -94,7 +94,12 @@ public class FollowedFriendsActivity extends RecycleViewActivity<FollowedFriends
     @Override
     public void onItemClick(View view, int pos, Friend item) {
         _Item = item;
-        presenter.isWuyou();
+
+        if (item.IsFriend) {
+            startActivity(FriendProfileActivity.class, new Bun().putInt("id", _Item.UserId).ok());
+        } else {
+            startActivity(StrangerProfileSettingsActivity.class, new Bun().putInt("id", _Item.UserId).ok());
+        }
 
     }
 

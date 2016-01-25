@@ -130,7 +130,6 @@ public class PowerFragment extends BaseFragment implements PowerView, VideoChoos
                 public void onClick(View view) {
                     pickVideo(view);
 
-
                 }
             });
 
@@ -209,7 +208,7 @@ public class PowerFragment extends BaseFragment implements PowerView, VideoChoos
                 if (video != null) {
                     video.getVideoFilePath();
                     video.getThumbnailPath();
-                    startActivity(PublishVideoActivity.class, new Bun().putString("file_name", video.getVideoFilePath()).ok());
+                    startActivity(PublishVideoActivity.class, new Bun().putString("file_name", video.getVideoFilePath()).putInt("uploadType", C.UPLOAD_TYPE_LOCAL).ok());
                 }
             }
         });

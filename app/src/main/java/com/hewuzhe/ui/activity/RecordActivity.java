@@ -161,6 +161,7 @@ public class RecordActivity extends SwipeRecycleViewActivity<RecordPresenter, Re
 
     @Override
     public void deleteFinished() {
+        snb("删除成功", tvTitle);
         adapter.showCheck(false);
     }
 

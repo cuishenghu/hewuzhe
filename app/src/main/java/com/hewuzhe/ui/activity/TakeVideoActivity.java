@@ -55,7 +55,6 @@ public class TakeVideoActivity extends ToolBarActivity {
         shootButton.setOnTouchListener(new View.OnTouchListener() {
             @Override
             public boolean onTouch(View v, MotionEvent event) {
-                // TODO Auto-generated method stub
                 if (event.getAction() == MotionEvent.ACTION_DOWN) {
                     movieRecorderView.record(new MovieRecorderView.OnRecordFinishListener() {
                         @Override
@@ -86,7 +85,6 @@ public class TakeVideoActivity extends ToolBarActivity {
                         layBtns.setVisibility(View.VISIBLE);
                     }
                 });
-
             }
         });
 
@@ -96,9 +94,9 @@ public class TakeVideoActivity extends ToolBarActivity {
                 shootButton.setVisibility(View.VISIBLE);
                 layBtns.setVisibility(View.GONE);
                 if (getIntentData().getInt(C.WHITCH, C.WHITCH_DEFAUT) == C.WHITCH_DEFAUT) {//发表视频
-                    startActivity(PublishVideoActivity.class, new Bun().putString("file_name", movieRecorderView.getmVecordFile().getPath()).ok());
+                    startActivity(PublishVideoActivity.class, new Bun().putString("file_name", movieRecorderView.getmVecordFile().getPath()).putInt("uploadType", C.UPLOAD_TYPE_RECORD).ok());
                 } else if (getIntentData().getInt(C.WHITCH, C.WHITCH_DEFAUT) == C.WHITCH_ONE) {//发表动态
-                    startActivity(PublishConditionVideoActivity.class, new Bun().putString("file_name", movieRecorderView.getmVecordFile().getPath()).ok());
+                    startActivity(PublishConditionVideoActivity.class, new Bun().putString("file_name", movieRecorderView.getmVecordFile().getPath()).putInt("uploadType", C.UPLOAD_TYPE_RECORD).ok());
                     finishActivity();
                 }
             }

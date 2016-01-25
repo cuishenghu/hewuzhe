@@ -9,6 +9,7 @@ import com.hewuzhe.ui.cons.C;
 import com.hewuzhe.utils.NetEngine;
 import com.hewuzhe.utils.SB;
 import com.hewuzhe.utils.SessionUtil;
+import com.hewuzhe.utils.StringUtil;
 import com.hewuzhe.view.ProfileSettingsView;
 
 import rx.Subscription;
@@ -288,6 +289,10 @@ public class ProfileSettingsPresenter extends BasePresenterImp<ProfileSettingsVi
 
     public void collectAndOther(int id, final int flag, final View v, String content) {
 
+        if (StringUtil.isEmpty(content)) {
+            view.snb("举报内容不能为空", v);
+            return;
+        }
         Subscription subscription = NetEngine.getService()
                 .SelectCommentByMessageId(id, new SessionUtil(view.getContext()).getUser().Id, flag, content)
                 .subscribeOn(Schedulers.io())

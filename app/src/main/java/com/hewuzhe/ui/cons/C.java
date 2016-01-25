@@ -116,4 +116,6 @@ public class C {
     public static final int MSG_UNREAD_COUNT = 20002;
     public static final int MSG_REFRESH_PLAN_LIST = 20003;
     public static final int MSG_CLOSE_FRIEND_PROFILE = 20004;
+    public static final int UPLOAD_TYPE_LOCAL = 0;//本地视频
+    public static final int UPLOAD_TYPE_RECORD = 1;//拍摄视频
 }

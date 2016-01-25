@@ -9,32 +9,32 @@ public class Charge {
 
 
     /**
-     * id : ch_mnTSuL0WH44Ca5aHy5qv50mH
+     * id : ch_KK84e5G8mD8K0Kib10bzLe50
      * object : charge
-     * created : 1453094944
+     * created : 1453691799
      * livemode : true
      * paid : false
      * refunded : false
      * app : app_qfD04CjHGu54aXXv
-     * channel : alipay
-     * order_no : 2016011800000036
+     * channel : wx
+     * order_no : 2016012500000028
      * client_ip : 127.0.0.1
      * amount : 120000
      * amount_settle : 120000
      * currency : cny
-     * subject : 2
-     * body : æ ¸æ­¦çä¼åè´­ä¹°
+     * subject : 46
+     * body : 1
      * extra : {}
      * time_paid : null
-     * time_expire : 1453181344
+     * time_expire : 1453698999
      * time_settle : null
      * transaction_no : null
-     * refunds : {"object":"list","url":"/v1/charges/ch_mnTSuL0WH44Ca5aHy5qv50mH/refunds","has_more":false,"data":[]}
+     * refunds : {"object":"list","url":"/v1/charges/ch_KK84e5G8mD8K0Kib10bzLe50/refunds","has_more":false,"data":[]}
      * amount_refunded : 0
      * failure_code : null
      * failure_msg : null
      * metadata : {}
-     * credential : {"object":"credential","alipay":{"orderInfo":"service=\"mobile.securitypay.pay\"&_input_charset=\"utf-8\"&notify_url=\"https%3A%2F%2Fapi.pingxx.com%2Fnotify%2Fcharges%2Fch_mnTSuL0WH44Ca5aHy5qv50mH\"&partner=\"2088121648755575\"&out_trade_no=\"2016011800000036\"&subject=\"2\"&body=\"æ ¸æ­¦ç\u009d\u0080ä¼\u009aå\u0091\u0098è´­ä¹°\"&total_fee=\"1200.00\"&payment_type=\"1\"&seller_id=\"2088121648755575\"&it_b_pay=\"2016-01-19 13:29:04\"&sign=\"FvFmQpnT5jIVWLUo926E%2Bp470asHRlMIxIe%2FqOCfgerYgqp0vUFRF%2B%2FfhrkzyLrBFNpQx8kOZfy1igEvBn3cD86BBknEMND%2BKjMjPPZ5QaSnBpWsnY%2Blx2np3pqv163w3skdsWe9v1pTfoHSlzlhEq3PJeeZgYggbiKM9KtqRyI%3D\"&sign_type=\"RSA\""}}
+     * credential : {"object":"credential","wx":{"appId":"wxb1fb6e1f1f47c07f","partnerId":"1299611201","prepayId":"wx20160125111640a754abd0300938887671","nonceStr":"06125c6f8bca44c46ba8f2e51805694b","timeStamp":1453691800,"packageValue":"Sign=WXPay","sign":"5A0886D2DFC5C771FAB28924C4F1CF3B"}}
      * description : null
      */
 
@@ -60,7 +60,7 @@ public class Charge {
     public Object transaction_no;
     /**
      * object : list
-     * url : /v1/charges/ch_mnTSuL0WH44Ca5aHy5qv50mH/refunds
+     * url : /v1/charges/ch_KK84e5G8mD8K0Kib10bzLe50/refunds
      * has_more : false
      * data : []
      */
@@ -72,7 +72,7 @@ public class Charge {
     public MetadataEntity metadata;
     /**
      * object : credential
-     * alipay : {"orderInfo":"service=\"mobile.securitypay.pay\"&_input_charset=\"utf-8\"&notify_url=\"https%3A%2F%2Fapi.pingxx.com%2Fnotify%2Fcharges%2Fch_mnTSuL0WH44Ca5aHy5qv50mH\"&partner=\"2088121648755575\"&out_trade_no=\"2016011800000036\"&subject=\"2\"&body=\"æ ¸æ­¦ç\u009d\u0080ä¼\u009aå\u0091\u0098è´­ä¹°\"&total_fee=\"1200.00\"&payment_type=\"1\"&seller_id=\"2088121648755575\"&it_b_pay=\"2016-01-19 13:29:04\"&sign=\"FvFmQpnT5jIVWLUo926E%2Bp470asHRlMIxIe%2FqOCfgerYgqp0vUFRF%2B%2FfhrkzyLrBFNpQx8kOZfy1igEvBn3cD86BBknEMND%2BKjMjPPZ5QaSnBpWsnY%2Blx2np3pqv163w3skdsWe9v1pTfoHSlzlhEq3PJeeZgYggbiKM9KtqRyI%3D\"&sign_type=\"RSA\""}
+     * wx : {"appId":"wxb1fb6e1f1f47c07f","partnerId":"1299611201","prepayId":"wx20160125111640a754abd0300938887671","nonceStr":"06125c6f8bca44c46ba8f2e51805694b","timeStamp":1453691800,"packageValue":"Sign=WXPay","sign":"5A0886D2DFC5C771FAB28924C4F1CF3B"}
      */
 
     public CredentialEntity credential;
@@ -94,14 +94,25 @@ public class Charge {
     public static class CredentialEntity {
         public String object;
         /**
-         * orderInfo : service="mobile.securitypay.pay"&_input_charset="utf-8"&notify_url="https%3A%2F%2Fapi.pingxx.com%2Fnotify%2Fcharges%2Fch_mnTSuL0WH44Ca5aHy5qv50mH"&partner="2088121648755575"&out_trade_no="2016011800000036"&subject="2"&body="æ ¸æ­¦çä¼åè´­ä¹°"&total_fee="1200.00"&payment_type="1"&seller_id="2088121648755575"&it_b_pay="2016-01-19 13:29:04"&sign="FvFmQpnT5jIVWLUo926E%2Bp470asHRlMIxIe%2FqOCfgerYgqp0vUFRF%2B%2FfhrkzyLrBFNpQx8kOZfy1igEvBn3cD86BBknEMND%2BKjMjPPZ5QaSnBpWsnY%2Blx2np3pqv163w3skdsWe9v1pTfoHSlzlhEq3PJeeZgYggbiKM9KtqRyI%3D"&sign_type="RSA"
+         * appId : wxb1fb6e1f1f47c07f
+         * partnerId : 1299611201
+         * prepayId : wx20160125111640a754abd0300938887671
+         * nonceStr : 06125c6f8bca44c46ba8f2e51805694b
+         * timeStamp : 1453691800
+         * packageValue : Sign=WXPay
+         * sign : 5A0886D2DFC5C771FAB28924C4F1CF3B
          */
 
-        public AlipayEntity alipay;
+        public WxEntity wx;
 
-        public static class AlipayEntity {
-            public String orderInfo;
+        public static class WxEntity {
+            public String appId;
+            public String partnerId;
+            public String prepayId;
+            public String nonceStr;
+            public int timeStamp;
+            public String packageValue;
+            public String sign;
         }
     }
-
 }

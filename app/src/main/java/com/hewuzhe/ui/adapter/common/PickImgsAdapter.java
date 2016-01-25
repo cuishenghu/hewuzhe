@@ -86,11 +86,10 @@ public class PickImgsAdapter extends BaseAdapter<PickImgsAdapter.VHolder, PickIm
                 @Override
                 public void onClick(View view) {
                     data.remove(position);
-                    PickImgsAdapter.this.notifyItemRemoved(position);
+                    PickImgsAdapter.this.notifyDataSetChanged();
                 }
             });
         }
-
     }
 
     /**

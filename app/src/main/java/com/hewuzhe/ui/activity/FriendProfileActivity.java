@@ -113,7 +113,7 @@ public class FriendProfileActivity extends ToolBarActivity<FriendProfilePresente
     @Override
     public void setData(final User friend) {
         _Friend = friend;
-        _TvUsername.setText(friend.RemarkName + "");
+        _TvUsername.setText(friend.NicName + "");
         _TvDesc.setText(friend.Description);
         _TvHeight.setText(friend.Height + "cm");
         _TvWeight.setText(friend.Weight + "kg");
@@ -124,7 +124,7 @@ public class FriendProfileActivity extends ToolBarActivity<FriendProfilePresente
         _LayFriendsCondition.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startActivity(MyConditionActivity.class, new Bun().putInt("id", friend.Id).putString("title", "好友动态").ok());
+                startActivity(MyConditionActivity.class, new Bun().putInt("id", friend.Id).putString("title", "个人动态").ok());
             }
         });
 

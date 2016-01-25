@@ -14,6 +14,7 @@ import com.hewuzhe.model.Dojo;
 import com.hewuzhe.presenter.DojoRecommendPresenter;
 import com.hewuzhe.ui.adapter.base.BaseAdapter;
 import com.hewuzhe.ui.cons.C;
+import com.hewuzhe.utils.StringUtil;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
@@ -55,7 +56,8 @@ public class DojoRecommendAdapter extends BaseAdapter<DojoRecommendAdapter.ViewH
         Dojo dojo = data.get(position);
 
         holder.tvDesc.setText(dojo.Content);
-        holder.tvLoc.setText(dojo.Address);
+
+        holder.tvLoc.setText(getAddress(dojo.Address));
         holder.tvName.setText(dojo.Title);
         holder.tvCall.setText(dojo.TelePhone);
         Glide.with(context)
@@ -65,6 +67,17 @@ public class DojoRecommendAdapter extends BaseAdapter<DojoRecommendAdapter.ViewH
                 .placeholder(R.mipmap.img_bg)
                 .into(holder.img);
 
+    }
+
+    private String getAddress(String address) {
+
+        if (!StringUtil.isEmpty(address)) {
+
+            int index = address.indexOf(",");
+            return address.substring(index + 1);
+        } else {
+            return "";
+        }
     }
 
     /**

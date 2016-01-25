@@ -19,9 +19,6 @@ import com.hewuzhe.view.PublishConditionView;
 
 import java.util.ArrayList;
 
-import retrofit.Callback;
-import retrofit.Response;
-import retrofit.Retrofit;
 import rx.Subscription;
 import rx.android.schedulers.AndroidSchedulers;
 import rx.functions.Action0;
@@ -41,6 +38,7 @@ public class PublishConditionPresenter extends ListPresenter<PublishConditionVie
     private int picCount = 0;
     private String pathList = "";
     private String videopath = "";
+    private int _UploadType = C.UPLOAD_TYPE_LOCAL;
 
     /**
      * 显示选择dialog
@@ -141,64 +139,43 @@ public class PublishConditionPresenter extends ListPresenter<PublishConditionVie
             pathList = pathList.substring(0, pathList.length() - 1);
         }
 
-//        Subscription subscription = NetEngine.getService()
-//                .SaveDongtai(pathList, new SessionUtil(view.getContext()).getUserId(), data.content, videoImg, videopath, videoDuration)
-//                .subscribeOn(Schedulers.io())
-//                .doOnSubscribe(() -> {
-//                    if (!view.isShowingDialog()) {
-//                        view.showDialog();
-//                    }
-//                })
-//                .subscribeOn(AndroidSchedulers.mainThread())
-//                .observeOn(AndroidSchedulers.mainThread())
-//                .subscribe(new SB<Res>() {
-//                    @Override
-//                    public void next(Res res) {
-//                        if (res.code == C.OK) {
-//                            view.snb("发布成功", v);
-//                            view.finishActivity();
-//                        }
-//
-//                    }
-//
-//                    @Override
-//                    public void onCompleted() {
-//                        view.dismissDialog();
-//
-//                    }
-//
-//                    @Override
-//                    public void onError(Throwable e) {
-//                        view.dismissDialog();
-//                    }
-//                });
-//        addSubscription(subscription);
-
-
-        if (!view.isShowingDialog()) {
-            view.showDialog();
-        }
-        NetEngine.getService()
+        Subscription subscription = NetEngine.getService()
                 .SaveDongtai(pathList, new SessionUtil(view.getContext()).getUserId(), data.content, videoImg, videopath, videoDuration)
-                .enqueue(new Callback<Res>() {
+                .subscribeOn(Schedulers.io())
+                .doOnSubscribe(new Action0() {
                     @Override
-                    public void onResponse(Response<Res> response, Retrofit retrofit) {
-                        Res res = response.body();
+                    public void call() {
+                        if (!view.isShowingDialog()) {
+                            view.showDialog();
+                        }
+                    }
+                })
+                .subscribeOn(AndroidSchedulers.mainThread())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new SB<Res>() {
+                    @Override
+                    public void next(Res res) {
                         if (res.code == C.OK) {
                             view.snb("发布成功", v);
                             view.finishActivity();
                         }
-                        view.dismissDialog();
-
 
                     }
 
                     @Override
-                    public void onFailure(Throwable t) {
+                    public void onCompleted() {
                         view.dismissDialog();
 
                     }
+
+                    @Override
+                    public void onError(Throwable e) {
+                        view.dismissDialog();
+                    }
                 });
+        addSubscription(subscription);
+
+
     }
 
     public void UpLoadConditionVideo(View v, String path) {

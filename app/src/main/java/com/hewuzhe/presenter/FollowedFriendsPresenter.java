@@ -147,9 +147,9 @@ public class FollowedFriendsPresenter extends RefreshAndLoadMorePresenter<Follow
     }
 
 
-    public void isWuyou() {
+    public void isWuyou(int id) {
         Subscription subscription = NetEngine.getService()
-                .IsWuyou(new SessionUtil(view.getContext()).getUserId(), view.getData())
+                .IsWuyou(new SessionUtil(view.getContext()).getUserId(), id)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new SB<Res<Boolean>>() {
@@ -157,7 +157,6 @@ public class FollowedFriendsPresenter extends RefreshAndLoadMorePresenter<Follow
                     public void next(Res<Boolean> res) {
                         if (res.code == C.OK) {
                             view.isWuYou(res.data);
-
                         }
                     }
 

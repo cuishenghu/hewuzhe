@@ -235,6 +235,7 @@ public class ContactsActivity extends ToolBarActivity<FriendsPresenter> implemen
     @Override
     public void bindData(ArrayList<Friend> friends) {
         _Friends = friends;
+        mAdapter.clear();
         mAdapter.setDatas(friends);
         _RecyclerView.setAdapter(mAdapter);
         _TvRecyclerindexviewTopc.setText(mAdapter.getItem(0).topc);

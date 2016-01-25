@@ -184,6 +184,7 @@ public class DoJoRecommendActivity extends SwipeRecycleViewActivity<DojoRecommen
 
         } else if (resultCode == C.RESULT_TWO) {
             tvTitle.setText(_cityName);
+            cityId = -1;
             presenter.getData(_cityName, _Lat + "", _Lng + "", page, count);
 
         }

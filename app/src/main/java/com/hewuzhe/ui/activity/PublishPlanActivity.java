@@ -18,14 +18,15 @@ import com.hewuzhe.model.UploadImage;
 import com.hewuzhe.model.common.DataModel;
 import com.hewuzhe.model.common.PickImg;
 import com.hewuzhe.presenter.PublishPlanPresenter;
-import com.hewuzhe.ui.App;
 import com.hewuzhe.ui.adapter.common.PickImgsAdapter;
 import com.hewuzhe.ui.base.ListActivity;
 import com.hewuzhe.ui.cons.C;
 import com.hewuzhe.utils.Bun;
+import com.hewuzhe.utils.GlideLoader;
 import com.hewuzhe.utils.NU;
 import com.hewuzhe.utils.TimeUtil;
 import com.hewuzhe.view.PublishPlanView;
+import com.yancy.imageselector.ImageConfig;
 import com.yancy.imageselector.ImageSelector;
 import com.yancy.imageselector.ImageSelectorActivity;
 
@@ -69,7 +70,6 @@ public class PublishPlanActivity extends ListActivity<PublishPlanPresenter, Pick
     private int id = -1;
     private int days = 30;
     private ArrayList<Pic> pics = new ArrayList<>();
-
 
     /**
      * @return 提供标题
@@ -320,7 +320,27 @@ public class PublishPlanActivity extends ListActivity<PublishPlanPresenter, Pick
 //            e.printStackTrace();
 //        }
 
-        ImageSelector.open(PublishPlanActivity.this, App.imageConfig);   // 开启图片选择器
+
+        ImageConfig imageConfig = new ImageConfig.Builder(new GlideLoader())
+                .steepToolBarColor(getResources().getColor(R.color.colorPrimary))
+                .titleBgColor(getResources().getColor(R.color.colorPrimary))
+                .titleSubmitTextColor(getResources().getColor(R.color.white))
+                .titleTextColor(getResources().getColor(R.color.white))
+                        // 开启多选   （默认为多选）
+                .mutiSelect()
+                        // 多选时的最大数量   （默认 9 张）
+                .mutiSelectMaxSize(6)
+                        // 开启拍照功能 （默认关闭）
+                .showCamera()
+                        // 已选择的图片路径
+                .pathList(new ArrayList<String>())
+                        // 拍照后存放的图片路径（默认 /temp/picture） （会自动创建）
+                .filePath("/ImageSelector/Pictures")
+                .build();
+
+        ImageSelector.open(PublishPlanActivity.this, imageConfig);   // 开启图片选择器
+
+
     }
 
 

@@ -24,6 +24,7 @@ import com.hewuzhe.view.ProfileSettingsView;
 import butterknife.Bind;
 import de.greenrobot.event.EventBus;
 import io.rong.imkit.RongIM;
+import io.rong.imlib.RongIMClient;
 
 public class FriendProfileSettingsActivity extends ToolBarActivity<ProfileSettingsPresenter> implements ProfileSettingsView {
 
@@ -89,7 +90,6 @@ public class FriendProfileSettingsActivity extends ToolBarActivity<ProfileSettin
             }
         });
 
-
         _LayReport.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -134,8 +134,7 @@ public class FriendProfileSettingsActivity extends ToolBarActivity<ProfileSettin
                         String content = ysnowEditDialog.content.getText().toString();
                         presenter.ChangeFriendRName(content);
                         _TvRemark.setText(content);
-                        _TvUsername.setText(content);
-
+//                        _TvUsername.setText(content);
                     }
                 });
 
@@ -218,7 +217,7 @@ public class FriendProfileSettingsActivity extends ToolBarActivity<ProfileSettin
         });
 
         _SwitchCondition.setChecked(user.IsShield);
-        _SwitchMsg.setChecked(false);
+        _SwitchMsg.setChecked(user.IsShieldNews);
 
 
         _SwitchCondition.setOnCheckedChangeListener(new SwitchView.OnCheckedChangeListener() {
@@ -231,17 +230,39 @@ public class FriendProfileSettingsActivity extends ToolBarActivity<ProfileSettin
                 }
             }
         });
+
+
         _SwitchMsg.setOnCheckedChangeListener(new SwitchView.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(View view, boolean isChecked) {
                 if (isChecked) {
                     presenter.ShieldFriendNews();
+                    RongIMClient.getInstance().addToBlacklist(friend.Id + "", new RongIMClient.OperationCallback() {
+                        @Override
+                        public void onSuccess() {
+
+                        }
+
+                        @Override
+                        public void onError(RongIMClient.ErrorCode errorCode) {
+
+                        }
+                    });
                 } else {
                     presenter.UnShieldFriendNews();
+                    RongIMClient.getInstance().removeFromBlacklist(friend.Id + "", new RongIMClient.OperationCallback() {
+                        @Override
+                        public void onSuccess() {
+
+                        }
+
+                        @Override
+                        public void onError(RongIMClient.ErrorCode errorCode) {
+
+                        }
+                    });
                 }
             }
         });
-
-
     }
 }

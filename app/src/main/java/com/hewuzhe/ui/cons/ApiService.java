@@ -105,13 +105,12 @@ public interface ApiService {
 
     @FormUrlEncoded
     @POST("Hewuzhe.asmx/SaveOrEditVideoMessage")
-    Observable<Res> SaveOrEditVideoMessage(@Field("id") int id, @Field("Title") String Title, @Field("ImagePath") String ImagePath, @Field("Content") String Content, @Field("VideoPath") String VideoPath, @Field("IsOriginal") String IsOriginal, @Field("IsFree") String IsFree, @Field("CategoryId") int CategoryId, @Field("UserId") int UserId, @Field("VideoDuration") String VideoDuration);
+    Observable<Res> SaveOrEditVideoMessage(@Field("id") int id, @Field("Title") String Title, @Field("ImagePath") String ImagePath, @Field("Content") String Content, @Field("VideoPath") String VideoPath, @Field("IsOriginal") String IsOriginal, @Field("IsFree") String IsFree, @Field("CategoryId") int CategoryId, @Field("UserId") int UserId, @Field("VideoDuration") String VideoDuration, @Field("uploadType") int uploadType);
 
 
     @FormUrlEncoded
     @POST("Hewuzhe.asmx/UpLoadVideo")
     Observable<Res<Video>> UpLoadVideo(@Field("fileName") String fileName, @Field("filestream") String filestream);
-
 
     @GET("Hedongli.asmx/GetOtherVideo")
     Observable<Res<ArrayList<Video>>> GetOtherVideo(@Query("userid") int userid, @Query("num") int num, @Query("id") int id);
@@ -144,7 +143,7 @@ public interface ApiService {
 
 
     @GET("Helianmeng.asmx/SaveDongtai")
-    Call<Res> SaveDongtai(@Query("pathlist") String pathlist, @Query("userid") int userid, @Query("content") String content, @Query("videoImage") String videoImage, @Query("videopath") String videopath, @Query("videoDuration") int videoDuration);
+    Observable<Res> SaveDongtai(@Query("pathlist") String pathlist, @Query("userid") int userid, @Query("content") String content, @Query("videoImage") String videoImage, @Query("videopath") String videopath, @Query("videoDuration") int videoDuration);
 
     @GET("Hewuzhe.asmx/SavePlan")
     Observable<Res> SavePlan(@Query("piclist") String piclist, @Query("userid") int userid, @Query("content") String content, @Query("title") String title, @Query("cateid") int cateid, @Query("starttime") String starttime, @Query("endtime") String endtime);
@@ -279,7 +278,7 @@ public interface ApiService {
     Call<Res<ArrayList<FriendCondition>>> SelectDongtaiByFriendId(@Query("startRowIndex") int startRowIndex, @Query("maximumRows") int maximumRows, @Query("friendid") int friendid);
 
     @GET("Hewuzhe.asmx/GetUpRecord")
-    Call<Res<ArrayList<Record>>> GetUpRecord(@Query("startRowIndex") int startRowIndex, @Query("maximumRows") int maximumRows, @Query("userid") int userid);
+    Observable<Res<ArrayList<Record>>> GetUpRecord(@Query("startRowIndex") int startRowIndex, @Query("maximumRows") int maximumRows, @Query("userid") int userid);
 
     @GET("Helianmeng.asmx/SelectTeamAnnouncement")
     Call<Res<ArrayList<TeamAnnounce>>> SelectTeamAnnouncement(@Query("startRowIndex") int startRowIndex, @Query("maximumRows") int maximumRows, @Query("teamid") int teamid);
@@ -297,7 +296,7 @@ public interface ApiService {
     Call<Res<Dojo>> SelectWuGuan(@Query("id") int id);
 
     @GET("Hewuzhe.asmx/DeleteVideo")
-    Call<Res> DeleteVideo(@Query("id") int id);
+    Observable<Res> DeleteVideo(@Query("id") int id);
 
     @GET("Helianmeng.asmx/SelectTeamIntroduce")
     Call<Res<TeamIntroduce>> SelectTeamIntroduce(@Query("teamid") int teamid);
@@ -338,5 +337,8 @@ public interface ApiService {
 
     @GET("Helianmeng.asmx/CancleJoinMatch")
     Observable<Res> CancleJoinMatch(@Query("userid") int userid, @Query("matchId") int matchId);
+
+    @GET("LoginAndRegister.asmx/OpenHuiyuan\n")
+    Observable<Res> OpenHuiyuan(@Query("userid") int userid, @Query("month") int month);
 
 }

@@ -24,7 +24,7 @@ public class FriendProfilePresenter extends BasePresenterImp<FriendProfileView> 
 
     public void getUserData() {
         Subscription subscription = NetEngine.getService()
-                .UpdateUser(view.getData())
+                .SelectMyFriend(view.getData(), new SessionUtil(view.getContext()).getUserId())
                 .subscribeOn(Schedulers.io())
                 .doOnSubscribe(new Action0() {
                     @Override

@@ -102,7 +102,7 @@ public class PublishVideoActivity extends ToolBarActivity<PublisVideoPresenter> 
     @Override
     protected void action() {
         super.action();
-        presenter.UpLoadVideo(tvAction, fileName, catId);
+        presenter.UpLoadVideo(tvAction, fileName, catId, getIntentData().getInt("uploadType"));
     }
 
     @Override

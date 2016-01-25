@@ -46,6 +46,7 @@ public class MemberBuyActivity extends ToolBarActivity<BuyPresenter> implements 
     private String _payWay = C.CHANNEL_ALIPAY;
     private int _anount = 1200 * 10 * 10;
     private String _desc = "1";
+    private int month = 12;
 
     /**
      * @return 提供标题
@@ -110,7 +111,7 @@ public class MemberBuyActivity extends ToolBarActivity<BuyPresenter> implements 
         _BtnEnsure.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                presenter.getCharge();
+                presenter.getCharges();
             }
         });
     }
@@ -143,6 +144,7 @@ public class MemberBuyActivity extends ToolBarActivity<BuyPresenter> implements 
             case 1:
                 _anount = 300 * 10 * 10;
                 _desc = "开通会员1个月";
+                month = 1;
 
                 _ImgOne.setImageResource(R.mipmap.bg_buy_focus);
                 _ImgTwo.setImageResource(R.mipmap.bg_buy);
@@ -153,6 +155,7 @@ public class MemberBuyActivity extends ToolBarActivity<BuyPresenter> implements 
             case 2:
                 _anount = 600 * 10 * 10;
                 _desc = "开通会员3个月";
+                month = 3;
 
                 _ImgOne.setImageResource(R.mipmap.bg_buy);
                 _ImgTwo.setImageResource(R.mipmap.bg_buy_focus);
@@ -164,6 +167,7 @@ public class MemberBuyActivity extends ToolBarActivity<BuyPresenter> implements 
             case 3:
                 _anount = 900 * 10 * 10;
                 _desc = "开通会员半年";
+                month = 6;
 
                 _ImgOne.setImageResource(R.mipmap.bg_buy);
                 _ImgTwo.setImageResource(R.mipmap.bg_buy);
@@ -175,6 +179,8 @@ public class MemberBuyActivity extends ToolBarActivity<BuyPresenter> implements 
             case 4:
                 _desc = "开通会员一年";
                 _anount = 1200 * 10 * 10;
+                month = 12;
+
                 _ImgOne.setImageResource(R.mipmap.bg_buy);
                 _ImgTwo.setImageResource(R.mipmap.bg_buy);
                 _ImgThree.setImageResource(R.mipmap.bg_buy);
@@ -200,15 +206,19 @@ public class MemberBuyActivity extends ToolBarActivity<BuyPresenter> implements 
 //                snb(result, _BtnEnsure);
                 String errorMsg = data.getExtras().getString("error_msg"); // 错误信息
                 String extraMsg = data.getExtras().getString("extra_msg"); // 错误信息
-                toast(errorMsg + "---" + extraMsg);
 
                 KLog.d(errorMsg + "---" + extraMsg);
+
+                if (result.equals("success")) {
+                    presenter.OpenHuiyuan(month);
+                }
             }
         }
     }
 
     @Override
     public void toPay(String charge) {
+        KLog.json(charge);
 
         Intent intent = new Intent();
         String packageName = getPackageName();

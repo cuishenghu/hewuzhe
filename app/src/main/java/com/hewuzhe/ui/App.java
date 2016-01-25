@@ -12,6 +12,7 @@ import com.hewuzhe.utils.GlideLoader;
 import com.socks.library.KLog;
 import com.yancy.imageselector.ImageConfig;
 
+import java.util.ArrayList;
 import java.util.LinkedList;
 
 import cn.jpush.android.api.JPushInterface;
@@ -98,7 +99,7 @@ public class App extends Application {
                         // 开启拍照功能 （默认关闭）
                 .showCamera()
                         // 已选择的图片路径
-//                .pathList(path)
+                .pathList(new ArrayList<String>())
                         // 拍照后存放的图片路径（默认 /temp/picture） （会自动创建）
                 .filePath("/ImageSelector/Pictures")
                 .build();

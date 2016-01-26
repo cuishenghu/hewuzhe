@@ -488,6 +488,8 @@
         <meta-data
             android:name="JPUSH_APPKEY"
             android:value="49d7a0a24aae94c23009fc21"/>
+        <!--49d7a0a24aae94c23009fc21-->
+        <!--ed22cf3dd4e950e773deba55-->
         <!-- </>值来自开发者平台取得的AppKey -->
 
         <activity android:name=".ui.activity.TestActivity"/>
@@ -574,6 +576,22 @@
         <activity android:name=".ui.activity.PhotoActivity"
                   android:theme="@style/Theme.AppCompat.Light.DarkActionBar">
         </activity>
+
+
+        <activity
+            android:name="com.qd.recorder.FFmpegRecorderActivity"
+            android:label="@string/app_name"
+            android:screenOrientation="portrait"
+            >
+        </activity>
+        <activity
+            android:name="com.qd.recorder.FFmpegPreviewActivity"
+            android:label="title_activity_ffmpeg_preview"
+            android:screenOrientation="portrait">
+        </activity>
+
+        <activity android:name=".ui.activity.BasicWebActivity"
+                  android:configChanges="screenSize|keyboardHidden|orientation"/>
     </application>
 
 </manifest>

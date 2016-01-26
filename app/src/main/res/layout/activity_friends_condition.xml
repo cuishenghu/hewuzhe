@@ -87,6 +87,42 @@
                     />
 
 
+                <LinearLayout android:id="@+id/lay_msg"
+                              android:layout_width="wrap_content"
+                              android:layout_height="120px"
+                              android:layout_gravity="center"
+                              android:layout_marginTop="8px"
+                              android:gravity="center"
+                              android:orientation="horizontal"
+                              android:visibility="gone"
+                              tools:visibility="visible">
+
+                    <ImageView
+                        android:id="@+id/img_msg_avatar"
+                        android:layout_width="132px"
+                        android:layout_height="132px"
+                        android:layout_gravity="center"
+                        android:layout_marginLeft="20px"
+                        android:layout_marginRight="20px"
+                        android:src="@mipmap/img_avatar"
+                        android:textSize="22px"
+                        />
+
+                    <TextView
+                        android:id="@+id/tv_msg_count"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:gravity="center_vertical|right"
+                        android:padding="5px"
+                        android:text="3条新消息"
+                        android:textColor="@color/white"
+                        android:textSize="28px"/>
+
+
+                </LinearLayout>
+
+
                 <LinearLayout android:layout_width="match_parent"
                               android:layout_height="150px"
                               android:layout_gravity="bottom"

@@ -24,38 +24,13 @@
                 android:layout_height="85px"
                 android:src="@mipmap/img_avatar"/>
 
-            <TextView android:id="@+id/tv_username"
-                      android:layout_width="wrap_content"
-                      android:layout_height="wrap_content"
-                      android:layout_marginLeft="18px"
-                      android:layout_toRightOf="@id/img_avatar"
-                      android:text="成龙"
-                      android:textColor="@color/white"
-                      android:textSize="30px"/>
-
-
-            <TextView android:id="@+id/tv_add_time"
-                      android:layout_width="wrap_content"
-                      android:layout_height="wrap_content"
-                      android:layout_below="@id/tv_username"
-                      android:layout_marginBottom="15px"
-                      android:layout_marginLeft="28px"
-                      android:layout_marginTop="10px"
-                      android:layout_toRightOf="@id/img_avatar"
-                      android:text="dfs"
-                      android:textColor="@color/white"
-                      android:textSize="22px"/>
 
 
             <LinearLayout android:layout_width="wrap_content"
                           android:layout_height="wrap_content"
                           android:layout_alignParentRight="true"
+                          android:id="@+id/lay_menu"
                           android:orientation="horizontal">
-
-
-
-
-
 
                 <LinearLayout android:id="@+id/lay_praise"
                               android:layout_width="wrap_content"
@@ -168,6 +143,29 @@
 
             </LinearLayout>
 
+            <TextView android:id="@+id/tv_username"
+                      android:layout_width="wrap_content"
+                      android:layout_height="wrap_content"
+                      android:layout_marginLeft="18px"
+                      android:layout_toRightOf="@id/img_avatar"
+                      android:singleLine="true"
+                      android:layout_toLeftOf="@id/lay_menu"
+                      android:text="成龙"
+                      android:textColor="@color/white"
+                      android:textSize="30px"/>
+
+
+            <TextView android:id="@+id/tv_add_time"
+                      android:layout_width="wrap_content"
+                      android:layout_height="wrap_content"
+                      android:layout_below="@id/tv_username"
+                      android:layout_marginBottom="15px"
+                      android:layout_marginLeft="28px"
+                      android:layout_marginTop="10px"
+                      android:layout_toRightOf="@id/img_avatar"
+                      android:text="dfs"
+                      android:textColor="@color/white"
+                      android:textSize="22px"/>
 
         </RelativeLayout>
 

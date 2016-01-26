@@ -15,12 +15,12 @@ import com.hewuzhe.R;
 import com.hewuzhe.presenter.base.BasePresenterImp;
 import com.hewuzhe.ui.activity.MainActivity;
 import com.hewuzhe.ui.activity.PublishVideoActivity;
-import com.hewuzhe.ui.activity.TakeVideoActivity;
 import com.hewuzhe.ui.adapter.MyViewPagerAdapter;
 import com.hewuzhe.ui.base.BaseFragment;
 import com.hewuzhe.ui.cons.C;
 import com.hewuzhe.utils.Bun;
 import com.hewuzhe.view.PowerView;
+import com.qd.recorder.FFmpegRecorderActivity;
 
 import butterknife.Bind;
 import cn.xm.weidongjian.popuphelper.PopupWindowHelper;
@@ -136,7 +136,8 @@ public class PowerFragment extends BaseFragment implements PowerView, VideoChoos
             tvTakeVideo.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    startActivity(TakeVideoActivity.class, new Bun().putInt(C.WHITCH, C.WHITCH_DEFAUT).ok());
+//                    startActivity(TakeVideoActivity.class, new Bun().putInt(C.WHITCH, C.WHITCH_DEFAUT).ok());
+                    startActivity(FFmpegRecorderActivity.class);
                 }
             });
             popupWindowHelper = new PopupWindowHelper(popView);

@@ -47,4 +47,5 @@ public class ArticleCollection {
     public boolean IsFavorite;
     public boolean IsRepeat;
     public String VisitNum;
+    public boolean isChecked=false;
 }

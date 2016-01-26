@@ -14,6 +14,7 @@ import com.hewuzhe.model.Friend;
 import com.hewuzhe.model.FriendCondition;
 import com.hewuzhe.model.Group;
 import com.hewuzhe.model.IntegralRecord;
+import com.hewuzhe.model.LiveVideo;
 import com.hewuzhe.model.MegaComment;
 import com.hewuzhe.model.MegaGame;
 import com.hewuzhe.model.MegaGameVideo;
@@ -268,6 +269,7 @@ public interface ApiService {
     @GET("Helianmeng.asmx/GetDongtaiPageByFriends")
     Observable<Res<ArrayList<FriendCondition>>> GetDongtaiPageByFriends(@Query("startRowIndex") int startRowIndex, @Query("maximumRows") int maximumRows, @Query("userid") int userid);
 
+
     @GET("Helianmeng.asmx/GetTeamDongtaiPageByTeamId")
     Observable<Res<ArrayList<FriendCondition>>> GetTeamDongtaiPageByTeamId(@Query("startRowIndex") int startRowIndex, @Query("maximumRows") int maximumRows, @Query("teamid") int teamid);
 
@@ -275,7 +277,7 @@ public interface ApiService {
     Observable<Res<ArrayList<FriendCondition>>> GetTeamDongtaiPageByUserId(@Query("startRowIndex") int startRowIndex, @Query("maximumRows") int maximumRows, @Query("userid") int userid);
 
     @GET("Helianmeng.asmx/SelectDongtaiByFriendId")
-    Call<Res<ArrayList<FriendCondition>>> SelectDongtaiByFriendId(@Query("startRowIndex") int startRowIndex, @Query("maximumRows") int maximumRows, @Query("friendid") int friendid);
+    Observable<Res<ArrayList<FriendCondition>>> SelectDongtaiByFriendId(@Query("startRowIndex") int startRowIndex, @Query("maximumRows") int maximumRows, @Query("friendid") int friendid);
 
     @GET("Hewuzhe.asmx/GetUpRecord")
     Observable<Res<ArrayList<Record>>> GetUpRecord(@Query("startRowIndex") int startRowIndex, @Query("maximumRows") int maximumRows, @Query("userid") int userid);
@@ -338,7 +340,16 @@ public interface ApiService {
     @GET("Helianmeng.asmx/CancleJoinMatch")
     Observable<Res> CancleJoinMatch(@Query("userid") int userid, @Query("matchId") int matchId);
 
-    @GET("LoginAndRegister.asmx/OpenHuiyuan\n")
+    @GET("LoginAndRegister.asmx/OpenHuiyuan")
     Observable<Res> OpenHuiyuan(@Query("userid") int userid, @Query("month") int month);
+
+    @GET("Hewuzhe.asmx/SelectVideoLive")
+    Observable<Res<LiveVideo>> SelectVideoLive(@Query("userid") int userid, @Query("videoLiveId") int videoLiveId);
+
+    @GET("Helianmeng.asmx/GetNoReadCommentNumByUserId")
+    Observable<Res> GetNoReadCommentNumByUserId(@Query("userid") int userid);
+
+    @GET("Helianmeng.asmx/SelectNoReadMatch")
+    Observable<Res> SelectNoReadMatch(@Query("userid") int userid, @Query("flg") int flg);
 
 }

@@ -19,4 +19,6 @@ public interface FriendsConditionView extends ConditionView, SwipeRefreshView,Li
     void setUserData(User data);
 
     void setDataStatus(int page, int count, Res<ArrayList<FriendCondition>> res);
+
+    void updateFriendNoReadNum(int count);
 }

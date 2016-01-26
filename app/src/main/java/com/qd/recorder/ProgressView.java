@@ -1,8 +1,5 @@
 package com.qd.recorder;
 
-import java.util.Iterator;
-import java.util.LinkedList;
-
 import android.app.Activity;
 import android.content.Context;
 import android.graphics.Canvas;
@@ -11,6 +8,9 @@ import android.graphics.Paint;
 import android.util.AttributeSet;
 import android.util.DisplayMetrics;
 import android.view.View;
+
+import java.util.Iterator;
+import java.util.LinkedList;
 
 public class ProgressView extends View
 {
@@ -50,11 +50,11 @@ public class ProgressView extends View
 		breakPaint = new Paint();
 
 		// 背景
-		setBackgroundColor(Color.parseColor("#19000000"));
+		setBackgroundColor(Color.parseColor("#3e3e40"));
 
 		// 主要进度的颜色
 		progressPaint.setStyle(Paint.Style.FILL);
-		progressPaint.setColor(Color.parseColor("#19e3cf"));
+		progressPaint.setColor(Color.parseColor("#ef9c00"));
 
 		// 一闪一闪的黄色进度
 		firstPaint.setStyle(Paint.Style.FILL);

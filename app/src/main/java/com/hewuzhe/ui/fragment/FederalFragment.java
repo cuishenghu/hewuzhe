@@ -13,7 +13,7 @@ import android.widget.TextView;
 
 import com.Zxing.CaptureActivity;
 import com.hewuzhe.R;
-import com.hewuzhe.presenter.base.BasePresenterImp;
+import com.hewuzhe.presenter.FederalPresenter;
 import com.hewuzhe.ui.activity.ContactsActivity;
 import com.hewuzhe.ui.activity.ConversationListActivity;
 import com.hewuzhe.ui.activity.CoorperationActivity;
@@ -30,6 +30,9 @@ import com.hewuzhe.ui.cons.C;
 import com.hewuzhe.utils.Bun;
 import com.hewuzhe.utils.NotiMsg;
 import com.hewuzhe.utils.SessionUtil;
+import com.hewuzhe.view.FederalView;
+
+import java.util.Timer;
 
 import butterknife.Bind;
 import de.greenrobot.event.EventBus;
@@ -44,7 +47,7 @@ import io.rong.imlib.model.Conversation;
 /**
  * Created by xianguangjin on 15/12/8.
  */
-public class FederalFragment extends BaseFragment {
+public class FederalFragment extends BaseFragment<FederalPresenter> implements FederalView {
 
     protected Toolbar toolBar;
     protected ActionBar actionBar;
@@ -80,7 +83,8 @@ public class FederalFragment extends BaseFragment {
     private TextView tvTitle;
     private AppBarLayout appBar;
     private boolean mIsHidden = false;
-
+    private Handler handler = new Handler();
+    private Timer timer;
 
     protected void initToolBar(View rootView) {
         toolBar = (Toolbar) rootView.findViewById(R.id.toolbar);
@@ -187,37 +191,45 @@ public class FederalFragment extends BaseFragment {
         initToolBar(v);
 
 
-        new Handler()
-                .postDelayed(new Runnable() {
+        handler.postDelayed(new Runnable() {
+            @Override
+            public void run() {
+
+                RongIM.getInstance().setOnReceiveUnreadCountChangedListener(new RongIM.OnReceiveUnreadCountChangedListener() {
                     @Override
-                    public void run() {
-
-                        RongIM.getInstance().setOnReceiveUnreadCountChangedListener(new RongIM.OnReceiveUnreadCountChangedListener() {
-                            @Override
-                            public void onMessageIncreased(int i) {
-                                NotiMsg msg = new NotiMsg();
-                                msg.what = C.MSG_UNREAD_COUNT;
-                                msg.msg1 = i;
-                                EventBus.getDefault().post(msg);
-                            }
-                        }, Conversation.ConversationType.PRIVATE, Conversation.ConversationType.GROUP);
-
-
-                        //扩展功能自定义
-                        InputProvider.ExtendProvider[] provider = {
-                                new ImageInputProvider(RongContext.getInstance()),//图片
-                                new CameraInputProvider(RongContext.getInstance()),//相机
-                                new LocationInputProvider(RongContext.getInstance()),//地理位置
-                        };
-
-                        RongIM.getInstance().resetInputExtensionProvider(Conversation.ConversationType.PRIVATE, provider);
-                        RongIM.getInstance().resetInputExtensionProvider(Conversation.ConversationType.GROUP, provider);
-
-
+                    public void onMessageIncreased(int i) {
+                        NotiMsg msg = new NotiMsg();
+                        msg.what = C.MSG_UNREAD_COUNT;
+                        msg.msg1 = i;
+                        EventBus.getDefault().post(msg);
                     }
-                }, 1000);
+                }, Conversation.ConversationType.PRIVATE, Conversation.ConversationType.GROUP);
 
 
+                //扩展功能自定义
+                InputProvider.ExtendProvider[] provider = {
+                        new ImageInputProvider(RongContext.getInstance()),//图片
+                        new CameraInputProvider(RongContext.getInstance()),//相机
+                        new LocationInputProvider(RongContext.getInstance()),//地理位置
+                };
+
+                RongIM.getInstance().resetInputExtensionProvider(Conversation.ConversationType.PRIVATE, provider);
+                RongIM.getInstance().resetInputExtensionProvider(Conversation.ConversationType.GROUP, provider);
+
+
+            }
+        }, 1000);
+
+
+//        timer = new Timer();
+
+//        timer.schedule(new TimerTask() {
+//            @Override
+//            public void run() {
+//                presenter.getNoReads();
+//
+//            }
+//        }, 1000, 2000);
     }
 
     /**
@@ -232,8 +244,8 @@ public class FederalFragment extends BaseFragment {
      * 绑定Presenter
      */
     @Override
-    public BasePresenterImp createPresenter() {
-        return null;
+    public FederalPresenter createPresenter() {
+        return new FederalPresenter();
     }
 
 
@@ -251,4 +263,8 @@ public class FederalFragment extends BaseFragment {
     }
 
 
+    @Override
+    public void updateFriendNoReadNum(int count) {
+
+    }
 }

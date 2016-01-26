@@ -5,6 +5,8 @@ import android.support.annotation.Nullable;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.CheckBox;
+import android.widget.CompoundButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -17,6 +19,8 @@ import com.hewuzhe.ui.cons.C;
 import com.hewuzhe.utils.StringUtil;
 import com.hewuzhe.utils.TimeUtil;
 
+import java.util.LinkedList;
+
 import butterknife.Bind;
 import butterknife.ButterKnife;
 
@@ -26,6 +30,15 @@ import butterknife.ButterKnife;
 public class ArticleAdapter extends BaseAdapter<ArticleAdapter.VHolder, ArticleCollection, ArticlesPresenter> {
 
 
+    /**
+     * 是否显示checkBox
+     */
+    private boolean isNeedShow = false;
+    private LinkedList<ArticleCollection> checkedList = new LinkedList<>();
+
+    /**
+     * @param context
+     */
     public ArticleAdapter(Context context) {
         super(context);
     }
@@ -56,7 +69,7 @@ public class ArticleAdapter extends BaseAdapter<ArticleAdapter.VHolder, ArticleC
     @Override
     public void bindData(VHolder holder, int position) {
 
-        ArticleCollection articleCollection = data.get(position);
+        final ArticleCollection articleCollection = data.get(position);
 
         if (!StringUtil.isEmpty(articleCollection.OperateTime)) {
             holder._TvAddTime.setText(TimeUtil.timeAgo(articleCollection.OperateTime));
@@ -84,6 +97,31 @@ public class ArticleAdapter extends BaseAdapter<ArticleAdapter.VHolder, ArticleC
         } else {
             holder._ImgCollect.setImageResource(R.mipmap.icon_collect_gray);
         }
+
+
+        holder._CbPlan.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
+                if (b) {
+                    if (!ArticleAdapter.this.checkedList.contains(articleCollection)) {
+                        articleCollection.isChecked = true;
+                        ArticleAdapter.this.checkedList.add(articleCollection);
+                    }
+                } else {
+                    if (ArticleAdapter.this.checkedList.contains(articleCollection)) {
+                        articleCollection.isChecked = false;
+                        ArticleAdapter.this.checkedList.remove(articleCollection);
+                    }
+                }
+            }
+        });
+
+        if (this.isNeedShow) {
+            holder._CbPlan.setVisibility(View.VISIBLE);
+        } else {
+            holder._CbPlan.setVisibility(View.GONE);
+        }
+
     }
 
 
@@ -118,10 +156,44 @@ public class ArticleAdapter extends BaseAdapter<ArticleAdapter.VHolder, ArticleC
         @Nullable
         @Bind(R.id.tv_praise)
         TextView _TvPraise;
+        @Nullable
+        @Bind(R.id.cb_plan)
+        CheckBox _CbPlan;
 
         VHolder(View view) {
             super(view);
             ButterKnife.bind(this, view);
         }
     }
+
+
+    /**
+     * 设置是否显示checkBox
+     *
+     * @param isNeedShow
+     */
+    public void showCheck(boolean isNeedShow) {
+        this.isNeedShow = isNeedShow;
+        this.notifyDataSetChanged();
+    }
+
+    /**
+     * 获取当前编辑状态
+     *
+     * @return
+     */
+    public boolean getCheckShowStatus() {
+        return this.isNeedShow;
+    }
+
+    /**
+     * 获取选中的Item
+     *
+     * @return
+     */
+    public LinkedList<ArticleCollection> getCheckedList() {
+        return this.checkedList;
+    }
+
+
 }

@@ -23,7 +23,7 @@ public class MyConditionPresenter extends ConditionPresenter<FriendsConditionVie
     public void getData(final int page, final int count) {
 
         Subscription subscription = NetEngine.getService()
-                .GetDongtaiPageByFriends((page - 1) * count, count, view.getData())
+                .SelectDongtaiByFriendId((page - 1) * count, count, view.getData())
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new SB<Res<ArrayList<FriendCondition>>>() {

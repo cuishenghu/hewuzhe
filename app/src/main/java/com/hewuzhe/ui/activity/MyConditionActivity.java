@@ -261,4 +261,9 @@ public class MyConditionActivity extends SwipeRecycleViewActivity<MyConditionPre
             adapter.hasMore();
         }
     }
+
+    @Override
+    public void updateFriendNoReadNum(int count) {
+
+    }
 }

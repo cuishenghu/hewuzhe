@@ -12,11 +12,14 @@ import com.hewuzhe.presenter.ArticleCollectionPresenter;
 import com.hewuzhe.ui.activity.FederalConditionDetailActivity;
 import com.hewuzhe.ui.adapter.ArticleAdapter;
 import com.hewuzhe.ui.base.SwipeRecycleViewFragment;
+import com.hewuzhe.ui.cons.C;
 import com.hewuzhe.utils.Bun;
+import com.hewuzhe.utils.NU;
 import com.hewuzhe.utils.SessionUtil;
 import com.hewuzhe.view.ArticleCollectionsView;
 
 import java.util.ArrayList;
+import java.util.LinkedList;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -98,11 +101,61 @@ public class ArticleCollectionsFragment extends SwipeRecycleViewFragment<Article
     @Override
     public void onItemClick(View view, int pos, ArticleCollection item) {
 
-        startActivity(FederalConditionDetailActivity.class, new Bun().putInt("id", item.MessageId).ok());
+        if (adapter.getCheckShowStatus()) {
+            /**
+             * 选择状态
+             * */
+
+            ((android.widget.CheckBox) view.findViewById(R.id.cb_plan)).setChecked(item.isChecked ? false : true);
+
+        } else {
+            /**
+             * 进入详情页
+             * */
+            startActivity(FederalConditionDetailActivity.class, new Bun().putInt("id", item.MessageId).ok());
+        }
+
+
     }
 
     @Override
     public Integer getData() {
         return new SessionUtil(getContext()).getUserId();
+    }
+
+    @Override
+    public void onReceive(Integer msg) {
+        if (msg == C.MSG_DEFAUT) {
+            //编辑
+            adapter.showCheck(true);
+        } else if (msg == C.MSG_ONE) {
+            //删除
+            LinkedList<ArticleCollection> checkedList = adapter.getCheckedList();
+            if (checkedList.size() > 0) {
+                for (ArticleCollection articleCollection : checkedList) {
+                    presenter.deletePlan(articleCollection, checkedList.size(), recyclerView);
+                    adapter.removeItem(articleCollection);
+                }
+            } else {
+                adapter.showCheck(false);
+            }
+        } else if (msg == C.MSG_TWO) {
+            adapter.showCheck(false);
+        }
+    }
+
+    /**
+     * 获取当前编辑状态
+     *
+     * @return
+     */
+    @Override
+    public Boolean getMsg() {
+        return NU.isNull(adapter) ? false : adapter.getCheckShowStatus();
+    }
+
+    @Override
+    public void collectAndOther() {
+        adapter.showCheck(false);
     }
 }

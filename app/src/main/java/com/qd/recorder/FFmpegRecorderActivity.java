@@ -7,7 +7,6 @@ import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
-import android.graphics.Color;
 import android.graphics.Matrix;
 import android.graphics.Rect;
 import android.graphics.YuvImage;
@@ -37,7 +36,6 @@ import android.view.SurfaceView;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.View.OnTouchListener;
-import android.view.ViewGroup.LayoutParams;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.Button;
@@ -48,8 +46,13 @@ import android.widget.TextView;
 
 import com.googlecode.javacv.FrameRecorder;
 import com.googlecode.javacv.cpp.opencv_core.IplImage;
+import com.hewuzhe.R;
+import com.hewuzhe.ui.activity.PublishConditionVideoActivity;
+import com.hewuzhe.ui.activity.PublishVideoActivity;
+import com.hewuzhe.ui.cons.C;
+import com.hewuzhe.utils.Bun;
 import com.qd.recorder.ProgressView.State;
-import com.qd.videorecorder.R;
+import com.socks.library.KLog;
 
 import java.io.ByteArrayOutputStream;
 import java.io.File;
@@ -102,8 +105,8 @@ public class FFmpegRecorderActivity extends Activity implements OnClickListener,
     private Camera mCamera;
 
     //预览的宽高和屏幕宽高
-    private int previewWidth = 480, screenWidth = 480;
-    private int previewHeight = 480, screenHeight = 800;
+    private int previewWidth = 180, screenWidth = 480;
+    private int previewHeight = 180, screenHeight = 800;
 
     //音频的采样率，recorderParameters中会有默认值
     private int sampleRate = 44100;
@@ -178,6 +181,8 @@ public class FFmpegRecorderActivity extends Activity implements OnClickListener,
     private RecorderThread recorderThread;
 
     private Handler mHandler;
+    private ImageView _ImgBack;
+    private Bundle data;
 
     private void initHandler() {
         mHandler = new Handler() {
@@ -339,6 +344,14 @@ public class FFmpegRecorderActivity extends Activity implements OnClickListener,
         flashIcon = (Button) findViewById(R.id.recorder_flashlight);
         switchCameraIcon = (Button) findViewById(R.id.recorder_frontcamera);
         flashIcon.setOnClickListener(this);
+//        _ImgBack = (ImageView) findViewById(R.id.img_back);
+//        _ImgBack.setOnClickListener(new OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                onBackPressed();
+//            }
+//        });
+
 
         if (getPackageManager().hasSystemFeature(PackageManager.FEATURE_CAMERA_FRONT)) {
             switchCameraIcon.setVisibility(View.VISIBLE);
@@ -384,21 +397,27 @@ public class FFmpegRecorderActivity extends Activity implements OnClickListener,
                     recorderThread.start();
                 }
                 //设置surface的宽高
+                KLog.d("screenWidth=" + screenWidth);
+                KLog.d("previewWidth=" + previewWidth);
+                KLog.d("previewHeight=" + previewHeight);
+                KLog.d("height=" + (int) (screenWidth * (previewWidth / (previewHeight * 1f))));
+
                 RelativeLayout.LayoutParams layoutParam1 = new RelativeLayout.LayoutParams(screenWidth, (int) (screenWidth * (previewWidth / (previewHeight * 1f))));
-                layoutParam1.addRule(RelativeLayout.ALIGN_PARENT_TOP, RelativeLayout.TRUE);
+//                RelativeLayout.LayoutParams layoutParam1 = new RelativeLayout.LayoutParams(screenWidth, (int) (screenWidth*0.7));
+//                layoutParam1.addRule(RelativeLayout.ALIGN_PARENT_TOP, RelativeLayout.TRUE);
                 //int margin = Util.calculateMargin(previewWidth, screenWidth);
                 //layoutParam1.setMargins(0,margin,0,margin);
 
-                RelativeLayout.LayoutParams layoutParam2 = new RelativeLayout.LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.MATCH_PARENT);
-                layoutParam2.topMargin = screenWidth;
+//                RelativeLayout.LayoutParams layoutParam2 = new RelativeLayout.LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.MATCH_PARENT);
+//                layoutParam2.topMargin = screenWidth;
 
-                View view = new View(FFmpegRecorderActivity.this);
-                view.setFocusable(false);
-                view.setBackgroundColor(Color.BLACK);
-                view.setFocusableInTouchMode(false);
-
+//                View view = new View(FFmpegRecorderActivity.this);
+//                view.setFocusable(false);
+//                view.setBackgroundColor(Color.BLACK);
+//                view.setFocusableInTouchMode(false);
+//
                 topLayout.addView(cameraView, layoutParam1);
-                topLayout.addView(view, layoutParam2);
+//                topLayout.addView(view, layoutParam2);
 
                 topLayout.setOnTouchListener(FFmpegRecorderActivity.this);
 
@@ -1014,6 +1033,8 @@ public class FFmpegRecorderActivity extends Activity implements OnClickListener,
                 //如果摄像头支持640*480，那么强制设为640*480
                 for (int i = 0; i < resolutionList.size(); i++) {
                     Size size = resolutionList.get(i);
+                    KLog.d("size.width="+size.width);
+                    KLog.d("size.height="+size.height);
                     if (size != null && size.width == 640 && size.height == 480) {
                         previewSize = size;
                         hasSize = true;
@@ -1147,10 +1168,24 @@ public class FFmpegRecorderActivity extends Activity implements OnClickListener,
         try {
             setActivityResult(valid);
             if (valid) {
-                Intent intent = new Intent(this, FFmpegPreviewActivity.class);
-                intent.putExtra("path", strVideoPath);
-                intent.putExtra("imagePath", imagePath);
-                startActivity(intent);
+
+                data = getIntent().getBundleExtra("data");
+                if (data == null) {
+                    data = new Bundle();
+                }
+
+                if (data.getInt(C.WHITCH, C.WHITCH_DEFAUT) == C.WHITCH_DEFAUT) {//发表视频
+                    Intent intent = new Intent(this, PublishVideoActivity.class);
+                    intent.putExtra("data", new Bun().putString("file_name", strVideoPath).putInt("uploadType", C.UPLOAD_TYPE_RECORD).ok());
+                    startActivity(intent);
+                } else if (data.getInt(C.WHITCH, C.WHITCH_DEFAUT) == C.WHITCH_ONE) {//发表动态
+                    Intent intent = new Intent(this, PublishConditionVideoActivity.class);
+                    intent.putExtra("data", new Bun().putString("file_name", strVideoPath).putInt("uploadType", C.UPLOAD_TYPE_RECORD).ok());
+                    startActivity(intent);
+                    finish();
+                }
+
+
             }
         } catch (Throwable e) {
             e.printStackTrace();

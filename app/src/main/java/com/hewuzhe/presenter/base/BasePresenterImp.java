@@ -48,5 +48,4 @@ public abstract class BasePresenterImp<V> implements BasePresenter<V> {
 
 
 
-
 }

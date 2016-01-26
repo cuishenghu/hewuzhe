@@ -4,8 +4,10 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.view.KeyEvent;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.inputmethod.EditorInfo;
 import android.widget.EditText;
 import android.widget.TextView;
 
@@ -42,6 +44,8 @@ public class CitySelectActivity extends ToolBarActivity<CitySelectPresenter> imp
     private RecyclerIndexAdapter mAdapter;
     private LinearLayoutManager mLayoutManager;
     private String _CityName = "";
+    private ArrayList<Address> _Address = new ArrayList<>();
+    private ArrayList<Address> _NewAddress = new ArrayList<>();
 
     /**
      * @return 提供标题
@@ -113,7 +117,37 @@ public class CitySelectActivity extends ToolBarActivity<CitySelectPresenter> imp
                 finishActivity();
             }
         });
+
+        _EdtSearchContent.setOnEditorActionListener(new TextView.OnEditorActionListener() {
+            @Override
+            public boolean onEditorAction(TextView textView, int i, KeyEvent keyEvent) {
+                if (i == EditorInfo.IME_ACTION_SEARCH) {
+                    String keyWord = _EdtSearchContent.getText().toString().trim();
+                    search(keyWord);
+                }
+                return false;
+            }
+        });
+
     }
+
+
+    private void search(String keyWord) {
+
+        hideSoftMethod(_EdtSearchContent);
+
+        for (Address address : _Address) {
+
+            if (address.Name.contains(keyWord)) {
+                _NewAddress.add(address);
+            }
+        }
+
+        _RecyclerView.setAdapter(mAdapter);
+        mAdapter.setDatas(_NewAddress);
+
+    }
+
 
     /**
      * 绑定Presenter
@@ -133,6 +167,7 @@ public class CitySelectActivity extends ToolBarActivity<CitySelectPresenter> imp
 
     @Override
     public void bindData(ArrayList<Address> addresses) {
+        _Address = addresses;
         mAdapter.setDatas(addresses);
         _RecyclerView.setAdapter(mAdapter);
         _TvRecyclerindexviewTopc.setText(mAdapter.getItem(0).topc);

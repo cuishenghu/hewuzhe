@@ -39,6 +39,7 @@ public class PublishConditionPresenter extends ListPresenter<PublishConditionVie
     private String pathList = "";
     private String videopath = "";
     private int _UploadType = C.UPLOAD_TYPE_LOCAL;
+    private String videoImg = "";
 
     /**
      * 显示选择dialog
@@ -133,7 +134,6 @@ public class PublishConditionPresenter extends ListPresenter<PublishConditionVie
             return;
         }
 
-        String videoImg = "";
         int videoDuration = 0;
         if (!StringUtil.isEmpty(pathList)) {
             pathList = pathList.substring(0, pathList.length() - 1);
@@ -178,7 +178,7 @@ public class PublishConditionPresenter extends ListPresenter<PublishConditionVie
 
     }
 
-    public void UpLoadConditionVideo(View v, String path) {
+    public void UpLoadConditionVideo(View v, String path, final String thumnail) {
         this.v = v;
 
         String fileName = path.substring(path.lastIndexOf("/") + 1, path.length());
@@ -199,7 +199,8 @@ public class PublishConditionPresenter extends ListPresenter<PublishConditionVie
                         public void next(Res<Video> res) {
                             if (res.code == C.OK) {
                                 videopath = res.data.VideoName;
-                                publishTwo("");
+
+                                uploadVideoImg(thumnail);
                             } else {
                                 view.dismissDialog();
                             }
@@ -222,4 +223,43 @@ public class PublishConditionPresenter extends ListPresenter<PublishConditionVie
             e.printStackTrace();
         }
     }
+
+
+    private void uploadVideoImg(String path) {
+        Subscription subscription = NetEngine.getService()
+                .UpLoadImage(Encoder.getFileName(path), Encoder.encodeBase64File(path))
+                .subscribeOn(Schedulers.io())
+                .doOnSubscribe(new Action0() {
+                    @Override
+                    public void call() {
+                        if (!view.isShowingDialog()) {
+                            view.showDialog();
+                        }
+                    }
+                })
+                .subscribeOn(AndroidSchedulers.mainThread())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new SB<Res<UploadImage>>() {
+                    @Override
+                    public void next(Res<UploadImage> res) {
+                        if (res.code == C.OK) {
+                            publishTwo("");
+                        }
+
+                    }
+
+                    @Override
+                    public void onCompleted() {
+
+                    }
+
+                    @Override
+                    public void onError(Throwable e) {
+                    }
+                });
+        addSubscription(subscription);
+
+    }
+
+
 }

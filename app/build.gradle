@@ -18,7 +18,8 @@ android {
         multiDexEnabled true
 
         ndk {
-            abiFilters "armeabi", "armeabi-v7a", "x86", "mips"
+            abiFilters "armeabi"
+//          abiFilters "armeabi", "armeabi-v7a", "x86", "mips"
         }
     }
 
@@ -63,7 +64,7 @@ android {
 }
 
 dependencies {
-//    compile fileTree(include: ['*.jar'], dir: 'libs')
+    compile fileTree(include: ['*.jar'], dir: 'libs')
     compile files('libs/zxing.jar')
     compile files('libs/MobTools.jar')
     compile files('libs/locSDK_6.22.jar')

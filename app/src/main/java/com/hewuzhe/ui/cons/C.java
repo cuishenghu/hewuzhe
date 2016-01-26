@@ -10,7 +10,7 @@ public class C {
     /**
      * URL
      */
-    public static final String BASE_URL = "http://115.28.67.86:8033/";
+    public static final String BASE_URL = "http://120.27.115.235/";
 
     /**
      * COLOR

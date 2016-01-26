@@ -1,23 +1,5 @@
 package com.qd.recorder;
 
-import static com.googlecode.javacv.cpp.opencv_highgui.cvCreateFileCapture;
-import static com.googlecode.javacv.cpp.opencv_highgui.cvQueryFrame;
-
-import java.io.BufferedOutputStream;
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
-import java.io.FileReader;
-import java.io.FileWriter;
-import java.io.IOException;
-import java.io.Reader;
-import java.io.Writer;
-import java.text.SimpleDateFormat;
-import java.util.Comparator;
-import java.util.Date;
-import java.util.HashMap;
-import java.util.List;
-
 import android.app.Activity;
 import android.app.Dialog;
 import android.content.ContentValues;
@@ -43,7 +25,25 @@ import android.widget.Toast;
 
 import com.googlecode.javacv.cpp.opencv_core.IplImage;
 import com.googlecode.javacv.cpp.opencv_highgui.CvCapture;
-import com.qd.videorecorder.R;
+import com.hewuzhe.R;
+
+import java.io.BufferedOutputStream;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.Reader;
+import java.io.Writer;
+import java.text.SimpleDateFormat;
+import java.util.Comparator;
+import java.util.Date;
+import java.util.HashMap;
+import java.util.List;
+
+import static com.googlecode.javacv.cpp.opencv_highgui.cvCreateFileCapture;
+import static com.googlecode.javacv.cpp.opencv_highgui.cvQueryFrame;
 
 
 public class Util {

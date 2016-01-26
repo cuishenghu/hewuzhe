@@ -1,21 +1,50 @@
 package com.hewuzhe.ui.activity;
 
 import android.os.Bundle;
-import android.webkit.WebSettings;
-import android.webkit.WebView;
-import android.webkit.WebViewClient;
+import android.text.method.ScrollingMovementMethod;
+import android.view.View;
+import android.widget.Button;
+import android.widget.ImageView;
+import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
+import com.external.viewpagerindicator.CirclePageIndicator;
 import com.hewuzhe.R;
-import com.hewuzhe.presenter.base.BasePresenterImp;
+import com.hewuzhe.model.LiveVideo;
+import com.hewuzhe.model.Pic;
+import com.hewuzhe.presenter.LiveVideoPresenter;
+import com.hewuzhe.ui.adapter.base.Bee_PageAdapter;
 import com.hewuzhe.ui.base.ToolBarActivity;
+import com.hewuzhe.ui.cons.C;
+import com.hewuzhe.ui.widget.AutoScrollViewPager;
+import com.hewuzhe.utils.Bun;
+import com.hewuzhe.view.LiveVideoView;
+
+import java.util.ArrayList;
 
 import butterknife.Bind;
 
-public class LiveVideoActivity extends ToolBarActivity {
+public class LiveVideoActivity extends ToolBarActivity<LiveVideoPresenter> implements LiveVideoView {
 
 
-    @Bind(R.id.webview)
-    WebView _Webview;
+    @Bind(R.id.viewpager)
+    AutoScrollViewPager _Viewpager;
+    @Bind(R.id.indicator)
+    CirclePageIndicator _Indicator;
+    @Bind(R.id.tv_line)
+    TextView _TvLine;
+    @Bind(R.id.tv_time_start)
+    TextView _TvTimeStart;
+    @Bind(R.id.tv_apply_end)
+    TextView _TvApplyEnd;
+    @Bind(R.id.tv_require)
+    TextView _TvRequire;
+    @Bind(R.id.tv_name)
+    TextView _TvName;
+    @Bind(R.id.btn_others)
+    Button _BtnOthers;
+    private ArrayList<View> bannerListView;
+    private Bee_PageAdapter bee_pageAdapter;
 
     @Override
     protected int provideContentViewId() {
@@ -28,35 +57,24 @@ public class LiveVideoActivity extends ToolBarActivity {
     @Override
     public void initListeners() {
 
+        _BtnOthers.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(BasicWebActivity.class, new Bun().putString("title", "视频直播").putString("url", "http://115.28.67.86:8033/zhibo.aspx").ok());
+            }
+        });
     }
 
     @Override
     protected void initThings(Bundle savedInstanceState) {
         super.initThings(savedInstanceState);
+        bannerListView = new ArrayList<View>();
+        bee_pageAdapter = new Bee_PageAdapter(bannerListView);
+        _Viewpager.setAdapter(bee_pageAdapter);
+        _Indicator.setViewPager(_Viewpager);
 
-        _Webview.getSettings().setJavaScriptEnabled(true);
-        _Webview.setWebViewClient(new WebViewClient() { //通过_Webview打开链接，不调用系统浏览器
+        presenter.SelectVideoLive(1);
 
-            @Override
-            public boolean shouldOverrideUrlLoading(WebView view, String url) {
-                view.loadUrl(url);
-                return true;
-            }
-        });
-
-        _Webview.setInitialScale(25);
-
-        WebSettings webSettings = _Webview.getSettings();
-        webSettings.setJavaScriptEnabled(true);
-        webSettings.setBuiltInZoomControls(false);
-        webSettings.setSupportZoom(false);
-
-        _Webview.getSettings().setUseWideViewPort(true);
-        _Webview.getSettings().setLoadWithOverviewMode(true);
-//      _Webview.loadDataWithBaseURL(null, data, "text/html", "utf-8", null);
-
-
-        _Webview.loadUrl("file:///android_asset/livevideo.html");
 
     }
 
@@ -64,8 +82,8 @@ public class LiveVideoActivity extends ToolBarActivity {
      * 绑定Presenter
      */
     @Override
-    public BasePresenterImp createPresenter() {
-        return null;
+    public LiveVideoPresenter createPresenter() {
+        return new LiveVideoPresenter();
     }
 
 
@@ -75,4 +93,33 @@ public class LiveVideoActivity extends ToolBarActivity {
     }
 
 
+    @Override
+    public void setData(LiveVideo liveVideo) {
+
+        _TvName.setText(liveVideo.Title);
+        _TvTimeStart.setText(liveVideo.TimeStart);
+        _TvApplyEnd.setText(liveVideo.TimeEnd);
+        _TvRequire.setText(liveVideo.Content);
+
+        _TvRequire.setMovementMethod(ScrollingMovementMethod.getInstance());
+
+
+        bannerListView.clear();
+
+        if (liveVideo.ImageList.size() > 0) {
+            for (Pic pic : liveVideo.ImageList) {
+                ImageView imageView = new ImageView(getContext());
+                imageView.setScaleType(ImageView.ScaleType.FIT_XY);
+                Glide.with(getContext())
+                        .load(C.BASE_URL + pic.ImagePath)
+                        .placeholder(R.mipmap.img_bg_videio)
+                        .crossFade()
+                        .into(imageView);
+                bannerListView.add(imageView);
+            }
+        }
+        _Viewpager.setAdapter(bee_pageAdapter);
+
+
+    }
 }

@@ -5,6 +5,8 @@ import android.support.annotation.Nullable;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.CheckBox;
+import android.widget.CompoundButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -15,6 +17,8 @@ import com.hewuzhe.presenter.base.BasePresenterImp;
 import com.hewuzhe.ui.adapter.base.BaseAdapter;
 import com.hewuzhe.ui.cons.C;
 import com.hewuzhe.utils.TimeUtil;
+
+import java.util.LinkedList;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
@@ -27,6 +31,12 @@ public class Videos2Adapter extends BaseAdapter<Videos2Adapter.ViewHolder, Video
     public Videos2Adapter(Context context) {
         super(context);
     }
+
+    /**
+     * 是否显示checkBox
+     */
+    private boolean isNeedShow = false;
+    private LinkedList<Video> checkedList = new LinkedList<>();
 
     /**
      * @return ItemView的LayoutId
@@ -53,7 +63,7 @@ public class Videos2Adapter extends BaseAdapter<Videos2Adapter.ViewHolder, Video
      */
     @Override
     public void bindData(ViewHolder holder, int position) {
-        Video video = data.get(position);
+        final Video video = data.get(position);
         Glide.with(context)
                 .load(C.BASE_URL + video.ImagePath)
                 .centerCrop()
@@ -92,6 +102,28 @@ public class Videos2Adapter extends BaseAdapter<Videos2Adapter.ViewHolder, Video
             holder.imgRepeat.setImageResource(R.mipmap.icon_share_focus);
         }
 
+        holder._CbPlan.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
+                if (b) {
+                    if (!Videos2Adapter.this.checkedList.contains(video)) {
+                        video.isChecked = true;
+                        Videos2Adapter.this.checkedList.add(video);
+                    }
+                } else {
+                    if (Videos2Adapter.this.checkedList.contains(video)) {
+                        video.isChecked = false;
+                        Videos2Adapter.this.checkedList.remove(video);
+                    }
+                }
+            }
+        });
+
+        if (this.isNeedShow) {
+            holder._CbPlan.setVisibility(View.VISIBLE);
+        } else {
+            holder._CbPlan.setVisibility(View.GONE);
+        }
     }
 
 
@@ -135,10 +167,43 @@ public class Videos2Adapter extends BaseAdapter<Videos2Adapter.ViewHolder, Video
         @Nullable
         @Bind(R.id.tv_repeat_count)
         TextView tvRepeatCount;
+        @Nullable
+        @Bind(R.id.cb_plan)
+        CheckBox _CbPlan;
 
         ViewHolder(View view) {
             super(view);
             ButterKnife.bind(this, view);
         }
     }
+
+
+    /**
+     * 设置是否显示checkBox
+     *
+     * @param isNeedShow
+     */
+    public void showCheck(boolean isNeedShow) {
+        this.isNeedShow = isNeedShow;
+        this.notifyDataSetChanged();
+    }
+
+    /**
+     * 获取当前编辑状态
+     *
+     * @return
+     */
+    public boolean getCheckShowStatus() {
+        return this.isNeedShow;
+    }
+
+    /**
+     * 获取选中的Item
+     *
+     * @return
+     */
+    public LinkedList<Video> getCheckedList() {
+        return this.checkedList;
+    }
+
 }

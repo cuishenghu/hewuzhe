@@ -14,15 +14,19 @@ import com.hewuzhe.ui.activity.VideoDetailActivity;
 import com.hewuzhe.ui.adapter.GridItemDecoration;
 import com.hewuzhe.ui.adapter.Videos2Adapter;
 import com.hewuzhe.ui.base.SwipeRecycleViewFragment;
+import com.hewuzhe.ui.cons.C;
 import com.hewuzhe.utils.Bun;
+import com.hewuzhe.utils.NU;
 import com.hewuzhe.utils.SessionUtil;
 import com.hewuzhe.view.VideoCollectionsView;
 
 import java.util.ArrayList;
+import java.util.LinkedList;
 
 /**
  * A simple {@link Fragment} subclass.
  */
+
 public class VideoCollectionsFragment extends SwipeRecycleViewFragment<VideoCollectionPresenter, Videos2Adapter, Video> implements VideoCollectionsView {
 
 
@@ -93,12 +97,28 @@ public class VideoCollectionsFragment extends SwipeRecycleViewFragment<VideoColl
      */
     @Override
     public void onItemClick(View view, int pos, Video item) {
-        if (item.PublisherId != 0) {
-            startActivity(VideoDetail2Activity.class, new Bun().putInt("Id", item.MessageId).ok());
+
+        if (adapter.getCheckShowStatus()) {
+            /**
+             * 选择状态
+             * */
+
+            ((android.widget.CheckBox) view.findViewById(R.id.cb_plan)).setChecked(item.isChecked ? false : true);
+
         } else {
-            startActivity(VideoDetailActivity.class, new Bun().putInt("Id", item.MessageId).ok());
+            /**
+             * 进入详情页
+             * */
+            if (item.PublisherId != 0) {
+                startActivity(VideoDetail2Activity.class, new Bun().putInt("Id", item.MessageId).ok());
+            } else {
+                startActivity(VideoDetailActivity.class, new Bun().putInt("Id", item.MessageId).ok());
+            }
+
         }
+
     }
+
 
     @Override
     public void bindData(ArrayList<Video> data) {
@@ -109,5 +129,42 @@ public class VideoCollectionsFragment extends SwipeRecycleViewFragment<VideoColl
     @Override
     public Integer getData() {
         return new SessionUtil(getContext()).getUserId();
+    }
+
+    @Override
+    public void onReceive(Integer msg) {
+        if (msg == C.MSG_DEFAUT) {
+            //编辑
+            adapter.showCheck(true);
+        } else if (msg == C.MSG_ONE) {
+            //删除
+            LinkedList<Video> checkedList = adapter.getCheckedList();
+            if (checkedList.size() > 0) {
+                for (Video video : checkedList) {
+                    presenter.deletePlan(video.MessageId, checkedList.size(), recyclerView);
+                    adapter.removeItem(video);
+                }
+            } else {
+                adapter.showCheck(false);
+            }
+        } else if (msg == C.MSG_TWO) {
+            adapter.showCheck(false);
+        }
+    }
+
+
+    /**
+     * 获取当前编辑状态
+     *
+     * @return
+     */
+    @Override
+    public Boolean getMsg() {
+        return NU.isNull(adapter) ? false : adapter.getCheckShowStatus();
+    }
+
+    @Override
+    public void collectAndOther() {
+        adapter.showCheck(false);
     }
 }

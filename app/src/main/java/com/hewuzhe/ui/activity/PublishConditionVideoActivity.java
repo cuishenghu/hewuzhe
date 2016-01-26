@@ -37,6 +37,7 @@ public class PublishConditionVideoActivity extends ToolBarActivity<PublishCondit
     private String fileName;
     private int catId = -1;
     private String title;
+    private String thumnail = "";
 
     @Override
     protected int provideContentViewId() {
@@ -62,7 +63,7 @@ public class PublishConditionVideoActivity extends ToolBarActivity<PublishCondit
         fileName = getIntentData().getString("file_name");
 
         try {
-            String thumnail = createThumbnailOfVideo(fileName);
+            thumnail = createThumbnailOfVideo(fileName);
             img.setImageURI(Uri.parse(new File(thumnail).toString()));
         } catch (ChooserException e) {
             e.printStackTrace();
@@ -88,7 +89,7 @@ public class PublishConditionVideoActivity extends ToolBarActivity<PublishCondit
     @Override
     protected void action() {
         super.action();
-        presenter.UpLoadConditionVideo(tvAction, fileName);
+        presenter.UpLoadConditionVideo(tvAction, fileName, thumnail);
     }
 
 

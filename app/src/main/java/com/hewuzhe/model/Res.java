@@ -45,4 +45,6 @@ public class Res<T> {
     @Nullable
     public String ImagePath;
 
+    @Nullable
+    public int count = 0;
 }

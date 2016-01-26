@@ -172,6 +172,7 @@ public class ArticlePresenter extends CommentPresenter<ArticleView> {
                     }
                 });
 
+        addSubscription(subscription);
     }
 
 

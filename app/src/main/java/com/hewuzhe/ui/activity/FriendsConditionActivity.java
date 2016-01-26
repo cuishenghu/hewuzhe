@@ -25,8 +25,12 @@ import com.hewuzhe.ui.cons.C;
 import com.hewuzhe.utils.Bun;
 import com.hewuzhe.utils.SessionUtil;
 import com.hewuzhe.view.FriendsConditionView;
+import com.qd.recorder.FFmpegRecorderActivity;
+import com.socks.library.KLog;
 
 import java.util.ArrayList;
+import java.util.Timer;
+import java.util.TimerTask;
 
 import butterknife.Bind;
 import cn.xm.weidongjian.popuphelper.PopupWindowHelper;
@@ -46,6 +50,12 @@ public class FriendsConditionActivity extends SwipeRecycleViewActivity<FriendCon
     Button _BtnPublish;
     @Bind(R.id.lay_comment)
     LinearLayout _LayComment;
+    @Bind(R.id.img_msg_avatar)
+    ImageView _ImgMsgAvatar;
+    @Bind(R.id.tv_msg_count)
+    TextView _TvMsgCount;
+    @Bind(R.id.lay_msg)
+    LinearLayout _LayMsg;
     private TextView action_1;
     private TextView action_2;
     private User user;
@@ -105,7 +115,7 @@ public class FriendsConditionActivity extends SwipeRecycleViewActivity<FriendCon
         action_2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startActivity(TakeVideoActivity.class, new Bun().putInt(C.WHITCH, C.WHITCH_ONE).ok());
+                startActivity(FFmpegRecorderActivity.class, new Bun().putInt(C.WHITCH, C.WHITCH_ONE).ok());
                 popupWindowHelper.dismiss();
             }
         });
@@ -119,6 +129,16 @@ public class FriendsConditionActivity extends SwipeRecycleViewActivity<FriendCon
         super.initThings(savedInstanceState);
         initBasicInfo();
         presenter.getData(page, count);
+
+        Timer timer = new Timer();
+        timer.schedule(new TimerTask() {
+            @Override
+            public void run() {
+                presenter.GetNoReadCommentNumByUserId();
+                KLog.d("更新未读条数");
+            }
+        }, 1000, 1000);
+
     }
 
     private void initBasicInfo() {
@@ -289,5 +309,27 @@ public class FriendsConditionActivity extends SwipeRecycleViewActivity<FriendCon
     @Override
     public void setDataStatus(int page, int count, Res<ArrayList<FriendCondition>> res) {
 
+    }
+
+    @Override
+    public void updateFriendNoReadNum(final int count) {
+
+        if (count > 0) {
+            _LayMsg.setVisibility(View.VISIBLE);
+            _TvMsgCount.setText(count + "条新消息");
+
+            _LayMsg.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    page = 1;
+                    refresh(true);
+                    presenter.getData(page, count);
+                }
+            });
+
+        } else {
+            _LayMsg.setVisibility(View.GONE);
+
+        }
     }
 }

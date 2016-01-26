@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent" android:layout_height="match_parent"
+    xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
+    android:layout_height="match_parent"
     android:background="@color/colorBg"
     android:orientation="vertical"
     tools:context="com.hewuzhe.ui.activity.ProfileActivity">
@@ -10,53 +10,148 @@
     <include layout="@layout/toolbar_layout"/>
 
 
-    <RelativeLayout android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:background="@color/colorListBg">
+    <LinearLayout android:layout_width="match_parent"
+                  android:layout_height="match_parent"
+                  android:background="@color/colorListBg"
+                  android:orientation="vertical">
+
+        <include layout="@layout/lay_ads"/>
+        <TextView
+            android:id="@+id/tv_line"
+            style="@style/text_30_white"
+            android:layout_width="match_parent"
+            android:layout_height="0px"
+            android:background="@color/colorBg"
+            android:text=""
+            android:visibility="visible"/>
+
+        <TextView
+            android:id="@+id/tv_name"
+            style="@style/text_35_white"
+            android:layout_width="wrap_content"
+            android:layout_height="105px"
+            android:gravity="center_vertical"
+            android:paddingLeft="20px"
+            android:text="活动详情："/>
+
+
+        <TextView
+            style="@style/text_30_white"
+            android:layout_width="match_parent"
+            android:layout_height="10px"
+            android:background="@color/colorBg"
+            android:text=""/>
 
         <LinearLayout android:layout_width="match_parent"
-                      android:layout_height="match_parent"
-                      android:orientation="vertical"
-                      android:paddingLeft="20px"
-                      android:paddingRight="20px">
-
-            <TextView android:id="@+id/tv_name"
-                      style="@style/text_35_white"
-                      android:layout_width="match_parent"
                       android:layout_height="wrap_content"
-                      android:layout_marginTop="20px"
-                      android:text="成龙功夫演示直播"/>
+                      android:orientation="horizontal"
+                      android:visibility="visible">
 
-
-            <TextView android:id="@+id/tv_froms"
-                      style="@style/text_25_colorLine"
-                      android:layout_width="match_parent"
-                      android:layout_height="wrap_content"
-                      android:layout_marginTop="10px"
-                      android:text="2015-12-09"/>
-
-            <TextView android:id="@+id/tv_content"
-                      style="@style/text_30_white"
-                      android:layout_width="match_parent"
-                      android:layout_height="wrap_content"
-                      android:layout_marginTop="10px"
-                      android:lineSpacingExtra="2dp"
-                      android:text="成家班就是五行里的飞虎队成家班就是五行里的飞虎队成家班就是五行里的飞虎队成家班就是五行里的飞虎队成家班就是五行里的飞虎队"/>
-
-            <LinearLayout android:id="@+id/lay_pics"
-                          android:layout_width="match_parent"
+            <LinearLayout android:layout_width="match_parent"
                           android:layout_height="wrap_content"
-                          android:orientation="vertical">
+                          android:layout_weight="1"
+                          android:orientation="vertical"
+                          android:paddingLeft="30px">
+                <TextView
+                    style="@style/text_27_white"
+                    android:layout_width="wrap_content"
+                    android:layout_height="75px"
+                    android:gravity="center_vertical"
+                    android:paddingLeft="20px"
+                    android:text="直播开始时间："/>
+
+
+                <TextView android:id="@+id/tv_time_start"
+                          style="@style/text_25_yellow"
+                          android:layout_width="wrap_content"
+                          android:layout_height="wrap_content"
+                          android:paddingLeft="20px"
+                          android:text="介绍"/>
 
             </LinearLayout>
 
-            <WebView android:id="@+id/webview"
-                     android:layout_width="match_parent"
-                     android:layout_height="wrap_content">
-            </WebView>
+            <LinearLayout android:layout_width="match_parent"
+                          android:layout_height="wrap_content"
+                          android:layout_weight="1"
+                          android:orientation="vertical"
+                          android:paddingLeft="30px">
+
+                <TextView
+                    style="@style/text_27_white"
+                    android:layout_width="wrap_content"
+                    android:layout_height="75px"
+                    android:gravity="center_vertical"
+                    android:paddingLeft="20px"
+                    android:text="直播结束时间："/>
+
+
+                <TextView android:id="@+id/tv_apply_end"
+                          style="@style/text_25_yellow"
+                          android:layout_width="wrap_content"
+                          android:layout_height="wrap_content"
+                          android:paddingLeft="20px"
+                          android:text="介绍"/>
+
+            </LinearLayout>
 
         </LinearLayout>
-    </RelativeLayout>
+
+
+        <TextView
+            style="@style/text_30_white"
+            android:layout_width="match_parent"
+            android:layout_height="10px"
+            android:background="@color/colorBg"
+            android:lineSpacingExtra="1.5dp"
+
+            android:text=""
+            android:visibility="visible"/>
+
+
+        <TextView
+            style="@style/text_30_white"
+            android:layout_width="wrap_content"
+            android:layout_height="75px"
+            android:gravity="center_vertical"
+            android:paddingLeft="20px"
+            android:text="内容介绍："/>
+
+
+        <TextView android:id="@+id/tv_require"
+                  style="@style/text_27_white"
+                  android:layout_width="match_parent"
+                  android:layout_height="match_parent"
+                  android:layout_marginBottom="10px"
+                  android:layout_weight="1"
+                  android:scrollbars="vertical"
+                  android:minLines="5"
+                  android:paddingLeft="20px"
+                  android:text="介绍"/>
+
+
+        <LinearLayout android:layout_width="match_parent"
+                      android:layout_height="wrap_content"
+                      android:background="@color/colorBg"
+                      android:gravity="center"
+                      android:orientation="horizontal"
+                      android:paddingBottom="20px"
+                      android:paddingTop="20px">
+
+            <Button android:id="@+id/btn_others"
+                    style="@style/text_30_white"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="20dp"
+                    android:layout_marginRight="20dp"
+                    android:background="@drawable/bg_selector_colorlistbg"
+                    android:text="查看课程"
+                    tools:visibility="visible"/>
+
+
+        </LinearLayout>
+
+
+    </LinearLayout>
 
 
 </LinearLayout>

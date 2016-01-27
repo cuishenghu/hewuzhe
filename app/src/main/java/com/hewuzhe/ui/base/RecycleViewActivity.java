@@ -34,6 +34,7 @@ public abstract class RecycleViewActivity<P extends RefreshAndLoadMorePresenter,
         super.initThings(savedInstanceState);
 
         this.layoutManager = provideLayoutManager();
+
         recyclerView.setLayoutManager(provideLayoutManager());
 
         this.adapter = provideAdapter();

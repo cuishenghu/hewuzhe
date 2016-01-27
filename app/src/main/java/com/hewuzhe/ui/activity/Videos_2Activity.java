@@ -29,7 +29,7 @@ public class Videos_2Activity extends SwipeRecycleViewActivity<Videos2Presenter,
 
     /**
      * @param savedInstanceState 缓存数据
-     *                           <p>
+     *                           <p/>
      */
     @Override
     protected void initThings(Bundle savedInstanceState) {
@@ -62,7 +62,18 @@ public class Videos_2Activity extends SwipeRecycleViewActivity<Videos2Presenter,
      */
     @Override
     protected RecyclerView.LayoutManager provideLayoutManager() {
-        layoutManager = new GridLayoutManager(getContext(), 2);
+        GridLayoutManager gridLayoutManager = new GridLayoutManager(getContext(), 2);
+
+        gridLayoutManager.setSpanSizeLookup(new GridLayoutManager.SpanSizeLookup() {
+            @Override
+            public int getSpanSize(int position) {
+                if (position == adapter.getItemCount() - 1) {
+                    return 2;
+                }
+                return 1;
+            }
+        });
+        layoutManager = gridLayoutManager;
 
         return layoutManager;
     }
@@ -125,4 +136,6 @@ public class Videos_2Activity extends SwipeRecycleViewActivity<Videos2Presenter,
     public Integer getData() {
         return catId;
     }
+
+
 }

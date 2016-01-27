@@ -20,6 +20,7 @@ import com.hewuzhe.utils.Bun;
 import com.hewuzhe.utils.StringUtil;
 import com.hewuzhe.utils.TimeUtil;
 import com.hewuzhe.view.ProfileSettingsView;
+import com.socks.library.KLog;
 
 import butterknife.Bind;
 import de.greenrobot.event.EventBus;
@@ -236,31 +237,37 @@ public class FriendProfileSettingsActivity extends ToolBarActivity<ProfileSettin
             @Override
             public void onCheckedChanged(View view, boolean isChecked) {
                 if (isChecked) {
-                    presenter.ShieldFriendNews();
                     RongIMClient.getInstance().addToBlacklist(friend.Id + "", new RongIMClient.OperationCallback() {
                         @Override
                         public void onSuccess() {
+                            KLog.d("onSuccess");
 
                         }
 
                         @Override
                         public void onError(RongIMClient.ErrorCode errorCode) {
+                            KLog.d("onError");
 
                         }
                     });
+                    presenter.ShieldFriendNews();
                 } else {
-                    presenter.UnShieldFriendNews();
                     RongIMClient.getInstance().removeFromBlacklist(friend.Id + "", new RongIMClient.OperationCallback() {
                         @Override
                         public void onSuccess() {
 
+                            KLog.d("onSuccess");
                         }
 
                         @Override
                         public void onError(RongIMClient.ErrorCode errorCode) {
+                            KLog.d("onError");
 
                         }
                     });
+
+                    presenter.UnShieldFriendNews();
+
                 }
             }
         });

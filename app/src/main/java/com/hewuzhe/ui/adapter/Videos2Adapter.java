@@ -30,6 +30,7 @@ public class Videos2Adapter extends BaseAdapter<Videos2Adapter.ViewHolder, Video
 
     public Videos2Adapter(Context context) {
         super(context);
+        isAddFooter = true;
     }
 
     /**

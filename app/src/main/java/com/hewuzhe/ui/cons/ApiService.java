@@ -347,7 +347,7 @@ public interface ApiService {
     Observable<Res<LiveVideo>> SelectVideoLive(@Query("userid") int userid, @Query("videoLiveId") int videoLiveId);
 
     @GET("Helianmeng.asmx/GetNoReadCommentNumByUserId")
-    Observable<Res> GetNoReadCommentNumByUserId(@Query("userid") int userid);
+    Observable<Res<String>> GetNoReadCommentNumByUserId(@Query("userid") int userid);
 
     @GET("Helianmeng.asmx/SelectNoReadMatch")
     Observable<Res> SelectNoReadMatch(@Query("userid") int userid, @Query("flg") int flg);

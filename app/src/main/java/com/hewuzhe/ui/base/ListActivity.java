@@ -31,6 +31,7 @@ public abstract class ListActivity<P extends ListPresenter, A extends BaseAdapte
         super.initThings(savedInstanceState);
 
         this.layoutManager = provideLayoutManager();
+
         recyclerView.setLayoutManager(provideLayoutManager());
 
         this.adapter = provideAdapter();

@@ -38,7 +38,6 @@ import io.rong.imkit.RongIM;
 public class GroupConditionActivity extends SwipeRecycleViewActivity<GroupConditionPresenter, GroupConditionAdapter, FriendCondition> implements AppBarLayout.OnOffsetChangedListener, GroupConditionView {
 
     private static final int PERCENTAGE_TO_ANIMATE_AVATAR = 30;
-
     @Bind(R.id.img_avatar)
     ImageView imgAvatar;
     @Bind(R.id.tv_name)

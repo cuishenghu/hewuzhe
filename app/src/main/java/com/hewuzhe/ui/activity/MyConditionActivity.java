@@ -263,7 +263,7 @@ public class MyConditionActivity extends SwipeRecycleViewActivity<MyConditionPre
     }
 
     @Override
-    public void updateFriendNoReadNum(int count) {
+    public void updateFriendNoReadNum(int count, String data) {
 
     }
 }

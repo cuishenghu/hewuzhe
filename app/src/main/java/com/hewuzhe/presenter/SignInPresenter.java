@@ -14,7 +14,12 @@ import com.hewuzhe.utils.SB;
 import com.hewuzhe.utils.SessionUtil;
 import com.hewuzhe.utils.StringUtil;
 import com.hewuzhe.view.SignInView;
+import com.socks.library.KLog;
 
+import java.util.Set;
+
+import cn.jpush.android.api.JPushInterface;
+import cn.jpush.android.api.TagAliasCallback;
 import rx.Subscriber;
 import rx.Subscription;
 import rx.android.schedulers.AndroidSchedulers;
@@ -74,6 +79,13 @@ public class SignInPresenter extends BasePresenterImp<SignInView> {
 
                                 user = userRes.data;
                                 sessionUtil.putUser(user);
+
+                                JPushInterface.setAlias(view.getContext(), "alias_" + user.Id, new TagAliasCallback() {
+                                    @Override
+                                    public void gotResult(int i, String s, Set<String> set) {
+                                        KLog.d(s);
+                                    }
+                                });
 
                                 view.getContext().startActivity(new Intent(view.getContext(), MainActivity.class));
                             } else {

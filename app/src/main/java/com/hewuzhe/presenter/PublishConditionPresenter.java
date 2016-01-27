@@ -199,7 +199,6 @@ public class PublishConditionPresenter extends ListPresenter<PublishConditionVie
                         public void next(Res<Video> res) {
                             if (res.code == C.OK) {
                                 videopath = res.data.VideoName;
-
                                 uploadVideoImg(thumnail);
                             } else {
                                 view.dismissDialog();
@@ -243,6 +242,7 @@ public class PublishConditionPresenter extends ListPresenter<PublishConditionVie
                     @Override
                     public void next(Res<UploadImage> res) {
                         if (res.code == C.OK) {
+                            videoImg = res.data.ImagePath;
                             publishTwo("");
                         }
 

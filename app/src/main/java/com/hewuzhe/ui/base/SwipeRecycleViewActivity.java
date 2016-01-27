@@ -34,9 +34,9 @@ public abstract class SwipeRecycleViewActivity<P extends RefreshAndLoadMorePrese
         super.initThings(savedInstanceState);
 
         this.layoutManager = provideLayoutManager();
-        recyclerView.setLayoutManager(provideLayoutManager());
-
         this.adapter = provideAdapter();
+
+        recyclerView.setLayoutManager(provideLayoutManager());
         recyclerView.setAdapter(adapter);
 
         adapter.setOnItemClickListener(this);
@@ -125,7 +125,6 @@ public abstract class SwipeRecycleViewActivity<P extends RefreshAndLoadMorePrese
             presenter.getData(page, count);
             adapter.loading();
         }
-
     }
 
     @Override

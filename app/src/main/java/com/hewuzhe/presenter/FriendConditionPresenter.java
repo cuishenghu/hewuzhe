@@ -58,11 +58,11 @@ public class FriendConditionPresenter extends ConditionPresenter<FriendsConditio
                 .GetNoReadCommentNumByUserId(new SessionUtil(view.getContext()).getUserId())
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new SB<Res>() {
+                .subscribe(new SB<Res<String>>() {
                     @Override
-                    public void next(Res res) {
+                    public void next(Res<String> res) {
                         if (res.code == C.OK) {
-                            view.updateFriendNoReadNum(res.count);
+                            view.updateFriendNoReadNum(res.count, res.data);
                         }
                     }
 

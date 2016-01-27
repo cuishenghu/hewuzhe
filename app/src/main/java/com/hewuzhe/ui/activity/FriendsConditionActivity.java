@@ -26,11 +26,8 @@ import com.hewuzhe.utils.Bun;
 import com.hewuzhe.utils.SessionUtil;
 import com.hewuzhe.view.FriendsConditionView;
 import com.qd.recorder.FFmpegRecorderActivity;
-import com.socks.library.KLog;
 
 import java.util.ArrayList;
-import java.util.Timer;
-import java.util.TimerTask;
 
 import butterknife.Bind;
 import cn.xm.weidongjian.popuphelper.PopupWindowHelper;
@@ -59,6 +56,7 @@ public class FriendsConditionActivity extends SwipeRecycleViewActivity<FriendCon
     private TextView action_1;
     private TextView action_2;
     private User user;
+    private boolean isFirstRun = true;
 
     @Override
     protected int provideContentViewId() {
@@ -130,14 +128,15 @@ public class FriendsConditionActivity extends SwipeRecycleViewActivity<FriendCon
         initBasicInfo();
         presenter.getData(page, count);
 
-        Timer timer = new Timer();
-        timer.schedule(new TimerTask() {
-            @Override
-            public void run() {
-                presenter.GetNoReadCommentNumByUserId();
-                KLog.d("更新未读条数");
-            }
-        }, 1000, 1000);
+        presenter.GetNoReadCommentNumByUserId();
+
+//        Timer timer = new Timer();
+//        timer.schedule(new TimerTask() {
+//            @Override
+//            public void run() {
+//                KLog.d("更新未读条数");
+//            }
+//        }, 1000, 1000);
 
     }
 
@@ -311,19 +310,25 @@ public class FriendsConditionActivity extends SwipeRecycleViewActivity<FriendCon
 
     }
 
+
     @Override
-    public void updateFriendNoReadNum(final int count) {
+    public void updateFriendNoReadNum(final int count, String data) {
 
         if (count > 0) {
             _LayMsg.setVisibility(View.VISIBLE);
             _TvMsgCount.setText(count + "条新消息");
 
+            Glide.with(getContext())
+                    .load(C.BASE_URL + data)
+                    .fitCenter()
+                    .placeholder(R.mipmap.img_avatar)
+                    .crossFade()
+                    .into(_ImgMsgAvatar);
+
             _LayMsg.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    page = 1;
-                    refresh(true);
-                    presenter.getData(page, count);
+                    startActivity(CondtionCommetnsActivity.class);
                 }
             });
 
@@ -332,4 +337,15 @@ public class FriendsConditionActivity extends SwipeRecycleViewActivity<FriendCon
 
         }
     }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        if (isFirstRun) {
+            isFirstRun = false;
+        } else {
+            presenter.GetNoReadCommentNumByUserId();
+        }
+    }
+
 }

@@ -400,6 +400,7 @@ public class WarriorFragment extends ToolBarFragment<WarriorFragmentPresenter> i
 
                 /**
                  * 连接融云成功
+                 *
                  * @param userid 当前 token
                  */
                 @Override
@@ -414,13 +415,14 @@ public class WarriorFragment extends ToolBarFragment<WarriorFragmentPresenter> i
                     RongIM.setConversationBehaviorListener(WarriorFragment.this);//设置会话界面操作的监听器。
                     RongIM.setLocationProvider(WarriorFragment.this);//设置地理位置提供者,不用位置的同学可以注掉此行代码
 
-//                    RongIM.setOnReceiveMessageListener(new RongIMClient.OnReceiveMessageListener() {
-//                        @Override
-//                        public boolean onReceived(Message message, int i) {
-//
-//                            return !spUtil.getBoolean("msg");
-//                        }
-//                    });
+                    RongIM.setOnReceiveMessageListener(new RongIMClient.OnReceiveMessageListener() {
+                        @Override
+                        public boolean onReceived(Message message, int i) {
+
+                            return !spUtil.getBoolean("msg");
+//                            return false;
+                        }
+                    });
                 }
 
                 /**

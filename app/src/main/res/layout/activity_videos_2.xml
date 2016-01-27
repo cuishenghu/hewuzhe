@@ -8,20 +8,23 @@
 
     <include layout="@layout/toolbar_layout"/>
 
-        <com.hewuzhe.ui.widget.MultiSwipeRefreshLayout
-            android:id="@+id/swipe_refresh_layout"
+    <com.hewuzhe.ui.widget.MultiSwipeRefreshLayout
+        android:id="@+id/swipe_refresh_layout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior"
+
+        >
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/recycler_view"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            app:layout_behavior="@string/appbar_scrolling_view_behavior">
-
-            <android.support.v7.widget.RecyclerView
-                android:id="@+id/recycler_view"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent">
-
-            </android.support.v7.widget.RecyclerView>
+            android:layout_marginBottom="80px"
+            >
+        </android.support.v7.widget.RecyclerView>
 
 
-        </com.hewuzhe.ui.widget.MultiSwipeRefreshLayout>
+    </com.hewuzhe.ui.widget.MultiSwipeRefreshLayout>
 
 </android.support.design.widget.CoordinatorLayout>

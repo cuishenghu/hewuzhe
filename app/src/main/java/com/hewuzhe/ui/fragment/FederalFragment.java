@@ -77,6 +77,8 @@ public class FederalFragment extends BaseFragment<FederalPresenter> implements F
     LinearLayout layScan;
     @Bind(R.id.tv_unread_count)
     TextView _TvUnreadCount;
+    @Bind(R.id.tv_friend_unread_count)
+    TextView _TvFriendUnreadCount;
     @Bind(R.id.lay_msg)
     FrameLayout _LayMsg;
     private ImageView imgBack;
@@ -265,6 +267,19 @@ public class FederalFragment extends BaseFragment<FederalPresenter> implements F
 
     @Override
     public void updateFriendNoReadNum(int count) {
-
+        if (count > 0) {
+            _TvFriendUnreadCount.setVisibility(View.VISIBLE);
+            _TvFriendUnreadCount.setText(count + "");
+        } else {
+            _TvFriendUnreadCount.setVisibility(View.GONE);
+        }
     }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        presenter.GetNoReadCommentNumByUserId();
+    }
+
+
 }

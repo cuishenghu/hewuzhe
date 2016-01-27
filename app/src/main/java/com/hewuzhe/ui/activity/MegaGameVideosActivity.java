@@ -43,7 +43,22 @@ public class MegaGameVideosActivity extends SwipeRecycleViewActivity<MegaGameVid
      */
     @Override
     protected RecyclerView.LayoutManager provideLayoutManager() {
+
         GridLayoutManager gridLayoutManager = new GridLayoutManager(getContext(), 2);
+
+        gridLayoutManager.setSpanSizeLookup(new GridLayoutManager.SpanSizeLookup() {
+            @Override
+            public int getSpanSize(int position) {
+                if (position == adapter.getItemCount() - 1) {
+                    return 2;
+                }
+                return 1;
+            }
+        });
+
+        layoutManager = gridLayoutManager;
+
+
         return gridLayoutManager;
     }
 

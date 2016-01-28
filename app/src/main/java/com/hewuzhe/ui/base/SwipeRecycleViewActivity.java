@@ -36,7 +36,7 @@ public abstract class SwipeRecycleViewActivity<P extends RefreshAndLoadMorePrese
         this.layoutManager = provideLayoutManager();
         this.adapter = provideAdapter();
 
-        recyclerView.setLayoutManager(provideLayoutManager());
+        recyclerView.setLayoutManager(layoutManager);
         recyclerView.setAdapter(adapter);
 
         adapter.setOnItemClickListener(this);

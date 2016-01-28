@@ -247,7 +247,7 @@ public class ProfileActivity extends ToolBarActivity<ProfilePresenter> implement
 
     private void showDatePicker() {
         DatePicker picker = new DatePicker(this);
-        picker.setRange(1980, 2015);//年份范围
+        picker.setRange(1900, 2015);//年份范围
         String yearStr = user.Birthday.substring(0, 4);
         String monthStr = user.Birthday.substring(5, 7);
         String dayStr = user.Birthday.substring(8, 10);

@@ -84,7 +84,7 @@ public class VideoDetail2Activity extends RecycleViewActivity<VideoDetailPresent
 
     /**
      * @param savedInstanceState 缓存数据
-     *                           <p/>
+     *                           <p>
      */
     @Override
     protected void initThings(Bundle savedInstanceState) {

@@ -344,13 +344,13 @@ public class FFmpegRecorderActivity extends Activity implements OnClickListener,
         flashIcon = (Button) findViewById(R.id.recorder_flashlight);
         switchCameraIcon = (Button) findViewById(R.id.recorder_frontcamera);
         flashIcon.setOnClickListener(this);
-//        _ImgBack = (ImageView) findViewById(R.id.img_back);
-//        _ImgBack.setOnClickListener(new OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                onBackPressed();
-//            }
-//        });
+        _ImgBack = (ImageView) findViewById(R.id.img_back);
+        _ImgBack.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                onBackPressed();
+            }
+        });
 
 
         if (getPackageManager().hasSystemFeature(PackageManager.FEATURE_CAMERA_FRONT)) {

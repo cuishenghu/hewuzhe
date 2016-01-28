@@ -1,13 +1,14 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
+                xmlns:tools="http://schemas.android.com/tools"
+                android:layout_width="match_parent" android:layout_height="match_parent"
                 android:background="@color/colorBg">
 
-    <FrameLayout android:layout_width="match_parent"
+    <FrameLayout android:id="@+id/lay_toolbar"
+                 android:layout_width="match_parent"
                  android:layout_height="?attr/actionBarSize"
-                 android:id="@+id/lay_toolbar"
                  android:background="@color/colorPrimary"
-                 android:orientation="horizontal">
+                 android:orientation="horizontal"
+                 android:visibility="gone">
 
         <ImageView
             android:id="@+id/img_back"
@@ -33,10 +34,10 @@
     <RelativeLayout
         android:id="@+id/recorder_flashlight_parent"
         android:layout_width="match_parent"
-        android:layout_below="@id/lay_toolbar"
         android:layout_height="56dp"
+        android:layout_below="@id/lay_toolbar"
         android:background="#222222"
-        android:visibility="gone">
+        android:visibility="visible">
 
         <TextView
             android:id="@+id/txtTimer"
@@ -48,23 +49,26 @@
 
         <Button
             android:id="@+id/recorder_flashlight"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="31dp"
+            android:layout_height="31dp"
             android:layout_centerVertical="true"
             android:layout_marginLeft="112dp"
             android:background="@drawable/btn_recorder_flashlight"
-            android:visibility="gone"/>
+            android:padding="10dp"
+            android:visibility="gone"
+            tools:visibility="visible"/>
 
         <Button
             android:id="@+id/recorder_frontcamera"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="35dp"
+            android:layout_height="32dp"
             android:layout_alignParentRight="true"
             android:layout_centerVertical="true"
             android:layout_marginRight="112dp"
             android:layout_toLeftOf="@id/recorder_flashlight"
             android:background="@drawable/btn_recorder_frontcamera"
-            android:visibility="gone"/>
+            android:visibility="gone"
+            tools:visibility="visible"/>
     </RelativeLayout>
 
     <com.qd.recorder.ProgressView

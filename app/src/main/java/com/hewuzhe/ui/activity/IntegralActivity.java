@@ -33,7 +33,6 @@ public class IntegralActivity extends SwipeRecycleViewActivity<IntegralPresenter
     @Override
     protected void initThings(Bundle savedInstanceState) {
         super.initThings(savedInstanceState);
-
         user = new SessionUtil(getContext())
                 .getUser();
 
@@ -91,11 +90,7 @@ public class IntegralActivity extends SwipeRecycleViewActivity<IntegralPresenter
 
     @Override
     public void bindData(ArrayList<IntegralRecord> data) {
-        if (page == 1) {
-            adapter.data.clear();
-        }
-        adapter.data.addAll(data);
-        adapter.notifyDataSetChanged();
+        bd(data);
     }
 
 
@@ -104,7 +99,7 @@ public class IntegralActivity extends SwipeRecycleViewActivity<IntegralPresenter
      */
     @Override
     protected IntegralRecordAdapter provideAdapter() {
-        header = getLayoutInflater().inflate(R.layout.header_integral, recyclerView, false);
+        header = getLayoutInflater().inflate(R.layout.header_integral, null);
         return new IntegralRecordAdapter(getContext(), header);
     }
 
@@ -115,6 +110,7 @@ public class IntegralActivity extends SwipeRecycleViewActivity<IntegralPresenter
     protected RecyclerView.LayoutManager provideLayoutManager() {
         return new LinearLayoutManager(getContext());
     }
+
 
     /**
      * @param view

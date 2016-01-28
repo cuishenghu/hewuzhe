@@ -30,6 +30,8 @@ import com.hewuzhe.utils.SessionUtil;
 import com.hewuzhe.utils.StringUtil;
 import com.hewuzhe.view.ArticleView;
 
+import org.sufficientlysecure.htmltextview.HtmlTextView;
+
 import java.io.File;
 import java.util.ArrayList;
 
@@ -41,7 +43,7 @@ public class FederalConditionDetailActivity extends RecycleViewActivity<ArticleP
 
     private TextView tvName;
     private TextView tvFroms;
-    private TextView tvContent;
+    private HtmlTextView tvContent;
     private ImageView imgPraise;
     private TextView tvPraiseCount;
     private TextView tvPageViews;
@@ -86,10 +88,9 @@ public class FederalConditionDetailActivity extends RecycleViewActivity<ArticleP
     }
 
     private void initHeader() {
-
         tvName = (TextView) header.findViewById(R.id.tv_name);
         tvFroms = (TextView) header.findViewById(R.id.tv_froms);
-        tvContent = (TextView) header.findViewById(R.id.tv_content);
+        tvContent = (HtmlTextView) header.findViewById(R.id.tv_content);
         imgPraise = (ImageView) header.findViewById(R.id.img_praise);
         tvPraiseCount = (TextView) header.findViewById(R.id.tv_praise_count);
         tvPageViews = (TextView) header.findViewById(R.id.tv_page_views);
@@ -98,8 +99,6 @@ public class FederalConditionDetailActivity extends RecycleViewActivity<ArticleP
         imgAvatar2 = (ImageView) header.findViewById(R.id.img_avatar_2);
         btnPublish = (Button) header.findViewById(R.id.btn_publish);
         edtComment = (EditText) header.findViewById(R.id.edt_comment);
-
-
     }
 
     /**
@@ -160,7 +159,10 @@ public class FederalConditionDetailActivity extends RecycleViewActivity<ArticleP
         tvTitle.setText(StringUtil.isEmpty(getIntentData().getString("title")) ? article.Title : getIntentData().getString("title"));
         tvName.setText(article.Title);
         _content = article.Content;
-        tvContent.setText(Html.fromHtml(_content, new MyImageGetter(), null));
+        HtmlTextView.RemoteImageGetter remoteGetter = new HtmlTextView.RemoteImageGetter();
+        remoteGetter.baseUrl = C.BASE_URL;
+        tvContent.setHtmlFromString(_content, remoteGetter);
+//      tvContent.setText(Html.fromHtml(_content, new MyImageGetter(), null));
 //      tvContent.loadUrl("http://www.baidu.com");
 
         tvFroms.setText("来自：" + article.Category + "  " + article.PublishTime);

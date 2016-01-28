@@ -34,7 +34,7 @@ public abstract class SwipeRecycleViewFragment<P extends RefreshAndLoadMorePrese
     protected void initThings(View view) {
         super.initThings(view);
         this.layoutManager = provideLayoutManager();
-        recyclerView.setLayoutManager(provideLayoutManager());
+        recyclerView.setLayoutManager(layoutManager);
 
         this.adapter = provideAdapter();
         recyclerView.setAdapter(adapter);

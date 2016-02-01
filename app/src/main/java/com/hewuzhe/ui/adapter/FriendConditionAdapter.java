@@ -18,7 +18,6 @@ import com.hewuzhe.model.Comment;
 import com.hewuzhe.model.FriendCondition;
 import com.hewuzhe.model.Pic;
 import com.hewuzhe.presenter.adapter.ConditionPresenter;
-import com.hewuzhe.ui.activity.BasicVideoActivity;
 import com.hewuzhe.ui.activity.PicsActivity;
 import com.hewuzhe.ui.adapter.base.BaseAdapter;
 import com.hewuzhe.ui.cons.C;
@@ -129,9 +128,6 @@ public class FriendConditionAdapter extends BaseAdapter<FriendConditionAdapter.V
             holder._LayImg.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    Intent intent = new Intent(context, BasicVideoActivity.class);
-                    intent.putExtra("data", new Bun().putString("videoPath", condition.VideoPath).ok());
-                    context.startActivity(intent);
 
                 }
             });

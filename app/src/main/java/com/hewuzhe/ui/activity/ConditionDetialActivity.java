@@ -230,9 +230,6 @@ public class ConditionDetialActivity extends SwipeRecycleViewActivity<ConditonDe
                 @Override
                 public void onClick(View view) {
                     {
-                        Intent intent = new Intent(getContext(), BasicVideoActivity.class);
-                        intent.putExtra("data", new Bun().putString("videoPath", condition.VideoPath).ok());
-                        getContext().startActivity(intent);
 
                     }
                 }

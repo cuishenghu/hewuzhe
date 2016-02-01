@@ -121,7 +121,6 @@ public class MegaGameDetailActivity extends ToolBarActivity<MegaGameDetailPresen
                     @Override
                     public void onClick(View view) {
                         User user = new SessionUtil(getContext()).getUser();
-                        startActivity(MegaVideoDetailActivity.class, new Bun().putInt("id", getIntentData().getInt("id")).putInt("teamid", user.TeamId).putInt("userid", user.Id).ok());
                     }
                 });
 
@@ -196,7 +195,6 @@ public class MegaGameDetailActivity extends ToolBarActivity<MegaGameDetailPresen
                 @Override
                 public void onClick(View view) {
                     User user = new SessionUtil(getContext()).getUser();
-                    startActivity(MegaVideoDetailActivity.class, new Bun().putInt("id", getIntentData().getInt("id")).putInt("teamid", user.TeamId).putInt("userid", user.Id).ok());
                 }
             });
 

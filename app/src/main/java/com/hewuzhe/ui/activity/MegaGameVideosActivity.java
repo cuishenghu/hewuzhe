@@ -139,7 +139,6 @@ public class MegaGameVideosActivity extends SwipeRecycleViewActivity<MegaGameVid
      */
     @Override
     public void onItemClick(View view, int pos, MegaGameVideo item) {
-        startActivity(MegaVideoDetailActivity.class, new Bun().putInt("id", getIntentData().getInt("id")).putInt("teamid", item.TeamId).putInt("userid", item.UserId).ok());
     }
 
     @Override

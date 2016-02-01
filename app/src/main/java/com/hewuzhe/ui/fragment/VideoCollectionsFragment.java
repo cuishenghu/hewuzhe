@@ -9,13 +9,10 @@ import android.view.View;
 import com.hewuzhe.R;
 import com.hewuzhe.model.Video;
 import com.hewuzhe.presenter.VideoCollectionPresenter;
-import com.hewuzhe.ui.activity.VideoDetail2Activity;
-import com.hewuzhe.ui.activity.VideoDetailActivity;
 import com.hewuzhe.ui.adapter.GridItemDecoration;
 import com.hewuzhe.ui.adapter.Videos2Adapter;
 import com.hewuzhe.ui.base.SwipeRecycleViewFragment;
 import com.hewuzhe.ui.cons.C;
-import com.hewuzhe.utils.Bun;
 import com.hewuzhe.utils.NU;
 import com.hewuzhe.utils.SessionUtil;
 import com.hewuzhe.view.VideoCollectionsView;
@@ -124,9 +121,6 @@ public class VideoCollectionsFragment extends SwipeRecycleViewFragment<VideoColl
              * 进入详情页
              * */
             if (item.PublisherId != 0) {
-                startActivity(VideoDetail2Activity.class, new Bun().putInt("Id", item.MessageId).ok());
-            } else {
-                startActivity(VideoDetailActivity.class, new Bun().putInt("Id", item.MessageId).ok());
             }
 
         }

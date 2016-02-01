@@ -1,5 +1,6 @@
 package com.hewuzhe.view;
 
+import com.hewuzhe.model.AboutUs;
 import com.hewuzhe.view.base.BaseView;
 
 /**
@@ -7,7 +8,9 @@ import com.hewuzhe.view.base.BaseView;
  */
 public interface WarriorFragmentView extends BaseView {
 
-    public  void setUserData();
+    void setUserData();
 
     void isWuYou(Boolean data, int userid);
+
+    void setIndexImg(AboutUs data);
 }

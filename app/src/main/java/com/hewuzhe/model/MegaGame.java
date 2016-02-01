@@ -6,7 +6,7 @@ import android.os.Parcelable;
 /**
  * Created by xianguangjin on 15/12/31.
  */
-public class MegaGame implements Parcelable{
+public class MegaGame implements Parcelable {
 
 
     public static final int STATUS_READY = 1;
@@ -47,6 +47,13 @@ public class MegaGame implements Parcelable{
 
     public boolean IsJoin;
     public String Phone;
+    /**
+     * Lat : 35.091954
+     * Lng : 118.408965
+     */
+
+    public String Lat;
+    public String Lng;
 
 
     @Override
@@ -70,6 +77,8 @@ public class MegaGame implements Parcelable{
         dest.writeInt(this.status);
         dest.writeByte(IsJoin ? (byte) 1 : (byte) 0);
         dest.writeString(this.Phone);
+        dest.writeString(this.Lat);
+        dest.writeString(this.Lng);
     }
 
     public MegaGame() {
@@ -90,6 +99,8 @@ public class MegaGame implements Parcelable{
         this.status = in.readInt();
         this.IsJoin = in.readByte() != 0;
         this.Phone = in.readString();
+        this.Lat = in.readString();
+        this.Lng = in.readString();
     }
 
     public static final Creator<MegaGame> CREATOR = new Creator<MegaGame>() {

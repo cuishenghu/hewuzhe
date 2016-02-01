@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.pm.ActivityInfo;
 import android.content.res.Configuration;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
@@ -42,6 +43,8 @@ import cn.sharesdk.framework.ShareSDK;
 import cn.sharesdk.onekeyshare.OnekeyShare;
 import io.vov.vitamio.LibsChecker;
 import io.vov.vitamio.widget.VideoView;
+import materialdialogs.DialogAction;
+import materialdialogs.MaterialDialog;
 
 public class VideoDetailActivity extends RecycleViewActivity<VideoDetailPresenter, CommentAdapter, Comment> implements VideoDetailView {
 
@@ -100,7 +103,6 @@ public class VideoDetailActivity extends RecycleViewActivity<VideoDetailPresente
         windowManager = (WindowManager) getSystemService(Context.WINDOW_SERVICE);
         id = getIntentData().getInt("Id");
         presenter.getVideoDetail(id);
-        presenter.getOtherVideos(id);
         presenter.getData(page, count);
     }
 
@@ -307,16 +309,30 @@ public class VideoDetailActivity extends RecycleViewActivity<VideoDetailPresente
     @Override
     public void setData(Video video) {
         _Video = video;
+        presenter.getOtherVideos(_Video.UserId, id);
+
         final int position = 0;
 
+        if (video.UserId == 0) {
+            tvAddTime.setText("播放" + video.VisitNum + "次");
 
-        Glide.with(getContext())
-                .load(C.BASE_URL + video.PhotoPath)
-                .placeholder(R.mipmap.img_avatar)
-                .centerCrop()
-                .crossFade()
-                .transform(new GlideCircleTransform(getContext()))
-                .into(imgAvatar);
+            Glide.with(getContext())
+                    .load(R.mipmap.ic_launcher)
+                    .placeholder(R.mipmap.img_avatar)
+                    .centerCrop()
+                    .crossFade()
+                    .transform(new GlideCircleTransform(getContext()))
+                    .into(imgAvatar);
+        } else {
+            tvAddTime.setText("发布于" + TimeUtil.timeAgo(video.PublishTime));
+            Glide.with(getContext())
+                    .load(C.BASE_URL + video.PhotoPath)
+                    .placeholder(R.mipmap.img_avatar)
+                    .centerCrop()
+                    .crossFade()
+                    .transform(new GlideCircleTransform(getContext()))
+                    .into(imgAvatar);
+        }
 
         Glide.with(getContext())
                 .load(C.BASE_URL + new SessionUtil(getContext()).getUser().PhotoPath)
@@ -328,7 +344,7 @@ public class VideoDetailActivity extends RecycleViewActivity<VideoDetailPresente
 
         tvUsername.setText(video.UserNicName);
 
-        if (video.IsLike) {
+        if (video.Islike) {
             imgPraise.setImageResource(R.mipmap.icon_praise_focus);
             imgPraise.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -336,17 +352,14 @@ public class VideoDetailActivity extends RecycleViewActivity<VideoDetailPresente
                     presenter.collectAndFavorateCance(id, 2, view);
                 }
             });
-
         } else {
             imgPraise.setImageResource(R.mipmap.icon_praise);
-
             imgPraise.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
                     presenter.collectAndOther(id, 2, view, position, "");
                 }
             });
-
         }
 
         if (video.IsFavorite) {
@@ -356,7 +369,6 @@ public class VideoDetailActivity extends RecycleViewActivity<VideoDetailPresente
                 @Override
                 public void onClick(View view) {
                     presenter.collectAndFavorateCance(id, 1, view);
-
                 }
             });
 
@@ -366,24 +378,20 @@ public class VideoDetailActivity extends RecycleViewActivity<VideoDetailPresente
                 @Override
                 public void onClick(View view) {
                     presenter.collectAndOther(id, 1, view, position, "");
-
                 }
             });
-
         }
-
 
         imgTranspond.setImageResource(R.mipmap.icon_share);
         imgTranspond.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                presenter.collectAndFavorateCance(id, 0, view);
+                presenter.collectAndOther(id, 0, view, position, "");
             }
         });
 
         tvTitle.setText(video.Title);
         tvUsername.setText(video.UserNicName);
-        tvAddTime.setText("发布于" + TimeUtil.timeAgo(video.PublishTime));
         tvDesc.setText("简介：" + video.Content);
         if (video.CommentNum <= 0) {
             tvCommentCount.setText("暂无评论");
@@ -393,7 +401,6 @@ public class VideoDetailActivity extends RecycleViewActivity<VideoDetailPresente
 
         if (!LibsChecker.checkVitamioLibs(this))
             return;
-
 
 //        if (video.UpLoadType == 0) {
 //            ViewGroup.LayoutParams params = videoController.getLayoutParams();
@@ -449,13 +456,20 @@ public class VideoDetailActivity extends RecycleViewActivity<VideoDetailPresente
         OtherVideosAdapter otherAdapter = new OtherVideosAdapter(getContext());
         otherAdapter.setOnItemClickListener(new OnItemClickListener() {
             @Override
-            public void onItemClick(View view, int pos, Object item) {
-                Video video = (Video) item;
-                id = video.Id;
-                presenter.getVideoDetail(id);
-                presenter.getOtherVideos(id);
-                page = 1;
-                presenter.getData(page, count);
+            public void onItemClick(View view, int pos, final Object item) {
+
+                showDefautInfoDialog("提示", "要切换视频吗？", new MaterialDialog.SingleButtonCallback() {
+                    @Override
+                    public void onClick(@NonNull MaterialDialog dialog, @NonNull DialogAction which) {
+                        Video video = (Video) item;
+                        id = video.Id;
+                        presenter.getVideoDetail(id);
+                        page = 1;
+                        presenter.getData(page, count);
+                    }
+                });
+
+
             }
         });
         reOthers.setAdapter(otherAdapter);
@@ -478,14 +492,16 @@ public class VideoDetailActivity extends RecycleViewActivity<VideoDetailPresente
     public void collectAndOther(boolean b, int flag, final int position) {
         switch (flag) {
             case 0:
-                imgTranspond.setImageResource(R.mipmap.icon_share_focus);
-                imgTranspond.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View view) {
-                        presenter.collectAndFavorateCance(id, 0, view);
+//                imgTranspond.setImageResource(R.mipmap.icon_share_focus);
+//                imgTranspond.setOnClickListener(new View.OnClickListener() {
+//                    @Override
+//                    public void onClick(View view) {
+//                        presenter.collectAndFavorateCance(id, 0, view);
+//
+//                    }
+//                });
 
-                    }
-                });
+                snb("转发成功", imgAvatar);
                 break;
             case 1:
                 if (b) {

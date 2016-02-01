@@ -48,7 +48,7 @@
                       android:layout_height="wrap_content"
                       android:layout_marginLeft="18px"
                       android:layout_toRightOf="@id/img_avatar"
-                      android:text="成龙"
+                      android:text=""
                       android:textColor="@color/white"
                       android:textSize="30px"/>
 

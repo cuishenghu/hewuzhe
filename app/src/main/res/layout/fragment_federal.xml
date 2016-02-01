@@ -292,10 +292,30 @@
 
             <TextView android:layout_width="wrap_content"
                       android:layout_height="wrap_content"
-                      android:layout_weight="1"
                       android:text="武者大赛"
                       android:textColor="@color/white"
                       android:textSize="30px"/>
+
+            <TextView android:id="@+id/tv_megagame_unread_count"
+                      style="@style/text_25_white"
+                      android:layout_width="18dp"
+                      android:layout_height="18dp"
+                      android:layout_gravity="center_vertical"
+                      android:layout_marginLeft="18px"
+                      android:background="@drawable/circle_red"
+                      android:gravity="center"
+                      android:text="1"
+                      android:visibility="gone"
+                      tools:visibility="visible"/>
+
+            <TextView android:layout_width="wrap_content"
+                      android:layout_height="wrap_content"
+                      android:layout_weight="1"
+                      android:text=""
+                      android:textColor="@color/white"
+                      android:textSize="30px"
+                      android:visibility="invisible"/>
+
 
             <ImageView android:layout_width="40dp"
                        android:layout_height="40dp"

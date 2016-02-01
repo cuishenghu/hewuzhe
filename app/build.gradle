@@ -13,8 +13,8 @@ android {
         applicationId "com.hewuzhe"
         minSdkVersion 16
         targetSdkVersion 23
-        versionCode 1
-        versionName "1.0"
+        versionCode 5
+        versionName "1.0.4"
         multiDexEnabled true
 
         ndk {
@@ -66,6 +66,7 @@ android {
 dependencies {
     compile fileTree(include: ['*.jar'], dir: 'libs')
     compile files('libs/zxing.jar')
+    compile files('libs/pgyer_sdk_2.2.2.jar')
     compile files('libs/MobTools.jar')
     compile files('libs/locSDK_6.22.jar')
     compile files('libs/baidumapapi_search_v3_6_1.jar')

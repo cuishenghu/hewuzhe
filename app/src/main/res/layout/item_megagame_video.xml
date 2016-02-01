@@ -44,6 +44,23 @@
             android:textSize="25px"/>
 
 
+        <TextView
+            android:id="@+id/tv_time"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="right|center_vertical"
+            android:layout_marginRight="10px"
+            android:layout_marginTop="18px"
+            android:background="@drawable/bg_transparent_deep"
+            android:paddingBottom="5px"
+            android:paddingLeft="8px"
+            android:paddingRight="8px"
+            android:paddingTop="5px"
+            android:text="001"
+            android:textColor="@color/white"
+            android:textSize="25px"/>
+
+
     </FrameLayout>
 
     <LinearLayout android:layout_width="match_parent"
@@ -67,7 +84,7 @@
                       android:layout_height="wrap_content"
                       android:layout_marginLeft="20px"
                       android:singleLine="true"
-                      android:text="成龙徒弟"
+                      android:text="徒弟"
                 />
 
             <TextView android:id="@+id/tv_count"

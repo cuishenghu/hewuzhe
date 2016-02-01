@@ -57,7 +57,7 @@
                     android:layout_gravity="center_vertical|right"
                     android:layout_marginRight="10px"
                     android:visibility="gone"
-                    android:text="消息列表"
+                    android:text="评论回复"
                     android:textColor="@android:color/white"
                     android:textSize="17sp"/>
 
@@ -103,7 +103,7 @@
                         android:layout_weight="1"
                         android:gravity="center_vertical|right"
                         android:padding="5px"
-                        android:text="成龙"
+                        android:text=""
                         android:textColor="@color/white"
                         android:textSize="28px"/>
 

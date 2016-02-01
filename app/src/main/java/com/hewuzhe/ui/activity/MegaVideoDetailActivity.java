@@ -69,6 +69,7 @@ public class MegaVideoDetailActivity extends RecycleViewActivity<MegaVideoDetail
     private int userid;
     private Button btnPost;
     private LinearLayout layVote;
+    private MegaVideo _Video;
 
     @Override
     protected int provideContentViewId() {
@@ -231,6 +232,7 @@ public class MegaVideoDetailActivity extends RecycleViewActivity<MegaVideoDetail
 
     @Override
     public void setData(MegaVideo video) {
+        _Video = video;
 
         Glide.with(getContext())
                 .load(C.BASE_URL + new SessionUtil(getContext()).getUser().PhotoPath)
@@ -307,6 +309,9 @@ public class MegaVideoDetailActivity extends RecycleViewActivity<MegaVideoDetail
     public void voteSuccess() {
         btnPost.setText("已投票");
         btnPost.setEnabled(false);
+        _Video.VoteNum++;
+
+        tvTotal.setText("已获得票数：" + _Video.VoteNum);
     }
 
     @Override

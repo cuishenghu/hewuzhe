@@ -58,8 +58,8 @@ public class Video {
      * Islike : false
      */
 
-    public boolean Islike=false;
-    public boolean IsFavorite=false;
+    public boolean Islike = false;
+    public boolean IsFavorite = false;
 
 
     /**
@@ -76,14 +76,15 @@ public class Video {
     public int RepeatNum;
     public boolean IsRecommend;
     public boolean IsLike;
-    public boolean IsRepeat=false;
+    public boolean IsRepeat = false;
 
 
     /**
      * UpLoadType : 0
      */
 
-    public int UpLoadType=0;//0是你选择手机中的视频
+    public int UpLoadType = 0;//0是你选择手机中的视频
     public int PublisherId;
-    public boolean isChecked=false;
+    public boolean isChecked = false;
+
 }

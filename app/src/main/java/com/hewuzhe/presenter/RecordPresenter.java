@@ -32,7 +32,7 @@ public class RecordPresenter extends RefreshAndLoadMorePresenter<RecordView> {
 
     public void getData(final int page, final int count) {
         Subscription subscription = NetEngine.getService()
-                .GetUpRecord(page, count, view.getData())
+                .GetUpRecord((page - 1) * count, count, view.getData())
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new SB<Res<ArrayList<Record>>>() {

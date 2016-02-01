@@ -21,7 +21,7 @@
             app:contentInsetLeft="0dp"
             app:contentInsetStart="0dp"
             app:layout_scrollFlags="scroll|enterAlways"
-        >
+            >
 
             <FrameLayout android:layout_width="match_parent"
                          android:layout_height="match_parent"
@@ -35,7 +35,7 @@
                     android:padding="13dp"
                     android:src="@mipmap/icon_person"
                     android:visibility="gone"
-                />
+                    />
 
                 <TextView
                     android:id="@+id/tv_title"
@@ -46,6 +46,16 @@
                     android:textColor="@android:color/white"
                     android:textSize="20sp"/>
 
+                <ImageView
+                    android:id="@+id/img_search"
+                    android:layout_width="48dp"
+                    android:layout_height="48dp"
+                    android:layout_gravity="center_vertical|right"
+                    android:layout_marginRight="48dp"
+                    android:padding="12dp"
+                    android:src="@mipmap/icon_search"
+                    />
+
 
                 <ImageView
                     android:id="@+id/img_add"
@@ -54,7 +64,7 @@
                     android:layout_gravity="center_vertical|right"
                     android:padding="10dp"
                     android:src="@mipmap/icon_camera"
-                />
+                    />
             </FrameLayout>
 
         </android.support.v7.widget.Toolbar>
@@ -64,8 +74,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@color/colorListBg"
-            app:tabIndicatorColor="@color/colorYellow"
             app:tabGravity="fill"
+            app:tabIndicatorColor="@color/colorYellow"
             app:tabMode="fixed"
             app:tabSelectedTextColor="@color/colorYellow"
             app:tabTextColor="@color/white"/>

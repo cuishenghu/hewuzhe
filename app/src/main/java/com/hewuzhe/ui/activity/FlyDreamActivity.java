@@ -27,6 +27,7 @@ public class FlyDreamActivity extends ToolBarActivity<FlyDreamPresenter> impleme
     ImageView _Img;
     @Bind(R.id.tv_desc)
     TextView _TvDesc;
+    private boolean isEditing = false;
 
     @Override
     protected int provideContentViewId() {
@@ -41,18 +42,17 @@ public class FlyDreamActivity extends ToolBarActivity<FlyDreamPresenter> impleme
 
     }
 
-
     /**
      * @param savedInstanceState 缓存数据
-     *                           <p>
+     *                           <p/>
      *                           初始化一些事情
      */
     @Override
     protected void initThings(Bundle savedInstanceState) {
         super.initThings(savedInstanceState);
+        tvAction.setText("编辑");
         presenter.setData();
         presenter.getHeader();
-
     }
 
     /**
@@ -78,8 +78,20 @@ public class FlyDreamActivity extends ToolBarActivity<FlyDreamPresenter> impleme
     @Override
     protected void action() {
         super.action();
-        presenter.UpdateMyDream(tvAction);
+        if (isEditing) {
+            edtMyDream.setEnabled(true);
+            edtToDo.setEnabled(true);
+            isEditing = true;
+            tvAction.setText("确定");
+        } else {
+            tvAction.setText("编辑");
+            isEditing = false;
+            edtMyDream.setEnabled(false);
+            edtToDo.setEnabled(false);
+            presenter.UpdateMyDream(tvAction);
+        }
     }
+
 
     @Override
     public MyDream getDate() {

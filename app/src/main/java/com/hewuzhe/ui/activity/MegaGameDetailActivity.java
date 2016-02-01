@@ -183,6 +183,7 @@ public class MegaGameDetailActivity extends ToolBarActivity<MegaGameDetailPresen
 
         if (!TimeUtil.timeComparedNow(megaGame.MatchTimeStart) && TimeUtil.timeComparedNow(megaGame.MatchTimeEnd)) {
             //比赛进行中
+
             megaGame.status = MegaGame.STATUS_ING;
 //            if (megaGame.IsJoin) {
             if (MegaGameActivity.PAGE == 0) {
@@ -199,7 +200,7 @@ public class MegaGameDetailActivity extends ToolBarActivity<MegaGameDetailPresen
                 }
             });
 
-            imgAction.setVisibility(View.VISIBLE);
+            imgAction.setVisibility(View.GONE);
             imgAction.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
@@ -263,11 +264,11 @@ public class MegaGameDetailActivity extends ToolBarActivity<MegaGameDetailPresen
             megaGame.status = MegaGame.STATUS_FINISHED;
             _BtnMyVideo.setText("活动结束");
             _BtnMyVideo.setEnabled(false);
-            _BtnOthers.setText("投票结果");
+            _BtnOthers.setText("投票排名");
             _BtnOthers.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    startActivity(MegaGameVideosActivity.class, new Bun().putInt("id", id).ok());
+                    startActivity(MegaGameVideosActivity.class, new Bun().putInt("id", id).putString("title", "投票排名").ok());
                 }
             });
         }
@@ -275,6 +276,14 @@ public class MegaGameDetailActivity extends ToolBarActivity<MegaGameDetailPresen
         _TvName.setText(megaGame.Name);
         _TvDesc.setText(megaGame.Introduction);
         _TvAddress.setText(megaGame.MatchAddress);
+
+        _TvAddress.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(BasicMapActivity.class, new Bun().putString("title", "大赛位置").putString("name", megaGame.Name).putString("address", megaGame.MatchAddress).putString("lat", megaGame.Lat).putString("lng", megaGame.Lng).ok());
+
+            }
+        });
         _TvApplyEnd.setText(megaGame.EnrollTimeEnd);
         _TvApplyEndTwo.setText(megaGame.EnrollTimeEnd);
         _TvTimeEnd.setText(TimeUtil.timeFormatTwo(megaGame.MatchTimeEnd));

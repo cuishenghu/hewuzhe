@@ -4,13 +4,13 @@ import android.support.design.widget.TabLayout;
 import android.support.v4.view.ViewPager;
 
 import com.hewuzhe.R;
-import com.hewuzhe.presenter.base.BasePresenterImp;
+import com.hewuzhe.presenter.MegaGamesPresenter;
 import com.hewuzhe.ui.adapter.MyViewPagerAdapter;
 import com.hewuzhe.ui.base.TabToolBarActivity;
 import com.hewuzhe.ui.fragment.MegaGameFragment;
 import com.hewuzhe.utils.Bun;
 
-public class MegaGameActivity extends TabToolBarActivity {
+public class MegaGameActivity extends TabToolBarActivity<MegaGamesPresenter> {
     public static int PAGE = 0;
 
     @Override
@@ -30,8 +30,8 @@ public class MegaGameActivity extends TabToolBarActivity {
      * 绑定Presenter
      */
     @Override
-    public BasePresenterImp createPresenter() {
-        return null;
+    public MegaGamesPresenter createPresenter() {
+        return new MegaGamesPresenter();
     }
 
 
@@ -52,6 +52,8 @@ public class MegaGameActivity extends TabToolBarActivity {
         viewPagerAdapter.addFragment(MegaGameFragment.newInstance(new Bun().putString("path", "SelectMatchPageByTeam").ok()), "战队赛事");
         mViewPager.setAdapter(viewPagerAdapter);
 
+        mViewPager.setOffscreenPageLimit(0);
+
         TabLayout mTabLayout = (TabLayout) findViewById(R.id.tabLayout);
         mTabLayout.addTab(mTabLayout.newTab().setText("武者大赛"));//给TabLayout添加Tab
         mTabLayout.addTab(mTabLayout.newTab().setText("战队赛事"));
@@ -67,6 +69,7 @@ public class MegaGameActivity extends TabToolBarActivity {
             @Override
             public void onPageSelected(int position) {
                 PAGE = position;
+                presenter.DeleteNoReadMatch();
 
             }
 

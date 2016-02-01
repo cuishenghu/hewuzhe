@@ -22,6 +22,7 @@ import com.hewuzhe.R;
 import com.hewuzhe.ui.activity.MemberActivity;
 import com.hewuzhe.utils.DataTypeUtils;
 import com.hewuzhe.utils.TimeUtil;
+import com.socks.library.KLog;
 
 import io.vov.vitamio.MediaPlayer;
 import io.vov.vitamio.widget.VideoView;
@@ -30,7 +31,7 @@ import materialdesign.views.ProgressWheel;
 /**
  * Created by sunger on 15/11/7.
  */
-public class VideoControllerView extends FrameLayout implements View.OnTouchListener, MediaPlayer.OnBufferingUpdateListener, MediaPlayer.OnPreparedListener, MediaPlayer.OnCompletionListener, SeekBar.OnSeekBarChangeListener {
+public class VideoControllerView extends FrameLayout implements View.OnTouchListener, MediaPlayer.OnBufferingUpdateListener, MediaPlayer.OnPreparedListener, MediaPlayer.OnCompletionListener, SeekBar.OnSeekBarChangeListener, MediaPlayer.OnInfoListener {
     private static final long delayMillis = 2000;
     private static final int MSG_PROGRESS_CHANGE = 2;
     private VideoView mVideoView;
@@ -95,8 +96,9 @@ public class VideoControllerView extends FrameLayout implements View.OnTouchList
         mVideoView = findView(R.id.videoView);
         mVideoView.setOnTouchListener(this);
         mVideoView.setOnPreparedListener(this);
-        mVideoView.setBufferSize(1024);
+        mVideoView.setBufferSize(2048);
         mVideoView.setOnBufferingUpdateListener(this);
+        mVideoView.setOnInfoListener(this);
 
         mVideoView.setOnCompletionListener(this);
         tvCurDuration = findView(R.id.tv_cur_duration);
@@ -243,11 +245,12 @@ public class VideoControllerView extends FrameLayout implements View.OnTouchList
     @Override
     public void onBufferingUpdate(MediaPlayer mp, int percent) {
         mProgressWheel.setText(percent + "%");
-        if (percent >= 30 || percent <= 0) {
-            mProgressWheel.setVisibility(View.INVISIBLE);
-        } else {
-            mProgressWheel.setVisibility(View.VISIBLE);
-        }
+        KLog.d("percent:" + percent);
+//        if (percent >= 30 || percent <= 0) {
+//            mProgressWheel.setVisibility(View.INVISIBLE);
+//        } else {
+//            mProgressWheel.setVisibility(View.VISIBLE);
+//        }
     }
 
 
@@ -285,6 +288,35 @@ public class VideoControllerView extends FrameLayout implements View.OnTouchList
         mVideoView.seekTo(seekBar.getProgress());
         updateTimeTask();
         Log.d("VideoControllerView", "seekBar.getProgress():" + seekBar.getProgress());
+    }
+
+    /**
+     * Called to indicate an info or a warning.
+     *
+     * @param mp    the MediaPlayer the info pertains to.
+     * @param what  the type of info or warning.
+     *              <ul>
+     *              <li>{@link #MEDIA_INFO_VIDEO_TRACK_LAGGING}
+     *              <li>{@link #MEDIA_INFO_BUFFERING_START}
+     *              <li>{@link #MEDIA_INFO_BUFFERING_END}
+     *              <li>{@link #MEDIA_INFO_NOT_SEEKABLE}
+     *              <li>{@link #MEDIA_INFO_DOWNLOAD_RATE_CHANGED}
+     *              </ul>
+     * @param extra an extra code, specific to the info. Typically implementation
+     *              dependant.
+     * @return True if the method handled the info, false if it didn't.
+     * Returning false, or not having an OnErrorListener at all, will
+     * cause the info to be discarded.
+     */
+    @Override
+    public boolean onInfo(MediaPlayer mp, int what, int extra) {
+        KLog.d("what:" + what);
+        if (what == MediaPlayer.MEDIA_INFO_BUFFERING_END) {
+            mProgressWheel.setVisibility(View.INVISIBLE);
+        } else if (what == MediaPlayer.MEDIA_INFO_BUFFERING_START) {
+            mProgressWheel.setVisibility(View.VISIBLE);
+        }
+        return false;
     }
 
     public interface OnFullScreenBtnClick {

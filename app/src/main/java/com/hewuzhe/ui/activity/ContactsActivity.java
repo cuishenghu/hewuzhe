@@ -86,6 +86,7 @@ public class ContactsActivity extends ToolBarActivity<FriendsPresenter> implemen
 
         tvTitle.requestFocus();
 
+
         imgAction.setImageResource(R.mipmap.icon_add);
 
         _Indexview.setTipTv(_TvRecyclerindexviewTip);
@@ -93,6 +94,7 @@ public class ContactsActivity extends ToolBarActivity<FriendsPresenter> implemen
         mLayoutManager.setOrientation(LinearLayoutManager.VERTICAL);
         _RecyclerView.setLayoutManager(mLayoutManager);
         mAdapter = new RecyclerIndexFriendsAdapter(_RecyclerView);
+        _RecyclerView.setAdapter(mAdapter);
 
         showDialog();
         presenter.getFriends();
@@ -185,7 +187,6 @@ public class ContactsActivity extends ToolBarActivity<FriendsPresenter> implemen
     }
 
     private void search(String keyWord) {
-
         hideSoftMethod(_EdtSearchContent);
 
         for (Friend friend : _Friends) {
@@ -200,8 +201,6 @@ public class ContactsActivity extends ToolBarActivity<FriendsPresenter> implemen
         if (_NewFriends.size() > 0) {
             _TvRecyclerindexviewTopc.setText(mAdapter.getItem(0).topc);
         }
-
-
     }
 
     /**
@@ -235,10 +234,12 @@ public class ContactsActivity extends ToolBarActivity<FriendsPresenter> implemen
     @Override
     public void bindData(ArrayList<Friend> friends) {
         _Friends = friends;
-        mAdapter.clear();
-        mAdapter.setDatas(friends);
         _RecyclerView.setAdapter(mAdapter);
-        _TvRecyclerindexviewTopc.setText(mAdapter.getItem(0).topc);
+//        mAdapter.getDatas().clear();
+//        mAdapter.getDatas().addAll(_Friends);
+//        mAdapter.notifyDataSetChanged();
+        mAdapter.setDatas(friends);
+//      _TvRecyclerindexviewTopc.setText(mAdapter.getItem(0).topc);
     }
 
     @Override
@@ -267,9 +268,8 @@ public class ContactsActivity extends ToolBarActivity<FriendsPresenter> implemen
     @Override
     protected void onResume() {
         super.onResume();
-
         if (!isFirstRun) {
-            presenter.getFriends();
+//            presenter.getFriends();
         } else {
             isFirstRun = false;
         }

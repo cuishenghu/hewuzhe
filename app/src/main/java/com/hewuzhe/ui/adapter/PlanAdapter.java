@@ -69,7 +69,7 @@ public class PlanAdapter extends BaseAdapter<PlanAdapter.VHolder, Plan, BasePres
         final Plan plan = data.get(position);
         holder._TvTitle.setText(plan.Title);
         holder._TvConent.setText(plan.Content);
-        holder._TvAddTime.setText(TimeUtil.timeAgo(plan.PublishTime));
+        holder._TvAddTime.setText(TimeUtil.timeFormatThree(plan.PublishTime));
         holder._TvPlanTime.setText(TimeUtil.timeFormatTwo(plan.StartTime) + "-" + TimeUtil.timeFormatTwo(plan.EndTime));
 
         holder._CbPlan.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {

@@ -56,7 +56,6 @@ public class DojoRecommendAdapter extends BaseAdapter<DojoRecommendAdapter.ViewH
         Dojo dojo = data.get(position);
 
         holder.tvDesc.setText(dojo.Content);
-
         holder.tvLoc.setText(getAddress(dojo.Address));
         holder.tvName.setText(dojo.Title);
         holder.tvCall.setText(dojo.TelePhone);
@@ -72,7 +71,6 @@ public class DojoRecommendAdapter extends BaseAdapter<DojoRecommendAdapter.ViewH
     private String getAddress(String address) {
 
         if (!StringUtil.isEmpty(address)) {
-
             int index = address.indexOf(",");
             return address.substring(index + 1);
         } else {

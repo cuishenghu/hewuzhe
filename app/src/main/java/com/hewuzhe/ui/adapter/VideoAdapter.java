@@ -72,6 +72,7 @@ public class VideoAdapter extends BaseAdapter<VideoAdapter.ViewHolder, Video, Ba
 
         holder.tvTitle.setText(video.Title);
 
+
         Glide.with(context)
                 .load(C.BASE_URL + video.ImagePath)
                 .centerCrop()
@@ -79,13 +80,27 @@ public class VideoAdapter extends BaseAdapter<VideoAdapter.ViewHolder, Video, Ba
                 .placeholder(R.mipmap.img_bg_videio)
                 .into(holder.imgBg);
 
-        Glide.with(context)
-                .load(C.BASE_URL + video.PhotoPath)
-                .centerCrop()
-                .crossFade()
-                .transform(new GlideCircleTransform(context))
-                .placeholder(R.mipmap.img_avatar)
-                .into(holder.imgAvatar);
+        if (video.UserId == 0) {
+//            holder.imgAvatar.setImageResource(R.mipmap.ic_launcher);
+
+            Glide.with(context)
+                    .load(R.mipmap.ic_launcher)
+                    .centerCrop()
+                    .crossFade()
+                    .transform(new GlideCircleTransform(context))
+                    .placeholder(R.mipmap.img_avatar)
+                    .into(holder.imgAvatar);
+
+
+        } else {
+            Glide.with(context)
+                    .load(C.BASE_URL + video.PhotoPath)
+                    .centerCrop()
+                    .crossFade()
+                    .transform(new GlideCircleTransform(context))
+                    .placeholder(R.mipmap.img_avatar)
+                    .into(holder.imgAvatar);
+        }
 
 
     }

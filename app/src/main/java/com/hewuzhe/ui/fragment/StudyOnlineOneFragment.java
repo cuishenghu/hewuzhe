@@ -50,7 +50,6 @@ public class StudyOnlineOneFragment extends BaseFragment<StudyOnlineFragPresente
 
     }
 
-
     /**
      * 初始化事件监听者
      */
@@ -68,7 +67,6 @@ public class StudyOnlineOneFragment extends BaseFragment<StudyOnlineFragPresente
     protected void initThings(View view) {
         id = getArguments().getInt("id");
         presenter.getCates(id);
-
         orderedSelectedPatterns();
 
     }

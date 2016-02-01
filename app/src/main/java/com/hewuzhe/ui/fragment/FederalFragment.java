@@ -33,6 +33,7 @@ import com.hewuzhe.utils.SessionUtil;
 import com.hewuzhe.view.FederalView;
 
 import java.util.Timer;
+import java.util.TimerTask;
 
 import butterknife.Bind;
 import de.greenrobot.event.EventBus;
@@ -79,6 +80,8 @@ public class FederalFragment extends BaseFragment<FederalPresenter> implements F
     TextView _TvUnreadCount;
     @Bind(R.id.tv_friend_unread_count)
     TextView _TvFriendUnreadCount;
+    @Bind(R.id.tv_megagame_unread_count)
+    TextView _TvMegaGameUnreadCount;
     @Bind(R.id.lay_msg)
     FrameLayout _LayMsg;
     private ImageView imgBack;
@@ -222,16 +225,27 @@ public class FederalFragment extends BaseFragment<FederalPresenter> implements F
             }
         }, 1000);
 
+        presenter.GetNoReadCommentNumByUserId();
+        presenter.SelectNoReadMatch();
+    }
 
-//        timer = new Timer();
+    private void startTask() {
+        timer = new Timer();
+        timer.schedule(new TimerTask() {
+            @Override
+            public void run() {
+                presenter.GetNoReadCommentNumByUserId();
+                presenter.SelectNoReadMatch();
+            }
+        }, 1000, 1500);
+    }
 
-//        timer.schedule(new TimerTask() {
-//            @Override
-//            public void run() {
-//                presenter.getNoReads();
-//
-//            }
-//        }, 1000, 2000);
+
+    private void stopTask() {
+        if (timer != null) {
+            timer.cancel();
+            timer = null;
+        }
     }
 
     /**
@@ -276,10 +290,33 @@ public class FederalFragment extends BaseFragment<FederalPresenter> implements F
     }
 
     @Override
-    public void onResume() {
-        super.onResume();
-        presenter.GetNoReadCommentNumByUserId();
+    public void updateMegaGameNoReadNum(int count) {
+        if (count > 0) {
+            _TvMegaGameUnreadCount.setVisibility(View.VISIBLE);
+            _TvMegaGameUnreadCount.setText(count + "");
+        } else {
+            _TvMegaGameUnreadCount.setVisibility(View.GONE);
+        }
     }
 
+    @Override
+    public void onHiddenChanged(boolean hidden) {
+        super.onHiddenChanged(hidden);
+        if (!hidden) {
+            presenter.GetNoReadCommentNumByUserId();
+            presenter.SelectNoReadMatch();
+        }
+    }
+
+//    @Override
+//    public void onResume() {
+//        super.onResume();
+//        startTask();
+//    }
+//
+//    @Override
+//    public void onPause() {
+//        super.onPause();
+//    }
 
 }

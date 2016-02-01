@@ -85,7 +85,6 @@ public class BasicWebActivity extends ToolBarActivity {
             }
         };
         _PayWeb.setWebChromeClient(webChromeClient);
-
     }
 
     /**

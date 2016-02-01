@@ -70,6 +70,7 @@ public class PublishPlanActivity extends ListActivity<PublishPlanPresenter, Pick
     private int id = -1;
     private int days = 30;
     private ArrayList<Pic> pics = new ArrayList<>();
+    private int maxSize = 6;
 
     /**
      * @return 提供标题
@@ -146,6 +147,7 @@ public class PublishPlanActivity extends ListActivity<PublishPlanPresenter, Pick
             catName = "年计划";
 
         }
+
 
         start = TimeUtil.getCurrentDayFormat();
         end = TimeUtil.getDayAfterFormat(days);
@@ -321,6 +323,8 @@ public class PublishPlanActivity extends ListActivity<PublishPlanPresenter, Pick
 //        }
 
 
+        maxSize = 6 - adapter.data.size();
+
         ImageConfig imageConfig = new ImageConfig.Builder(new GlideLoader())
                 .steepToolBarColor(getResources().getColor(R.color.colorPrimary))
                 .titleBgColor(getResources().getColor(R.color.colorPrimary))
@@ -329,7 +333,7 @@ public class PublishPlanActivity extends ListActivity<PublishPlanPresenter, Pick
                         // 开启多选   （默认为多选）
                 .mutiSelect()
                         // 多选时的最大数量   （默认 9 张）
-                .mutiSelectMaxSize(6)
+                .mutiSelectMaxSize(maxSize)
                         // 开启拍照功能 （默认关闭）
                 .showCamera()
                         // 已选择的图片路径
@@ -345,6 +349,13 @@ public class PublishPlanActivity extends ListActivity<PublishPlanPresenter, Pick
 
 
     private void takePicture() {
+
+        if (adapter.data.size() >= 6) {
+            snb("图片限制最多6张", _EdtContent);
+
+            return;
+        }
+
         chooserType = ChooserType.REQUEST_CAPTURE_PICTURE;
         imageChooserManager = new ImageChooserManager(this,
                 ChooserType.REQUEST_CAPTURE_PICTURE, true);

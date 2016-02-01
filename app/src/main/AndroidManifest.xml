@@ -105,6 +105,12 @@
             android:value="3argexb6r2qhe"/>
 
 
+        <meta-data
+            android:name="PGYER_APPID"
+            android:value="ce73a5d040f864fe9cee2e1b89065be8">
+        </meta-data>
+
+
         <!-- <service android:name="com.amap.api.location.APSService"/> -->
 
         <meta-data
@@ -167,20 +173,37 @@
         </activity>
         <activity
             android:name=".ui.activity.VideoDetailActivity"
-            android:configChanges="keyboardHidden|orientation|screenSize">
+            android:configChanges="keyboardHidden|orientation|screenSize"
+            android:windowSoftInputMode="adjustPan"
+            >
         </activity>
         <activity
             android:name=".ui.activity.VideoDetail2Activity"
-            android:configChanges="keyboardHidden|orientation|screenSize">
+            android:configChanges="keyboardHidden|orientation|screenSize"
+            android:windowSoftInputMode="adjustPan"
+            >
         </activity>
         <activity android:name=".ui.activity.TakeVideoActivity">
         </activity>
         <activity android:name=".ui.activity.PublishVideoActivity">
         </activity>
-        <activity android:name=".ui.activity.FederalConditionDetailActivity">
+        <activity android:name=".ui.activity.FederalConditionDetailActivity"
+                  android:windowSoftInputMode="stateHidden|adjustPan">
         </activity>
         <activity
             android:name=".ui.activity.PublishPlanActivity"
+            android:windowSoftInputMode="stateHidden|adjustPan">
+        </activity>
+        <activity
+            android:name=".ui.activity.SearchVideosActivity"
+            android:windowSoftInputMode="stateHidden|adjustPan">
+        </activity>
+        <activity
+            android:name=".ui.activity.SearchOnlineVideosActivity"
+            android:windowSoftInputMode="stateHidden|adjustPan">
+        </activity>
+        <activity
+            android:name=".ui.activity.SearchCatVideosActivity"
             android:windowSoftInputMode="stateHidden|adjustPan">
         </activity>
         <activity android:name=".ui.activity.NavigateActivity">

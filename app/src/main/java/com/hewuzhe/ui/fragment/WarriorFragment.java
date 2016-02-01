@@ -8,6 +8,7 @@ import android.support.v4.app.ActivityOptionsCompat;
 import android.support.v4.app.Fragment;
 import android.util.Log;
 import android.view.View;
+import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -15,11 +16,13 @@ import android.widget.TextView;
 import com.bumptech.glide.Glide;
 import com.google.gson.Gson;
 import com.hewuzhe.R;
+import com.hewuzhe.model.AboutUs;
 import com.hewuzhe.model.User;
 import com.hewuzhe.model.Weather;
 import com.hewuzhe.presenter.WarriorFragmentPresenter;
 import com.hewuzhe.ui.App;
 import com.hewuzhe.ui.activity.BasicMapActivity;
+import com.hewuzhe.ui.activity.BasicWebActivity;
 import com.hewuzhe.ui.activity.DoJoRecommendActivity;
 import com.hewuzhe.ui.activity.FlyDreamActivity;
 import com.hewuzhe.ui.activity.FriendProfileActivity;
@@ -42,6 +45,7 @@ import com.hewuzhe.utils.SPUtil;
 import com.hewuzhe.utils.SessionUtil;
 import com.hewuzhe.utils.StringUtil;
 import com.hewuzhe.view.WarriorFragmentView;
+import com.pgyersdk.update.PgyUpdateManager;
 import com.zhy.http.okhttp.OkHttpUtils;
 import com.zhy.http.okhttp.callback.StringCallback;
 
@@ -50,6 +54,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import butterknife.Bind;
+import butterknife.ButterKnife;
 import io.rong.imkit.RongIM;
 import io.rong.imlib.RongIMClient;
 import io.rong.imlib.model.Conversation;
@@ -111,6 +116,12 @@ public class WarriorFragment extends ToolBarFragment<WarriorFragmentPresenter> i
     TextView tvIntegral;
     @Bind(R.id.tv_level_name)
     TextView tvLevelName;
+    @Bind(R.id.img_index)
+    ImageView _ImgIndex;
+    @Bind(R.id.img_index_del)
+    ImageView _ImgIndexDel;
+    @Bind(R.id.lay_index_img)
+    FrameLayout _LayIndexImg;
     private View rootView;
     private User user;
     private boolean isHasSetRongIM = false;
@@ -171,8 +182,10 @@ public class WarriorFragment extends ToolBarFragment<WarriorFragmentPresenter> i
 //        initLoc();
 
 
+        PgyUpdateManager.register(getActivity());
         getWeather();
 
+        presenter.getIndexImg();
     }
 
     private void getWeather() {
@@ -353,6 +366,29 @@ public class WarriorFragment extends ToolBarFragment<WarriorFragmentPresenter> i
     }
 
     @Override
+    public void setIndexImg(final AboutUs data) {
+        Glide.with(getActivity())
+                .load(C.BASE_URL + data.IndexImage)
+                .fitCenter()
+                .crossFade()
+                .into(_ImgIndex);
+
+        _LayIndexImg.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(BasicWebActivity.class, new Bun().putString("url", data.ImageUrl).putString("title", "首页广告").ok());
+            }
+        });
+
+        _ImgIndexDel.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                _LayIndexImg.setVisibility(View.GONE);
+            }
+        });
+    }
+
+    @Override
     public boolean canBack() {
         return false;
     }
@@ -455,10 +491,8 @@ public class WarriorFragment extends ToolBarFragment<WarriorFragmentPresenter> i
             presenter.getUserInfo(Integer.parseInt(s));
             return null;
         } else {
-
             return new UserInfo(s, u.NicName, Uri.parse(C.BASE_URL + u.PhotoPath));
         }
-
     }
 
 
@@ -466,12 +500,10 @@ public class WarriorFragment extends ToolBarFragment<WarriorFragmentPresenter> i
     public Group getGroupInfo(String s) {
 //      User u = new Select().from(com.hewuzhe.model.Group.class).where("Id=" + s).executeSingle();
         User u = null;
-
         if (u == null) {
             presenter.getGroup(Integer.parseInt(s));
             return null;
         } else {
-
             return new Group(s, u.NicName, Uri.parse(C.BASE_URL + u.PhotoPath));
         }
     }
@@ -486,7 +518,6 @@ public class WarriorFragment extends ToolBarFragment<WarriorFragmentPresenter> i
         } else {
             presenter.isWuyou(id);
         }
-
 
         return false;
     }
@@ -539,6 +570,13 @@ public class WarriorFragment extends ToolBarFragment<WarriorFragmentPresenter> i
     @Override
     public boolean onMessageLongClick(Context context, View view, Message message) {
         return false;
+    }
+
+
+    @Override
+    public void onDestroyView() {
+        super.onDestroyView();
+        ButterKnife.unbind(this);
     }
 
 

@@ -15,6 +15,7 @@ import com.hewuzhe.R;
 import com.hewuzhe.presenter.base.BasePresenterImp;
 import com.hewuzhe.ui.activity.MainActivity;
 import com.hewuzhe.ui.activity.PublishVideoActivity;
+import com.hewuzhe.ui.activity.SearchVideosActivity;
 import com.hewuzhe.ui.adapter.MyViewPagerAdapter;
 import com.hewuzhe.ui.base.BaseFragment;
 import com.hewuzhe.ui.cons.C;
@@ -37,6 +38,8 @@ public class PowerFragment extends BaseFragment implements PowerView, VideoChoos
     protected Toolbar toolBar;
     @Bind(R.id.img_add)
     ImageView imgAdd;
+    @Bind(R.id.img_search)
+    ImageView imgSearch;
     private ImageView imgBack;
     private TextView tvTitle;
     private AppBarLayout appBar;
@@ -69,6 +72,13 @@ public class PowerFragment extends BaseFragment implements PowerView, VideoChoos
     @Override
     protected void initThings(View view) {
         initToolBar(view);
+
+        imgSearch.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(SearchVideosActivity.class, new Bun().putString("title", "搜索").ok());
+            }
+        });
 
     }
 

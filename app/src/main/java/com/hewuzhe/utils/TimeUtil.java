@@ -213,9 +213,56 @@ public class TimeUtil {
             e.printStackTrace();
             return "";
         }
-
-
     }
+
+
+    public static String timeFormatThree(String timeStr) {
+        Date date = null;
+        if (StringUtil.isEmpty(timeStr)) {
+            return "";
+        }
+        try {
+            SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+            date = format.parse(timeStr);
+            SimpleDateFormat formatReverse = new SimpleDateFormat("HH:mm");
+            return formatReverse.format(date);
+        } catch (ParseException e) {
+            e.printStackTrace();
+            return "";
+        }
+    }
+
+    public static String timeFormatFour(String timeStr) {
+        Date date = null;
+        if (StringUtil.isEmpty(timeStr)) {
+            return "";
+        }
+        try {
+            SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+            date = format.parse(timeStr);
+            SimpleDateFormat formatReverse = new SimpleDateFormat("MM-dd HH:mm");
+            return formatReverse.format(date);
+        } catch (ParseException e) {
+            e.printStackTrace();
+            return "";
+        }
+    }
+    public static String timeFormatFive(String timeStr) {
+        Date date = null;
+        if (StringUtil.isEmpty(timeStr)) {
+            return "";
+        }
+        try {
+            SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+            date = format.parse(timeStr);
+            SimpleDateFormat formatReverse = new SimpleDateFormat("MM-dHH:mm");
+            return formatReverse.format(date);
+        } catch (ParseException e) {
+            e.printStackTrace();
+            return "";
+        }
+    }
+
 
     /**
      * @param timeStr

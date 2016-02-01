@@ -17,6 +17,7 @@ import com.hewuzhe.ui.cons.C;
 import com.hewuzhe.utils.NU;
 import com.hewuzhe.utils.StringUtil;
 import com.hewuzhe.view.base.BaseView;
+import com.pgyersdk.crash.PgyCrashManager;
 import com.zhy.autolayout.AutoLayoutActivity;
 
 import butterknife.ButterKnife;
@@ -76,7 +77,7 @@ public abstract class BaseActivity<P extends BasePresenterImp> extends AutoLayou
         setContentView(provideContentViewId());
         ButterKnife.bind(this);
 
-//        PgyCrashManager.register(this);
+        PgyCrashManager.register(this);
 
         this.presenter = createPresenter();
         if (presenter != null) {

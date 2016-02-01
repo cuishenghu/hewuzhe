@@ -2,7 +2,7 @@
 <selector xmlns:android="http://schemas.android.com/apk/res/android">
 
     <item android:drawable="@drawable/bg_color_line" android:state_pressed="true"/>
-    <item android:drawable="@drawable/bg_color_bg" android:state_pressed="false"/>
+    <item android:drawable="@drawable/bg_color_listbg" android:state_pressed="false"/>
     <item android:drawable="@drawable/bg_color_listbg"/>
 
 </selector>

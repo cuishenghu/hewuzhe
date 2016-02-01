@@ -22,7 +22,7 @@
             android:layout_marginLeft="8px"
             android:layout_marginTop="15px"
             android:layout_toRightOf="@id/img"
-            android:text="成龙"
+            android:text=""
             android:textColor="@color/white"
             android:textSize="28px"/>
 

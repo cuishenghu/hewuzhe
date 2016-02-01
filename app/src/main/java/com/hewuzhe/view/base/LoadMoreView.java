@@ -13,4 +13,9 @@ public interface LoadMoreView extends BaseView {
 
     void hasMore();
 
+    void loadMore(String tip);
+
+    void hasMore(String tip);
+
+    void noMore(String tip);
 }

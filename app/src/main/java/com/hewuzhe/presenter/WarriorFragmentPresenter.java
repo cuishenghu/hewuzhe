@@ -2,6 +2,7 @@ package com.hewuzhe.presenter;
 
 import android.net.Uri;
 
+import com.hewuzhe.model.AboutUs;
 import com.hewuzhe.model.Group;
 import com.hewuzhe.model.Res;
 import com.hewuzhe.model.User;
@@ -150,4 +151,30 @@ public class WarriorFragmentPresenter extends BasePresenterImp<WarriorFragmentVi
     }
 
 
+    public void getIndexImg() {
+        Subscription subscription = NetEngine.getService()
+                .GetAuoutUs()
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new SB<Res<AboutUs>>() {
+                    @Override
+                    public void next(Res<AboutUs> res) {
+                        if (res.code == C.OK) {
+                            view.setIndexImg(res.data);
+                        }
+
+                    }
+
+                    @Override
+                    public void onCompleted() {
+
+                    }
+
+                    @Override
+                    public void onError(Throwable e) {
+
+                    }
+                });
+        addSubscription(subscription);
+    }
 }

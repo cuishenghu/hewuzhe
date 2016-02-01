@@ -76,7 +76,7 @@ public class FriendConditionAdapter extends BaseAdapter<FriendConditionAdapter.V
 
         holder._TvUsername.setText(condition.NicName);
         holder._TvContent.setText(condition.Content);
-        holder._TvAddTime.setText(TimeUtil.timeAgo(condition.PublishTime));
+        holder._TvAddTime.setText(TimeUtil.timeFormatFour(condition.PublishTime));
         holder._TvPraise.setText(condition.LikeNum + "");
 
         Glide.with(context)

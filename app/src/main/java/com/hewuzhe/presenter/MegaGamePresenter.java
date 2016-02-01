@@ -3,9 +3,11 @@ package com.hewuzhe.presenter;
 import com.hewuzhe.model.MegaGame;
 import com.hewuzhe.model.Res;
 import com.hewuzhe.presenter.base.RefreshAndLoadMorePresenter;
+import com.hewuzhe.ui.activity.MegaGameActivity;
 import com.hewuzhe.ui.cons.C;
 import com.hewuzhe.utils.NetEngine;
 import com.hewuzhe.utils.SB;
+import com.hewuzhe.utils.SessionUtil;
 import com.hewuzhe.view.MegaGameView;
 
 import java.util.ArrayList;
@@ -50,4 +52,27 @@ public class MegaGamePresenter extends RefreshAndLoadMorePresenter<MegaGameView>
 
     }
 
+    public void DeleteNoReadMatch() {
+        Subscription subscription = NetEngine.getService()
+                .DeleteNoReadMatch(new SessionUtil(view.getContext()).getUserId(), MegaGameActivity.PAGE == 0 ? 1 : 0)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new SB<Res>() {
+                    @Override
+                    public void next(Res res) {
+
+                    }
+
+                    @Override
+                    public void onCompleted() {
+
+                    }
+
+                    @Override
+                    public void onError(Throwable e) {
+
+                    }
+                });
+        addSubscription(subscription);
+    }
 }

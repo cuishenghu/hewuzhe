@@ -7,35 +7,38 @@ import android.view.KeyEvent;
 import android.view.View;
 import android.view.inputmethod.EditorInfo;
 import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.hewuzhe.R;
-import com.hewuzhe.model.MegaGameVideo;
-import com.hewuzhe.model.MegaGameVideosRequest;
-import com.hewuzhe.presenter.MegaGameVideoPresenter;
+import com.hewuzhe.model.Video;
+import com.hewuzhe.presenter.SearchOnlineVideosPresenter;
 import com.hewuzhe.ui.adapter.GridItemDecoration;
-import com.hewuzhe.ui.adapter.MegaGameVideosAdapter;
+import com.hewuzhe.ui.adapter.Videos2Adapter;
 import com.hewuzhe.ui.base.SwipeRecycleViewActivity;
 import com.hewuzhe.utils.Bun;
-import com.hewuzhe.view.MegaGameVideosView;
+import com.hewuzhe.view.SearchVideosView;
 
 import java.util.ArrayList;
 
 import butterknife.Bind;
 
-public class MegaGameVideosActivity extends SwipeRecycleViewActivity<MegaGameVideoPresenter, MegaGameVideosAdapter, MegaGameVideo> implements MegaGameVideosView {
+public class SearchOnlineVideosActivity extends SwipeRecycleViewActivity<SearchOnlineVideosPresenter, Videos2Adapter, Video> implements SearchVideosView {
 
+    public static int CAT_ID = 0;
     @Bind(R.id.edt_search_content)
     EditText _EdtSearchContent;
-
-    private MegaGameVideosRequest megaGameVideosRequest;
+    @Bind(R.id.tv_tip)
+    TextView _TvTip;
+    @Bind(R.id.lay_no_data)
+    LinearLayout _LayNoData;
 
     /**
      * @return 提供Adapter
      */
     @Override
-    protected MegaGameVideosAdapter provideAdapter() {
-        return new MegaGameVideosAdapter(getContext());
+    protected Videos2Adapter provideAdapter() {
+        return new Videos2Adapter(getContext());
     }
 
     /**
@@ -43,9 +46,7 @@ public class MegaGameVideosActivity extends SwipeRecycleViewActivity<MegaGameVid
      */
     @Override
     protected RecyclerView.LayoutManager provideLayoutManager() {
-
         GridLayoutManager gridLayoutManager = new GridLayoutManager(getContext(), 2);
-
         gridLayoutManager.setSpanSizeLookup(new GridLayoutManager.SpanSizeLookup() {
             @Override
             public int getSpanSize(int position) {
@@ -78,57 +79,42 @@ public class MegaGameVideosActivity extends SwipeRecycleViewActivity<MegaGameVid
     }
 
 
-    @Override
-    public boolean canAction() {
-        return true;
-    }
-
-    @Override
-    protected void action() {
-        super.action();
-        startActivity(MegaGameDetailActivity.class, new Bun().putInt("id", getIntentData().getInt("id")).ok());
-
-    }
-
     /**
      * 初始化事件监听者
      */
     @Override
     public void initListeners() {
-
         _EdtSearchContent.setOnEditorActionListener(new TextView.OnEditorActionListener() {
             @Override
             public boolean onEditorAction(TextView textView, int i, KeyEvent keyEvent) {
                 if (i == EditorInfo.IME_ACTION_SEARCH) {
                     refresh(true);
-                    getData();
+                    presenter.getData(page, count);
                 }
                 return false;
             }
         });
-
     }
-
 
     @Override
     protected void initThings(Bundle savedInstanceState) {
         super.initThings(savedInstanceState);
-        tvAction.setText("赛事详情");
+        CAT_ID = getIntentData().getInt("catId", 0);
+        _EdtSearchContent.setHint("搜索视频名称");
+        showNoData(true, "嘛都没有~~");
         recyclerView.addItemDecoration(new GridItemDecoration(10, 2));
-        presenter.getData(page, count);
-
     }
 
     /**
      * 绑定Presenter
      */
     @Override
-    public MegaGameVideoPresenter createPresenter() {
-        return new MegaGameVideoPresenter();
+    public SearchOnlineVideosPresenter createPresenter() {
+        return new SearchOnlineVideosPresenter();
     }
 
     @Override
-    public void bindData(ArrayList<MegaGameVideo> data) {
+    public void bindData(ArrayList<Video> data) {
         bd(data);
     }
 
@@ -138,20 +124,28 @@ public class MegaGameVideosActivity extends SwipeRecycleViewActivity<MegaGameVid
      * @param item
      */
     @Override
-    public void onItemClick(View view, int pos, MegaGameVideo item) {
-        startActivity(MegaVideoDetailActivity.class, new Bun().putInt("id", getIntentData().getInt("id")).putInt("teamid", item.TeamId).putInt("userid", item.UserId).ok());
+    public void onItemClick(View view, int pos, Video item) {
+        if (item.UserId != 0) {
+            SearchOnlineVideosActivity.this.startActivity(VideoDetail2Activity.class, new Bun().putInt("Id", item.Id).ok());
+        } else {
+            SearchOnlineVideosActivity.this.startActivity(VideoDetailActivity.class, new Bun().putInt("Id", item.Id).ok());
+        }
     }
 
     @Override
-    public MegaGameVideosRequest getData() {
-        if (megaGameVideosRequest == null) {
-            megaGameVideosRequest = new MegaGameVideosRequest();
-        }
-        megaGameVideosRequest.matchId = getIntentData().getInt("id");
-        megaGameVideosRequest.nicname = _EdtSearchContent.getText().toString().trim();
-
-        return megaGameVideosRequest;
+    public String getData() {
+        String keyword = _EdtSearchContent.getText().toString().trim();
+        return keyword;
     }
 
+    @Override
+    public void showNoData(boolean isShow, String tip) {
+        if (isShow) {
+            _LayNoData.setVisibility(View.VISIBLE);
+            _TvTip.setText(tip);
+        } else {
+            _LayNoData.setVisibility(View.GONE);
 
+        }
+    }
 }

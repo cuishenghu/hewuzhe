@@ -18,7 +18,6 @@ import com.hewuzhe.ui.base.ToolBarActivity;
 import com.hewuzhe.ui.cons.C;
 import com.hewuzhe.ui.inter.OnItemClickListener;
 import com.hewuzhe.utils.Bun;
-import com.hewuzhe.utils.TimeUtil;
 import com.hewuzhe.view.PlanDetialView;
 
 import java.util.ArrayList;
@@ -44,8 +43,25 @@ public class PlanDetailActivity extends ToolBarActivity<PlanDetailPresenter> imp
      */
     @Override
     protected String provideTitle() {
-        return "计划详情";
+        return getMyTitle();
     }
+
+    private String getMyTitle() {
+
+        switch (TrainActivity.PAGE) {
+
+            case 0:
+                return "周计划";
+            case 1:
+                return "月计划";
+            case 2:
+                return "季计划";
+            case 3:
+                return "年计划";
+        }
+        return "";
+    }
+
 
     /**
      * @return 提供LayoutId
@@ -108,7 +124,7 @@ public class PlanDetailActivity extends ToolBarActivity<PlanDetailPresenter> imp
         item = plan;
         _TvName.setText(plan.Title);
         _TvContent.setText(plan.Content);
-        _TvTime.setText(TimeUtil.timeFormatTwo(plan.StartTime) + "-" + TimeUtil.timeFormatTwo(plan.EndTime));
+        _TvTime.setText(plan.StartTime + "-" + plan.EndTime);
 
         _RecyclerView.setLayoutManager(new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, false));
         final PlanImgsAdapter planImgsAdapter = new PlanImgsAdapter(getContext());

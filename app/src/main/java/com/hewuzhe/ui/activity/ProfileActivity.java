@@ -500,4 +500,19 @@ public class ProfileActivity extends ToolBarActivity<ProfilePresenter> implement
     public void hasMore() {
 
     }
+
+    @Override
+    public void loadMore(String tip) {
+
+    }
+
+    @Override
+    public void hasMore(String tip) {
+
+    }
+
+    @Override
+    public void noMore(String tip) {
+
+    }
 }

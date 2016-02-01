@@ -3,10 +3,11 @@ package com.hewuzhe.presenter;
 import com.hewuzhe.model.Res;
 import com.hewuzhe.model.Video;
 import com.hewuzhe.presenter.base.RefreshAndLoadMorePresenter;
+import com.hewuzhe.ui.activity.SearchCatVideosActivity;
 import com.hewuzhe.ui.cons.C;
 import com.hewuzhe.utils.NetEngine;
 import com.hewuzhe.utils.SB;
-import com.hewuzhe.view.Videos2View;
+import com.hewuzhe.view.SearchVideosView;
 
 import java.util.ArrayList;
 
@@ -15,15 +16,21 @@ import rx.android.schedulers.AndroidSchedulers;
 import rx.schedulers.Schedulers;
 
 /**
- * Created by xianguangjin on 15/12/22.
+ * Created by xianguangjin on 16/1/31.
  */
-public class Videos2Presenter extends RefreshAndLoadMorePresenter<Videos2View> {
+public class SearchCatVideosPresenter extends RefreshAndLoadMorePresenter<SearchVideosView> {
 
-
+    /**
+     * 获取数据
+     *
+     * @param page
+     * @param count
+     */
+    @Override
     public void getData(final int page, final int count) {
-        int catId = view.getData();
+        String keyword = view.getData();
         Subscription subscription = NetEngine.getService()
-                .GetOnlineStudyList((page - 1) * count, count, catId, "")
+                .SelectVideoByCategory((page - 1) * count, count, SearchCatVideosActivity.CAT_ID, keyword)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new SB<Res<ArrayList<Video>>>() {
@@ -32,9 +39,11 @@ public class Videos2Presenter extends RefreshAndLoadMorePresenter<Videos2View> {
                         if (res.code == C.OK) {
                             view.bindData(res.data);
                             setDataStatus(page, count, res);
+                            if (res.recordcount > 0) {
+                                view.showNoData(false, "什么都没有找到");
+                            }
 
                         } else {
-
 
                         }
                     }
@@ -51,6 +60,16 @@ public class Videos2Presenter extends RefreshAndLoadMorePresenter<Videos2View> {
                 });
 
         addSubscription(subscription);
+
+    }
+
+
+    @Override
+    public void setDataStatus(int page, int count, Res res) {
+        super.setDataStatus(page, count, res);
+        if (res.recordcount <= 0) {
+            view.showNoData(true, "什么都没有找到");
+        }
 
     }
 

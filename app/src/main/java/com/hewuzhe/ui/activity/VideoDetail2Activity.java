@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.pm.ActivityInfo;
 import android.content.res.Configuration;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
@@ -31,6 +32,7 @@ import com.hewuzhe.ui.widget.YsnowEditDialog;
 import com.hewuzhe.utils.Bun;
 import com.hewuzhe.utils.SessionUtil;
 import com.hewuzhe.utils.StringUtil;
+import com.hewuzhe.utils.TimeUtil;
 import com.hewuzhe.view.VideoDetailView;
 
 import java.util.ArrayList;
@@ -40,6 +42,8 @@ import cn.sharesdk.framework.ShareSDK;
 import cn.sharesdk.onekeyshare.OnekeyShare;
 import io.vov.vitamio.LibsChecker;
 import io.vov.vitamio.widget.VideoView;
+import materialdialogs.DialogAction;
+import materialdialogs.MaterialDialog;
 
 public class VideoDetail2Activity extends RecycleViewActivity<VideoDetailPresenter, CommentAdapter, Comment> implements VideoDetailView {
 
@@ -84,7 +88,7 @@ public class VideoDetail2Activity extends RecycleViewActivity<VideoDetailPresent
 
     /**
      * @param savedInstanceState 缓存数据
-     *                           <p>
+     *                           <p/>
      */
     @Override
     protected void initThings(Bundle savedInstanceState) {
@@ -96,7 +100,7 @@ public class VideoDetail2Activity extends RecycleViewActivity<VideoDetailPresent
         windowManager = (WindowManager) getSystemService(Context.WINDOW_SERVICE);
         id = getIntentData().getInt("Id");
         presenter.getVideoDetail(id);
-        presenter.getOtherVideos(id);
+
         presenter.getData(page, count);
     }
 
@@ -299,16 +303,33 @@ public class VideoDetail2Activity extends RecycleViewActivity<VideoDetailPresent
     @Override
     public void setData(Video video) {
         _Video = video;
+        presenter.getOtherVideos(_Video.UserId, id);
+
         final int position = 0;
 
-        Glide.with(getContext())
-                .load(C.BASE_URL + _Video.PhotoPath)
-                .placeholder(R.mipmap.img_avatar)
-                .centerCrop()
-                .crossFade()
-                .transform(new GlideCircleTransform(getContext()))
-                .into(imgAvatar);
+        if (video.UserId == 0) {
+            tvAddTime.setText("播放" + video.VisitNum + "次");
 
+            Glide.with(getContext())
+                    .load(R.mipmap.ic_launcher)
+                    .placeholder(R.mipmap.img_avatar)
+                    .centerCrop()
+                    .crossFade()
+                    .transform(new GlideCircleTransform(getContext()))
+                    .into(imgAvatar);
+
+        } else {
+
+            tvAddTime.setText("发布于" + TimeUtil.timeAgo(video.PublishTime));
+
+            Glide.with(getContext())
+                    .load(C.BASE_URL + _Video.PhotoPath)
+                    .placeholder(R.mipmap.img_avatar)
+                    .centerCrop()
+                    .crossFade()
+                    .transform(new GlideCircleTransform(getContext()))
+                    .into(imgAvatar);
+        }
 
         Glide.with(getContext())
                 .load(C.BASE_URL + new SessionUtil(getContext()).getUser().PhotoPath)
@@ -321,7 +342,7 @@ public class VideoDetail2Activity extends RecycleViewActivity<VideoDetailPresent
 
         tvUsername.setText(video.UserNicName);
 
-        if (video.IsLike) {
+        if (video.Islike) {
             imgPraise.setImageResource(R.mipmap.icon_praise_focus);
             imgPraise.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -329,17 +350,14 @@ public class VideoDetail2Activity extends RecycleViewActivity<VideoDetailPresent
                     presenter.collectAndFavorateCance(id, 2, view);
                 }
             });
-
         } else {
             imgPraise.setImageResource(R.mipmap.icon_praise);
-
             imgPraise.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
                     presenter.collectAndOther(id, 2, view, position, "");
                 }
             });
-
         }
 
         if (video.IsFavorite) {
@@ -349,33 +367,28 @@ public class VideoDetail2Activity extends RecycleViewActivity<VideoDetailPresent
                 @Override
                 public void onClick(View view) {
                     presenter.collectAndFavorateCance(id, 1, view);
-
                 }
             });
-
         } else {
             imgCollect.setImageResource(R.mipmap.icon_collect);
             imgCollect.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
                     presenter.collectAndOther(id, 1, view, position, "");
-
                 }
             });
-
         }
 
         imgTranspond.setImageResource(R.mipmap.icon_share);
         imgTranspond.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                presenter.collectAndFavorateCance(id, 0, view);
+                presenter.collectAndOther(id, 0, view, position, "");
             }
         });
 
         tvTitle.setText(video.Title);
         tvUsername.setText(video.UserNicName);
-        tvAddTime.setText("播放" + video.VisitNum + "次");
         tvDesc.setText("简介：" + video.Content);
         if (video.CommentNum <= 0) {
             tvCommentCount.setText("暂无评论");
@@ -418,7 +431,7 @@ public class VideoDetail2Activity extends RecycleViewActivity<VideoDetailPresent
             }
         });
 
-        videoController.btnFullScreen.setVisibility(View.GONE);
+//        videoController.btnFullScreen.setVisibility(View.GONE);
         videoController.setVideoPath(C.BASE_URL + video.VideoPath);
         videoController.start();
 
@@ -433,15 +446,23 @@ public class VideoDetail2Activity extends RecycleViewActivity<VideoDetailPresent
         OtherVideosAdapter otherAdapter = new OtherVideosAdapter(getContext());
         otherAdapter.setOnItemClickListener(new OnItemClickListener() {
             @Override
-            public void onItemClick(View view, int pos, Object item) {
-                Video video = (Video) item;
-                id = video.Id;
-                presenter.getVideoDetail(id);
-                presenter.getOtherVideos(id);
-                page = 1;
-                presenter.getData(page, count);
+            public void onItemClick(View view, int pos, final Object item) {
+
+                showDefautInfoDialog("提示", "要切换视频吗？", new MaterialDialog.SingleButtonCallback() {
+                    @Override
+                    public void onClick(@NonNull MaterialDialog dialog, @NonNull DialogAction which) {
+                        Video video = (Video) item;
+                        id = video.Id;
+                        presenter.getVideoDetail(id);
+                        page = 1;
+                        presenter.getData(page, count);
+                    }
+                });
+
+
             }
         });
+
         reOthers.setAdapter(otherAdapter);
         if (videos != null && videos.size() > 0) {
             reOthers.setVisibility(View.VISIBLE);
@@ -462,14 +483,17 @@ public class VideoDetail2Activity extends RecycleViewActivity<VideoDetailPresent
     public void collectAndOther(boolean b, int flag, final int position) {
         switch (flag) {
             case 0:
-                imgTranspond.setImageResource(R.mipmap.icon_share_focus);
-                imgTranspond.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View view) {
-                        presenter.collectAndFavorateCance(id, 0, view);
+//                imgTranspond.setImageResource(R.mipmap.icon_share_focus);
+//                imgTranspond.setOnClickListener(new View.OnClickListener() {
+//                    @Override
+//                    public void onClick(View view) {
+//                        presenter.collectAndFavorateCance(id, 0, view);
+//
+//                    }
+//                });
 
-                    }
-                });
+                snb("转发成功", imgAvatar);
+
                 break;
             case 1:
                 if (b) {
@@ -568,7 +592,7 @@ public class VideoDetail2Activity extends RecycleViewActivity<VideoDetailPresent
             mLayout = VideoView.VIDEO_LAYOUT_FIT_PARENT;//原始尺寸
 
             ViewGroup.LayoutParams params = videoController.getLayoutParams();
-            params.height = StringUtil.dip2px(getContext(), 180);
+            params.height = StringUtil.dip2px(getContext(), 350);
             params.width = windowManager.getDefaultDisplay().getWidth();
             videoController.setLayoutParams(params);
         }

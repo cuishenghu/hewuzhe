@@ -9,4 +9,6 @@ public interface FederalView extends BaseView {
 
 
     void updateFriendNoReadNum(int count);
+
+    void updateMegaGameNoReadNum(int count);
 }

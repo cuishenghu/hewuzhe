@@ -30,11 +30,11 @@
                       android:layout_height="wrap_content"
                       android:layout_marginLeft="20px"
                       android:singleLine="true"
-                      android:text="成龙徒弟"
+                      android:text="徒弟"
                 />
 
             <TextView android:id="@+id/tv_join_time"
-                      style="@style/text_27_white"
+                      style="@style/text_25_white"
                       android:layout_width="match_parent"
                       android:layout_height="wrap_content"
                       android:layout_marginLeft="20px"
@@ -43,7 +43,7 @@
                 />
         </LinearLayout>
         <TextView android:id="@+id/tv_code"
-                  style="@style/text_27_white"
+                  style="@style/text_25_white"
                   android:layout_width="wrap_content"
                   android:layout_height="wrap_content"
                   android:layout_alignBottom="@id/lay_content"

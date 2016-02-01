@@ -68,7 +68,7 @@
                       android:layout_marginLeft="10px"
                       android:layout_weight="1"
                       android:singleLine="true"
-                      android:text="成龙"
+                      android:text=""
                       android:textColor="@color/white"
                       android:textSize="25px"/>
 

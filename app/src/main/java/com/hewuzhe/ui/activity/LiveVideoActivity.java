@@ -18,6 +18,7 @@ import com.hewuzhe.ui.base.ToolBarActivity;
 import com.hewuzhe.ui.cons.C;
 import com.hewuzhe.ui.widget.AutoScrollViewPager;
 import com.hewuzhe.utils.Bun;
+import com.hewuzhe.utils.TimeUtil;
 import com.hewuzhe.view.LiveVideoView;
 
 import java.util.ArrayList;
@@ -57,12 +58,6 @@ public class LiveVideoActivity extends ToolBarActivity<LiveVideoPresenter> imple
     @Override
     public void initListeners() {
 
-        _BtnOthers.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                startActivity(BasicWebActivity.class, new Bun().putString("title", "视频直播").putString("url", "http://115.28.67.86:8033/zhibo.aspx").ok());
-            }
-        });
     }
 
     @Override
@@ -120,6 +115,29 @@ public class LiveVideoActivity extends ToolBarActivity<LiveVideoPresenter> imple
         }
         _Viewpager.setAdapter(bee_pageAdapter);
 
+
+        if (TimeUtil.timeComparedNow(liveVideo.TimeStart)) {
+            //比赛未开始
+            _BtnOthers.setText("直播未开始");
+            _BtnOthers.setOnClickListener(null);
+        }
+
+        if (!TimeUtil.timeComparedNow(liveVideo.TimeStart) && TimeUtil.timeComparedNow(liveVideo.TimeEnd)) {
+            //比赛未结束,正在进行中
+            _BtnOthers.setText("正在直播");
+            _BtnOthers.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    startActivity(BasicWebActivity.class, new Bun().putString("title", "视频直播").putString("url", "http://115.28.67.86:8033/zhibo.aspx").ok());
+                }
+            });
+        }
+
+        if (!TimeUtil.timeComparedNow(liveVideo.TimeEnd)) {
+            //比赛已经结束
+            _BtnOthers.setText("直播已结束");
+            _BtnOthers.setOnClickListener(null);
+        }
 
     }
 }

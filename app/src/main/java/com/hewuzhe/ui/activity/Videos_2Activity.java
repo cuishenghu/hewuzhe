@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
+import android.widget.ImageView;
 
 import com.hewuzhe.R;
 import com.hewuzhe.model.Video;
@@ -16,11 +17,14 @@ import com.hewuzhe.view.Videos2View;
 
 import java.util.ArrayList;
 
+import butterknife.Bind;
+
 public class Videos_2Activity extends SwipeRecycleViewActivity<Videos2Presenter, Videos2Adapter, Video> implements Videos2View {
 
 
     private int catId;
-
+    @Bind(R.id.img_search)
+    ImageView imgSearch;
 
     @Override
     protected int provideContentViewId() {
@@ -37,6 +41,13 @@ public class Videos_2Activity extends SwipeRecycleViewActivity<Videos2Presenter,
         catId = getIntent().getIntExtra("id", 0);
         refresh(true);
         presenter.getData(page, count);
+
+        imgSearch.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(SearchOnlineVideosActivity.class, new Bun().putString("title", "搜索").putInt("catId", catId).ok());
+            }
+        });
     }
 
     /**
@@ -128,14 +139,10 @@ public class Videos_2Activity extends SwipeRecycleViewActivity<Videos2Presenter,
         } else {
             startActivity(VideoDetailActivity.class, new Bun().putInt("Id", item.Id).ok());
         }
-
     }
-
 
     @Override
     public Integer getData() {
         return catId;
     }
-
-
 }

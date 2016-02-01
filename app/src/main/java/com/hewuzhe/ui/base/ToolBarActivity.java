@@ -35,7 +35,7 @@ public abstract class ToolBarActivity<P extends BasePresenterImp> extends BaseAc
     /**
      * @return 提供标题
      */
-    abstract protected String provideTitle();
+    abstract protected CharSequence provideTitle();
 
     /**
      * @param savedInstanceState 缓存数据

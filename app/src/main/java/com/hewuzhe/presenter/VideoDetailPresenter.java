@@ -64,10 +64,10 @@ public class VideoDetailPresenter extends CommentPresenter<VideoDetailView> {
     /**
      * 获取其他视频
      */
-    public void getOtherVideos(int id) {
+    public void getOtherVideos(int userId, int id) {
 
         Subscription subscription = NetEngine.getService()
-                .GetOtherVideo(new SessionUtil(view.getContext()).getUser().Id, 3, id)
+                .GetOtherVideo(userId, 3, id)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new SB<Res<ArrayList<Video>>>() {
@@ -126,7 +126,7 @@ public class VideoDetailPresenter extends CommentPresenter<VideoDetailView> {
     public void collectAndFavorateCance(int id, final int flag, final View v) {
 
         view.showDialog();
-        NetEngine.getService()
+        Subscription subscription = NetEngine.getService()
                 .MessageRepeatAndFavoriteCancel(id, new SessionUtil(view.getContext()).getUser().Id, flag)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
@@ -138,13 +138,11 @@ public class VideoDetailPresenter extends CommentPresenter<VideoDetailView> {
                         } else {
                             view.snb("操作失败", v);
                         }
-
                     }
 
                     @Override
                     public void onCompleted() {
                         view.dismissDialog();
-
                     }
 
                     @Override
@@ -155,6 +153,7 @@ public class VideoDetailPresenter extends CommentPresenter<VideoDetailView> {
                     }
                 });
 
+        addSubscription(subscription);
     }
 
 

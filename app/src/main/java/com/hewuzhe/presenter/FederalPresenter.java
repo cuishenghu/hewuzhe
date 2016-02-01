@@ -51,16 +51,16 @@ public class FederalPresenter extends BasePresenterImp<FederalView> {
     }
 
 
-    public void SelectNoReadMatch(int flg) {
+    public void SelectNoReadMatch() {
         Subscription subscription = NetEngine.getService()
-                .SelectNoReadMatch(new SessionUtil(view.getContext()).getUserId(), flg)
+                .SelectNoReadMatch(new SessionUtil(view.getContext()).getUserId())
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new SB<Res>() {
                     @Override
                     public void next(Res res) {
                         if (res.code == C.OK) {
-                            view.updateFriendNoReadNum(res.count);
+                            view.updateMegaGameNoReadNum(res.count);
                         }
                     }
 

@@ -84,6 +84,13 @@ public class GroupMembersActivity extends RecycleViewActivity<GroupMembersPresen
             if (friend.NicName.contains(keyWord)) {
                 _NewFriends.add(friend);
             }
+
+            String mememberId = friend.Phone + "";
+
+            if (mememberId.contains(keyWord)) {
+                _NewFriends.add(friend);
+            }
+
         }
 
         adapter.addDatas(_NewFriends);
@@ -127,7 +134,7 @@ public class GroupMembersActivity extends RecycleViewActivity<GroupMembersPresen
      */
     @Override
     public void onItemClick(View view, int pos, Friend item) {
-        presenter.isWuyou(item.Id);
+        presenter.isWuyou(item.MemnerId);
     }
 
     @Override

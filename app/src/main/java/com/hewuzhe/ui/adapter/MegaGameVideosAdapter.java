@@ -74,8 +74,10 @@ public class MegaGameVideosAdapter extends BaseAdapter<MegaGameVideosAdapter.VHo
                 .crossFade()
                 .transform(new GlideCircleTransform(context))
                 .into(holder._ImgAvatar);
+
         holder._TvRank.setText(megaGameVideo.MatchCode + "");
-        holder._TvRankName.setText(megaGameVideo.UserRankName);
+        holder._TvTime.setText(megaGameVideo.MemberVideoDuration + "");
+        holder._TvRankName.setText("第" + position + "名");
         holder._TvUserName.setText(megaGameVideo.NicName);
         holder._TvCount.setText("得票数：" + megaGameVideo.VoteNum + "票");
 
@@ -107,6 +109,9 @@ public class MegaGameVideosAdapter extends BaseAdapter<MegaGameVideosAdapter.VHo
         @Nullable
         @Bind(R.id.tv_count)
         TextView _TvCount;
+        @Nullable
+        @Bind(R.id.tv_time)
+        TextView _TvTime;
 
         VHolder(View view) {
             super(view);

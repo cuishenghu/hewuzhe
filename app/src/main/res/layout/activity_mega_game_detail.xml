@@ -298,9 +298,10 @@
                       android:layout_width="wrap_content"
                       android:layout_height="wrap_content"
                       android:layout_marginBottom="10px"
-
                       android:paddingLeft="20px"
-                      android:text="介绍"/>
+
+                      android:text="介绍"
+                      tools:visibility="gone"/>
 
 
             <LinearLayout android:layout_width="match_parent"
@@ -333,9 +334,9 @@
                         style="@style/text_30_white"
                         android:layout_width="460px"
                         android:layout_height="wrap_content"
-                        android:visibility="gone"
                         android:background="@drawable/bg_selector_colorbg"
-                        android:text="联系电话"/>
+                        android:text="联系电话"
+                        android:visibility="gone"/>
 
 
             </LinearLayout>

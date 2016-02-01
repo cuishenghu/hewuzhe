@@ -43,6 +43,7 @@ public class MegaGameFragment extends SwipeRecycleViewFragment<MegaGamePresenter
         path = getArguments().getString("path");
         refresh(true);
         presenter.getData(page, count);
+        presenter.DeleteNoReadMatch();
     }
 
     /**
@@ -112,4 +113,5 @@ public class MegaGameFragment extends SwipeRecycleViewFragment<MegaGamePresenter
     public String getData() {
         return path;
     }
+
 }

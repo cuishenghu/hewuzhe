@@ -136,4 +136,25 @@ public abstract class SwipeRecycleViewActivity<P extends RefreshAndLoadMorePrese
     public void noMore() {
         adapter.noMore();
     }
+
+
+    @Override
+    public void loadMore(String tip) {
+        if (adapter.getStatus() == BaseAdapter.STATUS_HASMORE) {
+            page++;
+            presenter.getData(page, count);
+            adapter.loading(tip);
+        }
+    }
+
+    @Override
+    public void hasMore(String tip) {
+        adapter.hasMore(tip);
+    }
+
+    @Override
+    public void noMore(String tip) {
+        adapter.noMore(tip);
+    }
+
 }

@@ -28,6 +28,8 @@ public class MegaGameVideosTwoActivity extends SwipeRecycleViewActivity<MegaGame
     EditText _EdtSearchContent;
 
     private MegaGameVideosRequest megaGameVideosRequest;
+    private ArrayList<MegaGameVideo> _MegaGameVideos = new ArrayList<>();
+    private ArrayList<MegaGameVideo> _NewMegaGameVideos = new ArrayList<>();
 
     /**
      * @return 提供Adapter
@@ -80,13 +82,32 @@ public class MegaGameVideosTwoActivity extends SwipeRecycleViewActivity<MegaGame
             @Override
             public boolean onEditorAction(TextView textView, int i, KeyEvent keyEvent) {
                 if (i == EditorInfo.IME_ACTION_SEARCH) {
-                    refresh(true);
-                    getData();
+                    String keyWord = _EdtSearchContent.getText().toString().trim();
+                    search(keyWord);
+
                 }
                 return false;
             }
         });
 
+    }
+
+
+    private void search(String keyWord) {
+        hideSoftMethod(_EdtSearchContent);
+
+        for (MegaGameVideo megaGameVideo : _MegaGameVideos) {
+
+            if (megaGameVideo.NicName.contains(keyWord)) {
+                _NewMegaGameVideos.add(megaGameVideo);
+            }
+            String matchCode = megaGameVideo.MatchCode + "";
+            if (matchCode.contains(keyWord)) {
+                _NewMegaGameVideos.add(megaGameVideo);
+            }
+        }
+
+        adapter.addDatas(_NewMegaGameVideos);
     }
 
 
@@ -106,6 +127,7 @@ public class MegaGameVideosTwoActivity extends SwipeRecycleViewActivity<MegaGame
 
     @Override
     public void bindData(ArrayList<MegaGameVideo> data) {
+        _MegaGameVideos = data;
         bd(data);
     }
 

@@ -64,14 +64,13 @@
 
                 <TextView android:id="@+id/tv_loc"
                           style="@style/text_25_colorLine"
-                          android:layout_width="wrap_content"
+                          android:layout_width="match_parent"
                           android:layout_height="wrap_content"
-                          android:layout_marginLeft="8px"
+                          android:layout_marginLeft="3px"
                           android:layout_weight="1"
                           android:ellipsize="end"
-                          android:maxLength="6"
                           android:singleLine="true"
-                          android:text="临沂市..."/>
+                          android:text="临沂市临沂市临沂市临沂市..."/>
 
                 <ImageView android:layout_width="30px"
                            android:layout_height="30px"
@@ -80,7 +79,7 @@
 
                 <TextView android:id="@+id/tv_call"
                           style="@style/text_25_colorLine"
-                          android:layout_width="wrap_content"
+                          android:layout_width="match_parent"
                           android:layout_height="wrap_content"
                           android:layout_marginLeft="8px"
                           android:layout_weight="1"

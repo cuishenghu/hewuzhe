@@ -322,6 +322,25 @@ public abstract class BaseAdapter<VH extends RecyclerView.ViewHolder, M, P exten
         }
     }
 
+
+    public void loading(String tip) {
+        STATUS = STATUS_LOADING;
+        if (NU.notNull(tvStatus)) {
+
+            tvStatus.setText(tip);
+            progressView.setVisibility(View.VISIBLE);
+        }
+    }
+
+    public void hasMore(String tip) {
+        STATUS = STATUS_HASMORE;
+        if (NU.notNull(tvStatus)) {
+            tvStatus.setText(tip);
+            progressView.setVisibility(View.GONE);
+        }
+    }
+
+
     public void noMore(String tip) {
         STATUS = STATUS_NOMORE;
         if (NU.notNull(tvStatus)) {

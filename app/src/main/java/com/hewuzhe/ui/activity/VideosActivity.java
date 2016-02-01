@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
+import android.widget.ImageView;
 
 import com.hewuzhe.R;
 import com.hewuzhe.model.Video;
@@ -15,16 +16,31 @@ import com.hewuzhe.view.Videos2View;
 
 import java.util.ArrayList;
 
+import butterknife.Bind;
+
 public class VideosActivity extends SwipeRecycleViewActivity<VideosPresenter, VideoAdapter, Video> implements Videos2View {
 
 
     private int id;
+
+    @Bind(R.id.img_search)
+    ImageView imgSearch;
+
 
     @Override
     protected void initThings(Bundle savedInstanceState) {
         super.initThings(savedInstanceState);
         id = getIntent().getBundleExtra("data").getInt("id");
         presenter.getData(page, count);
+
+        imgSearch.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(SearchCatVideosActivity.class, new Bun().putString("title", "搜索").putInt("catId", id).ok());
+            }
+        });
+
+
     }
 
     /**

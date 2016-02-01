@@ -1,6 +1,7 @@
 package com.hewuzhe.ui.cons;
 
 import com.hewuzhe.MegaVideo;
+import com.hewuzhe.model.AboutUs;
 import com.hewuzhe.model.Address;
 import com.hewuzhe.model.Article;
 import com.hewuzhe.model.ArticleCollection;
@@ -76,7 +77,7 @@ public interface ApiService {
     Call<Res<MyDream>> SelectMyDream(@Query("userid") int userid);
 
     @GET("Hewuzhe.asmx/GetOnlineStudyListByPage")
-    Call<Res<ArrayList<Video>>> GetOnlineStudyList(@Query("startRowIndex") int startRowIndex, @Query("maximumRows") int maximumRows, @Query("categoryid") int categoryid);
+    Observable<Res<ArrayList<Video>>> GetOnlineStudyList(@Query("startRowIndex") int startRowIndex, @Query("maximumRows") int maximumRows, @Query("categoryid") int categoryid, @Query("search") String search);
 
     @GET("Hewuzhe.asmx/SelectFavoriteByUserId")
     Call<Res<ArrayList<Video>>> SelectFavoriteByUserId(@Query("startRowIndex") int startRowIndex, @Query("maximumRows") int maximumRows, @Query("isVideo") boolean categoryid, @Query("userid") int userid);
@@ -90,7 +91,7 @@ public interface ApiService {
     Observable<Res<Video>> GetOnlineStudy(@Query("id") int id, @Query("userid") int userid);
 
     @GET("Hedongli.asmx/{path}")
-    Call<Res<ArrayList<Video>>> getVideos(@Path("path") String path, @Query("startRowIndex") int startRowIndex, @Query("maximumRows") int maximumRows);
+    Observable<Res<ArrayList<Video>>> getVideos(@Path("path") String path, @Query("startRowIndex") int startRowIndex, @Query("maximumRows") int maximumRows, @Query("search") String search);
 
 
     @GET("Hewuzhe.asmx/GetPlanByCate")
@@ -101,7 +102,7 @@ public interface ApiService {
     Call<Res<ArrayList<Cate>>> GetChannel(@Query("startRowIndex") int startRowIndex, @Query("maximumRows") int maximumRows);
 
     @GET("Hedongli.asmx/SelectVideoByCategory")
-    Call<Res<ArrayList<Video>>> SelectVideoByCategory(@Query("startRowIndex") int startRowIndex, @Query("maximumRows") int maximumRows, @Query("cateid") int categoryid);
+    Observable<Res<ArrayList<Video>>> SelectVideoByCategory(@Query("startRowIndex") int startRowIndex, @Query("maximumRows") int maximumRows, @Query("cateid") int categoryid, @Query("search") String search);
 
 
     @FormUrlEncoded
@@ -350,6 +351,12 @@ public interface ApiService {
     Observable<Res<String>> GetNoReadCommentNumByUserId(@Query("userid") int userid);
 
     @GET("Helianmeng.asmx/SelectNoReadMatch")
-    Observable<Res> SelectNoReadMatch(@Query("userid") int userid, @Query("flg") int flg);
+    Observable<Res> SelectNoReadMatch(@Query("userid") int userid);
+
+    @GET("Helianmeng.asmx/DeleteNoReadMatch")
+    Observable<Res> DeleteNoReadMatch(@Query("userid") int userid, @Query("flg") int flg);
+
+    @GET("AboutUs.asmx/GetAuoutUs")
+    Observable<Res<AboutUs>> GetAuoutUs();
 
 }

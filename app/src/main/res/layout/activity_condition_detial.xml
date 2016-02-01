@@ -17,8 +17,9 @@
             android:id="@+id/swipe_refresh_layout"
             android:layout_width="match_parent"
             android:layout_height="match_parent">
-            <android.support.v4.widget.NestedScrollView android:layout_width="match_parent"
-                                                        android:layout_height="wrap_content">
+            <android.support.v4.widget.NestedScrollView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
 
                 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
                               android:layout_width="match_parent"
@@ -48,18 +49,16 @@
                             android:textSize="28px"/>
 
 
-
                         <TextView android:id="@+id/tv_content"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_below="@id/tv_username"
-                        android:layout_marginLeft="8px"
-                        android:layout_marginTop="12px"
-                        android:layout_toRightOf="@id/img"
-                        android:maxLines="2"
-                        android:text="我是内容............"
-                        android:textColor="@color/colorLine"
-                        android:textSize="25px"/>
+                                  android:layout_width="wrap_content"
+                                  android:layout_height="wrap_content"
+                                  android:layout_below="@id/tv_username"
+                                  android:layout_marginLeft="8px"
+                                  android:layout_marginTop="12px"
+                                  android:layout_toRightOf="@id/img"
+                                  android:text="我是内容............"
+                                  android:textColor="@color/colorLine"
+                                  android:textSize="25px"/>
 
                         <LinearLayout
                             android:id="@+id/lay_pics"

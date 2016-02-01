@@ -10,6 +10,8 @@ import com.hewuzhe.R;
 import com.hewuzhe.ui.inter.OnLocListener;
 import com.hewuzhe.utils.GlideLoader;
 import com.pgyersdk.crash.PgyCrashManager;
+import com.sina.sinavideo.sdk.utils.VDApplication;
+import com.sina.sinavideo.sdk.utils.VDResolutionManager;
 import com.socks.library.KLog;
 import com.yancy.imageselector.ImageConfig;
 
@@ -45,6 +47,11 @@ public class App extends Application {
 //                                Stetho.defaultInspectorModulesProvider(this))
 //                        .build());
 
+
+
+        VDApplication.getInstance().initPlayer(this);
+        VDResolutionManager.getInstance(this).init(
+                VDResolutionManager.RESOLUTION_SOLUTION_NONE);
 
         /**
          * KLog初始化

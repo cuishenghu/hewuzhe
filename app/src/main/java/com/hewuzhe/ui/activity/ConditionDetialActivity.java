@@ -73,6 +73,8 @@ public class ConditionDetialActivity extends SwipeRecycleViewActivity<ConditonDe
     @Bind(R.id.lay_comment_two)
     LinearLayout _LayCommentTwo;
     private FriendCondition _condition;
+    private int pageCount;
+    private int countMine = 3;
 
     @Override
     public Integer getData() {
@@ -182,9 +184,7 @@ public class ConditionDetialActivity extends SwipeRecycleViewActivity<ConditonDe
                     .into(_Img);
         }
 
-
-//        _Img.setOnClickListener(v->startActivity(FriendProfileActivity.class,new Bun().putInt("id",_condition.)));
-
+//      _Img.setOnClickListener(v->startActivity(FriendProfileActivity.class,new Bun().putInt("id",_condition.)));
 
         if (condition.IsLike) {
             _ImgPraise.setImageResource(R.mipmap.icon_praise_focus);
@@ -208,9 +208,21 @@ public class ConditionDetialActivity extends SwipeRecycleViewActivity<ConditonDe
 
         _LayPics.removeAllViews();//先清除之前的views
         _LayPics.setVisibility(View.GONE);
+        //
         if (condition.PicList.size() > 0) {
             _LayPics.setVisibility(View.VISIBLE);
-            int pageCount = condition.PicList.size() / count + 1;
+            int size = condition.PicList.size();
+            pageCount = size / 3;
+
+            if (size % 3 != 0) {
+                pageCount++;
+            }
+
+//            ViewGroup.LayoutParams params = _LayPics.getLayoutParams();
+//            params.width = ViewGroup.LayoutParams.MATCH_PARENT;
+//            params.height = 200 * pageCount;
+//            _LayPics.setLayoutParams(params);
+
             for (int i = 0; i < pageCount; i++) {
                 addImg(condition, i);
             }
@@ -277,12 +289,19 @@ public class ConditionDetialActivity extends SwipeRecycleViewActivity<ConditonDe
 
                         TextView tvUserCommenter = (TextView) view.findViewById(R.id.tv_user_commenter);
                         TextView tvUserCommented = (TextView) view.findViewById(R.id.tv_user_commented);
+
                         TextView tvConent = (TextView) view.findViewById(R.id.tv_conent);
+
 
                         tvUserCommenter.setText(comment.NicName);
                         tvUserCommented.setText(comment.CommentedNicName);
-                        tvConent.setText(comment.Content);
+                        tvConent.setText("：" + comment.Content);
 
+                        if (comment.CommentedId == comment.CommenterId) {
+                            tvUserCommented.setVisibility(View.GONE);
+                            TextView tv_reply = (TextView) view.findViewById(R.id.tv_reply);
+                            tv_reply.setVisibility(View.GONE);
+                        }
                         view.setOnClickListener(new View.OnClickListener() {
                             @Override
                             public void onClick(View view) {
@@ -304,7 +323,14 @@ public class ConditionDetialActivity extends SwipeRecycleViewActivity<ConditonDe
                         TextView tvConent = (TextView) view.findViewById(R.id.tv_conent);
                         tvUserCommenter.setText(comment.NicName);
                         tvUserCommented.setText(comment.CommentedNicName);
-                        tvConent.setText(comment.Content);
+                        tvConent.setText("：" +comment.Content);
+
+                        if (comment.CommentedId == comment.CommenterId) {
+                            tvUserCommented.setVisibility(View.GONE);
+                            TextView tv_reply = (TextView) view.findViewById(R.id.tv_reply);
+                            tv_reply.setVisibility(View.GONE);
+                        }
+
                         view.setOnClickListener(new View.OnClickListener() {
                             @Override
                             public void onClick(View view) {
@@ -326,7 +352,13 @@ public class ConditionDetialActivity extends SwipeRecycleViewActivity<ConditonDe
                     TextView tvConent = (TextView) view.findViewById(R.id.tv_conent);
                     tvUserCommenter.setText(comment.NicName);
                     tvUserCommented.setText(comment.CommentedNicName);
-                    tvConent.setText(comment.Content);
+                    tvConent.setText("：" +comment.Content);
+
+                    if (comment.CommentedId == comment.CommenterId) {
+                        tvUserCommented.setVisibility(View.GONE);
+                        TextView tv_reply = (TextView) view.findViewById(R.id.tv_reply);
+                        tv_reply.setVisibility(View.GONE);
+                    }
 
                     view.setOnClickListener(new View.OnClickListener() {
                         @Override
@@ -350,14 +382,12 @@ public class ConditionDetialActivity extends SwipeRecycleViewActivity<ConditonDe
     private void addImg(final FriendCondition condition, final int page) {
         LinearLayout linearLayout = (LinearLayout) getLayoutInflater().inflate(R.layout.component_comment_lay, null);
         _LayPics.addView(linearLayout);
-
         /**
          * 要添加的图片
          * */
-        List<Pic> subList = condition.PicList.subList(page * count, page * count + count >= condition.PicList.size() ? condition.PicList.size() : page * count + count);
+        List<Pic> subList = condition.PicList.subList(page * countMine, page * countMine + countMine >= condition.PicList.size() ? condition.PicList.size() : page * countMine + countMine);
         for (int i = 0; i < subList.size(); i++) {
-            Pic pic = subList.get(i);
-
+            final Pic pic = subList.get(i);
             LinearLayout imgWraper = (LinearLayout) getLayoutInflater().inflate(R.layout.component_comment_pic, null);
             linearLayout.addView(imgWraper);
 
@@ -374,14 +404,21 @@ public class ConditionDetialActivity extends SwipeRecycleViewActivity<ConditonDe
                     /**
                      * 到图片集页
                      * */
+                    ArrayList<Pic> newPics = new ArrayList<Pic>();
+                    for (Pic pic1 : condition.PicList) {
+                        Pic pic2 = new Pic();
+                        pic2.PictureUrl = pic1.ImagePath;
+                        pic2.ImagePath = "";
+                        newPics.add(pic2);
+                    }
+
                     Intent intent = new Intent(getContext(), PicsActivity.class);
-                    intent.putExtra("data", new Bun().putInt("pos", finalI + (page * count)).
-                            putString("pics", new Gson().toJson(condition.PicList)).ok());
+                    intent.putExtra("data", new Bun().putInt("pos", finalI + (page * countMine)).
+                            putString("pics", new Gson().toJson(newPics)).ok());
                     getContext().startActivity(intent);
                 }
             });
         }
-
     }
 
     @Override
@@ -464,7 +501,6 @@ public class ConditionDetialActivity extends SwipeRecycleViewActivity<ConditonDe
         comment.NicName = user.NicName;
         _condition.ComList.add(comment);
 //      adapter.notifyItemChanged(position);
-
         setComment(_condition);
 
     }

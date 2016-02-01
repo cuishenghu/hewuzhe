@@ -66,7 +66,6 @@ public class PicsFragment extends BaseFragment {
                     .fitCenter()
                     .crossFade()
                     .into(_Img);
-
         }
         _Img.setSingleTapListener(new ImageViewTouch.OnImageViewTouchSingleTapListener() {
             @Override

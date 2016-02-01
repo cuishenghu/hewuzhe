@@ -113,7 +113,6 @@ public class StudyOnlineOneFragment extends BaseFragment<StudyOnlineFragPresente
         MyAdapter adapter = new MyAdapter(getContext());
         adapter.setData(data);
         _Layout.setAdapter(adapter);
-
         _Layout.setOnItemClickListener(new OnItemClickListener() {
 
             @Override

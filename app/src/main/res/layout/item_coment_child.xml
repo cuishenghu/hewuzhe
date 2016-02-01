@@ -3,16 +3,17 @@
               android:layout_width="match_parent"
               android:layout_height="match_parent"
               android:background="@color/colorBg"
-              android:paddingTop="3px"
+              android:orientation="horizontal"
               android:paddingBottom="3px"
-              android:orientation="horizontal">
+              android:paddingTop="3px">
     <TextView android:id="@+id/tv_user_commenter"
               style="@style/text_25_yellow"
               android:layout_width="wrap_content"
               android:layout_height="wrap_content"
               android:text="黄晓明"/>
 
-    <TextView style="@style/text_25_white"
+    <TextView android:id="@+id/tv_reply"
+              style="@style/text_25_white"
               android:layout_width="wrap_content"
               android:layout_height="wrap_content"
               android:layout_marginLeft="8px"

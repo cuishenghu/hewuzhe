@@ -4,7 +4,6 @@
              android:layout_height="match_parent"
              tools:context="com.hewuzhe.ui.fragment.PicsFragment">
 
-    <!-- TODO: Update blank fragment layout -->
     <it.sephiroth.android.library.imagezoom.ImageViewTouch
         android:id="@+id/img"
         android:layout_width="match_parent"

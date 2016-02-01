@@ -11,8 +11,11 @@ import android.view.WindowManager;
 import android.widget.TextView;
 
 import com.hewuzhe.R;
-import com.hewuzhe.ui.App;
+import com.hewuzhe.utils.GlideLoader;
+import com.yancy.imageselector.ImageConfig;
 import com.yancy.imageselector.ImageSelector;
+
+import java.util.ArrayList;
 
 import imagechooser.api.ChooserType;
 import imagechooser.api.ImageChooserListener;
@@ -30,6 +33,7 @@ public class PicPickDialog {
     private int chooserType;
     public ImageChooserManager imageChooserManager;
     public String filePath;
+    private ImageConfig imageConfig;
 
     public PicPickDialog(Activity context) {
 
@@ -98,7 +102,25 @@ public class PicPickDialog {
 //            e.printStackTrace();
 //        }
 
-        ImageSelector.open(context, App.imageConfig);   // 开启图片选择器
+        imageConfig
+                = new ImageConfig.Builder(new GlideLoader())
+                .steepToolBarColor(context.getResources().getColor(R.color.colorPrimary))
+                .titleBgColor(context.getResources().getColor(R.color.colorPrimary))
+                .titleSubmitTextColor(context.getResources().getColor(R.color.white))
+                .titleTextColor(context.getResources().getColor(R.color.white))
+                        // 开启多选   （默认为多选）
+                .mutiSelect()
+                        // 多选时的最大数量   （默认 9 张）
+                .mutiSelectMaxSize(6)
+                        // 开启拍照功能 （默认关闭）
+                .showCamera()
+                        // 已选择的图片路径
+                .pathList(new ArrayList<String>())
+                        // 拍照后存放的图片路径（默认 /temp/picture） （会自动创建）
+                .filePath("/ImageSelector/Pictures")
+                .build();
+
+        ImageSelector.open(context, imageConfig);   // 开启图片选择器
         dismiss();
     }
 

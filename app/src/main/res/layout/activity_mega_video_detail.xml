@@ -1,33 +1,81 @@
-<LinearLayout
+<RelativeLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent" android:layout_height="match_parent"
     android:background="@color/colorBg"
     android:orientation="vertical"
     tools:context="com.hewuzhe.ui.fragment.OneFragment">
+    <android.support.design.widget.AppBarLayout
+        android:id="@+id/app_bar_layout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:theme="@style/AppTheme.AppBarOverlay"
+        app:elevation="4dp">
 
-
-    <include layout="@layout/toolbar_layout"/>
-
-    <LinearLayout android:layout_width="match_parent"
-                  android:layout_height="wrap_content"
-                  android:orientation="vertical"
-        >
-        <com.hewuzhe.ui.widget.VideoControllerView
-            android:id="@+id/video_controller"
+        <android.support.v7.widget.Toolbar
+            android:id="@+id/toolbar"
             android:layout_width="match_parent"
-            android:layout_height="200dp"
-            android:visibility="visible">
-        </com.hewuzhe.ui.widget.VideoControllerView>
-
-        <android.support.v7.widget.RecyclerView
-            android:id="@+id/recycler_view"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="?attr/actionBarSize"
+            android:background="?attr/colorPrimary"
+            app:contentInsetLeft="0dp"
+            app:contentInsetStart="0dp"
+            app:layout_scrollFlags="scroll|enterAlways"
             >
-        </android.support.v7.widget.RecyclerView>
+
+            <FrameLayout android:layout_width="match_parent"
+                         android:layout_height="match_parent"
+                         android:orientation="horizontal">
+
+                <ImageView
+                    android:id="@+id/img_back"
+                    android:layout_width="48dp"
+                    android:layout_height="48dp"
+                    android:layout_gravity="center_vertical"
+                    android:padding="14dp"
+                    android:src="@mipmap/icon_back"
+                    />
+
+                <TextView
+                    android:id="@+id/tv_title"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:text=""
+                    android:textColor="@android:color/white"
+                    android:textSize="20sp"/>
+
+                <TextView
+                    android:id="@+id/tv_action"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical|right"
+                    android:layout_marginRight="10px"
+                    android:text="确定"
+                    android:textColor="@android:color/white"
+                    android:textSize="17sp"/>
 
 
-    </LinearLayout>
+            </FrameLayout>
+        </android.support.v7.widget.Toolbar>
+    </android.support.design.widget.AppBarLayout>
 
-</LinearLayout>
+    <com.sina.sinavideo.sdk.VDVideoView
+        android:id="@+id/vv1"
+        android:layout_width="match_parent"
+        android:layout_height="190dp"
+        android:layout_below="@id/app_bar_layout"
+        android:background="#000000"
+        app:layerAttrs="@array/sv_videoview_layers2">
+    </com.sina.sinavideo.sdk.VDVideoView>
+
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/recycler_view"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/vv1"
+        >
+    </android.support.v7.widget.RecyclerView>
+
+
+</RelativeLayout>

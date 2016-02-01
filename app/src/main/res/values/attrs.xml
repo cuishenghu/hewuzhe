@@ -43,9 +43,9 @@
 
 
     <!--<declare-styleable name="AnimCheckBox">-->
-        <!--<attr name="stroke_width" format="dimension"/>-->
-        <!--<attr name="stroke_color" format="color"/>-->
-        <!--<attr name="circle_color" format="color"/>-->
+    <!--<attr name="stroke_width" format="dimension"/>-->
+    <!--<attr name="stroke_color" format="color"/>-->
+    <!--<attr name="circle_color" format="color"/>-->
     <!--</declare-styleable>-->
 
 
@@ -56,7 +56,7 @@
 
     <declare-styleable name="MovieRecorderView">
         <!-- 开始是否打开摄像头 -->
-        <attr name="is_open_camera" format="boolean" />
+        <attr name="is_open_camera" format="boolean"/>
         <!-- 一次拍摄最长时间 -->
         <attr name="record_max_time" format="integer"/>
         <!-- 视频分辨率宽度 -->
@@ -65,72 +65,72 @@
         <attr name="video_height" format="integer"/>
     </declare-styleable>
     <!-- These top three attributes are not accessible to library users -->
-    <attr name="md_divider" format="color" />
+    <attr name="md_divider" format="color"/>
 
     <!-- Accessible global theming attributes -->
-    <attr name="md_dark_theme" format="boolean" />
-    <attr name="md_background_color" format="color" />
+    <attr name="md_dark_theme" format="boolean"/>
+    <attr name="md_background_color" format="color"/>
 
-    <attr name="md_icon" format="reference" />
-    <attr name="md_icon_max_size" format="dimension" />
-    <attr name="md_icon_limit_icon_to_default_size" format="boolean" />
+    <attr name="md_icon" format="reference"/>
+    <attr name="md_icon_max_size" format="dimension"/>
+    <attr name="md_icon_limit_icon_to_default_size" format="boolean"/>
 
-    <attr name="md_title_color" format="color" />
-    <attr name="md_content_color" format="color" />
-    <attr name="md_link_color" format="color" />
+    <attr name="md_title_color" format="color"/>
+    <attr name="md_content_color" format="color"/>
+    <attr name="md_link_color" format="color"/>
 
-    <attr name="md_positive_color" format="color" />
-    <attr name="md_neutral_color" format="color" />
-    <attr name="md_negative_color" format="color" />
-    <attr name="md_widget_color" format="color" />
+    <attr name="md_positive_color" format="color"/>
+    <attr name="md_neutral_color" format="color"/>
+    <attr name="md_negative_color" format="color"/>
+    <attr name="md_widget_color" format="color"/>
 
-    <attr name="md_item_color" format="color" />
-    <attr name="md_divider_color" format="color" />
-    <attr name="md_list_selector" format="reference" />
+    <attr name="md_item_color" format="color"/>
+    <attr name="md_divider_color" format="color"/>
+    <attr name="md_list_selector" format="reference"/>
 
-    <attr name="md_btn_stacked_selector" format="reference" />
-    <attr name="md_btn_positive_selector" format="reference" />
-    <attr name="md_btn_neutral_selector" format="reference" />
-    <attr name="md_btn_negative_selector" format="reference" />
+    <attr name="md_btn_stacked_selector" format="reference"/>
+    <attr name="md_btn_positive_selector" format="reference"/>
+    <attr name="md_btn_neutral_selector" format="reference"/>
+    <attr name="md_btn_negative_selector" format="reference"/>
 
-    <attr name="md_btn_ripple_color" format="color" />
+    <attr name="md_btn_ripple_color" format="color"/>
 
     <attr name="md_title_gravity" format="enum">
-        <enum name="start" value="0" />
-        <enum name="center" value="1" />
-        <enum name="end" value="2" />
+        <enum name="start" value="0"/>
+        <enum name="center" value="1"/>
+        <enum name="end" value="2"/>
     </attr>
 
     <attr name="md_content_gravity" format="enum">
-        <enum name="start" value="0" />
-        <enum name="center" value="1" />
-        <enum name="end" value="2" />
+        <enum name="start" value="0"/>
+        <enum name="center" value="1"/>
+        <enum name="end" value="2"/>
     </attr>
 
     <attr name="md_btnstacked_gravity" format="enum">
-        <enum name="start" value="0" />
-        <enum name="center" value="1" />
-        <enum name="end" value="2" />
+        <enum name="start" value="0"/>
+        <enum name="center" value="1"/>
+        <enum name="end" value="2"/>
     </attr>
 
     <attr name="md_items_gravity" format="enum">
-        <enum name="start" value="0" />
-        <enum name="center" value="1" />
-        <enum name="end" value="2" />
+        <enum name="start" value="0"/>
+        <enum name="center" value="1"/>
+        <enum name="end" value="2"/>
     </attr>
 
     <attr name="md_buttons_gravity" format="enum">
-        <enum name="start" value="0" />
-        <enum name="center" value="1" />
-        <enum name="end" value="2" />
+        <enum name="start" value="0"/>
+        <enum name="center" value="1"/>
+        <enum name="end" value="2"/>
     </attr>
 
     <declare-styleable name="MDRootLayout">
-        <attr name="md_reduce_padding_no_title_no_buttons" format="boolean" />
+        <attr name="md_reduce_padding_no_title_no_buttons" format="boolean"/>
     </declare-styleable>
 
-    <attr name="md_medium_font" format="string" />
-    <attr name="md_regular_font" format="string" />
+    <attr name="md_medium_font" format="string"/>
+    <attr name="md_regular_font" format="string"/>
 
     <declare-styleable name="AnimCheckBox">
         <attr name="stroke_width" format="dimension"/>
@@ -139,5 +139,92 @@
     </declare-styleable>
 
 
+    <array name="sina_video_videoview_layers">
+        <item>@layout/control_layer</item>
+    </array>
+    <array name="sina_common_videoview_layers">
+        <item>@layout/common_control_layer</item>
+    </array>
+    <array name="sina_test_videoview_layers">
+        <item type="sina_test_videoview_layers1">@layout/common_control_layer</item>
+    </array>
+    <array name="sina_my_test_layer1">
+        <item>@layout/my_test_layer1</item>
+    </array>
+
+    <!-- 新的结构 -->
+    <array name="sina_simple_videoview_layers">
+        <item>@layout/simple_control_layer</item>
+    </array>
+    <array name="sv_videoview_layers">
+        <item>@array/sv_videoview_layer_controllayer</item>
+    </array>
+    <!-- 只横不竖 -->
+    <array name="only_horizon">
+        <item>@array/sv_videoview_layer_controllayer2</item>
+    </array>
+    <!-- 精简播放器例子，包含一个基本的播放器以及一个广告层 -->
+    <array name="sv_videoview_layers2">
+        <item>@array/simple_ui_layer_controllayer</item>
+        <item>@array/simple_ui_ad_controllayer</item>
+    </array>
+    <!-- 新浪视频 -->
+    <array name="sinavideo_layer">
+        <item>@array/sinavideo_layer_controllayer</item>
+    </array>
+    <array name="sinavideo_layer_controllayer">
+        <item>@layout/live_video_detail_control_layer</item>
+        <item>@layout/live_video_detail_control_layer_horizon</item>
+    </array>
+    <!-- 一组竖屏+横屏 -->
+    <array name="sv_videoview_layer_controllayer">
+        <item>@layout/control_layer</item>
+        <item>@layout/control_layer_horizon</item>
+    </array>
+    <!-- 一组竖屏+横屏 精简布局 -->
+    <array name="simple_ui_layer_controllayer">
+        <item>@layout/simple_ui_control_layer</item>
+        <item>@layout/simple_ui_control_layer_horizon</item>
+    </array>
+    <!-- 插入广告层，按照爱奇艺方式组织的 -->
+    <array name="simple_ui_ad_controllayer">
+        <item>@layout/simple_ui_ad_layer</item>
+        <item>@layout/simple_ui_ad_layer_horizon</item>
+    </array>
+    <!-- 只有横屏没有竖屏 -->
+    <array name="sv_videoview_layer_controllayer2">
+        <item>@null</item>
+        <item>@layout/control_layer_horizon</item>
+    </array>
+    <!-- 伪直播显示清晰度例子，包含一个基本的播放器以及一个广告层 -->
+    <array name="sv_videoview_m3u8_layers">
+        <item>@array/sv_m3u8_layer_controllayer</item>
+        <item>@array/simple_ui_ad_controllayer</item>
+    </array>
+    <array name="sv_m3u8_layer_controllayer">
+        <item>@layout/m3u8_ui_control_layer</item>
+        <item>@layout/m3u8_ui_control_layer_horizon</item>
+    </array>
+    <array name="sv_videoview_vid_vms_layers">
+        <item>@array/sv_vid_vms_controllayer</item>
+    </array>
+    <array name="sv_vid_vms_controllayer">
+        <item>@layout/vidvms_ui_control_layer</item>
+        <item>@layout/vidvms_ui_control_layer_horizon</item>
+    </array>
+
+    <!-- 广告倒计时的秒数图片 -->
+    <array name="ticker_img_list">
+        <item>@drawable/ic_launcher</item>
+        <item>@drawable/ic_launcher</item>
+        <item>@drawable/ic_launcher</item>
+        <item>@drawable/ic_launcher</item>
+        <item>@drawable/ic_launcher</item>
+        <item>@drawable/ic_launcher</item>
+        <item>@drawable/ic_launcher</item>
+        <item>@drawable/ic_launcher</item>
+        <item>@drawable/ic_launcher</item>
+        <item>@drawable/ic_launcher</item>
+    </array>
 
 </resources>

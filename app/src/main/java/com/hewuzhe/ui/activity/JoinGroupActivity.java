@@ -35,7 +35,7 @@ public class JoinGroupActivity extends RecycleViewActivity<JoinPresenter, JoinGr
     TextView _TvCity;
     @Bind(R.id.tv_district)
     TextView _TvDistrict;
-    private int mCityCode = 371302;
+    private int mCityCode = 0;
 
     private int provinceId;
     private int cityId;
@@ -169,9 +169,14 @@ public class JoinGroupActivity extends RecycleViewActivity<JoinPresenter, JoinGr
         address1.Name = "全部";
         address1.Code = "1000000000";
         address.add(0, address1);
+
         cityDialogAdapter = new AddressAdapter(getContext(), address);
         _TvCity.setText(address.get(0).Name);
-
+        if (address.size() > 1) {
+            presenter.getDistricts(Integer.parseInt(address.get(1).Code));
+        } else {
+            setDistricts(new ArrayList<Address>());
+        }
     }
 
     /**

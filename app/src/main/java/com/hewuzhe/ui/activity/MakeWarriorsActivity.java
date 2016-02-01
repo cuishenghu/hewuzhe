@@ -148,7 +148,6 @@ public class MakeWarriorsActivity extends RecycleViewActivity<MakeWarriorsPresen
             }
         });
 
-
         _EdtSearchContent.setOnEditorActionListener(new TextView.OnEditorActionListener() {
             @Override
             public boolean onEditorAction(TextView textView, int i, KeyEvent keyEvent) {
@@ -277,6 +276,11 @@ public class MakeWarriorsActivity extends RecycleViewActivity<MakeWarriorsPresen
         cityDialogAdapter = new AddressAdapter(getContext(), address);
         _TvCity.setText(address.get(0).Name);
 
+        if (address.size() > 1) {
+            presenter.getDistricts(Integer.parseInt(address.get(1).Code));
+        } else {
+            setDistricts(new ArrayList<Address>());
+        }
     }
 
     /**

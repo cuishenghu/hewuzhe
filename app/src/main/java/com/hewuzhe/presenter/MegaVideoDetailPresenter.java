@@ -298,4 +298,30 @@ public class MegaVideoDetailPresenter extends CommentPresenter<MegaVideoDetailVi
     }
 
 
+    public void voteTeam(int id, int teamid) {
+        Subscription subscription = NetEngine.getService()
+                .VotePerso(teamid, id, new SessionUtil(view.getContext()).getUserId())
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new SB<Res>() {
+                    @Override
+                    public void next(Res res) {
+                        if (res.code == C.OK) {
+                            view.voteSuccess();
+                        }
+                    }
+
+                    @Override
+                    public void onCompleted() {
+
+                    }
+
+                    @Override
+                    public void onError(Throwable e) {
+
+                    }
+                });
+
+        addSubscription(subscription);
+    }
 }

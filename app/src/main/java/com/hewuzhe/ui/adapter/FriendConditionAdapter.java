@@ -164,7 +164,14 @@ public class FriendConditionAdapter extends BaseAdapter<FriendConditionAdapter.V
 
                         tvUserCommenter.setText(comment.NicName);
                         tvUserCommented.setText(comment.CommentedNicName);
-                        tvConent.setText(comment.Content);
+                        tvConent.setText("：" +comment.Content);
+
+
+                        if (comment.CommentedId == comment.CommenterId) {
+                            tvUserCommented.setVisibility(View.GONE);
+                            TextView tv_reply = (TextView) view.findViewById(R.id.tv_reply);
+                            tv_reply.setVisibility(View.GONE);
+                        }
 
                         view.setOnClickListener(new View.OnClickListener() {
                             @Override
@@ -187,7 +194,14 @@ public class FriendConditionAdapter extends BaseAdapter<FriendConditionAdapter.V
                         TextView tvConent = (TextView) view.findViewById(R.id.tv_conent);
                         tvUserCommenter.setText(comment.NicName);
                         tvUserCommented.setText(comment.CommentedNicName);
-                        tvConent.setText(comment.Content);
+                        tvConent.setText("：" +comment.Content);
+
+                        if (comment.CommentedId == comment.CommenterId) {
+                            tvUserCommented.setVisibility(View.GONE);
+                            TextView tv_reply = (TextView) view.findViewById(R.id.tv_reply);
+                            tv_reply.setVisibility(View.GONE);
+                        }
+
                         view.setOnClickListener(new View.OnClickListener() {
                             @Override
                             public void onClick(View view) {
@@ -209,7 +223,14 @@ public class FriendConditionAdapter extends BaseAdapter<FriendConditionAdapter.V
                     TextView tvConent = (TextView) view.findViewById(R.id.tv_conent);
                     tvUserCommenter.setText(comment.NicName);
                     tvUserCommented.setText(comment.CommentedNicName);
-                    tvConent.setText(comment.Content);
+                    tvConent.setText("：" +comment.Content);
+
+                    if (comment.CommentedId == comment.CommenterId) {
+                        tvUserCommented.setVisibility(View.GONE);
+                        TextView tv_reply = (TextView) view.findViewById(R.id.tv_reply);
+                        tv_reply.setVisibility(View.GONE);
+                    }
+
 
                     view.setOnClickListener(new View.OnClickListener() {
                         @Override

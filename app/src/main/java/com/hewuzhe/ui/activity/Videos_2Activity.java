@@ -134,8 +134,9 @@ public class Videos_2Activity extends SwipeRecycleViewActivity<Videos2Presenter,
      */
     @Override
     public void onItemClick(View view, int pos, Video item) {
-        if (item.UserId != 0) {
-        }
+
+        startActivity(VideoDetail2Activity.class, new Bun().putInt("Id", item.Id).ok());
+
     }
 
     @Override

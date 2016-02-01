@@ -25,7 +25,6 @@ public class SplaseActivity extends BaseActivity<SplashPresenter> implements Spl
         return R.layout.splash_activity;
     }
 
-
     @Override
     public void initListeners() {
 
@@ -33,14 +32,13 @@ public class SplaseActivity extends BaseActivity<SplashPresenter> implements Spl
 
     /**
      * @param savedInstanceState 缓存数据
-     *                           <p>
+     *                           <p/>
      *                           初始化一些事情
      */
     @Override
     protected void initThings(Bundle savedInstanceState) {
         setTheme(R.style.AppTheme);
         startAnim();
-
     }
 
     /**

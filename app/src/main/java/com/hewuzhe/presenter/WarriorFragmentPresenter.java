@@ -60,14 +60,14 @@ public class WarriorFragmentPresenter extends BasePresenterImp<WarriorFragmentVi
 
     public void getUserInfo(int userid) {
         Subscription subscription = NetEngine.getService()
-                .UpdateUser(userid)
+                .SelectMyFriend(userid, new SessionUtil(view.getContext()).getUserId())
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new SB<Res<User>>() {
                     @Override
                     public void next(Res<User> res) {
                         if (res.code == C.OK) {
-                            RongIM.getInstance().refreshUserInfoCache(new UserInfo(res.data.Id + "", res.data.NicName, Uri.parse(C.BASE_URL + res.data.PhotoPath)));
+                            RongIM.getInstance().refreshUserInfoCache(new UserInfo(res.data.Id + "", res.data.RemarkName, Uri.parse(C.BASE_URL + res.data.PhotoPath)));
 //                            res.data.save();
                         }
                     }

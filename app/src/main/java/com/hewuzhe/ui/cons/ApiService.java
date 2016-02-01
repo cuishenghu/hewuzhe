@@ -314,7 +314,7 @@ public interface ApiService {
     Observable<Res<Boolean>> IsWuyou(@Query("userid") int userid, @Query("friendid") int friendid);
 
     @GET("Helianmeng.asmx/GetDongtaiById")
-    Call<Res<FriendCondition>> GetDongtaiById(@Query("userid") int userid, @Query("messid") int messid);
+    Observable<Res<FriendCondition>> GetDongtaiById(@Query("userid") int userid, @Query("messid") int messid);
 
     @GET("Helianmeng.asmx/CommentMatch")
     Observable<Res> CommentMatch(@Query("userid") int userid, @Query("memberId") int memberId, @Query("comment") String comment);
@@ -325,6 +325,9 @@ public interface ApiService {
 
     @GET("Helianmeng.asmx/VotePerso")
     Observable<Res> VotePerso(@Query("userid") int userid, @Query("matchId") int matchId, @Query("voterId") int voterId);
+
+    @GET("Helianmeng.asmx/VoteTeam")
+    Observable<Res> VoteTeam(@Query("teamid") int teamid, @Query("matchId") int matchId, @Query("voterId") int voterId);
 
     @GET("Helianmeng.asmx/JoinMatch")
     Observable<Res> JoinMatch(@Query("userid") int userid, @Query("matchId") int matchId, @Query("matchVideo") String matchVideo, @Query("videoDuration") String videoDuration, @Query("matchDescription") String matchDescription, @Query("matchImage") String matchImage, @Query("title") String title);

@@ -10,11 +10,10 @@ import com.hewuzhe.R;
 import com.hewuzhe.presenter.base.BasePresenterImp;
 import com.hewuzhe.ui.base.ToolBarActivity;
 import com.hewuzhe.utils.SPUtil;
+import com.socks.library.KLog;
 
 import butterknife.Bind;
-import io.rong.imkit.RongIM;
 import io.rong.imlib.RongIMClient;
-import io.rong.imlib.model.Message;
 
 public class SettingsActivity extends ToolBarActivity {
 
@@ -68,12 +67,41 @@ public class SettingsActivity extends ToolBarActivity {
             @Override
             public void onCheckedChanged(CompoundButton compoundButton, final boolean isChecked) {
                 spUtil.putBoolean("msg", isChecked);
-                RongIM.setOnReceiveMessageListener(new RongIMClient.OnReceiveMessageListener() {
-                    @Override
-                    public boolean onReceived(Message message, int i) {
-                        return !isChecked;
-                    }
-                });
+//                RongIM.setOnReceiveMessageListener(new RongIMClient.OnReceiveMessageListener() {
+//                    @Override
+//                    public boolean onReceived(Message message, int i) {
+//                        return !isChecked;
+//                    }
+//                });
+
+                if (!isChecked) {
+                    RongIMClient.getInstance().setNotificationQuietHours("00:00:00", 1440, new RongIMClient.OperationCallback() {
+                        @Override
+                        public void onSuccess() {
+                            KLog.d("add succes");
+
+                        }
+
+                        @Override
+                        public void onError(RongIMClient.ErrorCode errorCode) {
+                            KLog.d("add error");
+
+                        }
+                    });
+                } else {
+                    RongIMClient.getInstance().removeNotificationQuietHours(new RongIMClient.OperationCallback() {
+                        @Override
+                        public void onSuccess() {
+                            KLog.d("remove succes");
+                        }
+
+                        @Override
+                        public void onError(RongIMClient.ErrorCode errorCode) {
+                            KLog.d("remove error");
+                        }
+                    });
+
+                }
             }
         });
         _SwitchSound.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {

@@ -61,7 +61,7 @@ public class SearchWarriorsAdapter extends BaseAdapter<SearchWarriorsAdapter.VHo
     public void bindData(VHolder holder, final int position) {
         final Friend friend = data.get(position);
         holder._TvUsername.setText(friend.NicName);
-        holder._TvLevel.setText("等级：lv" + friend.Rank);
+//        holder._TvLevel.setText("等级：lv" + friend.Rank);
 
         Glide.with(context)
                 .load(C.BASE_URL + friend.PhotoPath)

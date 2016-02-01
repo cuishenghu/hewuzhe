@@ -454,7 +454,6 @@ public class WarriorFragment extends ToolBarFragment<WarriorFragmentPresenter> i
                     RongIM.setOnReceiveMessageListener(new RongIMClient.OnReceiveMessageListener() {
                         @Override
                         public boolean onReceived(Message message, int i) {
-
                             return !spUtil.getBoolean("msg");
 //                            return false;
                         }

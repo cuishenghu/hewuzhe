@@ -43,11 +43,18 @@ public class NavigateActivity extends BaseActivity implements View.OnTouchListen
 
     /**
      * @param savedInstanceState 缓存数据
-     *                           <p>
+     *                           <p/>
      *                           初始化一些事情
      */
     @Override
     protected void initThings(Bundle savedInstanceState) {
+
+        SPUtil spUtil = new SPUtil(getContext())
+                .open("settings");
+        spUtil.putBoolean("msg", true);
+        spUtil.putBoolean("sound", true);
+        spUtil.putBoolean("vibrate", true);
+
         MyViewPagerAdapter viewPagerAdapter = new MyViewPagerAdapter(getSupportFragmentManager());
         viewPagerAdapter.addFragment(NavigateOneFragment.newInstance(), "");
         viewPagerAdapter.addFragment(NavigateTwoFragment.newInstance(), "");

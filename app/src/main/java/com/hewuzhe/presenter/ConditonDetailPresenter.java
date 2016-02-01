@@ -33,28 +33,34 @@ public class ConditonDetailPresenter extends RefreshAndLoadMorePresenter<Condtio
      */
     @Override
     public void getData(int page, int count) {
-        NetEngine.getService()
+        Subscription subscription = NetEngine.getService()
                 .GetDongtaiById(new SessionUtil(view.getContext()).getUserId(), view.getData())
-                .enqueue(new Callback<Res<FriendCondition>>() {
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new SB<Res<FriendCondition>>() {
                     @Override
-                    public void onResponse(Response<Res<FriendCondition>> response, Retrofit retrofit) {
-                        Res<FriendCondition> res = response.body();
+                    public void next(Res<FriendCondition> res) {
                         if (res.code == C.OK) {
                             view.setData(res.data);
                             view.bindData(res.data.ComList);
                         }
 
+                    }
+
+                    @Override
+                    public void onCompleted() {
                         view.dismissDialog();
                         view.refresh(false);
                     }
 
                     @Override
-                    public void onFailure(Throwable t) {
-
+                    public void onError(Throwable e) {
                         view.dismissDialog();
                         view.refresh(false);
                     }
                 });
+
+        addSubscription(subscription);
 
     }
 

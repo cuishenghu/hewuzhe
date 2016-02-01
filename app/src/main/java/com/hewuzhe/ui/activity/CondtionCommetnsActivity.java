@@ -10,6 +10,7 @@ import com.hewuzhe.model.ConditionComment;
 import com.hewuzhe.presenter.ConditionCommentsPresenter;
 import com.hewuzhe.ui.adapter.MyConditionCommentAdapter;
 import com.hewuzhe.ui.base.SwipeRecycleViewActivity;
+import com.hewuzhe.utils.Bun;
 import com.hewuzhe.view.ConditionCommentsView;
 
 import java.util.ArrayList;
@@ -85,7 +86,6 @@ public class CondtionCommetnsActivity extends SwipeRecycleViewActivity<Condition
      */
     @Override
     public void onItemClick(View view, int pos, ConditionComment item) {
-
-
+        startActivity(ConditionDetialActivity.class, new Bun().putInt("id", item.MessageId).ok());
     }
 }

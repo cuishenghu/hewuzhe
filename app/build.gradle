@@ -114,4 +114,5 @@ dependencies {
     compile 'me.zhanghai.android.materialprogressbar:library:1.1.4'
     compile 'com.yancy.imageselector:imageselector:1.3.0'
     compile 'org.sufficientlysecure:html-textview:1.3'
+    compile project(':sinavideo_playersdk_v2.0')
 }

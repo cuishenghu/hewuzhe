@@ -39,33 +39,18 @@ public class FriendCondition {
      * PictureUrl :
      */
 
-    public ArrayList<Pic> PicList=new ArrayList<>();
-    /**
-     * Id : 54
-     * CommentedId : 46
-     * CommentedNicName : 盖世英雄
-     * CommentedPhotoPath : UpLoad/Photo/9d41d534-ade1-4453-9e5f-3d1814298596.jpg
-     * CommenterId : 46
-     * Content : 你喜欢哥哥还是妹妹啊
-     * NicName : 盖世英雄
-     * ParentId : 0
-     * MessageId : 139
-     * PhotoPath : UpLoad/Photo/9d41d534-ade1-4453-9e5f-3d1814298596.jpg
-     * PublishTime : 2016-01-01 11:35:39
-     */
+    public ArrayList<Pic> PicList = new ArrayList<>();
 
-    public ArrayList<Comment> ComList=new ArrayList<>();
-
+    public ArrayList<Comment> ComList = new ArrayList<>();
     /**
      * 是否是显示全部评论状态
      */
-    public boolean isShowingAll=false;
+    public boolean isShowingAll = false;
     /**
      * UserId : 2
      * IsFavorite : false
      * IsRepeat : true
      */
-
     public int UserId;
     public boolean IsFavorite;
     public boolean IsRepeat;

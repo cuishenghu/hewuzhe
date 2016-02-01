@@ -77,7 +77,8 @@ public class MegaGameVideosAdapter extends BaseAdapter<MegaGameVideosAdapter.VHo
 
         holder._TvRank.setText(megaGameVideo.MatchCode + "");
         holder._TvTime.setText(megaGameVideo.MemberVideoDuration + "");
-        holder._TvRankName.setText("第" + position + "名");
+        int rank = position + 1;
+        holder._TvRankName.setText("第" + rank + "名");
         holder._TvUserName.setText(megaGameVideo.NicName);
         holder._TvCount.setText("得票数：" + megaGameVideo.VoteNum + "票");
 

@@ -47,6 +47,7 @@ public class PicsActivity extends ToolBarActivity {
         return R.layout.activity_pics;
     }
 
+
     @Override
     protected void initThings(Bundle savedInstanceState) {
         super.initThings(savedInstanceState);

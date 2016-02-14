@@ -125,7 +125,6 @@ public class PlanFragment extends SwipeRecycleViewFragment<PlanPresenter, PlanAd
             /**
              * 进入详情页
              * */
-
             item.catId = id;
             startActivityForResult(PlanDetailActivity.class, new Bun().putInt("id", item.Id).ok(), C.RESULT_ONE);
         }

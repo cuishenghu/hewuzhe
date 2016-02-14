@@ -175,7 +175,6 @@ public class GroupConditionActivity extends SwipeRecycleViewActivity<GroupCondit
 
     }
 
-
     @Override
     protected void initThings(Bundle savedInstanceState) {
         super.initThings(savedInstanceState);
@@ -222,7 +221,7 @@ public class GroupConditionActivity extends SwipeRecycleViewActivity<GroupCondit
      */
     @Override
     public void onItemClick(View view, int pos, FriendCondition item) {
-        startActivity(ConditionDetialActivity.class, new Bun().putInt("id", item.Id).putString("_NickName", _NickName).putString("_PhotoPath", _PhotoPath).putInt("whitch", C.WHITCH_TWO).ok());
+        startActivity(ConditionDetialActivity.class, new Bun().putP("item", item).putString("_NickName", _NickName).putString("_PhotoPath", _PhotoPath).putInt("whitch", C.WHITCH_TWO).ok());
     }
 
     /**
@@ -275,6 +274,7 @@ public class GroupConditionActivity extends SwipeRecycleViewActivity<GroupCondit
         user = new SessionUtil(getContext()).getUser();
         FriendCondition condition = adapter.data.get(position);
         comment.CommentedNicName = condition.NicName;
+        comment.CommentedId = condition.UserId;
         comment.NicName = user.NicName;
         condition.ComList.add(comment);
         adapter.notifyItemChanged(position);
@@ -285,11 +285,12 @@ public class GroupConditionActivity extends SwipeRecycleViewActivity<GroupCondit
      *
      * @param id
      * @param nicName
+     * @param commenterId
      * @param position
      * @param view
      */
     @Override
-    public void showReplyInput(final int id, final String nicName, final int position, View view) {
+    public void showReplyInput(final int id, final String nicName, final int commenterId, final int position, View view) {
         _LayComment.setVisibility(View.VISIBLE);
         _EdtComment.requestFocus();
         showSoftInput(_EdtComment);
@@ -297,7 +298,7 @@ public class GroupConditionActivity extends SwipeRecycleViewActivity<GroupCondit
         _BtnPublish.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                presenter.publisReply(id, _EdtComment.getText().toString().trim(), nicName, view, position);
+                presenter.publisReply(id, nicName, commenterId, _EdtComment.getText().toString().trim(), view, position);
             }
         });
     }

@@ -33,12 +33,13 @@ public interface ConditionView extends LoadMoreView {
 
     /**
      * 回复评论
-     *  @param id
+     * @param id
      * @param nicName
+     * @param commenterId
      * @param position
      * @param v
      */
-    void showReplyInput(int id, String nicName, int position, View v);
+    void showReplyInput(int id, String nicName, int commenterId, int position, View v);
 
     void replySuccess(int position, Comment comment);
 

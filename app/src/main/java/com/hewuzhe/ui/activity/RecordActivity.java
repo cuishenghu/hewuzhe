@@ -12,6 +12,7 @@ import com.hewuzhe.model.Record;
 import com.hewuzhe.presenter.RecordPresenter;
 import com.hewuzhe.ui.adapter.RecordAdapter;
 import com.hewuzhe.ui.base.SwipeRecycleViewActivity;
+import com.hewuzhe.utils.Bun;
 import com.hewuzhe.utils.SessionUtil;
 import com.hewuzhe.view.RecordView;
 
@@ -148,8 +149,10 @@ public class RecordActivity extends SwipeRecycleViewActivity<RecordPresenter, Re
              * */
             ((CheckBox) view.findViewById(R.id.cb_plan)).setChecked(item.isChecked ? false : true);
         } else {
-        }
 
+            startActivity(BasicVideoTwoActivity.class, new Bun().putInt("Id", item.Id).ok());
+
+        }
     }
 
     @Override

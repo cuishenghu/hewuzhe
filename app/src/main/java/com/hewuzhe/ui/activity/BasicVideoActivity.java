@@ -1,56 +1,97 @@
-package com.hewuzhe;
+package com.hewuzhe.ui.activity;
 
-import android.app.Activity;
+import android.content.Context;
 import android.content.res.Configuration;
 import android.os.Bundle;
 import android.view.KeyEvent;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.Window;
+import android.view.WindowManager;
 import android.widget.ImageView;
 import android.widget.Toast;
 
+import com.hewuzhe.R;
+import com.hewuzhe.presenter.base.BasePresenterImp;
+import com.hewuzhe.ui.base.ToolBarActivity;
+import com.hewuzhe.ui.cons.C;
 import com.sina.sinavideo.coreplayer.util.LogS;
-import com.sina.sinavideo.sdk.VDVideoExtListeners.OnVDVideoFrameADListener;
-import com.sina.sinavideo.sdk.VDVideoExtListeners.OnVDVideoInsertADListener;
-import com.sina.sinavideo.sdk.VDVideoExtListeners.OnVDVideoPlaylistListener;
+import com.sina.sinavideo.sdk.VDVideoExtListeners;
 import com.sina.sinavideo.sdk.VDVideoView;
 import com.sina.sinavideo.sdk.data.VDVideoInfo;
 import com.sina.sinavideo.sdk.data.VDVideoListInfo;
 import com.sina.sinavideo.sdk.utils.VDVideoFullModeController;
-import com.sina.sinavideo.sdk.widgets.playlist.VDVideoPlayListView;
 
-public class SimpleTestActivity extends Activity implements
-        OnVDVideoInsertADListener, OnVDVideoFrameADListener,
-        OnVDVideoPlaylistListener {
+import butterknife.Bind;
 
-    private VDVideoView mVDVideoView = null;
-    private final static String TAG = "Test1Activity";
+public class BasicVideoActivity extends ToolBarActivity implements
+        VDVideoExtListeners.OnVDVideoInsertADListener, VDVideoExtListeners.OnVDVideoFrameADListener,
+        VDVideoExtListeners.OnVDVideoPlaylistListener {
+
+
+    private static final String TAG = "basicvideo";
+    @Bind(R.id.vv1)
+    VDVideoView mVDVideoView;
+    private int mLayout;
+    private WindowManager windowManager;
+    private int id;
+
+
+    /**
+     * @return 提供标题
+     */
+    @Override
+    protected String provideTitle() {
+        return "视频";
+    }
+
+    /**
+     * @return 提供LayoutId
+     */
+    @Override
+    protected int provideContentViewId() {
+        return R.layout.activity_basic_video;
+    }
+
+    /**
+     * 初始化事件监听者
+     */
+    @Override
+    public void initListeners() {
+
+    }
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        requestWindowFeature(Window.FEATURE_NO_TITLE);
-        setContentView(R.layout.simple_test);
-        // adIV是广告部分的控件，这个需要产品侧开发人员自己处理了
+    protected void initThings(Bundle savedInstanceState) {
+        super.initThings(savedInstanceState);
+
+
+        // 手动这是播放窗口父类，横屏的时候，会用这个做为容器使用，如果不设置，那么默认直接跳转到DecorView
+        mVDVideoView.setVDVideoViewContainer((ViewGroup) mVDVideoView
+                .getParent());
+
+        String videoPath = getIntentData().getString("videoPath");
+        windowManager = (WindowManager) getSystemService(Context.WINDOW_SERVICE);
+//        videoController.btnFullScreen.setVisibility(View.GONE);
+//        videoController.setVideoPath(C.BASE_URL + videoPath);
+//        videoController.start();
+
+
         ImageView adIV = (ImageView) findViewById(R.id.adFrameImageView);
         adIV.setOnClickListener(new View.OnClickListener() {
 
             @Override
             public void onClick(View arg0) {
                 // TODO Auto-generated method stub
-                Toast.makeText(SimpleTestActivity.this, "点击了静帧广告",
+                Toast.makeText(BasicVideoActivity.this, "点击了静帧广告",
                         Toast.LENGTH_LONG).show();
             }
         });
         // 从layout里面得到播放器ID
-        mVDVideoView = (VDVideoView) findViewById(R.id.vv1);
         // 手动这是播放窗口父类，横屏的时候，会用这个做为容器使用，如果不设置，那么默认直接跳转到DecorView
-        mVDVideoView.setVDVideoViewContainer((ViewGroup) mVDVideoView
-                .getParent());
 
         VDVideoListInfo infoList = new VDVideoListInfo();
         VDVideoInfo info = new VDVideoInfo();
+
         // 多流广告方式，就是在播放列表中配置广告流的方式
         // 单流方式：INSERTAD_TYPE_SINGLE，暂时不支持，如果设置了，会报exception
 //		infoList.mInsertADType = VDVideoListInfo.INSERTAD_TYPE_MULTI;
@@ -70,9 +111,9 @@ public class SimpleTestActivity extends Activity implements
 
         info = new VDVideoInfo();
         info.mTitle = "视频";
-        info.mPlayUrl = "http://120.27.115.235/UpLoad/Video/a3a4eb2c-f953-4699-a6ee-b18217afcb35.mp4";
+//        info.mPlayUrl = "http://120.27.115.235/UpLoad/Video/a3a4eb2c-f953-4699-a6ee-b18217afcb35.mp4";
+        info.mPlayUrl = C.BASE_URL + videoPath;
         infoList.addVideoInfo(info);
-
 
 //		info = new VDVideoInfo();
 //		info.mTitle = "这就是一个测试视频2";
@@ -93,16 +134,24 @@ public class SimpleTestActivity extends Activity implements
 //		mVDVideoView.setPlaylistListener(this);
 
         // 简单方式处理的视频列表
-        VDVideoPlayListView listView = (VDVideoPlayListView) findViewById(R.id.play_list_view);
-        if (listView != null) {
-            listView.onVideoList(infoList);
-        }
+//        VDVideoPlayListView listView = (VDVideoPlayListView) findViewById(R.id.play_list_view);
+//        if (listView != null) {
+//            listView.onVideoList(infoList);
+//        }
         // 初始化播放器以及播放列表
-        mVDVideoView.open(SimpleTestActivity.this, infoList);
+        mVDVideoView.open(BasicVideoActivity.this, infoList);
         // 开始播放，直接选择序号即可
         mVDVideoView.play(0);
-
     }
+
+    /**
+     * 绑定Presenter
+     */
+    @Override
+    public BasePresenterImp createPresenter() {
+        return null;
+    }
+
 
     @Override
     public boolean onKeyDown(int keyCode, KeyEvent event) {
@@ -186,4 +235,5 @@ public class SimpleTestActivity extends Activity implements
         // TODO Auto-generated method stub
         Toast.makeText(this, "开始换图", Toast.LENGTH_LONG).show();
     }
+
 }

@@ -10,10 +10,15 @@ import com.hewuzhe.ui.cons.C;
 import com.hewuzhe.utils.NetEngine;
 import com.hewuzhe.utils.SB;
 import com.hewuzhe.utils.SessionUtil;
+import com.hewuzhe.utils.StringUtil;
 import com.hewuzhe.view.ArticleView;
+import com.socks.library.KLog;
+import com.zhy.http.okhttp.OkHttpUtils;
+import com.zhy.http.okhttp.callback.StringCallback;
 
 import java.util.ArrayList;
 
+import okhttp3.Request;
 import rx.Subscription;
 import rx.android.schedulers.AndroidSchedulers;
 import rx.functions.Action0;
@@ -63,11 +68,16 @@ public class ArticlePresenter extends CommentPresenter<ArticleView> {
 
     }
 
-
     /**
      * 评论
      */
     public void publisComment(int id, String content, final View v) {
+
+        if (StringUtil.isEmpty(content)) {
+            view.snb("内容不能为空", v);
+            return;
+        }
+
         Subscription subscription = NetEngine.getService()
                 .MessageCommentDT(id, new SessionUtil(view.getContext()).getUser().Id, content)
                 .subscribeOn(Schedulers.io())
@@ -241,4 +251,47 @@ public class ArticlePresenter extends CommentPresenter<ArticleView> {
     }
 
 
+    public void getWeb(int id) {
+
+//
+//        Subscription subscription = NetEngine.getService()
+//                .MessageAndImageNews(id)
+//                .subscribeOn(Schedulers.io())
+//                .observeOn(AndroidSchedulers.mainThread())
+//                .subscribe(new SB<String>() {
+//                    @Override
+//                    public void next(String res) {
+//                        view.setWeb(res);
+//                    }
+//
+//                    @Override
+//                    public void onCompleted() {
+//
+//                    }
+//
+//                    @Override
+//                    public void onError(Throwable e) {
+//
+//                    }
+//                });
+//        addSubscription(subscription);
+
+        OkHttpUtils.get()
+                .url(C.BASE_URL + "MessageAndImageNews.aspx")
+                .addParams("id", String.valueOf(id))
+                .build()
+                .execute(new StringCallback() {
+                    @Override
+                    public void onError(Request request, Exception e) {
+
+                        KLog.e(e.getMessage());
+
+                    }
+
+                    @Override
+                    public void onResponse(String response) {
+                        view.setWeb(response);
+                    }
+                });
+    }
 }

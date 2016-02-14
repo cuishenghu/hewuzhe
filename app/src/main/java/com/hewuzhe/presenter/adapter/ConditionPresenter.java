@@ -151,8 +151,8 @@ public abstract class ConditionPresenter<V extends ConditionView> extends Refres
 
     }
 
-    public void showReplyInput(int id, String nicName, int position, View v) {
-        view.showReplyInput(id, nicName, position, v);
+    public void showReplyInput(int id, String nicName, int commenterId, int position, View v) {
+        view.showReplyInput(id, nicName, commenterId, position, v);
 
     }
 
@@ -165,7 +165,7 @@ public abstract class ConditionPresenter<V extends ConditionView> extends Refres
      * @param v
      * @param position
      */
-    public void publisReply(int id, final String nicName, final String content, final View v, final int position) {
+    public void publisReply(int id, final String nicName, final int commenterId, final String content, final View v, final int position) {
 
         if (StringUtil.isEmpty(content)) {
             view.snb("回复内容不能为空", v);
@@ -220,6 +220,7 @@ public abstract class ConditionPresenter<V extends ConditionView> extends Refres
                             Comment comment = new Comment();
                             comment.Content = content;
                             comment.CommentedNicName = nicName;
+                            comment.CommentedId = commenterId;
                             comment.Id = res.insertid;
                             view.replySuccess(position, comment);
                         } else {

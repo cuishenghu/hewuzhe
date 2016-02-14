@@ -1,11 +1,14 @@
 package com.hewuzhe.model;
 
+import android.os.Parcel;
+import android.os.Parcelable;
+
 import java.util.ArrayList;
 
 /**
  * Created by xianguangjin on 15/12/31.
  */
-public class FriendCondition {
+public class FriendCondition implements Parcelable {
 
 
     /**
@@ -51,7 +54,67 @@ public class FriendCondition {
      * IsFavorite : false
      * IsRepeat : true
      */
-    public int UserId;
+    public int UserId=0;
     public boolean IsFavorite;
     public boolean IsRepeat;
+
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeInt(this.Id);
+        dest.writeString(this.Content);
+        dest.writeString(this.PublishTime);
+        dest.writeString(this.NicName);
+        dest.writeString(this.VideoPath);
+        dest.writeString(this.ImagePath);
+        dest.writeString(this.VideoDuration);
+        dest.writeString(this.PhotoPath);
+        dest.writeInt(this.LikeNum);
+        dest.writeByte(IsLike ? (byte) 1 : (byte) 0);
+        dest.writeList(this.PicList);
+        dest.writeList(this.ComList);
+        dest.writeByte(isShowingAll ? (byte) 1 : (byte) 0);
+        dest.writeInt(this.UserId);
+        dest.writeByte(IsFavorite ? (byte) 1 : (byte) 0);
+        dest.writeByte(IsRepeat ? (byte) 1 : (byte) 0);
+    }
+
+    public FriendCondition() {
+    }
+
+    protected FriendCondition(Parcel in) {
+        this.Id = in.readInt();
+        this.Content = in.readString();
+        this.PublishTime = in.readString();
+        this.NicName = in.readString();
+        this.VideoPath = in.readString();
+        this.ImagePath = in.readString();
+        this.VideoDuration = in.readString();
+        this.PhotoPath = in.readString();
+        this.LikeNum = in.readInt();
+        this.IsLike = in.readByte() != 0;
+        this.PicList = new ArrayList<Pic>();
+        in.readList(this.PicList, Pic.class.getClassLoader());
+        this.ComList = new ArrayList<Comment>();
+        in.readList(this.ComList, Comment.class.getClassLoader());
+        this.isShowingAll = in.readByte() != 0;
+        this.UserId = in.readInt();
+        this.IsFavorite = in.readByte() != 0;
+        this.IsRepeat = in.readByte() != 0;
+    }
+
+    public static final Creator<FriendCondition> CREATOR = new Creator<FriendCondition>() {
+        public FriendCondition createFromParcel(Parcel source) {
+            return new FriendCondition(source);
+        }
+
+        public FriendCondition[] newArray(int size) {
+            return new FriendCondition[size];
+        }
+    };
 }

@@ -150,7 +150,7 @@ public class FFmpegRecorderActivity extends Activity implements OnClickListener,
     //录制的最短时间
     private int recordingMinimumTime = 6000;
     //提示换个场景
-    private int recordingChangeTime = 3000;
+    private int recordingChangeTime = 4000;
 
     boolean recordFinish = false;
     private Dialog creatingProgress;
@@ -257,6 +257,21 @@ public class FFmpegRecorderActivity extends Activity implements OnClickListener,
 
         setContentView(R.layout.activity_recorder);
 
+        data = getIntent().getBundleExtra("data");
+        if (data == null) {
+            data = new Bundle();
+        }
+
+        if (data.getInt(C.WHITCH, C.WHITCH_DEFAUT) == C.WHITCH_DEFAUT) {//发表视频
+            recordingTime = 20 * 1000;
+            recordingMinimumTime = 20 * 1000;
+
+        } else if (data.getInt(C.WHITCH, C.WHITCH_DEFAUT) == C.WHITCH_ONE) {//发表动态
+            recordingTime = 8 * 1000;
+            recordingMinimumTime = 8 * 1000;
+        }
+
+
         PowerManager pm = (PowerManager) getSystemService(Context.POWER_SERVICE);
         mWakeLock = pm.newWakeLock(PowerManager.SCREEN_BRIGHT_WAKE_LOCK, CLASS_LABEL);
         mWakeLock.acquire();
@@ -335,7 +350,7 @@ public class FFmpegRecorderActivity extends Activity implements OnClickListener,
         stateImageView = (ImageView) findViewById(R.id.recorder_surface_state);
 
         progressView = (ProgressView) findViewById(R.id.recorder_progress);
-        progressView.setTotalTime(recordingTime);
+        progressView.setTotalTime(recordingTime, this);
         cancelBtn = (Button) findViewById(R.id.recorder_cancel);
         cancelBtn.setOnClickListener(this);
         nextBtn = (Button) findViewById(R.id.recorder_next);
@@ -1033,8 +1048,8 @@ public class FFmpegRecorderActivity extends Activity implements OnClickListener,
                 //如果摄像头支持640*480，那么强制设为640*480
                 for (int i = 0; i < resolutionList.size(); i++) {
                     Size size = resolutionList.get(i);
-                    KLog.d("size.width="+size.width);
-                    KLog.d("size.height="+size.height);
+                    KLog.d("size.width=" + size.width);
+                    KLog.d("size.height=" + size.height);
                     if (size != null && size.width == 640 && size.height == 480) {
                         previewSize = size;
                         hasSize = true;

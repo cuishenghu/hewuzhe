@@ -162,7 +162,6 @@ public class BasicLocationMapActivity extends ToolBarActivity {
             _lng = location.getLongitude();
             _address = location.getAddrStr() + "";
 
-
             MyLocationData locData = new MyLocationData.Builder()
                     .accuracy(location.getRadius())
                             // 此处设置开发者获取到的方向信息，顺时针0-360

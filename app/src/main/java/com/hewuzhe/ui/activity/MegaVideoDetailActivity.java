@@ -286,7 +286,7 @@ public class MegaVideoDetailActivity extends RecycleViewActivity<MegaVideoDetail
 //		infoList.addVideoInfo(info);
 
         info = new VDVideoInfo();
-        info.mTitle = "这就是一个测试视频1";
+        info.mTitle = "视频";
 //      info.mPlayUrl = "http://120.27.115.235/UpLoad/Video/a3a4eb2c-f953-4699-a6ee-b18217afcb35.mp4";
         info.mPlayUrl = C.BASE_URL + video.MatchVideo;
         infoList.addVideoInfo(info);

@@ -1,8 +1,5 @@
 package com.hewuzhe.utils;
 
-import com.google.gson.Gson;
-import com.socks.library.KLog;
-
 import rx.Subscriber;
 
 /**
@@ -13,7 +10,7 @@ public abstract class SB<T> extends Subscriber<T> {
 
     @Override
     public void onNext(T t) {
-        KLog.json(new Gson().toJson(t));
+//        KLog.json(new Gson().toJson(t));
         next(t);
     }
 

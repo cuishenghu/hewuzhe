@@ -18,6 +18,7 @@ import com.hewuzhe.model.Comment;
 import com.hewuzhe.model.FriendCondition;
 import com.hewuzhe.model.Pic;
 import com.hewuzhe.presenter.adapter.ConditionPresenter;
+import com.hewuzhe.ui.activity.BasicVideoActivity;
 import com.hewuzhe.ui.activity.PicsActivity;
 import com.hewuzhe.ui.adapter.base.BaseAdapter;
 import com.hewuzhe.ui.cons.C;
@@ -126,9 +127,14 @@ public class FriendConditionAdapter extends BaseAdapter<FriendConditionAdapter.V
                     .crossFade()
                     .into(holder._ImgVideo);
             holder._LayImg.setOnClickListener(new View.OnClickListener() {
+                /**
+                 * @param view
+                 */
                 @Override
                 public void onClick(View view) {
-
+                    Intent intent = new Intent(context, BasicVideoActivity.class);
+                    intent.putExtra("data", new Bun().putString("videoPath", condition.VideoPath).ok());
+                    context.startActivity(intent);
                 }
             });
         }
@@ -164,10 +170,9 @@ public class FriendConditionAdapter extends BaseAdapter<FriendConditionAdapter.V
 
                         tvUserCommenter.setText(comment.NicName);
                         tvUserCommented.setText(comment.CommentedNicName);
-                        tvConent.setText("：" +comment.Content);
+                        tvConent.setText("：" + comment.Content);
 
-
-                        if (comment.CommentedId == comment.CommenterId) {
+                        if (comment.CommentedId == condition.UserId) {
                             tvUserCommented.setVisibility(View.GONE);
                             TextView tv_reply = (TextView) view.findViewById(R.id.tv_reply);
                             tv_reply.setVisibility(View.GONE);
@@ -176,7 +181,7 @@ public class FriendConditionAdapter extends BaseAdapter<FriendConditionAdapter.V
                         view.setOnClickListener(new View.OnClickListener() {
                             @Override
                             public void onClick(View view) {
-                                _presenter.showReplyInput(comment.Id, comment.NicName, position, view);
+                                _presenter.showReplyInput(comment.Id, comment.NicName, comment.CommenterId, position, view);
                             }
                         });
                     }
@@ -194,9 +199,9 @@ public class FriendConditionAdapter extends BaseAdapter<FriendConditionAdapter.V
                         TextView tvConent = (TextView) view.findViewById(R.id.tv_conent);
                         tvUserCommenter.setText(comment.NicName);
                         tvUserCommented.setText(comment.CommentedNicName);
-                        tvConent.setText("：" +comment.Content);
+                        tvConent.setText("：" + comment.Content);
 
-                        if (comment.CommentedId == comment.CommenterId) {
+                        if (comment.CommentedId == condition.UserId) {
                             tvUserCommented.setVisibility(View.GONE);
                             TextView tv_reply = (TextView) view.findViewById(R.id.tv_reply);
                             tv_reply.setVisibility(View.GONE);
@@ -205,7 +210,7 @@ public class FriendConditionAdapter extends BaseAdapter<FriendConditionAdapter.V
                         view.setOnClickListener(new View.OnClickListener() {
                             @Override
                             public void onClick(View view) {
-                                _presenter.showReplyInput(comment.Id, comment.NicName, position, view);
+                                _presenter.showReplyInput(comment.Id, comment.NicName, comment.CommenterId, position, view);
                             }
                         });
                     }
@@ -223,19 +228,18 @@ public class FriendConditionAdapter extends BaseAdapter<FriendConditionAdapter.V
                     TextView tvConent = (TextView) view.findViewById(R.id.tv_conent);
                     tvUserCommenter.setText(comment.NicName);
                     tvUserCommented.setText(comment.CommentedNicName);
-                    tvConent.setText("：" +comment.Content);
+                    tvConent.setText("：" + comment.Content);
 
-                    if (comment.CommentedId == comment.CommenterId) {
+                    if (comment.CommentedId == condition.UserId) {
                         tvUserCommented.setVisibility(View.GONE);
                         TextView tv_reply = (TextView) view.findViewById(R.id.tv_reply);
                         tv_reply.setVisibility(View.GONE);
                     }
 
-
                     view.setOnClickListener(new View.OnClickListener() {
                         @Override
                         public void onClick(View view) {
-                            _presenter.showReplyInput(comment.Id, comment.NicName, position, view);
+                            _presenter.showReplyInput(comment.Id, comment.NicName, comment.CommenterId, position, view);
                         }
                     });
 

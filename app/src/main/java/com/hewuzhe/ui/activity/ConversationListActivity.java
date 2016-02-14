@@ -64,14 +64,12 @@ public class ConversationListActivity extends ToolBarActivity {
         return null;
     }
 
-
     /**
      * 加载 会话列表 ConversationListFragment
      */
     private void enterFragment() {
 
         ConversationListFragment fragment = (ConversationListFragment) getSupportFragmentManager().findFragmentById(R.id.conversationlist);
-
         Uri uri = Uri.parse("rong://" + getApplicationInfo().packageName).buildUpon()
                 .appendPath("conversationlist")
                 .appendQueryParameter(Conversation.ConversationType.PRIVATE.getName(), "false") //设置私聊会话非聚合显示

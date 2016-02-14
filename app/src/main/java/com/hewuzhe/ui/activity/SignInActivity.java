@@ -172,7 +172,7 @@ public class SignInActivity extends BaseActivity<SignInPresenter> implements Sig
 
     /**
      * @param savedInstanceState 缓存数据
-     *                           <p/>
+     *                           <p>
      *                           初始化一些事情
      */
     @Override
@@ -233,6 +233,13 @@ public class SignInActivity extends BaseActivity<SignInPresenter> implements Sig
 //          popupOthers();
             return;
         }
+
+        /**
+         * 清除之前的账户
+         * */
+        if (plat.isValid()) {
+            plat.removeAccount();
+        }
 //判断指定平台是否已经完成授权
 //        if (plat.isAuthValid()) {
 //        String userId = plat.getDb().getUserId();
@@ -247,6 +254,7 @@ public class SignInActivity extends BaseActivity<SignInPresenter> implements Sig
         plat.SSOSetting(false);
         //获取用户资料
         plat.showUser(null);
+
     }
 
 

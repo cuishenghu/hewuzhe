@@ -90,8 +90,12 @@ public class ConditionDetialActivity extends SwipeRecycleViewActivity<ConditonDe
     @Override
     protected void initThings(Bundle savedInstanceState) {
         super.initThings(savedInstanceState);
-        showDialog();
-        presenter.getData(page, count);
+//        showDialog();
+//        presenter.getData(page, count);
+        FriendCondition friendCondition = getIntentData().getParcelable("item");
+        friendCondition.isShowingAll = false;
+        setData(friendCondition);
+
 
     }
 
@@ -228,6 +232,7 @@ public class ConditionDetialActivity extends SwipeRecycleViewActivity<ConditonDe
             }
         }
 
+
         if (StringUtil.isEmpty(condition.VideoPath)) {
             _LayImg.setVisibility(View.GONE);
 
@@ -242,11 +247,14 @@ public class ConditionDetialActivity extends SwipeRecycleViewActivity<ConditonDe
                 @Override
                 public void onClick(View view) {
                     {
-
+                        Intent intent = new Intent(getContext(), BasicVideoActivity.class);
+                        intent.putExtra("data", new Bun().putString("videoPath", condition.VideoPath).ok());
+                        getContext().startActivity(intent);
                     }
                 }
             });
         }
+
 
         _TvShowAll.setText(condition.isShowingAll ? "显示全部评论" : "关闭全部评论");
         _TvShowAll.setOnClickListener(new View.OnClickListener() {
@@ -297,7 +305,7 @@ public class ConditionDetialActivity extends SwipeRecycleViewActivity<ConditonDe
                         tvUserCommented.setText(comment.CommentedNicName);
                         tvConent.setText("：" + comment.Content);
 
-                        if (comment.CommentedId == comment.CommenterId) {
+                        if (comment.CommentedId == condition.UserId) {
                             tvUserCommented.setVisibility(View.GONE);
                             TextView tv_reply = (TextView) view.findViewById(R.id.tv_reply);
                             tv_reply.setVisibility(View.GONE);
@@ -305,7 +313,7 @@ public class ConditionDetialActivity extends SwipeRecycleViewActivity<ConditonDe
                         view.setOnClickListener(new View.OnClickListener() {
                             @Override
                             public void onClick(View view) {
-                                presenter.showReplyInput(comment.Id, comment.NicName, view);
+                                presenter.showReplyInput(comment.Id, comment.NicName, comment.CommenterId, view);
                             }
                         });
 
@@ -323,9 +331,9 @@ public class ConditionDetialActivity extends SwipeRecycleViewActivity<ConditonDe
                         TextView tvConent = (TextView) view.findViewById(R.id.tv_conent);
                         tvUserCommenter.setText(comment.NicName);
                         tvUserCommented.setText(comment.CommentedNicName);
-                        tvConent.setText("：" +comment.Content);
+                        tvConent.setText("：" + comment.Content);
 
-                        if (comment.CommentedId == comment.CommenterId) {
+                        if (comment.CommentedId == condition.UserId) {
                             tvUserCommented.setVisibility(View.GONE);
                             TextView tv_reply = (TextView) view.findViewById(R.id.tv_reply);
                             tv_reply.setVisibility(View.GONE);
@@ -334,7 +342,7 @@ public class ConditionDetialActivity extends SwipeRecycleViewActivity<ConditonDe
                         view.setOnClickListener(new View.OnClickListener() {
                             @Override
                             public void onClick(View view) {
-                                presenter.showReplyInput(comment.Id, comment.NicName, view);
+                                presenter.showReplyInput(comment.Id, comment.NicName, comment.CommenterId, view);
                             }
                         });
                     }
@@ -352,9 +360,9 @@ public class ConditionDetialActivity extends SwipeRecycleViewActivity<ConditonDe
                     TextView tvConent = (TextView) view.findViewById(R.id.tv_conent);
                     tvUserCommenter.setText(comment.NicName);
                     tvUserCommented.setText(comment.CommentedNicName);
-                    tvConent.setText("：" +comment.Content);
+                    tvConent.setText("：" + comment.Content);
 
-                    if (comment.CommentedId == comment.CommenterId) {
+                    if (comment.CommentedId == condition.UserId) {
                         tvUserCommented.setVisibility(View.GONE);
                         TextView tv_reply = (TextView) view.findViewById(R.id.tv_reply);
                         tv_reply.setVisibility(View.GONE);
@@ -363,7 +371,7 @@ public class ConditionDetialActivity extends SwipeRecycleViewActivity<ConditonDe
                     view.setOnClickListener(new View.OnClickListener() {
                         @Override
                         public void onClick(View view) {
-                            presenter.showReplyInput(comment.Id, comment.NicName, view);
+                            presenter.showReplyInput(comment.Id, comment.NicName, comment.CommenterId, view);
                         }
                     });
 
@@ -473,10 +481,11 @@ public class ConditionDetialActivity extends SwipeRecycleViewActivity<ConditonDe
      *
      * @param id
      * @param nicName
+     * @param commenterId
      * @param view
      */
     @Override
-    public void showReplyInput(final int id, final String nicName, View view) {
+    public void showReplyInput(final int id, final String nicName, final int commenterId, View view) {
         _LayCommentTwo.setVisibility(View.VISIBLE);
         _EdtComment.requestFocus();
         showSoftInput(_EdtComment);
@@ -484,7 +493,7 @@ public class ConditionDetialActivity extends SwipeRecycleViewActivity<ConditonDe
         _BtnPublish.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                presenter.publisReply(id, _EdtComment.getText().toString().trim(), nicName, view);
+                presenter.publisReply(id, nicName, commenterId, _EdtComment.getText().toString().trim(), view);
             }
         });
     }

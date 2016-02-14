@@ -190,7 +190,7 @@ public class FriendsConditionActivity extends SwipeRecycleViewActivity<FriendCon
      */
     @Override
     public void onItemClick(View view, int pos, FriendCondition item) {
-        startActivity(ConditionDetialActivity.class, new Bun().putInt("id", item.Id).putInt("whitch", C.WHITCH_ONE).ok());
+        startActivity(ConditionDetialActivity.class, new Bun().putP("item", item).putInt("whitch", C.WHITCH_ONE).ok());
     }
 
 
@@ -246,6 +246,7 @@ public class FriendsConditionActivity extends SwipeRecycleViewActivity<FriendCon
         FriendCondition condition = adapter.data.get(position);
         comment.CommentedNicName = condition.NicName;
         comment.NicName = user.NicName;
+        comment.CommentedId = condition.UserId;
         condition.ComList.add(comment);
         adapter.notifyItemChanged(position);
     }
@@ -259,7 +260,7 @@ public class FriendsConditionActivity extends SwipeRecycleViewActivity<FriendCon
      * @param view
      */
     @Override
-    public void showReplyInput(final int id, final String nicName, final int position, View view) {
+    public void showReplyInput(final int id, final String nicName, final int commenterId, final int position, View view) {
         _LayComment.setVisibility(View.VISIBLE);
         _EdtComment.requestFocus();
         showSoftInput(_EdtComment);
@@ -267,7 +268,7 @@ public class FriendsConditionActivity extends SwipeRecycleViewActivity<FriendCon
         _BtnPublish.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                presenter.publisReply(id, _EdtComment.getText().toString().trim(), nicName, view, position);
+                presenter.publisReply(id, nicName, commenterId, _EdtComment.getText().toString().trim(), view, position);
             }
         });
     }

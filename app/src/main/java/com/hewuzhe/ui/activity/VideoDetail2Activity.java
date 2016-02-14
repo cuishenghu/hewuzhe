@@ -292,6 +292,17 @@ public class VideoDetail2Activity extends RecycleViewActivity<VideoDetailPresent
         _Video = video;
         presenter.getOtherVideos(_Video.UserId, id);
 
+        ViewGroup.LayoutParams params = mVDVideoView.getLayoutParams();
+        params.width = ViewGroup.LayoutParams.MATCH_PARENT;
+
+        if (video.UserId == 0) {
+            params.height = StringUtil.dip2px(getContext(), 200);
+        } else {
+            params.height = StringUtil.dip2px(getContext(), 320);
+        }
+        mVDVideoView.setLayoutParams(params);
+
+
         final int position = 0;
 
         if (video.UserId == 0) {
@@ -417,11 +428,10 @@ public class VideoDetail2Activity extends RecycleViewActivity<VideoDetailPresent
 //		infoList.addVideoInfo(info);
 
         info = new VDVideoInfo();
-        info.mTitle = "这就是一个测试视频1";
+        info.mTitle = "视频";
 //        info.mPlayUrl = "http://120.27.115.235/UpLoad/Video/a3a4eb2c-f953-4699-a6ee-b18217afcb35.mp4";
         info.mPlayUrl = C.BASE_URL + video.VideoPath;
         infoList.addVideoInfo(info);
-
 
 //		info = new VDVideoInfo();
 //		info.mTitle = "这就是一个测试视频2";
@@ -458,7 +468,6 @@ public class VideoDetail2Activity extends RecycleViewActivity<VideoDetailPresent
             } else {
                 _LayNoVip.setVisibility(View.VISIBLE);
             }
-
         } else {
             layTranspond.setVisibility(View.VISIBLE);
             layShare.setVisibility(View.VISIBLE);

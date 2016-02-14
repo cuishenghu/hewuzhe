@@ -362,4 +362,7 @@ public interface ApiService {
     @GET("AboutUs.asmx/GetAuoutUs")
     Observable<Res<AboutUs>> GetAuoutUs();
 
+    @GET("MessageAndImageNews.aspx")
+    Observable<String> MessageAndImageNews(@Query("id") int id);
+
 }

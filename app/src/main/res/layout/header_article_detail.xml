@@ -10,7 +10,7 @@
                     android:layout_height="wrap_content">
 
         <LinearLayout android:layout_width="match_parent"
-                      android:layout_height="wrap_content"
+                      android:layout_height="match_parent"
                       android:background="@color/colorListBg"
                       android:orientation="vertical"
                       android:paddingLeft="20px"
@@ -21,8 +21,11 @@
                       android:layout_width="match_parent"
                       android:layout_height="wrap_content"
                       android:layout_marginTop="20px"
+                      android:ellipsize="marquee"
                       android:gravity="center"
-                      android:text="核武着联盟详情"/>
+                      android:singleLine="true"
+                      android:text="核武着联盟详情"
+                      android:visibility="gone"/>
 
             <TextView android:id="@+id/tv_froms"
                       style="@style/text_25_colorLine"
@@ -30,7 +33,8 @@
                       android:layout_height="wrap_content"
                       android:layout_marginTop="10px"
                       android:gravity="center"
-                      android:text="来自：公益培训 2013232332"/>
+                      android:text="来自：公益培训 2013232332"
+                      android:visibility="gone"/>
 
             <!--<TextView-->
             <!--android:id="@+id/tv_content"-->
@@ -41,15 +45,22 @@
             <!--android:lineSpacingExtra="2dp"-->
             <!--android:text="来自：公益培训 2013232332"/>-->
 
-            <org.sufficientlysecure.htmltextview.HtmlTextView
-                android:id="@+id/tv_content"
-                style="@style/text_30_white"
+            <!--<org.sufficientlysecure.htmltextview.HtmlTextView-->
+            <!--android:id="@+id/tv_content"-->
+            <!--style="@style/text_30_white"-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:layout_marginTop="10px"-->
+            <!--android:lineSpacingExtra="2dp"/>-->
+
+
+            <WebView
+                android:id="@+id/web_content"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="10px"
-                android:lineSpacingExtra="2dp"/>
+                >
 
-
+            </WebView>
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="85px"

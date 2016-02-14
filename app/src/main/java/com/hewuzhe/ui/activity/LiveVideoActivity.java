@@ -68,7 +68,7 @@ public class LiveVideoActivity extends ToolBarActivity<LiveVideoPresenter> imple
         _Viewpager.setAdapter(bee_pageAdapter);
         _Indicator.setViewPager(_Viewpager);
 
-        presenter.SelectVideoLive(1);
+        presenter.SelectVideoLive(3);
 
 
     }

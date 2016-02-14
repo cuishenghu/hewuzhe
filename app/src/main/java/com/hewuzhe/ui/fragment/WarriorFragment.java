@@ -46,6 +46,7 @@ import com.hewuzhe.utils.SessionUtil;
 import com.hewuzhe.utils.StringUtil;
 import com.hewuzhe.view.WarriorFragmentView;
 import com.pgyersdk.update.PgyUpdateManager;
+import com.socks.library.KLog;
 import com.zhy.http.okhttp.OkHttpUtils;
 import com.zhy.http.okhttp.callback.StringCallback;
 
@@ -136,6 +137,7 @@ public class WarriorFragment extends ToolBarFragment<WarriorFragmentPresenter> i
     private String _Address;
     private SPUtil spUtil;
     private boolean isFirstRun = true;
+    private boolean hasConnected = false;
 
 
     public WarriorFragment() {
@@ -203,6 +205,7 @@ public class WarriorFragment extends ToolBarFragment<WarriorFragmentPresenter> i
                     @Override
                     public void onResponse(String response) {
 
+                        KLog.json(response);
                         try {
                             JSONObject jsonObject = new JSONObject(response);
 
@@ -346,9 +349,9 @@ public class WarriorFragment extends ToolBarFragment<WarriorFragmentPresenter> i
                 .transform(new GlideCircleTransform(getContext()))
                 .into(imgAvatar);
 
-        connect(user.Token);
-
-
+        if (!hasConnected) {
+            connect(user.Token);
+        }
     }
 
     private String getUserId() {
@@ -393,7 +396,6 @@ public class WarriorFragment extends ToolBarFragment<WarriorFragmentPresenter> i
         return false;
     }
 
-
     @Override
     public void onResume() {
         super.onResume();
@@ -407,6 +409,7 @@ public class WarriorFragment extends ToolBarFragment<WarriorFragmentPresenter> i
     @Override
     public void onHiddenChanged(boolean hidden) {
         super.onHiddenChanged(hidden);
+
         if (!hidden) {
             presenter.getUserData();
         }
@@ -425,7 +428,6 @@ public class WarriorFragment extends ToolBarFragment<WarriorFragmentPresenter> i
          */
         if (getActivity().getApplicationInfo().packageName.equals(App.getCurProcessName(getActivity().getApplicationContext()))) {
             RongIM.connect(token, new RongIMClient.ConnectCallback() {
-
                 /**
                  * Token 错误，在线上环境下主要是因为 Token 已经过期，您需要向 App Server 重新请求一个新的 Token
                  */
@@ -442,6 +444,7 @@ public class WarriorFragment extends ToolBarFragment<WarriorFragmentPresenter> i
                 @Override
                 public void onSuccess(String userid) {
 
+                    hasConnected = true;
                     Log.d("LoginActivity", "--onSuccess" + userid);
 //                    startActivity(new Intent(LoginActivity.this, MainActivity.class));
 //                    finish();
@@ -462,7 +465,6 @@ public class WarriorFragment extends ToolBarFragment<WarriorFragmentPresenter> i
 
                 /**
                  * 连接融云失败
-                 *
                  * @param errorCode 错误码，可到官网 查看错误码对应的注释
                  */
                 @Override

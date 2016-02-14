@@ -16,7 +16,8 @@
         <com.hewuzhe.ui.widget.MultiSwipeRefreshLayout
             android:id="@+id/swipe_refresh_layout"
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="match_parent"
+            android:layout_marginBottom="90px">
             <android.support.v4.widget.NestedScrollView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
@@ -56,7 +57,7 @@
                                   android:layout_marginLeft="8px"
                                   android:layout_marginTop="12px"
                                   android:layout_toRightOf="@id/img"
-                                  android:text="我是内容............"
+                                  android:text=""
                                   android:textColor="@color/colorLine"
                                   android:textSize="25px"/>
 
@@ -103,7 +104,7 @@
                                 android:layout_height="wrap_content"
                                 android:layout_marginLeft="8px"
                                 android:layout_weight="1"
-                                android:text="4月20日"
+                                android:text=""
                                 android:textColor="@color/colorLine"
                                 android:textSize="25px"/>
 
@@ -113,7 +114,7 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_marginLeft="8px"
-                                android:text="200"
+                                android:text=""
                                 android:textColor="@color/white"
                                 android:textSize="25px"
                                 />
@@ -206,7 +207,7 @@
 
         <LinearLayout android:id="@+id/lay_comment_two"
                       android:layout_width="match_parent"
-                      android:layout_height="wrap_content"
+                      android:layout_height="90px"
                       android:layout_gravity="bottom"
                       android:layout_marginBottom="12px"
                       android:background="@color/colorPrimary"

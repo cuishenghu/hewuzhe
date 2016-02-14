@@ -300,7 +300,7 @@ public class MegaVideoDetailPresenter extends CommentPresenter<MegaVideoDetailVi
 
     public void voteTeam(int id, int teamid) {
         Subscription subscription = NetEngine.getService()
-                .VotePerso(teamid, id, new SessionUtil(view.getContext()).getUserId())
+                .VoteTeam(teamid, id, new SessionUtil(view.getContext()).getUserId())
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new SB<Res>() {

@@ -23,7 +23,7 @@ public interface CondtionDetailView extends ListView<Comment>, LoadMoreView, Get
 
     void commentSuccess(Comment comment);
 
-    void showReplyInput(int id, String nicName, View view);
+    void showReplyInput(int id, String nicName, int commenterId, View view);
 
     void replySuccess(Comment comment);
 }

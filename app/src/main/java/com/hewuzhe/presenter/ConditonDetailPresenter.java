@@ -150,8 +150,8 @@ public class ConditonDetailPresenter extends RefreshAndLoadMorePresenter<Condtio
 
     }
 
-    public void showReplyInput(int id, String nicName, View v) {
-        view.showReplyInput(id, nicName, v);
+    public void showReplyInput(int id, String nicName, int commenterId, View v) {
+        view.showReplyInput(id, nicName, commenterId, v);
 
     }
 
@@ -160,10 +160,11 @@ public class ConditonDetailPresenter extends RefreshAndLoadMorePresenter<Condtio
      *
      * @param id
      * @param nicName
+     * @param commenterId
      * @param content
      * @param v
      */
-    public void publisReply(int id, final String nicName, final String content, final View v) {
+    public void publisReply(int id, final String nicName, final int commenterId, final String content, final View v) {
 
         if (StringUtil.isEmpty(content)) {
             view.snb("回复内容不能为空", v);
@@ -218,6 +219,7 @@ public class ConditonDetailPresenter extends RefreshAndLoadMorePresenter<Condtio
                             Comment comment = new Comment();
                             comment.Content = content;
                             comment.CommentedNicName = nicName;
+                            comment.CommentedId = commenterId;
                             comment.Id = res.insertid;
                             view.replySuccess(comment);
                         } else {

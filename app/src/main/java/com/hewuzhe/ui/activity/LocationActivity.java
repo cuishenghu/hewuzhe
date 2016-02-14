@@ -213,6 +213,7 @@ public class LocationActivity extends AppCompatActivity
         mLocClient.setLocOption(option);
         mLocClient.start();
 
+
         nearAddressAdapter = new NearAddressAdapter(this,
                 R.layout.item_near_address, nearAddresses);
         _NearAddressList.setAdapter(nearAddressAdapter);
@@ -228,8 +229,6 @@ public class LocationActivity extends AppCompatActivity
                 Log.d("BasicLocationMapActivit", uri.toString());
                 WarriorFragment._LocationCallback.onSuccess(LocationMessage.obtain(poiInfo.location.latitude, poiInfo.location.longitude, poiInfo.address, uri));
                 LocationActivity.this.finish();
-
-
             }
         });
 

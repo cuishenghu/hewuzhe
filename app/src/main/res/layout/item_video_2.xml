@@ -4,6 +4,7 @@
               android:layout_width="match_parent" android:layout_height="wrap_content"
               android:background="@color/colorListBg"
               android:orientation="vertical"
+              android:paddingBottom="5px"
     >
 
     <FrameLayout android:layout_width="match_parent"
@@ -14,7 +15,6 @@
             android:layout_height="match_parent"
             android:scaleType="fitXY"
             android:src="@mipmap/img_bg_videio"/>
-
         <TextView
             android:id="@+id/tv_add_time"
             android:layout_width="wrap_content"
@@ -135,12 +135,6 @@
             android:visibility="gone"
             tools:visibility="visible"/>
 
-
     </LinearLayout>
-
-    <TextView android:layout_width="match_parent"
-              android:layout_height="22px"
-              android:background="@color/colorBg"/>
-
 
 </LinearLayout>

@@ -169,12 +169,18 @@ public class GroupConditionAdapter extends BaseAdapter<GroupConditionAdapter.VHo
 
                         tvUserCommenter.setText(comment.NicName);
                         tvUserCommented.setText(comment.CommentedNicName);
-                        tvConent.setText(comment.Content);
+                        tvConent.setText("：" + comment.Content);
+
+                        if (comment.CommentedId == condition.UserId) {
+                            tvUserCommented.setVisibility(View.GONE);
+                            TextView tv_reply = (TextView) view.findViewById(R.id.tv_reply);
+                            tv_reply.setVisibility(View.GONE);
+                        }
 
                         view.setOnClickListener(new View.OnClickListener() {
                             @Override
                             public void onClick(View view) {
-                                _presenter.showReplyInput(comment.Id, comment.NicName, position, view);
+                                _presenter.showReplyInput(comment.Id, comment.NicName, comment.CommenterId, position, view);
                             }
                         });
                     }
@@ -190,13 +196,22 @@ public class GroupConditionAdapter extends BaseAdapter<GroupConditionAdapter.VHo
                         TextView tvUserCommenter = (TextView) view.findViewById(R.id.tv_user_commenter);
                         TextView tvUserCommented = (TextView) view.findViewById(R.id.tv_user_commented);
                         TextView tvConent = (TextView) view.findViewById(R.id.tv_conent);
+
                         tvUserCommenter.setText(comment.NicName);
                         tvUserCommented.setText(comment.CommentedNicName);
-                        tvConent.setText(comment.Content);
+                        tvConent.setText("：" + comment.Content);
+
+                        if (comment.CommentedId == condition.UserId) {
+                            tvUserCommented.setVisibility(View.GONE);
+                            TextView tv_reply = (TextView) view.findViewById(R.id.tv_reply);
+                            tv_reply.setVisibility(View.GONE);
+                        }
+
+
                         view.setOnClickListener(new View.OnClickListener() {
                             @Override
                             public void onClick(View view) {
-                                _presenter.showReplyInput(comment.Id, comment.NicName, position, view);
+                                _presenter.showReplyInput(comment.Id, comment.NicName, comment.CommenterId, position, view);
                             }
                         });
                     }
@@ -212,17 +227,24 @@ public class GroupConditionAdapter extends BaseAdapter<GroupConditionAdapter.VHo
                     TextView tvUserCommenter = (TextView) view.findViewById(R.id.tv_user_commenter);
                     TextView tvUserCommented = (TextView) view.findViewById(R.id.tv_user_commented);
                     TextView tvConent = (TextView) view.findViewById(R.id.tv_conent);
+
                     tvUserCommenter.setText(comment.NicName);
                     tvUserCommented.setText(comment.CommentedNicName);
-                    tvConent.setText(comment.Content);
+                    tvConent.setText("：" + comment.Content);
+
+                    if (comment.CommentedId == condition.UserId) {
+                        tvUserCommented.setVisibility(View.GONE);
+                        TextView tv_reply = (TextView) view.findViewById(R.id.tv_reply);
+                        tv_reply.setVisibility(View.GONE);
+                    }
+
 
                     view.setOnClickListener(new View.OnClickListener() {
                         @Override
                         public void onClick(View view) {
-                            _presenter.showReplyInput(comment.Id, comment.NicName, position, view);
+                            _presenter.showReplyInput(comment.Id, comment.NicName, comment.CommenterId, position, view);
                         }
                     });
-
                 }
             }
 

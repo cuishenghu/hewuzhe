@@ -10,6 +10,9 @@ import android.support.v7.widget.RecyclerView;
 import android.text.Html;
 import android.text.Spanned;
 import android.view.View;
+import android.webkit.WebSettings;
+import android.webkit.WebView;
+import android.webkit.WebViewClient;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -43,7 +46,7 @@ public class FederalConditionDetailActivity extends RecycleViewActivity<ArticleP
 
     private TextView tvName;
     private TextView tvFroms;
-    private HtmlTextView tvContent;
+    //    private HtmlTextView tvContent;
     private ImageView imgPraise;
     private TextView tvPraiseCount;
     private TextView tvPageViews;
@@ -63,7 +66,7 @@ public class FederalConditionDetailActivity extends RecycleViewActivity<ArticleP
 
                 case 0:
                     Spanned content = Html.fromHtml(_content, new MyImageGetter(), null);
-                    tvContent.setText(content);
+//                    tvContent.setText(content);
                     break;
             }
 
@@ -71,6 +74,8 @@ public class FederalConditionDetailActivity extends RecycleViewActivity<ArticleP
         }
     };
     private Article _Article;
+    private WebView webContent;
+    private String visitNum = "";
 
 
     @Override
@@ -82,15 +87,19 @@ public class FederalConditionDetailActivity extends RecycleViewActivity<ArticleP
     protected void initThings(Bundle savedInstanceState) {
         super.initThings(savedInstanceState);
         id = getIntentData().getInt("id");
+        visitNum = getIntentData().getString("visitNum");
         initHeader();
         presenter.getArticleDetail(id);
+        presenter.getWeb(id);
         presenter.getData(page, count);
+
     }
 
     private void initHeader() {
         tvName = (TextView) header.findViewById(R.id.tv_name);
         tvFroms = (TextView) header.findViewById(R.id.tv_froms);
-        tvContent = (HtmlTextView) header.findViewById(R.id.tv_content);
+//        tvContent = (HtmlTextView) header.findViewById(R.id.tv_content);
+        webContent = (WebView) header.findViewById(R.id.web_content);
         imgPraise = (ImageView) header.findViewById(R.id.img_praise);
         tvPraiseCount = (TextView) header.findViewById(R.id.tv_praise_count);
         tvPageViews = (TextView) header.findViewById(R.id.tv_page_views);
@@ -99,6 +108,26 @@ public class FederalConditionDetailActivity extends RecycleViewActivity<ArticleP
         imgAvatar2 = (ImageView) header.findViewById(R.id.img_avatar_2);
         btnPublish = (Button) header.findViewById(R.id.btn_publish);
         edtComment = (EditText) header.findViewById(R.id.edt_comment);
+
+
+        webContent.setWebViewClient(new WebViewClient() { // 通过webView打开链接，不调用系统浏览器
+
+            @Override
+            public boolean shouldOverrideUrlLoading(WebView view, String url) {
+                view.loadUrl(url);
+                return true;
+            }
+        });
+
+        webContent.setInitialScale(25);
+        WebSettings webSettings = webContent.getSettings();
+        webSettings.setJavaScriptEnabled(true);
+//		webSettings.setBuiltInZoomControls(true);
+        webSettings.setSupportZoom(true);
+
+        webContent.getSettings().setUseWideViewPort(true);
+        webContent.getSettings().setLoadWithOverviewMode(true);
+
     }
 
     /**
@@ -161,15 +190,20 @@ public class FederalConditionDetailActivity extends RecycleViewActivity<ArticleP
         _content = article.Content;
         HtmlTextView.RemoteImageGetter remoteGetter = new HtmlTextView.RemoteImageGetter();
         remoteGetter.baseUrl = C.BASE_URL;
-        tvContent.setHtmlFromString(_content, remoteGetter);
+//        tvContent.setHtmlFromString(_content, remoteGetter);
 //      tvContent.setText(Html.fromHtml(_content, new MyImageGetter(), null));
-//      tvContent.loadUrl("http://www.baidu.com");
+        //
 
         tvFroms.setText("来自：" + article.Category + "  " + article.PublishTime);
-        tvPraiseCount.setText(article.LikeNum + "");
-        tvPageViews.setText("阅读 " + article.FavoriteNum + "");
+        tvPraiseCount.setText(article.FavoriteNum + "");
+        tvPageViews.setText("阅读 " + visitNum);
         tvCommentCount.setText("评论 " + article.CommentNum + "");
         tvCommentCountOne.setText("共" + article.CommentNum + "条");
+
+//        if (article.IsFavorite) {
+//
+//
+//        }
 
         Glide.with(getContext())
                 .load(C.BASE_URL + new SessionUtil(getContext()).getUser().PhotoPath)
@@ -243,11 +277,12 @@ public class FederalConditionDetailActivity extends RecycleViewActivity<ArticleP
      *
      * @param id
      * @param nicName
+     * @param commenterId
      * @param position
      * @param v
      */
     @Override
-    public void showReplyInput(int id, String nicName, int position, View v) {
+    public void showReplyInput(int id, String nicName, int commenterId, int position, View v) {
 
     }
 
@@ -334,6 +369,11 @@ public class FederalConditionDetailActivity extends RecycleViewActivity<ArticleP
             startActivity(StrangerProfileSettingsActivity.class, new Bun().putInt("id", userid).ok());
         }
 
+    }
+
+    @Override
+    public void setWeb(String res) {
+        webContent.loadDataWithBaseURL(C.BASE_URL, res, "text/html", "utf-8", "");
     }
 
 }

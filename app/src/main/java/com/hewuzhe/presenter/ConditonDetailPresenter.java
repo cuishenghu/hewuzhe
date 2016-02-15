@@ -1,6 +1,7 @@
 package com.hewuzhe.presenter;
 
 import android.view.View;
+import android.widget.LinearLayout;
 
 import com.hewuzhe.model.Comment;
 import com.hewuzhe.model.FriendCondition;
@@ -234,5 +235,33 @@ public class ConditonDetailPresenter extends RefreshAndLoadMorePresenter<Condtio
                         view.snb("回复失败", v);
                     }
                 });
+    }
+
+    public void deleteComment(int id, final View v) {
+        Subscription subscription = NetEngine.getService()
+                .DeleteComment(id)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new SB<Res>() {
+                    @Override
+                    public void next(Res res) {
+                        if (res.code == C.OK) {
+                            ((LinearLayout) v.getParent()).removeView(v);
+                        } else {
+
+                        }
+                    }
+
+                    @Override
+                    public void onCompleted() {
+
+                    }
+
+                    @Override
+                    public void onError(Throwable e) {
+
+                    }
+                });
+        addSubscription(subscription);
     }
 }

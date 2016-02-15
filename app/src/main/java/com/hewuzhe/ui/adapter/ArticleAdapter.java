@@ -29,7 +29,6 @@ import butterknife.ButterKnife;
  */
 public class ArticleAdapter extends BaseAdapter<ArticleAdapter.VHolder, ArticleCollection, ArticlesPresenter> {
 
-
     /**
      * 是否显示checkBox
      */
@@ -83,7 +82,7 @@ public class ArticleAdapter extends BaseAdapter<ArticleAdapter.VHolder, ArticleC
                 .into(holder._Img);
         holder._TvTitle.setText(articleCollection.Title);
         holder._TvConent.setText(articleCollection.Content);
-        holder._TvPraise.setText(articleCollection.LikeNum + "");
+//        holder._TvPraise.setText(articleCollection.CommentNum + "");
         holder._TvCollect.setText(articleCollection.FavoriteNum + "");
         if (articleCollection.IsFavorite) {
             holder._ImgCollect.setImageResource(R.mipmap.icon_collect_focus);
@@ -92,7 +91,7 @@ public class ArticleAdapter extends BaseAdapter<ArticleAdapter.VHolder, ArticleC
 
         }
 
-        if (articleCollection.IsLike) {
+        if (articleCollection.IsFavorite) {
             holder._ImgCollect.setImageResource(R.mipmap.icon_collect_focus);
         } else {
             holder._ImgCollect.setImageResource(R.mipmap.icon_collect_gray);

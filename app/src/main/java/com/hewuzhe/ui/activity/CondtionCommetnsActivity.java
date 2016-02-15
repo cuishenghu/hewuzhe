@@ -86,6 +86,6 @@ public class CondtionCommetnsActivity extends SwipeRecycleViewActivity<Condition
      */
     @Override
     public void onItemClick(View view, int pos, ConditionComment item) {
-        startActivity(ConditionDetialActivity.class, new Bun().putInt("id", item.MessageId).ok());
+        startActivity(ConditionDetialTwoActivity.class, new Bun().putInt("id", item.MessageId).ok());
     }
 }

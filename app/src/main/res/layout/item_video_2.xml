@@ -49,6 +49,8 @@
               android:layout_width="match_parent"
               android:layout_height="wrap_content"
               android:layout_marginLeft="20px"
+              android:ellipsize="end"
+              android:singleLine="true"
               android:text="创新理念"
         />
 
@@ -59,6 +61,7 @@
               android:layout_marginLeft="20px"
               android:lines="2"
               android:text="跆拳道。。。。。"
+              android:visibility="gone"
         />
 
     <LinearLayout android:layout_width="match_parent"

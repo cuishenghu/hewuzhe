@@ -84,6 +84,7 @@ public class SignInActivity extends BaseActivity<SignInPresenter> implements Sig
         tvSignUp.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+//              startActivity(new Intent(SignInActivity.this, SignupProfileActivity.class));
                 startActivity(new Intent(SignInActivity.this, SignUpActivity.class));
             }
         });
@@ -172,7 +173,7 @@ public class SignInActivity extends BaseActivity<SignInPresenter> implements Sig
 
     /**
      * @param savedInstanceState 缓存数据
-     *                           <p>
+     *                           <p/>
      *                           初始化一些事情
      */
     @Override

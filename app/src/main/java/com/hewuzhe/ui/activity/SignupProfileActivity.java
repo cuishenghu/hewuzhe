@@ -13,6 +13,7 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.hewuzhe.R;
@@ -26,6 +27,7 @@ import com.hewuzhe.ui.widget.GlideCircleTransform;
 import com.hewuzhe.ui.widget.YsnowDialog;
 import com.hewuzhe.utils.FileUtil;
 import com.hewuzhe.utils.SessionUtil;
+import com.hewuzhe.utils.StringUtil;
 import com.hewuzhe.utils.TimeUtil;
 import com.hewuzhe.view.ProfileView;
 
@@ -60,7 +62,7 @@ public class SignupProfileActivity extends ToolBarActivity<ProfilePresenter> imp
     @Bind(R.id.lay_weight)
     LinearLayout layWeight;
     @Bind(R.id.edt_age)
-    EditText edtAge;
+    TextView edtAge;
     @Bind(R.id.lay_age)
     LinearLayout layAge;
     @Bind(R.id.edt_long)
@@ -154,7 +156,7 @@ public class SignupProfileActivity extends ToolBarActivity<ProfilePresenter> imp
         layHeight.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                edtHeight.setSelection(edtHeight.getText().length());
+                edtHeight.setSelection(0, edtHeight.getText().length());
                 edtHeight.requestFocus();
                 showInputMethod(edtHeight);
 
@@ -163,22 +165,32 @@ public class SignupProfileActivity extends ToolBarActivity<ProfilePresenter> imp
         layWeight.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                edtWeight.setSelection(edtWeight.getText().length());
+                edtWeight.setSelection(0, edtWeight.getText().length());
                 edtWeight.requestFocus();
                 showInputMethod(edtWeight);
 
             }
         });
+
+
         layAge.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 showDatePicker();
             }
         });
+
+        edtAge.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                showDatePicker();
+            }
+        });
+
         layLong.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                edtLong.setSelection(edtLong.getText().length());
+                edtLong.setSelection(0, edtLong.getText().length());
                 edtLong.requestFocus();
                 showInputMethod(edtLong);
             }
@@ -233,17 +245,21 @@ public class SignupProfileActivity extends ToolBarActivity<ProfilePresenter> imp
 
 
     private void showDatePicker() {
-        DatePicker picker = new DatePicker(this);
-        picker.setRange(1980, 2015);//年份范围
-        String yearStr = user.Birthday.substring(0, 4);
-        String monthStr = user.Birthday.substring(5, 7);
-        String dayStr = user.Birthday.substring(8, 10);
+        DatePicker picker = new DatePicker(SignupProfileActivity.this);
+        picker.setRange(1900, 2016);//年份范围
 
-        int year = Integer.parseInt(yearStr);
-        int month = Integer.parseInt(monthStr);
-        int day = Integer.parseInt(dayStr);
+        user = new SessionUtil(getContext()).getUser();
 
-        picker.setSelectedItem(year, month, day);
+        if (!StringUtil.isEmpty(user.Birthday)) {
+            String yearStr = user.Birthday.substring(0, 4);
+            String monthStr = user.Birthday.substring(5, 7);
+            String dayStr = user.Birthday.substring(8, 10);
+
+            int year = Integer.parseInt(yearStr);
+            int month = Integer.parseInt(monthStr);
+            int day = Integer.parseInt(dayStr);
+            picker.setSelectedItem(year, month, day);
+        }
 
         picker.setOnDatePickListener(new DatePicker.OnYearMonthDayPickListener() {
             @Override
@@ -266,6 +282,7 @@ public class SignupProfileActivity extends ToolBarActivity<ProfilePresenter> imp
     protected void initThings(Bundle savedInstanceState) {
         super.initThings(savedInstanceState);
 
+        imgBack.setVisibility(View.GONE);
         ViewCompat.setTransitionName(imgAvatar, "imgAvatar");
         tvAction.setText("保存");
         presenter.getUserData();
@@ -308,10 +325,17 @@ public class SignupProfileActivity extends ToolBarActivity<ProfilePresenter> imp
     public User getData() {
 
         user.NicName = edtUsername.getText().toString().trim();
-//        if (StringUtil.isEmpty(user.NicName)) {
-//            edtUsername.setError("昵称不能为空");
-//            return null;
-//        }
+
+        if (StringUtil.isEmpty(user.NicName)) {
+            Toast.makeText(this, "昵称不能为空", Toast.LENGTH_SHORT).show();
+            return null;
+        }
+
+        if (StringUtil.isEmpty(user.PhotoPath)) {
+            Toast.makeText(this, "头像不能为空", Toast.LENGTH_SHORT).show();
+            return null;
+        }
+
 
         user.Sexuality = cbMale.isChecked() ? 1 : 2;
 
@@ -471,6 +495,12 @@ public class SignupProfileActivity extends ToolBarActivity<ProfilePresenter> imp
 
     @Override
     public void noMore(String tip) {
+
+    }
+
+    @Override
+    public void onBackPressed() {
+
 
     }
 }

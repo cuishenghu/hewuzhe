@@ -46,7 +46,7 @@ public class FederalConditionDetailActivity extends RecycleViewActivity<ArticleP
 
     private TextView tvName;
     private TextView tvFroms;
-    //    private HtmlTextView tvContent;
+    //private HtmlTextView tvContent;
     private ImageView imgPraise;
     private TextView tvPraiseCount;
     private TextView tvPageViews;
@@ -76,6 +76,7 @@ public class FederalConditionDetailActivity extends RecycleViewActivity<ArticleP
     private Article _Article;
     private WebView webContent;
     private String visitNum = "";
+    private boolean IsFavorite = false;
 
 
     @Override
@@ -88,6 +89,7 @@ public class FederalConditionDetailActivity extends RecycleViewActivity<ArticleP
         super.initThings(savedInstanceState);
         id = getIntentData().getInt("id");
         visitNum = getIntentData().getString("visitNum");
+        IsFavorite = getIntentData().getBoolean("IsFavorite");
         initHeader();
         presenter.getArticleDetail(id);
         presenter.getWeb(id);
@@ -200,10 +202,24 @@ public class FederalConditionDetailActivity extends RecycleViewActivity<ArticleP
         tvCommentCount.setText("评论 " + article.CommentNum + "");
         tvCommentCountOne.setText("共" + article.CommentNum + "条");
 
-//        if (article.IsFavorite) {
-//
-//
-//        }
+        if (IsFavorite) {
+            imgPraise.setImageResource(R.mipmap.icon_collect_focus);
+            imgPraise.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    presenter.collectAndFavorateCance(id, 1, view);
+                }
+            });
+
+        } else {
+            imgPraise.setImageResource(R.mipmap.icon_collect);
+            imgPraise.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    presenter.collectAndFavorate(id, 1, view);
+                }
+            });
+        }
 
         Glide.with(getContext())
                 .load(C.BASE_URL + new SessionUtil(getContext()).getUser().PhotoPath)
@@ -299,8 +315,8 @@ public class FederalConditionDetailActivity extends RecycleViewActivity<ArticleP
     @Override
     public void collectAndOther(boolean b, int flag) {
         if (b) {
-            _Article.LikeNum++;
-            tvPraiseCount.setText(_Article.LikeNum + "");
+            _Article.FavoriteNum++;
+            tvPraiseCount.setText(_Article.FavoriteNum + "");
             imgPraise.setImageResource(R.mipmap.icon_collect_focus);
             imgPraise.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -310,8 +326,8 @@ public class FederalConditionDetailActivity extends RecycleViewActivity<ArticleP
             });
 
         } else {
-            _Article.LikeNum--;
-            tvPraiseCount.setText(_Article.LikeNum + "");
+            _Article.FavoriteNum--;
+            tvPraiseCount.setText(_Article.FavoriteNum + "");
             imgPraise.setImageResource(R.mipmap.icon_collect);
 
             imgPraise.setOnClickListener(new View.OnClickListener() {

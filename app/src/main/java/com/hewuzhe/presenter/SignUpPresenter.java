@@ -47,7 +47,7 @@ public class SignUpPresenter extends BasePresenterImp<SignUpView> {
     }
 
 
-    public void Register(View v) {
+    public void Register(final View v) {
         this.v = v;
         code = view.getCode();
         phoneNum = view.getPhoneNum();
@@ -90,6 +90,37 @@ public class SignUpPresenter extends BasePresenterImp<SignUpView> {
 
         view.showDialog();
         SMSSDK.submitVerificationCode(C.DEFAULT_COUNTRY_ID, phoneNum, code);
+
+//        Subscription subscription = NetEngine.getService()
+//                .RegisterAndLogin(phoneNum, pwdModel.pwd)
+//                .subscribeOn(Schedulers.io())
+//                .observeOn(AndroidSchedulers.mainThread())
+//                .subscribe(new SB<Res>() {
+//                    @Override
+//                    public void next(Res res) {
+//                        if (res.code == C.OK) {
+//                            view.snb("注册成功", v);
+//
+//                            signin(phoneNum, pwdModel.pwd, v);
+//                        } else if (res.code == 1) {
+//                            view.snb("此号码已经注册", v);
+//                        } else {
+//                            view.snb("注册失败", v);
+//                        }
+//                    }
+//
+//                    @Override
+//                    public void onCompleted() {
+//                        view.dismissDialog();
+//
+//                    }
+//
+//                    @Override
+//                    public void onError(Throwable e) {
+//                        view.dismissDialog();
+//                        view.snb("注册失败", v);
+//                    }
+//                });
 
 
     }

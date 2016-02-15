@@ -141,6 +141,10 @@ public class ProfilePresenter extends AreaPresenter<ProfileView> {
     public void saveDataSignup(final View v) {
         User user = view.getData();
 
+        if (user == null) {
+            return;
+        }
+
         Subscription subscription = NetEngine.getService()
                 .ChangeInfor(user.Id, user.NicName, user.Sexuality, user.Height, user.Weight, user.HomeAreaId, user.Experience, user.Description, user.Birthday)
                 .subscribeOn(Schedulers.io())

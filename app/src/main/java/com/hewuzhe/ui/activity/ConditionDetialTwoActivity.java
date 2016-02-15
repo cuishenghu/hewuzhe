@@ -39,7 +39,7 @@ import butterknife.Bind;
 import materialdialogs.DialogAction;
 import materialdialogs.MaterialDialog;
 
-public class ConditionDetialActivity extends SwipeRecycleViewActivity<ConditonDetailPresenter, ConditionCommentAdapter, Comment> implements CondtionDetailView {
+public class ConditionDetialTwoActivity extends SwipeRecycleViewActivity<ConditonDetailPresenter, ConditionCommentAdapter, Comment> implements CondtionDetailView {
 
     @Bind(R.id.img)
     ImageView _Img;
@@ -93,11 +93,12 @@ public class ConditionDetialActivity extends SwipeRecycleViewActivity<ConditonDe
     @Override
     protected void initThings(Bundle savedInstanceState) {
         super.initThings(savedInstanceState);
-//        showDialog();
-//        presenter.getData(page, count);
-        FriendCondition friendCondition = getIntentData().getParcelable("item");
-        friendCondition.isShowingAll = false;
-        setData(friendCondition);
+        showDialog();
+        presenter.getData(page, count);
+
+//        FriendCondition friendCondition = getIntentData().getParcelable("item");
+//        friendCondition.isShowingAll = false;
+//        setData(friendCondition);
 
     }
 
@@ -321,7 +322,7 @@ public class ConditionDetialActivity extends SwipeRecycleViewActivity<ConditonDe
                                     showDefautInfoDialog("温馨提示", "确定要删除评论吗？", new MaterialDialog.SingleButtonCallback() {
                                         @Override
                                         public void onClick(@NonNull MaterialDialog dialog, @NonNull DialogAction which) {
-                                            presenter.deleteComment(comment.Id,view);
+                                            presenter.deleteComment(comment.Id, view);
                                         }
                                     });
                                 } else {

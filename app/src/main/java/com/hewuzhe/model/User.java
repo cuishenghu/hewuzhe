@@ -30,7 +30,7 @@ public class User {
     public int Height;
     public int Weight;
     public int Experience;
-    public String Birthday;
+    public String Birthday = "";
     public boolean IsClose;
     public boolean IsPay;
     public String OverTime;
@@ -53,7 +53,6 @@ public class User {
      * IsShield : true
      * IsShieldNews : false
      */
-
 
 
     public String RemarkName;

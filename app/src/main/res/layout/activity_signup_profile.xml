@@ -37,7 +37,6 @@
                     />
 
 
-
             </LinearLayout>
 
 
@@ -191,8 +190,8 @@
                                   android:layout_height="match_parent"
                                   android:background="@null"
                                   android:gravity="center_vertical"
-
                                   android:inputType="number"
+                                  android:text="0"
                             />
                         <TextView style="@style/text_30_white"
                                   android:layout_width="wrap_content"
@@ -230,6 +229,7 @@
                                   android:background="@null"
                                   android:gravity="center_vertical"
                                   android:inputType="number"
+                                  android:text="0"
                             />
                         <TextView style="@style/text_30_white"
                                   android:layout_width="wrap_content"
@@ -274,15 +274,16 @@
                                   android:background="@color/colorBg"
                                   android:gravity="center"
                                   android:orientation="horizontal">
-                        <EditText android:id="@+id/edt_age"
+                        <TextView android:id="@+id/edt_age"
                                   style="@style/text_30_white"
                                   android:layout_width="wrap_content"
                                   android:layout_height="match_parent"
                                   android:background="@null"
+                                  android:editable="false"
+                                  android:focusable="false"
                                   android:gravity="center_vertical"
                                   android:inputType="number"
-
-                                  android:text="22"
+                                  android:text="0"
                             />
                         <TextView style="@style/text_30_white"
                                   android:layout_width="wrap_content"
@@ -319,9 +320,8 @@
                                   android:layout_height="match_parent"
                                   android:background="@null"
                                   android:gravity="center_vertical"
-
                                   android:inputType="number"
-                                  android:text="12"
+                                  android:text="0"
                             />
                         <TextView style="@style/text_30_white"
                                   android:layout_width="wrap_content"
@@ -459,8 +459,8 @@
                           android:layout_marginTop="18px"
                           android:background="@color/colorLine"/>
 
-                <TextView android:layout_width="match_parent"
-                          android:id="@+id/tv_save"
+                <TextView android:id="@+id/tv_save"
+                          android:layout_width="match_parent"
                           android:layout_height="80px"
                           android:layout_marginBottom="30px"
                           android:layout_marginLeft="20px"

@@ -3,6 +3,7 @@ package com.hewuzhe.ui.fragment;
 import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
+import android.support.annotation.Nullable;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.ActivityOptionsCompat;
 import android.support.v4.app.Fragment;
@@ -22,7 +23,6 @@ import com.hewuzhe.model.Weather;
 import com.hewuzhe.presenter.WarriorFragmentPresenter;
 import com.hewuzhe.ui.App;
 import com.hewuzhe.ui.activity.BasicMapActivity;
-import com.hewuzhe.ui.activity.BasicWebActivity;
 import com.hewuzhe.ui.activity.DoJoRecommendActivity;
 import com.hewuzhe.ui.activity.FlyDreamActivity;
 import com.hewuzhe.ui.activity.FriendProfileActivity;
@@ -99,12 +99,16 @@ public class WarriorFragment extends ToolBarFragment<WarriorFragmentPresenter> i
     LinearLayout layRecord;
     @Bind(R.id.lay_integral)
     LinearLayout layIntegral;
+    @Nullable
     @Bind(R.id.tv_air_quality)
     TextView tvAirQuality;
+    @Nullable
     @Bind(R.id.tv_pm)
     TextView tvPm;
+    @Nullable
     @Bind(R.id.tv_address)
     TextView tvAddress;
+    @Nullable
     @Bind(R.id.tv_temperature)
     TextView tvTemperature;
     @Bind(R.id.tv_username)
@@ -215,11 +219,12 @@ public class WarriorFragment extends ToolBarFragment<WarriorFragmentPresenter> i
 
                             Weather weather = new Gson().fromJson(jsonObject1.toString(), Weather.class);
 
-                            tvAirQuality.setText("空气质量：无数据");
-                            tvTemperature.setText(weather.now.tmp + "℃");
-                            tvPm.setText("PM：无数据");
-                            tvAddress.setText(_cityName);
-
+                            if (tvAirQuality != null) {
+                                tvAirQuality.setText("空气质量：无数据");
+                                tvTemperature.setText(weather.now.tmp + "℃");
+                                tvPm.setText("PM：无数据");
+                                tvAddress.setText(_cityName);
+                            }
 
                         } catch (JSONException e) {
                             e.printStackTrace();
@@ -379,7 +384,12 @@ public class WarriorFragment extends ToolBarFragment<WarriorFragmentPresenter> i
         _LayIndexImg.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startActivity(BasicWebActivity.class, new Bun().putString("url", data.ImageUrl).putString("title", "首页广告").ok());
+//                startActivity(BasicWebActivity.class, new Bun().putString("url", data.ImageUrl).putString("title", "首页广告").ok());
+
+                Intent intent = new Intent(Intent.ACTION_VIEW);
+                intent.setData(Uri.parse(data.ImageUrl));
+                startActivity(intent);
+
             }
         });
 

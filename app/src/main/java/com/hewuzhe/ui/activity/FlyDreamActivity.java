@@ -79,16 +79,17 @@ public class FlyDreamActivity extends ToolBarActivity<FlyDreamPresenter> impleme
     protected void action() {
         super.action();
         if (isEditing) {
-            edtMyDream.setEnabled(true);
-            edtToDo.setEnabled(true);
-            isEditing = true;
-            tvAction.setText("确定");
-        } else {
-            tvAction.setText("编辑");
-            isEditing = false;
             edtMyDream.setEnabled(false);
             edtToDo.setEnabled(false);
+            isEditing = false;
+            tvAction.setText("编辑");
             presenter.UpdateMyDream(tvAction);
+
+        } else {
+            tvAction.setText("确定");
+            isEditing = true;
+            edtMyDream.setEnabled(true);
+            edtToDo.setEnabled(true);
         }
     }
 

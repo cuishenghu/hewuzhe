@@ -72,6 +72,9 @@ public class PlanAdapter extends BaseAdapter<PlanAdapter.VHolder, Plan, BasePres
         holder._TvAddTime.setText(TimeUtil.timeFormatThree(plan.PublishTime));
         holder._TvPlanTime.setText(TimeUtil.timeFormatTwo(plan.StartTime) + "-" + TimeUtil.timeFormatTwo(plan.EndTime));
 
+
+        holder._CbPlan.setChecked(plan.isChecked);
+
         holder._CbPlan.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
@@ -136,6 +139,11 @@ public class PlanAdapter extends BaseAdapter<PlanAdapter.VHolder, Plan, BasePres
      */
     public void showCheck(boolean isNeedShow) {
         this.isNeedShow = isNeedShow;
+        if (!isNeedShow) {
+            for (Plan plan : data) {
+                plan.isChecked = false;
+            }
+        }
         this.notifyDataSetChanged();
     }
 

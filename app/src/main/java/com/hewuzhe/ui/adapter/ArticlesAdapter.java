@@ -64,6 +64,14 @@ public class ArticlesAdapter extends BaseAdapter<ArticlesAdapter.VHolder, Articl
         holder._TvPraise.setText(article.LikeNum + "");
         holder._TvCollect.setText(article.FavoriteNum + "");
         holder._TvContent.setText(article.Content);
+
+        if (article.IsFavorite) {
+            holder._ImgCollect.setImageResource(R.mipmap.icon_collect_focus);
+        } else {
+            holder._ImgCollect.setImageResource(R.mipmap.icon_collect_gray);
+        }
+
+
         Glide.with(context)
                 .load(C.BASE_URL + article.ImagePath)
                 .centerCrop()

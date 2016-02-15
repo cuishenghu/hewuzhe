@@ -1,0 +1,132 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/colorBg"
+    android:orientation="vertical"
+    tools:context="com.hewuzhe.ui.activity.ChangePwdActivity">
+
+
+    <include layout="@layout/toolbar_layout"/>
+
+
+    <LinearLayout android:layout_width="match_parent"
+                  android:layout_height="wrap_content"
+                  android:layout_marginTop="20px"
+                  android:background="@color/colorListBg"
+                  android:orientation="vertical"
+                  android:paddingLeft="30px">
+
+
+        <TextView android:layout_width="match_parent"
+                  android:layout_height="1dp"
+                  android:layout_marginLeft="50px"
+                  android:background="@color/colorBg"/>
+
+
+        <LinearLayout android:layout_width="match_parent"
+                      android:layout_height="90px"
+                      android:background="@color/colorListBg"
+                      android:gravity="center_vertical"
+                      android:orientation="horizontal">
+
+
+            <EditText android:id="@+id/edt_old_pwd"
+                      style="@style/text_30_white"
+                      android:layout_width="0dp"
+                      android:layout_height="match_parent"
+
+                      android:layout_weight="1"
+                      android:background="@null"
+                      android:gravity="center_vertical"
+                      android:hint="请输入您的原密码"
+                      android:paddingLeft="20px"
+                      android:textColorHint="@color/colorLine"/>
+
+
+        </LinearLayout>
+
+
+    </LinearLayout>
+
+
+    <LinearLayout android:layout_width="match_parent"
+                  android:layout_height="wrap_content"
+                  android:background="@color/colorListBg"
+                  android:orientation="vertical"
+                  android:paddingLeft="30px">
+
+        <TextView android:layout_width="match_parent"
+                  android:layout_height="1dp"
+                  android:layout_marginLeft="50px"
+                  android:background="@color/colorBg"/>
+
+
+        <LinearLayout android:layout_width="match_parent"
+                      android:layout_height="90px"
+                      android:background="@color/colorListBg"
+                      android:gravity="center_vertical"
+                      android:orientation="horizontal">
+
+
+            <EditText android:id="@+id/edt_pwd"
+                      style="@style/text_30_white"
+                      android:layout_width="match_parent"
+                      android:layout_height="match_parent"
+                      android:background="@null"
+                      android:gravity="center_vertical"
+
+                      android:hint="请输入您的新密码"
+                      android:inputType="textPassword"
+                      android:paddingLeft="20px"
+                      android:textColorHint="@color/colorLine"/>
+
+        </LinearLayout>
+
+        <TextView android:layout_width="match_parent"
+                  android:layout_height="1dp"
+                  android:layout_marginLeft="50px"
+                  android:background="@color/colorBg"/>
+
+
+        <LinearLayout android:layout_width="match_parent"
+                      android:layout_height="90px"
+                      android:background="@color/colorListBg"
+                      android:gravity="center_vertical"
+                      android:orientation="horizontal">
+
+
+            <EditText android:id="@+id/edt_pwd_again"
+                      style="@style/text_30_white"
+                      android:layout_width="0dp"
+                      android:layout_height="match_parent"
+                      android:layout_weight="1"
+                      android:background="@null"
+                      android:gravity="center_vertical"
+                      android:hint="请再次输入您的密码"
+                      android:inputType="textPassword"
+                      android:paddingLeft="20px"
+                      android:textColorHint="@color/colorLine"/>
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+    <Button
+        android:id="@+id/btn_ensure"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="20px"
+        android:layout_marginRight="20px"
+        android:layout_marginTop="80px"
+        android:background="@drawable/select_yellow"
+        android:gravity="center"
+        android:padding="20px"
+        android:text="确认"
+        android:textColor="@android:color/white"
+        android:textSize="40px"/>
+
+
+</LinearLayout>

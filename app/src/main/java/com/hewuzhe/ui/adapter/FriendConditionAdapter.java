@@ -24,6 +24,7 @@ import com.hewuzhe.ui.adapter.base.BaseAdapter;
 import com.hewuzhe.ui.cons.C;
 import com.hewuzhe.ui.widget.GlideCircleTransform;
 import com.hewuzhe.utils.Bun;
+import com.hewuzhe.utils.SessionUtil;
 import com.hewuzhe.utils.StringUtil;
 import com.hewuzhe.utils.TimeUtil;
 
@@ -172,7 +173,7 @@ public class FriendConditionAdapter extends BaseAdapter<FriendConditionAdapter.V
                         tvUserCommented.setText(comment.CommentedNicName);
                         tvConent.setText("：" + comment.Content);
 
-                        if (comment.CommentedId == condition.UserId) {
+                        if (comment.ParentId == 0) {
                             tvUserCommented.setVisibility(View.GONE);
                             TextView tv_reply = (TextView) view.findViewById(R.id.tv_reply);
                             tv_reply.setVisibility(View.GONE);
@@ -181,7 +182,15 @@ public class FriendConditionAdapter extends BaseAdapter<FriendConditionAdapter.V
                         view.setOnClickListener(new View.OnClickListener() {
                             @Override
                             public void onClick(View view) {
-                                _presenter.showReplyInput(comment.Id, comment.NicName, comment.CommenterId, position, view);
+//                                _presenter.showReplyInput(comment.Id, comment.NicName, comment.Id, position, view);
+
+                                if (comment.CommenterId == new SessionUtil(context).getUserId()) {
+                                    _presenter.deleteComment(comment.Id, view);
+
+                                } else {
+                                    _presenter.showReplyInput(comment.Id, comment.NicName, comment.Id, position, view);
+                                }
+
                             }
                         });
                     }
@@ -201,7 +210,7 @@ public class FriendConditionAdapter extends BaseAdapter<FriendConditionAdapter.V
                         tvUserCommented.setText(comment.CommentedNicName);
                         tvConent.setText("：" + comment.Content);
 
-                        if (comment.CommentedId == condition.UserId) {
+                        if (comment.ParentId == 0) {
                             tvUserCommented.setVisibility(View.GONE);
                             TextView tv_reply = (TextView) view.findViewById(R.id.tv_reply);
                             tv_reply.setVisibility(View.GONE);
@@ -210,7 +219,12 @@ public class FriendConditionAdapter extends BaseAdapter<FriendConditionAdapter.V
                         view.setOnClickListener(new View.OnClickListener() {
                             @Override
                             public void onClick(View view) {
-                                _presenter.showReplyInput(comment.Id, comment.NicName, comment.CommenterId, position, view);
+                                if (comment.CommenterId == new SessionUtil(context).getUserId()) {
+                                    _presenter.deleteComment(comment.Id, view);
+
+                                } else {
+                                    _presenter.showReplyInput(comment.Id, comment.NicName, comment.Id, position, view);
+                                }
                             }
                         });
                     }
@@ -230,7 +244,7 @@ public class FriendConditionAdapter extends BaseAdapter<FriendConditionAdapter.V
                     tvUserCommented.setText(comment.CommentedNicName);
                     tvConent.setText("：" + comment.Content);
 
-                    if (comment.CommentedId == condition.UserId) {
+                    if (comment.ParentId == 0) {
                         tvUserCommented.setVisibility(View.GONE);
                         TextView tv_reply = (TextView) view.findViewById(R.id.tv_reply);
                         tv_reply.setVisibility(View.GONE);
@@ -239,7 +253,12 @@ public class FriendConditionAdapter extends BaseAdapter<FriendConditionAdapter.V
                     view.setOnClickListener(new View.OnClickListener() {
                         @Override
                         public void onClick(View view) {
-                            _presenter.showReplyInput(comment.Id, comment.NicName, comment.CommenterId, position, view);
+                            if (comment.CommenterId == new SessionUtil(context).getUserId()) {
+                                _presenter.deleteComment(comment.Id, view);
+
+                            } else {
+                                _presenter.showReplyInput(comment.Id, comment.NicName, comment.Id, position, view);
+                            }
                         }
                     });
 

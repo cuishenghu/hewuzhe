@@ -77,7 +77,7 @@ public class RecordAdapter extends BaseAdapter<RecordAdapter.ViewHolder, Record,
                 .crossFade()
                 .into(holder.img);
 
-
+        holder._CbPlan.setChecked(record.isChecked);
         holder._CbPlan.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
@@ -149,6 +149,12 @@ public class RecordAdapter extends BaseAdapter<RecordAdapter.ViewHolder, Record,
      */
     public void showCheck(boolean isNeedShow) {
         this.isNeedShow = isNeedShow;
+        if (!isNeedShow) {
+            for (Record plan : data) {
+                plan.isChecked = false;
+            }
+        }
+
         this.notifyDataSetChanged();
     }
 

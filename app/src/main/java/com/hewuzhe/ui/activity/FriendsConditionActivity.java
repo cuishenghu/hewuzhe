@@ -246,7 +246,7 @@ public class FriendsConditionActivity extends SwipeRecycleViewActivity<FriendCon
         FriendCondition condition = adapter.data.get(position);
         comment.CommentedNicName = condition.NicName;
         comment.NicName = user.NicName;
-        comment.CommentedId = condition.UserId;
+        comment.ParentId = 0;
         condition.ComList.add(comment);
         adapter.notifyItemChanged(position);
     }

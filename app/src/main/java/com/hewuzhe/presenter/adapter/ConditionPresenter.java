@@ -1,6 +1,8 @@
 package com.hewuzhe.presenter.adapter;
 
+import android.support.annotation.NonNull;
 import android.view.View;
+import android.widget.LinearLayout;
 
 import com.hewuzhe.model.Comment;
 import com.hewuzhe.model.Res;
@@ -12,6 +14,8 @@ import com.hewuzhe.utils.SessionUtil;
 import com.hewuzhe.utils.StringUtil;
 import com.hewuzhe.view.adapter.ConditionView;
 
+import materialdialogs.DialogAction;
+import materialdialogs.MaterialDialog;
 import retrofit.Callback;
 import retrofit.Response;
 import retrofit.Retrofit;
@@ -220,7 +224,7 @@ public abstract class ConditionPresenter<V extends ConditionView> extends Refres
                             Comment comment = new Comment();
                             comment.Content = content;
                             comment.CommentedNicName = nicName;
-                            comment.CommentedId = commenterId;
+                            comment.ParentId = commenterId;
                             comment.Id = res.insertid;
                             view.replySuccess(position, comment);
                         } else {
@@ -235,5 +239,40 @@ public abstract class ConditionPresenter<V extends ConditionView> extends Refres
                         view.snb("回复失败", v);
                     }
                 });
+    }
+
+    public void deleteComment(final int id, final View v) {
+
+        view.showDefautInfoDialog("温馨提示", "确定要删除评论吗？", new MaterialDialog.SingleButtonCallback() {
+            @Override
+            public void onClick(@NonNull MaterialDialog dialog, @NonNull DialogAction which) {
+                Subscription subscription = NetEngine.getService()
+                        .DeleteComment(id)
+                        .subscribeOn(Schedulers.io())
+                        .observeOn(AndroidSchedulers.mainThread())
+                        .subscribe(new SB<Res>() {
+                            @Override
+                            public void next(Res res) {
+                                if (res.code == C.OK) {
+                                    ((LinearLayout) v.getParent()).removeView(v);
+                                } else {
+
+                                }
+                            }
+
+                            @Override
+                            public void onCompleted() {
+
+                            }
+
+                            @Override
+                            public void onError(Throwable e) {
+
+                            }
+                        });
+                addSubscription(subscription);
+            }
+        });
+
     }
 }

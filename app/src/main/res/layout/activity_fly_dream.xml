@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent" xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent" android:layout_height="match_parent"
     android:background="@color/colorListBg"
     android:orientation="vertical"
     tools:context="com.hewuzhe.ui.activity.ProfileActivity">
@@ -12,10 +12,10 @@
 
 
     <android.support.v4.widget.NestedScrollView
-        app:layout_behavior="@string/appbar_scrolling_view_behavior"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:scrollbars="none">
+        android:scrollbars="none"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
 
         <LinearLayout android:layout_width="match_parent"
@@ -23,17 +23,17 @@
                       android:orientation="vertical">
 
 
-            <ImageView android:layout_width="match_parent"
+            <ImageView android:id="@+id/img"
+                       android:layout_width="match_parent"
                        android:layout_height="400px"
                        android:scaleType="fitXY"
-                       android:id="@+id/img"
                        android:src="@mipmap/img_bg"/>
 
 
-            <TextView android:layout_width="match_parent"
+            <TextView android:id="@+id/tv_desc"
+                      android:layout_width="match_parent"
                       android:layout_height="wrap_content"
                       android:padding="10px"
-                      android:id="@+id/tv_desc"
                       android:text=""
                       android:textColor="@color/white"/>
 
@@ -56,15 +56,16 @@
                           android:textColor="@color/white"
                           android:textSize="30px"/>
 
-                <EditText android:layout_width="match_parent"
+                <EditText android:id="@+id/edt_my_dream"
+                          android:layout_width="match_parent"
                           android:layout_height="wrap_content"
                           android:layout_marginRight="20px"
-                          android:id="@+id/edt_my_dream"
                           android:background="@color/colorBg"
                           android:foregroundGravity="top"
                           android:hint="只要有梦，总会实现，开启梦想"
                           android:minLines="3"
                           android:padding="10px"
+                          android:textColor="@color/white"
                           android:textColorHint="@color/colorLine"/>
 
 
@@ -84,14 +85,15 @@
                           android:textColor="@color/white"
                           android:textSize="30px"/>
 
-                <EditText android:layout_width="match_parent"
+                <EditText android:id="@+id/edt_to_do"
+                          android:layout_width="match_parent"
                           android:layout_height="wrap_content"
                           android:layout_marginRight="20px"
                           android:background="@color/colorBg"
-                          android:id="@+id/edt_to_do"
                           android:hint="只要努力，总会实现，请输入"
                           android:minLines="7"
                           android:padding="10px"
+                          android:textColor="@color/white"
                           android:textColorHint="@color/colorLine"/>
 
 

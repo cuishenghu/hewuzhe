@@ -53,6 +53,9 @@ public interface ApiService {
     @GET("LoginAndRegister.asmx/Login")
     Observable<Res<User>> Login(@Query("username") String usernmae, @Query("password") String password);
 
+    @GET("LoginAndRegister.asmx/ChangePassWord")
+    Observable<Res> ChangePassWord(@Query("userid") int userid, @Query("oldpwd") String oldpwd, @Query("password") String password);
+
     @GET("LoginAndRegister.asmx/GetPayOverTime")
     Observable<Res<OverTime>> GetPayOverTime(@Query("userid") int userid);
 
@@ -361,6 +364,9 @@ public interface ApiService {
 
     @GET("AboutUs.asmx/GetAuoutUs")
     Observable<Res<AboutUs>> GetAuoutUs();
+
+    @GET("Helianmeng.asmx/DeleteComment")
+    Observable<Res> DeleteComment(@Query("id") int id);
 
     @GET("MessageAndImageNews.aspx")
     Observable<String> MessageAndImageNews(@Query("id") int id);

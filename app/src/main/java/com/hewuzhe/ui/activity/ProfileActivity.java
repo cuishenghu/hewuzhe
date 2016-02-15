@@ -161,7 +161,7 @@ public class ProfileActivity extends ToolBarActivity<ProfilePresenter> implement
         layHeight.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                edtHeight.setSelection(edtHeight.getText().length());
+                edtHeight.setSelection(0, edtHeight.getText().length());
                 edtHeight.requestFocus();
                 showSoftInput(edtHeight);
 
@@ -170,7 +170,7 @@ public class ProfileActivity extends ToolBarActivity<ProfilePresenter> implement
         layWeight.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                edtWeight.setSelection(edtWeight.getText().length());
+                edtWeight.setSelection(0, edtWeight.getText().length());
                 edtWeight.requestFocus();
                 showSoftInput(edtWeight);
 
@@ -192,7 +192,7 @@ public class ProfileActivity extends ToolBarActivity<ProfilePresenter> implement
         layLong.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                edtLong.setSelection(edtLong.getText().length());
+                edtLong.setSelection(0, edtLong.getText().length());
                 edtLong.requestFocus();
                 showSoftInput(edtLong);
             }
@@ -201,7 +201,7 @@ public class ProfileActivity extends ToolBarActivity<ProfilePresenter> implement
         layChangePwd.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startActivity(ForgetPwdActivity.class, new Bun().putString("title", "修改密码").ok());
+                startActivity(ChangePwdActivity.class, new Bun().putString("title", "修改密码").ok());
             }
         });
 
@@ -242,12 +242,12 @@ public class ProfileActivity extends ToolBarActivity<ProfilePresenter> implement
                 });
             }
         });
-
     }
+
 
     private void showDatePicker() {
         DatePicker picker = new DatePicker(this);
-        picker.setRange(1900, 2015);//年份范围
+        picker.setRange(1900, 2016);//年份范围
         String yearStr = user.Birthday.substring(0, 4);
         String monthStr = user.Birthday.substring(5, 7);
         String dayStr = user.Birthday.substring(8, 10);

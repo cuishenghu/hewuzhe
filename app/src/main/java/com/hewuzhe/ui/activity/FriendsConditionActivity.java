@@ -1,5 +1,8 @@
 package com.hewuzhe.ui.activity;
 
+import android.app.Activity;
+import android.content.Intent;
+import android.hardware.Camera;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -12,6 +15,12 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
+import com.duanqu.qupai.android.app.QupaiDraftManager;
+import com.duanqu.qupai.android.app.QupaiServiceImpl;
+import com.duanqu.qupai.editor.EditorResult;
+import com.duanqu.qupai.engine.session.MovieExportOptions;
+import com.duanqu.qupai.engine.session.VideoSessionCreateInfo;
+import com.duanqu.qupai.recorder.EditorCreateInfo;
 import com.hewuzhe.R;
 import com.hewuzhe.model.Comment;
 import com.hewuzhe.model.FriendCondition;
@@ -22,10 +31,13 @@ import com.hewuzhe.presenter.adapter.ConditionPresenter;
 import com.hewuzhe.ui.adapter.FriendConditionAdapter;
 import com.hewuzhe.ui.base.SwipeRecycleViewActivity;
 import com.hewuzhe.ui.cons.C;
+import com.hewuzhe.ui.cons.Contant;
+import com.hewuzhe.ui.cons.FileUtils;
+import com.hewuzhe.ui.fragment.PowerFragment;
 import com.hewuzhe.utils.Bun;
 import com.hewuzhe.utils.SessionUtil;
 import com.hewuzhe.view.FriendsConditionView;
-import com.qd.recorder.FFmpegRecorderActivity;
+import com.socks.library.KLog;
 
 import java.util.ArrayList;
 
@@ -57,6 +69,9 @@ public class FriendsConditionActivity extends SwipeRecycleViewActivity<FriendCon
     private TextView action_2;
     private User user;
     private boolean isFirstRun = true;
+    private int beautySkinProgress;
+    private final EditorCreateInfo _CreateInfo = new EditorCreateInfo();
+    private String videoPath;
 
     @Override
     protected int provideContentViewId() {
@@ -113,7 +128,8 @@ public class FriendsConditionActivity extends SwipeRecycleViewActivity<FriendCon
         action_2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startActivity(FFmpegRecorderActivity.class, new Bun().putInt(C.WHITCH, C.WHITCH_ONE).ok());
+//                startActivity(FFmpegRecorderActivity.class, new Bun().putInt(C.WHITCH, C.WHITCH_ONE).ok());
+                startRecordActivity();
                 popupWindowHelper.dismiss();
             }
         });
@@ -360,4 +376,81 @@ public class FriendsConditionActivity extends SwipeRecycleViewActivity<FriendCon
         adapter.notifyDataSetChanged();
     }
 
+
+    private void startRecordActivity() {
+        //美颜参数:1-100.这里不设指定为80,这个值只在第一次设置，之后在录制界面滑动美颜参数之后系统会记住上一次滑动的状态
+        beautySkinProgress = 80;
+
+        /**
+         * 压缩参数，可以自由调节
+         */
+        MovieExportOptions movie_options = new MovieExportOptions.Builder()
+                .setVideoProfile("high")
+                .setVideoBitrate(Contant.DEFAULT_BITRATE)
+                .setVideoPreset(Contant.DEFAULT_VIDEO_Preset).setVideoRateCRF(Contant.DEFAULT_VIDEO_RATE_CRF)
+                .setOutputVideoLevel(Contant.DEFAULT_VIDEO_LEVEL)
+                .setOutputVideoTune(Contant.DEFAULT_VIDEO_TUNE)
+                .configureMuxer(Contant.DEFAULT_VIDEO_MOV_FLAGS_KEY, Contant.DEFAULT_VIDEO_MOV_FLAGS_VALUE)
+                .build();
+
+        /**
+         * 界面参数
+         */
+        VideoSessionCreateInfo create_info = new VideoSessionCreateInfo.Builder()
+                .setOutputDurationLimit(Contant.DEFAULT_DURATION_MAX_LIMIT)
+                .setOutputDurationMin(Contant.DEFAULT_DURATION_LIMIT_MIN)
+                .setMovieExportOptions(movie_options)
+                .setWaterMarkPath(Contant.WATER_MARK_PATH)
+                .setWaterMarkPosition(1)
+                .setBeautyProgress(beautySkinProgress)
+                .setBeautySkinOn(false)
+                .setCameraFacing(
+                        Camera.CameraInfo.CAMERA_FACING_BACK)
+                .setVideoSize(360, 640)
+                .setCaptureHeight(getResources().getDimension(R.dimen.qupai_recorder_capture_height_size))
+                .setBeautySkinViewOn(false)
+                .setFlashLightOn(true)
+                .setTimelineTimeIndicator(false)
+                .build();
+
+        _CreateInfo.setSessionCreateInfo(create_info);
+        _CreateInfo.setNextIntent(null);
+        _CreateInfo.setOutputThumbnailSize(360, 640);//输出图片宽高
+        videoPath = FileUtils.newOutgoingFilePath(this);
+        _CreateInfo.setOutputVideoPath(videoPath);//输出视频路径
+        _CreateInfo.setOutputThumbnailPath(videoPath + ".png");//输出图片路径
+
+        QupaiServiceImpl qupaiService = new QupaiServiceImpl.Builder()
+                .setEditorCreateInfo(_CreateInfo).build();
+
+        qupaiService.showRecordPage(this, PowerFragment.QUPAI_RECORD_REQUEST);
+    }
+
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+
+        if (resultCode == Activity.RESULT_OK && requestCode == PowerFragment.QUPAI_RECORD_REQUEST) {
+            EditorResult result = new EditorResult(data);
+            //得到视频path，和缩略图path的数组，返回十张缩略图,和视频时长
+            String path = result.getPath();
+            result.getThumbnail();
+            result.getDuration();
+
+            //开始上传，上传前请务必确认已调用授权接口
+//           startUpload();
+
+            //删除草稿
+            QupaiDraftManager draftManager = new QupaiDraftManager();
+            draftManager.deleteDraft(data);
+
+            KLog.d(path);
+
+            Intent intent = new Intent(this, PublishConditionVideoActivity.class);
+            intent.putExtra("data", new Bun().putString("file_name", path).putInt("uploadType", C.UPLOAD_TYPE_RECORD).ok());
+            startActivity(intent);
+            finish();
+        }
+    }
 }

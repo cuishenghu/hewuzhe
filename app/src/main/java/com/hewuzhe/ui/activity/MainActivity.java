@@ -1,5 +1,6 @@
 package com.hewuzhe.ui.activity;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
@@ -10,14 +11,19 @@ import android.view.View;
 import android.widget.FrameLayout;
 import android.widget.LinearLayout;
 
+import com.duanqu.qupai.android.app.QupaiDraftManager;
+import com.duanqu.qupai.editor.EditorResult;
 import com.hewuzhe.R;
 import com.hewuzhe.presenter.base.BasePresenterImp;
 import com.hewuzhe.ui.base.BaseActivity;
+import com.hewuzhe.ui.cons.C;
 import com.hewuzhe.ui.fragment.EquipmentFragment;
 import com.hewuzhe.ui.fragment.FederalFragment;
 import com.hewuzhe.ui.fragment.MoreFragment;
 import com.hewuzhe.ui.fragment.PowerFragment;
 import com.hewuzhe.ui.fragment.WarriorFragment;
+import com.hewuzhe.utils.Bun;
+import com.socks.library.KLog;
 
 import butterknife.Bind;
 
@@ -203,7 +209,6 @@ public class MainActivity extends BaseActivity {
     }
 
 
-
     @Override
     public boolean onKeyDown(int keyCode, KeyEvent event) {
         if (keyCode == KeyEvent.KEYCODE_BACK) {
@@ -216,6 +221,33 @@ public class MainActivity extends BaseActivity {
         return super.onKeyDown(keyCode, event);
     }
 
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (resultCode == Activity.RESULT_OK && requestCode == PowerFragment.QUPAI_RECORD_REQUEST) {
+            EditorResult result = new EditorResult(data);
+            //得到视频path，和缩略图path的数组，返回十张缩略图,和视频时长
+            String path = result.getPath();
+            result.getThumbnail();
+            result.getDuration();
+
+            //开始上传，上传前请务必确认已调用授权接口
+//           startUpload();
+
+            //删除草稿
+            QupaiDraftManager draftManager = new QupaiDraftManager();
+            draftManager.deleteDraft(data);
+
+
+            KLog.d(path);
+
+            Intent intent = new Intent(this, PublishVideoActivity.class);
+            intent.putExtra("data", new Bun().putString("file_name", path).putInt("uploadType", C.UPLOAD_TYPE_RECORD).ok());
+            startActivity(intent);
+        }
+
+
+    }
 }
 
 

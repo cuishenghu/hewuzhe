@@ -2,6 +2,7 @@ package com.hewuzhe.ui.fragment;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.hardware.Camera;
 import android.support.design.widget.AppBarLayout;
 import android.support.design.widget.TabLayout;
 import android.support.v4.view.ViewPager;
@@ -11,6 +12,10 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.duanqu.qupai.android.app.QupaiServiceImpl;
+import com.duanqu.qupai.engine.session.MovieExportOptions;
+import com.duanqu.qupai.engine.session.VideoSessionCreateInfo;
+import com.duanqu.qupai.recorder.EditorCreateInfo;
 import com.hewuzhe.R;
 import com.hewuzhe.presenter.base.BasePresenterImp;
 import com.hewuzhe.ui.activity.MainActivity;
@@ -19,9 +24,10 @@ import com.hewuzhe.ui.activity.SearchVideosActivity;
 import com.hewuzhe.ui.adapter.MyViewPagerAdapter;
 import com.hewuzhe.ui.base.BaseFragment;
 import com.hewuzhe.ui.cons.C;
+import com.hewuzhe.ui.cons.Contant;
+import com.hewuzhe.ui.cons.FileUtils;
 import com.hewuzhe.utils.Bun;
 import com.hewuzhe.view.PowerView;
-import com.qd.recorder.FFmpegRecorderActivity;
 
 import butterknife.Bind;
 import cn.xm.weidongjian.popuphelper.PopupWindowHelper;
@@ -50,6 +56,12 @@ public class PowerFragment extends BaseFragment implements PowerView, VideoChoos
     private PopupWindowHelper popupWindowHelper;
     private int chooserType;
     private VideoChooserManager videoChooserManager;
+    private int beautySkinProgress;
+    private final EditorCreateInfo _CreateInfo = new EditorCreateInfo();
+
+    private String videoPath;
+    public static int QUPAI_RECORD_REQUEST = 101;
+
 
     /**
      * 初始化事件监听者
@@ -147,7 +159,9 @@ public class PowerFragment extends BaseFragment implements PowerView, VideoChoos
                 @Override
                 public void onClick(View view) {
 //                    startActivity(TakeVideoActivity.class, new Bun().putInt(C.WHITCH, C.WHITCH_DEFAUT).ok());
-                    startActivity(FFmpegRecorderActivity.class);
+//                    startActivity(FFmpegRecorderActivity.class);
+
+                    startRecordActivity();
                 }
             });
             popupWindowHelper = new PopupWindowHelper(popView);
@@ -177,8 +191,10 @@ public class PowerFragment extends BaseFragment implements PowerView, VideoChoos
                 reinitializeVideoChooser();
             }
             videoChooserManager.submit(requestCode, data);
-        } else {
+
         }
+
+
     }
 
     // Should be called if for some reason the VideoChooserManager is null (Due
@@ -235,4 +251,55 @@ public class PowerFragment extends BaseFragment implements PowerView, VideoChoos
     public void onError(String reason) {
 
     }
+
+
+    private void startRecordActivity() {
+        //美颜参数:1-100.这里不设指定为80,这个值只在第一次设置，之后在录制界面滑动美颜参数之后系统会记住上一次滑动的状态
+        beautySkinProgress = 80;
+
+        /**
+         * 压缩参数，可以自由调节
+         */
+        MovieExportOptions movie_options = new MovieExportOptions.Builder()
+                .setVideoProfile("high")
+                .setVideoBitrate(Contant.DEFAULT_BITRATE)
+                .setVideoPreset(Contant.DEFAULT_VIDEO_Preset).setVideoRateCRF(Contant.DEFAULT_VIDEO_RATE_CRF)
+                .setOutputVideoLevel(Contant.DEFAULT_VIDEO_LEVEL)
+                .setOutputVideoTune(Contant.DEFAULT_VIDEO_TUNE)
+                .configureMuxer(Contant.DEFAULT_VIDEO_MOV_FLAGS_KEY, Contant.DEFAULT_VIDEO_MOV_FLAGS_VALUE)
+                .build();
+
+        /**
+         * 界面参数
+         */
+        VideoSessionCreateInfo create_info = new VideoSessionCreateInfo.Builder()
+                .setOutputDurationLimit(Contant.DEFAULT_DURATION_MAX_LIMIT_TWO)
+                .setOutputDurationMin(Contant.DEFAULT_DURATION_LIMIT_MIN_TWO)
+                .setMovieExportOptions(movie_options)
+                .setWaterMarkPath(Contant.WATER_MARK_PATH)
+                .setWaterMarkPosition(1)
+                .setBeautyProgress(beautySkinProgress)
+                .setBeautySkinOn(false)
+                .setCameraFacing(
+                        Camera.CameraInfo.CAMERA_FACING_FRONT)
+                .setVideoSize(360, 640)
+                .setCaptureHeight(getResources().getDimension(R.dimen.qupai_recorder_capture_height_size))
+                .setBeautySkinViewOn(false)
+                .setFlashLightOn(true)
+                .setTimelineTimeIndicator(false)
+                .build();
+
+        _CreateInfo.setSessionCreateInfo(create_info);
+        _CreateInfo.setNextIntent(null);
+        _CreateInfo.setOutputThumbnailSize(360, 640);//输出图片宽高
+        videoPath = FileUtils.newOutgoingFilePath(getActivity());
+        _CreateInfo.setOutputVideoPath(videoPath);//输出视频路径
+        _CreateInfo.setOutputThumbnailPath(videoPath + ".png");//输出图片路径
+
+        QupaiServiceImpl qupaiService = new QupaiServiceImpl.Builder()
+                .setEditorCreateInfo(_CreateInfo).build();
+        qupaiService.showRecordPage(getActivity(), QUPAI_RECORD_REQUEST);
+    }
+
+
 }

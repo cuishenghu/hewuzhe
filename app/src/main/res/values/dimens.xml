@@ -55,4 +55,7 @@
     <dimen name="md_listitem_vertical_margin_choice">8dp</dimen>
 
 
+    <dimen name="font_24sp">24sp</dimen>
+    <dimen name="qupai_recorder_capture_height_size">118dp</dimen>
+
 </resources>

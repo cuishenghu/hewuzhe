@@ -4,9 +4,13 @@ import android.app.ActivityManager;
 import android.app.Application;
 import android.content.Context;
 import android.support.multidex.MultiDex;
+import android.util.Log;
 
+import com.duanqu.qupai.upload.AuthService;
+import com.duanqu.qupai.upload.QupaiAuthListener;
 import com.hewuzhe.BuildConfig;
 import com.hewuzhe.R;
+import com.hewuzhe.ui.cons.Contant;
 import com.hewuzhe.ui.inter.OnLocListener;
 import com.hewuzhe.utils.GlideLoader;
 import com.pgyersdk.crash.PgyCrashManager;
@@ -32,6 +36,7 @@ public class App extends Application {
     public LinkedList<OnLocListener> onLocListeners = new LinkedList<>();
     public static ImageConfig imageConfig;
 
+    private static final String AUTHTAG = "QupaiAuth";
 
     /**
      *
@@ -39,9 +44,12 @@ public class App extends Application {
     @Override
     public void onCreate() {
         super.onCreate();
-
 //        ActiveAndroid.initialize(this);
         LitePalApplication.initialize(this);
+
+
+        initAuth(getApplicationContext(), Contant.appkey, Contant.appsecret, Contant.space);
+
 
 //      Stetho.initialize(
 //                Stetho.newInitializerBuilder(this)
@@ -134,4 +142,31 @@ public class App extends Application {
         super.attachBaseContext(base);
         MultiDex.install(this);
     }
+
+
+    /**
+     * 鉴权 建议只调用一次,在Application调用。在demo里面为了测试调用了多次 得到accessToken
+     *
+     * @param context
+     * @param appKey    appkey
+     * @param appsecret appsecret
+     * @param space     space
+     */
+    private void initAuth(Context context, String appKey, String appsecret, String space) {
+        AuthService service = AuthService.getInstance();
+        service.setQupaiAuthListener(new QupaiAuthListener() {
+            @Override
+            public void onAuthError(int errorCode, String message) {
+                Log.e(AUTHTAG, "ErrorCode" + errorCode + "message" + message);
+            }
+
+            @Override
+            public void onAuthComplte(int responseCode, String responseMessage) {
+                Contant.accessToken = responseMessage;
+            }
+        });
+        service.startAuth(context, appKey, appsecret, space);
+    }
+
+
 }

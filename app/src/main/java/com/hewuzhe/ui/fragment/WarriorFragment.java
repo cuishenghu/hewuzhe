@@ -208,7 +208,6 @@ public class WarriorFragment extends ToolBarFragment<WarriorFragmentPresenter> i
 
                     @Override
                     public void onResponse(String response) {
-
                         KLog.json(response);
                         try {
                             JSONObject jsonObject = new JSONObject(response);
@@ -220,9 +219,12 @@ public class WarriorFragment extends ToolBarFragment<WarriorFragmentPresenter> i
                             Weather weather = new Gson().fromJson(jsonObject1.toString(), Weather.class);
 
                             if (tvAirQuality != null) {
-                                tvAirQuality.setText("空气质量：无数据");
-                                tvTemperature.setText(weather.now.tmp + "℃");
+                                tvAirQuality.setText(weather.daily_forecast.get(0).cond.txt_d);
                                 tvPm.setText("PM：无数据");
+                                tvPm.setVisibility(View.GONE);
+
+                                tvTemperature.setText(weather.now.tmp + "℃");
+
                                 tvAddress.setText(_cityName);
                             }
 

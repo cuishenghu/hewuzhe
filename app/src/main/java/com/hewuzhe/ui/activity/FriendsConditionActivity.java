@@ -190,7 +190,8 @@ public class FriendsConditionActivity extends SwipeRecycleViewActivity<FriendCon
      */
     @Override
     public void onItemClick(View view, int pos, FriendCondition item) {
-        startActivity(ConditionDetialActivity.class, new Bun().putP("item", item).putInt("whitch", C.WHITCH_ONE).ok());
+        startActivity(ConditionDetialTwoActivity.class, new Bun().putInt("id", item.Id).putInt("whitch", C.WHITCH_ONE).ok());
+//        startActivity(ConditionDetialActivity.class, new Bun().putP("item", item).putInt("whitch", C.WHITCH_ONE).ok());
     }
 
 
@@ -245,7 +246,9 @@ public class FriendsConditionActivity extends SwipeRecycleViewActivity<FriendCon
         user = new SessionUtil(getContext()).getUser();
         FriendCondition condition = adapter.data.get(position);
         comment.CommentedNicName = condition.NicName;
+        comment.CommentedId = condition.UserId;
         comment.NicName = user.NicName;
+        comment.CommenterId = new SessionUtil(getContext()).getUserId();
         comment.ParentId = 0;
         condition.ComList.add(comment);
         adapter.notifyItemChanged(position);
@@ -285,6 +288,8 @@ public class FriendsConditionActivity extends SwipeRecycleViewActivity<FriendCon
         user = new SessionUtil(getContext()).getUser();
         FriendCondition condition = adapter.data.get(position);
         comment.NicName = user.NicName;
+        comment.CommenterId = new SessionUtil(getContext()).getUserId();
+
         condition.ComList.add(comment);
         adapter.notifyItemChanged(position);
     }
@@ -335,7 +340,6 @@ public class FriendsConditionActivity extends SwipeRecycleViewActivity<FriendCon
 
         } else {
             _LayMsg.setVisibility(View.GONE);
-
         }
     }
 
@@ -347,6 +351,13 @@ public class FriendsConditionActivity extends SwipeRecycleViewActivity<FriendCon
         } else {
             presenter.GetNoReadCommentNumByUserId();
         }
+    }
+
+
+    @Override
+    public void deleteConditionSuccess(int position) {
+        adapter.data.remove(position);
+        adapter.notifyDataSetChanged();
     }
 
 }

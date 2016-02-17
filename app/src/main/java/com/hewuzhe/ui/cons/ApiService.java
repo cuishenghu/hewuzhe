@@ -169,7 +169,7 @@ public interface ApiService {
 
 
     @GET("Hewuzhe.asmx/GetCreditRecord")
-    Call<Res<ArrayList<IntegralRecord>>> GetCreditRecord(@Query("startRowIndex") int startRowIndex, @Query("maximumRows") int maximumRows, @Query("userid") int userid);
+    Observable<Res<ArrayList<IntegralRecord>>> GetCreditRecord(@Query("startRowIndex") int startRowIndex, @Query("maximumRows") int maximumRows, @Query("userid") int userid);
 
     @GET("Hewuzhe.asmx/GetBigCateForOnlineStudy")
     Observable<Res<ArrayList<StudyOnlineCate>>> GetBigCateForOnlineStudy();

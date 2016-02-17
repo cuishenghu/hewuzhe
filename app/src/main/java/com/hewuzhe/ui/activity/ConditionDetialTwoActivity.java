@@ -195,7 +195,13 @@ public class ConditionDetialTwoActivity extends SwipeRecycleViewActivity<Condito
 
         if (condition.IsLike) {
             _ImgPraise.setImageResource(R.mipmap.icon_praise_focus);
-            _ImgPraise.setOnClickListener(null);
+            _ImgPraise.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    presenter.collectAndOtherCanl(condition.Id, ConditionPresenter.PRAISE, view);
+                }
+            });
+
         } else {
             _ImgPraise.setImageResource(R.mipmap.icon_praise);
             _ImgPraise.setOnClickListener(new View.OnClickListener() {
@@ -411,7 +417,6 @@ public class ConditionDetialTwoActivity extends SwipeRecycleViewActivity<Condito
                         }
                     });
 
-
                 }
             }
 
@@ -470,8 +475,31 @@ public class ConditionDetialTwoActivity extends SwipeRecycleViewActivity<Condito
     public void collectAndOther(boolean b, int flag) {
         if (flag == ConditionPresenter.PRAISE) {
             if (b) {
-                _TvPraise.setText((_condition.LikeNum + 1) + "");
+                _condition.LikeNum++;
+                _TvPraise.setText(_condition.LikeNum + "");
                 _ImgPraise.setImageResource(R.mipmap.icon_praise_focus);
+
+                _ImgPraise.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        presenter.collectAndOtherCanl(_condition.Id, ConditionPresenter.PRAISE, view);
+                    }
+                });
+
+
+            } else {
+                _condition.LikeNum--;
+                _TvPraise.setText(_condition.LikeNum + "");
+                _ImgPraise.setImageResource(R.mipmap.icon_praise);
+
+                _ImgPraise.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        presenter.collectAndOther(_condition.Id, ConditionPresenter.PRAISE, view);
+                    }
+                });
+
+
             }
         }
 
@@ -507,6 +535,8 @@ public class ConditionDetialTwoActivity extends SwipeRecycleViewActivity<Condito
         User user = new SessionUtil(getContext()).getUser();
         comment.CommentedNicName = _condition.NicName;
         comment.NicName = user.NicName;
+        comment.ParentId = 0;
+        comment.CommenterId = new SessionUtil(getContext()).getUserId();
         _condition.ComList.add(comment);
 //        adapter.notifyItemChanged(position);
         setComment(_condition);
@@ -545,6 +575,8 @@ public class ConditionDetialTwoActivity extends SwipeRecycleViewActivity<Condito
         _EdtComment.setText("");
         User user = new SessionUtil(getContext()).getUser();
         comment.NicName = user.NicName;
+        comment.CommenterId = new SessionUtil(getContext()).getUserId();
+
         _condition.ComList.add(comment);
 //      adapter.notifyItemChanged(position);
         setComment(_condition);

@@ -70,7 +70,7 @@ public class PublishPlanActivity extends ListActivity<PublishPlanPresenter, Pick
     private int id = -1;
     private int days = 30;
     private ArrayList<Pic> pics = new ArrayList<>();
-    private int maxSize = 6;
+    private int maxSize = 9;
 
     /**
      * @return 提供标题
@@ -323,7 +323,7 @@ public class PublishPlanActivity extends ListActivity<PublishPlanPresenter, Pick
 //        }
 
 
-        maxSize = 6 - adapter.data.size();
+        maxSize = 9 - adapter.data.size();
 
         ImageConfig imageConfig = new ImageConfig.Builder(new GlideLoader())
                 .steepToolBarColor(getResources().getColor(R.color.colorPrimary))

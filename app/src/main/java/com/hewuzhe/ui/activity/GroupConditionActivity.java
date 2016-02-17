@@ -221,7 +221,8 @@ public class GroupConditionActivity extends SwipeRecycleViewActivity<GroupCondit
      */
     @Override
     public void onItemClick(View view, int pos, FriendCondition item) {
-        startActivity(ConditionDetialActivity.class, new Bun().putP("item", item).putString("_NickName", _NickName).putString("_PhotoPath", _PhotoPath).putInt("whitch", C.WHITCH_TWO).ok());
+        startActivity(ConditionDetialTwoActivity.class, new Bun().putInt("id", item.Id).putString("_NickName", _NickName).putString("_PhotoPath", _PhotoPath).putInt("whitch", C.WHITCH_TWO).ok());
+//        startActivity(ConditionDetialActivity.class, new Bun().putP("item", item).putString("_NickName", _NickName).putString("_PhotoPath", _PhotoPath).putInt("whitch", C.WHITCH_TWO).ok());
     }
 
     /**
@@ -274,6 +275,7 @@ public class GroupConditionActivity extends SwipeRecycleViewActivity<GroupCondit
         user = new SessionUtil(getContext()).getUser();
         FriendCondition condition = adapter.data.get(position);
         comment.CommentedNicName = condition.NicName;
+        comment.CommenterId = new SessionUtil(getContext()).getUserId();
         comment.CommentedId = condition.UserId;
         comment.NicName = user.NicName;
         condition.ComList.add(comment);
@@ -315,8 +317,15 @@ public class GroupConditionActivity extends SwipeRecycleViewActivity<GroupCondit
         user = new SessionUtil(getContext()).getUser();
         FriendCondition condition = adapter.data.get(position);
         comment.NicName = user.NicName;
+        comment.CommenterId = new SessionUtil(getContext()).getUserId();
+
         condition.ComList.add(comment);
         adapter.notifyItemChanged(position);
+    }
+
+    @Override
+    public void deleteConditionSuccess(int position) {
+
     }
 
     @Override

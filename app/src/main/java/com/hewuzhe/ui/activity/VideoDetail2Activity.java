@@ -5,8 +5,10 @@ import android.content.Intent;
 import android.content.res.Configuration;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
+import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.StaggeredGridLayoutManager;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.WindowManager;
@@ -37,6 +39,7 @@ import com.hewuzhe.view.VideoDetailView;
 import com.sina.sinavideo.coreplayer.util.LogS;
 import com.sina.sinavideo.sdk.VDVideoExtListeners;
 import com.sina.sinavideo.sdk.VDVideoView;
+import com.sina.sinavideo.sdk.VDVideoViewController;
 import com.sina.sinavideo.sdk.data.VDVideoInfo;
 import com.sina.sinavideo.sdk.data.VDVideoListInfo;
 import com.sina.sinavideo.sdk.utils.VDVideoFullModeController;
@@ -302,7 +305,6 @@ public class VideoDetail2Activity extends RecycleViewActivity<VideoDetailPresent
         }
         mVDVideoView.setLayoutParams(params);
 
-
         final int position = 0;
 
         if (video.UserId == 0) {
@@ -315,11 +317,9 @@ public class VideoDetail2Activity extends RecycleViewActivity<VideoDetailPresent
                     .crossFade()
                     .transform(new GlideCircleTransform(getContext()))
                     .into(imgAvatar);
-
         } else {
 
             tvAddTime.setText("发布于" + TimeUtil.timeAgo(video.PublishTime));
-
             Glide.with(getContext())
                     .load(C.BASE_URL + _Video.PhotoPath)
                     .placeholder(R.mipmap.img_avatar)
@@ -336,7 +336,6 @@ public class VideoDetail2Activity extends RecycleViewActivity<VideoDetailPresent
                 .crossFade()
                 .transform(new GlideCircleTransform(getContext()))
                 .into(imgAvatar2);
-
 
         tvUsername.setText(video.UserNicName);
 
@@ -648,8 +647,62 @@ public class VideoDetail2Activity extends RecycleViewActivity<VideoDetailPresent
     @Override
     public void onItemClick(View view, int pos, Comment item) {
 
+        String content = "@" + item.CommenterNicName + ":" + item.Content;
+        edtComment.setText(content);
+        edtComment.setSelection(0);
+        edtComment.requestFocus();
 
+        if (getFirstVisiblePosition() == 0) {
+            showSoftInput(edtComment);
+        } else {
+            recyclerView.scrollToPosition(1);
+            recyclerView.smoothScrollBy(0, -100);
+            showSoftInput(recyclerView);
+        }
     }
+
+
+    /**
+     * 获取第一条展示的位置
+     *
+     * @return
+     */
+    private int getFirstVisiblePosition() {
+        int position;
+        if (getLayoutManager() instanceof LinearLayoutManager) {
+            position = ((LinearLayoutManager) getLayoutManager()).findFirstVisibleItemPosition();
+        } else if (getLayoutManager() instanceof GridLayoutManager) {
+            position = ((GridLayoutManager) getLayoutManager()).findFirstVisibleItemPosition();
+        } else if (getLayoutManager() instanceof StaggeredGridLayoutManager) {
+            StaggeredGridLayoutManager layoutManager = (StaggeredGridLayoutManager) getLayoutManager();
+            int[] lastPositions = layoutManager.findFirstVisibleItemPositions(new int[layoutManager.getSpanCount()]);
+            position = getMinPositions(lastPositions);
+        } else {
+            position = 0;
+        }
+        return position;
+    }
+
+    /**
+     * 获得当前展示最小的position
+     *
+     * @param positions
+     * @return
+     */
+    private int getMinPositions(int[] positions) {
+        int size = positions.length;
+        int minPosition = Integer.MAX_VALUE;
+        for (int i = 0; i < size; i++) {
+            minPosition = Math.min(minPosition, positions[i]);
+        }
+        return minPosition;
+    }
+
+
+    private RecyclerView.LayoutManager getLayoutManager() {
+        return recyclerView.getLayoutManager();
+    }
+
 
     @Override
     public Integer getData() {
@@ -690,13 +743,16 @@ public class VideoDetail2Activity extends RecycleViewActivity<VideoDetailPresent
 
         if (newConfig.orientation == Configuration.ORIENTATION_LANDSCAPE) {
             mVDVideoView.setIsFullScreen(true);
+            isFulllScreen = true;
+
             LogS.e(VDVideoFullModeController.TAG, "onConfigurationChanged---横屏");
         } else if (newConfig.orientation == Configuration.ORIENTATION_PORTRAIT) {
             mVDVideoView.setIsFullScreen(false);
+            isFulllScreen = false;
             LogS.e(VDVideoFullModeController.TAG, "onConfigurationChanged---竖屏");
         }
-
     }
+
 
     /**
      * 播放列表里面点击了某个视频，触发外部事件
@@ -735,5 +791,21 @@ public class VideoDetail2Activity extends RecycleViewActivity<VideoDetailPresent
     public void onFrameADPrepared(VDVideoInfo info) {
         // TODO Auto-generated method stub
         Toast.makeText(this, "开始换图", Toast.LENGTH_LONG).show();
+    }
+
+
+    @Override
+    public void onBackPressed() {
+//        Toast.makeText(this, "isFulllScreen:" + isFulllScreen, Toast.LENGTH_SHORT).show();
+
+        if (isFulllScreen) {
+            VDVideoViewController controller = VDVideoViewController
+                    .getInstance(getContext());
+            if (null != controller)
+                controller.setIsFullScreen(false);
+        } else {
+            super.onBackPressed();
+        }
+
     }
 }

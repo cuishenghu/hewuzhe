@@ -112,7 +112,7 @@ public class ArticleCollectionsFragment extends SwipeRecycleViewFragment<Article
             /**
              * 进入详情页
              * */
-            startActivity(FederalConditionDetailActivity.class, new Bun().putInt("id", item.MessageId).putString("visitNum", item.VisitNum).putBoolean("IsFavorite", item.IsFavorite).ok());
+            startActivity(FederalConditionDetailActivity.class, new Bun().putInt("id", item.MessageId).putString("visitNum", item.VisitNum).putString("MessageCame", item.MessageCame).putBoolean("IsFavorite", item.IsFavorite).ok());
         }
 
 

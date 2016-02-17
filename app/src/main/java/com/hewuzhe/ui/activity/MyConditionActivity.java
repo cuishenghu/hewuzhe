@@ -126,7 +126,7 @@ public class MyConditionActivity extends SwipeRecycleViewActivity<MyConditionPre
     @Override
     public void onItemClick(View view, int pos, FriendCondition item) {
 
-        startActivity(ConditionDetialActivity.class, new Bun().putInt("id", item.Id).ok());
+        startActivity(ConditionDetialTwoActivity.class, new Bun().putInt("id", item.Id).ok());
 
     }
 
@@ -183,6 +183,8 @@ public class MyConditionActivity extends SwipeRecycleViewActivity<MyConditionPre
         FriendCondition condition = adapter.data.get(position);
         comment.CommentedNicName = condition.NicName;
         comment.CommentedId = condition.UserId;
+        comment.CommenterId = new SessionUtil(getContext()).getUserId();
+
         comment.NicName = user.NicName;
         condition.ComList.add(comment);
         adapter.notifyItemChanged(position);
@@ -223,8 +225,16 @@ public class MyConditionActivity extends SwipeRecycleViewActivity<MyConditionPre
         user = new SessionUtil(getContext()).getUser();
         FriendCondition condition = adapter.data.get(position);
         comment.NicName = user.NicName;
+        comment.CommenterId = new SessionUtil(getContext()).getUserId();
+
         condition.ComList.add(comment);
         adapter.notifyItemChanged(position);
+    }
+
+    @Override
+    public void deleteConditionSuccess(int position) {
+        adapter.data.remove(position);
+        adapter.notifyDataSetChanged();
     }
 
     @Override

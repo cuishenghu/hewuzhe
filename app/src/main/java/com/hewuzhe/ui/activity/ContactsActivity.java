@@ -17,6 +17,7 @@ import android.widget.TextView;
 import com.bumptech.glide.Glide;
 import com.hewuzhe.R;
 import com.hewuzhe.model.Friend;
+import com.hewuzhe.model.Friends;
 import com.hewuzhe.model.Group;
 import com.hewuzhe.presenter.FriendsPresenter;
 import com.hewuzhe.ui.adapter.RecyclerIndexFriendsAdapter;
@@ -27,6 +28,9 @@ import com.hewuzhe.ui.widget.IndexView;
 import com.hewuzhe.utils.Bun;
 import com.hewuzhe.utils.SessionUtil;
 import com.hewuzhe.view.FriendsView;
+import com.socks.library.KLog;
+
+import org.litepal.crud.DataSupport;
 
 import java.util.ArrayList;
 
@@ -63,7 +67,6 @@ public class ContactsActivity extends ToolBarActivity<FriendsPresenter> implemen
     private ArrayList<Friend> _NewFriends = new ArrayList<>();
     private boolean isFirstRun = true;
 
-
     /**
      * @return 提供标题
      */
@@ -96,8 +99,38 @@ public class ContactsActivity extends ToolBarActivity<FriendsPresenter> implemen
         mAdapter = new RecyclerIndexFriendsAdapter(_RecyclerView);
         _RecyclerView.setAdapter(mAdapter);
 
-        showDialog();
-        presenter.getFriends();
+
+        ArrayList<Friends> friends = (ArrayList<Friends>) DataSupport.findAll(Friends.class);
+
+        if (friends != null && friends.size() > 0) {
+            _RecyclerView.setAdapter(mAdapter);
+            ArrayList<Friend> friends3 = new ArrayList<>();
+            for (Friends friends1 : friends) {
+                Friend friend = new Friend();
+                friend.Id = friends1.friendid;
+                friend.topc = friends1.topc;
+                friend.IsFriend = friends1.isfriend;
+                friend.IsShield = friends1.isshield;
+                friend.JoinTime = friends1.jointime;
+                friend.NicName = friends1.nicname;
+                friend.Phone = friends1.phone;
+                friend.PhotoPath = friends1.photopath;
+                friend.MemnerId = friends1.memnerid;
+                friend.UserId = friends1.userid;
+                friend.RemarkName = friends1.remarkname;
+                friend.TeamId = friends1.teamid;
+                friend.Rank = friends1.rank;
+                friends3.add(friend);
+            }
+
+            mAdapter.setDatas(friends3);
+
+            presenter.getFriends();
+
+        } else {
+            showDialog();
+            presenter.getFriends();
+        }
 
         if (new SessionUtil(getContext()).getUser().TeamId == 0) {
             _LayGroup.setVisibility(View.GONE);
@@ -234,6 +267,30 @@ public class ContactsActivity extends ToolBarActivity<FriendsPresenter> implemen
     @Override
     public void bindData(ArrayList<Friend> friends) {
         _Friends = friends;
+        if (_Friends.size() > 0) {
+            DataSupport.deleteAll(Friends.class);
+
+            for (Friend friend : friends) {
+                Friends friends1 = new Friends();
+                friends1.friendid = friend.Id;
+                friends1.topc = friend.topc;
+                friends1.isfriend = friend.IsFriend;
+                friends1.isshield = friend.IsShield;
+                friends1.jointime = friend.JoinTime;
+                friends1.nicname = friend.NicName;
+                friends1.phone = friend.Phone;
+                friends1.photopath = friend.PhotoPath;
+                friends1.memnerid = friend.MemnerId;
+                friends1.userid = friend.UserId;
+                friends1.remarkname = friend.RemarkName;
+                friends1.teamid = friend.TeamId;
+                friends1.rank = friend.Rank;
+                boolean isSuccess = friends1.save();
+
+                KLog.d("isSuccess:" + isSuccess);
+
+            }
+        }
         _RecyclerView.setAdapter(mAdapter);
 //        mAdapter.getDatas().clear();
 //        mAdapter.getDatas().addAll(_Friends);

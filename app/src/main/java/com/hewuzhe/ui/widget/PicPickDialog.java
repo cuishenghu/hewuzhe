@@ -111,7 +111,7 @@ public class PicPickDialog {
                         // 开启多选   （默认为多选）
                 .mutiSelect()
                         // 多选时的最大数量   （默认 9 张）
-                .mutiSelectMaxSize(6)
+                .mutiSelectMaxSize(9)
                         // 开启拍照功能 （默认关闭）
                 .showCamera()
                         // 已选择的图片路径

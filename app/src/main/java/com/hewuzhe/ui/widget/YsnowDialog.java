@@ -37,7 +37,7 @@ public class YsnowDialog {
 
         mDialog = new Dialog(context, R.style.dialog);
         mDialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
-//        ViewGroup.LayoutParams layoutParams = new ViewGroup.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+//      ViewGroup.LayoutParams layoutParams = new ViewGroup.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
         mDialog.setContentView(layout);
 
         Window win = mDialog.getWindow();

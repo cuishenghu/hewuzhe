@@ -28,6 +28,7 @@ public class FederalConditionFragment extends SwipeRecycleViewFragment<ArticlesP
     private static final int CONDITION = 1;
     private int catId;
     private int flag;
+    private String title = "";
 
     public static FederalConditionFragment newInstance(Bundle args) {
         FederalConditionFragment fragment = new FederalConditionFragment();
@@ -52,11 +53,15 @@ public class FederalConditionFragment extends SwipeRecycleViewFragment<ArticlesP
         catId = getArguments().getInt("catid");
         if (catId == 76 || catId == 77) {
             //招聘合作
+            title = "招聘合作";
             flag = CORRPERATION;
         } else if (catId >= 57 && catId <= 61) {
             //联盟动态
+            title = "联盟动态";
+
             flag = CONDITION;
         } else if (catId >= 72 && catId <= 75) {
+            title = "行业资讯";
 
         }
 
@@ -124,7 +129,7 @@ public class FederalConditionFragment extends SwipeRecycleViewFragment<ArticlesP
     @Override
     public void onItemClick(View view, int pos, Article item) {
 
-        startActivity(FederalConditionDetailActivity.class, new Bun().putString("title", flag == CONDITION ? "联盟详情" : getArguments().getString("name")).putInt("id", item.Id).putString("visitNum", item.VisitNum + "").putBoolean("IsFavorite", item.IsFavorite).ok());
+        startActivity(FederalConditionDetailActivity.class, new Bun().putString("MessageCame", title).putInt("id", item.Id).putString("visitNum", item.VisitNum + "").putBoolean("IsFavorite", item.IsFavorite).ok());
     }
 
     @Override

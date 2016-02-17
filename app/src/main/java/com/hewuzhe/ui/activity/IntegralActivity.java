@@ -13,7 +13,7 @@ import com.hewuzhe.model.IntegralRecord;
 import com.hewuzhe.model.User;
 import com.hewuzhe.presenter.IntegralPresenter;
 import com.hewuzhe.ui.adapter.IntegralRecordAdapter;
-import com.hewuzhe.ui.base.SwipeRecycleViewActivity;
+import com.hewuzhe.ui.base.RecycleViewActivity;
 import com.hewuzhe.ui.cons.C;
 import com.hewuzhe.ui.widget.GlideCircleTransform;
 import com.hewuzhe.utils.SessionUtil;
@@ -21,7 +21,7 @@ import com.hewuzhe.view.IntegralView;
 
 import java.util.ArrayList;
 
-public class IntegralActivity extends SwipeRecycleViewActivity<IntegralPresenter, IntegralRecordAdapter, IntegralRecord> implements IntegralView {
+public class IntegralActivity extends RecycleViewActivity<IntegralPresenter, IntegralRecordAdapter, IntegralRecord> implements IntegralView {
 
 
     private TextView tvNickNae;
@@ -92,7 +92,6 @@ public class IntegralActivity extends SwipeRecycleViewActivity<IntegralPresenter
     public void bindData(ArrayList<IntegralRecord> data) {
         bd(data);
     }
-
 
     /**
      * @return 提供Adapter

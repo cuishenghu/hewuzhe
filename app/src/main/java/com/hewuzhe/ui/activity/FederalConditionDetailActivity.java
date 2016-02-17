@@ -5,8 +5,10 @@ import android.os.Bundle;
 import android.os.Environment;
 import android.os.Handler;
 import android.os.Message;
+import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.StaggeredGridLayoutManager;
 import android.text.Html;
 import android.text.Spanned;
 import android.view.View;
@@ -30,7 +32,6 @@ import com.hewuzhe.ui.widget.GlideCircleTransform;
 import com.hewuzhe.utils.AsyncImageLoader;
 import com.hewuzhe.utils.Bun;
 import com.hewuzhe.utils.SessionUtil;
-import com.hewuzhe.utils.StringUtil;
 import com.hewuzhe.view.ArticleView;
 
 import org.sufficientlysecure.htmltextview.HtmlTextView;
@@ -126,6 +127,7 @@ public class FederalConditionDetailActivity extends RecycleViewActivity<ArticleP
         webSettings.setJavaScriptEnabled(true);
 //		webSettings.setBuiltInZoomControls(true);
         webSettings.setSupportZoom(true);
+//        webSettings.setTextSize(WebSettings.TextSize.LARGER);
 
         webContent.getSettings().setUseWideViewPort(true);
         webContent.getSettings().setLoadWithOverviewMode(true);
@@ -181,20 +183,19 @@ public class FederalConditionDetailActivity extends RecycleViewActivity<ArticleP
 
     @Override
     protected String provideTitle() {
-        return getIntentData().getString("title");
+        return getIntentData().getString("MessageCame");
     }
 
     @Override
     public void setData(Article article) {
         this._Article = article;
-        tvTitle.setText(StringUtil.isEmpty(getIntentData().getString("title")) ? article.Title : getIntentData().getString("title"));
+//        tvTitle.setText(StringUtil.isEmpty(getIntentData().getString("title")) ? article.Title : getIntentData().getString("title"));
         tvName.setText(article.Title);
         _content = article.Content;
         HtmlTextView.RemoteImageGetter remoteGetter = new HtmlTextView.RemoteImageGetter();
         remoteGetter.baseUrl = C.BASE_URL;
 //        tvContent.setHtmlFromString(_content, remoteGetter);
 //      tvContent.setText(Html.fromHtml(_content, new MyImageGetter(), null));
-        //
 
         tvFroms.setText("来自：" + article.Category + "  " + article.PublishTime);
         tvPraiseCount.setText(article.FavoriteNum + "");
@@ -250,6 +251,62 @@ public class FederalConditionDetailActivity extends RecycleViewActivity<ArticleP
     @Override
     public void onItemClick(View view, int pos, Comment item) {
 
+        String content = "@" + item.NicName + ":" + item.Content;
+        edtComment.setText(content);
+        edtComment.setSelection(0);
+        edtComment.requestFocus();
+
+        if (getFirstVisiblePosition() == 0) {
+            showSoftInput(edtComment);
+        } else {
+            recyclerView.scrollToPosition(1);
+            recyclerView.smoothScrollBy(0, -100);
+            showSoftInput(recyclerView);
+        }
+
+
+    }
+
+
+    /**
+     * 获取第一条展示的位置
+     *
+     * @return
+     */
+    private int getFirstVisiblePosition() {
+        int position;
+        if (getLayoutManager() instanceof LinearLayoutManager) {
+            position = ((LinearLayoutManager) getLayoutManager()).findFirstVisibleItemPosition();
+        } else if (getLayoutManager() instanceof GridLayoutManager) {
+            position = ((GridLayoutManager) getLayoutManager()).findFirstVisibleItemPosition();
+        } else if (getLayoutManager() instanceof StaggeredGridLayoutManager) {
+            StaggeredGridLayoutManager layoutManager = (StaggeredGridLayoutManager) getLayoutManager();
+            int[] lastPositions = layoutManager.findFirstVisibleItemPositions(new int[layoutManager.getSpanCount()]);
+            position = getMinPositions(lastPositions);
+        } else {
+            position = 0;
+        }
+        return position;
+    }
+
+    private RecyclerView.LayoutManager getLayoutManager() {
+        return recyclerView.getLayoutManager();
+    }
+
+
+    /**
+     * 获得当前展示最小的position
+     *
+     * @param positions
+     * @return
+     */
+    private int getMinPositions(int[] positions) {
+        int size = positions.length;
+        int minPosition = Integer.MAX_VALUE;
+        for (int i = 0; i < size; i++) {
+            minPosition = Math.min(minPosition, positions[i]);
+        }
+        return minPosition;
     }
 
     @Override
@@ -304,6 +361,11 @@ public class FederalConditionDetailActivity extends RecycleViewActivity<ArticleP
 
     @Override
     public void replySuccess(int position, Comment comment) {
+
+    }
+
+    @Override
+    public void deleteConditionSuccess(int position) {
 
     }
 
@@ -389,7 +451,7 @@ public class FederalConditionDetailActivity extends RecycleViewActivity<ArticleP
 
     @Override
     public void setWeb(String res) {
-        webContent.loadDataWithBaseURL(C.BASE_URL, res, "text/html", "utf-8", "");
+        webContent.loadDataWithBaseURL(C.BASE_URL, res, "text/html", "UTF-8", "");
     }
 
 }

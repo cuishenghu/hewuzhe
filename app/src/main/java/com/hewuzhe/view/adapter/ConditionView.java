@@ -44,4 +44,5 @@ public interface ConditionView extends LoadMoreView {
     void replySuccess(int position, Comment comment);
 
 
+    void deleteConditionSuccess(int position);
 }

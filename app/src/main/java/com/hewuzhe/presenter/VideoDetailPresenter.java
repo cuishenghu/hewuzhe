@@ -67,7 +67,7 @@ public class VideoDetailPresenter extends CommentPresenter<VideoDetailView> {
     public void getOtherVideos(int userId, int id) {
 
         Subscription subscription = NetEngine.getService()
-                .GetOtherVideo(userId, 3, id)
+                .GetOtherVideo(userId, 4, id)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new SB<Res<ArrayList<Video>>>() {

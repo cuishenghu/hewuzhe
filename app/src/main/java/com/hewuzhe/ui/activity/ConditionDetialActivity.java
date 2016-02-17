@@ -194,7 +194,13 @@ public class ConditionDetialActivity extends SwipeRecycleViewActivity<ConditonDe
 
         if (condition.IsLike) {
             _ImgPraise.setImageResource(R.mipmap.icon_praise_focus);
-            _ImgPraise.setOnClickListener(null);
+            _ImgPraise.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    presenter.collectAndOtherCanl(condition.Id, ConditionPresenter.PRAISE, view);
+                }
+            });
+
         } else {
             _ImgPraise.setImageResource(R.mipmap.icon_praise);
             _ImgPraise.setOnClickListener(new View.OnClickListener() {
@@ -321,7 +327,7 @@ public class ConditionDetialActivity extends SwipeRecycleViewActivity<ConditonDe
                                     showDefautInfoDialog("温馨提示", "确定要删除评论吗？", new MaterialDialog.SingleButtonCallback() {
                                         @Override
                                         public void onClick(@NonNull MaterialDialog dialog, @NonNull DialogAction which) {
-                                            presenter.deleteComment(comment.Id,view);
+                                            presenter.deleteComment(comment.Id, view);
                                         }
                                     });
                                 } else {
@@ -469,8 +475,31 @@ public class ConditionDetialActivity extends SwipeRecycleViewActivity<ConditonDe
     public void collectAndOther(boolean b, int flag) {
         if (flag == ConditionPresenter.PRAISE) {
             if (b) {
-                _TvPraise.setText((_condition.LikeNum + 1) + "");
+                _condition.LikeNum++;
+                _TvPraise.setText(_condition.LikeNum + "");
                 _ImgPraise.setImageResource(R.mipmap.icon_praise_focus);
+
+                _ImgPraise.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        presenter.collectAndOtherCanl(_condition.Id, ConditionPresenter.PRAISE, view);
+                    }
+                });
+
+
+            } else {
+                _condition.LikeNum--;
+                _TvPraise.setText(_condition.LikeNum + "");
+                _ImgPraise.setImageResource(R.mipmap.icon_praise);
+
+                _ImgPraise.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        presenter.collectAndOther(_condition.Id, ConditionPresenter.PRAISE, view);
+                    }
+                });
+
+
             }
         }
 

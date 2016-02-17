@@ -48,4 +48,13 @@ public class ArticleCollection {
     public boolean IsRepeat;
     public String VisitNum;
     public boolean isChecked=false;
+
+
+    /**
+     * PublisherId : 0
+     * MessageCame : èçå¨æ
+     */
+
+    public int PublisherId;
+    public String MessageCame;
 }

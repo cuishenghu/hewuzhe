@@ -15,6 +15,8 @@ import com.sina.sinavideo.sdk.utils.VDResolutionManager;
 import com.socks.library.KLog;
 import com.yancy.imageselector.ImageConfig;
 
+import org.litepal.LitePalApplication;
+
 import java.util.ArrayList;
 import java.util.LinkedList;
 
@@ -38,15 +40,16 @@ public class App extends Application {
     public void onCreate() {
         super.onCreate();
 
+//        ActiveAndroid.initialize(this);
+        LitePalApplication.initialize(this);
 
-//        Stetho.initialize(
+//      Stetho.initialize(
 //                Stetho.newInitializerBuilder(this)
 //                        .enableDumpapp(
 //                                Stetho.defaultDumperPluginsProvider(this))
 //                        .enableWebKitInspector(
 //                                Stetho.defaultInspectorModulesProvider(this))
 //                        .build());
-
 
 
         VDApplication.getInstance().initPlayer(this);
@@ -103,7 +106,7 @@ public class App extends Application {
                         // 开启多选   （默认为多选）
                 .mutiSelect()
                         // 多选时的最大数量   （默认 9 张）
-                .mutiSelectMaxSize(6)
+                .mutiSelectMaxSize(9)
                         // 开启拍照功能 （默认关闭）
                 .showCamera()
                         // 已选择的图片路径

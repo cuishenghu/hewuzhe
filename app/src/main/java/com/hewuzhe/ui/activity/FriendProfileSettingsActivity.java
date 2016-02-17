@@ -17,6 +17,7 @@ import com.hewuzhe.ui.widget.GlideCircleTransform;
 import com.hewuzhe.ui.widget.SwitchView;
 import com.hewuzhe.ui.widget.YsnowEditDialog;
 import com.hewuzhe.utils.Bun;
+import com.hewuzhe.utils.EmojsUtils;
 import com.hewuzhe.utils.StringUtil;
 import com.hewuzhe.utils.TimeUtil;
 import com.hewuzhe.view.ProfileSettingsView;
@@ -26,6 +27,7 @@ import butterknife.Bind;
 import de.greenrobot.event.EventBus;
 import io.rong.imkit.RongIM;
 import io.rong.imlib.RongIMClient;
+
 
 public class FriendProfileSettingsActivity extends ToolBarActivity<ProfileSettingsPresenter> implements ProfileSettingsView {
 
@@ -133,9 +135,15 @@ public class FriendProfileSettingsActivity extends ToolBarActivity<ProfileSettin
                     public void onClick(View view) {
                         ysnowEditDialog.dismiss();
                         String content = ysnowEditDialog.content.getText().toString();
+
+
+                        if (EmojsUtils.containsEmoji(content)) {
+                            toast("备注名不能包含表情");
+                            return;
+                        }
+
                         presenter.ChangeFriendRName(content);
-                        _TvRemark.setText(content);
-//                        _TvUsername.setText(content);
+
                     }
                 });
 
@@ -197,9 +205,16 @@ public class FriendProfileSettingsActivity extends ToolBarActivity<ProfileSettin
     }
 
     @Override
+    public void setRemarkSuccess(String rName) {
+        toast("设置成功");
+        _TvRemark.setText(rName);
+        _TvUsername.setText(friend.NicName + "(" + rName + ")");
+    }
+    
+    @Override
     public void setData(User user) {
         friend = user;
-        _TvUsername.setText(friend.RemarkName + "");
+        _TvUsername.setText(friend.RemarkName.equals(friend.NicName) ? friend.NicName : friend.NicName + "(" + friend.RemarkName + ")");
         _TvInfo.setText(StringUtil.getGender(friend.Sexuality) + " " + TimeUtil.timeHaved(friend.Birthday) + "岁 " + "   " + friend.HomeAreaprovinceName + " " + friend.HomeAreaCityName + " " + friend.HomeAreaCountyName);
         _TvRemark.setText(friend.RemarkName);
 

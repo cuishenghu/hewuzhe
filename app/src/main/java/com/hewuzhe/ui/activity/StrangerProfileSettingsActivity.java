@@ -177,6 +177,11 @@ public class StrangerProfileSettingsActivity extends ToolBarActivity<ProfileSett
     }
 
     @Override
+    public void setRemarkSuccess(String rName) {
+
+    }
+
+    @Override
     public void setData(User user) {
         friend = user;
         _TvUsername.setText(friend.NicName + "");

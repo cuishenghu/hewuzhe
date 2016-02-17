@@ -1,12 +1,23 @@
 package com.hewuzhe.model;
 
+import org.litepal.crud.DataSupport;
 
 /**
  * Created by xianguangjin on 15/12/31.
  */
-public class Friend {
+public class Friends extends DataSupport {
     public String topc;
-    public int Id;
+    public int id;
+    public int friendid;
+
+    public int getFriendid() {
+        return friendid;
+    }
+
+    public void setFriendid(int friendid) {
+        this.friendid = friendid;
+    }
+
     /**
      * NicName : å­åè¹
      * PhotoPath : UpLoad/Photo/qwreqwreqwqw.jpg
@@ -16,14 +27,14 @@ public class Friend {
      */
 
 
-    public String NicName;
+    public String nicname;
 
-    public String PhotoPath;
+    public String photopath;
 
 
-    public int Rank;
+    public int rank;
 
-    public boolean IsFriend;
+    public boolean isfriend;
     /**
      * TeamName : æ­¦å½æ´¾
      * HomeAreaCountyName :
@@ -122,9 +133,9 @@ public class Friend {
      */
 
 
-    public String Phone;
+    public String phone;
 
-    public int TeamId;
+    public int teamid;
     /**
      * MemnerId : 24
      * JoinTime : /Date(1450339424453)/
@@ -138,39 +149,132 @@ public class Friend {
      * State_IsDirty : true
      */
 
-    public int MemnerId;
+    public int memnerid;
 
-    public String JoinTime;
+    public String jointime;
     /**
      * IsShield : false
      * UserId : 46
      */
 
-    public boolean IsShield;
+    public boolean isshield;
 
-    public int UserId;
+    public int userid;
     /**
      * RemarkName : æ±å©ä¼
      */
 
 
-    public String RemarkName;
+    public String remarkname;
 
-    public Friend() {
+
+    public String getTopc() {
+        return topc;
     }
 
-    public Friend(String name, int id) {
-        NicName = name;
-        Id = id;
+    public void setTopc(String topc) {
+        this.topc = topc;
     }
 
-    public String nicName;
+    public int getId() {
+        return id;
+    }
 
-    public int areaId;
+    public void setId(int id) {
+        this.id = id;
+    }
 
-    public int age;
+    public String getNicname() {
+        return nicname;
+    }
 
-    public int sexuality;
+    public void setNicname(String nicname) {
+        this.nicname = nicname;
+    }
 
+    public String getPhotopath() {
+        return photopath;
+    }
 
+    public void setPhotopath(String photopath) {
+        this.photopath = photopath;
+    }
+
+    public int getRank() {
+        return rank;
+    }
+
+    public void setRank(int rank) {
+        this.rank = rank;
+    }
+
+    public boolean isfriend() {
+        return isfriend;
+    }
+    public boolean isIsfriend() {
+        return isfriend;
+    }
+
+    public void setIsfriend(boolean isfriend) {
+        this.isfriend = isfriend;
+    }
+
+    public String getPhone() {
+        return phone;
+    }
+
+    public void setPhone(String phone) {
+        this.phone = phone;
+    }
+
+    public int getTeamid() {
+        return teamid;
+    }
+
+    public void setTeamid(int teamid) {
+        this.teamid = teamid;
+    }
+
+    public int getMemnerid() {
+        return memnerid;
+    }
+
+    public void setMemnerid(int memnerid) {
+        this.memnerid = memnerid;
+    }
+
+    public String getJointime() {
+        return jointime;
+    }
+
+    public void setJointime(String jointime) {
+        this.jointime = jointime;
+    }
+
+    public boolean isshield() {
+        return isshield;
+    }
+    public boolean isIsshield() {
+        return isshield;
+    }
+
+    public void setIsshield(boolean isshield) {
+        this.isshield = isshield;
+    }
+
+    public int getUserid() {
+        return userid;
+    }
+
+    public void setUserid(int userid) {
+        this.userid = userid;
+    }
+
+    public String getRemarkname() {
+        return remarkname;
+    }
+
+    public void setRemarkname(String remarkname) {
+        this.remarkname = remarkname;
+    }
 }

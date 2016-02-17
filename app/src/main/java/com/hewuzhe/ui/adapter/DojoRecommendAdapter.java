@@ -72,7 +72,12 @@ public class DojoRecommendAdapter extends BaseAdapter<DojoRecommendAdapter.ViewH
 
         if (!StringUtil.isEmpty(address)) {
             int index = address.indexOf(",");
-            return address.substring(index + 1);
+            address = address.substring(index + 1);
+            index = address.indexOf(",");
+            address = address.substring(index + 1);
+            index = address.indexOf(",");
+
+            return address.substring(0, index);
         } else {
             return "";
         }

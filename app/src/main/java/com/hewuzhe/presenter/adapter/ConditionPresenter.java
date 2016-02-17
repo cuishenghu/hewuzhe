@@ -275,4 +275,38 @@ public abstract class ConditionPresenter<V extends ConditionView> extends Refres
         });
 
     }
+
+    public void deleteCondition(final int id, final int position) {
+
+        view.showDefautInfoDialog("温馨提示", "确认删除动态？", new MaterialDialog.SingleButtonCallback() {
+            @Override
+            public void onClick(@NonNull MaterialDialog dialog, @NonNull DialogAction which) {
+                Subscription subscription = NetEngine.getService()
+                        .DeletePlan(id)
+                        .subscribeOn(Schedulers.io())
+                        .observeOn(AndroidSchedulers.mainThread())
+                        .subscribe(new SB<Res>() {
+                            @Override
+                            public void next(Res res) {
+                                if (res.code == C.OK) {
+                                    view.deleteConditionSuccess(position);
+                                }
+                            }
+
+                            @Override
+                            public void onCompleted() {
+
+                            }
+
+                            @Override
+                            public void onError(Throwable e) {
+
+                            }
+                        });
+
+                addSubscription(subscription);
+            }
+        });
+
+    }
 }

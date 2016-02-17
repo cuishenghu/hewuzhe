@@ -90,6 +90,37 @@ public class ConditonDetailPresenter extends RefreshAndLoadMorePresenter<Condtio
     }
 
 
+    public void collectAndOtherCanl(int id, final int flag, final View v) {
+        view.showDialog();
+        NetEngine.getService()
+                .MessageRepeatAndFavoriteCancel(id, new SessionUtil(view.getContext()).getUser().Id, flag)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new SB<Res>() {
+                    @Override
+                    public void next(Res res) {
+                        if (res.code == C.OK) {
+                            view.collectAndOther(false, flag);
+                        } else {
+                            view.snb("操作失败", v);
+                        }
+                    }
+
+                    @Override
+                    public void onCompleted() {
+
+                        view.dismissDialog();
+                    }
+
+                    @Override
+                    public void onError(Throwable e) {
+                        view.snb("操作失败", v);
+                        view.dismissDialog();
+
+                    }
+                });
+    }
+
     /**
      * 评论
      */
@@ -220,7 +251,7 @@ public class ConditonDetailPresenter extends RefreshAndLoadMorePresenter<Condtio
                             Comment comment = new Comment();
                             comment.Content = content;
                             comment.CommentedNicName = nicName;
-                            comment.CommentedId = commenterId;
+                            comment.ParentId = commenterId;
                             comment.Id = res.insertid;
                             view.replySuccess(comment);
                         } else {

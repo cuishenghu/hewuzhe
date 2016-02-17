@@ -14,11 +14,14 @@
                android:scaleType="centerCrop"
                android:src="@mipmap/img_bg"/>
     <TextView android:id="@+id/tv_name"
-              android:layout_width="wrap_content"
+              android:layout_width="160px"
               android:layout_height="wrap_content"
               android:layout_gravity="center_horizontal"
               android:layout_marginTop="6px"
-              android:text="咏春拳"
+              android:ellipsize="end"
+              android:maxLines="2"
+              android:minLines="2"
+              android:text=""
               android:textColor="@color/white"/>
 
 </LinearLayout>

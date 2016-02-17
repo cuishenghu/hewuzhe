@@ -256,7 +256,7 @@ public class ProfileSettingsPresenter extends BasePresenterImp<ProfileSettingsVi
         addSubscription(subscription);
     }
 
-    public void ChangeFriendRName(String rName) {
+    public void ChangeFriendRName(final String rName) {
 
         Subscription subscription = NetEngine.getService()
                 .ChangeFriendRName(view.getData(), new SessionUtil(view.getContext()).getUserId(), rName)
@@ -266,7 +266,7 @@ public class ProfileSettingsPresenter extends BasePresenterImp<ProfileSettingsVi
                     @Override
                     public void next(Res res) {
                         if (res.code == C.OK) {
-
+                            view.setRemarkSuccess(rName);
 
                         }
                     }

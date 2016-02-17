@@ -81,6 +81,8 @@ public class Videos2Adapter extends BaseAdapter<Videos2Adapter.ViewHolder, Video
 
         if (video.IsFree) {
             holder.tvIsFree.setVisibility(View.GONE);
+            holder.tvRepeatCount.setVisibility(View.VISIBLE);
+            holder.imgRepeat.setVisibility(View.VISIBLE);
         } else {
             holder.tvIsFree.setVisibility(View.VISIBLE);
         }
@@ -97,11 +99,11 @@ public class Videos2Adapter extends BaseAdapter<Videos2Adapter.ViewHolder, Video
         }
 
 
-        if (video.IsRepeat) {
-            holder.imgRepeat.setImageResource(R.mipmap.icon_share_gray);
-        } else {
-            holder.imgRepeat.setImageResource(R.mipmap.icon_share_focus);
-        }
+//        if (video.IsRepeat) {
+//            holder.imgRepeat.setImageResource(R.mipmap.icon_share_gray);
+//        } else {
+//            holder.imgRepeat.setImageResource(R.mipmap.icon_share_focus);
+//        }
 
         holder._CbPlan.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override

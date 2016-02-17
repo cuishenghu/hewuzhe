@@ -18,6 +18,8 @@ import com.hewuzhe.model.Comment;
 import com.hewuzhe.model.FriendCondition;
 import com.hewuzhe.model.Pic;
 import com.hewuzhe.presenter.adapter.ConditionPresenter;
+import com.hewuzhe.ui.activity.BasicVideoActivity;
+import com.hewuzhe.ui.activity.ConditionDetialTwoActivity;
 import com.hewuzhe.ui.activity.PicsActivity;
 import com.hewuzhe.ui.adapter.base.BaseAdapter;
 import com.hewuzhe.ui.cons.C;
@@ -120,7 +122,7 @@ public class GroupConditionAdapter extends BaseAdapter<GroupConditionAdapter.VHo
             }
         }
 
-        if (StringUtil.isEmpty(condition.VideoPath)) {
+        if (StringUtil.isEmpty(condition.ImagePath)) {
             holder._LayImg.setVisibility(View.GONE);
 
         } else {
@@ -130,12 +132,31 @@ public class GroupConditionAdapter extends BaseAdapter<GroupConditionAdapter.VHo
                     .centerCrop()
                     .crossFade()
                     .into(holder._ImgVideo);
-            holder._LayImg.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
+            if (StringUtil.isEmpty(condition.VideoPath)) {
+                holder._LayImg.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+//                        context.startActivity(new Intent(context, ConditionDetialTwoActivity.class), new Bun().putInt("id", condition.Id).putString("_NickName", _NickName).putString("_PhotoPath", _PhotoPath).putInt("whitch", C.WHITCH_TWO).ok());
+                        Intent intent = new Intent(context, ConditionDetialTwoActivity.class);
+                        intent.putExtra("data", new Bun().putInt("id", condition.Id).putString("_NickName", _NickName).putString("_PhotoPath", _PhotoPath).putInt("whitch", C.WHITCH_TWO).ok());
+                        context.startActivity(intent);
 
-                }
-            });
+                    }
+                });
+
+            } else {
+                holder._LayImg.setOnClickListener(new View.OnClickListener() {
+                    /**
+                     * @param view
+                     */
+                    @Override
+                    public void onClick(View view) {
+                        Intent intent = new Intent(context, BasicVideoActivity.class);
+                        intent.putExtra("data", new Bun().putString("videoPath", condition.VideoPath).ok());
+                        context.startActivity(intent);
+                    }
+                });
+            }
         }
 
         holder._TvShowAll.setText(condition.isShowingAll ? "关闭全部评论" : "显示全部评论");

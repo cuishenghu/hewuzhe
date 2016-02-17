@@ -262,7 +262,7 @@
             <android.support.v7.widget.RecyclerView
                 android:id="@+id/re_others"
                 android:layout_width="match_parent"
-                android:layout_height="240px"
+                android:layout_height="270px"
                 android:layout_marginLeft="30px"
                 android:background="@color/colorListBg">
 

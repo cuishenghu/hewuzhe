@@ -24,10 +24,10 @@
                          android:layout_height="240px"
                          android:background="@color/colorBg">
 
-
                 <TextView android:id="@+id/tv_air_quality"
                           android:layout_width="wrap_content"
                           android:layout_height="wrap_content"
+                          android:layout_marginTop="20px"
                           android:padding="18px"
                           android:text="空气质量：严重污染"
                           android:textColor="@color/white"
@@ -39,9 +39,9 @@
                           android:layout_marginTop="25px"
                           android:padding="18px"
                           android:text="pm：2.2.232"
-
                           android:textColor="@color/white"
-                          android:textSize="22px"/>
+                          android:textSize="22px"
+                          android:visibility="gone"/>
 
                 <TextView android:id="@+id/tv_address"
                           android:layout_width="wrap_content"
@@ -232,8 +232,8 @@
                            android:layout_gravity="center_vertical|right"
                            android:layout_marginRight="15px"
                            android:padding="8px"
-                           android:src="@mipmap/icon_del"/>
-
+                           android:src="@mipmap/icon_del"
+                           android:visibility="gone"/>
             </FrameLayout>
 
             <LinearLayout android:id="@+id/lay_live"

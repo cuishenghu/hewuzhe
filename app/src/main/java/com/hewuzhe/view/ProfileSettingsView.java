@@ -9,4 +9,6 @@ import com.hewuzhe.view.base.SetView;
  */
 public interface ProfileSettingsView extends GetView<Integer>,SetView<User> {
     void followSuccess(boolean b);
+
+    void setRemarkSuccess(String rName);
 }

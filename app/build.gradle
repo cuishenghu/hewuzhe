@@ -32,10 +32,10 @@ android {
         versionName "1.0.9"
         multiDexEnabled true
 
-        ndk {
-            abiFilters "armeabi"
-//          abiFilters "armeabi", "armeabi-v7a", "x86", "mips"
-        }
+//        ndk {
+////          abiFilters "armeabi"
+//            abiFilters "armeabi", "armeabi-v7a", "x86", "mips"
+//        }
     }
 
     buildTypes {

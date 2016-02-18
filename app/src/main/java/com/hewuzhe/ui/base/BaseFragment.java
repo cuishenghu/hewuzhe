@@ -1,6 +1,7 @@
 package com.hewuzhe.ui.base;
 
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
@@ -298,5 +299,11 @@ public abstract class BaseFragment<P extends BasePresenterImp> extends Fragment 
     @Override
     public void finishActivity() {
         getActivity().finish();
+    }
+
+
+    @Override
+    public Context getContext() {
+        return getActivity();
     }
 }

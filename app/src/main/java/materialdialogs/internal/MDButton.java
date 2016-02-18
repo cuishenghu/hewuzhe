@@ -4,7 +4,7 @@ import android.annotation.TargetApi;
 import android.content.Context;
 import android.graphics.drawable.Drawable;
 import android.os.Build;
-import android.support.v7.text.AllCapsTransformationMethod;
+import android.support.v7.internal.text.AllCapsTransformationMethod;
 import android.util.AttributeSet;
 import android.view.Gravity;
 import android.widget.TextView;
@@ -75,7 +75,6 @@ public class MDButton extends TextView {
     public void setStackedGravity(GravityEnum gravity) {
         mStackedGravity = gravity;
     }
-
     public void setStackedSelector(Drawable d) {
         mStackedBackground = d;
         if (mStacked)

@@ -8,9 +8,7 @@ import android.support.annotation.ColorInt;
 import android.support.annotation.ColorRes;
 import android.support.annotation.DrawableRes;
 import android.support.annotation.StringRes;
-import android.support.annotation.StyleRes;
 import android.view.View;
-import android.widget.TextView;
 
 /**
  * 兼容旧版&新版
@@ -31,15 +29,15 @@ public class CompatUtils {
         }
     }
 
-    @TargetApi(Build.VERSION_CODES.M)
-    public static void setTextAppearance(TextView view, @StyleRes int appearanceRes) {
-        if (Build.VERSION.SDK_INT < 23) {
-            //noinspection deprecation
-            view.setTextAppearance(view.getContext(), appearanceRes);
-        } else {
-            view.setTextAppearance(appearanceRes);
-        }
-    }
+//    @TargetApi(Build.VERSION_CODES.M)
+//    public static void setTextAppearance(TextView view, @StyleRes int appearanceRes) {
+//        if (Build.VERSION.SDK_INT < 23) {
+//            //noinspection deprecation
+//            view.setTextAppearance(view.getContext(), appearanceRes);
+//        } else {
+//            view.setTextAppearance(appearanceRes);
+//        }
+//    }
 
     @TargetApi(Build.VERSION_CODES.LOLLIPOP)
     public static Drawable getDrawable(Context context, @DrawableRes int drawableRes) {
@@ -67,7 +65,7 @@ public class CompatUtils {
             //noinspection deprecation
             return context.getResources().getColor(colorRes);
         } else {
-            return context.getResources().getColor(colorRes, null);
+            return context.getResources().getColor(colorRes);
         }
     }
 

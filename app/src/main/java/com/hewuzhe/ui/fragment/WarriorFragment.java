@@ -593,6 +593,8 @@ public class WarriorFragment extends ToolBarFragment<WarriorFragmentPresenter> i
     }
 
 
+
+
 ///*
 //    public void initLoc() {
 //        //声明mLocationOption对象

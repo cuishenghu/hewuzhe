@@ -112,10 +112,6 @@
         <meta-data
             android:name="RONG_CLOUD_APP_KEY"
             android:value="ik1qhw091ul4p"/>
-        <meta-data
-            android:name="PGYER_APPID"
-            android:value="ce73a5d040f864fe9cee2e1b89065be8">
-        </meta-data>
 
         <!-- <service android:name="com.amap.api.location.APSService"/> -->
 

@@ -9,9 +9,12 @@
         <option name="modules">
           <set>
             <option value="$PROJECT_DIR$" />
+            <option value="$PROJECT_DIR$/BGAAdapter" />
             <option value="$PROJECT_DIR$/IMKit" />
+            <option value="$PROJECT_DIR$/MaterialProgressBar" />
             <option value="$PROJECT_DIR$/Minisdk-release" />
             <option value="$PROJECT_DIR$/app" />
+            <option value="$PROJECT_DIR$/autolayout" />
             <option value="$PROJECT_DIR$/sinavideo_playercore_v2.0" />
             <option value="$PROJECT_DIR$/sinavideo_playersdk_v2.0" />
           </set>

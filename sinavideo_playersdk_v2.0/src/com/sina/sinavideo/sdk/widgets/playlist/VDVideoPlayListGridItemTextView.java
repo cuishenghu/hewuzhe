@@ -25,7 +25,7 @@ public class VDVideoPlayListGridItemTextView extends TextView implements VDBaseW
         super(context, attrs);
         TypedArray a = context.obtainStyledAttributes(attrs, R.styleable.ResolutionBackGround);
         int otherTextColor = Color.parseColor("#d1d1d1");
-        int curBgColor = Color.parseColor("#0078db");
+        int curBgColor = Color.parseColor("#ef9c00");
         mNoPlayColor = a.getColor(R.styleable.PlayListTextViewColor_NoPlayColor, otherTextColor);
         mCurPlayColor = a.getColor(R.styleable.PlayListTextViewColor_CurPlayColor, curBgColor);
         a.recycle();

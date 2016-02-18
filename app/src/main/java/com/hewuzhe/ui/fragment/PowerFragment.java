@@ -281,8 +281,8 @@ public class PowerFragment extends BaseFragment implements PowerView, VideoChoos
                 .setBeautyProgress(beautySkinProgress)
                 .setBeautySkinOn(false)
                 .setCameraFacing(
-                        Camera.CameraInfo.CAMERA_FACING_FRONT)
-                .setVideoSize(360, 640)
+                        Camera.CameraInfo.CAMERA_FACING_BACK)
+                .setVideoSize(480, 480)
                 .setCaptureHeight(getResources().getDimension(R.dimen.qupai_recorder_capture_height_size))
                 .setBeautySkinViewOn(false)
                 .setFlashLightOn(true)

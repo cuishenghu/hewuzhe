@@ -89,7 +89,7 @@ public final class VDVideoBottomColorBar extends SeekBar implements
 		super.onDraw(canvas);
 		if (max != 0) {
 			int end = (int) (((float) progress * getMeasuredWidth()) / max);
-			mPaint.setColor(Color.parseColor("#0078db"));
+			mPaint.setColor(Color.parseColor("#ef9c00"));
 			mPaint.setStyle(Style.FILL);
 			r.set(0, 0, end, getMeasuredHeight());
 			canvas.drawRect(r, mPaint);

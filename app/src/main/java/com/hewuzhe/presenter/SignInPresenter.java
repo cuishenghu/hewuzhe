@@ -88,6 +88,7 @@ public class SignInPresenter extends BasePresenterImp<SignInView> {
                                 });
 
                                 view.getContext().startActivity(new Intent(view.getContext(), MainActivity.class));
+                                view.finishActivity();
                             } else {
                                 view.snb("登录失败", v);
                             }

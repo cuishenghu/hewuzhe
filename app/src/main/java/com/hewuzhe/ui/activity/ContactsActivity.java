@@ -188,7 +188,7 @@ public class ContactsActivity extends RecycleViewActivity<FriendsPresenter, Frie
                         _TvRecyclerindexviewTopc.setVisibility(View.GONE);
                     } else {
                         _TvRecyclerindexviewTopc.setVisibility(View.VISIBLE);
-                        _TvRecyclerindexviewTopc.setText(adapter.data.get(firstPos-1).topc);
+                        _TvRecyclerindexviewTopc.setText(adapter.data.get(firstPos - 1).topc);
                     }
                 }
             }
@@ -359,7 +359,7 @@ public class ContactsActivity extends RecycleViewActivity<FriendsPresenter, Frie
      */
     @Override
     public void onItemClick(View view, int pos, Friend item) {
-
+        startActivity(FriendProfileActivity.class, new Bun().putInt("id", item.Id).ok());
     }
 
 }

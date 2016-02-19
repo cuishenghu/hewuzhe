@@ -18,6 +18,7 @@ import com.hewuzhe.ui.cons.C;
 import com.hewuzhe.utils.SessionUtil;
 
 import butterknife.Bind;
+import io.rong.imkit.RongIM;
 import materialdialogs.DialogAction;
 import materialdialogs.GravityEnum;
 import materialdialogs.MaterialDialog;
@@ -136,6 +137,12 @@ public class MoreFragment extends ToolBarFragment {
             public void onClick(View view) {
                 new SessionUtil(getContext())
                         .removeUserInfoStr();
+
+                /**
+                 * 退出融云
+                 * */
+                RongIM.getInstance().logout();
+
                 startActivity(SignInActivity.class);
                 getActivity().finish();
             }

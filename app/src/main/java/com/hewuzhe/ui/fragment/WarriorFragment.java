@@ -338,6 +338,10 @@ public class WarriorFragment extends ToolBarFragment<WarriorFragmentPresenter> i
     public void setUserData() {
         user = new SessionUtil(getContext()).getUser();
 
+        if (!hasConnected) {
+            connect(user.Token);
+        }
+
         tvUsername.setText(user.NicName);
         tvId.setText("ID:" + getUserId());
         tvLevel.setText("lv" + user.Rank);
@@ -359,9 +363,6 @@ public class WarriorFragment extends ToolBarFragment<WarriorFragmentPresenter> i
                 .transform(new GlideCircleTransform(getContext()))
                 .into(imgAvatar);
 
-        if (!hasConnected) {
-            connect(user.Token);
-        }
     }
 
     private String getUserId() {
@@ -460,6 +461,8 @@ public class WarriorFragment extends ToolBarFragment<WarriorFragmentPresenter> i
                 @Override
                 public void onTokenIncorrect() {
                     Log.d("LoginActivity", "--onTokenIncorrect");
+                    user = new SessionUtil(getContext()).getUser();
+                    connect(user.Token);
                 }
 
                 /**
@@ -474,6 +477,7 @@ public class WarriorFragment extends ToolBarFragment<WarriorFragmentPresenter> i
                     Log.d("LoginActivity", "--onSuccess" + userid);
 //                    startActivity(new Intent(LoginActivity.this, MainActivity.class));
 //                    finish();
+
 
                     RongIM.setUserInfoProvider(WarriorFragment.this, true);//设置用户信息提供者。
                     RongIM.setGroupInfoProvider(WarriorFragment.this, true);//设置群组信息提供者。
@@ -495,7 +499,8 @@ public class WarriorFragment extends ToolBarFragment<WarriorFragmentPresenter> i
                  */
                 @Override
                 public void onError(RongIMClient.ErrorCode errorCode) {
-
+                    user = new SessionUtil(getContext()).getUser();
+                    connect(user.Token);
                     Log.d("LoginActivity", "--onError" + errorCode);
                 }
             });

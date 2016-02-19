@@ -36,6 +36,7 @@ import cn.sharesdk.framework.ShareSDK;
 import cn.sharesdk.tencent.qzone.QZone;
 import cn.sharesdk.wechat.friends.Wechat;
 import cn.xm.weidongjian.popuphelper.PopupWindowHelper;
+import io.rong.imkit.RongIM;
 
 
 public class SignInActivity extends BaseActivity<SignInPresenter> implements SignInView, PlatformActionListener, Handler.Callback {
@@ -171,16 +172,12 @@ public class SignInActivity extends BaseActivity<SignInPresenter> implements Sig
     }
 
 
-    /**
-     * @param savedInstanceState 缓存数据
-     *                           <p/>
-     *                           初始化一些事情
-     */
     @Override
     protected void initThings(Bundle savedInstanceState) {
-//       showAnim();
+        RongIM.getInstance().logout();
         ShareSDK.initSDK(this);
         handler = new Handler(this);
+
     }
 
     /**

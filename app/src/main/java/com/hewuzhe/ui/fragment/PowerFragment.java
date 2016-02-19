@@ -62,7 +62,6 @@ public class PowerFragment extends BaseFragment implements PowerView, VideoChoos
     private String videoPath;
     public static int QUPAI_RECORD_REQUEST = 101;
 
-
     /**
      * 初始化事件监听者
      */
@@ -91,7 +90,6 @@ public class PowerFragment extends BaseFragment implements PowerView, VideoChoos
                 startActivity(SearchVideosActivity.class, new Bun().putString("title", "搜索").ok());
             }
         });
-
     }
 
     /**
@@ -109,7 +107,6 @@ public class PowerFragment extends BaseFragment implements PowerView, VideoChoos
     public BasePresenterImp createPresenter() {
         return null;
     }
-
 
     protected void initToolBar(View rootView) {
         toolBar = (Toolbar) rootView.findViewById(R.id.toolbar);

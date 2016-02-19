@@ -4,7 +4,7 @@ import com.hewuzhe.model.Friend;
 import com.hewuzhe.model.Group;
 import com.hewuzhe.model.Res;
 import com.hewuzhe.model.WrapFriend;
-import com.hewuzhe.presenter.base.BasePresenterImp;
+import com.hewuzhe.presenter.base.RefreshAndLoadMorePresenter;
 import com.hewuzhe.ui.cons.C;
 import com.hewuzhe.ui.widget.CharacterParser;
 import com.hewuzhe.ui.widget.PinyinFriendComparator;
@@ -24,7 +24,7 @@ import rx.schedulers.Schedulers;
 /**
  * Created by xianguangjin on 15/12/31.
  */
-public class FriendsPresenter extends BasePresenterImp<FriendsView> {
+public class FriendsPresenter extends RefreshAndLoadMorePresenter<FriendsView> {
     private ArrayList<Friend> friends = new ArrayList<>();
 
     public void getFriends() {
@@ -107,6 +107,17 @@ public class FriendsPresenter extends BasePresenterImp<FriendsView> {
                 });
 
         addSubscription(subscription);
+
+    }
+
+    /**
+     * 获取数据
+     *
+     * @param page
+     * @param count
+     */
+    @Override
+    public void getData(int page, int count) {
 
     }
 }

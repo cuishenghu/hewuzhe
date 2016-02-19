@@ -23,8 +23,9 @@ import butterknife.ButterKnife;
  */
 public class JoinGroupAdapter extends BaseAdapter<JoinGroupAdapter.VHolder, Group, JoinPresenter> {
 
-    public JoinGroupAdapter(Context context, JoinPresenter joinPresenter) {
-        super(context, joinPresenter);
+
+    public JoinGroupAdapter(Context context, JoinPresenter joinPresenter, View header) {
+        super(context, joinPresenter, header);
     }
 
     /**

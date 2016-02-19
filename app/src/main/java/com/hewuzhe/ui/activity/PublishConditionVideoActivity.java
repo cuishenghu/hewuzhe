@@ -1,5 +1,6 @@
 package com.hewuzhe.ui.activity;
 
+import android.app.Activity;
 import android.graphics.Bitmap;
 import android.media.ThumbnailUtils;
 import android.net.Uri;
@@ -118,8 +119,8 @@ public class PublishConditionVideoActivity extends ToolBarActivity<PublishCondit
 
     @Override
     public void publishSuccess() {
-
-
+        setResult(Activity.RESULT_OK);
+        finishActivity();
     }
 
 

@@ -1,6 +1,7 @@
 package com.hewuzhe.ui.adapter;
 
 import android.content.Context;
+import android.view.View;
 
 import com.baidu.mapapi.search.core.PoiInfo;
 import com.hewuzhe.R;
@@ -21,7 +22,11 @@ public class NearAddressAdapter extends MyBaseAdapter<PoiInfo> {
     }
 
     @Override
-    public void setConvert(BaseViewHolder viewHolder, PoiInfo info) {
+    public void setConvert(BaseViewHolder viewHolder, PoiInfo info,int pos) {
+        if (pos == 0) {
+          viewHolder.getView(R.id.img).setVisibility(View.VISIBLE);
+        }
+
         viewHolder.setTextView(R.id.item_address_name_tv, info.name);
         viewHolder.setTextView(R.id.item_address_detail_tv, info.address);
     }

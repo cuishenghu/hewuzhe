@@ -10,142 +10,43 @@
 
     <include layout="@layout/toolbar_layout_two"/>
 
-    <LinearLayout android:layout_width="match_parent"
-                  android:layout_height="90px"
-                  android:layout_marginBottom="10px"
-                  android:layout_marginTop="10px"
-                  android:background="@color/colorListBg"
-                  android:gravity="center_vertical"
-                  android:orientation="horizontal">
 
-        <ImageView android:layout_width="70px"
-                   android:layout_height="70px"
-                   android:layout_marginLeft="20px"
-                   android:padding="18px"
-                   android:src="@mipmap/icon_search"/>
+    <TextView
+        android:id="@+id/tv_recyclerindexview_topc"
+        android:layout_width="match_parent"
+        android:layout_height="85px"
+        android:background="@drawable/bg_color_bg"
+        android:gravity="center_vertical"
+        android:paddingLeft="20px"
+        android:text="A"
+        android:textColor="@color/white"
+        android:textSize="15sp"
+        android:textStyle="bold"
+        android:visibility="gone"/>
 
-        <EditText android:id="@+id/edt_search_content"
-                  android:layout_width="match_parent"
-                  android:layout_height="70px"
-                  android:layout_marginLeft="20px"
-                  android:background="@null"
-                  android:hint="搜索好友昵称"
-                  android:imeActionId="@+id/edt_search_content_actionid"
-                  android:imeOptions="actionSearch"
-                  android:inputType="text"
-                  android:textColor="@color/colorLine"
-                  android:textColorHint="@color/colorLine"/>
-
-    </LinearLayout>
 
     <FrameLayout android:layout_width="match_parent"
                  android:layout_height="wrap_content">
 
-        <LinearLayout android:layout_width="match_parent"
-                      android:layout_height="wrap_content"
-                      android:orientation="vertical">
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/recycler_view"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:scrollbars="none"/>
 
+        <TextView
+            android:id="@+id/tv_recyclerindexview_tip"
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            android:layout_gravity="center"
+            android:background="@drawable/circle_black"
+            android:gravity="center"
+            android:text="A"
+            android:textColor="@android:color/white"
+            android:textSize="25sp"
+            android:visibility="gone"
+            tools:visibility="visible"/>
 
-            <LinearLayout android:id="@+id/lay_followed"
-                          android:layout_width="match_parent"
-                          android:layout_height="100px"
-                          android:background="@color/colorListBg"
-                          android:gravity="center_vertical"
-                          android:orientation="horizontal"
-                          android:paddingLeft="20dp">
-                <ImageView
-                    android:layout_width="60px"
-                    android:layout_height="60px"
-                    android:layout_marginRight="30dp"
-                    android:src="@mipmap/icon_new_friends"
-                    />
-                <TextView style="@style/text_32_white"
-                          android:layout_width="wrap_content"
-                          android:layout_height="wrap_content"
-                          android:layout_weight="1"
-                          android:text="新关注好友"/>
-
-            </LinearLayout>
-
-            <TextView android:id="@+id/tv_group"
-                      style="@style/text_35_white"
-                      android:layout_width="match_parent"
-                      android:layout_height="85px"
-                      android:gravity="center_vertical"
-                      android:paddingLeft="25px"
-                      android:text="我的战队"/>
-
-
-            <LinearLayout android:id="@+id/lay_group"
-                          android:layout_width="match_parent"
-                          android:layout_height="100px"
-                          android:background="@color/colorListBg"
-                          android:gravity="center_vertical"
-                          android:orientation="horizontal"
-                          android:paddingLeft="20dp">
-                <ImageView
-                    android:id="@+id/img_group_avatar"
-                    android:layout_width="85px"
-                    android:layout_height="85px"
-                    android:layout_marginRight="30dp"
-                    android:src="@mipmap/img_avatar"
-                    />
-                <TextView android:id="@+id/tv_group_name"
-                          style="@style/text_35_white"
-                          android:layout_width="wrap_content"
-                          android:layout_height="wrap_content"
-                          android:layout_weight="1"
-                          android:text="战队"/>
-
-            </LinearLayout>
-
-
-            <FrameLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:background="@color/colorListBg">
-
-                <TextView android:layout_width="match_parent"
-                          android:layout_height="2px"
-                          android:layout_marginLeft="20dp"
-                          android:background="@color/colorBg"/>
-
-                <android.support.v7.widget.RecyclerView
-                    android:id="@+id/recycler_view"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_marginTop="20px"
-                    android:scrollbars="none"/>
-
-                <TextView
-                    android:id="@+id/tv_recyclerindexview_topc"
-                    android:layout_width="match_parent"
-                    android:layout_height="85px"
-                    android:background="@drawable/bg_color_bg"
-                    android:gravity="center_vertical"
-                    android:paddingLeft="20px"
-                    android:text="A"
-                    android:textColor="@color/white"
-                    android:textSize="15sp"
-                    android:textStyle="bold"/>
-
-
-                <TextView
-                    android:id="@+id/tv_recyclerindexview_tip"
-                    android:layout_width="60dp"
-                    android:layout_height="60dp"
-                    android:layout_gravity="center"
-                    android:background="@drawable/circle_black"
-                    android:gravity="center"
-                    android:text="A"
-                    android:textColor="@android:color/white"
-                    android:textSize="25sp"
-                    android:visibility="gone"
-                    tools:visibility="visible"/>
-
-            </FrameLayout>
-
-        </LinearLayout>
 
         <com.hewuzhe.ui.widget.IndexView
             android:id="@+id/indexview"

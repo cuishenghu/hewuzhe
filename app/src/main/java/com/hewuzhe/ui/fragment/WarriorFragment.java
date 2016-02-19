@@ -347,7 +347,6 @@ public class WarriorFragment extends ToolBarFragment<WarriorFragmentPresenter> i
             }
         });
 
-
         Glide.with(getActivity())
                 .load(C.BASE_URL + user.PhotoPath)
                 .centerCrop()
@@ -362,9 +361,20 @@ public class WarriorFragment extends ToolBarFragment<WarriorFragmentPresenter> i
     }
 
     private String getUserId() {
-        return StringUtil.isEmpty(user.Phone) ? "000000" + user.Id : user.Phone;
+        return StringUtil.isEmpty(user.Phone) ? "000000" + user.Id : getPhone(user.Phone);
     }
 
+    private String getPhone(String phone) {
+        if (StringUtil.isMobile(phone)) {
+            String start = phone.substring(0, 3);
+            String end = phone.substring(8, 11);
+            return start + "*****" + end;
+        } else if (!StringUtil.isEmpty(phone)) {
+            return phone;
+        } else {
+            return "";
+        }
+    }
 
     @Override
     public void isWuYou(Boolean data, int userid) {
@@ -591,8 +601,6 @@ public class WarriorFragment extends ToolBarFragment<WarriorFragmentPresenter> i
         super.onDestroyView();
         ButterKnife.unbind(this);
     }
-
-
 
 
 ///*

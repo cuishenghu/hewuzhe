@@ -56,9 +56,9 @@ public class DojoRecommendAdapter extends BaseAdapter<DojoRecommendAdapter.ViewH
         Dojo dojo = data.get(position);
 
         holder.tvDesc.setText(dojo.Content);
-        holder.tvLoc.setText(getAddress(dojo.Address));
+        holder.tvLoc.setText("地址：" + dojo.Address);
         holder.tvName.setText(dojo.Title);
-        holder.tvCall.setText(dojo.TelePhone);
+        holder.tvCall.setText("电话：" + dojo.TelePhone);
         Glide.with(context)
                 .load(C.BASE_URL + dojo.ImagePath)
                 .centerCrop()
@@ -71,13 +71,17 @@ public class DojoRecommendAdapter extends BaseAdapter<DojoRecommendAdapter.ViewH
     private String getAddress(String address) {
 
         if (!StringUtil.isEmpty(address)) {
-            int index = address.indexOf(",");
-            address = address.substring(index + 1);
-            index = address.indexOf(",");
-            address = address.substring(index + 1);
-            index = address.indexOf(",");
+            try {
+                int index = address.indexOf(",");
+                address = address.substring(index + 1);
+                index = address.indexOf(",");
+                address = address.substring(index + 1);
+                index = address.indexOf(",");
+                return address.substring(0, index);
+            } catch (Exception e) {
 
-            return address.substring(0, index);
+                return "";
+            }
         } else {
             return "";
         }

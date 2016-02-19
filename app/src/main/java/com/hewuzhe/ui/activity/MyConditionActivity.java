@@ -32,12 +32,6 @@ import butterknife.Bind;
 public class MyConditionActivity extends SwipeRecycleViewActivity<MyConditionPresenter, FriendConditionAdapter, FriendCondition> implements FriendsConditionView {
 
 
-    @Bind(R.id.img_bg)
-    ImageView _ImgBg;
-    @Bind(R.id.tv_username)
-    TextView _TvUsername;
-    @Bind(R.id.img_avatar)
-    ImageView _ImgAvatar;
     @Bind(R.id.edt_comment)
     EditText _EdtComment;
     @Bind(R.id.btn_publish)
@@ -45,6 +39,10 @@ public class MyConditionActivity extends SwipeRecycleViewActivity<MyConditionPre
     @Bind(R.id.lay_comment)
     LinearLayout _LayComment;
     private User user;
+    private View header;
+    private ImageView _ImgBg;
+    private TextView _TvUsername;
+    private ImageView _ImgAvatar;
 
     @Override
     protected int provideContentViewId() {
@@ -77,6 +75,7 @@ public class MyConditionActivity extends SwipeRecycleViewActivity<MyConditionPre
     @Override
     protected void initThings(Bundle savedInstanceState) {
         super.initThings(savedInstanceState);
+        initHeader();
         presenter.getUserInfo();
         presenter.getData(page, count);
 
@@ -102,12 +101,21 @@ public class MyConditionActivity extends SwipeRecycleViewActivity<MyConditionPre
     }
 
 
+    private void initHeader() {
+        _ImgBg = (ImageView) header.findViewById(R.id.img_bg);
+        _TvUsername = (TextView) header.findViewById(R.id.tv_username);
+        _ImgAvatar = (ImageView) header.findViewById(R.id.img_avatar);
+
+    }
+
+
     /**
      * @return 提供Adapter
      */
     @Override
     protected FriendConditionAdapter provideAdapter() {
-        return new FriendConditionAdapter(getContext(), presenter);
+        header = getLayoutInflater().inflate(R.layout.header_friend_condtions, null);
+        return new FriendConditionAdapter(getContext(), presenter, header);
     }
 
     /**
@@ -187,7 +195,9 @@ public class MyConditionActivity extends SwipeRecycleViewActivity<MyConditionPre
 
         comment.NicName = user.NicName;
         condition.ComList.add(comment);
-        adapter.notifyItemChanged(position);
+//        adapter.notifyItemChanged(position);
+        adapter.notifyDataSetChanged();
+
     }
 
     /**
@@ -228,7 +238,9 @@ public class MyConditionActivity extends SwipeRecycleViewActivity<MyConditionPre
         comment.CommenterId = new SessionUtil(getContext()).getUserId();
 
         condition.ComList.add(comment);
-        adapter.notifyItemChanged(position);
+//        adapter.notifyItemChanged(position);
+        adapter.notifyDataSetChanged();
+
     }
 
     @Override

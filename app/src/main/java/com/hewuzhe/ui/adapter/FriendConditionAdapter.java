@@ -2,8 +2,11 @@ package com.hewuzhe.ui.adapter;
 
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Color;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.RecyclerView;
+import android.text.SpannableString;
+import android.text.style.ForegroundColorSpan;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.FrameLayout;
@@ -42,10 +45,12 @@ public class FriendConditionAdapter extends BaseAdapter<FriendConditionAdapter.V
      * 每行有几张图片
      */
     private int count = 3;
+    private SpannableString spannableString;
 
-    public FriendConditionAdapter(Context context, ConditionPresenter conditionPresenter) {
-        super(context, conditionPresenter);
+    public FriendConditionAdapter(Context context, ConditionPresenter conditionPresenter, View header) {
+        super(context, conditionPresenter, header);
     }
+
 
     /**
      * @return ItemView的LayoutId
@@ -122,12 +127,12 @@ public class FriendConditionAdapter extends BaseAdapter<FriendConditionAdapter.V
             holder._LayImg.setVisibility(View.GONE);
         } else {
             holder._LayImg.setVisibility(View.VISIBLE);
+//            holder._TvTime.setText(condition.VideoDuration);
             Glide.with(context)
                     .load(C.BASE_URL + condition.ImagePath)
                     .centerCrop()
                     .crossFade()
                     .into(holder._ImgVideo);
-
 
             if (StringUtil.isEmpty(condition.VideoPath)) {
                 holder._LayImg.setOnClickListener(new View.OnClickListener() {
@@ -161,7 +166,7 @@ public class FriendConditionAdapter extends BaseAdapter<FriendConditionAdapter.V
             holder._ImgDel.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    _presenter.deleteCondition(condition.Id,position);
+                    _presenter.deleteCondition(condition.Id, position);
                 }
             });
         } else {
@@ -172,17 +177,15 @@ public class FriendConditionAdapter extends BaseAdapter<FriendConditionAdapter.V
 
                 }
             });
-
         }
 
         holder._TvShowAll.setText(condition.isShowingAll ? "关闭全部评论" : "显示全部评论");
-
         holder._TvShowAll.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 condition.isShowingAll = condition.isShowingAll ? false : true;
                 holder._TvShowAll.setText(condition.isShowingAll ? "关闭全部评论" : "显示全部评论");
-                FriendConditionAdapter.this.notifyItemChanged(position);
+                FriendConditionAdapter.this.notifyItemChanged(position + 1);
             }
         });
 
@@ -200,19 +203,24 @@ public class FriendConditionAdapter extends BaseAdapter<FriendConditionAdapter.V
                         View view = _inflater.inflate(R.layout.item_coment_child, null);
                         holder._LayComment.addView(view);
 
-                        TextView tvUserCommenter = (TextView) view.findViewById(R.id.tv_user_commenter);
-                        TextView tvUserCommented = (TextView) view.findViewById(R.id.tv_user_commented);
                         TextView tvConent = (TextView) view.findViewById(R.id.tv_conent);
 
-                        tvUserCommenter.setText(comment.NicName);
-                        tvUserCommented.setText(comment.CommentedNicName);
-                        tvConent.setText("：" + comment.Content);
+                        String content = "";
 
                         if (comment.ParentId == 0) {
-                            tvUserCommented.setVisibility(View.GONE);
-                            TextView tv_reply = (TextView) view.findViewById(R.id.tv_reply);
-                            tv_reply.setVisibility(View.GONE);
+                            content = comment.NicName + "：" + comment.Content;
+                            spannableString = new SpannableString(content);
+                            spannableString.setSpan(new ForegroundColorSpan(Color.parseColor("#ef9c00")), 0, comment.NicName.length(), 0);
+                        } else {
+                            content = comment.NicName + "回复" + comment.CommentedNicName + "：" + comment.Content;
+                            spannableString = new SpannableString(content);
+                            spannableString.setSpan(new ForegroundColorSpan(Color.parseColor("#ef9c00")), 0, comment.NicName.length(), 0);
+                            spannableString.setSpan(new ForegroundColorSpan(Color.parseColor("#ef9c00")), comment.NicName.length() + 2, comment.NicName.length() + 2 + comment.CommentedNicName.length(), 0);
+
                         }
+
+                        tvConent.setText(spannableString);
+
 
                         view.setOnClickListener(new View.OnClickListener() {
                             @Override
@@ -238,18 +246,23 @@ public class FriendConditionAdapter extends BaseAdapter<FriendConditionAdapter.V
                         View view = _inflater.inflate(R.layout.item_coment_child, null);
                         holder._LayComment.addView(view);
 
-                        TextView tvUserCommenter = (TextView) view.findViewById(R.id.tv_user_commenter);
-                        TextView tvUserCommented = (TextView) view.findViewById(R.id.tv_user_commented);
                         TextView tvConent = (TextView) view.findViewById(R.id.tv_conent);
-                        tvUserCommenter.setText(comment.NicName);
-                        tvUserCommented.setText(comment.CommentedNicName);
-                        tvConent.setText("：" + comment.Content);
+
+                        String content = "";
 
                         if (comment.ParentId == 0) {
-                            tvUserCommented.setVisibility(View.GONE);
-                            TextView tv_reply = (TextView) view.findViewById(R.id.tv_reply);
-                            tv_reply.setVisibility(View.GONE);
+                            content = comment.NicName + "：" + comment.Content;
+                            spannableString = new SpannableString(content);
+                            spannableString.setSpan(new ForegroundColorSpan(Color.parseColor("#ef9c00")), 0, comment.NicName.length(), 0);
+                        } else {
+                            content = comment.NicName + "回复" + comment.CommentedNicName + "：" + comment.Content;
+                            spannableString = new SpannableString(content);
+                            spannableString.setSpan(new ForegroundColorSpan(Color.parseColor("#ef9c00")), 0, comment.NicName.length(), 0);
+                            spannableString.setSpan(new ForegroundColorSpan(Color.parseColor("#ef9c00")), comment.NicName.length() + 2, comment.NicName.length() + 2 + comment.CommentedNicName.length(), 0);
+
                         }
+
+                        tvConent.setText(spannableString);
 
                         view.setOnClickListener(new View.OnClickListener() {
                             @Override
@@ -272,18 +285,23 @@ public class FriendConditionAdapter extends BaseAdapter<FriendConditionAdapter.V
                     View view = _inflater.inflate(R.layout.item_coment_child, null);
                     holder._LayComment.addView(view);
 
-                    TextView tvUserCommenter = (TextView) view.findViewById(R.id.tv_user_commenter);
-                    TextView tvUserCommented = (TextView) view.findViewById(R.id.tv_user_commented);
                     TextView tvConent = (TextView) view.findViewById(R.id.tv_conent);
-                    tvUserCommenter.setText(comment.NicName);
-                    tvUserCommented.setText(comment.CommentedNicName);
-                    tvConent.setText("：" + comment.Content);
+
+                    String content = "";
 
                     if (comment.ParentId == 0) {
-                        tvUserCommented.setVisibility(View.GONE);
-                        TextView tv_reply = (TextView) view.findViewById(R.id.tv_reply);
-                        tv_reply.setVisibility(View.GONE);
+                        content = comment.NicName + "：" + comment.Content;
+                        spannableString = new SpannableString(content);
+                        spannableString.setSpan(new ForegroundColorSpan(Color.parseColor("#ef9c00")), 0, comment.NicName.length(), 0);
+                    } else {
+                        content = comment.NicName + "回复" + comment.CommentedNicName + "：" + comment.Content;
+                        spannableString = new SpannableString(content);
+                        spannableString.setSpan(new ForegroundColorSpan(Color.parseColor("#ef9c00")), 0, comment.NicName.length(), 0);
+                        spannableString.setSpan(new ForegroundColorSpan(Color.parseColor("#ef9c00")), comment.NicName.length() + 2, comment.NicName.length() + 2 + comment.CommentedNicName.length(), 0);
+
                     }
+
+                    tvConent.setText(spannableString);
 
                     view.setOnClickListener(new View.OnClickListener() {
                         @Override
@@ -390,6 +408,9 @@ public class FriendConditionAdapter extends BaseAdapter<FriendConditionAdapter.V
         @Nullable
         @Bind(R.id.tv_show_all)
         TextView _TvShowAll;
+        @Nullable
+        @Bind(R.id.tv_time)
+        TextView _TvTime;
         @Nullable
         @Bind(R.id.lay_comment)
         LinearLayout _LayComment;

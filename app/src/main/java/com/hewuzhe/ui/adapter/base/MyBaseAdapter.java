@@ -85,7 +85,7 @@ public abstract class MyBaseAdapter<T> extends ArrayAdapter<T> {
 		BaseViewHolder viewHolder = BaseViewHolder.get(getContext(), parent,
 				resourceId, position, convertView);
 		// 设置每个item控件
-		setConvert(viewHolder, getItem(position));
+		setConvert(viewHolder, getItem(position),position);
 		return viewHolder.getConvertView();
 	}
 
@@ -96,7 +96,7 @@ public abstract class MyBaseAdapter<T> extends ArrayAdapter<T> {
 	 * @Title: setConvert
 	 * @Description: 抽象方法，由子类去实现每个itme如何设置
 	 */
-	public abstract void setConvert(BaseViewHolder viewHolder, T t);
+	public abstract void setConvert(BaseViewHolder viewHolder, T t,int pos);
 
 	public void setList(List<T> list) {
 		this.list = list;

@@ -10,7 +10,8 @@
               style="@style/text_25_yellow"
               android:layout_width="wrap_content"
               android:layout_height="wrap_content"
-              android:text="黄晓明"/>
+              android:text="黄晓明"
+              android:visibility="gone"/>
 
     <TextView android:id="@+id/tv_reply"
               style="@style/text_25_white"
@@ -18,13 +19,15 @@
               android:layout_height="wrap_content"
               android:layout_marginLeft="8px"
               android:layout_marginRight="8px"
-              android:text="回复"/>
+              android:text="回复"
+              android:visibility="gone"/>
 
     <TextView android:id="@+id/tv_user_commented"
               style="@style/text_25_yellow"
               android:layout_width="wrap_content"
               android:layout_height="wrap_content"
-              android:text="Baby"/>
+              android:text="Baby"
+              android:visibility="gone"/>
 
     <TextView android:id="@+id/tv_conent"
               style="@style/text_25_white"

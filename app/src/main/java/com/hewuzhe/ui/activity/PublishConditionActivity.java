@@ -1,5 +1,6 @@
 package com.hewuzhe.ui.activity;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
@@ -66,7 +67,6 @@ public class PublishConditionActivity extends ListActivity<PublishConditionPrese
     protected void initThings(Bundle savedInstanceState) {
         super.initThings(savedInstanceState);
         tvAction.setText("发布");
-
         presenter.getData(page, count);
     }
 
@@ -93,7 +93,8 @@ public class PublishConditionActivity extends ListActivity<PublishConditionPrese
 
     @Override
     public void publishSuccess() {
-
+        setResult(Activity.RESULT_OK);
+        finishActivity();
     }
 
     @Override

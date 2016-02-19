@@ -53,6 +53,13 @@ public class FlyDreamActivity extends ToolBarActivity<FlyDreamPresenter> impleme
         tvAction.setText("编辑");
         presenter.setData();
         presenter.getHeader();
+
+
+        edtMyDream.setEnabled(false);
+        edtToDo.setEnabled(false);
+        isEditing = false;
+
+
     }
 
     /**

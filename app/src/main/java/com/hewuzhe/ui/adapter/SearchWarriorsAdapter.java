@@ -29,10 +29,10 @@ public class SearchWarriorsAdapter extends BaseAdapter<SearchWarriorsAdapter.VHo
      * @param context
      */
 
-    public SearchWarriorsAdapter(Context context, MakeWarriorsPresenter makeWarriorsPresenter) {
-        super(context, makeWarriorsPresenter);
-    }
 
+    public SearchWarriorsAdapter(Context context, MakeWarriorsPresenter makeWarriorsPresenter, View header) {
+        super(context, makeWarriorsPresenter, header);
+    }
 
     /**
      * @return ItemView的LayoutId

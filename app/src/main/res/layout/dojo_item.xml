@@ -6,12 +6,12 @@
               android:gravity="center_vertical"
               android:orientation="horizontal">
 
-    <LinearLayout android:layout_width="match_parent"
-                  android:layout_height="wrap_content"
-                  android:layout_marginBottom="10px"
-                  android:background="@color/colorListBg"
-                  android:orientation="horizontal"
-                  android:padding="10px">
+    <RelativeLayout android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="10px"
+                    android:background="@color/colorListBg"
+                    android:orientation="horizontal"
+                    android:padding="10px">
 
         <ImageView android:id="@+id/img"
                    android:layout_width="200px"
@@ -22,6 +22,7 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="150px"
+            android:layout_toRightOf="@id/img"
             android:orientation="vertical"
             android:paddingBottom="10px"
             android:paddingLeft="10px"
@@ -42,25 +43,21 @@
                       android:singleLine="true"
                       android:text="临沂核武者"/>
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="22px"
-                android:gravity="center_vertical"
-                android:letterSpacing="5"
-                android:paddingLeft="8px"
-                android:singleLine="true"
-                android:text="····························································································"
-                android:textColor="@color/colorLine"/>
 
             <LinearLayout android:layout_width="match_parent"
                           android:layout_height="match_parent"
-                          android:layout_marginTop="10px"
+                          android:layout_marginTop="5px"
                           android:gravity="center_vertical"
-                          android:orientation="horizontal">
+                          android:orientation="vertical">
 
-                <ImageView android:layout_width="30px"
-                           android:layout_height="30px"
-                           android:src="@mipmap/icon_loc"/>
+                <TextView android:id="@+id/tv_call"
+                          style="@style/text_25_colorLine"
+                          android:layout_width="match_parent"
+                          android:layout_height="wrap_content"
+                          android:layout_marginLeft="3px"
+                          android:layout_weight="1"
+                          android:singleLine="true"
+                          android:text="0539-123456"/>
 
                 <TextView android:id="@+id/tv_loc"
                           style="@style/text_25_colorLine"
@@ -72,26 +69,11 @@
                           android:singleLine="true"
                           android:text="临沂市临沂市临沂市临沂市..."/>
 
-                <ImageView android:layout_width="30px"
-                           android:layout_height="30px"
-                           android:layout_marginLeft="15px"
-                           android:src="@mipmap/icon_call"/>
-
-                <TextView android:id="@+id/tv_call"
-                          style="@style/text_25_colorLine"
-                          android:layout_width="match_parent"
-                          android:layout_height="wrap_content"
-                          android:layout_marginLeft="8px"
-                          android:layout_weight="1"
-                          android:singleLine="true"
-                          android:text="0539-123456"/>
 
             </LinearLayout>
 
-
         </LinearLayout>
 
-    </LinearLayout>
-
+    </RelativeLayout>
 
 </LinearLayout>

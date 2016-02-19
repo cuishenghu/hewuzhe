@@ -91,7 +91,7 @@
         <ImageView android:id="@+id/img_collect"
                    android:layout_width="30px"
                    android:layout_height="30px"
-                   android:layout_marginLeft="38px"
+                   android:layout_marginLeft="28px"
                    android:src="@mipmap/icon_collect_gray"/>
 
         <TextView
@@ -104,17 +104,13 @@
 
             />
 
-        <TextView android:layout_width="wrap_content"
-                  android:layout_height="wrap_content"
-                  android:layout_weight="1"/>
-
 
         <ImageView android:id="@+id/img_repeat"
                    android:layout_width="30px"
                    android:layout_height="30px"
-                   android:layout_marginLeft="38px"
+                   android:layout_marginLeft="28px"
                    android:src="@mipmap/icon_share_gray"
-                   android:visibility="gone"/>
+                   android:visibility="visible"/>
 
         <TextView
             android:id="@+id/tv_repeat_count"
@@ -123,8 +119,11 @@
             android:layout_height="wrap_content"
             android:layout_marginLeft="10px"
             android:text="100"
-            android:visibility="gone"
+            android:visibility="visible"
             />
+        <TextView android:layout_width="wrap_content"
+                  android:layout_height="wrap_content"
+                  android:layout_weight="1"/>
 
 
         <CheckBox

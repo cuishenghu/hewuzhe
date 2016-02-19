@@ -97,6 +97,7 @@ public class ArticleAdapter extends BaseAdapter<ArticleAdapter.VHolder, ArticleC
             holder._ImgCollect.setImageResource(R.mipmap.icon_collect_gray);
         }
 
+        holder._CbPlan.setChecked(articleCollection.isChecked);
 
         holder._CbPlan.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
@@ -173,6 +174,13 @@ public class ArticleAdapter extends BaseAdapter<ArticleAdapter.VHolder, ArticleC
      */
     public void showCheck(boolean isNeedShow) {
         this.isNeedShow = isNeedShow;
+
+        if (!isNeedShow) {
+            for (ArticleCollection articleCollection : data) {
+                articleCollection.isChecked = false;
+            }
+        }
+
         this.notifyDataSetChanged();
     }
 

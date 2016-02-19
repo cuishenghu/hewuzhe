@@ -122,7 +122,7 @@ public class FederalConditionDetailActivity extends RecycleViewActivity<ArticleP
             }
         });
 
-        webContent.setInitialScale(25);
+        webContent.setInitialScale(1);
         WebSettings webSettings = webContent.getSettings();
         webSettings.setJavaScriptEnabled(true);
 //		webSettings.setBuiltInZoomControls(true);

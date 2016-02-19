@@ -1,10 +1,13 @@
 package com.hewuzhe.ui.activity;
 
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.text.SpannableString;
+import android.text.style.ForegroundColorSpan;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -78,6 +81,7 @@ public class ConditionDetialActivity extends SwipeRecycleViewActivity<ConditonDe
     private FriendCondition _condition;
     private int pageCount;
     private int countMine = 3;
+    private SpannableString spannableString;
 
     @Override
     public Integer getData() {
@@ -303,22 +307,22 @@ public class ConditionDetialActivity extends SwipeRecycleViewActivity<ConditonDe
                         View view = getLayoutInflater().inflate(R.layout.item_coment_child, null);
                         _LayComment.addView(view);
 
-                        TextView tvUserCommenter = (TextView) view.findViewById(R.id.tv_user_commenter);
-                        TextView tvUserCommented = (TextView) view.findViewById(R.id.tv_user_commented);
-
                         TextView tvConent = (TextView) view.findViewById(R.id.tv_conent);
 
-
-                        tvUserCommenter.setText(comment.NicName);
-                        tvUserCommented.setText(comment.CommentedNicName);
-                        tvConent.setText("：" + comment.Content);
+                        String content = "";
 
                         if (comment.ParentId == 0) {
-                            tvUserCommented.setVisibility(View.GONE);
-                            TextView tv_reply = (TextView) view.findViewById(R.id.tv_reply);
-                            tv_reply.setVisibility(View.GONE);
-                        }
+                            content = comment.NicName + "：" + comment.Content;
+                            spannableString = new SpannableString(content);
+                            spannableString.setSpan(new ForegroundColorSpan(Color.parseColor("#ef9c00")), 0, comment.NicName.length(), 0);
+                        } else {
+                            content = comment.NicName + "回复" + comment.CommentedNicName + "：" + comment.Content;
+                            spannableString = new SpannableString(content);
+                            spannableString.setSpan(new ForegroundColorSpan(Color.parseColor("#ef9c00")), 0, comment.NicName.length(), 0);
+                            spannableString.setSpan(new ForegroundColorSpan(Color.parseColor("#ef9c00")), comment.NicName.length() + 2, comment.NicName.length() + 2 + comment.CommentedNicName.length(), 0);
 
+                        }
+                        tvConent.setText(spannableString);
                         view.setOnClickListener(new View.OnClickListener() {
                             @Override
                             public void onClick(final View view) {
@@ -333,12 +337,9 @@ public class ConditionDetialActivity extends SwipeRecycleViewActivity<ConditonDe
                                 } else {
                                     presenter.showReplyInput(comment.Id, comment.NicName, comment.Id, view);
                                 }
-
                             }
                         });
-
                     }
-
 
                 } else {
                     for (int i = 0; i < 3; i++) {
@@ -346,19 +347,22 @@ public class ConditionDetialActivity extends SwipeRecycleViewActivity<ConditonDe
                         View view = getLayoutInflater().inflate(R.layout.item_coment_child, null);
                         _LayComment.addView(view);
 
-                        TextView tvUserCommenter = (TextView) view.findViewById(R.id.tv_user_commenter);
-                        TextView tvUserCommented = (TextView) view.findViewById(R.id.tv_user_commented);
                         TextView tvConent = (TextView) view.findViewById(R.id.tv_conent);
-                        tvUserCommenter.setText(comment.NicName);
-                        tvUserCommented.setText(comment.CommentedNicName);
-                        tvConent.setText("：" + comment.Content);
+
+                        String content = "";
 
                         if (comment.ParentId == 0) {
-                            tvUserCommented.setVisibility(View.GONE);
-                            TextView tv_reply = (TextView) view.findViewById(R.id.tv_reply);
-                            tv_reply.setVisibility(View.GONE);
-                        }
+                            content = comment.NicName + "：" + comment.Content;
+                            spannableString = new SpannableString(content);
+                            spannableString.setSpan(new ForegroundColorSpan(Color.parseColor("#ef9c00")), 0, comment.NicName.length(), 0);
+                        } else {
+                            content = comment.NicName + "回复" + comment.CommentedNicName + "：" + comment.Content;
+                            spannableString = new SpannableString(content);
+                            spannableString.setSpan(new ForegroundColorSpan(Color.parseColor("#ef9c00")), 0, comment.NicName.length(), 0);
+                            spannableString.setSpan(new ForegroundColorSpan(Color.parseColor("#ef9c00")), comment.NicName.length() + 2, comment.NicName.length() + 2 + comment.CommentedNicName.length(), 0);
 
+                        }
+                        tvConent.setText(spannableString);
                         view.setOnClickListener(new View.OnClickListener() {
                             @Override
                             public void onClick(final View view) {
@@ -387,18 +391,22 @@ public class ConditionDetialActivity extends SwipeRecycleViewActivity<ConditonDe
                     View view = getLayoutInflater().inflate(R.layout.item_coment_child, null);
                     _LayComment.addView(view);
 
-                    TextView tvUserCommenter = (TextView) view.findViewById(R.id.tv_user_commenter);
-                    TextView tvUserCommented = (TextView) view.findViewById(R.id.tv_user_commented);
                     TextView tvConent = (TextView) view.findViewById(R.id.tv_conent);
-                    tvUserCommenter.setText(comment.NicName);
-                    tvUserCommented.setText(comment.CommentedNicName);
-                    tvConent.setText("：" + comment.Content);
+
+                    String content = "";
 
                     if (comment.ParentId == 0) {
-                        tvUserCommented.setVisibility(View.GONE);
-                        TextView tv_reply = (TextView) view.findViewById(R.id.tv_reply);
-                        tv_reply.setVisibility(View.GONE);
+                        content = comment.NicName + "：" + comment.Content;
+                        spannableString = new SpannableString(content);
+                        spannableString.setSpan(new ForegroundColorSpan(Color.parseColor("#ef9c00")), 0, comment.NicName.length(), 0);
+                    } else {
+                        content = comment.NicName + "回复" + comment.CommentedNicName + "：" + comment.Content;
+                        spannableString = new SpannableString(content);
+                        spannableString.setSpan(new ForegroundColorSpan(Color.parseColor("#ef9c00")), 0, comment.NicName.length(), 0);
+                        spannableString.setSpan(new ForegroundColorSpan(Color.parseColor("#ef9c00")), comment.NicName.length() + 2, comment.NicName.length() + 2 + comment.CommentedNicName.length(), 0);
+
                     }
+                    tvConent.setText(spannableString);
 
                     view.setOnClickListener(new View.OnClickListener() {
                         @Override

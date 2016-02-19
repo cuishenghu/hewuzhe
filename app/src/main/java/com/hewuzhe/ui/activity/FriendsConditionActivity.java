@@ -47,24 +47,21 @@ import cn.xm.weidongjian.popuphelper.PopupWindowHelper;
 public class FriendsConditionActivity extends SwipeRecycleViewActivity<FriendConditionPresenter, FriendConditionAdapter, FriendCondition> implements FriendsConditionView {
 
 
-    @Bind(R.id.img_bg)
-    ImageView _ImgBg;
-    @Bind(R.id.tv_username)
-    TextView _TvUsername;
-    @Bind(R.id.img_avatar)
-    ImageView _ImgAvatar;
     @Bind(R.id.edt_comment)
     EditText _EdtComment;
     @Bind(R.id.btn_publish)
     Button _BtnPublish;
     @Bind(R.id.lay_comment)
     LinearLayout _LayComment;
-    @Bind(R.id.img_msg_avatar)
-    ImageView _ImgMsgAvatar;
-    @Bind(R.id.tv_msg_count)
-    TextView _TvMsgCount;
-    @Bind(R.id.lay_msg)
-    LinearLayout _LayMsg;
+
+    private ImageView _ImgBg;
+    private LinearLayout _LayMsg;
+    private ImageView _ImgMsgAvatar;
+    private TextView _TvMsgCount;
+    private TextView _TvUsername;
+    private ImageView _ImgAvatar;
+
+
     private TextView action_1;
     private TextView action_2;
     private User user;
@@ -72,6 +69,7 @@ public class FriendsConditionActivity extends SwipeRecycleViewActivity<FriendCon
     private int beautySkinProgress;
     private final EditorCreateInfo _CreateInfo = new EditorCreateInfo();
     private String videoPath;
+    private View header;
 
     @Override
     protected int provideContentViewId() {
@@ -94,12 +92,10 @@ public class FriendsConditionActivity extends SwipeRecycleViewActivity<FriendCon
         return new FriendConditionPresenter();
     }
 
-
     @Override
     protected String provideTitle() {
         return "武者动态";
     }
-
 
     @Override
     public boolean canAction() {
@@ -120,7 +116,7 @@ public class FriendsConditionActivity extends SwipeRecycleViewActivity<FriendCon
         action_1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startActivity(PublishConditionActivity.class);
+                startActivityForResult(PublishConditionActivity.class, 102);
                 popupWindowHelper.dismiss();
             }
         });
@@ -128,7 +124,7 @@ public class FriendsConditionActivity extends SwipeRecycleViewActivity<FriendCon
         action_2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-//                startActivity(FFmpegRecorderActivity.class, new Bun().putInt(C.WHITCH, C.WHITCH_ONE).ok());
+//              startActivity(FFmpegRecorderActivity.class, new Bun().putInt(C.WHITCH, C.WHITCH_ONE).ok());
                 startRecordActivity();
                 popupWindowHelper.dismiss();
             }
@@ -141,9 +137,9 @@ public class FriendsConditionActivity extends SwipeRecycleViewActivity<FriendCon
     @Override
     protected void initThings(Bundle savedInstanceState) {
         super.initThings(savedInstanceState);
+        initHeader();
         initBasicInfo();
         presenter.getData(page, count);
-
         presenter.GetNoReadCommentNumByUserId();
 
 //        Timer timer = new Timer();
@@ -153,6 +149,16 @@ public class FriendsConditionActivity extends SwipeRecycleViewActivity<FriendCon
 //                KLog.d("更新未读条数");
 //            }
 //        }, 1000, 1000);
+
+    }
+
+    private void initHeader() {
+        _ImgBg = (ImageView) header.findViewById(R.id.img_bg);
+        _LayMsg = (LinearLayout) header.findViewById(R.id.lay_msg);
+        _ImgMsgAvatar = (ImageView) header.findViewById(R.id.img_msg_avatar);
+        _TvMsgCount = (TextView) header.findViewById(R.id.tv_msg_count);
+        _TvUsername = (TextView) header.findViewById(R.id.tv_username);
+        _ImgAvatar = (ImageView) header.findViewById(R.id.img_avatar);
 
     }
 
@@ -188,7 +194,8 @@ public class FriendsConditionActivity extends SwipeRecycleViewActivity<FriendCon
      */
     @Override
     protected FriendConditionAdapter provideAdapter() {
-        return new FriendConditionAdapter(getContext(), presenter);
+        header = getLayoutInflater().inflate(R.layout.header_friend_condtions, null);
+        return new FriendConditionAdapter(getContext(), presenter, header);
     }
 
     /**
@@ -267,7 +274,8 @@ public class FriendsConditionActivity extends SwipeRecycleViewActivity<FriendCon
         comment.CommenterId = new SessionUtil(getContext()).getUserId();
         comment.ParentId = 0;
         condition.ComList.add(comment);
-        adapter.notifyItemChanged(position);
+//        adapter.notifyItemChanged(position);
+        adapter.notifyDataSetChanged();
     }
 
     /**
@@ -307,8 +315,10 @@ public class FriendsConditionActivity extends SwipeRecycleViewActivity<FriendCon
         comment.CommenterId = new SessionUtil(getContext()).getUserId();
 
         condition.ComList.add(comment);
-        adapter.notifyItemChanged(position);
+//      adapter.notifyItemChanged(position);
+        adapter.notifyDataSetChanged();
     }
+
 
     @Override
     public void onscroll(RecyclerView recyclerView, int dx, int dy) {
@@ -422,8 +432,8 @@ public class FriendsConditionActivity extends SwipeRecycleViewActivity<FriendCon
 
         QupaiServiceImpl qupaiService = new QupaiServiceImpl.Builder()
                 .setEditorCreateInfo(_CreateInfo).build();
-
         qupaiService.showRecordPage(this, PowerFragment.QUPAI_RECORD_REQUEST);
+
     }
 
 
@@ -446,11 +456,16 @@ public class FriendsConditionActivity extends SwipeRecycleViewActivity<FriendCon
             draftManager.deleteDraft(data);
 
             KLog.d(path);
-
             Intent intent = new Intent(this, PublishConditionVideoActivity.class);
             intent.putExtra("data", new Bun().putString("file_name", path).putInt("uploadType", C.UPLOAD_TYPE_RECORD).ok());
-            startActivity(intent);
-            finish();
+            startActivityForResult(intent, 102);
+
+        } else if (resultCode == Activity.RESULT_OK && requestCode == 102) {
+            snb("发布成功", recyclerView);
+
+            page = 1;
+            refresh(true);
+            presenter.getData(page, count);
         }
     }
 }

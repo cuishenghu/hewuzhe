@@ -21,23 +21,18 @@ import com.hewuzhe.view.MakeWarriorsView;
 
 import java.util.ArrayList;
 
-import butterknife.Bind;
 import materialdialogs.MaterialDialog;
 
 public class MakeWarriorsActivity extends RecycleViewActivity<MakeWarriorsPresenter, SearchWarriorsAdapter, Friend> implements MakeWarriorsView {
 
-    @Bind(R.id.edt_search_content)
-    EditText _EdtSearchContent;
-    @Bind(R.id.tv_province)
-    TextView _TvProvince;
-    @Bind(R.id.tv_city)
-    TextView _TvCity;
-    @Bind(R.id.tv_district)
-    TextView _TvDistrict;
-    @Bind(R.id.tv_age)
-    TextView _TvAge;
-    @Bind(R.id.tv_gender)
-    TextView _TvGender;
+
+    private TextView _TvProvince;
+    private TextView _TvCity;
+    private TextView _TvDistrict;
+    private TextView _TvAge;
+    private TextView _TvGender;
+    private EditText _EdtSearchContent;
+
 
     private int provinceId;
     private int cityId;
@@ -49,6 +44,7 @@ public class MakeWarriorsActivity extends RecycleViewActivity<MakeWarriorsPresen
     private int mAreaId = 0;
     private Friend _item;
     private boolean isFirstRun = true;
+    private View header;
 
     @Override
     protected int provideContentViewId() {
@@ -58,7 +54,17 @@ public class MakeWarriorsActivity extends RecycleViewActivity<MakeWarriorsPresen
     @Override
     protected void initThings(Bundle savedInstanceState) {
         super.initThings(savedInstanceState);
+        initHeader();
         presenter.getData(page, count);
+    }
+
+    private void initHeader() {
+        _TvProvince = (TextView) header.findViewById(R.id.tv_province);
+        _TvCity = (TextView) header.findViewById(R.id.tv_city);
+        _TvDistrict = (TextView) header.findViewById(R.id.tv_district);
+        _TvAge = (TextView) header.findViewById(R.id.tv_age);
+        _TvGender = (TextView) header.findViewById(R.id.tv_gender);
+        _EdtSearchContent = (EditText) header.findViewById(R.id.edt_search_content);
     }
 
     /**
@@ -181,7 +187,8 @@ public class MakeWarriorsActivity extends RecycleViewActivity<MakeWarriorsPresen
      */
     @Override
     protected SearchWarriorsAdapter provideAdapter() {
-        return new SearchWarriorsAdapter(getContext(), presenter);
+        header = getLayoutInflater().inflate(R.layout.header_make_warriors, null);
+        return new SearchWarriorsAdapter(getContext(), presenter, header);
     }
 
     /**

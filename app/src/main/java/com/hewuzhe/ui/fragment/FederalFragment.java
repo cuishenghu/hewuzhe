@@ -274,7 +274,6 @@ public class FederalFragment extends BaseFragment<FederalPresenter> implements F
                 _TvUnreadCount.setVisibility(View.VISIBLE);
                 _TvUnreadCount.setText(msg.msg1 + "");
             }
-
         }
     }
 

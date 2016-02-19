@@ -104,6 +104,7 @@ public class Videos2Adapter extends BaseAdapter<Videos2Adapter.ViewHolder, Video
 //        } else {
 //            holder.imgRepeat.setImageResource(R.mipmap.icon_share_focus);
 //        }
+        holder._CbPlan.setChecked(video.isChecked);
 
         holder._CbPlan.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
@@ -188,6 +189,11 @@ public class Videos2Adapter extends BaseAdapter<Videos2Adapter.ViewHolder, Video
      */
     public void showCheck(boolean isNeedShow) {
         this.isNeedShow = isNeedShow;
+        if (!isNeedShow) {
+            for (Video video : data) {
+                video.isChecked = false;
+            }
+        }
         this.notifyDataSetChanged();
     }
 

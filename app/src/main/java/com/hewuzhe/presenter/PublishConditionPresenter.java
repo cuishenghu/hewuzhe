@@ -40,6 +40,7 @@ public class PublishConditionPresenter extends ListPresenter<PublishConditionVie
     private String videopath = "";
     private int _UploadType = C.UPLOAD_TYPE_LOCAL;
     private String videoImg = "";
+    private ArrayList<PickImg> list = new ArrayList<>();
 
     /**
      * 显示选择dialog
@@ -72,7 +73,6 @@ public class PublishConditionPresenter extends ListPresenter<PublishConditionVie
         //上传图片
         if (data.list.size() > 0) {
             uploadImg(data.list);
-
         } else {
             //发布
             publishTwo("");
@@ -81,48 +81,53 @@ public class PublishConditionPresenter extends ListPresenter<PublishConditionVie
     }
 
     private void uploadImg(ArrayList<PickImg> list) {
+        this.list = list;
         neeCount = list.size();
-        for (PickImg pickImg : list) {
-            Subscription subscription = NetEngine.getService()
-                    .UpLoadImage(Encoder.getFileName(pickImg.filePath), Encoder.encodeBase64File(pickImg.filePath))
-                    .subscribeOn(Schedulers.io())
-                    .doOnSubscribe(new Action0() {
-                        @Override
-                        public void call() {
-                            view.showDialog();
-                        }
-                    })
-                    .subscribeOn(AndroidSchedulers.mainThread())
-                    .observeOn(AndroidSchedulers.mainThread())
-                    .subscribe(new SB<Res<UploadImage>>() {
-                        @Override
-                        public void next(Res<UploadImage> res) {
-                            if (res.code == C.OK) {
-                                picCount++;
-                                pathList += res.data.ImagePath + "&";
-                                if (picCount >= neeCount) {
-                                    publishTwo(pathList);
-                                }
+        uploadImage();
 
+    }
+
+    private void uploadImage() {
+        PickImg pickImg = list.get(picCount);
+
+        Subscription subscription = NetEngine.getService()
+                .UpLoadImage(Encoder.getFileName(pickImg.filePath), Encoder.encodeBase64File(pickImg.filePath))
+                .subscribeOn(Schedulers.io())
+                .doOnSubscribe(new Action0() {
+                    @Override
+                    public void call() {
+                        view.showDialog();
+                    }
+                })
+                .subscribeOn(AndroidSchedulers.mainThread())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new SB<Res<UploadImage>>() {
+                    @Override
+                    public void next(Res<UploadImage> res) {
+                        if (res.code == C.OK) {
+                            picCount++;
+                            pathList += res.data.ImagePath + "&";
+                            if (picCount >= neeCount) {
+                                publishTwo(pathList);
                             } else {
-                                neeCount--;
+                                uploadImage();
                             }
-
-                        }
-
-                        @Override
-                        public void onCompleted() {
-
-                        }
-
-                        @Override
-                        public void onError(Throwable e) {
+                        } else {
                             neeCount--;
                         }
-                    });
-            addSubscription(subscription);
+                    }
 
-        }
+                    @Override
+                    public void onCompleted() {
+
+                    }
+
+                    @Override
+                    public void onError(Throwable e) {
+                        neeCount--;
+                    }
+                });
+        addSubscription(subscription);
     }
 
     private void publishTwo(String pathList) {
@@ -156,8 +161,7 @@ public class PublishConditionPresenter extends ListPresenter<PublishConditionVie
                     @Override
                     public void next(Res res) {
                         if (res.code == C.OK) {
-                            view.snb("发布成功", v);
-                            view.finishActivity();
+                            view.publishSuccess();
                         }
 
                     }

@@ -216,6 +216,7 @@ public class LocationActivity extends AppCompatActivity
 
         nearAddressAdapter = new NearAddressAdapter(this,
                 R.layout.item_near_address, nearAddresses);
+
         _NearAddressList.setAdapter(nearAddressAdapter);
         _NearAddressList.setEmptyView(_NearListEmptyLl);
 
@@ -228,6 +229,20 @@ public class LocationActivity extends AppCompatActivity
                 Uri uri = Uri.parse("http://api.map.baidu.com/staticimage/v2?ak=rs8pD43GeAkZpFHii4Z3PLr3&mcode=666666&center=" + poiInfo.location.longitude + "," + poiInfo.location.latitude + "&width=300&height=200&zoom=15");
                 Log.d("BasicLocationMapActivit", uri.toString());
                 WarriorFragment._LocationCallback.onSuccess(LocationMessage.obtain(poiInfo.location.latitude, poiInfo.location.longitude, poiInfo.address, uri));
+                LocationActivity.this.finish();
+            }
+        });
+
+        _TvAction.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (nearAddresses != null && nearAddresses.size() > 0) {
+                    PoiInfo poiInfo = nearAddresses.get(0);
+                    Uri uri = Uri.parse("http://api.map.baidu.com/staticimage/v2?ak=rs8pD43GeAkZpFHii4Z3PLr3&mcode=666666&center=" + poiInfo.location.longitude + "," + poiInfo.location.latitude + "&width=300&height=200&zoom=15");
+                    Log.d("BasicLocationMapActivit", uri.toString());
+                    WarriorFragment._LocationCallback.onSuccess(LocationMessage.obtain(poiInfo.location.latitude, poiInfo.location.longitude, poiInfo.address, uri));
+                }
+
                 LocationActivity.this.finish();
             }
         });

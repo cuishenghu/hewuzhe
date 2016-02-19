@@ -22,7 +22,7 @@ public class SearchAddressAdapter extends MyBaseAdapter<PoiInfo> {
 	}
 
 	@Override
-	public void setConvert(BaseViewHolder viewHolder, PoiInfo info) {
+	public void setConvert(BaseViewHolder viewHolder, PoiInfo info,int pos) {
 		viewHolder.setTextView(R.id.item_address_name_tv, info.name);
 		viewHolder.setTextView(R.id.item_address_detail_tv, info.address);
 	}

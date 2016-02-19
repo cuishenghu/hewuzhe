@@ -7,6 +7,7 @@ import android.view.KeyEvent;
 import android.view.View;
 import android.view.inputmethod.EditorInfo;
 import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.hewuzhe.R;
@@ -21,20 +22,17 @@ import com.hewuzhe.view.JoinGroupView;
 
 import java.util.ArrayList;
 
-import butterknife.Bind;
 import materialdialogs.MaterialDialog;
 
 public class JoinGroupActivity extends RecycleViewActivity<JoinPresenter, JoinGroupAdapter, Group> implements JoinGroupView {
 
 
-    @Bind(R.id.edt_search_content)
-    EditText _EdtSearchContent;
-    @Bind(R.id.tv_province)
-    TextView _TvProvince;
-    @Bind(R.id.tv_city)
-    TextView _TvCity;
-    @Bind(R.id.tv_district)
-    TextView _TvDistrict;
+    private LinearLayout _LaySearch;
+    private TextView _TvProvince;
+    private TextView _TvCity;
+    private TextView _TvDistrict;
+
+
     private int mCityCode = 0;
 
     private int provinceId;
@@ -44,6 +42,8 @@ public class JoinGroupActivity extends RecycleViewActivity<JoinPresenter, JoinGr
     private AddressAdapter cityDialogAdapter;
     private AddressAdapter disctrictAdapter;
     private int areaId;
+    private View header;
+    private EditText _EdtSearchContent;
 
     @Override
     protected int provideContentViewId() {
@@ -113,7 +113,18 @@ public class JoinGroupActivity extends RecycleViewActivity<JoinPresenter, JoinGr
     protected void initThings(Bundle savedInstanceState) {
         super.initThings(savedInstanceState);
 
+        initHeader();
         presenter.getData(page, count);
+
+    }
+
+    private void initHeader() {
+        _LaySearch = (LinearLayout) header.findViewById(R.id.lay_search);
+        _TvProvince = (TextView) header.findViewById(R.id.tv_province);
+        _TvCity = (TextView) header.findViewById(R.id.tv_city);
+        _TvDistrict = (TextView) header.findViewById(R.id.tv_district);
+        _EdtSearchContent = (EditText) header.findViewById(R.id.edt_search_content);
+
 
     }
 
@@ -214,7 +225,8 @@ public class JoinGroupActivity extends RecycleViewActivity<JoinPresenter, JoinGr
      */
     @Override
     protected JoinGroupAdapter provideAdapter() {
-        return new JoinGroupAdapter(getContext(), presenter);
+        header = getLayoutInflater().inflate(R.layout.header_join_groups, null);
+        return new JoinGroupAdapter(getContext(), presenter, header);
     }
 
     /**

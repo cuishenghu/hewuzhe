@@ -136,19 +136,13 @@ public class FriendsConditionActivity extends SwipeRecycleViewActivity<FriendCon
 
     @Override
     protected void initThings(Bundle savedInstanceState) {
+        page = 0;
         super.initThings(savedInstanceState);
         initHeader();
+//      presenter.getData(page, count);
         initBasicInfo();
-        presenter.getData(page, count);
         presenter.GetNoReadCommentNumByUserId();
 
-//        Timer timer = new Timer();
-//        timer.schedule(new TimerTask() {
-//            @Override
-//            public void run() {
-//                KLog.d("更新未读条数");
-//            }
-//        }, 1000, 1000);
 
     }
 
@@ -159,7 +153,6 @@ public class FriendsConditionActivity extends SwipeRecycleViewActivity<FriendCon
         _TvMsgCount = (TextView) header.findViewById(R.id.tv_msg_count);
         _TvUsername = (TextView) header.findViewById(R.id.tv_username);
         _ImgAvatar = (ImageView) header.findViewById(R.id.img_avatar);
-
     }
 
     private void initBasicInfo() {
@@ -433,7 +426,6 @@ public class FriendsConditionActivity extends SwipeRecycleViewActivity<FriendCon
         QupaiServiceImpl qupaiService = new QupaiServiceImpl.Builder()
                 .setEditorCreateInfo(_CreateInfo).build();
         qupaiService.showRecordPage(this, PowerFragment.QUPAI_RECORD_REQUEST);
-
     }
 
 
@@ -462,9 +454,8 @@ public class FriendsConditionActivity extends SwipeRecycleViewActivity<FriendCon
 
         } else if (resultCode == Activity.RESULT_OK && requestCode == 102) {
             snb("发布成功", recyclerView);
-
-            page = 1;
             refresh(true);
+            page = 1;
             presenter.getData(page, count);
         }
     }

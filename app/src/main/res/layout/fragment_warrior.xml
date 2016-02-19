@@ -24,29 +24,32 @@
                          android:layout_height="240px"
                          android:background="@color/colorBg">
 
-                <TextView android:id="@+id/tv_air_quality"
-                          android:layout_width="wrap_content"
-                          android:layout_height="wrap_content"
-                          android:layout_marginTop="20px"
-                          android:padding="18px"
-                          android:text="空气质量：严重污染"
-                          android:textColor="@color/white"
-                          android:textSize="22px"/>
+                <LinearLayout android:layout_width="wrap_content"
+                              android:layout_height="wrap_content"
+                              android:layout_gravity="right"
+                              android:layout_marginTop="20px"
+                              android:gravity="center_vertical"
+                              android:orientation="horizontal">
 
-                <TextView android:id="@+id/tv_pm"
-                          android:layout_width="wrap_content"
-                          android:layout_height="wrap_content"
-                          android:layout_marginTop="25px"
-                          android:padding="18px"
-                          android:text="pm：2.2.232"
-                          android:textColor="@color/white"
-                          android:textSize="22px"
-                          android:visibility="gone"/>
+                    <ImageView android:id="@+id/img_weather"
+                               android:layout_width="wrap_content"
+                               android:layout_height="wrap_content"
+                               android:src="@mipmap/weather"/>
+
+
+                    <TextView android:id="@+id/tv_air_quality"
+                              android:layout_width="wrap_content"
+                              android:layout_height="wrap_content"
+                              android:padding="18px"
+                              android:text=""
+                              android:textColor="@color/white"
+                              android:textSize="22px"/>
+
+                </LinearLayout>
 
                 <TextView android:id="@+id/tv_address"
                           android:layout_width="wrap_content"
                           android:layout_height="wrap_content"
-                          android:layout_gravity="right"
                           android:padding="18px"
                           android:text="山东：临沂"
                           android:textColor="@color/white"
@@ -55,7 +58,6 @@
                 <TextView android:id="@+id/tv_temperature"
                           android:layout_width="wrap_content"
                           android:layout_height="wrap_content"
-                          android:layout_gravity="right"
                           android:layout_marginTop="25px"
                           android:padding="18px"
                           android:text="-3C"

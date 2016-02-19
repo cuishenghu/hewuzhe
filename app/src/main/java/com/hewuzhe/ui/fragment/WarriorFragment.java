@@ -103,9 +103,6 @@ public class WarriorFragment extends ToolBarFragment<WarriorFragmentPresenter> i
     @Bind(R.id.tv_air_quality)
     TextView tvAirQuality;
     @Nullable
-    @Bind(R.id.tv_pm)
-    TextView tvPm;
-    @Nullable
     @Bind(R.id.tv_address)
     TextView tvAddress;
     @Nullable
@@ -127,6 +124,8 @@ public class WarriorFragment extends ToolBarFragment<WarriorFragmentPresenter> i
     ImageView _ImgIndexDel;
     @Bind(R.id.lay_index_img)
     FrameLayout _LayIndexImg;
+    @Bind(R.id.img_weather)
+    ImageView _ImgWeather;
     private View rootView;
     private User user;
     private boolean isHasSetRongIM = false;
@@ -220,12 +219,17 @@ public class WarriorFragment extends ToolBarFragment<WarriorFragmentPresenter> i
 
                             if (tvAirQuality != null) {
                                 tvAirQuality.setText(weather.daily_forecast.get(0).cond.txt_d);
-                                tvPm.setText("PM：无数据");
-                                tvPm.setVisibility(View.GONE);
 
                                 tvTemperature.setText(weather.now.tmp + "℃");
 
+
                                 tvAddress.setText(_cityName);
+
+                                Glide.with(getActivity())
+                                        .load("http://files.heweather.com/cond_icon/" + weather.daily_forecast.get(0).cond.code_d + ".png")
+                                        .centerCrop()
+                                        .fitCenter()
+                                        .into(_ImgWeather);
                             }
 
                         } catch (JSONException e) {

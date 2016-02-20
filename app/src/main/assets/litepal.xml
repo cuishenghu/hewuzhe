@@ -33,5 +33,8 @@
     -->
     <list>
         <mapping class="com.hewuzhe.model.Friends"></mapping>
+        <mapping class="com.hewuzhe.model.FriendCondition"></mapping>
+        <mapping class="com.hewuzhe.model.Comment"></mapping>
+        <mapping class="com.hewuzhe.model.Pic"></mapping>
     </list>
 </litepal>

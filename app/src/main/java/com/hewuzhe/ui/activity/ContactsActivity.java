@@ -28,6 +28,7 @@ import com.hewuzhe.ui.widget.IndexView;
 import com.hewuzhe.utils.Bun;
 import com.hewuzhe.utils.SessionUtil;
 import com.hewuzhe.view.FriendsView;
+import com.socks.library.KLog;
 
 import org.litepal.crud.DataSupport;
 
@@ -109,7 +110,7 @@ public class ContactsActivity extends RecycleViewActivity<FriendsPresenter, Frie
             }
 
             adapter.addDatas(friends3);
-//            presenter.getFriends();
+            presenter.getFriends();
 
         } else {
             showDialog();
@@ -286,37 +287,37 @@ public class ContactsActivity extends RecycleViewActivity<FriendsPresenter, Frie
 
     @Override
     public void bindData(ArrayList<Friend> friends) {
-//        _Friends = friends;
-//        if (_Friends.size() > 0) {
-//            DataSupport.deleteAll(Friends.class);
-//
-//            for (Friend friend : friends) {
-//                Friends friends1 = new Friends();
-//                friends1.friendid = friend.Id;
-//                friends1.topc = friend.topc;
-//                friends1.isfriend = friend.IsFriend;
-//                friends1.isshield = friend.IsShield;
-//                friends1.jointime = friend.JoinTime;
-//                friends1.nicname = friend.NicName;
-//                friends1.phone = friend.Phone;
-//                friends1.photopath = friend.PhotoPath;
-//                friends1.memnerid = friend.MemnerId;
-//                friends1.userid = friend.UserId;
-//                friends1.remarkname = friend.RemarkName;
-//                friends1.teamid = friend.TeamId;
-//                friends1.rank = friend.Rank;
-//                boolean isSuccess = friends1.save();
-//
-//                KLog.d("isSuccess:" + isSuccess);
-//
-//            }
-//        }
-//        recyclerView.setAdapter(adapter);
-////        mAdapter.getDatas().clear();
-////        mAdapter.getDatas().addAll(_Friends);
-////        mAdapter.notifyDataSetChanged();
-//        adapter.addDatas(friends);
-//      _TvRecyclerindexviewTopc.setText(mAdapter.getItem(0).topc);
+        _Friends = friends;
+        if (_Friends.size() > 0) {
+            DataSupport.deleteAll(Friends.class);
+
+            for (Friend friend : friends) {
+                Friends friends1 = new Friends();
+                friends1.friendid = friend.Id;
+                friends1.topc = friend.topc;
+                friends1.isfriend = friend.IsFriend;
+                friends1.isshield = friend.IsShield;
+                friends1.jointime = friend.JoinTime;
+                friends1.nicname = friend.NicName;
+                friends1.phone = friend.Phone;
+                friends1.photopath = friend.PhotoPath;
+                friends1.memnerid = friend.MemnerId;
+                friends1.userid = friend.UserId;
+                friends1.remarkname = friend.RemarkName;
+                friends1.teamid = friend.TeamId;
+                friends1.rank = friend.Rank;
+                boolean isSuccess = friends1.save();
+
+                KLog.d("isSuccess:" + isSuccess);
+
+            }
+        }
+        recyclerView.setAdapter(adapter);
+//        mAdapter.getDatas().clear();
+//        mAdapter.getDatas().addAll(_Friends);
+//        mAdapter.notifyDataSetChanged();
+        adapter.addDatas(friends);
+//        _TvRecyclerindexviewTopc.setText(mAdapter.getItem(0).topc);
     }
 
     @Override

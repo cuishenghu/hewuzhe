@@ -13,6 +13,8 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
+import com.google.common.reflect.TypeToken;
+import com.google.gson.Gson;
 import com.hewuzhe.R;
 import com.hewuzhe.model.Comment;
 import com.hewuzhe.model.FriendCondition;
@@ -25,10 +27,13 @@ import com.hewuzhe.ui.base.SwipeRecycleViewActivity;
 import com.hewuzhe.ui.cons.C;
 import com.hewuzhe.ui.widget.GlideCircleTransform;
 import com.hewuzhe.utils.Bun;
+import com.hewuzhe.utils.SPUtil;
 import com.hewuzhe.utils.SessionUtil;
+import com.hewuzhe.utils.StringUtil;
 import com.hewuzhe.view.GroupConditionView;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import butterknife.Bind;
 import cn.xm.weidongjian.popuphelper.PopupWindowHelper;
@@ -73,6 +78,7 @@ public class GroupConditionActivity extends SwipeRecycleViewActivity<GroupCondit
     private String _NickName = "";
     private int myTeamId;
     private String _PhotoPath = "";
+    private SPUtil spData;
 
 
     @Override
@@ -179,6 +185,13 @@ public class GroupConditionActivity extends SwipeRecycleViewActivity<GroupCondit
     protected void initThings(Bundle savedInstanceState) {
         super.initThings(savedInstanceState);
         EventBus.getDefault().register(this);
+        spData = new SPUtil(getContext()).open("data");
+        String friendcondition = spData.getString("groupcondition");
+        if (!StringUtil.isEmpty(friendcondition)) {
+            ArrayList<FriendCondition> friendConditions = new Gson().fromJson(friendcondition, new TypeToken<List<FriendCondition>>() {
+            }.getType());
+            bindData(friendConditions);
+        }
         presenter.getBasicInfo();
 
     }
@@ -193,6 +206,12 @@ public class GroupConditionActivity extends SwipeRecycleViewActivity<GroupCondit
 
     @Override
     public void bindData(ArrayList<FriendCondition> data) {
+
+        if (page == 1) {
+            String json = new Gson().toJson(data);
+            spData.putString("groupcondition", json);
+        }
+
         bd(data);
     }
 

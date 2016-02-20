@@ -3,13 +3,15 @@ package com.hewuzhe.model;
 import android.os.Parcel;
 import android.os.Parcelable;
 
+import org.litepal.annotation.Column;
+import org.litepal.crud.DataSupport;
+
 import java.util.ArrayList;
 
 /**
  * Created by xianguangjin on 15/12/31.
  */
-public class FriendCondition implements Parcelable {
-
+public class FriendCondition extends DataSupport implements Parcelable {
 
     /**
      * Id : 139
@@ -25,8 +27,9 @@ public class FriendCondition implements Parcelable {
      * LikeNum : 0
      * IsLike : false
      */
-
+    @Column(ignore = true)
     public int Id;
+    public int fId = 0;
     public String Content;
     public String PublishTime;
     public String NicName;
@@ -54,7 +57,7 @@ public class FriendCondition implements Parcelable {
      * IsFavorite : false
      * IsRepeat : true
      */
-    public int UserId=0;
+    public int UserId = 0;
     public boolean IsFavorite;
     public boolean IsRepeat;
 
@@ -117,4 +120,145 @@ public class FriendCondition implements Parcelable {
             return new FriendCondition[size];
         }
     };
+
+
+    public String getPhotoPath() {
+        return PhotoPath;
+    }
+
+    public void setPhotoPath(String photoPath) {
+        PhotoPath = photoPath;
+    }
+
+    public int getId() {
+        return Id;
+    }
+
+    public void setId(int id) {
+        Id = id;
+    }
+
+    public int getfId() {
+        return fId;
+    }
+
+    public void setfId(int fId) {
+        this.fId = fId;
+    }
+
+    public String getContent() {
+        return Content;
+    }
+
+    public void setContent(String content) {
+        Content = content;
+    }
+
+    public String getPublishTime() {
+        return PublishTime;
+    }
+
+    public void setPublishTime(String publishTime) {
+        PublishTime = publishTime;
+    }
+
+    public String getNicName() {
+        return NicName;
+    }
+
+    public void setNicName(String nicName) {
+        NicName = nicName;
+    }
+
+    public String getVideoPath() {
+        return VideoPath;
+    }
+
+    public void setVideoPath(String videoPath) {
+        VideoPath = videoPath;
+    }
+
+    public String getImagePath() {
+        return ImagePath;
+    }
+
+    public void setImagePath(String imagePath) {
+        ImagePath = imagePath;
+    }
+
+    public String getVideoDuration() {
+        return VideoDuration;
+    }
+
+    public void setVideoDuration(String videoDuration) {
+        VideoDuration = videoDuration;
+    }
+
+    public int getLikeNum() {
+        return LikeNum;
+    }
+
+    public void setLikeNum(int likeNum) {
+        LikeNum = likeNum;
+    }
+
+    public boolean isIsLike() {
+        return IsLike;
+    }
+
+    public void setIsLike(boolean isLike) {
+        IsLike = isLike;
+    }
+
+    public ArrayList<Pic> getPicList() {
+        return PicList;
+    }
+
+    public void setPicList(ArrayList<Pic> picList) {
+        PicList = picList;
+    }
+
+    public ArrayList<Comment> getComList() {
+        return ComList;
+    }
+
+    public void setComList(ArrayList<Comment> comList) {
+        ComList = comList;
+    }
+
+    public boolean isShowingAll() {
+        return isShowingAll;
+    }
+
+    public void setIsShowingAll(boolean isShowingAll) {
+        this.isShowingAll = isShowingAll;
+    }
+
+    public int getUserId() {
+        return UserId;
+    }
+
+    public void setUserId(int userId) {
+        UserId = userId;
+    }
+
+    public boolean isIsFavorite() {
+        return IsFavorite;
+    }
+
+    public void setIsFavorite(boolean isFavorite) {
+        IsFavorite = isFavorite;
+    }
+
+    public boolean isIsRepeat() {
+        return IsRepeat;
+    }
+
+    public void setIsRepeat(boolean isRepeat) {
+        IsRepeat = isRepeat;
+    }
+
+    public static Creator<FriendCondition> getCREATOR() {
+        return CREATOR;
+    }
 }

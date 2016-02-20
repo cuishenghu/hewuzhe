@@ -21,6 +21,8 @@ import com.duanqu.qupai.editor.EditorResult;
 import com.duanqu.qupai.engine.session.MovieExportOptions;
 import com.duanqu.qupai.engine.session.VideoSessionCreateInfo;
 import com.duanqu.qupai.recorder.EditorCreateInfo;
+import com.google.common.reflect.TypeToken;
+import com.google.gson.Gson;
 import com.hewuzhe.R;
 import com.hewuzhe.model.Comment;
 import com.hewuzhe.model.FriendCondition;
@@ -35,11 +37,14 @@ import com.hewuzhe.ui.cons.Contant;
 import com.hewuzhe.ui.cons.FileUtils;
 import com.hewuzhe.ui.fragment.PowerFragment;
 import com.hewuzhe.utils.Bun;
+import com.hewuzhe.utils.SPUtil;
 import com.hewuzhe.utils.SessionUtil;
+import com.hewuzhe.utils.StringUtil;
 import com.hewuzhe.view.FriendsConditionView;
 import com.socks.library.KLog;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import butterknife.Bind;
 import cn.xm.weidongjian.popuphelper.PopupWindowHelper;
@@ -70,6 +75,7 @@ public class FriendsConditionActivity extends SwipeRecycleViewActivity<FriendCon
     private final EditorCreateInfo _CreateInfo = new EditorCreateInfo();
     private String videoPath;
     private View header;
+    private SPUtil spData;
 
     @Override
     protected int provideContentViewId() {
@@ -136,10 +142,21 @@ public class FriendsConditionActivity extends SwipeRecycleViewActivity<FriendCon
 
     @Override
     protected void initThings(Bundle savedInstanceState) {
-        page = 0;
         super.initThings(savedInstanceState);
+
         initHeader();
-//      presenter.getData(page, count);
+
+        spData = new SPUtil(getContext()).open("data");
+        String friendcondition = spData.getString("friendcondition");
+        if (!StringUtil.isEmpty(friendcondition)) {
+            ArrayList<FriendCondition> friendConditions = new Gson().fromJson(friendcondition, new TypeToken<List<FriendCondition>>() {
+            }.getType());
+            bindData(friendConditions);
+        } else {
+            page = 0;
+            presenter.getData(page, count);
+        }
+
         initBasicInfo();
         presenter.GetNoReadCommentNumByUserId();
 
@@ -172,12 +189,16 @@ public class FriendsConditionActivity extends SwipeRecycleViewActivity<FriendCon
                 }
             });
         }
-
-
     }
 
     @Override
     public void bindData(ArrayList<FriendCondition> data) {
+
+        if (page == 1) {
+            String json = new Gson().toJson(data);
+            spData.putString("friendcondition", json);
+        }
+
         bd(data);
     }
 

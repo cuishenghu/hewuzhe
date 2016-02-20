@@ -7,7 +7,6 @@ import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import com.hewuzhe.model.UP;
 import com.hewuzhe.model.User;
-import com.socks.library.KLog;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -21,23 +20,20 @@ public class SessionUtil {
 
     public SessionUtil(Context context) {
         this.context = context;
-
     }
 
     public String getUserInfoStr() {
         SharedPreferences share = context.getSharedPreferences("user", 0);
         String userInfo = share.getString("userInfo", "");
-        KLog.json("getUserInfoStr", userInfo);
+//      KLog.json("getUserInfoStr", userInfo);
         return userInfo;
-
     }
-
 
     public void putUserInfoStr(String userInfoStr) {
         SharedPreferences share = context.getSharedPreferences("user", 0);
         SharedPreferences.Editor editor = share.edit();
         editor.putString("userInfo", userInfoStr);
-        KLog.json("putUserInfoStr", userInfoStr);
+//        KLog.json("putUserInfoStr", userInfoStr);
         editor.commit();
     }
 
@@ -45,7 +41,7 @@ public class SessionUtil {
         SharedPreferences share = context.getSharedPreferences("user", 0);
         SharedPreferences.Editor editor = share.edit();
         editor.putString("userInfo", new Gson().toJson(user));
-        KLog.json("putUser", new Gson().toJson(user));
+//      KLog.json("putUser", new Gson().toJson(user));
         editor.commit();
     }
 
@@ -65,7 +61,7 @@ public class SessionUtil {
             return null;
         } else {
             Gson gson = new Gson();
-            KLog.json("getUser", userInfo);
+//          KLog.json("getUser", userInfo);
             return gson.fromJson(userInfo, User.class);
         }
     }

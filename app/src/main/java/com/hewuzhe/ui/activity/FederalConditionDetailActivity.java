@@ -127,7 +127,7 @@ public class FederalConditionDetailActivity extends RecycleViewActivity<ArticleP
         webSettings.setJavaScriptEnabled(true);
 //		webSettings.setBuiltInZoomControls(true);
         webSettings.setSupportZoom(true);
-//        webSettings.setTextSize(WebSettings.TextSize.LARGER);
+//      webSettings.setTextSize(WebSettings.TextSize.LARGER);
 
         webContent.getSettings().setUseWideViewPort(true);
         webContent.getSettings().setLoadWithOverviewMode(true);
@@ -251,7 +251,7 @@ public class FederalConditionDetailActivity extends RecycleViewActivity<ArticleP
     @Override
     public void onItemClick(View view, int pos, Comment item) {
 
-        String content = "@" + item.NicName + ":" + item.Content;
+        String content = "@" + item.CommenterNicName + ":" + item.Content;
         edtComment.setText(content);
         edtComment.setSelection(0);
         edtComment.requestFocus();

@@ -3,12 +3,15 @@ package com.hewuzhe.model;
 import android.os.Parcel;
 import android.os.Parcelable;
 
+import org.litepal.crud.DataSupport;
+
 /**
  * Created by xianguangjin on 16/1/1.
  */
-public class Pic implements Parcelable{
+public class Pic extends DataSupport implements Parcelable {
 
     public int Id;
+
     public String ImagePath;
     public String PictureUrl;
 
@@ -43,4 +46,28 @@ public class Pic implements Parcelable{
             return new Pic[size];
         }
     };
+
+    public int getId() {
+        return Id;
+    }
+
+    public void setId(int id) {
+        Id = id;
+    }
+
+    public String getImagePath() {
+        return ImagePath;
+    }
+
+    public void setImagePath(String imagePath) {
+        ImagePath = imagePath;
+    }
+
+    public String getPictureUrl() {
+        return PictureUrl;
+    }
+
+    public void setPictureUrl(String pictureUrl) {
+        PictureUrl = pictureUrl;
+    }
 }

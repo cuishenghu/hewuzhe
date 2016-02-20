@@ -8,6 +8,7 @@ import android.util.Log;
 
 import com.duanqu.qupai.upload.AuthService;
 import com.duanqu.qupai.upload.QupaiAuthListener;
+import com.facebook.stetho.Stetho;
 import com.hewuzhe.BuildConfig;
 import com.hewuzhe.R;
 import com.hewuzhe.ui.cons.Contant;
@@ -64,6 +65,15 @@ public class App extends Application {
         VDResolutionManager.getInstance(this).init(
                 VDResolutionManager.RESOLUTION_SOLUTION_NONE);
 
+
+        Stetho.initialize(
+                Stetho.newInitializerBuilder(this)
+                        .enableDumpapp(
+                                Stetho.defaultDumperPluginsProvider(this))
+                        .enableWebKitInspector(
+                                Stetho.defaultInspectorModulesProvider(this))
+                        .build());
+
         /**
          * KLog初始化
          * */
@@ -106,22 +116,72 @@ public class App extends Application {
         }
 
         imageConfig
-                = new ImageConfig.Builder(new GlideLoader())
-                .steepToolBarColor(getResources().getColor(R.color.colorPrimary))
-                .titleBgColor(getResources().getColor(R.color.colorPrimary))
-                .titleSubmitTextColor(getResources().getColor(R.color.white))
-                .titleTextColor(getResources().getColor(R.color.white))
-                        // 开启多选   （默认为多选）
-                .mutiSelect()
-                        // 多选时的最大数量   （默认 9 张）
-                .mutiSelectMaxSize(9)
-                        // 开启拍照功能 （默认关闭）
-                .showCamera()
-                        // 已选择的图片路径
-                .pathList(new ArrayList<String>())
-                        // 拍照后存放的图片路径（默认 /temp/picture） （会自动创建）
-                .filePath("/ImageSelector/Pictures")
-                .build();
+                = new ImageConfig.Builder(new
+                GlideLoader()
+        )
+                .
+
+                        steepToolBarColor(getResources()
+
+                                        .
+
+                                                getColor(R.color.colorPrimary)
+
+                        )
+                .
+
+                        titleBgColor(getResources()
+
+                                        .
+
+                                                getColor(R.color.colorPrimary)
+
+                        )
+                .
+
+                        titleSubmitTextColor(getResources()
+
+                                        .
+
+                                                getColor(R.color.white)
+
+                        )
+                .
+
+                        titleTextColor(getResources()
+
+                                        .
+
+                                                getColor(R.color.white)
+
+                        )
+                                // 开启多选   （默认为多选）
+                .
+
+                        mutiSelect()
+                                // 多选时的最大数量   （默认 9 张）
+                .
+
+                        mutiSelectMaxSize(9)
+                                // 开启拍照功能 （默认关闭）
+                .
+
+                        showCamera()
+                                // 已选择的图片路径
+                .
+
+                        pathList(new ArrayList<String>()
+
+                        )
+                                // 拍照后存放的图片路径（默认 /temp/picture） （会自动创建）
+                .
+
+                        filePath("/ImageSelector/Pictures")
+
+                .
+
+                        build();
+
     }
 
     public static String getCurProcessName(Context context) {

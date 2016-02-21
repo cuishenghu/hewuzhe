@@ -33,5 +33,23 @@
 
     <color name="md_edittext_error">#DD2C00</color>
 
+    <color name="classification_one">#FF292A2F</color>
+    <color name="classification_two">#FF494A4F</color>
+    <color name="classification_three">#FFEF9C00</color>
+    <color name="classification_text">#AAFFFFFF</color>
+    <color name="divider_one">#BBCCCCCC</color>
+    <color name="divider_two">#88CCCCCC</color>
+    <color name="classification_background">#FF4E4E4E</color>
+    <color name="province_line_border">#C7C7C7</color>
+    <!-- 区分========================================================= -->
+
+    <color name="hwz_title">#1e1d22</color>
+    <color name="hwz_background">#3e3e40</color>
+    <color name="hwz_bg_black">#292a2f</color>
+    <color name="hwz_font_yellow">#efa726</color>
+    <color name="hwz_font_gray">#969696</color>
+    <color name="hwz_font_white">#ffffff</color>
+    <color name="grey_text">#7D7D7D</color>
+
 
 </resources>

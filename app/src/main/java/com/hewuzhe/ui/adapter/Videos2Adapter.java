@@ -14,8 +14,10 @@ import com.bumptech.glide.Glide;
 import com.hewuzhe.R;
 import com.hewuzhe.model.Video;
 import com.hewuzhe.presenter.base.BasePresenterImp;
+import com.hewuzhe.ui.activity.Videos_2Activity;
 import com.hewuzhe.ui.adapter.base.BaseAdapter;
 import com.hewuzhe.ui.cons.C;
+import com.hewuzhe.utils.StringUtil;
 import com.hewuzhe.utils.TimeUtil;
 
 import java.util.LinkedList;
@@ -28,9 +30,13 @@ import butterknife.ButterKnife;
  */
 public class Videos2Adapter extends BaseAdapter<Videos2Adapter.ViewHolder, Video, BasePresenterImp> {
 
+    private boolean isChecked = false;
+    private int screenWidth = 10;
+
     public Videos2Adapter(Context context) {
         super(context);
         isAddFooter = true;
+        this.screenWidth = StringUtil.getScreenWidth((Videos_2Activity)context);
     }
 
     /**
@@ -65,9 +71,10 @@ public class Videos2Adapter extends BaseAdapter<Videos2Adapter.ViewHolder, Video
     @Override
     public void bindData(ViewHolder holder, int position) {
         final Video video = data.get(position);
+        ViewGroup.LayoutParams pageParms = holder.imgBg.getLayoutParams();
+        pageParms.height = isChecked?screenWidth*3/5:screenWidth*3/10;
         Glide.with(context)
                 .load(C.BASE_URL + video.ImagePath)
-                .centerCrop()
                 .crossFade()
                 .placeholder(R.mipmap.img_default)
                 .into(holder.imgBg);
@@ -104,7 +111,6 @@ public class Videos2Adapter extends BaseAdapter<Videos2Adapter.ViewHolder, Video
 //        } else {
 //            holder.imgRepeat.setImageResource(R.mipmap.icon_share_focus);
 //        }
-        holder._CbPlan.setChecked(video.isChecked);
 
         holder._CbPlan.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
@@ -189,11 +195,6 @@ public class Videos2Adapter extends BaseAdapter<Videos2Adapter.ViewHolder, Video
      */
     public void showCheck(boolean isNeedShow) {
         this.isNeedShow = isNeedShow;
-        if (!isNeedShow) {
-            for (Video video : data) {
-                video.isChecked = false;
-            }
-        }
         this.notifyDataSetChanged();
     }
 
@@ -215,4 +216,8 @@ public class Videos2Adapter extends BaseAdapter<Videos2Adapter.ViewHolder, Video
         return this.checkedList;
     }
 
+
+    public void changeViewHeight(boolean isChecked){
+        this.isChecked = isChecked;
+    }
 }

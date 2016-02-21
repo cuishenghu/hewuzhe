@@ -7,6 +7,7 @@ import com.hewuzhe.model.Article;
 import com.hewuzhe.model.ArticleCollection;
 import com.hewuzhe.model.Cate;
 import com.hewuzhe.model.Charge;
+import com.hewuzhe.model.Classification;
 import com.hewuzhe.model.Comment;
 import com.hewuzhe.model.ConditionComment;
 import com.hewuzhe.model.Dojo;
@@ -23,8 +24,14 @@ import com.hewuzhe.model.MyDream;
 import com.hewuzhe.model.OtherImage;
 import com.hewuzhe.model.OverTime;
 import com.hewuzhe.model.Plan;
+import com.hewuzhe.model.Product;
+import com.hewuzhe.model.ProductCollection;
+import com.hewuzhe.model.ProductComment;
 import com.hewuzhe.model.Record;
 import com.hewuzhe.model.Res;
+import com.hewuzhe.model.Result;
+import com.hewuzhe.model.ShopCar;
+import com.hewuzhe.model.Site;
 import com.hewuzhe.model.StudyOnlineCatItem;
 import com.hewuzhe.model.StudyOnlineCate;
 import com.hewuzhe.model.TeamAnnounce;
@@ -371,4 +378,66 @@ public interface ApiService {
     @GET("MessageAndImageNews.aspx")
     Observable<String> MessageAndImageNews(@Query("id") int id);
 
+    @GET("Hewuzhe.asmx/SelectVideoLiveList")
+    Call<Res<ArrayList<LiveVideo>>> SelectVideoLiveList(@Query("startRowIndex") int startRowIndex, @Query("maximumRows") int maximumRows, @Query("userid") int userid);
+
+
+    @GET("Hezhuangbei.asmx/SelectBigCategory")
+    Call<Res<ArrayList<Classification>>> SelectBigCategory();
+
+    @GET("Hezhuangbei.asmx/SelectSmallCategory")
+    Call<Res<ArrayList<Classification>>> SelectSmallCategory(@Query("parentId") int parentId);
+
+    @GET("Hezhuangbei.asmx/SelectAllDeliveryAddress")
+    Call<Res<ArrayList<Site>>> SelectAllDeliveryAddress(@Query("userId") int userId);
+
+    @GET("Hezhuangbei.asmx/SetDefaultDeliveryAddress")
+    Call<Res> SetDefaultDeliveryAddress(@Query("userId") int userId, @Query("id") int id);
+
+    @GET("Hezhuangbei.asmx/EditDeliveryAddress")
+    Call<Res> EditDeliveryAddress(@Query("userId") int userId, @Query("id") int id, @Query("areaId") String areaId, @Query("address") String address, @Query("isDefaul") int isDefaul, @Query("receiverName") String receiverName, @Query("phone") String phone, @Query("codeForAddress") String codeForAddress);
+
+    @GET("LoginAndRegister.asmx/GetCounty")
+    Call<Res<ArrayList<Address>>> GetCounty();
+
+    @GET("Hezhuangbei.asmx/DeleteDeliveryAddress")
+    Call<Res> DeleteDeliveryAddress(@Query("userId") int userId, @Query("idList") String idList);
+
+//区分==============================================================================================
+
+    @GET("Hezhuangbei.asmx/SelectProductBySearch")
+    Observable<Res<ArrayList<Product>>> SelectProductBySearch(@Query("startRowIndex") int startRowIndex, @Query("maximumRows") int maximumRows, @Query("search") String search, @Query("categoryId") int categoryId, @Query("isPriceAsc") int isPriceAsc, @Query("isSalesAsc") int isSalesAsc, @Query("isCommentAsc") int isCommentAsc, @Query("isNewAsc") int isNewAsc, @Query("isCredit") int isCredit, @Query("isRecommend") int isRecommend);
+
+    @GET("Hezhuangbei.asmx/SelectProduct")
+    Observable<Res<Product>> SelectProduct(@Query("id") int id,@Query("userid") int userid,@Query("maximumRows") int maximumRows);
+
+    @GET("Hezhuangbei.asmx/SelectBasketProduct")
+    Observable<Res<ArrayList<ShopCar>>> SelectBasketProduct(@Query("startRowIndex") int startRowIndex, @Query("maximumRows") int maximumRows, @Query("userId") int userId);
+
+    @GET("Hezhuangbei.asmx/FavoriteProduct")
+    Observable<Res> FavoriteProduct(@Query("userid") int userid,@Query("productId") int productId);
+
+    @GET("Hezhuangbei.asmx/CancleFavoriteProduct")
+    Observable<Res> CancleFavoriteProduct(@Query("userid") int userid,@Query("productId") int productId);
+
+    @GET("Hezhuangbei.asmx/SelectCommentByProductId")
+    Observable<Res<ArrayList<ProductComment>>> SelectCommentByProductId(@Query("productId") int productId, @Query("startRowIndex") int startRowIndex, @Query("maximumRows") int maximumRows);
+
+    @GET("Hezhuangbei.asmx/InsertBasket")
+    Observable<Res> InsertBasket(@Query("productId") int productId,@Query("num") int num,@Query("priceId") int priceId,@Query("userId") int userId,@Query("price") double price);
+
+    @GET("Hezhuangbei.asmx/DeleteBasketProduct")
+    Observable<Res> DeleteBasketProduct(@Query("idList") String idList,@Query("userId") int userId);
+
+    @GET("Hezhuangbei.asmx/ChangeBasketProductNum")
+    Observable<Res> ChangeBasketProductNum(@Query("id") int id,@Query("num") int num,@Query("userId") int userId);
+
+    @GET("Hezhuangbei.asmx/BuyNow")
+    Observable<Res> BuyNow(@Query("productId") int productId,@Query("num") int num,@Query("priceId") int priceId,@Query("userId") int userId,@Query("price") double price,@Query("deliveryId") int deliveryId,@Query("description") String description);
+
+    @GET("Hezhuangbei.asmx/SelectFavoriteByUserIdAndSearch")
+    Observable<Res<ArrayList<ProductCollection>>> SelectFavoriteByUserIdAndSearch(@Query("startRowIndex") int startRowIndex, @Query("maximumRows") int maximumRows, @Query("userId") int userId, @Query("search") String search);
+
+    @GET("Hezhuangbei.asmx/GetPostage")
+    Observable<Res<Result>> GetPostage(@Query("userid") int userid,@Query("idList") String idList);
 }

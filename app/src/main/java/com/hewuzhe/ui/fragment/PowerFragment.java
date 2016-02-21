@@ -9,6 +9,9 @@ import android.support.v4.view.ViewPager;
 import android.support.v7.widget.Toolbar;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.widget.Button;
+import android.widget.CheckBox;
+import android.widget.CompoundButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -46,6 +49,8 @@ public class PowerFragment extends BaseFragment implements PowerView, VideoChoos
     ImageView imgAdd;
     @Bind(R.id.img_search)
     ImageView imgSearch;
+    @Bind(R.id.swicth_button)
+    CheckBox swicthButton;
     private ImageView imgBack;
     private TextView tvTitle;
     private AppBarLayout appBar;
@@ -61,6 +66,8 @@ public class PowerFragment extends BaseFragment implements PowerView, VideoChoos
 
     private String videoPath;
     public static int QUPAI_RECORD_REQUEST = 101;
+    private MyViewPagerAdapter viewPagerAdapter;
+
 
     /**
      * 初始化事件监听者
@@ -71,6 +78,15 @@ public class PowerFragment extends BaseFragment implements PowerView, VideoChoos
             @Override
             public void onClick(View view) {
                 showPopView();
+            }
+        });
+        swicthButton.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                ((OneFragment)viewPagerAdapter.getItem(0)).changeSpanCount(isChecked);
+                ((OneFragment)viewPagerAdapter.getItem(1)).changeSpanCount(isChecked);
+                ((OneFragment)viewPagerAdapter.getItem(2)).changeSpanCount(isChecked);
+                ((OneFragment)viewPagerAdapter.getItem(3)).changeSpanCount(isChecked);
             }
         });
     }
@@ -90,6 +106,7 @@ public class PowerFragment extends BaseFragment implements PowerView, VideoChoos
                 startActivity(SearchVideosActivity.class, new Bun().putString("title", "搜索").ok());
             }
         });
+
     }
 
     /**
@@ -108,6 +125,7 @@ public class PowerFragment extends BaseFragment implements PowerView, VideoChoos
         return null;
     }
 
+
     protected void initToolBar(View rootView) {
         toolBar = (Toolbar) rootView.findViewById(R.id.toolbar);
         ((MainActivity) getActivity()).setSupportActionBar(toolBar);
@@ -116,8 +134,8 @@ public class PowerFragment extends BaseFragment implements PowerView, VideoChoos
         appBar = (AppBarLayout) rootView.findViewById(R.id.app_bar_layout);
         tvTitle.setText("功夫汇");
 
-        ViewPager mViewPager = (ViewPager) rootView.findViewById(R.id.viewpager);
-        MyViewPagerAdapter viewPagerAdapter = new MyViewPagerAdapter(getActivity().getSupportFragmentManager());
+        final ViewPager mViewPager = (ViewPager) rootView.findViewById(R.id.viewpager);
+        viewPagerAdapter = new MyViewPagerAdapter(getActivity().getSupportFragmentManager());
         viewPagerAdapter.addFragment(OneFragment.newInstance("NewVideo"), "最新");//添加Fragment
         viewPagerAdapter.addFragment(OneFragment.newInstance("HotVideo"), "热门");
         viewPagerAdapter.addFragment(OneFragment.newInstance("TuijianVideo"), "推荐");
@@ -133,6 +151,19 @@ public class PowerFragment extends BaseFragment implements PowerView, VideoChoos
         mTabLayout.addTab(mTabLayout.newTab());
         mTabLayout.addTab(mTabLayout.newTab());
         mTabLayout.setupWithViewPager(mViewPager);//给TabLayout设置关联ViewPager，如果设置了ViewPager，那么ViewPagerAdapter中的getPageTitle()方法返回的就是Tab上的标题
+        mTabLayout.setOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
+            @Override
+            public void onTabSelected(TabLayout.Tab tab) {
+                mViewPager.setCurrentItem(tab.getPosition());
+                swicthButton.setVisibility(tab.getPosition() == 4?View.GONE:View.VISIBLE);
+            }
+
+            @Override
+            public void onTabUnselected(TabLayout.Tab tab) {}
+
+            @Override
+            public void onTabReselected(TabLayout.Tab tab) {}
+        });
     }
 
     /**
@@ -188,10 +219,7 @@ public class PowerFragment extends BaseFragment implements PowerView, VideoChoos
                 reinitializeVideoChooser();
             }
             videoChooserManager.submit(requestCode, data);
-
         }
-
-
     }
 
     // Should be called if for some reason the VideoChooserManager is null (Due
@@ -297,6 +325,4 @@ public class PowerFragment extends BaseFragment implements PowerView, VideoChoos
                 .setEditorCreateInfo(_CreateInfo).build();
         qupaiService.showRecordPage(getActivity(), QUPAI_RECORD_REQUEST);
     }
-
-
 }

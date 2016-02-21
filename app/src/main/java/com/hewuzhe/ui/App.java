@@ -14,6 +14,10 @@ import com.hewuzhe.R;
 import com.hewuzhe.ui.cons.Contant;
 import com.hewuzhe.ui.inter.OnLocListener;
 import com.hewuzhe.utils.GlideLoader;
+import com.nostra13.universalimageloader.cache.disc.naming.Md5FileNameGenerator;
+import com.nostra13.universalimageloader.core.ImageLoader;
+import com.nostra13.universalimageloader.core.ImageLoaderConfiguration;
+import com.nostra13.universalimageloader.core.assist.QueueProcessingType;
 import com.pgyersdk.crash.PgyCrashManager;
 import com.sina.sinavideo.sdk.utils.VDApplication;
 import com.sina.sinavideo.sdk.utils.VDResolutionManager;
@@ -51,7 +55,7 @@ public class App extends Application {
 
         initAuth(getApplicationContext(), Contant.appkey, Contant.appsecret, Contant.space);
 
-
+        initImageLoader();//初始化ImageLoader\
 //      Stetho.initialize(
 //                Stetho.newInitializerBuilder(this)
 //                        .enableDumpapp(
@@ -226,6 +230,21 @@ public class App extends Application {
             }
         });
         service.startAuth(context, appKey, appsecret, space);
+    }
+    /**
+     * 初始化ImageLoader
+     */
+    protected void initImageLoader() {
+        //初始化ImageLoader
+        ImageLoaderConfiguration.Builder config = new ImageLoaderConfiguration.Builder(this);
+        config.threadPriority(Thread.NORM_PRIORITY - 2);
+        config.denyCacheImageMultipleSizesInMemory();
+        config.diskCacheFileNameGenerator(new Md5FileNameGenerator());
+        config.diskCacheSize(50 * 1024 * 1024);
+        config.tasksProcessingOrder(QueueProcessingType.LIFO);
+        config.writeDebugLogs();
+
+        ImageLoader.getInstance().init(config.build());
     }
 
 

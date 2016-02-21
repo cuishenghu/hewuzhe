@@ -21,7 +21,6 @@ public class IntegralPresenter extends RefreshAndLoadMorePresenter<IntegralView>
 
     public void getData(final int page, final int count) {
 
-
         Subscription subscription = NetEngine.getService()
                 .GetCreditRecord((page - 1) * count, count, new SessionUtil(view.getContext()).getUser().Id)
                 .subscribeOn(Schedulers.io())

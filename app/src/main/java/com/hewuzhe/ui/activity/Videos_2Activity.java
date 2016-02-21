@@ -4,6 +4,8 @@ import android.os.Bundle;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
+import android.widget.CheckBox;
+import android.widget.CompoundButton;
 import android.widget.ImageView;
 
 import com.hewuzhe.R;
@@ -21,10 +23,14 @@ import butterknife.Bind;
 
 public class Videos_2Activity extends SwipeRecycleViewActivity<Videos2Presenter, Videos2Adapter, Video> implements Videos2View {
 
-
     private int catId;
     @Bind(R.id.img_search)
     ImageView imgSearch;
+    @Bind(R.id.swicth_button)
+    CheckBox swicthButton;
+
+    private GridLayoutManager gridLayoutManager;
+    private GridItemDecoration decoration;
 
     @Override
     protected int provideContentViewId() {
@@ -64,7 +70,8 @@ public class Videos_2Activity extends SwipeRecycleViewActivity<Videos2Presenter,
      */
     @Override
     protected Videos2Adapter provideAdapter() {
-        recyclerView.addItemDecoration(new GridItemDecoration(10, 2));
+        decoration = new GridItemDecoration(10, 2);
+        recyclerView.addItemDecoration(decoration);
         return new Videos2Adapter(getContext());
     }
 
@@ -73,19 +80,18 @@ public class Videos_2Activity extends SwipeRecycleViewActivity<Videos2Presenter,
      */
     @Override
     protected RecyclerView.LayoutManager provideLayoutManager() {
-        GridLayoutManager gridLayoutManager = new GridLayoutManager(getContext(), 2);
+        gridLayoutManager = new GridLayoutManager(getContext(), 2);
 
         gridLayoutManager.setSpanSizeLookup(new GridLayoutManager.SpanSizeLookup() {
             @Override
             public int getSpanSize(int position) {
                 if (position == adapter.getItemCount() - 1) {
-                    return 2;
+                    return swicthButton.isChecked()?1:2;
                 }
                 return 1;
             }
         });
         layoutManager = gridLayoutManager;
-
         return layoutManager;
     }
 
@@ -94,8 +100,15 @@ public class Videos_2Activity extends SwipeRecycleViewActivity<Videos2Presenter,
      */
     @Override
     public void initListeners() {
-
-
+        swicthButton.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                decoration.setSpanCount(isChecked?1:2);
+                gridLayoutManager.setSpanCount(isChecked?1:2);
+                adapter.changeViewHeight(isChecked);
+                adapter.notifyDataSetChanged();
+            }
+        });
     }
 
 

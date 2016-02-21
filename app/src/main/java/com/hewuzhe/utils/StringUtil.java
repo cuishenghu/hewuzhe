@@ -1,6 +1,14 @@
 package com.hewuzhe.utils;
 
+import android.app.Activity;
 import android.content.Context;
+import android.util.DisplayMetrics;
+import android.view.Display;
+import android.view.View;
+import android.view.ViewGroup;
+import android.view.WindowManager;
+import android.widget.ListAdapter;
+import android.widget.ListView;
 
 import com.hewuzhe.ui.cons.C;
 
@@ -59,5 +67,69 @@ public class StringUtil {
         }
 
         return "";
+    }
+
+    /**
+     * <p>
+     * 进行tostring操作，如果传入的是null，返回空字符串㿿
+     * </p>
+     *
+     * <pre>
+     * ObjectUtils.toString(null)         = ""
+     * ObjectUtils.toString("")           = ""
+     * ObjectUtils.toString("bat")        = "bat"
+     * ObjectUtils.toString(Boolean.TRUE) = "true"
+     * </pre>
+     * @param obj
+     *            溿
+     * @return String
+     */
+    public static String toString(Object obj, String nullStr) {
+        return obj == null ? nullStr : "".equals(obj) ? nullStr : obj.toString();
+    }
+
+    /**
+     * 字符串验证
+     * @param obj
+     * @return 验证返回字符串
+     */
+    public static String toString(Object obj) {
+        return null == obj?"":obj.toString();
+    }
+
+
+    /**
+     * listView自适应高度
+     * @param listView
+     */
+    public static void listAutoHeight(ListView listView){
+        ListAdapter listAdapter = listView.getAdapter();
+        if (listAdapter == null) {
+            return;
+        }
+
+        int totalHeight = 0;
+        for (int i = 0; i < listAdapter.getCount(); i++) {
+            View listItem = listAdapter.getView(i, null, listView);
+            listItem.measure(0, 0);
+            totalHeight += listItem.getMeasuredHeight();
+        }
+
+        ViewGroup.LayoutParams params = listView.getLayoutParams();
+        params.height = totalHeight + (listView.getDividerHeight() * (listAdapter.getCount()-1));
+        ((ViewGroup.MarginLayoutParams)params).setMargins(0, 10, 0, 10);
+        listView.setLayoutParams(params);
+    }
+    /**
+     * 获取手机屏幕宽度
+     * @param activity 当前Activity
+     * @return 屏幕的宽度
+     */
+    public static int getScreenWidth(Activity activity){
+        WindowManager windowManager = activity.getWindowManager();
+        Display display = windowManager.getDefaultDisplay();
+        DisplayMetrics metrics = new DisplayMetrics();
+        display.getMetrics(metrics);
+        return metrics.widthPixels;
     }
 }

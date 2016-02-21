@@ -222,6 +222,21 @@
         <activity android:name=".ui.activity.MemberBuyActivity">
         </activity>
 
+        <!-- 功夫库 -->
+        <!--<activity android:name=".ui.activity.EquipmentAllSortActivity"></activity>-->
+        <activity android:name=".ui.activity.OrderConfirmFirstActivity"></activity>
+        <activity android:name=".ui.activity.OrderConfirmSecondActivity"></activity>
+        <activity android:name=".ui.activity.OrderCenterActivity"></activity>
+        <activity android:name=".ui.activity.OrderDetailsActivity"></activity>
+        <activity android:name=".ui.activity.OrderAssessActivity"></activity>
+        <activity android:name=".ui.activity.MyScoreActivity"></activity>
+        <activity android:name=".ui.activity.MyScoretDuiHuanJiLuActivity"></activity>
+        <activity android:name=".ui.activity.MyScoretDuiHuanInfoActivity"></activity>
+        <activity android:name=".ui.activity.MyScoretDuiHuanSuccessInfoActivity"></activity>
+        <activity android:name=".ui.activity.MyScoretDuiHuanCheckLogticsActivity"></activity>
+        <activity android:name=".ui.activity.ProductClassifiActivity"></activity>
+        <activity android:name=".ui.activity.SiteActivity"></activity>
+        <activity android:name=".ui.activity.SiteAddActivity"></activity>
         <!-- 支付 -->
         <!-- Ping++ SDK 注册 -->
         <activity
@@ -610,6 +625,19 @@
             <!-- </intent-filter> -->
         </activity>
         <activity android:name=".ui.activity.ChangePwdActivity">
+        </activity>
+        <activity android:name=".ui.activity.LiveVideoListActivity">
+        </activity>
+        <!-- 区分=================================================================== -->
+        <activity android:name=".ui.activity.ProductListActivity" android:windowSoftInputMode="adjustUnspecified|stateHidden">
+        </activity>
+        <activity android:name=".ui.activity.ProductInfoActivity">
+        </activity>
+        <activity android:name=".ui.activity.ShopCarActivity">
+        </activity>
+        <activity android:name=".ui.activity.ProductCommentActivity">
+        </activity>
+        <activity android:name=".ui.activity.LiveVideoListActivity">
         </activity>
     </application>
 

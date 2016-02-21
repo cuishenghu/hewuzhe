@@ -18,6 +18,7 @@ import com.hewuzhe.presenter.base.BasePresenterImp;
 import com.hewuzhe.ui.base.BaseActivity;
 import com.hewuzhe.ui.cons.C;
 import com.hewuzhe.ui.fragment.EquipmentFragment;
+import com.hewuzhe.ui.fragment.EquipmentFragment2;
 import com.hewuzhe.ui.fragment.FederalFragment;
 import com.hewuzhe.ui.fragment.MoreFragment;
 import com.hewuzhe.ui.fragment.PowerFragment;
@@ -48,7 +49,7 @@ public class MainActivity extends BaseActivity {
     private Fragment curFragment;
     private FederalFragment federalFragment;
     private PowerFragment powerFragment;
-    private EquipmentFragment equipmentFragment;
+    private EquipmentFragment2 equipmentFragment2;
     private MoreFragment moreFragment;
 
     @Override
@@ -161,11 +162,11 @@ public class MainActivity extends BaseActivity {
                 menuFive.setBackgroundColor(primary);
 
 
-                if (null == equipmentFragment) {
-                    equipmentFragment = new EquipmentFragment();
+                if (null == equipmentFragment2) {
+                    equipmentFragment2 = new EquipmentFragment2();
                 }
 
-                switchContent(curFragment, equipmentFragment);
+                switchContent(curFragment, equipmentFragment2);
 
 
             }

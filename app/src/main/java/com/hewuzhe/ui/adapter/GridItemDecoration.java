@@ -18,6 +18,10 @@ public class GridItemDecoration extends RecyclerView.ItemDecoration {
         this.spanCount = spanCount;
     }
 
+    public void setSpanCount(int spanCount){
+        this.spanCount = spanCount;
+    }
+
     /**
      * Retrieve any offsets for the given item. Each field of <code>outRect</code> specifies
      * the number of pixels that the item view should be inset by, similar to padding or margin.
@@ -43,12 +47,10 @@ public class GridItemDecoration extends RecyclerView.ItemDecoration {
         int position = parent.getChildAdapterPosition(view); // item position
         int column = position % spanCount; // item column
 
-        if (column == spanCount - 1) {
-            outRect.bottom = space;
-
-        } else {
+        outRect.top = space;
+        if(spanCount == 1)
+            outRect.left = space;
+        if(spanCount == 1 || column != spanCount - 1)
             outRect.right = space;
-            outRect.bottom = space;
-        }
     }
 }

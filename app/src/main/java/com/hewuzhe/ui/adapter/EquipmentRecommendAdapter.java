@@ -5,6 +5,7 @@ import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.BaseAdapter;
 import android.widget.BaseExpandableListAdapter;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -13,6 +14,9 @@ import android.widget.TextView;
 import com.hewuzhe.R;
 import com.hewuzhe.model.Equipment;
 import com.hewuzhe.model.EquipmentSort;
+import com.hewuzhe.ui.http.UrlContants;
+import com.hewuzhe.utils.StringUtil;
+import com.nostra13.universalimageloader.core.ImageLoader;
 
 import java.util.List;
 
@@ -72,17 +76,18 @@ public class EquipmentRecommendAdapter extends BaseExpandableListAdapter {
             holder.img_equipment_pic = (ImageView) convertView.findViewById(R.id.img_equip_pic);//商品图片
             holder.tv_equipment_name = (TextView) convertView.findViewById(R.id.tv_equip_name);//商品名称
             holder.tv_equipment_price = (TextView) convertView.findViewById(R.id.tv_equip_price);//商品价格
-            holder.tv_equipment_person = (TextView) convertView.findViewById(R.id.tv_equip_person);//商品关注度
+            holder.tv_equipment_person = (TextView) convertView.findViewById(R.id.tv_equip_visit_sum);//商品关注度
             holder.tv_equipment_sale_num = (TextView) convertView.findViewById(R.id.tv_equip_sale_num);//商品销售量
             convertView.setTag(holder);
         } else {
             holder = (EquipmentViewHolder) convertView.getTag();
         }
-//        ImageLoader.getInstance().displayImage(StringUtil.toString(UrlContants.IMAGE_URL + equipment.getImagePath(), "http://"), holder.img_equipment_pic);
+        ImageLoader.getInstance().displayImage(StringUtil.toString(UrlContants.IMAGE_URL +
+                equipment.getImagePath(), "http://"), holder.img_equipment_pic);
         holder.tv_equipment_name.setText(equipment.getName());
-        holder.tv_equipment_price.setText(equipment.getPrice());
-        holder.tv_equipment_person.setText(equipment.getVisitNum());
-        holder.tv_equipment_sale_num.setText(equipment.getSaleNum());
+        holder.tv_equipment_price.setText("¥" + equipment.getPrice());
+        holder.tv_equipment_person.setText(equipment.getVisitNum() + "人");
+        holder.tv_equipment_sale_num.setText("销量：" + equipment.getSaleNum());
         return convertView;
     }
 

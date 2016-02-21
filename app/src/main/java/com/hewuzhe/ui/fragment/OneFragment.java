@@ -2,7 +2,7 @@ package com.hewuzhe.ui.fragment;
 
 
 import android.support.v4.app.Fragment;
-import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 
@@ -10,6 +10,7 @@ import com.hewuzhe.R;
 import com.hewuzhe.model.Video;
 import com.hewuzhe.presenter.OneFragmentPresenter;
 import com.hewuzhe.ui.activity.VideoDetail2Activity;
+import com.hewuzhe.ui.adapter.GridItemDecoration;
 import com.hewuzhe.ui.adapter.VideoAdapter;
 import com.hewuzhe.ui.base.SwipeRecycleViewFragment;
 import com.hewuzhe.utils.Bun;
@@ -23,6 +24,10 @@ import java.util.ArrayList;
 public class OneFragment extends SwipeRecycleViewFragment<OneFragmentPresenter, VideoAdapter, Video> implements OneFragmentView {
 
     private String path;
+    private boolean isChecked = true;
+
+    private GridLayoutManager gridLayoutManager;
+    private GridItemDecoration decoration;
 
     public static OneFragment newInstance(String path) {
         OneFragment oneFragment = new OneFragment();
@@ -52,6 +57,8 @@ public class OneFragment extends SwipeRecycleViewFragment<OneFragmentPresenter, 
      */
     @Override
     protected VideoAdapter provideAdapter() {
+        decoration = new GridItemDecoration(10, 1);
+        recyclerView.addItemDecoration(decoration);
         return new VideoAdapter(getActivity());
     }
 
@@ -60,7 +67,19 @@ public class OneFragment extends SwipeRecycleViewFragment<OneFragmentPresenter, 
      */
     @Override
     protected RecyclerView.LayoutManager provideLayoutManager() {
-        return new LinearLayoutManager(getActivity());
+        gridLayoutManager = new GridLayoutManager(getContext(), 1);
+
+        gridLayoutManager.setSpanSizeLookup(new GridLayoutManager.SpanSizeLookup() {
+            @Override
+            public int getSpanSize(int position) {
+                if (position == adapter.getItemCount() - 1) {
+                    return isChecked?1:2;
+                }
+                return 1;
+            }
+        });
+        layoutManager = gridLayoutManager;
+        return layoutManager;
     }
 
 
@@ -101,5 +120,13 @@ public class OneFragment extends SwipeRecycleViewFragment<OneFragmentPresenter, 
     @Override
     public String getData() {
         return path;
+    }
+
+    public void changeSpanCount(boolean isChecked){
+        this.isChecked = isChecked;
+        decoration.setSpanCount(isChecked?1:2);
+        gridLayoutManager.setSpanCount(isChecked?1:2);
+        adapter.changeViewHeight(isChecked);
+        adapter.notifyDataSetChanged();
     }
 }

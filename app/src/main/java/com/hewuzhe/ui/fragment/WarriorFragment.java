@@ -28,9 +28,11 @@ import com.hewuzhe.ui.activity.FlyDreamActivity;
 import com.hewuzhe.ui.activity.FriendProfileActivity;
 import com.hewuzhe.ui.activity.IntegralActivity;
 import com.hewuzhe.ui.activity.LiveVideoActivity;
+import com.hewuzhe.ui.activity.LiveVideoListActivity;
 import com.hewuzhe.ui.activity.LocationActivity;
 import com.hewuzhe.ui.activity.MemberActivity;
 import com.hewuzhe.ui.activity.MyCollectionsActivity;
+import com.hewuzhe.ui.activity.MyScoreActivity;
 import com.hewuzhe.ui.activity.PhotoActivity;
 import com.hewuzhe.ui.activity.ProfileActivity;
 import com.hewuzhe.ui.activity.RecordActivity;
@@ -293,13 +295,13 @@ public class WarriorFragment extends ToolBarFragment<WarriorFragmentPresenter> i
         layIntegral.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startActivity(new Intent(getActivity(), IntegralActivity.class));
+                startActivity(new Intent(getActivity(), MyScoreActivity.class));
             }
         });
         layLive.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startActivity(new Intent(getActivity(), LiveVideoActivity.class));
+                startActivity(new Intent(getActivity(), LiveVideoListActivity.class));
             }
         });
         tvDojoRecommend.setOnClickListener(new View.OnClickListener() {

@@ -5,8 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/colorBg"
-    android:orientation="vertical"
-    tools:context="com.hewuzhe.ui.activity.MegaGameApplyActivity">
+    android:orientation="vertical">
     <include layout="@layout/toolbar_layout"/>
 
     <RelativeLayout android:layout_width="match_parent"

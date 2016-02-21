@@ -13,6 +13,7 @@ import com.hewuzhe.presenter.base.BasePresenterImp;
 import com.hewuzhe.ui.activity.AboutActivity;
 import com.hewuzhe.ui.activity.SettingsActivity;
 import com.hewuzhe.ui.activity.SignInActivity;
+import com.hewuzhe.ui.activity.SiteActivity;
 import com.hewuzhe.ui.base.ToolBarFragment;
 import com.hewuzhe.ui.cons.C;
 import com.hewuzhe.utils.SessionUtil;
@@ -36,6 +37,8 @@ public class MoreFragment extends ToolBarFragment {
     LinearLayout layClearData;
     @Bind(R.id.lay_service)
     LinearLayout layService;
+    @Bind(R.id.lay_address)
+    LinearLayout layAddress;
     @Bind(R.id.btn_exit)
     Button btnExit;
 
@@ -145,6 +148,13 @@ public class MoreFragment extends ToolBarFragment {
 
                 startActivity(SignInActivity.class);
                 getActivity().finish();
+            }
+        });
+
+        layAddress.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                getActivity().startActivity(new Intent(getActivity(), SiteActivity.class));
             }
         });
     }

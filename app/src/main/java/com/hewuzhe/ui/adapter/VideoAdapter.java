@@ -2,6 +2,7 @@ package com.hewuzhe.ui.adapter;
 
 import android.content.Context;
 import android.support.annotation.Nullable;
+import android.support.v4.app.FragmentActivity;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.view.ViewGroup;
@@ -26,13 +27,16 @@ import butterknife.ButterKnife;
  */
 public class VideoAdapter extends BaseAdapter<VideoAdapter.ViewHolder, Video, BasePresenterImp> {
 
+    private boolean isChecked = true;
+    private int screenWidth = 10;
+
     /**
      * RecycleView的头部
-     *
      * @param context
      */
     public VideoAdapter(Context context) {
         super(context);
+        this.screenWidth = StringUtil.getScreenWidth((FragmentActivity)context);
     }
 
     /**
@@ -73,9 +77,10 @@ public class VideoAdapter extends BaseAdapter<VideoAdapter.ViewHolder, Video, Ba
         holder.tvTitle.setText(video.Title);
 
 
+        ViewGroup.LayoutParams pageParms = holder.imgBg.getLayoutParams();
+        pageParms.height = isChecked?screenWidth*2/3:screenWidth/3;
         Glide.with(context)
                 .load(C.BASE_URL + video.ImagePath)
-                .centerCrop()
                 .crossFade()
                 .placeholder(R.mipmap.img_bg_videio)
                 .into(holder.imgBg);
@@ -138,5 +143,9 @@ public class VideoAdapter extends BaseAdapter<VideoAdapter.ViewHolder, Video, Ba
             super(view);
             ButterKnife.bind(this, view);
         }
+    }
+
+    public void changeViewHeight(boolean isChecked){
+        this.isChecked = isChecked;
     }
 }

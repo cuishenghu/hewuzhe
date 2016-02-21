@@ -82,7 +82,7 @@
 
     </android.support.design.widget.AppBarLayout>
 
-    <LinearLayout
+    <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical"
@@ -92,6 +92,19 @@
             android:id="@+id/viewpager"
             android:layout_width="match_parent"
             android:layout_height="match_parent"/>
-    </LinearLayout>
+
+        <CheckBox
+            android:id="@+id/swicth_button"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentBottom="true"
+            android:layout_marginRight="20dp"
+            android:layout_marginBottom="20dp"
+            android:checked="true"
+            android:button="@null"
+            android:background="@drawable/bg_switch_button"/>
+
+    </RelativeLayout>
 
 </android.support.design.widget.CoordinatorLayout>

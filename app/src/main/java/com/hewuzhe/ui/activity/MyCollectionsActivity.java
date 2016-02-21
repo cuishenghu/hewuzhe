@@ -5,11 +5,13 @@ import android.support.design.widget.TabLayout;
 import android.support.v4.view.ViewPager;
 
 import com.hewuzhe.R;
+import com.hewuzhe.model.Product;
 import com.hewuzhe.presenter.base.BasePresenterImp;
 import com.hewuzhe.ui.adapter.MyViewPagerAdapter;
 import com.hewuzhe.ui.base.TabToolBarActivity;
 import com.hewuzhe.ui.cons.C;
 import com.hewuzhe.ui.fragment.ArticleCollectionsFragment;
+import com.hewuzhe.ui.fragment.ProductCollectionsFragment;
 import com.hewuzhe.ui.fragment.VideoCollectionsFragment;
 import com.hewuzhe.ui.inter.OnReceiveListener;
 import com.hewuzhe.utils.NU;
@@ -88,11 +90,13 @@ public class MyCollectionsActivity extends TabToolBarActivity {
         mViewPager = (ViewPager) findViewById(R.id.viewpager);
         viewPagerAdapter = new MyViewPagerAdapter(getSupportFragmentManager());
         viewPagerAdapter.addFragment(VideoCollectionsFragment.newInstance(), "视频");//添加Fragment
+        viewPagerAdapter.addFragment(ProductCollectionsFragment.newInstance(), "商品");//添加Fragment
         viewPagerAdapter.addFragment(ArticleCollectionsFragment.newInstance(), "文章");
         mViewPager.setAdapter(viewPagerAdapter);
 
         TabLayout mTabLayout = (TabLayout) findViewById(R.id.tabLayout);
         mTabLayout.addTab(mTabLayout.newTab());//给TabLayout添加Tab
+        mTabLayout.addTab(mTabLayout.newTab());
         mTabLayout.addTab(mTabLayout.newTab());
         mTabLayout.setupWithViewPager(mViewPager);//给TabLayout设置关联ViewPager，如果设置了ViewPager，那么ViewPagerAdapter中的getPageTitle()方法返回的就是Tab上的标题
 

@@ -21,6 +21,7 @@ public class LiveVideo {
 
     public int Id;
     public String Title;
+    public String ImagePath;
     public String Content;
     public String LiveBack;
     public String LiveFront;

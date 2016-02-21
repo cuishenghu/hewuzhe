@@ -68,7 +68,7 @@ public class LiveVideoActivity extends ToolBarActivity<LiveVideoPresenter> imple
         _Viewpager.setAdapter(bee_pageAdapter);
         _Indicator.setViewPager(_Viewpager);
 
-        presenter.SelectVideoLive(3);
+        presenter.SelectVideoLive(getIntentData().getInt("Id"));
 
 
     }
@@ -138,6 +138,46 @@ public class LiveVideoActivity extends ToolBarActivity<LiveVideoPresenter> imple
             _BtnOthers.setText("直播已结束");
             _BtnOthers.setOnClickListener(null);
         }
+
+    }
+
+    @Override
+    public void bindData(ArrayList<LiveVideo> data) {
+
+    }
+
+    @Override
+    public void loadMore() {
+
+    }
+
+    @Override
+    public void noMore() {
+
+    }
+
+    @Override
+    public void hasMore() {
+
+    }
+
+    @Override
+    public void loadMore(String tip) {
+
+    }
+
+    @Override
+    public void hasMore(String tip) {
+
+    }
+
+    @Override
+    public void noMore(String tip) {
+
+    }
+
+    @Override
+    public void refresh(boolean refreshing) {
 
     }
 }

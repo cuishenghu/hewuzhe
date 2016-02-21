@@ -1,18 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
               xmlns:tools="http://schemas.android.com/tools"
-              android:layout_width="match_parent" android:layout_height="wrap_content"
+              android:layout_width="match_parent"
+              android:layout_height="wrap_content"
               android:background="@color/colorListBg"
               android:orientation="vertical"
               android:paddingBottom="5px"
     >
 
     <FrameLayout android:layout_width="match_parent"
-                 android:layout_height="240px">
+                 android:layout_height="wrap_content">
         <ImageView
             android:id="@+id/img_bg"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="120dp"
             android:scaleType="fitXY"
             android:src="@mipmap/img_bg_videio"/>
         <TextView
@@ -91,7 +92,7 @@
         <ImageView android:id="@+id/img_collect"
                    android:layout_width="30px"
                    android:layout_height="30px"
-                   android:layout_marginLeft="28px"
+                   android:layout_marginLeft="38px"
                    android:src="@mipmap/icon_collect_gray"/>
 
         <TextView
@@ -104,13 +105,17 @@
 
             />
 
+        <TextView android:layout_width="wrap_content"
+                  android:layout_height="wrap_content"
+                  android:layout_weight="1"/>
+
 
         <ImageView android:id="@+id/img_repeat"
                    android:layout_width="30px"
                    android:layout_height="30px"
-                   android:layout_marginLeft="28px"
+                   android:layout_marginLeft="38px"
                    android:src="@mipmap/icon_share_gray"
-                   android:visibility="visible"/>
+                   android:visibility="gone"/>
 
         <TextView
             android:id="@+id/tv_repeat_count"
@@ -119,11 +124,8 @@
             android:layout_height="wrap_content"
             android:layout_marginLeft="10px"
             android:text="100"
-            android:visibility="visible"
+            android:visibility="gone"
             />
-        <TextView android:layout_width="wrap_content"
-                  android:layout_height="wrap_content"
-                  android:layout_weight="1"/>
 
 
         <CheckBox

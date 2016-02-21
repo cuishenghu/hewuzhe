@@ -1,19 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
                 android:layout_width="match_parent"
-                android:layout_height="460px"
+                android:layout_height="wrap_content"
                 android:background="@color/colorBg"
-                android:orientation="vertical"
-                android:paddingBottom="20px">
+                android:orientation="vertical">
 
     <FrameLayout android:layout_width="match_parent"
-                 android:layout_height="match_parent">
-
+                 android:layout_height="wrap_content">
 
         <ImageView
             android:id="@+id/img_bg"
             android:layout_width="match_parent"
-            android:layout_height="460px"
+            android:layout_height="180dp"
             android:scaleType="fitXY"
             android:src="@mipmap/img_bg_videio"/>
 
@@ -21,19 +19,18 @@
                   android:layout_width="match_parent"
                   android:layout_height="wrap_content"
                   android:layout_gravity="bottom"
-                  android:layout_marginBottom="110px"
+                  android:layout_marginBottom="85px"
                   android:layout_marginLeft="30px"
                   android:text="咏春拳最快制服敌人的拳法"
                   android:textColor="@color/white"
-                  android:textSize="30px"
-            />
+                  android:textSize="22px" />
 
         <ImageView
             android:id="@+id/img_share"
-            android:layout_width="30px"
-            android:layout_height="30px"
+            android:layout_width="22px"
+            android:layout_height="22px"
             android:layout_gravity="bottom|right"
-            android:layout_marginBottom="110px"
+            android:layout_marginBottom="85px"
             android:layout_marginRight="30px"
             android:src="@mipmap/icon_share"
             />
@@ -42,13 +39,13 @@
         <TextView android:layout_width="match_parent"
                   android:layout_height="1dp"
                   android:layout_gravity="bottom"
-                  android:layout_marginBottom="101px"
+                  android:layout_marginBottom="81px"
                   android:layout_marginLeft="30px"
                   android:background="@color/colorLine"/>
 
 
         <LinearLayout android:layout_width="match_parent"
-                      android:layout_height="100px"
+                      android:layout_height="80px"
                       android:layout_gravity="bottom"
                       android:gravity="center_vertical"
                       android:orientation="horizontal"
@@ -58,8 +55,8 @@
 
             <ImageView
                 android:id="@+id/img_avatar"
-                android:layout_width="80px"
-                android:layout_height="80px"
+                android:layout_width="60px"
+                android:layout_height="60px"
                 android:src="@mipmap/img_avatar"
                 />
             <TextView android:id="@+id/tv_username"
@@ -70,10 +67,10 @@
                       android:singleLine="true"
                       android:text=""
                       android:textColor="@color/white"
-                      android:textSize="25px"/>
+                      android:textSize="20px"/>
 
-            <ImageView android:layout_width="30px"
-                       android:layout_height="30px"
+            <ImageView android:layout_width="20px"
+                       android:layout_height="20px"
                        android:layout_marginLeft="18px"
                        android:src="@mipmap/icon_comment"/>
 
@@ -84,11 +81,11 @@
                 android:layout_marginLeft="10px"
                 android:text="100条评论"
                 android:textColor="@color/white"
-                android:textSize="25px"/>
+                android:textSize="20px"/>
 
 
-            <ImageView android:layout_width="30px"
-                       android:layout_height="30px"
+            <ImageView android:layout_width="20px"
+                       android:layout_height="20px"
                        android:layout_marginLeft="38px"
                        android:src="@mipmap/icon_nearly"/>
 
@@ -99,7 +96,7 @@
                 android:layout_marginLeft="10px"
                 android:text="刚刚发布"
                 android:textColor="@color/white"
-                android:textSize="25px"/>
+                android:textSize="20px"/>
 
 
         </LinearLayout>

@@ -1,0 +1,149 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.hewuzhe.utils.swipe.SwipeLayout
+    android:id="@+id/swipe"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/hwz_background">
+    <LinearLayout
+        android:id="@+id/trash_button"
+        android:tag="Bottom2"
+        android:background="#333"
+        android:layout_width="40dp"
+        android:gravity="center"
+        android:layout_height="match_parent">
+        <ImageView
+            android:id="@+id/trash"
+            android:src="@mipmap/trash"
+            android:layout_width="22dp"
+            android:layout_height="22dp" />
+    </LinearLayout>
+    <RelativeLayout
+        android:id="@+id/shop_one"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/hwz_bg_black"
+        android:paddingTop="8dp"
+        android:paddingLeft="8dp" >
+
+        <ImageView
+            android:id="@+id/shopcar_select"
+            android:layout_width="16dp"
+            android:layout_height="16dp"
+            android:layout_marginRight="10dp"
+            android:layout_centerVertical="true"
+            android:src="@mipmap/icon_select_normal" />
+
+        <ImageView
+            android:id="@+id/icon_title"
+            android:layout_width="80dp"
+            android:layout_height="80dp"
+            android:layout_marginRight="10dp"
+            android:layout_centerVertical="true"
+            android:layout_toRightOf="@+id/shopcar_select"
+            android:src="@mipmap/icon_item_pic" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent= "true"
+            android:paddingRight="10dp"
+            android:layout_toRightOf="@+id/icon_title"
+            android:orientation="vertical" >
+
+            <TextView
+                android:id="@+id/shopcar_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="0dp"
+                android:lines="1"
+                android:text="@string/prolist_title_shopcar"
+                android:maxLines="2"
+                android:textColor="@color/hwz_font_white"
+                android:textSize="16sp" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginBottom="4dp"
+                android:orientation="horizontal">
+                <TextView
+                    android:id="@+id/shopcar_guige"
+                    android:layout_width="wrap_content"
+                    android:layout_height="34dp"
+                    android:lines="2"
+                    android:maxEms="10"
+                    android:text="@string/proinfo_user_guige"
+                    android:textColor="@color/hwz_font_gray"
+                    android:textSize="11sp" />
+
+                <TextView
+                    android:id="@+id/pro_price"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/prolist_price_s"
+                    android:gravity="right"
+                    android:lines="1"
+                    android:textColor="@color/hwz_font_yellow"
+                    android:textSize="16sp" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginBottom="4dp"
+                android:orientation="horizontal">
+
+                <LinearLayout
+                    android:id="@+id/shopcar_hint"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content">
+
+                <ImageView
+                    android:id="@+id/shopcar_add"
+                    android:layout_width="18dp"
+                    android:layout_height="18dp"
+                    android:layout_margin="4dp"
+                    android:src="@mipmap/icon_add"/>
+                <TextView
+                    android:id="@+id/pro_num"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@color/hwz_font_gray"
+                    android:paddingLeft="4dp"
+                    android:paddingRight="4dp"
+                    android:text="1"
+
+                    android:textColor="@color/hwz_font_white"
+                    android:textSize="14sp" />
+                <ImageView
+                    android:id="@+id/shopcar_sub"
+                    android:layout_width="18dp"
+                    android:layout_height="18dp"
+                    android:layout_margin="4dp"
+                    android:src="@mipmap/icon_sub"/>
+                </LinearLayout>
+
+                <TextView
+                    android:id="@+id/shopcar_buynum"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="right"
+                    android:text="x1"
+                    android:textColor="@color/hwz_font_gray"
+                    android:textSize="16sp" />
+            </LinearLayout>
+
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_marginLeft="15dp"
+            android:background="@color/hwz_background"
+            android:layout_alignParentBottom="true">
+        </LinearLayout>
+
+    </RelativeLayout>
+
+
+</com.hewuzhe.utils.swipe.SwipeLayout>

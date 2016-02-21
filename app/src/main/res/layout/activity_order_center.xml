@@ -1,0 +1,57 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical" >
+
+    <com.hewuzhe.view.MyCommonTitle
+        android:id="@+id/aci_mytitle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:background="@color/colorBg">
+
+        <RadioGroup
+            android:id="@+id/tab_my_order"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:background="@color/colorPrimary"
+            android:gravity="center"
+            android:orientation="horizontal" >
+
+            <RadioButton
+                android:id="@+id/rb_wait_to_pay"
+                style="@style/my_radiobutton"
+                android:checked="true"
+                android:text="待付款" />
+
+            <RadioButton
+                android:id="@+id/rb_wait_to_send"
+                style="@style/my_radiobutton"
+                android:text="待发货" />
+
+            <RadioButton
+                android:id="@+id/rb_wait_to_receive"
+                style="@style/my_radiobutton"
+                android:text="待收货" />
+
+            <RadioButton
+                android:id="@+id/rb_received_goods"
+                style="@style/my_radiobutton"
+                android:text="已收货" />
+      
+        </RadioGroup>
+
+        <FrameLayout
+            android:id="@+id/order_framelayout"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+        </FrameLayout>
+    </LinearLayout>
+
+</LinearLayout>

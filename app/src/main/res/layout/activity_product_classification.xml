@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+    <include layout="@layout/toolbar_layout"/>
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/classification_background">
+        <ListView
+            android:scrollbars="none"
+            android:id="@+id/classification_one"
+            android:layout_width="1dp"
+            android:layout_weight="1"
+            android:divider="@color/divider_one"
+            android:dividerHeight="0.6dp"
+            android:layout_height="match_parent">
+        </ListView>
+        <ListView
+            android:scrollbars="none"
+            android:id="@+id/classification_two"
+            android:layout_width="1dp"
+            android:layout_weight="1"
+            android:divider="@color/divider_two"
+            android:dividerHeight="0.4dp"
+            android:layout_height="match_parent">
+        </ListView>
+        <ListView
+            android:scrollbars="none"
+            android:id="@+id/classification_three"
+            android:layout_width="1dp"
+            android:layout_weight="1"
+            android:divider="@color/divider_two"
+            android:dividerHeight="0.4dp"
+            android:layout_height="match_parent">
+        </ListView>
+    </LinearLayout>
+</LinearLayout>

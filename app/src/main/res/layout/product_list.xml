@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    >
+
+    <RelativeLayout
+        android:id="@+id/shop_one"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/hwz_bg_black"
+        android:padding="8dp" >
+
+        <ImageView
+            android:id="@+id/icon_title"
+            android:layout_width="80dp"
+            android:layout_height="80dp"
+            android:layout_marginRight="10dp"
+            android:src="@mipmap/icon_item_pic" />
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:layout_toRightOf="@+id/icon_title"
+            android:orientation="vertical" >
+
+            <TextView
+                android:id="@+id/pro_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="8dp"
+                android:text="@string/prolist_title"
+                android:maxLines="1"
+                android:textColor="@color/hwz_font_white"
+                android:textSize="16sp" />
+
+            <TextView
+                android:id="@+id/pro_price"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/prolist_price_s"
+                android:layout_marginRight="4dp"
+                android:layout_marginBottom="4dp"
+                android:textColor="@color/hwz_font_yellow"
+                android:textSize="18sp" />
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal" >
+
+                <ImageView
+                    android:layout_width="25dp"
+                    android:layout_height="25dp"
+                    android:layout_marginRight="4dp"
+                    android:src="@mipmap/read"/>
+
+                <TextView
+                    android:id="@+id/pro_visitnum"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/prolist_price_m"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginRight="20dp"
+                    android:textColor="@color/hwz_font_gray"
+                    android:textSize="14sp" />
+
+                <TextView
+                    android:id="@+id/pro_salenum"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/prolist_pay_num"
+                    android:layout_gravity="center_vertical"
+                    android:textColor="@color/hwz_font_gray"
+                    android:textSize="14sp" />
+            </LinearLayout>
+        </LinearLayout>
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="10dp"
+            android:src="@mipmap/prolistright" />
+    </RelativeLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/hwz_background" >
+    </LinearLayout>
+
+</LinearLayout>

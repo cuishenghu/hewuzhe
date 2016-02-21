@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="81dp"
+    android:background="@color/classification_one">
+    <LinearLayout
+        android:id="@+id/tv_default"
+        android:layout_width="60dp"
+        android:layout_height="80dp"
+        android:layout_alignParentRight="true"
+        android:gravity="center">
+        <ImageView
+            android:id="@+id/tv_default_ico"
+            android:layout_gravity="center"
+            android:layout_width="25dp"
+            android:layout_height="25dp"
+            android:src="@drawable/adress_choose" />
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="80dp"
+        android:layout_toLeftOf="@id/tv_default"
+        android:orientation="vertical"
+        android:padding="5dp">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="30dp"
+            android:gravity="center_vertical">
+            <TextView
+                android:id="@+id/tv_name"
+                android:layout_width="0.0dip"
+                android:layout_weight="1"
+                android:layout_height="wrap_content"
+                android:singleLine="true"
+                android:text="姓名"
+                android:textColor="#fff" />
+            <TextView
+                android:id="@+id/tv_phone"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:text="18660992354"
+                android:textColor="#fff" />
+        </LinearLayout>
+        <TextView
+            android:id="@+id/tv_adress"
+            android:layout_width="match_parent"
+            android:layout_height="30dp"
+            android:singleLine="true"
+            android:gravity="center_vertical"
+            android:layout_centerVertical="true"
+            android:text="山东省临沂市兰山区金鼎国际904"
+            android:textColor="#fff" />
+    </LinearLayout>
+    <TextView
+        android:id="@+id/tv_divider"
+        android:layout_width="match_parent"
+        android:layout_height="0.4dp"
+        android:layout_below="@id/tv_default"
+        android:background="@color/divider_two"/>
+</RelativeLayout>

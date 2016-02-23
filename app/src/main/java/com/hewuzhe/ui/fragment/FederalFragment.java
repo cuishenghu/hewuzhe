@@ -97,7 +97,7 @@ public class FederalFragment extends BaseFragment<FederalPresenter> implements F
         imgBack = (ImageView) rootView.findViewById(R.id.img_back);
         tvTitle = (TextView) rootView.findViewById(R.id.tv_title);
         appBar = (AppBarLayout) rootView.findViewById(R.id.app_bar_layout);
-        tvTitle.setText("功夫圈");
+        tvTitle.setText("发现");
 
     }
 

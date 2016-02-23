@@ -117,7 +117,7 @@ public class GroupConditionActivity extends SwipeRecycleViewActivity<GroupCondit
 
     @Override
     protected String provideTitle() {
-        return "战队动态";
+        return "群聊";
     }
 
 

@@ -37,7 +37,7 @@ public class MegaGameActivity extends TabToolBarActivity<MegaGamesPresenter> {
 
     @Override
     protected String provideTitle() {
-        return "武者大赛";
+        return "赛事";
     }
 
 

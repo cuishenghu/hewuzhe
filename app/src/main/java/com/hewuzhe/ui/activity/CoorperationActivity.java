@@ -51,7 +51,7 @@ public class CoorperationActivity extends ToolBarActivity<FederalConditionPresen
 
     @Override
     protected String provideTitle() {
-        return "招聘合作";
+        return "创业";
     }
 
 

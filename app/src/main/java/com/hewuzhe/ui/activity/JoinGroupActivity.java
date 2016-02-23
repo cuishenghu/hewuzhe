@@ -139,7 +139,7 @@ public class JoinGroupActivity extends RecycleViewActivity<JoinPresenter, JoinGr
 
     @Override
     protected String provideTitle() {
-        return "加入战队";
+        return "同城";
     }
 
 

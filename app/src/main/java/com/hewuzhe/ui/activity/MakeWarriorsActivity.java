@@ -178,7 +178,7 @@ public class MakeWarriorsActivity extends RecycleViewActivity<MakeWarriorsPresen
 
     @Override
     protected String provideTitle() {
-        return "结交武者";
+        return "交友";
     }
 
 

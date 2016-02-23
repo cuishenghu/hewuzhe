@@ -54,7 +54,7 @@ public class TrainActivity extends TabToolBarActivity {
 
     @Override
     protected String provideTitle() {
-        return "训练计划";
+        return "课程";
     }
 
 

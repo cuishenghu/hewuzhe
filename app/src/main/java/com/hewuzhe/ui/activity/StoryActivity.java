@@ -50,7 +50,7 @@ public class StoryActivity extends ToolBarActivity<FederalConditionPresenter> im
 
     @Override
     protected String provideTitle() {
-        return "行业资讯";
+        return "资讯";
     }
 
 

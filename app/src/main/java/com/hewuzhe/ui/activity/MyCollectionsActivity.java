@@ -53,7 +53,7 @@ public class MyCollectionsActivity extends TabToolBarActivity {
 
     @Override
     protected String provideTitle() {
-        return "我的收藏";
+        return "收藏";
     }
 
     @Override

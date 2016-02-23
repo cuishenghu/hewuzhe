@@ -41,7 +41,7 @@ public class FederalConditionActivity extends ToolBarActivity<FederalConditionPr
 
     @Override
     protected String provideTitle() {
-        return "联盟动态";
+        return "话题";
     }
 
 

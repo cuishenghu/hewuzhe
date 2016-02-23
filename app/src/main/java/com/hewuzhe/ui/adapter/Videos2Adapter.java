@@ -16,6 +16,7 @@ import com.hewuzhe.model.Video;
 import com.hewuzhe.presenter.base.BasePresenterImp;
 import com.hewuzhe.ui.activity.Videos_2Activity;
 import com.hewuzhe.ui.adapter.base.BaseAdapter;
+import com.hewuzhe.ui.base.TabToolBarActivity;
 import com.hewuzhe.ui.cons.C;
 import com.hewuzhe.utils.StringUtil;
 import com.hewuzhe.utils.TimeUtil;
@@ -36,7 +37,7 @@ public class Videos2Adapter extends BaseAdapter<Videos2Adapter.ViewHolder, Video
     public Videos2Adapter(Context context) {
         super(context);
         isAddFooter = true;
-        this.screenWidth = StringUtil.getScreenWidth((Videos_2Activity)context);
+        this.screenWidth = StringUtil.getScreenWidth((TabToolBarActivity)context);
     }
 
     /**

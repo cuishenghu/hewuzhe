@@ -100,7 +100,7 @@
 
             <TextView android:layout_width="wrap_content"
                       android:layout_height="wrap_content"
-                      android:text="武者动态"
+                      android:text="动态"
                       android:textColor="@color/white"
                       android:textSize="30px"/>
 
@@ -153,7 +153,7 @@
             <TextView android:layout_width="wrap_content"
                       android:layout_height="wrap_content"
                       android:layout_weight="1"
-                      android:text="战队动态"
+                      android:text="群聊"
                       android:textColor="@color/white"
                       android:textSize="30px"/>
 
@@ -186,7 +186,7 @@
             <TextView android:layout_width="wrap_content"
                       android:layout_height="wrap_content"
                       android:layout_weight="1"
-                      android:text="联盟动态"
+                      android:text="话题"
                       android:textColor="@color/white"
                       android:textSize="30px"/>
 
@@ -223,7 +223,7 @@
             <TextView android:layout_width="wrap_content"
                       android:layout_height="wrap_content"
                       android:layout_weight="1"
-                      android:text="结交武者"
+                      android:text="交友"
                       android:textColor="@color/white"
                       android:textSize="30px"/>
 
@@ -256,7 +256,7 @@
             <TextView android:layout_width="wrap_content"
                       android:layout_height="wrap_content"
                       android:layout_weight="1"
-                      android:text="加入战队"
+                      android:text="同城"
                       android:textColor="@color/white"
                       android:textSize="30px"/>
 
@@ -292,7 +292,7 @@
 
             <TextView android:layout_width="wrap_content"
                       android:layout_height="wrap_content"
-                      android:text="武者大赛"
+                      android:text="赛事"
                       android:textColor="@color/white"
                       android:textSize="30px"/>
 
@@ -345,7 +345,7 @@
             <TextView android:layout_width="wrap_content"
                       android:layout_height="wrap_content"
                       android:layout_weight="1"
-                      android:text="行业资讯"
+                      android:text="资讯"
                       android:textColor="@color/white"
                       android:textSize="30px"/>
 
@@ -378,7 +378,7 @@
             <TextView android:layout_width="wrap_content"
                       android:layout_height="wrap_content"
                       android:layout_weight="1"
-                      android:text="招聘合作"
+                      android:text="创业"
                       android:textColor="@color/white"
                       android:textSize="30px"/>
 
@@ -415,7 +415,7 @@
             <TextView android:layout_width="wrap_content"
                       android:layout_height="wrap_content"
                       android:layout_weight="1"
-                      android:text="扫一扫"
+                      android:text="扫码"
                       android:textColor="@color/white"
                       android:textSize="30px"/>
 

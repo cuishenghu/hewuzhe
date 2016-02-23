@@ -97,7 +97,7 @@ public class CaptureActivity extends ToolBarActivity implements Callback {
 
     @Override
     protected String provideTitle() {
-        return "扫一扫";
+        return "扫码";
     }
 
     /**

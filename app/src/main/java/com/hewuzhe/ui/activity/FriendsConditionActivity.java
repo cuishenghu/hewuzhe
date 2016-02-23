@@ -100,7 +100,7 @@ public class FriendsConditionActivity extends SwipeRecycleViewActivity<FriendCon
 
     @Override
     protected String provideTitle() {
-        return "武者动态";
+        return "动态";
     }
 
     @Override

@@ -159,7 +159,7 @@ public class EquipmentFragment2 extends BaseFragment implements IXListViewListen
         tvTitle = (TextView) rootView.findViewById(R.id.tv_title);
         tvAction = (TextView) rootView.findViewById(R.id.tv_action);
         appBar = (AppBarLayout) rootView.findViewById(R.id.app_bar_layout);
-        tvTitle.setText("功夫库");
+        tvTitle.setText("购物");
         tvAction.setVisibility(View.VISIBLE);
         tvAction.setText("搜索");
         imgBack.setVisibility(View.GONE);

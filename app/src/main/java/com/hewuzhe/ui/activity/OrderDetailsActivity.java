@@ -55,6 +55,7 @@ public class OrderDetailsActivity extends BaseActivity2 {
     //    private List<OrderNumber> orders = new ArrayList<OrderNumber>();
     private OrderDetailsItemAdaptet orderDetailsItemAdaptet;
     private String state;//判断是否评论过
+    private String billId;//订单ID
 
     //    private int[] pic = {R.drawable.icon_item_pic, R.drawable.icon_item_pic};
 //    private String data[][] = {{"男士哑铃10公斤一对", "规格：S/红色", "¥20.00", "x1"}, {"男士哑铃10公斤一对", "规格：S/红色", "¥20.00", "x1"}};
@@ -62,20 +63,21 @@ public class OrderDetailsActivity extends BaseActivity2 {
 //    private List<Map<String, String>> list = new ArrayList<Map<String, String>>();
     private OrderNumber orders;
     private int mType;
+    private int buyerState;//买家状态
     private int total_number;
     private double total_price;
-    private String areaId;//传过来收货地址ID
+    private String areaId;//
     private List<OrderContent> orderContents = new ArrayList<OrderContent>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        areaId = (String) getIntent().getSerializableExtra("areaId");
-        orders = (OrderNumber) getIntent().getSerializableExtra("order");
-        mType = (Integer) getIntent().getSerializableExtra("mType");
+//        areaId = (String) getIntent().getSerializableExtra("areaId");
+        billId = getIntent().getStringExtra("billId");
+//        mType = (Integer) getIntent().getSerializableExtra("mType");
 //        total_number = Integer.parseInt((String) getIntent().getSerializableExtra("number"));
 //        total_price = Double.parseDouble((String) getIntent().getSerializableExtra("price"));
-        state = (String) getIntent().getStringExtra("state");
+//        state = (String) getIntent().getStringExtra("state");
 //        int i = orders.getProList().size();
         setContentView(R.layout.activity_order_details);
         initView();
@@ -180,12 +182,18 @@ public class OrderDetailsActivity extends BaseActivity2 {
         /**
          * 买家的状态
          */
-        if (mType == 1) {
+        if (buyerState == 1) {
             tv_buyer_state.setVisibility(View.VISIBLE);
             tv_buyer_state.setText("等待买家付款");
-        } else if (mType == 2) {
+        } else if (buyerState == 2) {
             tv_buyer_state.setVisibility(View.VISIBLE);
             tv_buyer_state.setText("买家已付款");
+        } else if (buyerState == 3) {
+            tv_buyer_state.setVisibility(View.VISIBLE);
+            tv_buyer_state.setText("待收货");
+        } else if (buyerState == 4) {
+            tv_buyer_state.setVisibility(View.VISIBLE);
+            tv_buyer_state.setText("已收货");
         }
 
     }
@@ -197,7 +205,7 @@ public class OrderDetailsActivity extends BaseActivity2 {
         RequestParams params = new RequestParams();
         params.put("startRowIndex", 0);
         params.put("maximumRows", 100);
-        params.put("billId", orders.getId());
+        params.put("billId", billId);
         HttpUtils.getProductByOrderNo(new HttpErrorHandler() {
             @Override
             public void onRecevieSuccess(JSONObject json) {
@@ -226,10 +234,13 @@ public class OrderDetailsActivity extends BaseActivity2 {
                     tv_create_order_time.setText(jsonObject.getString("BuildTime"));//创建订单时间
                     tv_dispatch_date.setText(jsonObject.getString("SendTime"));//发货时间
                     tv_postage_price.setText("货到付款");
+                    buyerState = Integer.parseInt(jsonObject.getString("State"));
+                    areaId = jsonObject.getString("AreaId");
 //                    int getPostage = Integer.parseInt(orders.getPostage());
 //                    tv_postage_price.setText(getPostage == 0 ? "包邮" : getPostage == (-1) ? "货到付款" : "邮费：**元");    //上部邮费.....卖家包邮
                 }
                 orderDetailsItemAdaptet.notifyDataSetChanged();
+                getReceiverInfo();
                 /**
                  * ListView自适应高度
                  */
@@ -242,7 +253,7 @@ public class OrderDetailsActivity extends BaseActivity2 {
 
 
     private void selectButtonFromType(final int mType) {
-        final String orderId = orders.getId();
+        final String orderId = billId;
         if (mType == 1) {
             tv_left_btn.setVisibility(View.VISIBLE);
             tv_left_btn.setText("取消订单");

@@ -12,6 +12,7 @@ import com.hewuzhe.model.User;
 import com.hewuzhe.ui.activity.CondtionCommetnsActivity;
 import com.hewuzhe.ui.activity.FollowedFriendsActivity;
 import com.hewuzhe.ui.activity.GroupConditionActivity;
+import com.hewuzhe.ui.activity.OrderDetailsActivity;
 import com.hewuzhe.ui.activity.TestActivity;
 import com.hewuzhe.utils.Bun;
 import com.hewuzhe.utils.NU;
@@ -75,7 +76,6 @@ public class MyReceiver extends BroadcastReceiver {
                                     i = new Intent(context, GroupConditionActivity.class);
                                     i.putExtra("data", new Bun().putInt("teamid", user.TeamId).ok());
                                     break;
-
                                 case 2:
                                     i = new Intent(context, FollowedFriendsActivity.class);
                                     break;
@@ -85,9 +85,12 @@ public class MyReceiver extends BroadcastReceiver {
                                 case 4:
                                     i = new Intent(context, CondtionCommetnsActivity.class);
                                     break;
-
+                                case 9:
+                                    i = new Intent(context, OrderDetailsActivity.class).putExtra("billId", msgExtra.id);
+                                    break;
+                                default:
+                                    break;
                             }
-
 
                             if (i != null) {
                             }

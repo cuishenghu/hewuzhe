@@ -25,8 +25,11 @@ import butterknife.ButterKnife;
  */
 public class SiteAdapter extends BaseAdapter<SiteAdapter.VHolder, Site, SitePresenter> {
 
-    public SiteAdapter(Context context, SitePresenter presenter) {
+    private int sel = 0;
+
+    public SiteAdapter(Context context, SitePresenter presenter, int sel) {
         super(context, presenter, false);
+        this.sel = sel;
     }
 
     @Override
@@ -58,8 +61,10 @@ public class SiteAdapter extends BaseAdapter<SiteAdapter.VHolder, Site, SitePres
                 @Override
                 public void onClick(View view) {
                     _presenter.setDefault(site.Id);
-                    ((SiteActivity)context).setResult(9, new Intent().putExtra("site", site));
-                    ((SiteActivity)context).finish();
+                    if(sel == 0){
+                        ((SiteActivity)context).setResult(9, new Intent().putExtra("site", site));
+                        ((SiteActivity)context).finish();
+                    }
                 }
             });
         }

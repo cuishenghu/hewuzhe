@@ -154,7 +154,7 @@ public class MoreFragment extends ToolBarFragment {
         layAddress.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                getActivity().startActivity(new Intent(getActivity(), SiteActivity.class));
+                getActivity().startActivity(new Intent(getActivity(), SiteActivity.class).putExtra("sel", 1));
             }
         });
     }

@@ -46,7 +46,7 @@ public class SiteActivity extends RecycleViewActivity<SitePresenter, SiteAdapter
 
     @Override
     protected SiteAdapter provideAdapter() {
-        return new SiteAdapter(getContext(), presenter);
+        return new SiteAdapter(getContext(), presenter, getIntent().getIntExtra("sel", 0));
     }
 
     @Override

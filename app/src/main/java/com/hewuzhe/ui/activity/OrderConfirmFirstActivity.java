@@ -52,11 +52,11 @@ public class OrderConfirmFirstActivity extends BaseActivity2 {
     private MyCommonTitle myCommonTitle;
     private LinearLayout ll_no_address, ll_address, ll_alipay, ll_weixin, ll_money, ll_score;
     private TextView tv_username, tv_mobile, tv_address, tv_order_sum, tv_total_price, tv_submit, tv_postage_price, tv_postage, tv_my_score;
-    private EditText ed_score;
+    private EditText ed_content;
     private ImageView img_weixin, img_alipay;
     private ListView order_list;
     private String type;
-    private String areaId;//传过来收货地址ID
+    private String areaId;//订单中心传过来收货地址ID
     private String score;//用户积分>>>>>>>>从积分兑换商品跳转过来传用户积分,显示积分兑换功能,隐藏支付宝和微信支付功能
     private static final int REQUEST_CODE_PAYMENT = 1;
     private String billId;//此处为购物车结算传过来的订单ID
@@ -75,6 +75,7 @@ public class OrderConfirmFirstActivity extends BaseActivity2 {
     private String total_price;//订单总价
     private Site site;
     private OrderContent orderContent;
+    private double totlePrice = 0.00;
     private String deliveryId;//默认收货地址ID
     //    private String postageState;//邮费状态0包邮  -1货到付款  其他显示邮费金额
     private String liveryPrice;
@@ -132,7 +133,7 @@ public class OrderConfirmFirstActivity extends BaseActivity2 {
         ll_alipay = (LinearLayout) findViewById(R.id.ll_zhifubao);
         ll_weixin = (LinearLayout) findViewById(R.id.ll_weixin);
         tv_my_score = (TextView) findViewById(R.id.tv_my_score);//我的积分
-        ed_score = (EditText) findViewById(R.id.ed_score);//商品兑换需要积分
+        ed_content = (EditText) findViewById(R.id.ed_content);//确认订单的备注信息
         img_weixin = (ImageView) findViewById(R.id.img_select_weixni);//选择微信支付
         img_alipay = (ImageView) findViewById(R.id.img_select_alipay);//选择支付宝支付
 
@@ -141,6 +142,13 @@ public class OrderConfirmFirstActivity extends BaseActivity2 {
         getDefaultAddress();// 查询默认收货地址，若没有默认收货地址，则返回第一个收货地址
 
         setListener(ll_no_address, ll_address, ll_alipay, ll_weixin, tv_submit);
+//        int i = tv_total_price.getText().toString().indexOf("¥");
+//        int j = tv_total_price.getText().toString().length();
+//        String totalprice = tv_total_price.getText().toString().substring(tv_total_price.getText().toString().indexOf("¥")+1, tv_total_price.getText().toString().length());
+//        if (Integer.parseInt(totalprice) != 0) {
+//            setListener();
+//        }
+
 //        if (product != null) {
 //            list = new ArrayList<OrderChild>();
 //            OrderChild orderChild = new OrderChild();
@@ -245,7 +253,6 @@ public class OrderConfirmFirstActivity extends BaseActivity2 {
         }
         if (StringUtil.isEmpty(total_price)) {
             double price = 0.00;
-            double totlePrice = 0.00;
             int number = 0;
             for (int i = 0; i < list.size(); i++) {
                 price = Double.parseDouble(list.get(i).getProductPriceTotalPrice());//单价
@@ -297,28 +304,31 @@ public class OrderConfirmFirstActivity extends BaseActivity2 {
                     Tools.toast(OrderConfirmFirstActivity.this, "请先添加收货地址");
                     break;
                 }
-                if (!StringUtil.isEmpty(state)) {
-                    if (Integer.parseInt(state) == 2) {
+                if ((int)totlePrice==0){
+                break;
+            }
+            if (!StringUtil.isEmpty(state)) {
+                if (Integer.parseInt(state) == 2) {
 //                    userId 用户ID
 //                    deliveryId 收货地址ID
 //                    description 订单备注
 //                    basketDeatilIdList 购物车明细ID 用“&”拼接
-                        for (int i = 0; i < list.size(); i++) {
-                            String productId = list.get(i).getId();
-                            basketDeatilIdList = basketDeatilIdList + productId + "&";
-                        }
-                        basketDeatilIdList = basketDeatilIdList.substring(0, basketDeatilIdList.length() - 1);
-                        submitBasket();
-                    } else if (Integer.parseInt(state) == 1) {
-                        for (int i = 0; i < list.size(); i++) {
-                            buyNow(i);
-                        }
+                    for (int i = 0; i < list.size(); i++) {
+                        String productId = list.get(i).getId();
+                        basketDeatilIdList = basketDeatilIdList + productId + "&";
                     }
-                } else {
-                    billId = order.getId();
-                    confirmSubmitCharge(billId);
+                    basketDeatilIdList = basketDeatilIdList.substring(0, basketDeatilIdList.length() - 1);
+                    submitBasket();
+                } else if (Integer.parseInt(state) == 1) {
+                    for (int i = 0; i < list.size(); i++) {
+                        buyNow(i);
+                    }
                 }
-                break;
+            } else {
+                billId = order.getId();
+                confirmSubmitCharge(billId);
+            }
+            break;
         }
     }
 
@@ -333,7 +343,7 @@ public class OrderConfirmFirstActivity extends BaseActivity2 {
         params.put("priceId", list.get(i).getProductPriceId());//  价格ID
         params.put("price", list.get(i).getProductPriceTotalPrice());// 商品单价
         params.put("deliveryId", deliveryId);
-        params.put("description", "sdfasf");//订单备注
+        params.put("description", ed_content.getText().toString());//订单备注
         HttpUtils.buyNow(new HttpErrorHandler() {
             @Override
             public void onRecevieSuccess(JSONObject json) {
@@ -351,7 +361,7 @@ public class OrderConfirmFirstActivity extends BaseActivity2 {
         RequestParams params = new RequestParams();
         params.put("userId", new SessionUtil(OrderConfirmFirstActivity.this).getUserId());
         params.put("deliveryId", deliveryId);
-        params.put("description", "sd");
+        params.put("description", ed_content.getText().toString());
         params.put("basketDeatilIdList", basketDeatilIdList);
         HttpUtils.submitBasket(new HttpErrorHandler() {
             @Override
@@ -432,7 +442,7 @@ public class OrderConfirmFirstActivity extends BaseActivity2 {
                     Tools.toast(this, "您已经付款成功");
 //                    startActivity(new Intent(OrderConfirmFirstActivity.this, OrderCenterActivity.class).putExtra("mType", 2 + ""));
 //                    reflush();
-//                    finish();
+                    finish();
                 } else if (result.equals("fail")) {
                     Tools.toast(this, "支付失败，请重试！");
 //                    setResult(RESULT_OK);
@@ -450,13 +460,13 @@ public class OrderConfirmFirstActivity extends BaseActivity2 {
 //                    setResult(RESULT_OK);
 //                    startActivity(new Intent(OrderConfirmFirstActivity.this, OrderCenterActivity.class).putExtra("mType", 1 + ""));
 //                    reflush();
-//                    finish();
+                    finish();
                 } else if (resultCode == Activity.RESULT_CANCELED) {
                     Tools.toast(this, "支付取消！");
 //                    setResult(RESULT_OK);
 //                    startActivity(new Intent(OrderConfirmFirstActivity.this, OrderCenterActivity.class).putExtra("mType", 1 + ""));
 //                    reflush();
-//                    finish();
+                    finish();
                 }
             }
         } else if (requestCode == 11) {

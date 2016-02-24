@@ -146,10 +146,7 @@ public class OrderGroupAdapter extends BaseAdapter {
             public void onItemClick(AdapterView<?> parent, View view, int psition, long id) {
 //                Toast.makeText(context, position+"", Toast.LENGTH_LONG).show();
                 Intent intent = new Intent(context, OrderDetailsActivity.class);
-                intent.putExtra("order", orderNumber);
-                intent.putExtra("mType", mType);
-                intent.putExtra("state", orderNumber.getState());
-                intent.putExtra("areaId", orderNumber.getAreaId());
+                intent.putExtra("billId", orderNumber.getId());
                 ((FragmentActivity)context).startActivityForResult((intent), 11);
             }
         });

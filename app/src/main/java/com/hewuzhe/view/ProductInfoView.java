@@ -12,4 +12,5 @@ import java.util.ArrayList;
 public interface ProductInfoView extends GetView<Product> {
     void bindData(Product data);
     void GetPostageState(double state);
+    void showCount(int count);
 }

@@ -7,6 +7,7 @@ import com.hewuzhe.model.Charge;
 import com.hewuzhe.model.Product;
 import com.hewuzhe.model.Res;
 import com.hewuzhe.model.Result;
+import com.hewuzhe.model.ShopCar;
 import com.hewuzhe.presenter.base.BasePresenterImp;
 import com.hewuzhe.ui.cons.C;
 import com.hewuzhe.utils.NetEngine;
@@ -193,6 +194,37 @@ public class ProductInfoPresenter extends BasePresenterImp<ProductInfoView> {
 
                     @Override
                     public void onError(Throwable e) {
+                    }
+                });
+        addSubscription(subscription);
+    }
+
+    public void getCount(){
+        int i = new SessionUtil(view.getContext()).getUserId();
+        Subscription subscription = NetEngine.getService()
+                .SelectBasketProduct(0, 1000, new SessionUtil(view.getContext()).getUserId())
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new SB<Res<ArrayList<ShopCar>>>() {
+
+                    @Override
+                    public void next(Res<ArrayList<ShopCar>> res) {
+//                        String s = res.toString();
+                        if (res.code == C.OK) {
+                            view.showCount(res.data.size());
+                        }
+                    }
+
+                    @Override
+                    public void onCompleted() {
+
+                        view.dismissDialog();
+                    }
+
+                    @Override
+                    public void onError(Throwable e) {
+                        view.dismissDialog();
+
                     }
                 });
         addSubscription(subscription);

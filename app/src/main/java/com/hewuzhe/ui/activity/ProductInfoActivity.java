@@ -23,11 +23,14 @@ import android.widget.Toast;
 import android.widget.ViewFlipper;
 
 import com.bumptech.glide.Glide;
+import com.google.gson.Gson;
 import com.hewuzhe.R;
 import com.hewuzhe.banner.CircleFlowIndicator;
 import com.hewuzhe.banner.ImagePagerAdapter;
 import com.hewuzhe.banner.ViewFlow;
+import com.hewuzhe.model.FriendCondition;
 import com.hewuzhe.model.OrderContent;
+import com.hewuzhe.model.Pic;
 import com.hewuzhe.model.Product;
 import com.hewuzhe.model.ProductComment;
 import com.hewuzhe.presenter.ProductInfoPresenter;
@@ -56,6 +59,7 @@ import butterknife.OnClick;
 public class ProductInfoActivity extends ToolBarActivity<ProductInfoPresenter> implements ProductInfoView, OnItemClickListener {
 
     @Bind(R.id.product_title)       TextView product_title;         //商品名称
+    @Bind(R.id.tv_count)       TextView tv_count;         //商品名称
     @Bind(R.id.product_price)       TextView product_price;         //商品价格
     @Bind(R.id.product_liveryPrice) TextView product_liveryPrice;   //商品运费
     @Bind(R.id.product_visitNum)    TextView product_visitNum;      //浏览数
@@ -165,6 +169,8 @@ public class ProductInfoActivity extends ToolBarActivity<ProductInfoPresenter> i
 
     }
 
+
+
     @OnClick(R.id.user_comment)
     public void userComment(){
         startActivity(new Intent(this,ProductCommentActivity.class).putExtra("productId",product.Id));
@@ -225,6 +231,12 @@ public class ProductInfoActivity extends ToolBarActivity<ProductInfoPresenter> i
 
         }
     };
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        presenter.getCount();
+    }
 
     @Override
     public void bindData(Product data) {
@@ -335,6 +347,7 @@ public class ProductInfoActivity extends ToolBarActivity<ProductInfoPresenter> i
 
                 if (!tag_color.trim().equals("") && !tag_size.trim().equals("")) {
                     presenter.addInsertBasket(product.Id, number, price_num, price, v);
+                    presenter.getCount();
                     pop.dismiss();
                 } else {
                     Toast.makeText(ProductInfoActivity.this, "请重新选择规格", Toast.LENGTH_SHORT).show();
@@ -436,6 +449,16 @@ public class ProductInfoActivity extends ToolBarActivity<ProductInfoPresenter> i
     }
 
     @Override
+    public void showCount(int count) {
+        if (count > 0) {
+            tv_count.setVisibility(View.VISIBLE);
+            tv_count.setText(count + "");
+        } else {
+            tv_count.setVisibility(View.GONE);
+        }
+    }
+
+    @Override
     public ProductInfoPresenter createPresenter() {
         return new ProductInfoPresenter();
     }
@@ -473,7 +496,7 @@ public class ProductInfoActivity extends ToolBarActivity<ProductInfoPresenter> i
 
     private void initBanner(ArrayList<String> imageUrlList) {
 
-        mViewFlow.setAdapter(new ImagePagerAdapter(this, imageUrlList, linkUrlArray, titleList).setInfiniteLoop(true));
+        mViewFlow.setAdapter(new ImagePagerAdapter(this, imageUrlList, linkUrlArray, titleList,product.PicList).setInfiniteLoop(true));
         mViewFlow.setmSideBuffer(imageUrlList.size()); // 实际图片张数，
         // 我的ImageAdapter实际图片张数为3
 

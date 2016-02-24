@@ -124,66 +124,66 @@ public class ProductListActivity extends RecycleViewActivity<ProductListPresente
     public void onSearchMethod(View v){
         switch (v.getId()){
             case R.id.salenum_title:
-                if(this.id_o==2) {
+                if(this.id_o==1) {
                     salenum_bottom.setImageResource(R.mipmap.prolistbottom_click);
                     salenum_top.setImageResource(R.mipmap.prolisttop);
-                    id_o=1;
-                }else if(this.id_o==1){
+                    id_o=2;
+                }else if(this.id_o==2){
                     salenum_bottom.setImageResource(R.mipmap.prolistbottom);
                     salenum_top.setImageResource(R.mipmap.prolisttop_click);
-                    id_o=2;
+                    id_o=1;
                 }else{
                     salenum_bottom.setImageResource(R.mipmap.prolistbottom_click);
                     salenum_top.setImageResource(R.mipmap.prolisttop);
-                    id_o=1;
+                    id_o=2;
                 }
                 presenter.getData(page, count,searchText,0,id_t,id_o,id_s,id_f,0,0);
                 break;
             case R.id.price_title:
-                if(this.id_t==2) {
+                if(this.id_t==1) {
                     price_bottom.setImageResource(R.mipmap.prolistbottom_click);
                     price_top.setImageResource(R.mipmap.prolisttop);
-                    id_t=1;
-                }else if(this.id_t==1){
+                    id_t=2;
+                }else if(this.id_t==2){
                     price_bottom.setImageResource(R.mipmap.prolistbottom);
                     price_top.setImageResource(R.mipmap.prolisttop_click);
-                    id_t=2;
+                    id_t=1;
                 }else{
                     price_bottom.setImageResource(R.mipmap.prolistbottom_click);
                     price_top.setImageResource(R.mipmap.prolisttop);
-                    id_t=1;
+                    id_t=2;
                 }
                 presenter.getData(page, count,searchText,0,id_t,id_o,id_s,id_f,0,0);
                 break;
             case R.id.comment_title:
-                if(this.id_s==2) {
+                if(this.id_s==1) {
                     comment_bottom.setImageResource(R.mipmap.prolistbottom_click);
                     comment_top.setImageResource(R.mipmap.prolisttop);
-                    id_s=1;
-                }else if(this.id_s==1){
+                    id_s=2;
+                }else if(this.id_s==2){
                     comment_bottom.setImageResource(R.mipmap.prolistbottom);
                     comment_top.setImageResource(R.mipmap.prolisttop_click);
-                    id_s=2;
+                    id_s=1;
                 }else {
                     comment_bottom.setImageResource(R.mipmap.prolistbottom_click);
                     comment_top.setImageResource(R.mipmap.prolisttop);
-                    id_s=1;
+                    id_s=2;
                 }
                 presenter.getData(page, count,searchText,0,id_t,id_o,id_s,id_f,0,0);
                 break;
             case R.id.new_title:
-                if(this.id_f==2) {
+                if(this.id_f==1) {
                     new_bottom.setImageResource(R.mipmap.prolistbottom_click);
                     new_top.setImageResource(R.mipmap.prolisttop);
-                    id_f=1;
-                }else if(this.id_f==1){
+                    id_f=2;
+                }else if(this.id_f==2){
                     new_bottom.setImageResource(R.mipmap.prolistbottom);
                     new_top.setImageResource(R.mipmap.prolisttop_click);
-                    id_f=2;
+                    id_f=1;
                 }else{
                     new_bottom.setImageResource(R.mipmap.prolistbottom_click);
                     new_top.setImageResource(R.mipmap.prolisttop);
-                    id_f=1;
+                    id_f=2;
                 }
                 presenter.getData(page, count,searchText,0,id_t,id_o,id_s,id_f,0,0);
                 break;

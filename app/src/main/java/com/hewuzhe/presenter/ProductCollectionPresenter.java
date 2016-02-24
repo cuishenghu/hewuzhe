@@ -45,17 +45,16 @@ public class ProductCollectionPresenter extends RefreshAndLoadMorePresenter<Prod
                             view.bindData(res.data);
                             setDataStatus(page, count, res);
                         }
+                        view.refresh(false);
                     }
 
                     @Override
                     public void onCompleted() {
-
-                        view.dismissDialog();
                     }
 
                     @Override
                     public void onError(Throwable e) {
-                        view.dismissDialog();
+                        view.refresh(false);
 
                     }
                 });

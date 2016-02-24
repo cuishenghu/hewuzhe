@@ -94,6 +94,24 @@ public class SessionUtil {
 
     }
 
+    public void removeUp(UP up) {
+        ArrayList<UP> ups = getUPs();
+        if (ups == null) {
+            ups = new ArrayList<>();
+        }
+
+        for (UP up1 : ups) {
+            if (up1.userName.equals(up.userName)) {
+                ups.remove(up1);
+            }
+        }
+
+        SharedPreferences share = context.getSharedPreferences("user", 0);
+        SharedPreferences.Editor editor = share.edit();
+        editor.putString("up", new Gson().toJson(ups));
+        editor.commit();
+    }
+
     private boolean contains(ArrayList<UP> ups, UP up) {
         for (UP up1 : ups) {
             if (up1.userName.equals(up.userName)) {

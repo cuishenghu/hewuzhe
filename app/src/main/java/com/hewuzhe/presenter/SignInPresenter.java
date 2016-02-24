@@ -3,6 +3,7 @@ package com.hewuzhe.presenter;
 import android.content.Intent;
 import android.view.View;
 
+import com.google.gson.Gson;
 import com.hewuzhe.model.Res;
 import com.hewuzhe.model.UP;
 import com.hewuzhe.model.User;
@@ -15,12 +16,17 @@ import com.hewuzhe.utils.SessionUtil;
 import com.hewuzhe.utils.StringUtil;
 import com.hewuzhe.view.SignInView;
 import com.socks.library.KLog;
+import com.zhy.http.okhttp.OkHttpUtils;
+import com.zhy.http.okhttp.callback.StringCallback;
+
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.util.Set;
 
 import cn.jpush.android.api.JPushInterface;
 import cn.jpush.android.api.TagAliasCallback;
-import rx.Subscriber;
+import okhttp3.Request;
 import rx.Subscription;
 import rx.android.schedulers.AndroidSchedulers;
 import rx.functions.Action0;
@@ -46,56 +52,113 @@ public class SignInPresenter extends BasePresenterImp<SignInView> {
                 return;
             }
 
-            Subscription subscription = NetEngine.getService()
-                    .Login(user.UserName, user.PassWord)
-                    .subscribeOn(Schedulers.io())
-                    .doOnSubscribe(new Action0() {
+            view.showDialog();
+
+            OkHttpUtils
+                    .get()
+                    .url(C.BASE_URL + "LoginAndRegister.asmx/Login")
+                    .addParams("username", user.UserName)
+                    .addParams("password", user.PassWord)
+                    .build()
+                    .execute(new StringCallback() {
                         @Override
-                        public void call() {
-                            view.showDialog();
-                        }
-                    })
-                    .subscribeOn(AndroidSchedulers.mainThread())
-                    .observeOn(AndroidSchedulers.mainThread())
-                    .subscribe(new Subscriber<Res<User>>() {
-                        @Override
-                        public void onCompleted() {
+                        public void onError(Request request, Exception e) {
+                            KLog.d(e.getMessage());
                             view.dismissDialog();
+
                         }
 
                         @Override
-                        public void onError(Throwable e) {
+                        public void onResponse(String response) {
+                            KLog.d(response);
                             view.dismissDialog();
-                            view.snb("登录失败", v);
-                        }
 
-                        @Override
-                        public void onNext(Res<User> userRes) {
-                            if (userRes.code == C.OK) {
-                                /**保存数据**/
-                                SessionUtil sessionUtil = new SessionUtil(view.getContext());
-                                UP up = new UP(user.UserName, user.PassWord);
-                                sessionUtil.putUP(up);
+                            try {
+                                JSONObject jsonObject = new JSONObject(response);
+                                int code = jsonObject.optInt("code");
+                                if (code == C.OK) {
+                                    /**保存数据**/
+                                    SessionUtil sessionUtil = new SessionUtil(view.getContext());
+                                    UP up = new UP(user.UserName, user.PassWord);
+                                    sessionUtil.removeUp(up);
+                                    sessionUtil.putUP(up);
 
-                                user = userRes.data;
-                                sessionUtil.putUser(user);
+                                    user = new Gson().fromJson(jsonObject.optString("data").toString(), User.class);
+                                    sessionUtil.putUser(user);
 
-                                JPushInterface.setAlias(view.getContext(), "alias_" + user.Id, new TagAliasCallback() {
-                                    @Override
-                                    public void gotResult(int i, String s, Set<String> set) {
-                                        KLog.d(s);
-                                    }
-                                });
+                                    JPushInterface.setAlias(view.getContext(), "alias_" + user.Id, new TagAliasCallback() {
+                                        @Override
+                                        public void gotResult(int i, String s, Set<String> set) {
+                                            KLog.d(s);
+                                        }
+                                    });
 
-                                view.getContext().startActivity(new Intent(view.getContext(), MainActivity.class));
-                                view.finishActivity();
-                            } else {
-                                view.snb("登录失败", v);
+                                    view.getContext().startActivity(new Intent(view.getContext(), MainActivity.class));
+                                    view.finishActivity();
+
+
+                                } else {
+                                    view.toast(jsonObject.getString("data"));
+                                }
+                            } catch (JSONException e) {
+                                e.printStackTrace();
                             }
+
 
                         }
                     });
-            addSubscription(subscription);
+
+
+//            Subscription subscription = NetEngine.getService()
+//                    .Login(user.UserName, user.PassWord)
+//                    .subscribeOn(Schedulers.io())
+//                    .doOnSubscribe(new Action0() {
+//                        @Override
+//                        public void call() {
+//                            view.showDialog();
+//                        }
+//                    })
+//                    .subscribeOn(AndroidSchedulers.mainThread())
+//                    .observeOn(AndroidSchedulers.mainThread())
+//                    .subscribe(new Subscriber<Res<User>>() {
+//                        @Override
+//                        public void onCompleted() {
+//                            view.dismissDialog();
+//                        }
+//
+//                        @Override
+//                        public void onError(Throwable e) {
+//                            view.dismissDialog();
+//                            view.snb("登录失败", v);
+//                        }
+//
+//                        @Override
+//                        public void onNext(Res<User> userRes) {
+//                            if (userRes.code == C.OK) {
+//                                /**保存数据**/
+//                                SessionUtil sessionUtil = new SessionUtil(view.getContext());
+//                                UP up = new UP(user.UserName, user.PassWord);
+//                                sessionUtil.putUP(up);
+//
+//                                user = userRes.data;
+//                                sessionUtil.putUser(user);
+//
+//                                JPushInterface.setAlias(view.getContext(), "alias_" + user.Id, new TagAliasCallback() {
+//                                    @Override
+//                                    public void gotResult(int i, String s, Set<String> set) {
+//                                        KLog.d(s);
+//                                    }
+//                                });
+//
+//                                view.getContext().startActivity(new Intent(view.getContext(), MainActivity.class));
+//                                view.finishActivity();
+//                            } else {
+//                                view.snb("登录失败", v);
+//                            }
+//
+//                        }
+//                    });
+//            addSubscription(subscription);
         } else {
             view.snb("登录失败__", v);
             view.dismissDialog();

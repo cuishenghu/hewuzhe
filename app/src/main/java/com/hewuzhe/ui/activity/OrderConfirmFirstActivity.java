@@ -304,7 +304,7 @@ public class OrderConfirmFirstActivity extends BaseActivity2 {
                     Tools.toast(OrderConfirmFirstActivity.this, "请先添加收货地址");
                     break;
                 }
-                if ((int)totlePrice==0){
+                if (totlePrice==0.00){
                 break;
             }
             if (!StringUtil.isEmpty(state)) {
@@ -383,7 +383,7 @@ public class OrderConfirmFirstActivity extends BaseActivity2 {
         String o = total_price;
         params.put("amount", (int) (Double.parseDouble(total_price) * 100));//金额
 //                params.put("amount", 1);//金额
-        params.put("description", "是电风扇的");//描述
+        params.put("description", "dsfg");//描述
         params.put("billId", billId);//订单号
         params.put("flg", "1");//flg 类型 0：充值会员 1：购买商品
         HttpUtils.confirmSubmitCharge(new AbstractHttpHandler() {

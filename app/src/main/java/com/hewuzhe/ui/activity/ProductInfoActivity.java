@@ -1,12 +1,8 @@
 package com.hewuzhe.ui.activity;
 
-import android.app.AlertDialog;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.drawable.BitmapDrawable;
 import android.os.Bundle;
-import android.support.v4.view.ViewCompat;
-import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.Gravity;
 import android.view.LayoutInflater;
@@ -15,7 +11,6 @@ import android.view.ViewGroup;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
-import android.widget.ListView;
 import android.widget.PopupWindow;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
@@ -28,16 +23,12 @@ import com.hewuzhe.R;
 import com.hewuzhe.banner.CircleFlowIndicator;
 import com.hewuzhe.banner.ImagePagerAdapter;
 import com.hewuzhe.banner.ViewFlow;
-import com.hewuzhe.model.FriendCondition;
 import com.hewuzhe.model.OrderContent;
 import com.hewuzhe.model.Pic;
 import com.hewuzhe.model.Product;
-import com.hewuzhe.model.ProductComment;
 import com.hewuzhe.presenter.ProductInfoPresenter;
-import com.hewuzhe.presenter.base.BasePresenterImp;
 import com.hewuzhe.ui.adapter.ProductColorAdapter;
 import com.hewuzhe.ui.adapter.ProductInfoAdapter;
-import com.hewuzhe.ui.adapter.base.BaseAdapter;
 import com.hewuzhe.ui.base.SyLinearLayoutManager;
 import com.hewuzhe.ui.base.ToolBarActivity;
 import com.hewuzhe.ui.cons.C;
@@ -50,7 +41,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.Bind;
-import butterknife.ButterKnife;
 import butterknife.OnClick;
 
 /**

@@ -200,9 +200,19 @@ public class SignInActivity extends BaseActivity<SignInPresenter> implements Sig
     public void showDialog() {
         if (loadingDialog == null) {
             loadingDialog = new LoadingDialog(SignInActivity.this, "正在登录...");
+            loadingDialog.setCanceledOnTouchOutside(false);
         }
         loadingDialog.show();
     }
+
+    public void showDialog(String content) {
+        if (loadingDialog == null) {
+            loadingDialog = new LoadingDialog(SignInActivity.this, content);
+            loadingDialog.setCanceledOnTouchOutside(false);
+        }
+        loadingDialog.show();
+    }
+
 
     @Override
     public void dismissDialog() {
@@ -225,13 +235,12 @@ public class SignInActivity extends BaseActivity<SignInPresenter> implements Sig
         return user;
     }
 
-
     private void authorize(Platform plat) {
+        showDialog("正在调起授权");
         if (plat == null) {
 //          popupOthers();
             return;
         }
-
         /**
          * 清除之前的账户
          * */
@@ -252,11 +261,11 @@ public class SignInActivity extends BaseActivity<SignInPresenter> implements Sig
         plat.SSOSetting(false);
         //获取用户资料
         plat.showUser(null);
-
     }
 
 
     public void onComplete(Platform platform, int action, HashMap<String, Object> res) {
+        dismissDialog();
         if (action == Platform.ACTION_USER_INFOR) {
             Message msg = new Message();
             msg.what = MSG_AUTH_COMPLETE;
@@ -266,6 +275,8 @@ public class SignInActivity extends BaseActivity<SignInPresenter> implements Sig
     }
 
     public void onError(Platform platform, int action, Throwable t) {
+        dismissDialog();
+
         if (action == Platform.ACTION_USER_INFOR) {
             handler.sendEmptyMessage(MSG_AUTH_ERROR);
         }
@@ -273,13 +284,16 @@ public class SignInActivity extends BaseActivity<SignInPresenter> implements Sig
     }
 
     public void onCancel(Platform platform, int action) {
+        dismissDialog();
         if (action == Platform.ACTION_USER_INFOR) {
             handler.sendEmptyMessage(MSG_AUTH_CANCEL);
         }
     }
 
+
     @SuppressWarnings("unchecked")
     public boolean handleMessage(Message msg) {
+        dismissDialog();
         switch (msg.what) {
             case MSG_AUTH_CANCEL: {
                 //取消授权
@@ -307,5 +321,11 @@ public class SignInActivity extends BaseActivity<SignInPresenter> implements Sig
             break;
         }
         return false;
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        dismissDialog();
     }
 }

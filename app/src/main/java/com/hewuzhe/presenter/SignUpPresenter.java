@@ -4,6 +4,7 @@ import android.view.View;
 
 import com.hewuzhe.model.PwdModel;
 import com.hewuzhe.model.Res;
+import com.hewuzhe.model.UP;
 import com.hewuzhe.model.User;
 import com.hewuzhe.presenter.base.BasePresenterImp;
 import com.hewuzhe.ui.activity.SignupProfileActivity;
@@ -29,6 +30,8 @@ import rx.schedulers.Schedulers;
 public class SignUpPresenter extends BasePresenterImp<SignUpView> {
 
 
+    private static int WHITCH = 0;
+
     public EventHandler eh;
     private String phoneNum;
     private String code;
@@ -51,6 +54,8 @@ public class SignUpPresenter extends BasePresenterImp<SignUpView> {
         this.v = v;
         code = view.getCode();
         phoneNum = view.getPhoneNum();
+
+        WHITCH = 0;
 
         if (StringUtil.isEmpty(code)) {
             view.snb("请填写验证码", v);
@@ -141,45 +146,18 @@ public class SignUpPresenter extends BasePresenterImp<SignUpView> {
                     if (event == SMSSDK.EVENT_SUBMIT_VERIFICATION_CODE) {
                         /**
                          * 验证成功
+                         *
+                         *
                          * */
+
                         view.getHandler().post(new Runnable() {
                             @Override
                             public void run() {
-                                /**注册**/
-                                Subscription subscription = NetEngine.getService()
-                                        .RegisterAndLogin(phoneNum, pwdModel.pwd)
-                                        .subscribeOn(Schedulers.io())
-                                        .observeOn(AndroidSchedulers.mainThread())
-                                        .subscribe(new SB<Res>() {
-                                            @Override
-                                            public void next(Res res) {
-                                                if (res.code == C.OK) {
-                                                    view.snb("注册成功", v);
-
-                                                    signin(phoneNum, pwdModel.pwd, v);
-                                                } else if (res.code == 1) {
-                                                    view.snb("此号码已经注册", v);
-                                                } else {
-                                                    view.snb("注册失败", v);
-                                                }
-                                            }
-
-                                            @Override
-                                            public void onCompleted() {
-                                                view.dismissDialog();
-
-                                            }
-
-                                            @Override
-                                            public void onError(Throwable e) {
-                                                view.dismissDialog();
-                                                view.snb("注册失败", v);
-                                            }
-                                        });
-
-
-                                addSubscription(subscription);
-
+                                if (WHITCH == 0) {
+                                    registers();
+                                } else {
+                                    changePwds();
+                                }
 
                             }
                         });
@@ -209,6 +187,43 @@ public class SignUpPresenter extends BasePresenterImp<SignUpView> {
         };
 
         SMSSDK.registerEventHandler(eh); //注册短信回调
+    }
+
+    private void registers() {
+        /**注册**/
+        Subscription subscription = NetEngine.getService()
+                .RegisterAndLogin(phoneNum, pwdModel.pwd)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new SB<Res>() {
+                    @Override
+                    public void next(Res res) {
+                        if (res.code == C.OK) {
+                            view.snb("注册成功", v);
+
+                            signin(phoneNum, pwdModel.pwd, v);
+                        } else if (res.code == 1) {
+                            view.snb("此号码已经注册", v);
+                        } else {
+                            view.snb("注册失败", v);
+                        }
+                    }
+
+                    @Override
+                    public void onCompleted() {
+                        view.dismissDialog();
+
+                    }
+
+                    @Override
+                    public void onError(Throwable e) {
+                        view.dismissDialog();
+                        view.snb("注册失败", v);
+                    }
+                });
+
+
+        addSubscription(subscription);
     }
 
     public void unRegistSMS() {
@@ -275,7 +290,87 @@ public class SignUpPresenter extends BasePresenterImp<SignUpView> {
     }
 
     public void changePwd(View v) {
+        WHITCH = 1;
+        this.v = v;
+        pwdModel = view.getPwd();
+        phoneNum = view.getPhoneNum();
+        code = view.getCode();
+        if (StringUtil.isEmpty(phoneNum)) {
+            view.snb("用户名不能为空", v);
+            return;
+        }
+
+        if (StringUtil.isEmpty(code)) {
+            view.snb("请填写验证码", v);
+            return;
+        }
+
+        if (!StringUtil.isMobile(phoneNum)) {
+            view.snb("请填写正确的手机号", v);
+            return;
+        }
+
+        if (StringUtil.isEmpty(pwdModel.pwdAgain)) {
+            view.snb("密码不能为空", v);
+            return;
+        }
+        if (StringUtil.isEmpty(pwdModel.pwd)) {
+            view.snb("密码不能为空", v);
+            return;
+        }
+
+        if (!pwdModel.pwd.equals(pwdModel.pwdAgain)) {
+            view.snb("两次密码输入不一致", v);
+            return;
+        }
+
+        view.showDialog();
+        SMSSDK.submitVerificationCode(C.DEFAULT_COUNTRY_ID, phoneNum, code);
+    }
+
+    private void changePwds() {
 
 
+        Subscription subscription = NetEngine.getService()
+                .ForgetPassword(phoneNum, pwdModel.pwd)
+                .subscribeOn(Schedulers.io())
+                .doOnSubscribe(new Action0() {
+                    @Override
+                    public void call() {
+                        view.showDialog();
+                    }
+                })
+                .subscribeOn(AndroidSchedulers.mainThread())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new SB<Res>() {
+                    @Override
+                    public void next(Res res) {
+                        if (res.code == C.OK) {
+
+                            SessionUtil sessionUtil = new SessionUtil(view.getContext());
+                            UP up = new UP(phoneNum, pwdModel.pwd);
+                            sessionUtil.removeUp(up);
+                            sessionUtil.putUP(up);
+
+                            view.toast("找回成功");
+                            view.finishActivity();
+                        } else {
+                            view.toast("找回失败");
+                        }
+                    }
+
+                    @Override
+                    public void onCompleted() {
+                        view.dismissDialog();
+                    }
+
+                    @Override
+                    public void onError(Throwable e) {
+                        view.dismissDialog();
+
+                    }
+                });
+
+        addSubscription(subscription);
     }
 }

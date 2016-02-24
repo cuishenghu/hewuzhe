@@ -60,6 +60,9 @@ public interface ApiService {
     @GET("LoginAndRegister.asmx/Login")
     Observable<Res<User>> Login(@Query("username") String usernmae, @Query("password") String password);
 
+    @GET("LoginAndRegister.asmx/ForgetPassword")
+    Observable<Res> ForgetPassword(@Query("phone") String usernmae, @Query("password") String password);
+
     @GET("LoginAndRegister.asmx/ChangePassWord")
     Observable<Res> ChangePassWord(@Query("userid") int userid, @Query("oldpwd") String oldpwd, @Query("password") String password);
 

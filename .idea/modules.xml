@@ -3,12 +3,12 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/BGAAdapter/BGAAdapter.iml" filepath="$PROJECT_DIR$/BGAAdapter/BGAAdapter.iml" />
-      <module fileurl="file://$PROJECT_DIR$/Hewuzhe.iml" filepath="$PROJECT_DIR$/Hewuzhe.iml" />
       <module fileurl="file://$PROJECT_DIR$/IMKit/IMKit.iml" filepath="$PROJECT_DIR$/IMKit/IMKit.iml" />
       <module fileurl="file://$PROJECT_DIR$/MaterialProgressBar/MaterialProgressBar.iml" filepath="$PROJECT_DIR$/MaterialProgressBar/MaterialProgressBar.iml" />
       <module fileurl="file://$PROJECT_DIR$/Minisdk-release/Minisdk-release.iml" filepath="$PROJECT_DIR$/Minisdk-release/Minisdk-release.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
       <module fileurl="file://$PROJECT_DIR$/autolayout/autolayout.iml" filepath="$PROJECT_DIR$/autolayout/autolayout.iml" />
+      <module fileurl="file://$PROJECT_DIR$/hewuzhe.iml" filepath="$PROJECT_DIR$/hewuzhe.iml" />
       <module fileurl="file://$PROJECT_DIR$/sinavideo_playercore_v2.0/sinavideo_playercore_v2.0.iml" filepath="$PROJECT_DIR$/sinavideo_playercore_v2.0/sinavideo_playercore_v2.0.iml" />
       <module fileurl="file://$PROJECT_DIR$/sinavideo_playersdk_v2.0/sinavideo_playersdk_v2.0.iml" filepath="$PROJECT_DIR$/sinavideo_playersdk_v2.0/sinavideo_playersdk_v2.0.iml" />
     </modules>

@@ -33,6 +33,7 @@ public class ForgetPwdActivity extends ToolBarActivity<SignUpPresenter> implemen
     private Handler mHandler = new Handler();
     private CountDownTimer countDownTimer;
 
+
     /**
      * @param savedInstanceState 缓存数据
      *                           <p>

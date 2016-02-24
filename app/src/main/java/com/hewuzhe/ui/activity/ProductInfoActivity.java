@@ -347,6 +347,7 @@ public class ProductInfoActivity extends ToolBarActivity<ProductInfoPresenter> i
 
                 if (!tag_color.trim().equals("") && !tag_size.trim().equals("")) {
                     presenter.addInsertBasket(product.Id, number, price_num, price, v);
+                    presenter.getCount();
                     pop.dismiss();
                 } else {
                     Toast.makeText(ProductInfoActivity.this, "请重新选择规格", Toast.LENGTH_SHORT).show();

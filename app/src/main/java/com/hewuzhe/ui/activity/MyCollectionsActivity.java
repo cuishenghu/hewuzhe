@@ -3,6 +3,7 @@ package com.hewuzhe.ui.activity;
 import android.os.Bundle;
 import android.support.design.widget.TabLayout;
 import android.support.v4.view.ViewPager;
+import android.view.View;
 
 import com.hewuzhe.R;
 import com.hewuzhe.model.Product;
@@ -53,7 +54,7 @@ public class MyCollectionsActivity extends TabToolBarActivity {
 
     @Override
     protected String provideTitle() {
-        return "收藏";
+        return "我的收藏";
     }
 
     @Override
@@ -111,11 +112,18 @@ public class MyCollectionsActivity extends TabToolBarActivity {
             public void onPageSelected(int position) {
                 if (!NU.isNull(mViewPager)) {
                     OnReceiveListener<Integer, Boolean> onReceiveListener = (OnReceiveListener) viewPagerAdapter.getItem(position);
+                    if(position==1){
+                        tvAction.setVisibility(View.INVISIBLE);
+                    }else{
+                        tvAction.setVisibility(View.VISIBLE);
+                    }
+
                     if (onReceiveListener.getMsg()) {
                         tvAction.setText("确定");
                     } else {
                         tvAction.setText("删除");
                     }
+
                 }
 
 

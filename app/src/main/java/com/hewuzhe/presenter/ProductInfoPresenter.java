@@ -115,7 +115,7 @@ public class ProductInfoPresenter extends BasePresenterImp<ProductInfoView> {
     public void addInsertBasket(int productId,int num,int priceId,double price,final View v){
 
         Subscription subscription = NetEngine.getService()
-                .InsertBasket(productId,num,priceId,new SessionUtil(view.getContext()).getUserId(),price )
+                .InsertBasket(productId, num, priceId, new SessionUtil(view.getContext()).getUserId(),price )
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new SB<Res>() {

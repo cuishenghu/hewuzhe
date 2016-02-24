@@ -22,6 +22,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 import android.widget.ViewFlipper;
 
+import com.bumptech.glide.Glide;
 import com.hewuzhe.R;
 import com.hewuzhe.banner.CircleFlowIndicator;
 import com.hewuzhe.banner.ImagePagerAdapter;
@@ -65,13 +66,13 @@ public class ProductInfoActivity extends ToolBarActivity<ProductInfoPresenter> i
     @Bind(R.id.product_isfavorite)     ImageView product_isfavorite;           //收藏图
     @Bind(R.id.product_isfavorite_click) LinearLayout product_isfavorite_click;       //收藏click
 
-//    @Bind(R.id.pro_num)
+    //    @Bind(R.id.pro_num)
     TextView pro_num;
 
-//    @Bind(R.id.shopcar_add)
+    //    @Bind(R.id.shopcar_add)
     ImageView shopcar_add;
 
-//    @Bind(R.id.shopcar_sub)
+    //    @Bind(R.id.shopcar_sub)
     ImageView shopcar_sub;
 
     LinearLayout pro_isFavo_click;
@@ -109,6 +110,7 @@ public class ProductInfoActivity extends ToolBarActivity<ProductInfoPresenter> i
     public RecyclerView recyclerView_color;
     public RecyclerView recyclerView_size;
     public ProductInfoAdapter adapter;
+    public ImageView product_image;
     public ProductColorAdapter adapter_color;
     public RecyclerView.LayoutManager layoutManager;
     public TextView pro_buy_now_true;
@@ -196,6 +198,29 @@ public class ProductInfoActivity extends ToolBarActivity<ProductInfoPresenter> i
                 }
             }
 
+            for (int i = 0; i < product.PriceList.size(); i++) {
+                if (product.PriceList.get(i).ColorId == tag_color_num && product.PriceList.get(i).SizeId == tag_size_num) {
+//                    price_num = product.PriceList.get(i).Id;
+                        product_price_true.setText("￥" + product.PriceList.get(i).Price);
+                    if(product.PriceList.get(i).ImagePath.trim().equals(""))
+                    Glide.with(ProductInfoActivity.this)
+                            .load(C.BASE_URL + product.ImagePath)
+                            .centerCrop()
+                            .crossFade()
+                            .placeholder(R.mipmap.img_bg)
+                            .into(product_image);
+                    else
+                        Glide.with(ProductInfoActivity.this)
+                                .load(C.BASE_URL + product.PriceList.get(i).ImagePath)
+                                .centerCrop()
+                                .crossFade()
+                                .placeholder(R.mipmap.img_bg)
+                                .into(product_image);
+//                    price = product.PriceList.get(i).Price;
+                    break;
+                }
+            }
+
 
 
         }
@@ -276,13 +301,13 @@ public class ProductInfoActivity extends ToolBarActivity<ProductInfoPresenter> i
         selectview =(View) mview.findViewById(R.id.menu_selectclose);
 
         product_price_true = (TextView) mview.findViewById(R.id.product_price_true);
-
+        product_image = (ImageView)mview.findViewById(R.id.product_image);
         pro_isFavo_click =(LinearLayout) mview.findViewById(R.id.pro_isFavo_click);
-        pro_isFavo_img =(ImageView) mview.findViewById(R.id.pro_isFavo_img);
+        pro_isFavo_img = (ImageView) mview.findViewById(R.id.pro_isFavo_img);
         pro_isFavo_tit =(TextView) mview.findViewById(R.id.pro_isFavo_tit);
-        shopcar_add  = (ImageView)mview.findViewById(R.id.shopcar_add);
-        shopcar_sub = (ImageView)mview.findViewById(R.id.shopcar_sub);
-        pro_num = (TextView)mview.findViewById(R.id.pro_num);
+        shopcar_add = (ImageView) mview.findViewById(R.id.shopcar_add);
+        shopcar_sub = (ImageView) mview.findViewById(R.id.shopcar_sub);
+        pro_num = (TextView) mview.findViewById(R.id.pro_num);
 
         initData();
 
@@ -328,7 +353,7 @@ public class ProductInfoActivity extends ToolBarActivity<ProductInfoPresenter> i
                 for (int i = 0; i < product.PriceList.size(); i++) {
                     if (product.PriceList.get(i).ColorId == tag_color_num && product.PriceList.get(i).SizeId == tag_size_num) {
                         price_num = product.PriceList.get(i).Id;
-                        product_price_true.setText("￥" + product.PriceList.get(i).Price);
+//                        product_price_true.setText("￥" + product.PriceList.get(i).Price);
                         price = product.PriceList.get(i).Price;
                         break;
                     }

@@ -18,6 +18,7 @@ import com.hewuzhe.ui.adapter.ShopCarAdapter;
 import com.hewuzhe.ui.base.RecycleViewActivity;
 import com.hewuzhe.view.ShopCarView;
 
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 
 import butterknife.Bind;
@@ -43,6 +44,7 @@ public class ShopCarActivity extends RecycleViewActivity<ShopCarPresenter, ShopC
     public boolean isSelectAll;
     public String idList="";
     public String Postage="";
+    public String state="编辑";
 
     public ArrayList<ShopCar> data=new ArrayList<ShopCar>();
 
@@ -55,6 +57,7 @@ public class ShopCarActivity extends RecycleViewActivity<ShopCarPresenter, ShopC
     protected void action() {
         if(tv_action.getText().equals("编辑")){
             tv_action.setText("完成");
+            state="完成";
             for (int i=0;i<data.size();i++){
                 data.get(i).is_show=true;
             }
@@ -62,6 +65,7 @@ public class ShopCarActivity extends RecycleViewActivity<ShopCarPresenter, ShopC
 
         }else{
             tv_action.setText("编辑");
+            state="编辑";
             for (int i=0;i<data.size();i++){
                 data.get(i).is_show=false;
             }
@@ -124,30 +128,32 @@ public class ShopCarActivity extends RecycleViewActivity<ShopCarPresenter, ShopC
 
     @Override
     public void onItemClick(View view, int pos, ShopCar shopCar) {
-        if(shopCar.select_state) {
-            shopCar.select_state = false;
-            double price=0.0;
-            for (int i=0;i<data.size();i++){
-                if(data.get(i).select_state)
-                    price+=data.get(i).AllPrice;
-            }
-            isSelectAll=true;
+        if(state.equals("编辑")) {
+            DecimalFormat df = new DecimalFormat("#.00");
+            if (shopCar.select_state) {
+                shopCar.select_state = false;
+                double price = 0.0;
+                for (int i = 0; i < data.size(); i++) {
+                    if (data.get(i).select_state)
+                        price += data.get(i).AllPrice;
+                }
+                isSelectAll = true;
 //            shopcar_select.setImageResource(R.mipmap.icon_select_click);
-            tv_total_price.setText("总金额：￥" + price);
-            adapter.notifyDataSetChanged();
-        }
-        else{
-            shopCar.select_state = true;
-            double price=0.0;
-            for (int i=0;i<data.size();i++){
-                if(data.get(i).select_state)
-                    price+=data.get(i).AllPrice;
-            }
-            isSelectAll=true;
+                tv_total_price.setText("总金额：￥" + df.format(price));
+                adapter.notifyDataSetChanged();
+            } else {
+                shopCar.select_state = true;
+                double price = 0.0;
+                for (int i = 0; i < data.size(); i++) {
+                    if (data.get(i).select_state)
+                        price += data.get(i).AllPrice;
+                }
+                isSelectAll = true;
 //            shopcar_select.setImageResource(R.mipmap.icon_select_click);
-            tv_total_price.setText("总金额：￥"+price);
-            adapter.notifyDataSetChanged();
+                tv_total_price.setText("总金额：￥" + df.format(price));
+                adapter.notifyDataSetChanged();
 
+            }
         }
 //        Toast.makeText(this,shopCar.ProductColorName+"/"+shopCar.ProductSizeName,Toast.LENGTH_SHORT).show();
 
@@ -177,24 +183,27 @@ public class ShopCarActivity extends RecycleViewActivity<ShopCarPresenter, ShopC
 
     @OnClick(R.id.shopcar_select)
     public void allSelect(){
-        if(isSelectAll){
-            for (int i=0;i<data.size();i++){
-                data.get(i).select_state=false;
+        if(state.equals("编辑")) {
+            DecimalFormat df = new DecimalFormat("#.00");
+            if (isSelectAll) {
+                for (int i = 0; i < data.size(); i++) {
+                    data.get(i).select_state = false;
+                }
+                isSelectAll = false;
+                shopcar_select.setImageResource(R.mipmap.icon_select_normal);
+                tv_total_price.setText("总金额：￥" + 0.00);
+                adapter.notifyDataSetChanged();
+            } else {
+                double price = 0.0;
+                for (int i = 0; i < data.size(); i++) {
+                    data.get(i).select_state = true;
+                    price += data.get(i).AllPrice;
+                }
+                isSelectAll = true;
+                shopcar_select.setImageResource(R.mipmap.icon_select_click);
+                tv_total_price.setText("总金额：￥" + df.format(price));
+                adapter.notifyDataSetChanged();
             }
-            isSelectAll=false;
-            shopcar_select.setImageResource(R.mipmap.icon_select_normal);
-            tv_total_price.setText("总金额：￥"+0.0);
-            adapter.notifyDataSetChanged();
-        }else{
-            double price=0.0;
-            for (int i=0;i<data.size();i++){
-                data.get(i).select_state=true;
-                price+=data.get(i).AllPrice;
-            }
-            isSelectAll=true;
-            shopcar_select.setImageResource(R.mipmap.icon_select_click);
-            tv_total_price.setText("总金额：￥"+price);
-            adapter.notifyDataSetChanged();
         }
 
     }

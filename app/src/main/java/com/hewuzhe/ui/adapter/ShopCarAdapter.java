@@ -27,7 +27,7 @@ import butterknife.OnClick;
  */
 public class ShopCarAdapter extends BaseAdapter<ShopCarAdapter.VHolder, ShopCar, ShopCarPresenter> {
 
-    public int number=0;
+//    public int number=0;
     public int res_select=0;
 
     public ShopCarAdapter(Context context, ShopCarPresenter shopCarPresenter) {
@@ -56,7 +56,7 @@ public class ShopCarAdapter extends BaseAdapter<ShopCarAdapter.VHolder, ShopCar,
                 .placeholder(R.mipmap.img_bg)
                 .into(holder.icon_title);
 
-        number=shopCar.Number;
+//        number=shopCar.Number;
         shopCar.AllPrice = shopCar.Number*shopCar.ProductPriceTotalPrice;
         holder.shopcar_buynum.setText("x" + shopCar.Number);
         holder.pro_price.setText("￥"+shopCar.ProductPriceTotalPrice);
@@ -76,22 +76,20 @@ public class ShopCarAdapter extends BaseAdapter<ShopCarAdapter.VHolder, ShopCar,
         holder.shopcar_add.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                number++;
-                shopCar.Number=number;
-                holder.shopcar_buynum.setText("x"+number);
-                holder.pro_num.setText(number + "");
+                shopCar.Number++;
+                holder.shopcar_buynum.setText("x"+shopCar.Number);
+                holder.pro_num.setText(shopCar.Number + "");
             }
         });
 
         holder.shopcar_sub.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(number==1)
+                if(shopCar.Number==1)
                     return;
-                number--;
-                shopCar.Number=number;
-                holder.shopcar_buynum.setText("x"+number);
-                holder.pro_num.setText(number+"");
+                shopCar.Number--;
+                holder.shopcar_buynum.setText("x"+shopCar.Number);
+                holder.pro_num.setText(shopCar.Number+"");
             }
         });
 

@@ -284,6 +284,12 @@ public class ProductInfoActivity extends ToolBarActivity<ProductInfoPresenter> i
 
         mDefaultTagGroup.setOnTagClickListener(mTagClickListener);
         mDefaultTagGroup_size.setOnTagClickListener(mTagClickListener_size);
+        Glide.with(ProductInfoActivity.this)
+                .load(C.BASE_URL + product.ImagePath)
+                .centerCrop()
+                .crossFade()
+                .placeholder(R.mipmap.img_bg)
+                .into(product_image);
 
         //banner轮播图
         for (int i=0;i<product.PicList.size();i++){

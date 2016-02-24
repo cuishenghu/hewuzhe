@@ -135,6 +135,7 @@ public class ProductInfoActivity extends ToolBarActivity<ProductInfoPresenter> i
     public String tag_size="";
     public int tag_color_num;
     public int tag_size_num;
+    public String picurl="";
     public int price_num;
     public double price;
     public int number=1;
@@ -208,14 +209,16 @@ public class ProductInfoActivity extends ToolBarActivity<ProductInfoPresenter> i
                 if (product.PriceList.get(i).ColorId == tag_color_num && product.PriceList.get(i).SizeId == tag_size_num) {
 //                    price_num = product.PriceList.get(i).Id;
                         product_price_true.setText("￥" + product.PriceList.get(i).Price);
-                    if(product.PriceList.get(i).ImagePath.trim().equals(""))
+                    if(product.PriceList.get(i).ImagePath.trim().equals("")){
                     Glide.with(ProductInfoActivity.this)
                             .load(C.BASE_URL + product.ImagePath)
                             .centerCrop()
                             .crossFade()
                             .placeholder(R.mipmap.img_bg)
                             .into(product_image);
-                    else
+                        picurl=product.ImagePath;
+                    }
+                    else {
                         Glide.with(ProductInfoActivity.this)
                                 .load(C.BASE_URL + product.PriceList.get(i).ImagePath)
                                 .centerCrop()
@@ -223,6 +226,8 @@ public class ProductInfoActivity extends ToolBarActivity<ProductInfoPresenter> i
                                 .placeholder(R.mipmap.img_bg)
                                 .into(product_image);
 //                    price = product.PriceList.get(i).Price;
+                        picurl=product.PriceList.get(i).ImagePath;
+                    }
                     break;
                 }
             }
@@ -328,6 +333,18 @@ public class ProductInfoActivity extends ToolBarActivity<ProductInfoPresenter> i
         pro_num = (TextView) mview.findViewById(R.id.pro_num);
 
         initData();
+
+        product_image.setOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick(View v) {
+                if(picurl.trim().equals(""))
+                    addImg(product.ImagePath,0);
+                else
+                    addImg(picurl,0);
+            }
+        });
+
 
         pro_buy_now_true.setOnClickListener(new View.OnClickListener() {
 
@@ -443,6 +460,22 @@ public class ProductInfoActivity extends ToolBarActivity<ProductInfoPresenter> i
             }
         });
 
+    }
+    //图片合集
+    private void addImg(String src,int pos) {
+        ArrayList<Pic> newPics = new ArrayList<Pic>();
+
+
+            Pic pic = new Pic();
+            pic.PictureUrl = src;
+            pic.ImagePath = "";
+            newPics.add(pic);
+
+
+        Intent intent = new Intent(this, PicsActivity.class);
+        intent.putExtra("data", new Bun().putInt("pos", pos).
+                putString("pics", new Gson().toJson(newPics)).ok());
+        this.startActivity(intent);
     }
 
     @Override

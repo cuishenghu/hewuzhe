@@ -1,12 +1,8 @@
 package com.hewuzhe.ui.activity;
 
-import android.app.AlertDialog;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.drawable.BitmapDrawable;
 import android.os.Bundle;
-import android.support.v4.view.ViewCompat;
-import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.Gravity;
 import android.view.LayoutInflater;
@@ -15,7 +11,6 @@ import android.view.ViewGroup;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
-import android.widget.ListView;
 import android.widget.PopupWindow;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
@@ -28,16 +23,12 @@ import com.hewuzhe.R;
 import com.hewuzhe.banner.CircleFlowIndicator;
 import com.hewuzhe.banner.ImagePagerAdapter;
 import com.hewuzhe.banner.ViewFlow;
-import com.hewuzhe.model.FriendCondition;
 import com.hewuzhe.model.OrderContent;
 import com.hewuzhe.model.Pic;
 import com.hewuzhe.model.Product;
-import com.hewuzhe.model.ProductComment;
 import com.hewuzhe.presenter.ProductInfoPresenter;
-import com.hewuzhe.presenter.base.BasePresenterImp;
 import com.hewuzhe.ui.adapter.ProductColorAdapter;
 import com.hewuzhe.ui.adapter.ProductInfoAdapter;
-import com.hewuzhe.ui.adapter.base.BaseAdapter;
 import com.hewuzhe.ui.base.SyLinearLayoutManager;
 import com.hewuzhe.ui.base.ToolBarActivity;
 import com.hewuzhe.ui.cons.C;
@@ -50,7 +41,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.Bind;
-import butterknife.ButterKnife;
 import butterknife.OnClick;
 
 /**
@@ -135,6 +125,7 @@ public class ProductInfoActivity extends ToolBarActivity<ProductInfoPresenter> i
     public String tag_size="";
     public int tag_color_num;
     public int tag_size_num;
+    public String picurl="";
     public int price_num;
     public double price;
     public int number=1;
@@ -208,14 +199,16 @@ public class ProductInfoActivity extends ToolBarActivity<ProductInfoPresenter> i
                 if (product.PriceList.get(i).ColorId == tag_color_num && product.PriceList.get(i).SizeId == tag_size_num) {
 //                    price_num = product.PriceList.get(i).Id;
                         product_price_true.setText("￥" + product.PriceList.get(i).Price);
-                    if(product.PriceList.get(i).ImagePath.trim().equals(""))
+                    if(product.PriceList.get(i).ImagePath.trim().equals("")){
                     Glide.with(ProductInfoActivity.this)
                             .load(C.BASE_URL + product.ImagePath)
                             .centerCrop()
                             .crossFade()
                             .placeholder(R.mipmap.img_bg)
                             .into(product_image);
-                    else
+                        picurl=product.ImagePath;
+                    }
+                    else {
                         Glide.with(ProductInfoActivity.this)
                                 .load(C.BASE_URL + product.PriceList.get(i).ImagePath)
                                 .centerCrop()
@@ -223,6 +216,8 @@ public class ProductInfoActivity extends ToolBarActivity<ProductInfoPresenter> i
                                 .placeholder(R.mipmap.img_bg)
                                 .into(product_image);
 //                    price = product.PriceList.get(i).Price;
+                        picurl=product.PriceList.get(i).ImagePath;
+                    }
                     break;
                 }
             }
@@ -284,6 +279,12 @@ public class ProductInfoActivity extends ToolBarActivity<ProductInfoPresenter> i
 
         mDefaultTagGroup.setOnTagClickListener(mTagClickListener);
         mDefaultTagGroup_size.setOnTagClickListener(mTagClickListener_size);
+        Glide.with(ProductInfoActivity.this)
+                .load(C.BASE_URL + product.ImagePath)
+                .centerCrop()
+                .crossFade()
+                .placeholder(R.mipmap.img_bg)
+                .into(product_image);
 
         //banner轮播图
         for (int i=0;i<product.PicList.size();i++){
@@ -322,6 +323,18 @@ public class ProductInfoActivity extends ToolBarActivity<ProductInfoPresenter> i
         pro_num = (TextView) mview.findViewById(R.id.pro_num);
 
         initData();
+
+        product_image.setOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick(View v) {
+                if(picurl.trim().equals(""))
+                    addImg(product.ImagePath,0);
+                else
+                    addImg(picurl,0);
+            }
+        });
+
 
         pro_buy_now_true.setOnClickListener(new View.OnClickListener() {
 
@@ -437,6 +450,22 @@ public class ProductInfoActivity extends ToolBarActivity<ProductInfoPresenter> i
             }
         });
 
+    }
+    //图片合集
+    private void addImg(String src,int pos) {
+        ArrayList<Pic> newPics = new ArrayList<Pic>();
+
+
+            Pic pic = new Pic();
+            pic.PictureUrl = src;
+            pic.ImagePath = "";
+            newPics.add(pic);
+
+
+        Intent intent = new Intent(this, PicsActivity.class);
+        intent.putExtra("data", new Bun().putInt("pos", pos).
+                putString("pics", new Gson().toJson(newPics)).ok());
+        this.startActivity(intent);
     }
 
     @Override

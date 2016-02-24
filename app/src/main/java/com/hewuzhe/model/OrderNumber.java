@@ -35,13 +35,13 @@ public class OrderNumber implements Serializable {
     private String IsCancle;//判断是否评论过
     private String Count;//订单商品总件数
 
-    private List<OrderContent> ProList=new ArrayList<OrderContent>();//订单里的商品列表
+    private ArrayList<OrderContent> ProList=new ArrayList<OrderContent>();//订单里的商品列表
 
     public OrderNumber() {
     }
 
     public OrderNumber(String count,String state,String id, String billNo, String price, String postage, String liveryName, String liveryNo, String liveryType,
-                       String areaId, String buildTime, String payTime, String sendTime, String operateTime, List<OrderContent> proList,String isCancle) {
+                       String areaId, String buildTime, String payTime, String sendTime, String operateTime, ArrayList<OrderContent> proList,String isCancle) {
         Id = id;
         BillNo = billNo;
         Price = price;
@@ -160,7 +160,7 @@ public class OrderNumber implements Serializable {
         return ProList;
     }
 
-    public void setProList(List<OrderContent> proList) {
+    public void setProList(ArrayList<OrderContent> proList) {
         ProList = proList;
     }
 

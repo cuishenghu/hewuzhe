@@ -184,7 +184,7 @@ public class ShopCarActivity extends RecycleViewActivity<ShopCarPresenter, ShopC
     @OnClick(R.id.shopcar_select)
     public void allSelect(){
         if(state.equals("编辑")) {
-            DecimalFormat df = new DecimalFormat("#.00");
+            DecimalFormat df = new DecimalFormat("########0.00");
             if (isSelectAll) {
                 for (int i = 0; i < data.size(); i++) {
                     data.get(i).select_state = false;

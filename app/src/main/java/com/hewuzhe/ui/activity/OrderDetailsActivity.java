@@ -3,6 +3,7 @@ package com.hewuzhe.ui.activity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.graphics.Paint;
 import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
@@ -67,17 +68,18 @@ public class OrderDetailsActivity extends BaseActivity2 {
     private int total_number;
     private double total_price;
     private String areaId;//
-    private List<OrderContent> orderContents = new ArrayList<OrderContent>();
+    private ArrayList<OrderContent> orderContents = new ArrayList<OrderContent>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-//        areaId = (String) getIntent().getSerializableExtra("areaId");
+        areaId = (String) getIntent().getSerializableExtra("areaId");
         billId = getIntent().getStringExtra("billId");
-//        mType = (Integer) getIntent().getSerializableExtra("mType");
+        mType = (Integer) getIntent().getSerializableExtra("mType");
+//        orders = (OrderNumber) getIntent().getSerializableExtra("order");
 //        total_number = Integer.parseInt((String) getIntent().getSerializableExtra("number"));
 //        total_price = Double.parseDouble((String) getIntent().getSerializableExtra("price"));
-//        state = (String) getIntent().getStringExtra("state");
+        state = (String) getIntent().getStringExtra("state");
 //        int i = orders.getProList().size();
         setContentView(R.layout.activity_order_details);
         initView();
@@ -224,7 +226,7 @@ public class OrderDetailsActivity extends BaseActivity2 {
                     orderContent.setProductColorName(jsonObject.getString("ProductColorName"));
                     orderContent.setProductPriceTotalPrice(jsonObject.getString("DetailPrice"));
                     orderContent.setNumber(jsonArray.getJSONObject(i).getString("Number"));
-                    orderContent.setMiddleImagePath(UrlContants.IMAGE_URL + jsonObject.getString("MiddleImagePath"));
+                    orderContent.setMiddleImagePath(jsonObject.getString("MiddleImagePath"));
                     orderContents.add(orderContent);
 
                     tv_total_price.setText("合计：¥" + jsonObject.getString("BillPrice"));//订单价格
@@ -253,14 +255,13 @@ public class OrderDetailsActivity extends BaseActivity2 {
 
 
     private void selectButtonFromType(final int mType) {
-        final String orderId = billId;
         if (mType == 1) {
             tv_left_btn.setVisibility(View.VISIBLE);
             tv_left_btn.setText("取消订单");
             tv_left_btn.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    viewDialog(orderId, mType);
+                    viewDialog(billId, mType);
                 }
             });
             tv_right_btn.setVisibility(View.VISIBLE);
@@ -268,7 +269,7 @@ public class OrderDetailsActivity extends BaseActivity2 {
             tv_right_btn.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    startActivity(new Intent(OrderDetailsActivity.this, OrderConfirmFirstActivity.class).putExtra("areaId", areaId).putExtra("order", orders).putExtra("number", total_number + "").putExtra("price", total_price + ""));
+                    startActivity(new Intent(OrderDetailsActivity.this, OrderConfirmFirstActivity.class).putExtra("areaId", areaId).putExtra("list", orderContents).putExtra("billId", billId).putExtra("number", tv_order_sum.getText().subSequence(1, 2).toString()).putExtra("price", tv_total_price.getText().toString().substring(4, tv_total_price.getText().toString().length())));
                     finish();
                 }
             });
@@ -280,7 +281,7 @@ public class OrderDetailsActivity extends BaseActivity2 {
             tv_right_btn.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    viewDialog(orderId, mType);
+                    viewDialog(billId, mType);
                 }
             });
         }
@@ -309,7 +310,7 @@ public class OrderDetailsActivity extends BaseActivity2 {
             tv_left_btn.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    viewDialog(orderId, mType);
+                    viewDialog(billId, mType);
                 }
             });
             tv_right_btn.setVisibility(View.VISIBLE);
@@ -321,7 +322,7 @@ public class OrderDetailsActivity extends BaseActivity2 {
                 tv_right_btn.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        startActivity(new Intent(OrderDetailsActivity.this, OrderAssessActivity.class).putExtra("order", orders));
+                        startActivity(new Intent(OrderDetailsActivity.this, OrderAssessActivity.class).putExtra("list", orderContents).putExtra("billId", billId));
                     }
                 });
             }
@@ -331,7 +332,7 @@ public class OrderDetailsActivity extends BaseActivity2 {
     /**
      * 弹框提示
      */
-    private void viewDialog(final String orderId, final int mType) {
+    private void viewDialog(final String billId, final int mType) {
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setTitle("温馨提示");
         if (mType == 1) {
@@ -339,7 +340,7 @@ public class OrderDetailsActivity extends BaseActivity2 {
             builder.setPositiveButton("确定", new DialogInterface.OnClickListener() {
                 @Override
                 public void onClick(DialogInterface dialog, int which) {
-                    deleteOrder(orderId, mType);
+                    deleteOrder(billId, mType);
                 }
             }).setNegativeButton("取消", new DialogInterface.OnClickListener() {
                 @Override
@@ -352,7 +353,7 @@ public class OrderDetailsActivity extends BaseActivity2 {
             builder.setPositiveButton("确定", new DialogInterface.OnClickListener() {
                 @Override
                 public void onClick(DialogInterface dialog, int which) {
-                    cancleOrder(orderId, mType);
+                    cancleOrder(billId, mType);
                 }
             }).setNegativeButton("取消", new DialogInterface.OnClickListener() {
                 @Override
@@ -365,7 +366,7 @@ public class OrderDetailsActivity extends BaseActivity2 {
             builder.setPositiveButton("确定", new DialogInterface.OnClickListener() {
                 @Override
                 public void onClick(DialogInterface dialog, int which) {
-                    deleteOrder(orderId, mType);
+                    deleteOrder(billId, mType);
                 }
             }).setNegativeButton("取消", new DialogInterface.OnClickListener() {
                 @Override
@@ -380,9 +381,9 @@ public class OrderDetailsActivity extends BaseActivity2 {
     /**
      * 删除订单
      */
-    private void deleteOrder(final String orderId, final int mType) {
+    private void deleteOrder(final String billId, final int mType) {
         RequestParams params = new RequestParams();
-        params.put("billId", orderId);//订单ID
+        params.put("billId", billId);//订单ID
         params.put("userId", new SessionUtil(OrderDetailsActivity.this).getUserId()); //由于自己ID没有订单,现在传2,此ID为李发起的ID.待修改成自己的ID========
         HttpUtils.deleteOrder(new HttpErrorHandler() {
             @Override
@@ -399,7 +400,7 @@ public class OrderDetailsActivity extends BaseActivity2 {
      */
     private void confirmReceived(final int mType) {
         RequestParams params = new RequestParams();
-        params.put("billId", orders.getId());//订单ID
+        params.put("billId", billId);//订单ID
         params.put("userId", new SessionUtil(OrderDetailsActivity.this).getUserId()); //由于自己ID没有订单,现在传2,此ID为李发起的ID.待修改成自己的ID==========
         HttpUtils.confirmReceived(new HttpErrorHandler() {
             @Override
@@ -422,9 +423,9 @@ public class OrderDetailsActivity extends BaseActivity2 {
     /**
      * 取消订单
      */
-    private void cancleOrder(final String orderId, final int mType) {
+    private void cancleOrder(final String billId, final int mType) {
         RequestParams params = new RequestParams();
-        params.put("billId", orderId);
+        params.put("billId", billId);
         params.put("userId", new SessionUtil(OrderDetailsActivity.this).getUserId()); //由于自己ID没有订单,现在传2,此ID为李发起的ID.待修改成自己的ID==============================================================================
         HttpUtils.cancleOrder(new HttpErrorHandler() {
             @Override

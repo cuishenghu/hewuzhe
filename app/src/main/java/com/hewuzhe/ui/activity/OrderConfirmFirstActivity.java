@@ -69,8 +69,7 @@ public class OrderConfirmFirstActivity extends BaseActivity2 {
 //    private String data[][] = {{"男士哑铃一对10公斤", "规格：S/红色", "¥50", "x1"}, {"男士哑铃一对10公斤", "规格：S/红色", "¥50", "x1"}};
 //    private SimpleAdapter simpleAdapter = null;
 //    private List<Map<String, String>> list = new ArrayList<Map<String, String>>();
-    private OrderNumber order;
-    private List<OrderContent> list;
+    private ArrayList<OrderContent> list = new ArrayList<OrderContent>();
     private String total_number;//订单商品数量
     private String total_price;//订单总价
     private Site site;
@@ -83,13 +82,15 @@ public class OrderConfirmFirstActivity extends BaseActivity2 {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-//        order.getProList()=(List<OrderContent>)getIntent().getSerializableExtra("list");
+//        list=(List<OrderContent>)getIntent().getSerializableExtra("list");
         liveryPrice = getIntent().getStringExtra("LiveryPrice");
         list = (ArrayList<OrderContent>) getIntent().getSerializableExtra("list");
         state = (String) getIntent().getStringExtra("state");
         areaId = (String) getIntent().getSerializableExtra("areaId");
+        billId = (String) getIntent().getSerializableExtra("billId");
+
         score = (String) getIntent().getSerializableExtra("score");//积分兑换商品跳转传值
-        order = (OrderNumber) getIntent().getSerializableExtra("order");//由订单中心的付款按钮传值过来的OrderGroup
+//        order =   (ArrayList<OrderContent>)getIntent().getSerializableExtra("order");//由订单中心的付款按钮传值过来的OrderGroup
         total_number = (String) getIntent().getSerializableExtra("number");
         total_price = (String) getIntent().getSerializableExtra("price");
         setContentView(R.layout.activity_order_confirm_first);
@@ -158,13 +159,12 @@ public class OrderConfirmFirstActivity extends BaseActivity2 {
 //            orderChild.setPrice2("00");
 //            list.add(orderChild);
 //        }
-        if (list != null) {
+//        if (list != null) {
+//            OrderConfirmFirstAdaptet orderDetailsItemAdaptet = new OrderConfirmFirstAdaptet(OrderConfirmFirstActivity.this, list);
+//            order_list.setAdapter(orderDetailsItemAdaptet);
+//        } else {
             OrderConfirmFirstAdaptet orderDetailsItemAdaptet = new OrderConfirmFirstAdaptet(OrderConfirmFirstActivity.this, list);
             order_list.setAdapter(orderDetailsItemAdaptet);
-        } else {
-            OrderConfirmFirstAdaptet orderDetailsItemAdaptet = new OrderConfirmFirstAdaptet(OrderConfirmFirstActivity.this, order.getProList());
-            order_list.setAdapter(orderDetailsItemAdaptet);
-        }
         /**
          * ListView自适应高度
          */
@@ -304,31 +304,32 @@ public class OrderConfirmFirstActivity extends BaseActivity2 {
                     Tools.toast(OrderConfirmFirstActivity.this, "请先添加收货地址");
                     break;
                 }
-                if (totlePrice==0.00){
-                break;
-            }
-            if (!StringUtil.isEmpty(state)) {
-                if (Integer.parseInt(state) == 2) {
+                DecimalFormat df = new DecimalFormat("#####0.00");
+                if (total_price.equals("0.00")) {
+                    break;
+                }
+                if (!StringUtil.isEmpty(state)) {
+                    if (Integer.parseInt(state) == 2) {
 //                    userId 用户ID
 //                    deliveryId 收货地址ID
 //                    description 订单备注
 //                    basketDeatilIdList 购物车明细ID 用“&”拼接
-                    for (int i = 0; i < list.size(); i++) {
-                        String productId = list.get(i).getId();
-                        basketDeatilIdList = basketDeatilIdList + productId + "&";
+                        for (int i = 0; i < list.size(); i++) {
+                            String productId = list.get(i).getId();
+                            basketDeatilIdList = basketDeatilIdList + productId + "&";
+                        }
+                        basketDeatilIdList = basketDeatilIdList.substring(0, basketDeatilIdList.length() - 1);
+                        submitBasket();
+                    } else if (Integer.parseInt(state) == 1) {
+                        for (int i = 0; i < list.size(); i++) {
+                            buyNow(i);
+                        }
                     }
-                    basketDeatilIdList = basketDeatilIdList.substring(0, basketDeatilIdList.length() - 1);
-                    submitBasket();
-                } else if (Integer.parseInt(state) == 1) {
-                    for (int i = 0; i < list.size(); i++) {
-                        buyNow(i);
-                    }
+                } else {
+//                    billId = order.getId();
+                    confirmSubmitCharge(billId);
                 }
-            } else {
-                billId = order.getId();
-                confirmSubmitCharge(billId);
-            }
-            break;
+                break;
         }
     }
 
@@ -383,7 +384,7 @@ public class OrderConfirmFirstActivity extends BaseActivity2 {
         String o = total_price;
         params.put("amount", (int) (Double.parseDouble(total_price) * 100));//金额
 //                params.put("amount", 1);//金额
-        params.put("description", "dsfg");//描述
+        params.put("description", "是电风扇的");//描述
         params.put("billId", billId);//订单号
         params.put("flg", "1");//flg 类型 0：充值会员 1：购买商品
         HttpUtils.confirmSubmitCharge(new AbstractHttpHandler() {

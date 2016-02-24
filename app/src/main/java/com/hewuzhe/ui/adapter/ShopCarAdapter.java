@@ -18,6 +18,8 @@ import com.hewuzhe.ui.adapter.base.BaseAdapter;
 import com.hewuzhe.ui.cons.C;
 import com.hewuzhe.ui.widget.GlideCircleTransform;
 
+import java.text.DecimalFormat;
+
 import butterknife.Bind;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
@@ -59,7 +61,8 @@ public class ShopCarAdapter extends BaseAdapter<ShopCarAdapter.VHolder, ShopCar,
 //        number=shopCar.Number;
         shopCar.AllPrice = shopCar.Number*shopCar.ProductPriceTotalPrice;
         holder.shopcar_buynum.setText("x" + shopCar.Number);
-        holder.pro_price.setText("￥"+shopCar.ProductPriceTotalPrice);
+        DecimalFormat df = new DecimalFormat("########0.00");
+        holder.pro_price.setText("￥"+df.format(shopCar.ProductPriceTotalPrice));
         holder.shopcar_guige.setText("规格：" +shopCar.ProductSizeName+"/"+shopCar.ProductColorName);
         holder.shopcar_title.setText( shopCar.ProductName);
         holder.pro_num.setText(shopCar.Number + "");

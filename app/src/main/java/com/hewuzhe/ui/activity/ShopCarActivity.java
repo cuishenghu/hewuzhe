@@ -95,7 +95,7 @@ public class ShopCarActivity extends RecycleViewActivity<ShopCarPresenter, ShopC
     protected void initThings(Bundle savedInstanceState) {
         super.initThings(savedInstanceState);
         tv_action.setText("编辑");
-        presenter.getData(page, count);
+        presenter.getData(1, 1000);
 
     }
 

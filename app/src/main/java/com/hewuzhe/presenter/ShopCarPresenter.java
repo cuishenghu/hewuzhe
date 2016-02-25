@@ -25,7 +25,7 @@ public class ShopCarPresenter extends RefreshAndLoadMorePresenter<ShopCarView> {
         ShopCar shopCar = view.getData();
         int i = new SessionUtil(view.getContext()).getUserId();
         Subscription subscription = NetEngine.getService()
-                .SelectBasketProduct((page - 1) * count, 1000, new SessionUtil(view.getContext()).getUserId())
+                .SelectBasketProduct(0, 1000, new SessionUtil(view.getContext()).getUserId())
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new SB<Res<ArrayList<ShopCar>>>() {
@@ -35,7 +35,7 @@ public class ShopCarPresenter extends RefreshAndLoadMorePresenter<ShopCarView> {
 //                        String s = res.toString();
                         if (res.code == C.OK) {
                             view.bindData(res.data);
-                            setDataStatus(page, count, res);
+                            setDataStatus(0, 1000, res);
                         }
                     }
 

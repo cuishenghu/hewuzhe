@@ -15,8 +15,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@color/hwz_bg_black"
-            android:layout_marginBottom="-65dp"
             android:layout_below="@+id/shopcar_tit"
+            android:layout_marginBottom="65dp"
             android:orientation="vertical" >
 
             <TextView
@@ -39,7 +39,7 @@
                 android:id="@+id/recycler_view"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_marginBottom="85dp"
+
                 >
 
 

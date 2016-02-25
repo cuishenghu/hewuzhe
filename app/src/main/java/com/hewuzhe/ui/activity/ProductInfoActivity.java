@@ -34,6 +34,7 @@ import com.hewuzhe.ui.base.ToolBarActivity;
 import com.hewuzhe.ui.cons.C;
 import com.hewuzhe.ui.inter.OnItemClickListener;
 import com.hewuzhe.utils.Bun;
+import com.hewuzhe.utils.StringUtil;
 import com.hewuzhe.utils.TagGroup;
 import com.hewuzhe.view.ProductInfoView;
 
@@ -323,6 +324,8 @@ public class ProductInfoActivity extends ToolBarActivity<ProductInfoPresenter> i
 
         ViewGroup.LayoutParams para;
         para = framelayout.getLayoutParams();
+        para.height= StringUtil.getScreenWidth(this);
+        framelayout.setLayoutParams(para);
 
         initBanner(imageUrlList);
     }

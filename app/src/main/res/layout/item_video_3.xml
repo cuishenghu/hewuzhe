@@ -1,0 +1,172 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              xmlns:tools="http://schemas.android.com/tools"
+              android:layout_width="match_parent"
+              android:layout_height="180dp"
+              android:background="@color/colorListBg"
+              android:orientation="vertical"
+              android:paddingBottom="5px"
+    >
+
+    <FrameLayout android:layout_width="match_parent"
+                 android:layout_height="180dp">
+        <ImageView
+            android:id="@+id/img_bg"
+            android:layout_width="match_parent"
+            android:layout_height="180dp"
+            android:scaleType="fitXY"
+            android:src="@mipmap/img_bg_videio"/>
+        <TextView
+            android:id="@+id/tv_add_time"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10px"
+            android:layout_marginTop="18px"
+            android:text=""
+            android:textColor="@color/white"
+            android:textSize="25px"/>
+
+        <TextView
+            android:id="@+id/tv_is_free"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="right"
+            android:layout_marginRight="10px"
+            android:layout_marginTop="18px"
+            android:background="@color/colorYellow"
+            android:paddingBottom="5px"
+            android:paddingLeft="8px"
+            android:paddingRight="8px"
+            android:paddingTop="5px"
+            android:text="会员"
+            android:textColor="@color/white"
+            android:textSize="25px"/>
+
+
+        <TextView android:id="@+id/tv_title"
+                  style="@style/text_25_white"
+                  android:layout_width="match_parent"
+                  android:layout_height="wrap_content"
+                  android:layout_gravity="bottom"
+                  android:layout_marginBottom="83px"
+                  android:layout_marginLeft="20px"
+                  android:ellipsize="end"
+                  android:singleLine="true"
+                  android:text="创新理念"
+            />
+
+
+        <TextView android:layout_width="match_parent"
+                  android:layout_height="1dp"
+                  android:layout_gravity="bottom"
+                  android:layout_marginBottom="72px"
+                  android:layout_marginLeft="30px"
+                  android:background="@color/colorLine"/>
+
+
+        <LinearLayout android:layout_width="match_parent"
+                      android:layout_height="wrap_content"
+                      android:layout_gravity="bottom"
+                      android:layout_marginBottom="11px"
+                      android:gravity="center_vertical"
+                      android:orientation="horizontal"
+                      android:paddingLeft="20px"
+                      android:paddingRight="30px"
+            >
+
+            <ImageView
+                android:id="@+id/img_avatar"
+                android:layout_width="50px"
+                android:layout_height="50px"
+                android:scaleType="fitXY"
+                android:src="@mipmap/ic_launcher"
+                />
+
+            <ImageView android:id="@+id/img_collect"
+                       android:layout_width="30px"
+                       android:layout_height="30px"
+                       android:layout_marginLeft="38px"
+                       android:layout_gravity="center_vertical"
+
+                       android:src="@mipmap/icon_collect"/>
+
+            <TextView
+                android:id="@+id/tv_collect_count"
+                style="@style/text_25_white"
+                android:layout_width="wrap_content"
+                android:layout_gravity="center_vertical"
+
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10px"
+                android:text="100"
+
+                />
+
+            <ImageView android:id="@+id/img_praise"
+                       android:layout_width="30px"
+                       android:layout_height="30px"
+                       android:layout_gravity="center_vertical"
+                       android:layout_marginLeft="38px"
+                       android:src="@mipmap/icon_praise"/>
+            <TextView
+                android:id="@+id/tv_praise_count"
+                style="@style/text_25_white"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+
+                android:layout_marginLeft="10px"
+                android:text="100"
+                />
+
+            <TextView android:layout_width="wrap_content"
+                      android:layout_height="wrap_content"
+                      android:layout_weight="1"/>
+
+            <ImageView android:id="@+id/img_repeat"
+                       android:layout_width="30px"
+                       android:layout_height="30px"
+                       android:layout_marginLeft="38px"
+                       android:src="@mipmap/icon_share_gray"
+                       android:visibility="gone"/>
+
+            <TextView
+                android:id="@+id/tv_repeat_count"
+                style="@style/text_25_colorLine"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10px"
+                android:text="100"
+                android:visibility="gone"
+                />
+
+
+            <CheckBox
+                android:id="@+id/cb_plan"
+                android:layout_width="30px"
+                android:layout_height="30px"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="8px"
+                android:background="@drawable/icon_cb_selector_two"
+                android:button="@null"
+                android:visibility="gone"
+                tools:visibility="visible"/>
+
+        </LinearLayout>
+
+
+    </FrameLayout>
+
+
+    <TextView android:id="@+id/tv_desc"
+              style="@style/text_27_colorLine"
+              android:layout_width="match_parent"
+              android:layout_height="wrap_content"
+              android:layout_marginLeft="20px"
+              android:lines="2"
+              android:text="跆拳道。。。。。"
+              android:visibility="gone"
+        />
+
+
+</LinearLayout>

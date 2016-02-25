@@ -39,7 +39,7 @@ public class SignInPresenter extends BasePresenterImp<SignInView> {
 
     private User user;
 
-    public void signin(final View v) {
+    public void signin(final View v, final boolean isRememberPwd) {
         user = view.getData();
         if (user != null) {
             if (StringUtil.isEmpty(user.UserName)) {
@@ -79,7 +79,7 @@ public class SignInPresenter extends BasePresenterImp<SignInView> {
                                 if (code == C.OK) {
                                     /**保存数据**/
                                     SessionUtil sessionUtil = new SessionUtil(view.getContext());
-                                    UP up = new UP(user.UserName, user.PassWord);
+                                    UP up = new UP(user.UserName, isRememberPwd ? user.PassWord : "");
                                     sessionUtil.removeUp(up);
                                     sessionUtil.putUP(up);
 

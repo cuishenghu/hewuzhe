@@ -100,7 +100,8 @@ public class SessionUtil {
             ups = new ArrayList<>();
         }
 
-        for (UP up1 : ups) {
+        for (int i = 0; i < ups.size(); i++) {
+            UP up1 = ups.get(i);
             if (up1.userName.equals(up.userName)) {
                 ups.remove(up1);
             }

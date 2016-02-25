@@ -127,7 +127,7 @@ public class FriendConditionAdapter extends BaseAdapter<FriendConditionAdapter.V
             holder._LayImg.setVisibility(View.GONE);
         } else {
             holder._LayImg.setVisibility(View.VISIBLE);
-//            holder._TvTime.setText(condition.VideoDuration);
+            holder._TvTime.setText(condition.VideoDuration);
             Glide.with(context)
                     .load(C.BASE_URL + condition.ImagePath)
                     .centerCrop()

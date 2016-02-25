@@ -79,6 +79,7 @@ public class DojoDetailActivity extends ToolBarActivity<DojoDetailPresenter> imp
     @Override
     public void initListeners() {
 
+
     }
 
     @Override
@@ -109,6 +110,18 @@ public class DojoDetailActivity extends ToolBarActivity<DojoDetailPresenter> imp
                 .fitCenter()
                 .crossFade()
                 .into(_Img);
+
+        _Img.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Pic pic = new Pic();
+                pic.PictureUrl = dojo.ImagePath;
+                ArrayList<Pic> pics = new ArrayList();
+                pics.add(pic);
+                startActivity(PicsActivity.class, new Bun().putString("pics", new Gson().toJson(pics)).ok());
+            }
+        });
+
 
         _TvName.setText(dojo.Title);
         _ImgCall.setText(dojo.TelePhone);
@@ -150,7 +163,7 @@ public class DojoDetailActivity extends ToolBarActivity<DojoDetailPresenter> imp
             final ArrayList<Pic> pics = new ArrayList<>();
             for (OtherImage otherImage : data) {
                 Pic pic = new Pic();
-                pic.ImagePath = otherImage.ImagePath;
+                pic.PictureUrl = otherImage.ImagePath;
                 pics.add(pic);
             }
 

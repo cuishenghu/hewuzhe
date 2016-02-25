@@ -158,7 +158,7 @@ public interface ApiService {
 
 
     @GET("Helianmeng.asmx/SaveDongtai")
-    Observable<Res> SaveDongtai(@Query("pathlist") String pathlist, @Query("userid") int userid, @Query("content") String content, @Query("videoImage") String videoImage, @Query("videopath") String videopath, @Query("videoDuration") int videoDuration);
+    Observable<Res> SaveDongtai(@Query("pathlist") String pathlist, @Query("userid") int userid, @Query("content") String content, @Query("videoImage") String videoImage, @Query("videopath") String videopath, @Query("videoDuration") String videoDuration);
 
     @GET("Hewuzhe.asmx/SavePlan")
     Observable<Res> SavePlan(@Query("piclist") String piclist, @Query("userid") int userid, @Query("content") String content, @Query("title") String title, @Query("cateid") int cateid, @Query("starttime") String starttime, @Query("endtime") String endtime);

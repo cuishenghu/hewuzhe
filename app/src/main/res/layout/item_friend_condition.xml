@@ -28,10 +28,10 @@
             android:id="@+id/tv_username"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="8px"
+            android:layout_marginLeft="18px"
             android:layout_marginTop="15px"
             android:layout_toRightOf="@id/img"
-            android:text=""
+            android:text="@string/ssdk_alipay"
             android:textColor="@color/white"
             android:textSize="28px"/>
 
@@ -40,10 +40,11 @@
                   android:layout_width="wrap_content"
                   android:layout_height="wrap_content"
                   android:layout_below="@id/img"
-                  android:layout_marginLeft="10px"
-                  android:layout_marginTop="8px"
+                  android:layout_marginBottom="20px"
+                  android:layout_marginLeft="35px"
+                  android:layout_marginTop="20px"
                   android:text="我是内容............"
-                  android:textColor="@color/colorLine"
+                  android:textColor="@color/white"
                   android:textSize="25px"/>
 
         <LinearLayout
@@ -51,6 +52,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_below="@id/tv_content"
+            android:layout_marginLeft="25px"
             android:orientation="vertical">
         </LinearLayout>
 
@@ -63,9 +65,10 @@
 
             <ImageView
                 android:id="@+id/img_video"
-                android:layout_width="160px"
-                android:layout_height="160px"
+                android:layout_width="200px"
+                android:layout_height="200px"
                 android:layout_margin="10px"
+                android:layout_marginLeft="5px"
                 android:orientation="vertical"
                 android:scaleType="fitXY"
                 android:src="@mipmap/img_bg_videio"
@@ -84,7 +87,7 @@
                       android:layout_height="wrap_content"
                       android:layout_gravity="bottom|right"
                       android:layout_marginBottom="10px"
-                      android:layout_marginRight="10px"
+                      android:layout_marginRight="18px"
                       android:text=""/>
         </FrameLayout>
 
@@ -93,7 +96,7 @@
                       android:layout_width="match_parent"
                       android:layout_height="wrap_content"
                       android:layout_below="@id/lay_img"
-                      android:layout_marginTop="10px"
+                      android:layout_marginTop="20px"
                       android:gravity="center_vertical"
                       android:orientation="horizontal">
 

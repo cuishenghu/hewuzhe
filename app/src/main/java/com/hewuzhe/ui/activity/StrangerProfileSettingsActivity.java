@@ -11,7 +11,9 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
+import com.google.gson.Gson;
 import com.hewuzhe.R;
+import com.hewuzhe.model.Pic;
 import com.hewuzhe.model.User;
 import com.hewuzhe.presenter.ProfileSettingsPresenter;
 import com.hewuzhe.ui.base.ToolBarActivity;
@@ -24,6 +26,8 @@ import com.hewuzhe.utils.SPUtil;
 import com.hewuzhe.utils.StringUtil;
 import com.hewuzhe.utils.TimeUtil;
 import com.hewuzhe.view.ProfileSettingsView;
+
+import java.util.ArrayList;
 
 import butterknife.Bind;
 import io.rong.imlib.RongIMClient;
@@ -194,6 +198,18 @@ public class StrangerProfileSettingsActivity extends ToolBarActivity<ProfileSett
                 .crossFade()
                 .transform(new GlideCircleTransform(getContext()))
                 .into(_ImgAvatar);
+
+        _ImgAvatar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Pic pic = new Pic();
+                pic.PictureUrl = friend.PhotoPath;
+                ArrayList<Pic> pics = new ArrayList();
+                pics.add(pic);
+                startActivity(PicsActivity.class, new Bun().putString("pics", new Gson().toJson(pics)).putBoolean("isHidePage", true).ok());
+            }
+        });
+
 
         _BtnFollow.setOnClickListener(new View.OnClickListener() {
             @Override

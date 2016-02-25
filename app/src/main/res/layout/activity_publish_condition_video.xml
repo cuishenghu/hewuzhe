@@ -24,7 +24,6 @@
 
     </FrameLayout>
 
-
     <TextView android:layout_width="match_parent"
               android:layout_height="4dp"
               android:background="@color/colorBg"/>
@@ -39,6 +38,7 @@
               android:hint="请写下视频的介绍"
               android:paddingLeft="20px"
               android:paddingTop="20px"
+              android:textColor="@color/colorYellow"
               android:textColorHint="@color/colorLine"/>
 
 

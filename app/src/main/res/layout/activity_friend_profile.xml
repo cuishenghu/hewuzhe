@@ -21,13 +21,13 @@
             <ImageView android:id="@+id/img"
                        android:layout_width="match_parent"
                        android:layout_height="280px"
-                       android:visibility="gone"
                        android:scaleType="fitXY"
-                       android:src="@mipmap/bg_friends_condition"/>
+                       android:src="@mipmap/bg_friends_condition"
+                       android:visibility="gone"/>
 
             <LinearLayout android:layout_width="match_parent"
                           android:layout_height="match_parent"
-                          android:layout_marginTop="120px"
+                          android:layout_marginTop="180px"
                           android:background="@color/colorBg"
                           android:orientation="vertical">
 
@@ -38,20 +38,6 @@
                               android:paddingLeft="30px"
                               android:paddingTop="10px">
 
-                    <TextView android:id="@+id/tv_username"
-                              style="@style/text_30_yellow"
-                              android:layout_width="wrap_content"
-                              android:layout_height="wrap_content"
-                              android:layout_marginLeft="130px"
-                              android:text=""/>
-
-                    <TextView android:id="@+id/tv_info"
-                              style="@style/text_27_white"
-                              android:layout_width="wrap_content"
-                              android:layout_height="wrap_content"
-                              android:layout_marginLeft="120px"
-                              android:layout_marginTop="5px"
-                              android:text="男 26岁 山东 临沂 兰山区"/>
 
                     <TextView android:layout_width="match_parent"
                               android:layout_height="2px"
@@ -272,6 +258,22 @@
                        android:layout_marginTop="60px"
                        android:src="@mipmap/img_avatar"/>
 
+            <TextView android:id="@+id/tv_info"
+                      style="@style/text_27_white"
+                      android:layout_width="wrap_content"
+                      android:layout_height="wrap_content"
+                      android:layout_marginLeft="150px"
+                      android:layout_marginTop="120px"
+                      android:text="男 26岁 山东 临沂 兰山区"/>
+
+
+            <TextView android:id="@+id/tv_username"
+                      style="@style/text_30_yellow"
+                      android:layout_width="wrap_content"
+                      android:layout_height="wrap_content"
+                      android:layout_marginLeft="150px"
+                      android:layout_marginTop="80px"
+                      android:text="sss"/>
 
         </FrameLayout>
     </android.support.v4.widget.NestedScrollView>

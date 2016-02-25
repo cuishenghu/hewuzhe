@@ -324,7 +324,7 @@ public class ProductInfoActivity extends ToolBarActivity<ProductInfoPresenter> i
 
         ViewGroup.LayoutParams para;
         para = framelayout.getLayoutParams();
-        para.height= StringUtil.getScreenWidth(this);
+        para.height= StringUtil.getScreenWidth(this)/2;
         framelayout.setLayoutParams(para);
 
         initBanner(imageUrlList);

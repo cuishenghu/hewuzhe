@@ -171,7 +171,7 @@ public class ProductInfoActivity extends ToolBarActivity<ProductInfoPresenter> i
     private TagGroup.OnTagClickListener mTagClickListener = new TagGroup.OnTagClickListener() {
         @Override
         public void onTagClick(String tag) {
-            Toast.makeText(ProductInfoActivity.this, tag, Toast.LENGTH_SHORT).show();
+//            Toast.makeText(ProductInfoActivity.this, tag, Toast.LENGTH_SHORT).show();
             tag_color=tag;
             for(int i=0;i<product.ColorList.size();i++){
                 if(product.ColorList.get(i).Name.equals(tag_color)) {
@@ -212,7 +212,7 @@ public class ProductInfoActivity extends ToolBarActivity<ProductInfoPresenter> i
     private TagGroup.OnTagClickListener mTagClickListener_size = new TagGroup.OnTagClickListener() {
         @Override
         public void onTagClick(String tag) {
-            Toast.makeText(ProductInfoActivity.this, tag, Toast.LENGTH_SHORT).show();
+//            Toast.makeText(ProductInfoActivity.this, tag, Toast.LENGTH_SHORT).show();
             tag_size=tag;
 
 
@@ -392,6 +392,7 @@ public class ProductInfoActivity extends ToolBarActivity<ProductInfoPresenter> i
                     presenter.addInsertBasket(product.Id, number, price_num, price, v);
                     presenter.getCount();
                     pop.dismiss();
+                    Toast.makeText(ProductInfoActivity.this, "加入购物车成功！！", Toast.LENGTH_SHORT).show();
                 } else {
                     Toast.makeText(ProductInfoActivity.this, "请重新选择规格", Toast.LENGTH_SHORT).show();
                     return;

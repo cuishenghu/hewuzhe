@@ -1,5 +1,6 @@
 package com.hewuzhe.ui.fragment;
 
+import android.content.Intent;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
@@ -100,7 +101,19 @@ public class ProductCollectionsFragment extends SwipeRecycleViewFragment<Product
      */
     @Override
     public void onItemClick(View view, int pos, ProductCollection item) {
+        if (adapter.getCheckShowStatus()) {
+            /**
+             * 选择状态
+             * */
 
+            ((android.widget.CheckBox) view.findViewById(R.id.cb_plan)).setChecked(item.isChecked ? false : true);
+
+        } else {
+            /**
+             * 进入详情页
+             * */
+            startActivity(new Intent(this.getActivity(), ProductInfoActivity.class).putExtra("data", new Bun().putInt("proid", item.ProductId).ok()));
+        }
     }
 
     @Override
@@ -110,7 +123,23 @@ public class ProductCollectionsFragment extends SwipeRecycleViewFragment<Product
 
     @Override
     public void onReceive(Integer msg) {
-
+        if (msg == C.MSG_DEFAUT) {
+            //编辑
+            adapter.showCheck(true);
+        } else if (msg == C.MSG_ONE) {
+            //删除
+            LinkedList<ProductCollection> checkedList = adapter.getCheckedList();
+            if (checkedList.size() > 0) {
+                for (ProductCollection articleCollection : checkedList) {
+                    presenter.deleteCollection(articleCollection.ProductId, recyclerView);
+                    adapter.removeItem(articleCollection);
+                }
+            } else {
+                adapter.showCheck(false);
+            }
+        } else if (msg == C.MSG_TWO) {
+            adapter.showCheck(false);
+        }
 
     }
 
@@ -126,7 +155,7 @@ public class ProductCollectionsFragment extends SwipeRecycleViewFragment<Product
 
     @Override
     public void collectAndOther() {
-        adapter.showCheck();
+        adapter.showCheck(false);
     }
 
 }

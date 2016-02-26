@@ -11,4 +11,5 @@ public class ProductCollection {
     public double Price;
     public int VisitNum;
     public int SaleNum;
+    public boolean isChecked=false;
 }

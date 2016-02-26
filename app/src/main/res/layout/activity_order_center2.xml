@@ -1,0 +1,165 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <com.hewuzhe.view.MyCommonTitle
+        android:id="@+id/aci_mytitle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/colorBg"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:background="@color/colorPrimary"
+            android:gravity="center"
+            android:orientation="horizontal">
+
+            <RelativeLayout
+                android:id="@+id/ll_wait_to_pay"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+
+                android:background="@drawable/tab_order_bg"
+                android:gravity="center">
+
+                <TextView
+                    android:id="@+id/tv_wait_to_pay"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_centerInParent="true"
+                    android:gravity="center"
+                    android:text="待付款"
+                    android:textColor="@color/colorYellow"
+                    android:textSize="16sp" />
+
+                <TextView
+                    android:id="@+id/tv_wait_to_pay_count"
+                    style="@style/text_25_white"
+                    android:layout_width="15dp"
+                    android:layout_height="15dp"
+                    android:layout_alignParentRight="true"
+                    android:layout_marginRight="10dp"
+                    android:background="@drawable/circle_red"
+                    android:gravity="center"
+                    android:text="0"
+                    android:visibility="gone"
+                    tools:visibility="visible" />
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:id="@+id/ll_wait_to_send"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+
+                android:background="@drawable/tab_order_bg"
+                android:gravity="center">
+
+                <TextView
+                    android:id="@+id/tv_wait_to_send"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_centerInParent="true"
+                    android:gravity="center"
+                    android:text="待发货"
+                    android:textColor="@drawable/tab_font_color"
+                    android:textSize="16sp" />
+
+                <TextView
+                    android:id="@+id/tv_wait_to_send_count"
+                    style="@style/text_25_white"
+                    android:layout_width="15dp"
+                    android:layout_height="15dp"
+                    android:layout_alignParentRight="true"
+                    android:layout_marginRight="10dp"
+                    android:background="@drawable/circle_red"
+                    android:gravity="center"
+                    android:text="0"
+                    android:visibility="gone"
+                    tools:visibility="visible" />
+            </RelativeLayout>
+
+
+            <RelativeLayout
+                android:id="@+id/ll_wait_to_receive"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:background="@drawable/tab_order_bg"
+                android:gravity="center">
+
+                <TextView
+                    android:id="@+id/tv_wait_to_receive"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_centerInParent="true"
+                    android:gravity="center"
+                    android:text="待收货"
+                    android:textColor="@drawable/tab_font_color"
+                    android:textSize="16sp" />
+
+                <TextView
+                    android:id="@+id/tv_wait_to_receive_count"
+                    style="@style/text_25_white"
+                    android:layout_width="15dp"
+                    android:layout_height="15dp"
+                    android:layout_alignParentRight="true"
+                    android:layout_marginRight="10dp"
+                    android:background="@drawable/circle_red"
+                    android:gravity="center"
+                    android:text="0"
+                    android:visibility="gone"
+                    tools:visibility="visible" />
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:id="@+id/ll_received"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+
+                android:gravity="center_horizontal">
+
+                <TextView
+                    android:id="@+id/tv_received"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_centerInParent="true"
+                    android:background="@drawable/tab_order_bg"
+                    android:gravity="center"
+                    android:text="已收货"
+                    android:textColor="@drawable/tab_font_color"
+                    android:textSize="16sp" />
+
+                <TextView
+                    android:id="@+id/tv_received_count"
+                    style="@style/text_25_white"
+                    android:layout_width="15dp"
+                    android:layout_height="15dp"
+                    android:layout_alignParentRight="true"
+                    android:layout_marginRight="10dp"
+                    android:background="@drawable/circle_red"
+                    android:gravity="center"
+                    android:text="0"
+                    android:visibility="gone"
+                    tools:visibility="visible" />
+            </RelativeLayout>
+        </LinearLayout>
+
+        <com.hewuzhe.view.XListView
+            android:id="@+id/list_order"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+
+    </LinearLayout>
+
+</LinearLayout>

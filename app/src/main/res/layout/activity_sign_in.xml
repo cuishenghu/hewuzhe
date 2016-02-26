@@ -137,6 +137,14 @@
 
     </LinearLayout>
 
+    <CheckBox
+        android:id="@+id/cb_remember_pwd"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="5px"
+        android:checked="true"
+        android:text="记住密码"
+        android:textColor="@color/white"/>
 
     <LinearLayout android:layout_width="match_parent"
                   android:layout_height="wrap_content"

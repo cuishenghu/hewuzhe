@@ -8,7 +8,7 @@
         android:id="@+id/trash_button"
         android:tag="Bottom2"
         android:background="#333"
-        android:layout_width="40dp"
+        android:layout_width="80dp"
         android:gravity="center"
         android:layout_height="match_parent">
         <ImageView

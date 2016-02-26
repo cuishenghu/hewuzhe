@@ -95,7 +95,7 @@ public class ShopCarActivity extends RecycleViewActivity<ShopCarPresenter, ShopC
     protected void initThings(Bundle savedInstanceState) {
         super.initThings(savedInstanceState);
         tv_action.setText("编辑");
-        presenter.getData(page, count);
+        presenter.getData(1, 1000);
 
     }
 
@@ -129,7 +129,7 @@ public class ShopCarActivity extends RecycleViewActivity<ShopCarPresenter, ShopC
     @Override
     public void onItemClick(View view, int pos, ShopCar shopCar) {
         if(state.equals("编辑")) {
-            DecimalFormat df = new DecimalFormat("#.00");
+            DecimalFormat df = new DecimalFormat("######0.00");
             if (shopCar.select_state) {
                 shopCar.select_state = false;
                 double price = 0.0;

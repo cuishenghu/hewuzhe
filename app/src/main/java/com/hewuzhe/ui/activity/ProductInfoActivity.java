@@ -34,6 +34,7 @@ import com.hewuzhe.ui.base.ToolBarActivity;
 import com.hewuzhe.ui.cons.C;
 import com.hewuzhe.ui.inter.OnItemClickListener;
 import com.hewuzhe.utils.Bun;
+import com.hewuzhe.utils.StringUtil;
 import com.hewuzhe.utils.TagGroup;
 import com.hewuzhe.view.ProductInfoView;
 
@@ -179,6 +180,33 @@ public class ProductInfoActivity extends ToolBarActivity<ProductInfoPresenter> i
                 }
             }
 
+            for (int i = 0; i < product.PriceList.size(); i++) {
+                if (product.PriceList.get(i).ColorId == tag_color_num && product.PriceList.get(i).SizeId == tag_size_num) {
+//                    price_num = product.PriceList.get(i).Id;
+                    product_price_true.setText("￥" + product.PriceList.get(i).Price);
+                    if(product.PriceList.get(i).ImagePath.trim().equals("")){
+                        Glide.with(ProductInfoActivity.this)
+                                .load(C.BASE_URL + product.ImagePath)
+                                .centerCrop()
+                                .crossFade()
+                                .placeholder(R.mipmap.img_bg)
+                                .into(product_image);
+                        picurl=product.ImagePath;
+                    }
+                    else {
+                        Glide.with(ProductInfoActivity.this)
+                                .load(C.BASE_URL + product.PriceList.get(i).ImagePath)
+                                .centerCrop()
+                                .crossFade()
+                                .placeholder(R.mipmap.img_bg)
+                                .into(product_image);
+//                    price = product.PriceList.get(i).Price;
+                        picurl=product.PriceList.get(i).ImagePath;
+                    }
+                    break;
+                }
+            }
+
         }
     };
     private TagGroup.OnTagClickListener mTagClickListener_size = new TagGroup.OnTagClickListener() {
@@ -296,6 +324,8 @@ public class ProductInfoActivity extends ToolBarActivity<ProductInfoPresenter> i
 
         ViewGroup.LayoutParams para;
         para = framelayout.getLayoutParams();
+        para.height= StringUtil.getScreenWidth(this)/2;
+        framelayout.setLayoutParams(para);
 
         initBanner(imageUrlList);
     }

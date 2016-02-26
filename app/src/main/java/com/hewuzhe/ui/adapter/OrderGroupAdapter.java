@@ -200,7 +200,7 @@ public class OrderGroupAdapter extends BaseAdapter {
             holder.tv_right_btn.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    confirmReceived(position);
+                    confirmReceived(position,mType);
                 }
             });
         } else if (mType == 4) {
@@ -302,7 +302,7 @@ public class OrderGroupAdapter extends BaseAdapter {
     /**
      * 确认收货
      */
-    private void confirmReceived(final int position) {
+    private void confirmReceived(final int position,final int mType) {
         final RequestParams params = new RequestParams();
         params.put("billId", orderNumbers.get(position).getId());//订单ID
         params.put("userId", new SessionUtil(context).getUserId()); //由于自己ID没有订单,现在传2,此ID为李发起的ID.待修改成自己的ID==========
@@ -312,6 +312,7 @@ public class OrderGroupAdapter extends BaseAdapter {
                 Tools.toast(context, "订单" + orderNumbers.get(position).getId() + "收货成功！");
                 orderNumbers.remove(position);
                 OrderGroupAdapter.this.notifyDataSetChanged();
+//                context.startActivity(new Intent(context,OrderDetailsActivity.class).putExtra("mType",mType+1).putExtra("billId",orderNumbers.get(position).getId()));//确认收货跳转到已收货的订单详情
             }
 
             @Override

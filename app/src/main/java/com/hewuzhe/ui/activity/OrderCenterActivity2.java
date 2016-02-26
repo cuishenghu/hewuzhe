@@ -6,33 +6,23 @@ import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.os.Handler;
-import android.support.v4.app.FragmentActivity;
 import android.view.View;
-import android.widget.RadioGroup;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
-import com.alibaba.fastjson.JSONObject;
 import com.hewuzhe.R;
 import com.hewuzhe.model.OrderNumber;
-import com.hewuzhe.ui.adapter.OrderGroupAdapter;
 import com.hewuzhe.ui.adapter.OrderGroupAdapter2;
 import com.hewuzhe.ui.base.BaseActivity2;
-import com.hewuzhe.ui.fragment.OrderCenterFragment;
-import com.hewuzhe.ui.fragment.OrderFragment;
 import com.hewuzhe.ui.http.EntityHandler;
-import com.hewuzhe.ui.http.HttpErrorHandler;
 import com.hewuzhe.ui.http.HttpUtils;
 import com.hewuzhe.utils.SessionUtil;
-import com.hewuzhe.utils.StringUtil;
-import com.hewuzhe.utils.Tools;
 import com.hewuzhe.view.MyCommonTitle;
 import com.hewuzhe.view.MyRequestDailog;
 import com.hewuzhe.view.XListView;
 import com.loopj.android.http.AsyncHttpResponseHandler;
 import com.loopj.android.http.RequestParams;
 
-import org.w3c.dom.Text;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -82,10 +72,10 @@ public class OrderCenterActivity2 extends BaseActivity2 implements XListView.IXL
         ll_wait_to_receive = (RelativeLayout) findViewById(R.id.ll_wait_to_receive);
         ll_received = (RelativeLayout) findViewById(R.id.ll_received);
 
-        tv_wait_to_pay_count = (TextView) findViewById(R.id.tv_wait_to_pay_count);//统计订单中心待付款数量
-        tv_wait_to_send_count = (TextView) findViewById(R.id.tv_wait_to_send_count);//统计订单中心已付款数量
-        tv_wait_to_receive_count = (TextView) findViewById(R.id.tv_wait_to_receive_count);//统计订单中心待收货数量
-        tv_received_count = (TextView) findViewById(R.id.tv_received_count);//统计订单中心已收货数量
+//        tv_wait_to_pay_count = (TextView) findViewById(R.id.tv_wait_to_pay_count);//统计订单中心待付款数量
+//        tv_wait_to_send_count = (TextView) findViewById(R.id.tv_wait_to_send_count);//统计订单中心已付款数量
+//        tv_wait_to_receive_count = (TextView) findViewById(R.id.tv_wait_to_receive_count);//统计订单中心待收货数量
+//        tv_received_count = (TextView) findViewById(R.id.tv_received_count);//统计订单中心已收货数量
 
         tv_wait_to_pay = (TextView) findViewById(R.id.tv_wait_to_pay);//统计订单中心待付款数量
         tv_wait_to_send = (TextView) findViewById(R.id.tv_wait_to_send);//统计订单中心已付款数量
@@ -233,57 +223,57 @@ public class OrderCenterActivity2 extends BaseActivity2 implements XListView.IXL
         }
     };
 
-    public void getDataFromI(int i) {
-        for (i = 1; i <= 4; i++) {
-            requestRecordCountData(i);
-            if (i == 1) {
-                tv_wait_to_pay.setTextColor(getResources().getColor(R.color.colorYellow));
-                tv_wait_to_send.setTextColor(Color.WHITE);
-                tv_received.setTextColor(Color.WHITE);
-                tv_wait_to_receive.setTextColor(Color.WHITE);
-                tv_wait_to_pay.setVisibility(View.VISIBLE);
-                tv_wait_to_pay.setText(recordcount);
-            }
-            if (i == 2) {
-                tv_wait_to_send.setTextColor(getResources().getColor(R.color.colorYellow));
-                tv_received.setTextColor(Color.WHITE);
-                tv_wait_to_receive.setTextColor(Color.WHITE);
-                tv_wait_to_pay.setTextColor(Color.WHITE);
-                tv_wait_to_send.setText(recordcount);
-            }
-            if (i == 3) {
-                tv_wait_to_receive.setTextColor(getResources().getColor(R.color.colorYellow));
-                tv_wait_to_pay.setTextColor(Color.WHITE);
-                tv_wait_to_send.setTextColor(Color.WHITE);
-                tv_received.setTextColor(Color.WHITE);
-                tv_wait_to_receive.setText(recordcount);
-            }
-            if (i == 4) {
-                tv_received.setTextColor(getResources().getColor(R.color.colorYellow));
-                tv_wait_to_receive.setTextColor(Color.WHITE);
-                tv_wait_to_pay.setTextColor(Color.WHITE);
-                tv_wait_to_send.setTextColor(Color.WHITE);
-                tv_received.setText(recordcount);
-            }
-        }
+//    public void getDataFromI(int i) {
+//        for (i = 1; i <= 4; i++) {
+////            requestRecordCountData(i);
+//            if (i == 1) {
+//                tv_wait_to_pay.setTextColor(getResources().getColor(R.color.colorYellow));
+//                tv_wait_to_send.setTextColor(Color.WHITE);
+//                tv_received.setTextColor(Color.WHITE);
+//                tv_wait_to_receive.setTextColor(Color.WHITE);
+//                tv_wait_to_pay.setVisibility(View.VISIBLE);
+//                tv_wait_to_pay.setText(recordcount);
+//            }
+//            if (i == 2) {
+//                tv_wait_to_send.setTextColor(getResources().getColor(R.color.colorYellow));
+//                tv_received.setTextColor(Color.WHITE);
+//                tv_wait_to_receive.setTextColor(Color.WHITE);
+//                tv_wait_to_pay.setTextColor(Color.WHITE);
+//                tv_wait_to_send.setText(recordcount);
+//            }
+//            if (i == 3) {
+//                tv_wait_to_receive.setTextColor(getResources().getColor(R.color.colorYellow));
+//                tv_wait_to_pay.setTextColor(Color.WHITE);
+//                tv_wait_to_send.setTextColor(Color.WHITE);
+//                tv_received.setTextColor(Color.WHITE);
+//                tv_wait_to_receive.setText(recordcount);
+//            }
+//            if (i == 4) {
+//                tv_received.setTextColor(getResources().getColor(R.color.colorYellow));
+//                tv_wait_to_receive.setTextColor(Color.WHITE);
+//                tv_wait_to_pay.setTextColor(Color.WHITE);
+//                tv_wait_to_send.setTextColor(Color.WHITE);
+//                tv_received.setText(recordcount);
+//            }
+//        }
+//
+//    }
 
-    }
-
-    public void requestRecordCountData(final int i) {
-        params = new RequestParams();
-        params.put("startRowIndex", 0);//开始行索引
-        params.put("maximumRows", 1);//每页条数
-        params.put("userId", new SessionUtil(OrderCenterActivity2.this).getUserId());//用户ID   由于自己ID没有订单,现在传2,此ID为李发起的ID.待修改成自己的ID=============================================================================
-        params.put("proNum", 1);//每个订单下显示商品个数
-        params.put("state", i);//订单状态 1：未付款 2：代发货 3：已发货 4：已签收 5：买家已评价 6：卖家已评价 7：已过期 8：全部 9:申请取消订单 10：已取消订单
-        HttpUtils.getOrderByUserId(new HttpErrorHandler() {
-            @Override
-            public void onRecevieSuccess(JSONObject json) {
-                recordcount = json.getString("recordcount");
-            }
-        }, params);
-
-    }
+//    public void requestRecordCountData(final int i) {
+//        params = new RequestParams();
+//        params.put("startRowIndex", 0);//开始行索引
+//        params.put("maximumRows", 1);//每页条数
+//        params.put("userId", new SessionUtil(OrderCenterActivity2.this).getUserId());//用户ID   由于自己ID没有订单,现在传2,此ID为李发起的ID.待修改成自己的ID=============================================================================
+//        params.put("proNum", 1);//每个订单下显示商品个数
+//        params.put("state", i);//订单状态 1：未付款 2：代发货 3：已发货 4：已签收 5：买家已评价 6：卖家已评价 7：已过期 8：全部 9:申请取消订单 10：已取消订单
+//        HttpUtils.getOrderByUserId(new HttpErrorHandler() {
+//            @Override
+//            public void onRecevieSuccess(JSONObject json) {
+//                recordcount = json.getString("recordcount");
+//            }
+//        }, params);
+//
+//    }
 
     /**
      * 下拉刷新

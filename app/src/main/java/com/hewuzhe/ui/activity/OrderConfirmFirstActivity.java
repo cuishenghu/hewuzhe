@@ -442,34 +442,44 @@ public class OrderConfirmFirstActivity extends BaseActivity2 {
                     Tools.toast(this, "您已经付款成功");
                     startActivity(new Intent(OrderConfirmFirstActivity.this, OrderCenterActivity2.class).putExtra("mType", 2));
 //                    reflush();
-                    OrderCenterActivity2.OrderCenterActivity2.finish();
+                    if (OrderCenterActivity2.OrderCenterActivity2 != null) {
+                        OrderCenterActivity2.OrderCenterActivity2.finish();
+                    }
                     finish();
                 } else if (result.equals("fail")) {
                     Tools.toast(this, "支付失败，请重试！");
 //                    setResult(RESULT_OK);
                     startActivity(new Intent(OrderConfirmFirstActivity.this, OrderCenterActivity.class).putExtra("mType", 1));
-                    OrderCenterActivity2.OrderCenterActivity2.finish();
+                    if (OrderCenterActivity2.OrderCenterActivity2 != null) {
+                        OrderCenterActivity2.OrderCenterActivity2.finish();
+                    }
 //                    reflush();
                     finish();
                 } else if (result.equals("invalid")) {
                     Tools.toast(this, "支付失败，请重试！");
 //                    setResult(99, new Intent().putExtra("mType", 2 + ""));
                     startActivity(new Intent(OrderConfirmFirstActivity.this, OrderCenterActivity.class).putExtra("mType", 1));
-                    OrderCenterActivity2.OrderCenterActivity2.finish();
+                    if (OrderCenterActivity2.OrderCenterActivity2 != null) {
+                        OrderCenterActivity2.OrderCenterActivity2.finish();
+                    }
 //                    reflush();
                     finish();
                 } else if (result.equals("cancel")) {
                     Tools.toast(this, "取消支付！");
 //                    setResult(RESULT_OK);
                     startActivity(new Intent(OrderConfirmFirstActivity.this, OrderCenterActivity.class).putExtra("mType", 1));
-                    OrderCenterActivity2.OrderCenterActivity2.finish();
+                    if (OrderCenterActivity2.OrderCenterActivity2 != null) {
+                        OrderCenterActivity2.OrderCenterActivity2.finish();
+                    }
 //                      reflush();
                     finish();
                 } else if (resultCode == Activity.RESULT_CANCELED) {
                     Tools.toast(this, "支付取消！");
 //                    setResult(RESULT_OK);
                     startActivity(new Intent(OrderConfirmFirstActivity.this, OrderCenterActivity.class).putExtra("mType", 1));
-                    OrderCenterActivity2.OrderCenterActivity2.finish();
+                    if (OrderCenterActivity2.OrderCenterActivity2 != null) {
+                        OrderCenterActivity2.OrderCenterActivity2.finish();
+                    }
 //                    reflush();
                     finish();
                 }

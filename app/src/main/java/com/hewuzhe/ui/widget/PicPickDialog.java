@@ -88,19 +88,6 @@ public class PicPickDialog {
 
 
     private void chooseImage() {
-//        chooserType = ChooserType.REQUEST_PICK_PICTURE;
-//        imageChooserManager = new ImageChooserManager(context,
-//                ChooserType.REQUEST_PICK_PICTURE, true);
-//        imageChooserManager.setImageChooserListener((ImageChooserListener) context);
-//        imageChooserManager.clearOldFiles();
-//        try {
-////            pbar.setVisibility(View.VISIBLE);
-//            filePath = imageChooserManager.choose();
-//        } catch (IllegalArgumentException e) {
-//            e.printStackTrace();
-//        } catch (Exception e) {
-//            e.printStackTrace();
-//        }
 
         imageConfig
                 = new ImageConfig.Builder(new GlideLoader())

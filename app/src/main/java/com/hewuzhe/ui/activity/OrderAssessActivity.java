@@ -53,6 +53,7 @@ public class OrderAssessActivity extends BaseActivity2 {
     private List<Map<String, String>> lists = new ArrayList<Map<String, String>>();
     private List<OrderContent> list;
     private String billId;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -115,7 +116,6 @@ public class OrderAssessActivity extends BaseActivity2 {
 //            comlist = gson.toJson(lists).toString();
 //        }
 //    }
-
     @Override
     public void onClick(View view) {
         super.onClick(view);
@@ -132,8 +132,8 @@ public class OrderAssessActivity extends BaseActivity2 {
                     String userId = new SessionUtil(OrderAssessActivity.this).getUserId() + "";
                     String productId = list.get(i).getProductId();
                     String productPriceId = list.get(i).getProductPriceId();
-                    ping1= img_chaping.isSelected();
-                    ping2= img_zhongping.isSelected();
+                    ping1 = img_chaping.isSelected();
+                    ping2 = img_zhongping.isSelected();
                     String type = ping1 ? "0" : (ping2 ? "1" : "2");
                     map.put("userId", userId);
                     map.put("productId", productId);
@@ -152,6 +152,8 @@ public class OrderAssessActivity extends BaseActivity2 {
                     @Override
                     public void onRecevieSuccess(com.alibaba.fastjson.JSONObject json) {
                         Tools.toast(OrderAssessActivity.this, "提交评论成功");
+                        startActivity(new Intent(OrderAssessActivity.this, OrderCenterActivity2.class).putExtra("mType", 4));
+                        OrderCenterActivity2.OrderCenterActivity2.finish();
                         finish();
                     }
                 }, params);

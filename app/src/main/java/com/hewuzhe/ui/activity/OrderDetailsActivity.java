@@ -38,10 +38,11 @@ import java.util.List;
 public class OrderDetailsActivity extends BaseActivity2 {
 
     private MyCommonTitle myCommonTitle;
-    private LinearLayout ll_no_address, ll_address;
+    private LinearLayout ll_no_address, ll_address, ll_pay_time, ll_send_time;
     private TextView tv_username;
     private TextView tv_mobile;
     private TextView tv_address;
+    private TextView tv_order_time;//付款时间,发货时间,收货时间
     private TextView tv_buyer_state;//买家的订单状态
     private TextView tv_postage_price;
     private TextView tv_order_sum;
@@ -75,7 +76,7 @@ public class OrderDetailsActivity extends BaseActivity2 {
         super.onCreate(savedInstanceState);
         areaId = (String) getIntent().getSerializableExtra("areaId");
         billId = getIntent().getStringExtra("billId");
-        mType = (Integer) getIntent().getSerializableExtra("mType");
+        mType = getIntent().getIntExtra("mType",0);
 //        orders = (OrderNumber) getIntent().getSerializableExtra("order");
 //        total_number = Integer.parseInt((String) getIntent().getSerializableExtra("number"));
 //        total_price = Double.parseDouble((String) getIntent().getSerializableExtra("price"));
@@ -114,6 +115,9 @@ public class OrderDetailsActivity extends BaseActivity2 {
         tv_dispatch_date = (TextView) findViewById(R.id.tv_dispatch_date);//发货时间
         tv_left_btn = (TextView) findViewById(R.id.tv_left_btn);//左边按钮
         tv_right_btn = (TextView) findViewById(R.id.tv_right_btn);//右边按钮
+
+        tv_order_time = (TextView) findViewById(R.id.tv_order_time);////付款时间,发货时间,收货时间
+        ll_pay_time = (LinearLayout) findViewById(R.id.ll_pay_time);//付款时间
 
 
         order_list = (ListView) findViewById(R.id.list_order_details);
@@ -197,7 +201,18 @@ public class OrderDetailsActivity extends BaseActivity2 {
             tv_buyer_state.setVisibility(View.VISIBLE);
             tv_buyer_state.setText("已收货");
         }
-
+        /**
+         * 根据订单类型显示订单的明细时间
+         */
+        if (mType == 1) {
+            ll_pay_time.setVisibility(View.GONE);
+        } else if (mType == 2) {
+            tv_order_time.setText("付款时间：");
+        } else if (mType == 3) {
+            tv_order_time.setText("发货时间：");
+        } else if (mType == 4) {
+            tv_order_time.setText("收货时间：");
+        }
     }
 
     /**
@@ -221,7 +236,9 @@ public class OrderDetailsActivity extends BaseActivity2 {
                 for (int i = 0; i < jsonArray.size(); i++) {
                     jsonObject = jsonArray.getJSONObject(i);
                     OrderContent orderContent = new OrderContent();
+                    orderContent.setProductId(jsonObject.getString("ProductId"));
                     orderContent.setProductName(jsonObject.getString("ProductName"));
+                    orderContent.setProductPriceId(jsonObject.getString("ProductPriceId"));
                     orderContent.setProductSizeName(jsonObject.getString("ProductSizeName"));
                     orderContent.setProductColorName(jsonObject.getString("ProductColorName"));
                     orderContent.setProductPriceTotalPrice(jsonObject.getString("DetailPrice"));
@@ -232,9 +249,14 @@ public class OrderDetailsActivity extends BaseActivity2 {
                     tv_total_price.setText("合计：¥" + jsonObject.getString("BillPrice"));//订单价格
                     tv_order_sum.setText("共" + jsonArray.size() + "件商品");
                     tv_order_no.setText(jsonObject.getString("BillNo"));//订单编号
-                    tv_pay_time.setText(jsonObject.getString("PayTime"));//付款时间
                     tv_create_order_time.setText(jsonObject.getString("BuildTime"));//创建订单时间
-                    tv_dispatch_date.setText(jsonObject.getString("SendTime"));//发货时间
+                    if (mType == 2) {
+                        tv_pay_time.setText(jsonObject.getString("PayTime"));//付款时间
+                    } else if (mType == 3) {
+                        tv_pay_time.setText(jsonObject.getString("SendTime"));//发货时间
+                    } else if (mType == 4) {
+                        tv_pay_time.setText(jsonObject.getString("ReceiveTime"));//收货时间
+                    }
                     tv_postage_price.setText("货到付款");
                     buyerState = Integer.parseInt(jsonObject.getString("State"));
                     areaId = jsonObject.getString("AreaId");
@@ -323,6 +345,7 @@ public class OrderDetailsActivity extends BaseActivity2 {
                     @Override
                     public void onClick(View v) {
                         startActivity(new Intent(OrderDetailsActivity.this, OrderAssessActivity.class).putExtra("list", orderContents).putExtra("billId", billId));
+                        finish();
                     }
                 });
             }
@@ -389,7 +412,7 @@ public class OrderDetailsActivity extends BaseActivity2 {
             @Override
             public void onRecevieSuccess(JSONObject json) {
                 Tools.toast(OrderDetailsActivity.this, "订单删除成功！");
-                setResult(99, new Intent().putExtra("mType", mType + ""));
+                setResult(99, new Intent().putExtra("mType", mType));
                 finish();
             }
         }, params);
@@ -406,8 +429,9 @@ public class OrderDetailsActivity extends BaseActivity2 {
             @Override
             public void onRecevieSuccess(JSONObject json) {
                 Tools.toast(OrderDetailsActivity.this, "订单" + orders.getId() + "收货成功！");
-                setResult(99, new Intent().putExtra("mType", mType + ""));
-//                startActivity(new Intent(OrderDetailsActivity.this, OrderCenterActivity.class).putExtra("mType", 4));
+//                setResult(99, new Intent().putExtra("mType", mType + 1));
+                startActivity(new Intent(OrderDetailsActivity.this, OrderCenterActivity2.class).putExtra("mType", 4));
+                OrderCenterActivity2.OrderCenterActivity2.finish();
                 finish();
 //                reflush();
             }

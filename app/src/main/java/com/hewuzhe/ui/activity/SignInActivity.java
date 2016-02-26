@@ -9,6 +9,8 @@ import android.os.Message;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.CheckBox;
+import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -63,6 +65,8 @@ public class SignInActivity extends BaseActivity<SignInPresenter> implements Sig
     EditText edtUsername;
     @Bind(R.id.edt_pwd)
     EditText edtPwd;
+    @Bind(R.id.cb_remember_pwd)
+    CheckBox _CbRememberPwd;
     private LoadingDialog loadingDialog;
 
     private Handler handler;
@@ -70,6 +74,8 @@ public class SignInActivity extends BaseActivity<SignInPresenter> implements Sig
     private PopupWindowHelper popupWindowHelper;
     private ArrayList<UP> ups;
     private PopupWindow popupWindow;
+    private boolean isRememberPwd = true;
+
 
     @Override
     protected int provideContentViewId() {
@@ -98,7 +104,7 @@ public class SignInActivity extends BaseActivity<SignInPresenter> implements Sig
         tvSignIn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                presenter.signin(view);
+                presenter.signin(view, isRememberPwd);
             }
         });
 
@@ -126,6 +132,13 @@ public class SignInActivity extends BaseActivity<SignInPresenter> implements Sig
                 } else {
                     dismissUPs();
                 }
+            }
+        });
+
+        _CbRememberPwd.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                isRememberPwd = isChecked;
 
             }
         });
@@ -151,7 +164,7 @@ public class SignInActivity extends BaseActivity<SignInPresenter> implements Sig
                             dismissUPs();
                             edtUsername.setText(up.userName);
                             edtPwd.setText(up.passWord);
-                            presenter.signin(textView);
+//                          presenter.signin(textView, isRememberPwd);
 
                         }
                     });
@@ -328,4 +341,5 @@ public class SignInActivity extends BaseActivity<SignInPresenter> implements Sig
         super.onPause();
         dismissDialog();
     }
+
 }

@@ -163,8 +163,8 @@ public class OrderConfirmFirstActivity extends BaseActivity2 {
 //            OrderConfirmFirstAdaptet orderDetailsItemAdaptet = new OrderConfirmFirstAdaptet(OrderConfirmFirstActivity.this, list);
 //            order_list.setAdapter(orderDetailsItemAdaptet);
 //        } else {
-            OrderConfirmFirstAdaptet orderDetailsItemAdaptet = new OrderConfirmFirstAdaptet(OrderConfirmFirstActivity.this, list);
-            order_list.setAdapter(orderDetailsItemAdaptet);
+        OrderConfirmFirstAdaptet orderDetailsItemAdaptet = new OrderConfirmFirstAdaptet(OrderConfirmFirstActivity.this, list);
+        order_list.setAdapter(orderDetailsItemAdaptet);
         /**
          * ListView自适应高度
          */
@@ -264,7 +264,6 @@ public class OrderConfirmFirstActivity extends BaseActivity2 {
         } else {
             tv_total_price.setText("总金额：¥" + df.format(Double.parseDouble(total_price)));
         }
-
 //        int postage = Integer.parseInt(order.getPostage());
 //        double postage = 0.00;
 //        for (int i = 0; i < list.size(); i++) {
@@ -305,7 +304,7 @@ public class OrderConfirmFirstActivity extends BaseActivity2 {
                     break;
                 }
                 DecimalFormat df = new DecimalFormat("#####0.00");
-                if (total_price.equals("0.00")) {
+                if (df.format(Double.parseDouble(total_price)).equals("0.00")) {
                     break;
                 }
                 if (!StringUtil.isEmpty(state)) {
@@ -441,31 +440,46 @@ public class OrderConfirmFirstActivity extends BaseActivity2 {
 //                showMsg(result, errorMsg, extraMsg);
                 if (result.equals("success")) {
                     Tools.toast(this, "您已经付款成功");
-//                    startActivity(new Intent(OrderConfirmFirstActivity.this, OrderCenterActivity.class).putExtra("mType", 2 + ""));
+                    startActivity(new Intent(OrderConfirmFirstActivity.this, OrderCenterActivity2.class).putExtra("mType", 2));
 //                    reflush();
+                    if (OrderCenterActivity2.OrderCenterActivity2 != null) {
+                        OrderCenterActivity2.OrderCenterActivity2.finish();
+                    }
                     finish();
                 } else if (result.equals("fail")) {
                     Tools.toast(this, "支付失败，请重试！");
 //                    setResult(RESULT_OK);
-//                    startActivity(new Intent(OrderConfirmFirstActivity.this, OrderCenterActivity.class).putExtra("mType", 1 + ""));
+                    startActivity(new Intent(OrderConfirmFirstActivity.this, OrderCenterActivity.class).putExtra("mType", 1));
+                    if (OrderCenterActivity2.OrderCenterActivity2 != null) {
+                        OrderCenterActivity2.OrderCenterActivity2.finish();
+                    }
 //                    reflush();
-//                    finish();
+                    finish();
                 } else if (result.equals("invalid")) {
                     Tools.toast(this, "支付失败，请重试！");
 //                    setResult(99, new Intent().putExtra("mType", 2 + ""));
-//                    startActivity(new Intent(OrderConfirmFirstActivity.this, OrderCenterActivity.class));
+                    startActivity(new Intent(OrderConfirmFirstActivity.this, OrderCenterActivity.class).putExtra("mType", 1));
+                    if (OrderCenterActivity2.OrderCenterActivity2 != null) {
+                        OrderCenterActivity2.OrderCenterActivity2.finish();
+                    }
 //                    reflush();
-//                    finish();
+                    finish();
                 } else if (result.equals("cancel")) {
                     Tools.toast(this, "取消支付！");
 //                    setResult(RESULT_OK);
-//                    startActivity(new Intent(OrderConfirmFirstActivity.this, OrderCenterActivity.class).putExtra("mType", 1 + ""));
-//                    reflush();
+                    startActivity(new Intent(OrderConfirmFirstActivity.this, OrderCenterActivity.class).putExtra("mType", 1));
+                    if (OrderCenterActivity2.OrderCenterActivity2 != null) {
+                        OrderCenterActivity2.OrderCenterActivity2.finish();
+                    }
+//                      reflush();
                     finish();
                 } else if (resultCode == Activity.RESULT_CANCELED) {
                     Tools.toast(this, "支付取消！");
 //                    setResult(RESULT_OK);
-//                    startActivity(new Intent(OrderConfirmFirstActivity.this, OrderCenterActivity.class).putExtra("mType", 1 + ""));
+                    startActivity(new Intent(OrderConfirmFirstActivity.this, OrderCenterActivity.class).putExtra("mType", 1));
+                    if (OrderCenterActivity2.OrderCenterActivity2 != null) {
+                        OrderCenterActivity2.OrderCenterActivity2.finish();
+                    }
 //                    reflush();
                     finish();
                 }

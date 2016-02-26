@@ -12,7 +12,7 @@ import com.hewuzhe.R;
 import com.hewuzhe.model.Video;
 import com.hewuzhe.presenter.Videos2Presenter;
 import com.hewuzhe.ui.adapter.GridItemDecoration;
-import com.hewuzhe.ui.adapter.Videos2Adapter;
+import com.hewuzhe.ui.adapter.Videos3Adapter;
 import com.hewuzhe.ui.base.SwipeRecycleViewActivity;
 import com.hewuzhe.utils.Bun;
 import com.hewuzhe.view.Videos2View;
@@ -21,7 +21,7 @@ import java.util.ArrayList;
 
 import butterknife.Bind;
 
-public class Videos_2Activity extends SwipeRecycleViewActivity<Videos2Presenter, Videos2Adapter, Video> implements Videos2View {
+public class Videos_2Activity extends SwipeRecycleViewActivity<Videos2Presenter, Videos3Adapter, Video> implements Videos2View {
 
     private int catId;
     @Bind(R.id.img_search)
@@ -64,15 +64,14 @@ public class Videos_2Activity extends SwipeRecycleViewActivity<Videos2Presenter,
         return new Videos2Presenter();
     }
 
-
     /**
      * @return 提供Adapter
      */
     @Override
-    protected Videos2Adapter provideAdapter() {
+    protected Videos3Adapter provideAdapter() {
         decoration = new GridItemDecoration(10, 2);
         recyclerView.addItemDecoration(decoration);
-        return new Videos2Adapter(getContext());
+        return new Videos3Adapter(getContext());
     }
 
     /**
@@ -86,7 +85,7 @@ public class Videos_2Activity extends SwipeRecycleViewActivity<Videos2Presenter,
             @Override
             public int getSpanSize(int position) {
                 if (position == adapter.getItemCount() - 1) {
-                    return swicthButton.isChecked()?1:2;
+                    return swicthButton.isChecked() ? 1 : 2;
                 }
                 return 1;
             }
@@ -103,8 +102,8 @@ public class Videos_2Activity extends SwipeRecycleViewActivity<Videos2Presenter,
         swicthButton.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                decoration.setSpanCount(isChecked?1:2);
-                gridLayoutManager.setSpanCount(isChecked?1:2);
+                decoration.setSpanCount(isChecked ? 1 : 2);
+                gridLayoutManager.setSpanCount(isChecked ? 1 : 2);
                 adapter.changeViewHeight(isChecked);
                 adapter.notifyDataSetChanged();
             }

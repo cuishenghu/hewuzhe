@@ -2,7 +2,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical" >
+    android:orientation="vertical">
 
     <com.hewuzhe.view.MyCommonTitle
         android:id="@+id/aci_mytitle"
@@ -12,8 +12,8 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="vertical"
-        android:background="@color/colorBg">
+        android:background="@color/colorBg"
+        android:orientation="vertical">
 
         <RadioGroup
             android:id="@+id/tab_my_order"
@@ -21,13 +21,15 @@
             android:layout_height="40dp"
             android:background="@color/colorPrimary"
             android:gravity="center"
-            android:orientation="horizontal" >
+            android:orientation="horizontal">
 
-            <RadioButton
-                android:id="@+id/rb_wait_to_pay"
-                style="@style/my_radiobutton"
-                android:checked="true"
-                android:text="待付款" />
+                <RadioButton
+                    android:id="@+id/rb_wait_to_pay"
+                    android:checked="true"
+                    style="@style/my_radiobutton"
+                    android:text="待付款"/>
+
+
 
             <RadioButton
                 android:id="@+id/rb_wait_to_send"
@@ -43,7 +45,7 @@
                 android:id="@+id/rb_received_goods"
                 style="@style/my_radiobutton"
                 android:text="已收货" />
-      
+
         </RadioGroup>
 
         <FrameLayout

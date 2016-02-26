@@ -9,12 +9,12 @@ import com.hewuzhe.model.common.DataModel;
 import com.hewuzhe.model.common.PickImg;
 import com.hewuzhe.presenter.base.ListPresenter;
 import com.hewuzhe.ui.cons.C;
-import com.hewuzhe.utils.Alist;
 import com.hewuzhe.utils.Encoder;
 import com.hewuzhe.utils.NetEngine;
 import com.hewuzhe.utils.SB;
 import com.hewuzhe.utils.SessionUtil;
 import com.hewuzhe.utils.StringUtil;
+import com.hewuzhe.utils.TimeUtil;
 import com.hewuzhe.view.PublishConditionView;
 
 import java.util.ArrayList;
@@ -41,6 +41,7 @@ public class PublishConditionPresenter extends ListPresenter<PublishConditionVie
     private int _UploadType = C.UPLOAD_TYPE_LOCAL;
     private String videoImg = "";
     private ArrayList<PickImg> list = new ArrayList<>();
+    private String videoDuration = "0";
 
     /**
      * 显示选择dialog
@@ -53,7 +54,7 @@ public class PublishConditionPresenter extends ListPresenter<PublishConditionVie
 
     @Override
     public void getData(int page, int count) {
-        view.bindData(new Alist().add(new PickImg()).ok());
+//        view.bindData(new Alist().add(new PickImg()).ok());
     }
 
     /**
@@ -139,11 +140,11 @@ public class PublishConditionPresenter extends ListPresenter<PublishConditionVie
             return;
         }
 
-        int videoDuration = 0;
         if (!StringUtil.isEmpty(pathList)) {
             pathList = pathList.substring(0, pathList.length() - 1);
         }
 
+        videoDuration = TimeUtil.timeFormat(Long.parseLong(videoDuration));
         Subscription subscription = NetEngine.getService()
                 .SaveDongtai(pathList, new SessionUtil(view.getContext()).getUserId(), data.content, videoImg, videopath, videoDuration)
                 .subscribeOn(Schedulers.io())
@@ -182,9 +183,9 @@ public class PublishConditionPresenter extends ListPresenter<PublishConditionVie
 
     }
 
-    public void UpLoadConditionVideo(View v, String path, final String thumnail) {
+    public void UpLoadConditionVideo(View v, String path, final String thumnail, String duration) {
         this.v = v;
-
+        this.videoDuration = duration;
         String fileName = path.substring(path.lastIndexOf("/") + 1, path.length());
 
         try {

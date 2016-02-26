@@ -135,6 +135,14 @@
         <item name="android:layout_height">fill_parent</item>
         <item name="android:layout_weight">1.0</item>
     </style>
+    <style name="my_radiobutton2">
+        <item name="android:textSize">16sp</item>
+        <item name="android:textColor">@drawable/tab_font_color</item>
+        <item name="android:button">@null</item>
+        <item name="android:background">@drawable/tab_order_bg</item>
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">fill_parent</item>
+    </style>
     <!-- 圆形imageview -->
     <declare-styleable name="CircleImageView">
         <attr name="border_width" format="dimension" />

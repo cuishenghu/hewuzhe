@@ -1,12 +1,10 @@
 package com.hewuzhe.ui.adapter;
 
-import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.net.Uri;
-import android.support.v4.app.FragmentActivity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,18 +13,15 @@ import android.widget.BaseAdapter;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.alibaba.fastjson.JSONObject;
 import com.hewuzhe.R;
 import com.hewuzhe.model.OrderContent;
 import com.hewuzhe.model.OrderNumber;
-import com.hewuzhe.model.Product;
-import com.hewuzhe.model.ProductSort;
 import com.hewuzhe.ui.activity.OrderAssessActivity;
+import com.hewuzhe.ui.activity.OrderCenterActivity2;
 import com.hewuzhe.ui.activity.OrderConfirmFirstActivity;
 import com.hewuzhe.ui.activity.OrderDetailsActivity;
-import com.hewuzhe.ui.fragment.OrderFragment;
 import com.hewuzhe.ui.http.HttpErrorHandler;
 import com.hewuzhe.ui.http.HttpUtils;
 import com.hewuzhe.utils.SessionUtil;
@@ -38,7 +33,7 @@ import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.List;
 
-public class OrderGroupAdapter extends BaseAdapter {
+public class OrderGroupAdapter2 extends BaseAdapter {
     private LayoutInflater mLayoutInflater;
     private ArrayList<OrderNumber> orderNumbers;
     private Context context;
@@ -48,7 +43,7 @@ public class OrderGroupAdapter extends BaseAdapter {
     List total_num = null;
     List total_all_price = null;
 
-    public OrderGroupAdapter(Context context, ArrayList<OrderNumber> orderNumbers, int mType) {
+    public OrderGroupAdapter2(Context context, ArrayList<OrderNumber> orderNumbers, int mType) {
         super();
         mLayoutInflater = LayoutInflater.from(context);
         this.context = context;
@@ -150,14 +145,15 @@ public class OrderGroupAdapter extends BaseAdapter {
                 intent.putExtra("mType", mType);
                 intent.putExtra("state", orderNumber.getState());
                 intent.putExtra("areaId", orderNumber.getAreaId());
-                ((FragmentActivity) context).startActivityForResult((intent), 11);
+                ((OrderCenterActivity2) context).startActivityForResult((intent), 11);
+
             }
         });
 
         /**
          * 不同页面显示不同的按钮
          */
-       final ArrayList<OrderContent> orderContents = (ArrayList<OrderContent>) orderNumber.getProList();
+        final ArrayList<OrderContent> orderContents = (ArrayList<OrderContent>) orderNumber.getProList();
         if (mType == 1) {
             holder.tv_left_btn.setText("取消订单");
             holder.tv_left_btn.setOnClickListener(new View.OnClickListener() {
@@ -171,8 +167,9 @@ public class OrderGroupAdapter extends BaseAdapter {
                 @Override
                 public void onClick(View v) {
 
-                    ((FragmentActivity) context).startActivityForResult(new Intent(context, OrderConfirmFirstActivity.class).putExtra("billId", orderNumber.getId()).putExtra("areaId", orderNumber.getAreaId()).putExtra("list", orderContents).putExtra("number", orderNumber.getCount()).putExtra("price", orderNumber.getPrice()), 11);
+                    context.startActivity(new Intent(context, OrderConfirmFirstActivity.class).putExtra("mType", mType).putExtra("billId", orderNumber.getId()).putExtra("areaId", orderNumber.getAreaId()).putExtra("list", orderContents).putExtra("number", orderNumber.getCount()).putExtra("price", orderNumber.getPrice()));
 //                    context.startActivity(new Intent(context, OrderConfirmFirstActivity.class).putExtra("order", orderNumbers.get(position)).putExtra("number", total_num.get(position).toString()).putExtra("price", orderNumber.getPrice()));
+                    ((OrderCenterActivity2) context).finish();
                 }
             });
         } else if (mType == 2) {
@@ -200,7 +197,7 @@ public class OrderGroupAdapter extends BaseAdapter {
             holder.tv_right_btn.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    confirmReceived(position,mType);
+                    confirmReceived(position, mType);
                 }
             });
         } else if (mType == 4) {
@@ -220,7 +217,8 @@ public class OrderGroupAdapter extends BaseAdapter {
                 holder.tv_right_btn.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        context.startActivity(new Intent(context, OrderAssessActivity.class).putExtra("list", orderContents).putExtra("billId",orderNumber.getId()));
+                        context.startActivity(new Intent(context, OrderAssessActivity.class).putExtra("mType", mType).putExtra("list", orderContents).putExtra("billId", orderNumber.getId()));
+                        ((OrderCenterActivity2) context).finish();
                     }
                 });
             }
@@ -293,7 +291,7 @@ public class OrderGroupAdapter extends BaseAdapter {
             @Override
             public void onRecevieSuccess(JSONObject json) {
                 orderNumbers.remove(position);
-                OrderGroupAdapter.this.notifyDataSetChanged();
+                OrderGroupAdapter2.this.notifyDataSetChanged();
                 Tools.toast(context, "订单删除成功！");
             }
         }, params);
@@ -302,7 +300,7 @@ public class OrderGroupAdapter extends BaseAdapter {
     /**
      * 确认收货
      */
-    private void confirmReceived(final int position,final int mType) {
+    private void confirmReceived(final int position, final int mType) {
         final RequestParams params = new RequestParams();
         params.put("billId", orderNumbers.get(position).getId());//订单ID
         params.put("userId", new SessionUtil(context).getUserId()); //由于自己ID没有订单,现在传2,此ID为李发起的ID.待修改成自己的ID==========
@@ -311,7 +309,11 @@ public class OrderGroupAdapter extends BaseAdapter {
             public void onRecevieSuccess(JSONObject json) {
                 Tools.toast(context, "订单" + orderNumbers.get(position).getId() + "收货成功！");
                 orderNumbers.remove(position);
-                OrderGroupAdapter.this.notifyDataSetChanged();
+                OrderGroupAdapter2.this.notifyDataSetChanged();
+                context.startActivity(new Intent(context, OrderCenterActivity2.class).putExtra("mType", mType + 1));
+                ((OrderCenterActivity2) context).finish();
+
+
 //                context.startActivity(new Intent(context,OrderDetailsActivity.class).putExtra("mType",mType+1).putExtra("billId",orderNumbers.get(position).getId()));//确认收货跳转到已收货的订单详情
             }
 
@@ -334,7 +336,7 @@ public class OrderGroupAdapter extends BaseAdapter {
             @Override
             public void onRecevieSuccess(JSONObject json) {
                 Tools.toast(context, "订单" + orderNumbers.get(position).getBillNo() + "取消成功！");
-                OrderGroupAdapter.this.notifyDataSetChanged();
+                OrderGroupAdapter2.this.notifyDataSetChanged();
 
             }
 

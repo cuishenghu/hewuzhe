@@ -8,7 +8,9 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
+import com.google.gson.Gson;
 import com.hewuzhe.R;
+import com.hewuzhe.model.Pic;
 import com.hewuzhe.model.User;
 import com.hewuzhe.presenter.FriendProfilePresenter;
 import com.hewuzhe.ui.base.ToolBarActivity;
@@ -18,6 +20,8 @@ import com.hewuzhe.utils.Bun;
 import com.hewuzhe.utils.StringUtil;
 import com.hewuzhe.utils.TimeUtil;
 import com.hewuzhe.view.FriendProfileView;
+
+import java.util.ArrayList;
 
 import butterknife.Bind;
 import de.greenrobot.event.EventBus;
@@ -145,6 +149,18 @@ public class FriendProfileActivity extends ToolBarActivity<FriendProfilePresente
                 .crossFade()
                 .transform(new GlideCircleTransform(getContext()))
                 .into(_ImgAvatar);
+
+
+        _ImgAvatar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Pic pic = new Pic();
+                pic.PictureUrl = friend.PhotoPath;
+                ArrayList<Pic> pics = new ArrayList();
+                pics.add(pic);
+                startActivity(PicsActivity.class, new Bun().putString("pics", new Gson().toJson(pics)).putBoolean("isHidePage", true).ok());
+            }
+        });
 
 
         _Btn.setText("发送消息");

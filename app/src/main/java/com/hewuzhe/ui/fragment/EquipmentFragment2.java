@@ -13,6 +13,7 @@ import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 
 import com.hewuzhe.model.ProductSort;
+import com.hewuzhe.ui.activity.OrderCenterActivity2;
 import com.hewuzhe.ui.activity.OrderDetailsActivity;
 import com.hewuzhe.ui.activity.ProductClassifiActivity;
 import com.hewuzhe.ui.activity.ProductInfoActivity;
@@ -22,6 +23,7 @@ import com.hewuzhe.view.XListView.IXListViewListener;
 
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.hewuzhe.R;
@@ -55,7 +57,7 @@ public class EquipmentFragment2 extends BaseFragment implements IXListViewListen
     private TextView tvTitle;
     private AppBarLayout appBar;
     private boolean mIsHidden = false;
-    private TextView tvAction;
+    private RelativeLayout llAction;
     private User user;
     @Bind(R.id.ll_all_sort)
     LinearLayout ll_all_sort;
@@ -80,7 +82,7 @@ public class EquipmentFragment2 extends BaseFragment implements IXListViewListen
      */
     @Override
     public void initListeners() {
-        tvAction.setOnClickListener(new View.OnClickListener() {
+        llAction.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 //跳转到搜索界面=========================================================
@@ -102,7 +104,7 @@ public class EquipmentFragment2 extends BaseFragment implements IXListViewListen
         ll_my_order.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(getActivity(), OrderCenterActivity.class));
+                startActivity(new Intent(getActivity(), OrderCenterActivity2.class));
             }
         });
         ll_shopping_cart.setOnClickListener(new View.OnClickListener() {
@@ -157,11 +159,11 @@ public class EquipmentFragment2 extends BaseFragment implements IXListViewListen
         ((MainActivity) getActivity()).setSupportActionBar(toolBar);
         imgBack = (ImageView) rootView.findViewById(R.id.img_back);
         tvTitle = (TextView) rootView.findViewById(R.id.tv_title);
-        tvAction = (TextView) rootView.findViewById(R.id.tv_action);
+        llAction = (RelativeLayout) rootView.findViewById(R.id.ll_search);
         appBar = (AppBarLayout) rootView.findViewById(R.id.app_bar_layout);
         tvTitle.setText("购物");
-        tvAction.setVisibility(View.VISIBLE);
-        tvAction.setText("搜索");
+//        tvAction.setVisibility(View.VISIBLE);
+//        tvAction.setText("搜索");
         imgBack.setVisibility(View.GONE);
 
     }

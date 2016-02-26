@@ -19,6 +19,7 @@ import java.util.ArrayList;
 public class FollowedFriendsActivity extends RecycleViewActivity<FollowedFriendsPresenter, FollowedFriendAdapter, Friend> implements FollowedFriendsView {
 
     private Friend _Item;
+    private boolean isFirstRun = true;
 
     /**
      * @return 提供LayoutId
@@ -115,6 +116,17 @@ public class FollowedFriendsActivity extends RecycleViewActivity<FollowedFriends
             startActivity(FriendProfileActivity.class, new Bun().putInt("id", _Item.UserId).ok());
         } else {
             startActivity(StrangerProfileSettingsActivity.class, new Bun().putInt("id", _Item.UserId).ok());
+        }
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        if (isFirstRun) {
+            isFirstRun = false;
+        } else {
+            page = 1;
+            presenter.getData(page, count);
         }
     }
 }

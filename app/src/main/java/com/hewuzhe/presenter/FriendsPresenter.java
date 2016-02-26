@@ -28,7 +28,7 @@ public class FriendsPresenter extends RefreshAndLoadMorePresenter<FriendsView> {
     private ArrayList<Friend> friends = new ArrayList<>();
 
     public void getFriends() {
-
+        friends.clear();
         Subscription subscription = NetEngine.getService()
                 .GetFriendForKeyValue(view.getData())
                 .subscribeOn(Schedulers.io())

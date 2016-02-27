@@ -114,4 +114,9 @@ public class HttpUtils {
         client.get(UrlContants.getUrl(UrlContants.SHIELDNEWSFRIEND), params, handler);
     }
 
+    /* 修改是否接收推送信息 */
+    public static void changeTuiSong(AsyncHttpResponseHandler handler, RequestParams params) {
+        client.get(UrlContants.getUrl(UrlContants.CHANGETUISONG), params, handler);
+    }
+
 }

@@ -443,4 +443,7 @@ public interface ApiService {
 
     @GET("Hezhuangbei.asmx/GetPostage")
     Observable<Res<Result>> GetPostage(@Query("userid") int userid,@Query("idList") String idList);
+
+    @GET("LoginAndRegister.asmx/ChangeTuiSong")
+    Observable<Res> ChangeTuiSong(@Query("userid") int userid,@Query("istuisong") boolean istuisong);
 }

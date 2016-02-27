@@ -7,6 +7,7 @@ import android.view.KeyEvent;
 import android.view.View;
 import android.view.inputmethod.EditorInfo;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.hewuzhe.R;
@@ -45,6 +46,7 @@ public class MakeWarriorsActivity extends RecycleViewActivity<MakeWarriorsPresen
     private Friend _item;
     private boolean isFirstRun = true;
     private View header;
+    private ImageView _ImgSearch;
 
     @Override
     protected int provideContentViewId() {
@@ -65,6 +67,7 @@ public class MakeWarriorsActivity extends RecycleViewActivity<MakeWarriorsPresen
         _TvAge = (TextView) header.findViewById(R.id.tv_age);
         _TvGender = (TextView) header.findViewById(R.id.tv_gender);
         _EdtSearchContent = (EditText) header.findViewById(R.id.edt_search_content);
+        _ImgSearch = (ImageView) header.findViewById(R.id.img_search);
     }
 
     /**
@@ -164,6 +167,17 @@ public class MakeWarriorsActivity extends RecycleViewActivity<MakeWarriorsPresen
                 return false;
             }
         });
+
+
+
+        _ImgSearch.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                showDialog();
+                presenter.getData(page, count);
+            }
+        });
+
 
     }
 

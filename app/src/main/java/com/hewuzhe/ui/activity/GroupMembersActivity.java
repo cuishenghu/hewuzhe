@@ -7,6 +7,7 @@ import android.view.KeyEvent;
 import android.view.View;
 import android.view.inputmethod.EditorInfo;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.hewuzhe.R;
@@ -26,6 +27,8 @@ public class GroupMembersActivity extends RecycleViewActivity<GroupMembersPresen
 
     @Bind(R.id.edt_search_content)
     EditText _EdtSearchContent;
+    @Bind(R.id.img_search)
+    ImageView _ImgSearch;
 
     private int provinceId;
     private int cityId;
@@ -72,6 +75,15 @@ public class GroupMembersActivity extends RecycleViewActivity<GroupMembersPresen
                 return false;
             }
         });
+
+        _ImgSearch.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String keyWord = _EdtSearchContent.getText().toString().trim();
+                search(keyWord);
+            }
+        });
+
 
     }
 

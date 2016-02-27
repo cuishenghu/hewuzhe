@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="@color/colorBg"
-    android:orientation="vertical"
-    tools:context="com.hewuzhe.ui.activity.MegaGameVideosActivity">
+              xmlns:tools="http://schemas.android.com/tools"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              android:background="@color/colorBg"
+              android:orientation="vertical"
+              tools:context="com.hewuzhe.ui.activity.MegaGameVideosActivity">
 
-    <include layout="@layout/toolbar_layout" />
+    <include layout="@layout/toolbar_layout"/>
 
 
     <LinearLayout
@@ -23,7 +23,7 @@
             android:id="@+id/edt_search_content"
             android:layout_width="0dp"
             android:layout_height="70px"
-            android:layout_marginLeft="10px"
+            android:layout_marginLeft="30px"
             android:layout_weight="1"
             android:background="@null"
             android:hint="搜索参赛者的编号"
@@ -31,15 +31,16 @@
             android:imeOptions="actionSearch"
             android:inputType="text"
             android:textColor="@color/colorLine"
-            android:textColorHint="@color/colorLine" />
+            android:textColorHint="@color/colorLine"/>
 
         <ImageView
+            android:id="@+id/img_search"
             android:layout_width="70px"
             android:layout_height="70px"
             android:layout_marginLeft="10px"
-            android:layout_marginRight="10px"
+            android:layout_marginRight="30px"
             android:padding="15px"
-            android:src="@mipmap/icon_search" />
+            android:src="@mipmap/icon_search"/>
 
     </LinearLayout>
 
@@ -78,7 +79,7 @@
                 style="@style/text_30_white"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="嘛都没有~~" />
+                android:text="嘛都没有~~"/>
 
 
         </LinearLayout>

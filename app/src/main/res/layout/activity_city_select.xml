@@ -23,7 +23,7 @@
             android:id="@+id/edt_search_content"
             android:layout_width="0dp"
             android:layout_height="70px"
-            android:layout_marginLeft="10px"
+            android:layout_marginLeft="30px"
             android:layout_weight="1"
             android:background="@null"
             android:hint="搜索城市/行政区"
@@ -37,7 +37,8 @@
             android:layout_width="70px"
             android:layout_height="70px"
             android:layout_marginLeft="10px"
-            android:layout_marginRight="10px"
+            android:id="@+id/img_search"
+            android:layout_marginRight="50px"
             android:padding="15px"
             android:src="@mipmap/icon_search" />
     </LinearLayout>

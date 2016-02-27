@@ -7,6 +7,7 @@ import android.view.KeyEvent;
 import android.view.View;
 import android.view.inputmethod.EditorInfo;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.hewuzhe.R;
@@ -27,6 +28,8 @@ public class MegaGameVideosActivity extends SwipeRecycleViewActivity<MegaGameVid
 
     @Bind(R.id.edt_search_content)
     EditText _EdtSearchContent;
+    @Bind(R.id.img_search)
+    ImageView _ImgSearch;
 
     private MegaGameVideosRequest megaGameVideosRequest;
 
@@ -101,11 +104,24 @@ public class MegaGameVideosActivity extends SwipeRecycleViewActivity<MegaGameVid
             public boolean onEditorAction(TextView textView, int i, KeyEvent keyEvent) {
                 if (i == EditorInfo.IME_ACTION_SEARCH) {
                     refresh(true);
-                    getData();
+                    page = 1;
+                    presenter.getData(page, count);
+
                 }
                 return false;
             }
         });
+
+
+        _ImgSearch.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                refresh(true);
+                page = 1;
+                presenter.getData(page, count);
+            }
+        });
+
 
     }
 

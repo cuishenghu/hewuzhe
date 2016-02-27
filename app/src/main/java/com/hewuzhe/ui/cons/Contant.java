@@ -14,7 +14,8 @@ public class Contant {
     /**
      * 默认码率
      */
-    public static int DEFAULT_BITRATE = 800 * 1024;
+    public static int DEFAULT_BITRATE = 480 * 480;
+//    public static int DEFAULT_BITRATE = 800 * 1024;
     /**
      * 默认CRF参数
      */

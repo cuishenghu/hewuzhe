@@ -7,6 +7,7 @@ import android.view.KeyEvent;
 import android.view.View;
 import android.view.inputmethod.EditorInfo;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
@@ -44,6 +45,7 @@ public class JoinGroupActivity extends RecycleViewActivity<JoinPresenter, JoinGr
     private int areaId;
     private View header;
     private EditText _EdtSearchContent;
+    private ImageView _ImgSearch;
 
     @Override
     protected int provideContentViewId() {
@@ -106,6 +108,16 @@ public class JoinGroupActivity extends RecycleViewActivity<JoinPresenter, JoinGr
                 return false;
             }
         });
+
+        _ImgSearch.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                showDialog();
+                presenter.getData(page, count);
+            }
+        });
+
+
     }
 
 
@@ -124,6 +136,7 @@ public class JoinGroupActivity extends RecycleViewActivity<JoinPresenter, JoinGr
         _TvCity = (TextView) header.findViewById(R.id.tv_city);
         _TvDistrict = (TextView) header.findViewById(R.id.tv_district);
         _EdtSearchContent = (EditText) header.findViewById(R.id.edt_search_content);
+        _ImgSearch = (ImageView) header.findViewById(R.id.img_search);
 
 
     }

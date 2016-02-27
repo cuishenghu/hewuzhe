@@ -9,6 +9,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.inputmethod.EditorInfo;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.hewuzhe.R;
@@ -41,6 +42,8 @@ public class CitySelectActivity extends ToolBarActivity<CitySelectPresenter> imp
     EditText _EdtSearchContent;
     @Bind(R.id.tv_city)
     TextView _TvCity;
+    @Bind(R.id.img_search)
+    ImageView _ImgSearch;
     private RecyclerIndexAdapter mAdapter;
     private LinearLayoutManager mLayoutManager;
     private String _CityName = "";
@@ -128,6 +131,16 @@ public class CitySelectActivity extends ToolBarActivity<CitySelectPresenter> imp
                 return false;
             }
         });
+
+
+        _ImgSearch.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String keyWord = _EdtSearchContent.getText().toString().trim();
+                search(keyWord);
+            }
+        });
+
 
     }
 

@@ -56,6 +56,7 @@ public class ContactsActivity extends RecycleViewActivity<FriendsPresenter, Frie
     private boolean isFirstRun = true;
     private View header;
     private EditText _EdtSearchContent;
+    private ImageView _ImgSearch;
 
     /**
      * @return 提供标题
@@ -82,9 +83,7 @@ public class ContactsActivity extends RecycleViewActivity<FriendsPresenter, Frie
         initHeader();
 
         imgAction.setImageResource(R.mipmap.icon_add);
-
         _Indexview.setTipTv(_TvRecyclerindexviewTip);
-
 
         ArrayList<Friends> friends = (ArrayList<Friends>) DataSupport.findAll(Friends.class);
 
@@ -123,7 +122,6 @@ public class ContactsActivity extends RecycleViewActivity<FriendsPresenter, Frie
         } else {
             _LayGroup.setVisibility(View.VISIBLE);
             _TvGroup.setVisibility(View.VISIBLE);
-
             presenter.getGroup();
         }
     }
@@ -138,6 +136,7 @@ public class ContactsActivity extends RecycleViewActivity<FriendsPresenter, Frie
         _TvRecyclerindexviewTopc = (TextView) findViewById(R.id.tv_recyclerindexview_topc);
         _TvRecyclerindexviewTip = (TextView) findViewById(R.id.tv_recyclerindexview_tip);
         _EdtSearchContent = (EditText) header.findViewById(R.id.edt_search_content);
+        _ImgSearch = (ImageView) header.findViewById(R.id.img_search);
 
     }
 
@@ -209,6 +208,14 @@ public class ContactsActivity extends RecycleViewActivity<FriendsPresenter, Frie
                     search(keyWord);
                 }
                 return false;
+            }
+        });
+
+        _ImgSearch.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String keyWord = _EdtSearchContent.getText().toString().trim();
+                search(keyWord);
             }
         });
 

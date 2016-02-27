@@ -108,4 +108,10 @@ public class HttpUtils {
     public static void buyNow(AsyncHttpResponseHandler handler, RequestParams params) {
         client.get(UrlContants.getUrl(UrlContants.BUYNOW), params, handler);
     }
+
+    /* 获取被屏蔽信息的舞友 */
+    public static void getShieldNewsFriend(AsyncHttpResponseHandler handler, RequestParams params) {
+        client.get(UrlContants.getUrl(UrlContants.SHIELDNEWSFRIEND), params, handler);
+    }
+
 }

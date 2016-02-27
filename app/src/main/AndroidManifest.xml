@@ -238,6 +238,9 @@
         <activity android:name=".ui.activity.ProductClassifiActivity"></activity>
         <activity android:name=".ui.activity.SiteActivity"></activity>
         <activity android:name=".ui.activity.SiteAddActivity"></activity>
+        <activity android:name=".ui.activity.FeedBackActivity"></activity>
+        <activity android:name=".ui.activity.MoreShieldListActivity"></activity>
+
         <!-- 支付 -->
         <!-- Ping++ SDK 注册 -->
         <activity

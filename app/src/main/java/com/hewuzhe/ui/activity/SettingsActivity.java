@@ -1,6 +1,8 @@
 package com.hewuzhe.ui.activity;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.LinearLayout;
@@ -48,6 +50,13 @@ public class SettingsActivity extends ToolBarActivity {
      */
     @Override
     public void initListeners() {
+
+        _LayShieldList.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(SettingsActivity.this, MoreShieldListActivity.class));
+            }
+        });
 
     }
 

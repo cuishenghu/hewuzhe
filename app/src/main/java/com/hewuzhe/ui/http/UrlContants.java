@@ -68,6 +68,8 @@ public class UrlContants {
 
     public static final String BUYNOW = "Hezhuangbei.asmx/BuyNow?";//立即购买
 
+    public static final String SHIELDNEWSFRIEND = "Helianmeng.asmx/ShieldNewsFriend?";//获取被屏蔽信息的舞友
+
 
     public static String getUrl(String token) {
         if (token == null || token.equals("")) {

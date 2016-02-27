@@ -11,6 +11,7 @@ import android.widget.LinearLayout;
 import com.hewuzhe.R;
 import com.hewuzhe.presenter.base.BasePresenterImp;
 import com.hewuzhe.ui.activity.AboutActivity;
+import com.hewuzhe.ui.activity.FeedBackActivity;
 import com.hewuzhe.ui.activity.SettingsActivity;
 import com.hewuzhe.ui.activity.SignInActivity;
 import com.hewuzhe.ui.activity.SiteActivity;
@@ -35,8 +36,8 @@ public class MoreFragment extends ToolBarFragment {
     LinearLayout layCheckUpdate;
     @Bind(R.id.lay_clear_data)
     LinearLayout layClearData;
-    @Bind(R.id.lay_service)
-    LinearLayout layService;
+    @Bind(R.id.lay_feedback)
+    LinearLayout lay_feedback;
     @Bind(R.id.lay_address)
     LinearLayout layAddress;
     @Bind(R.id.btn_exit)
@@ -98,37 +99,39 @@ public class MoreFragment extends ToolBarFragment {
         });
 
 
-        layService.setOnClickListener(new View.OnClickListener() {
+        lay_feedback.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                MaterialDialog materialDialog = new MaterialDialog.Builder(getActivity())
-                        .title("拨打客服电话")
-                        .titleGravity(GravityEnum.CENTER)
-                        .titleColor(Color.WHITE)
-                        .contentColor(Color.WHITE)
-                        .positiveColor(C.COLOR_YELLOW)
-                        .negativeColor(C.COLOR_YELLOW)
-                        .content("确定拨打客服电话吗？")
-                        .backgroundColor(C.COLOR_BG)
-                        .positiveText("确定")
-                        .negativeText("取消")
-                        .backgroundColor(C.COLOR_BG)
-                        .onPositive(new MaterialDialog.SingleButtonCallback() {
-                            @Override
-                            public void onClick(@NonNull MaterialDialog dialog, @NonNull DialogAction which) {
-                                dialog.dismiss();
-                                Intent intent = new Intent(Intent.ACTION_CALL);
-                                intent.setData(Uri.parse("tel:12345678901"));
-                                startActivity(intent);
-                            }
-                        })
-                        .onNegative(new MaterialDialog.SingleButtonCallback() {
-                            @Override
-                            public void onClick(@NonNull MaterialDialog dialog, @NonNull DialogAction which) {
-                                dialog.dismiss();
-                            }
-                        })
-                        .show();
+                getActivity().startActivity(new Intent(getActivity(), FeedBackActivity.class));
+
+//                MaterialDialog materialDialog = new MaterialDialog.Builder(getActivity())
+//                        .title("拨打客服电话")
+//                        .titleGravity(GravityEnum.CENTER)
+//                        .titleColor(Color.WHITE)
+//                        .contentColor(Color.WHITE)
+//                        .positiveColor(C.COLOR_YELLOW)
+//                        .negativeColor(C.COLOR_YELLOW)
+//                        .content("确定拨打客服电话吗？")
+//                        .backgroundColor(C.COLOR_BG)
+//                        .positiveText("确定")
+//                        .negativeText("取消")
+//                        .backgroundColor(C.COLOR_BG)
+//                        .onPositive(new MaterialDialog.SingleButtonCallback() {
+//                            @Override
+//                            public void onClick(@NonNull MaterialDialog dialog, @NonNull DialogAction which) {
+//                                dialog.dismiss();
+//                                Intent intent = new Intent(Intent.ACTION_CALL);
+//                                intent.setData(Uri.parse("tel:12345678901"));
+//                                startActivity(intent);
+//                            }
+//                        })
+//                        .onNegative(new MaterialDialog.SingleButtonCallback() {
+//                            @Override
+//                            public void onClick(@NonNull MaterialDialog dialog, @NonNull DialogAction which) {
+//                                dialog.dismiss();
+//                            }
+//                        })
+//                        .show();
 
 
             }

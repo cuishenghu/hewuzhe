@@ -77,6 +77,24 @@ public class ShopCarActivity extends RecycleViewActivity<ShopCarPresenter, ShopC
         }
     }
 
+    protected void actionCheck() {
+        if(tv_action.getText().equals("完成")){
+            state="完成";
+            for (int i=0;i<data.size();i++){
+                data.get(i).is_show=true;
+            }
+            adapter.notifyDataSetChanged();
+
+        }else{
+            state="编辑";
+            for (int i=0;i<data.size();i++){
+                data.get(i).is_show=false;
+            }
+
+            adapter.notifyDataSetChanged();
+        }
+    }
+
     @Override
     public boolean canAction() {
         return true;
@@ -114,6 +132,7 @@ public class ShopCarActivity extends RecycleViewActivity<ShopCarPresenter, ShopC
     public void bindData(ArrayList<ShopCar> data) {
         this.data = data;
         bd(data);
+        actionCheck();
     }
 
     @Override
@@ -163,7 +182,12 @@ public class ShopCarActivity extends RecycleViewActivity<ShopCarPresenter, ShopC
     @Override
     protected void onResume() {
         super.onResume();
+
         presenter.getData(page, count);
+
+        actionCheck();
+
+
     }
 
     @Override

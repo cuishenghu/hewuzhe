@@ -67,12 +67,18 @@ public class ShopCarAdapter extends BaseAdapter<ShopCarAdapter.VHolder, ShopCar,
         holder.shopcar_title.setText( shopCar.ProductName);
         holder.pro_num.setText(shopCar.Number + "");
         holder.shopcar_select.setImageResource(shopCar.select_state ? R.mipmap.icon_select_click : R.mipmap.icon_select_normal);
-        holder.shopcar_hint.setVisibility(shopCar.is_show?View.VISIBLE:View.INVISIBLE);
+        holder.shopcar_hint.setVisibility(shopCar.is_show ? View.VISIBLE : View.GONE);
+        holder.trash_button.setVisibility(shopCar.is_show?View.VISIBLE:View.INVISIBLE);
+        holder.shopcar_buynum.setVisibility(shopCar.is_show?View.GONE:View.VISIBLE);
 
         holder.trash_button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 _presenter.deleteShopCar(shopCar.Id + "");
+                Toast.makeText(context, "商品删除成功！！", Toast.LENGTH_SHORT).show();
+//                for (int i=0;i<data.size();i++){
+//                    data.get(i).is_show=true;
+//                }
             }
         });
 

@@ -98,8 +98,8 @@
 
             <ImageView
                 android:id="@+id/shopcar_add"
-                android:layout_width="18dp"
-                android:layout_height="18dp"
+                android:layout_width="20dp"
+                android:layout_height="20dp"
                 android:layout_marginTop="4dp"
                 android:layout_marginLeft="4dp"
                 android:layout_marginBottom="4dp"
@@ -115,11 +115,11 @@
                 android:text="1"
 
                 android:textColor="@color/hwz_font_white"
-                android:textSize="14sp" />
+                android:textSize="16sp" />
             <ImageView
                 android:id="@+id/shopcar_sub"
-                android:layout_width="18dp"
-                android:layout_height="18dp"
+                android:layout_width="20dp"
+                android:layout_height="20dp"
                 android:layout_marginTop="4dp"
                 android:layout_marginLeft="10dp"
                 android:layout_marginBottom="4dp"

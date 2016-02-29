@@ -39,6 +39,7 @@ import com.hewuzhe.model.TeamIntroduce;
 import com.hewuzhe.model.UploadImage;
 import com.hewuzhe.model.User;
 import com.hewuzhe.model.Video;
+import com.hewuzhe.model.VipPrice;
 import com.hewuzhe.model.WrapFriend;
 
 import java.util.ArrayList;
@@ -443,4 +444,10 @@ public interface ApiService {
 
     @GET("Hezhuangbei.asmx/GetPostage")
     Observable<Res<Result>> GetPostage(@Query("userid") int userid,@Query("idList") String idList);
+
+    @GET("LoginAndRegister.asmx/ChangeTuiSong")
+    Observable<Res> ChangeTuiSong(@Query("userid") int userid,@Query("istuisong") boolean istuisong);
+
+    @GET("LoginAndRegister.asmx/SelectUserPayList")
+    Observable<Res<ArrayList<VipPrice>>> SelectUserPayList();
 }

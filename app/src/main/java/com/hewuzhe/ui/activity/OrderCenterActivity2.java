@@ -64,7 +64,7 @@ public class OrderCenterActivity2 extends BaseActivity2 implements XListView.IXL
      */
     public void initView() {
         myCommonTitle = (MyCommonTitle) findViewById(R.id.aci_mytitle);
-        myCommonTitle.setTitle("确认订单");
+        myCommonTitle.setTitle("订单中心");
         myCommonTitle.setListener(this, null, null);
 
         ll_wait_to_pay = (RelativeLayout) findViewById(R.id.ll_wait_to_pay);

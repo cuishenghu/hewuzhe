@@ -87,7 +87,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="关于艾特功夫"
+                android:text="关于iKungfu"
                 android:textColor="@color/white"
                 android:textSize="30px" />
 
@@ -136,12 +136,22 @@
 
 
     <LinearLayout
+        android:id="@+id/lay_service"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="8px"
+        android:layout_height="80px"
+        android:layout_marginTop="5dp"
         android:background="@color/colorListBg"
-        android:orientation="vertical"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
         android:paddingLeft="15dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="在线客服 (12345645)"
+            android:textColor="@color/white"
+            android:textSize="30px" />
 
 
     </LinearLayout>
@@ -154,7 +164,8 @@
         android:background="@color/colorListBg"
         android:gravity="center_vertical"
         android:orientation="horizontal"
-        android:paddingLeft="15dp">
+        android:paddingLeft="15dp"
+        android:visibility="gone">
 
         <TextView
             android:layout_width="wrap_content"

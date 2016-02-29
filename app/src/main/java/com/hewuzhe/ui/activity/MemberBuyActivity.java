@@ -7,9 +7,11 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.TextView;
 
 import com.hewuzhe.R;
 import com.hewuzhe.model.GetChargeRequest;
+import com.hewuzhe.model.VipPrice;
 import com.hewuzhe.presenter.BuyPresenter;
 import com.hewuzhe.ui.base.ToolBarActivity;
 import com.hewuzhe.ui.cons.C;
@@ -18,10 +20,19 @@ import com.hewuzhe.view.BuyView;
 import com.pingplusplus.android.PaymentActivity;
 import com.socks.library.KLog;
 
+import java.util.ArrayList;
+
 import butterknife.Bind;
 
 public class MemberBuyActivity extends ToolBarActivity<BuyPresenter> implements BuyView {
-
+    @Bind(R.id.tv_vip_price1)
+    TextView _TvVipPrice1;//会员套餐一的价格
+    @Bind(R.id.tv_vip_price2)
+    TextView _TvVipPrice2;//会员套餐二的价格
+    @Bind(R.id.tv_vip_price3)
+    TextView _TvVipPrice3;//会员套餐三的价格
+    @Bind(R.id.tv_vip_price4)
+    TextView _TvVipPrice4;//会员套餐四的价格
     @Bind(R.id.img_one)
     ImageView _ImgOne;
     @Bind(R.id.img_two)
@@ -44,9 +55,10 @@ public class MemberBuyActivity extends ToolBarActivity<BuyPresenter> implements 
      * 支付方式
      */
     private String _payWay = C.CHANNEL_ALIPAY;
-    private int _anount = 1200 * 10 * 10;
+    private int _anount = 100 * 10 * 10;
     private String _desc = "1";
     private int month = 12;
+    private ArrayList<VipPrice> list = null;
 
     /**
      * @return 提供标题
@@ -71,6 +83,14 @@ public class MemberBuyActivity extends ToolBarActivity<BuyPresenter> implements 
      */
     @Override
     public void initListeners() {
+
+        list = (ArrayList<VipPrice>) getIntent().getSerializableExtra("list");
+        _TvVipPrice1.setText(list.get(0).Price+"");
+        _TvVipPrice2.setText(list.get(1).Price+"");
+        _TvVipPrice3.setText(list.get(2).Price+"");
+        _TvVipPrice4.setText(list.get(3).Price+"");
+
+
         _ImgOne.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -142,7 +162,7 @@ public class MemberBuyActivity extends ToolBarActivity<BuyPresenter> implements 
     private void selectTime(int i) {
         switch (i) {
             case 1:
-                _anount = 300 * 10 * 10;
+                _anount = list.get(0).Price * 10 * 10;
                 _desc = "开通会员1个月";
                 month = 1;
 
@@ -153,7 +173,7 @@ public class MemberBuyActivity extends ToolBarActivity<BuyPresenter> implements 
 
                 break;
             case 2:
-                _anount = 600 * 10 * 10;
+                _anount = list.get(1).Price * 10 * 10;
                 _desc = "开通会员3个月";
                 month = 3;
 
@@ -165,7 +185,7 @@ public class MemberBuyActivity extends ToolBarActivity<BuyPresenter> implements 
                 break;
 
             case 3:
-                _anount = 900 * 10 * 10;
+                _anount = list.get(2).Price * 10 * 10;
                 _desc = "开通会员半年";
                 month = 6;
 
@@ -177,8 +197,8 @@ public class MemberBuyActivity extends ToolBarActivity<BuyPresenter> implements 
                 break;
 
             case 4:
+                _anount = list.get(3).Price * 10 * 10;
                 _desc = "开通会员一年";
-                _anount = 1200 * 10 * 10;
                 month = 12;
 
                 _ImgOne.setImageResource(R.mipmap.bg_buy);
@@ -233,7 +253,7 @@ public class MemberBuyActivity extends ToolBarActivity<BuyPresenter> implements 
         GetChargeRequest request = new GetChargeRequest();
         request.userId = new SessionUtil(getContext()).getUserId();
         request.channel = _payWay;
-        request.amount = 1;
+        request.amount = _anount;
         request.description = _desc;
         return request;
     }

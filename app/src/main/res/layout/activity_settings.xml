@@ -20,7 +20,7 @@
 
 
         <LinearLayout
-            android:id="@+id/lay_friends_condition"
+            android:id="@+id/lay_friends_assess_notic"
             android:layout_width="match_parent"
             android:layout_height="80px"
             android:gravity="center_vertical"

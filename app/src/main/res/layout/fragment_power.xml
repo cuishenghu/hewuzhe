@@ -52,7 +52,7 @@
                     android:layout_gravity="center_vertical|right"
                     android:layout_marginRight="48dp"
                     android:padding="12dp"
-                    android:src="@mipmap/icon_search"
+                    android:src="@drawable/icon_sousuo"
                     />
 
 

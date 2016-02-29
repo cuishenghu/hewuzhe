@@ -1,181 +1,218 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/colorBg"
     android:orientation="vertical"
     tools:context="com.hewuzhe.ui.activity.MemberBuyActivity">
-    <include layout="@layout/toolbar_layout"/>
 
-    <LinearLayout android:layout_width="match_parent"
-                  android:layout_height="wrap_content"
-                  android:layout_marginBottom="30px"
-                  android:layout_marginTop="10px"
-                  android:background="@color/colorListBg"
-                  android:orientation="vertical"
-                  android:paddingLeft="20px">
+    <include layout="@layout/toolbar_layout" />
 
-        <LinearLayout android:layout_width="match_parent"
-                      android:layout_height="85px"
-                      android:gravity="center_vertical"
-                      android:orientation="horizontal">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="30px"
+        android:layout_marginTop="10px"
+        android:background="@color/colorListBg"
+        android:orientation="vertical"
+        android:paddingLeft="20px">
 
-            <TextView style="@style/text_35_white"
-                      android:layout_width="wrap_content"
-                      android:layout_height="wrap_content"
-                      android:layout_weight="1"
-                      android:text="会员套餐"/>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="85px"
+            android:gravity="center_vertical"
+            android:orientation="horizontal">
 
-            <TextView android:layout_width="2px"
-                      android:layout_height="60px"
-                      android:background="@color/colorLine"/>
+            <TextView
+                style="@style/text_35_white"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="会员套餐" />
 
-            <TextView style="@style/text_25_white"
-                      android:layout_width="wrap_content"
-                      android:layout_height="wrap_content"
-                      android:paddingLeft="20px"
-                      android:paddingRight="20px"
-                      android:text="已同意服务协议"/>
+            <TextView
+                android:layout_width="2px"
+                android:layout_height="60px"
+                android:background="@color/colorLine" />
+
+            <TextView
+                style="@style/text_25_white"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingLeft="20px"
+                android:paddingRight="20px"
+                android:text="已同意服务协议" />
 
 
         </LinearLayout>
 
-        <TextView android:layout_width="match_parent"
-                  android:layout_height="2px"
-                  android:layout_marginLeft="20px"
-                  android:background="@color/colorBg"/>
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="2px"
+            android:layout_marginLeft="20px"
+            android:background="@color/colorBg" />
 
-        <LinearLayout android:layout_width="match_parent"
-                      android:layout_height="85px"
-                      android:gravity="center_vertical"
-                      android:orientation="horizontal">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="85px"
+            android:gravity="center_vertical"
+            android:orientation="horizontal">
 
-            <TextView style="@style/text_30_white"
-                      android:layout_width="wrap_content"
-                      android:layout_height="wrap_content"
-                      android:text="一个月"/>
-            <TextView style="@style/text_30_yellow"
-                      android:layout_width="wrap_content"
-                      android:layout_height="wrap_content"
-                      android:text="300"/>
-            <TextView style="@style/text_30_white"
-                      android:layout_width="wrap_content"
-                      android:layout_height="wrap_content"
-                      android:layout_weight="1"
-                      android:text="元"/>
+            <TextView
+                style="@style/text_30_white"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="一个月" />
+
+            <TextView
+                android:id="@+id/tv_vip_price1"
+                style="@style/text_30_yellow"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="**" />
+
+            <TextView
+                style="@style/text_30_white"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="元" />
 
             <ImageView
                 android:id="@+id/img_one"
                 android:layout_width="110px"
                 android:layout_height="70px"
                 android:layout_marginRight="25px"
-                android:src="@mipmap/bg_buy"
-                />
+                android:src="@mipmap/bg_buy" />
 
 
         </LinearLayout>
 
-        <TextView android:layout_width="match_parent"
-                  android:layout_height="2px"
-                  android:layout_marginLeft="20px"
-                  android:background="@color/colorBg"/>
-        <LinearLayout android:layout_width="match_parent"
-                      android:layout_height="85px"
-                      android:gravity="center_vertical"
-                      android:orientation="horizontal">
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="2px"
+            android:layout_marginLeft="20px"
+            android:background="@color/colorBg" />
 
-            <TextView style="@style/text_30_white"
-                      android:layout_width="wrap_content"
-                      android:layout_height="wrap_content"
-                      android:text="三个月"/>
-            <TextView style="@style/text_30_yellow"
-                      android:layout_width="wrap_content"
-                      android:layout_height="wrap_content"
-                      android:text="600"/>
-            <TextView style="@style/text_30_white"
-                      android:layout_width="wrap_content"
-                      android:layout_height="wrap_content"
-                      android:layout_weight="1"
-                      android:text="元"/>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="85px"
+            android:gravity="center_vertical"
+            android:orientation="horizontal">
+
+            <TextView
+                style="@style/text_30_white"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="三个月" />
+
+            <TextView
+                android:id="@+id/tv_vip_price2"
+                style="@style/text_30_yellow"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="**" />
+
+            <TextView
+                style="@style/text_30_white"
+
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="元" />
 
             <ImageView
                 android:id="@+id/img_two"
                 android:layout_width="110px"
                 android:layout_height="70px"
                 android:layout_marginRight="25px"
-                android:src="@mipmap/bg_buy"
-                />
+                android:src="@mipmap/bg_buy" />
 
 
         </LinearLayout>
 
-        <TextView android:layout_width="match_parent"
-                  android:layout_height="2px"
-                  android:layout_marginLeft="20px"
-                  android:background="@color/colorBg"/>
-        <LinearLayout android:layout_width="match_parent"
-                      android:layout_height="85px"
-                      android:gravity="center_vertical"
-                      android:orientation="horizontal">
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="2px"
+            android:layout_marginLeft="20px"
+            android:background="@color/colorBg" />
 
-            <TextView style="@style/text_30_white"
-                      android:layout_width="wrap_content"
-                      android:layout_height="wrap_content"
-                      android:text="半年"/>
-            <TextView style="@style/text_30_yellow"
-                      android:layout_width="wrap_content"
-                      android:layout_height="wrap_content"
-                      android:text="900"/>
-            <TextView style="@style/text_30_white"
-                      android:layout_width="wrap_content"
-                      android:layout_height="wrap_content"
-                      android:layout_weight="1"
-                      android:text="元"/>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="85px"
+            android:gravity="center_vertical"
+            android:orientation="horizontal">
+
+            <TextView
+                style="@style/text_30_white"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="6个月" />
+
+            <TextView
+                android:id="@+id/tv_vip_price3"
+                style="@style/text_30_yellow"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="**" />
+
+            <TextView
+                style="@style/text_30_white"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="元" />
 
             <ImageView
                 android:id="@+id/img_three"
                 android:layout_width="110px"
                 android:layout_height="70px"
                 android:layout_marginRight="25px"
-                android:src="@mipmap/bg_buy"
-                />
+                android:src="@mipmap/bg_buy" />
 
 
         </LinearLayout>
 
 
-        <TextView android:layout_width="match_parent"
-                  android:layout_height="2px"
-                  android:layout_marginLeft="20px"
-                  android:background="@color/colorBg"/>
-        <LinearLayout android:layout_width="match_parent"
-                      android:layout_height="85px"
-                      android:gravity="center_vertical"
-                      android:orientation="horizontal">
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="2px"
+            android:layout_marginLeft="20px"
+            android:background="@color/colorBg" />
 
-            <TextView style="@style/text_30_white"
-                      android:layout_width="wrap_content"
-                      android:layout_height="wrap_content"
-                      android:text="一年"/>
-            <TextView style="@style/text_30_yellow"
-                      android:layout_width="wrap_content"
-                      android:layout_height="wrap_content"
-                      android:text="1200"/>
-            <TextView style="@style/text_30_white"
-                      android:layout_width="wrap_content"
-                      android:layout_height="wrap_content"
-                      android:layout_weight="1"
-                      android:text="元"/>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="85px"
+            android:gravity="center_vertical"
+            android:orientation="horizontal">
+
+            <TextView
+                style="@style/text_30_white"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="一年" />
+
+            <TextView
+                android:id="@+id/tv_vip_price4"
+                style="@style/text_30_yellow"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="**" />
+
+            <TextView
+                style="@style/text_30_white"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="元" />
 
             <ImageView
                 android:id="@+id/img_four"
                 android:layout_width="110px"
                 android:layout_height="70px"
                 android:layout_marginRight="25px"
-                android:src="@mipmap/bg_buy_focus"
-                />
+                android:src="@mipmap/bg_buy_focus" />
 
 
         </LinearLayout>
@@ -184,114 +221,122 @@
     </LinearLayout>
 
 
-    <LinearLayout android:layout_width="match_parent"
-                  android:layout_height="wrap_content"
-                  android:layout_marginBottom="30px"
-                  android:background="@color/colorListBg"
-                  android:orientation="vertical"
-                  android:paddingLeft="20px">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="30px"
+        android:background="@color/colorListBg"
+        android:orientation="vertical"
+        android:paddingLeft="20px">
 
-        <LinearLayout android:layout_width="match_parent"
-                      android:layout_height="85px"
-                      android:gravity="center_vertical"
-                      android:orientation="horizontal">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="85px"
+            android:gravity="center_vertical"
+            android:orientation="horizontal">
 
-            <TextView style="@style/text_35_white"
-                      android:layout_width="wrap_content"
-                      android:layout_height="wrap_content"
-                      android:layout_weight="1"
-                      android:text="支付方式"/>
+            <TextView
+                style="@style/text_35_white"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="支付方式" />
 
         </LinearLayout>
 
-        <TextView android:layout_width="match_parent"
-                  android:layout_height="2px"
-                  android:layout_marginLeft="20px"
-                  android:background="@color/colorBg"/>
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="2px"
+            android:layout_marginLeft="20px"
+            android:background="@color/colorBg" />
 
-        <LinearLayout android:id="@+id/lay_alipay"
-                      android:layout_width="match_parent"
-                      android:layout_height="85px"
-                      android:gravity="center_vertical"
-                      android:orientation="horizontal">
+        <LinearLayout
+            android:id="@+id/lay_alipay"
+            android:layout_width="match_parent"
+            android:layout_height="85px"
+            android:gravity="center_vertical"
+            android:orientation="horizontal">
 
             <ImageView
                 android:layout_width="55px"
                 android:layout_height="55px"
                 android:layout_marginRight="25px"
-                android:src="@mipmap/icon_alipay"
-                />
+                android:src="@mipmap/icon_alipay" />
 
-            <TextView style="@style/text_30_white"
-                      android:layout_width="wrap_content"
-                      android:layout_height="wrap_content"
-                      android:layout_weight="1"
-                      android:text="支付宝支付"/>
+            <TextView
+                style="@style/text_30_white"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="支付宝支付" />
 
             <ImageView
                 android:id="@+id/img_alipay"
                 android:layout_width="35px"
                 android:layout_height="35px"
                 android:layout_marginRight="25px"
-                android:src="@mipmap/icon_select_pay_focus"
-                />
+                android:src="@mipmap/icon_select_pay_focus" />
 
 
         </LinearLayout>
 
-        <TextView android:layout_width="match_parent"
-                  android:layout_height="2px"
-                  android:layout_marginLeft="20px"
-                  android:background="@color/colorBg"/>
-        <LinearLayout android:id="@+id/lay_wx"
-                      android:layout_width="match_parent"
-                      android:layout_height="85px"
-                      android:gravity="center_vertical"
-                      android:orientation="horizontal">
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="2px"
+            android:layout_marginLeft="20px"
+            android:background="@color/colorBg" />
+
+        <LinearLayout
+            android:id="@+id/lay_wx"
+            android:layout_width="match_parent"
+            android:layout_height="85px"
+            android:gravity="center_vertical"
+            android:orientation="horizontal">
 
             <ImageView
                 android:layout_width="55px"
                 android:layout_height="55px"
                 android:layout_marginRight="25px"
-                android:src="@mipmap/icon_wexin"
-                />
+                android:src="@mipmap/icon_wexin" />
 
-            <TextView style="@style/text_30_white"
-                      android:layout_width="wrap_content"
-                      android:layout_height="wrap_content"
-                      android:layout_weight="1"
-                      android:text="微信支付"/>
+            <TextView
+                style="@style/text_30_white"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="微信支付" />
 
             <ImageView
                 android:id="@+id/img_wx"
                 android:layout_width="35px"
                 android:layout_height="35px"
                 android:layout_marginRight="25px"
-                android:src="@mipmap/icon_select_pay"
-                />
+                android:src="@mipmap/icon_select_pay" />
 
 
         </LinearLayout>
 
-        <TextView android:layout_width="match_parent"
-                  android:layout_height="2px"
-                  android:layout_marginLeft="20px"
-                  android:background="@color/colorBg"/>
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="2px"
+            android:layout_marginLeft="20px"
+            android:background="@color/colorBg" />
 
 
     </LinearLayout>
 
-    <Button android:id="@+id/btn_ensure"
-            style="@style/text_35_white"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_horizontal"
-            android:layout_marginBottom="30px"
-            android:layout_marginLeft="30px"
-            android:layout_marginRight="30px"
-            android:layout_marginTop="30px"
-            android:background="@drawable/select_yellow"
-            android:text="确定"/>
+    <Button
+        android:id="@+id/btn_ensure"
+        style="@style/text_35_white"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginBottom="30px"
+        android:layout_marginLeft="30px"
+        android:layout_marginRight="30px"
+        android:layout_marginTop="30px"
+        android:background="@drawable/select_yellow"
+        android:text="确定" />
 
 
 </LinearLayout>

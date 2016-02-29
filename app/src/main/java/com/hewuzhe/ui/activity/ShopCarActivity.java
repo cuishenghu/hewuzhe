@@ -170,7 +170,10 @@ public class ShopCarActivity extends RecycleViewActivity<ShopCarPresenter, ShopC
                 }
                 isSelectAll = true;
 //            shopcar_select.setImageResource(R.mipmap.icon_select_click);
-                presenter.GetPostage(GetPost());
+                if(GetPost().equals(""))
+                    tv_postage.setText("邮费：（无）");
+                else
+                    presenter.GetPostage(GetPost());
                 tv_total_price.setText("总金额：￥" + df.format(price));
                 adapter.notifyDataSetChanged();
             } else {
@@ -181,7 +184,10 @@ public class ShopCarActivity extends RecycleViewActivity<ShopCarPresenter, ShopC
                         price += data.get(i).AllPrice;
                 }
                 isSelectAll = true;
-                presenter.GetPostage(GetPost());
+                if(GetPost().equals(""))
+                    tv_postage.setText("邮费：(无)");
+                else
+                    presenter.GetPostage(GetPost());
 //            shopcar_select.setImageResource(R.mipmap.icon_select_click);
                 tv_total_price.setText("总金额：￥" + df.format(price));
                 adapter.notifyDataSetChanged();

@@ -72,6 +72,8 @@ public class UrlContants {
 
     public static final String CHANGETUISONG = "LoginAndRegister.asmx/ChangeTuiSong?";//修改是否接收推送信息
 
+    public static final String SELECTBILLCOUNT = "Hezhuangbei.asmx/SelectBillCount?";//根据用户ID，查询订单个数
+
 
     public static String getUrl(String token) {
         if (token == null || token.equals("")) {

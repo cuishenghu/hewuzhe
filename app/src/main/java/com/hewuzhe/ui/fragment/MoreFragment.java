@@ -110,7 +110,7 @@ public class MoreFragment extends ToolBarFragment {
         ll_service.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                getActivity().startActivity(new Intent(getActivity(), FeedBackActivity.class));
+//                getActivity().startActivity(new Intent(getActivity(), FeedBackActivity.class));
 
                 MaterialDialog materialDialog = new MaterialDialog.Builder(getActivity())
                         .title("拨打客服电话")

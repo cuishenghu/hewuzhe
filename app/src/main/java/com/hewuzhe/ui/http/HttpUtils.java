@@ -119,4 +119,9 @@ public class HttpUtils {
         client.get(UrlContants.getUrl(UrlContants.CHANGETUISONG), params, handler);
     }
 
+    /* 根据用户ID，查询订单个数 */
+    public static void getSelectBillCount(AsyncHttpResponseHandler handler, RequestParams params) {
+        client.get(UrlContants.getUrl(UrlContants.SELECTBILLCOUNT), params, handler);
+    }
+
 }

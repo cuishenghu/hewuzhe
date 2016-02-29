@@ -51,8 +51,7 @@
                     android:background="@drawable/circle_red"
                     android:gravity="center"
                     android:text="1"
-                    android:visibility="gone"
-                    tools:visibility="visible"/>
+                    android:visibility="gone"/>
             </RelativeLayout>
 
             <RelativeLayout
@@ -84,8 +83,7 @@
                     android:background="@drawable/circle_red"
                     android:gravity="center"
                     android:text="0"
-                    android:visibility="gone"
-                    tools:visibility="visible" />
+                    android:visibility="gone"/>
             </RelativeLayout>
 
 
@@ -117,8 +115,7 @@
                     android:background="@drawable/circle_red"
                     android:gravity="center"
                     android:text="0"
-                    android:visibility="gone"
-                    tools:visibility="visible" />
+                    android:visibility="gone"/>
             </RelativeLayout>
 
             <RelativeLayout
@@ -150,8 +147,7 @@
                     android:background="@drawable/circle_red"
                     android:gravity="center"
                     android:text="0"
-                    android:visibility="gone"
-                    tools:visibility="visible" />
+                    android:visibility="gone"/>
             </RelativeLayout>
         </LinearLayout>
 

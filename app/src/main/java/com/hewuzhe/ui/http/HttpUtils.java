@@ -114,4 +114,9 @@ public class HttpUtils {
         client.get(UrlContants.getUrl(UrlContants.SHIELDNEWSFRIEND), params, handler);
     }
 
+    /* 获取被屏蔽信息的舞友 */
+    public static void getBannarList(AsyncHttpResponseHandler handler, RequestParams params) {
+        client.get(UrlContants.getUrl(UrlContants.BANNARLIST), params, handler);
+    }
+
 }

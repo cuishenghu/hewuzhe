@@ -41,6 +41,9 @@ public class ShopCarActivity extends RecycleViewActivity<ShopCarPresenter, ShopC
     @Bind(R.id.shopcar_select)
     ImageView shopcar_select;
 
+    @Bind(R.id.tv_postage)
+    TextView tv_postage;
+
     public boolean isSelectAll;
     public String idList="";
     public String Postage="";
@@ -145,6 +148,15 @@ public class ShopCarActivity extends RecycleViewActivity<ShopCarPresenter, ShopC
         return new LinearLayoutManager(getContext());
     }
 
+    public String GetPost(){
+        idList="";
+        for (int i = 0;i<data.size();i++){
+            if(data.get(i).select_state)
+                idList+=data.get(i).Id+"&";
+        }
+        return idList;
+    }
+
     @Override
     public void onItemClick(View view, int pos, ShopCar shopCar) {
         if(state.equals("编辑")) {
@@ -158,6 +170,7 @@ public class ShopCarActivity extends RecycleViewActivity<ShopCarPresenter, ShopC
                 }
                 isSelectAll = true;
 //            shopcar_select.setImageResource(R.mipmap.icon_select_click);
+                presenter.GetPostage(GetPost());
                 tv_total_price.setText("总金额：￥" + df.format(price));
                 adapter.notifyDataSetChanged();
             } else {
@@ -168,6 +181,7 @@ public class ShopCarActivity extends RecycleViewActivity<ShopCarPresenter, ShopC
                         price += data.get(i).AllPrice;
                 }
                 isSelectAll = true;
+                presenter.GetPostage(GetPost());
 //            shopcar_select.setImageResource(R.mipmap.icon_select_click);
                 tv_total_price.setText("总金额：￥" + df.format(price));
                 adapter.notifyDataSetChanged();
@@ -195,15 +209,6 @@ public class ShopCarActivity extends RecycleViewActivity<ShopCarPresenter, ShopC
         adapter.notifyItemChanged(pos);
     }
 
-    @Override
-    public void GetPostageState(double state) {
-        if(state==0)
-            Postage= "包邮";
-        else
-            Postage= "货到付款";
-
-    }
-
 
     @OnClick(R.id.shopcar_select)
     public void allSelect(){
@@ -216,6 +221,7 @@ public class ShopCarActivity extends RecycleViewActivity<ShopCarPresenter, ShopC
                 isSelectAll = false;
                 shopcar_select.setImageResource(R.mipmap.icon_select_normal);
                 tv_total_price.setText("总金额：￥" + 0.00);
+                tv_postage.setText("邮费：（无）");
                 adapter.notifyDataSetChanged();
             } else {
                 double price = 0.0;
@@ -225,12 +231,29 @@ public class ShopCarActivity extends RecycleViewActivity<ShopCarPresenter, ShopC
                 }
                 isSelectAll = true;
                 shopcar_select.setImageResource(R.mipmap.icon_select_click);
+                presenter.GetPostage(GetPost());
                 tv_total_price.setText("总金额：￥" + df.format(price));
                 adapter.notifyDataSetChanged();
             }
         }
 
     }
+
+    @Override
+    public void GetPostageState(double state) {
+        if(state==0)
+            Postage= "包邮";
+        else if(state==-1)
+            Postage= "货到付款";
+        else {
+            DecimalFormat df = new DecimalFormat("######0.00");
+            Postage = df.format(state).toString();
+        }
+
+        tv_postage.setText("邮费："+Postage);
+
+    }
+
     @OnClick(R.id.tv_submit_btn)
     public void submitBtn(){
 
@@ -251,13 +274,14 @@ public class ShopCarActivity extends RecycleViewActivity<ShopCarPresenter, ShopC
 
         }
 
+
 //        if(idList.equals(""))
 //            return;
 //        presenter.GetPostage(idList);
-//        if(this.Postage.equals(""))
-//            return;
+        if(this.Postage.equals(""))
+            return;
 
-        startActivity(new Intent(this, OrderConfirmFirstActivity.class).putExtra("state", "2").putExtra("list", temp).putExtra("LiveryPrice", "货到付款"));
+        startActivity(new Intent(this, OrderConfirmFirstActivity.class).putExtra("state", "2").putExtra("list", temp).putExtra("LiveryPrice", Postage));
     }
 
 }

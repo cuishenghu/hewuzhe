@@ -26,9 +26,11 @@ import com.hewuzhe.banner.ViewFlow;
 import com.hewuzhe.model.OrderContent;
 import com.hewuzhe.model.Pic;
 import com.hewuzhe.model.Product;
+import com.hewuzhe.model.Tel;
 import com.hewuzhe.presenter.ProductInfoPresenter;
 import com.hewuzhe.ui.adapter.ProductColorAdapter;
 import com.hewuzhe.ui.adapter.ProductInfoAdapter;
+import com.hewuzhe.ui.adapter.ProductTelAdapter;
 import com.hewuzhe.ui.base.SyLinearLayoutManager;
 import com.hewuzhe.ui.base.ToolBarActivity;
 import com.hewuzhe.ui.cons.C;
@@ -106,9 +108,11 @@ public class ProductInfoActivity extends ToolBarActivity<ProductInfoPresenter> i
     ArrayList<String> titleList = new ArrayList<String>();
 
     public RecyclerView recyclerView;
+    public RecyclerView telrecyclerView;
     public RecyclerView recyclerView_color;
     public RecyclerView recyclerView_size;
     public ProductInfoAdapter adapter;
+    public ProductTelAdapter teladapter;
     public ImageView product_image;
     public ProductColorAdapter adapter_color;
     public RecyclerView.LayoutManager layoutManager;
@@ -335,6 +339,7 @@ public class ProductInfoActivity extends ToolBarActivity<ProductInfoPresenter> i
         framelayout.setLayoutParams(para);
 
         initBanner(imageUrlList);
+        presenter.SelectProductPhone();
     }
 
     @Override
@@ -533,6 +538,13 @@ public class ProductInfoActivity extends ToolBarActivity<ProductInfoPresenter> i
         } else {
             tv_count.setVisibility(View.GONE);
         }
+    }
+
+    @Override
+    public void bindTel(ArrayList<Tel> data) {
+        telrecyclerView = (RecyclerView) telmview.findViewById(R.id.recycler_tel);//findViewById(R.id.recycler_view_comment);
+        telrecyclerView.setLayoutManager(new SyLinearLayoutManager(this));
+        telrecyclerView.setAdapter(teladapter = new ProductTelAdapter(getContext(), data));
     }
 
     @Override

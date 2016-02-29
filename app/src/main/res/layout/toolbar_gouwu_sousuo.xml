@@ -1,13 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <android.support.design.widget.AppBarLayout
-    android:id="@+id/app_bar_layout"
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/app_bar_layout"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:theme="@style/AppTheme.AppBarOverlay"
-    app:elevation="4dp"
-    xmlns:tools="http://schemas.android.com/tools">
+    app:elevation="4dp">
+
     <android.support.v7.widget.Toolbar
         android:id="@+id/toolbar"
         android:layout_width="match_parent"
@@ -15,10 +16,10 @@
         android:background="?attr/colorPrimary"
         app:contentInsetLeft="0dp"
         app:contentInsetStart="0dp"
-        app:layout_scrollFlags="scroll|enterAlways"
-        >
+        app:layout_scrollFlags="scroll|enterAlways">
 
-        <FrameLayout android:layout_width="match_parent"
+        <FrameLayout
+            android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:orientation="horizontal">
 
@@ -28,8 +29,7 @@
                 android:layout_height="48dp"
                 android:layout_gravity="center_vertical"
                 android:padding="14dp"
-                android:src="@mipmap/icon_back"
-                />
+                android:src="@mipmap/icon_back" />
 
             <TextView
                 android:id="@+id/tv_title"
@@ -38,35 +38,36 @@
                 android:layout_gravity="center"
                 android:text=""
                 android:textColor="@android:color/white"
-                android:textSize="20sp"/>
-        <RelativeLayout
-            android:id="@+id/ll_search"
-            android:layout_width="48dp"
-            android:layout_height="48dp"
-            android:layout_gravity="center_vertical|right"
-            android:padding="10dp"
-            android:layout_marginRight="10dp">
+                android:textSize="20sp" />
 
-            <ImageView
-                android:id="@+id/img_action"
-                android:layout_width="30dp"
-                android:layout_height="30dp"
+            <RelativeLayout
+                android:id="@+id/ll_search"
+                android:layout_width="48dp"
+                android:layout_height="48dp"
                 android:layout_gravity="center_vertical|right"
-                android:src="@drawable/icon_sousuo"
-                />
+                android:layout_marginRight="10dp"
+                android:padding="10dp">
 
-            <TextView android:id="@+id/tv_count"
-                style="@style/text_25_white"
-                android:layout_width="15dp"
-                android:layout_height="15dp"
-                android:layout_gravity="center_vertical"
-                android:layout_marginLeft="18px"
-                android:background="@drawable/circle_red"
-                android:gravity="center"
-                android:text="1"
-                android:visibility="gone"/>
+                <ImageView
+                    android:id="@+id/img_action"
+                    android:layout_width="25dp"
+                    android:layout_height="25dp"
+                    android:gravity="center_vertical"
+                    android:src="@drawable/icon_sousuo" />
 
-        </RelativeLayout>
+                <TextView
+                    android:id="@+id/tv_count"
+                    style="@style/text_25_white"
+                    android:layout_width="15dp"
+                    android:layout_height="15dp"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginLeft="18px"
+                    android:background="@drawable/circle_red"
+                    android:gravity="center"
+                    android:text="1"
+                    android:visibility="gone" />
+
+            </RelativeLayout>
 
         </FrameLayout>
 

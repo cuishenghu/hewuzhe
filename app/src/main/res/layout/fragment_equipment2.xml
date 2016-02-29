@@ -2,6 +2,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:background="@color/colorBg"
     android:orientation="vertical">
 
@@ -12,12 +13,39 @@
         android:layout_height="match_parent"
         android:orientation="vertical">
 
-        <ImageView
-            android:id="@+id/imageView1"
-            android:layout_width="match_parent"
-            android:layout_height="180dp"
-            android:scaleType="fitXY"
-            android:src="@drawable/icon_top_pic" />
+        <FrameLayout
+            android:id="@+id/framelayout"
+            android:layout_width="fill_parent"
+            android:layout_height="200dp"
+            android:orientation="vertical" >
+
+            <com.hewuzhe.banner.ViewFlow
+                android:id="@+id/viewflow"
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent" />
+
+            <FrameLayout
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="bottom"
+                android:background="@color/transparent"
+                android:gravity="center"
+                android:padding="3dip" >
+
+                <com.hewuzhe.banner.CircleFlowIndicator
+                    android:id="@+id/viewflowindic"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal|bottom"
+                    android:padding="2dip"
+                    app:activeColor="@color/hwz_font_gray"
+                    app:activeType="fill"
+                    app:circleSeparation="20dip"
+                    app:inactiveColor="#ffffff"
+                    app:inactiveType="fill"
+                    app:radius="4dip" />
+            </FrameLayout>
+        </FrameLayout>
 
         <LinearLayout
             android:layout_width="match_parent"

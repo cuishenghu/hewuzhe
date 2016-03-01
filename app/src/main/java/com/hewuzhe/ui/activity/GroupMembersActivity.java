@@ -73,6 +73,16 @@ public class GroupMembersActivity extends RecycleViewActivity<GroupMembersPresen
             }
         });
 
+        findViewById(R.id.img_search).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                hideSoftMethod(_EdtSearchContent);
+                String keyWord = _EdtSearchContent.getText().toString().trim();
+                search(keyWord);
+            }
+        });
+
+
     }
 
 

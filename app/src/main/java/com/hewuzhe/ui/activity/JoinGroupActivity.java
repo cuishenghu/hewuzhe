@@ -104,11 +104,24 @@ public class JoinGroupActivity extends RecycleViewActivity<JoinPresenter, JoinGr
                 if (i == EditorInfo.IME_ACTION_SEARCH) {
                     showDialog();
                     page = 1;
+                    hideSoftMethod(_EdtSearchContent);
                     presenter.getData(page, count);
                 }
                 return false;
             }
         });
+
+
+        findViewById(R.id.img_search).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                showDialog();
+                hideSoftMethod(_EdtSearchContent);
+                page = 1;
+                presenter.getData(page, count);
+            }
+        });
+
     }
 
     @Override

@@ -32,6 +32,7 @@ public class SearchCatVideosActivity extends SwipeRecycleViewActivity<SearchCatV
     @Bind(R.id.lay_no_data)
     LinearLayout _LayNoData;
 
+
     /**
      * @return 提供Adapter
      */
@@ -88,9 +89,19 @@ public class SearchCatVideosActivity extends SwipeRecycleViewActivity<SearchCatV
             public boolean onEditorAction(TextView textView, int i, KeyEvent keyEvent) {
                 if (i == EditorInfo.IME_ACTION_SEARCH) {
                     refresh(true);
+                    page = 1;
                     presenter.getData(page, count);
                 }
                 return false;
+            }
+        });
+
+        findViewById(R.id.img_search).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                refresh(true);
+                page = 1;
+                presenter.getData(page, count);
             }
         });
     }

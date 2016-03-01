@@ -36,6 +36,7 @@
             android:layout_height="70px"
             android:layout_marginLeft="10px"
             android:layout_marginRight="10px"
+            android:id="@+id/img_search"
             android:padding="15px"
             android:src="@mipmap/icon_search" />
 

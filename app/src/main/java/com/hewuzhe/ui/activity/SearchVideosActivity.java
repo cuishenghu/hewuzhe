@@ -87,11 +87,25 @@ public class SearchVideosActivity extends SwipeRecycleViewActivity<SearchVideosP
             public boolean onEditorAction(TextView textView, int i, KeyEvent keyEvent) {
                 if (i == EditorInfo.IME_ACTION_SEARCH) {
                     refresh(true);
+                    page = 1;
+                    hideSoftMethod(_EdtSearchContent);
                     presenter.getData(page, count);
                 }
                 return false;
             }
         });
+
+        findViewById(R.id.img_search).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                refresh(true);
+                page = 1;
+                hideSoftMethod(_EdtSearchContent);
+                presenter.getData(page, count);
+            }
+        });
+
+
     }
 
     @Override

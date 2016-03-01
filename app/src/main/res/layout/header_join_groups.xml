@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="@color/colorBg"
-    android:orientation="vertical">
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@color/colorBg"
+                android:orientation="vertical">
 
 
     <LinearLayout
@@ -29,15 +29,16 @@
             android:imeOptions="actionSearch"
             android:inputType="text"
             android:textColor="@color/colorLine"
-            android:textColorHint="@color/colorLine" />
+            android:textColorHint="@color/colorLine"/>
 
         <ImageView
+            android:id="@+id/img_search"
             android:layout_width="70px"
             android:layout_height="70px"
             android:layout_marginLeft="10px"
             android:layout_marginRight="10px"
             android:padding="15px"
-            android:src="@mipmap/icon_search" />
+            android:src="@mipmap/icon_search"/>
 
     </LinearLayout>
 
@@ -62,7 +63,7 @@
                 android:layout_height="wrap_content"
                 android:text="地区："
                 android:textColor="@color/white"
-                android:textSize="30px" />
+                android:textSize="30px"/>
 
             <LinearLayout
                 android:layout_width="wrap_content"
@@ -82,13 +83,13 @@
                     android:paddingRight="8px"
                     android:text="山东"
                     android:textColor="@color/white"
-                    android:textSize="30px" />
+                    android:textSize="30px"/>
 
                 <ImageView
                     android:layout_width="25px"
                     android:layout_height="25px"
                     android:layout_marginLeft="10px"
-                    android:src="@mipmap/icon_more_down" />
+                    android:src="@mipmap/icon_more_down"/>
 
             </LinearLayout>
 
@@ -110,13 +111,13 @@
                     android:paddingRight="8px"
                     android:text="临沂"
                     android:textColor="@color/white"
-                    android:textSize="30px" />
+                    android:textSize="30px"/>
 
                 <ImageView
                     android:layout_width="25px"
                     android:layout_height="25px"
                     android:layout_marginLeft="10px"
-                    android:src="@mipmap/icon_more_down" />
+                    android:src="@mipmap/icon_more_down"/>
 
             </LinearLayout>
 
@@ -139,13 +140,13 @@
                     android:paddingRight="8px"
                     android:text="兰山区"
                     android:textColor="@color/white"
-                    android:textSize="30px" />
+                    android:textSize="30px"/>
 
                 <ImageView
                     android:layout_width="25px"
                     android:layout_height="25px"
                     android:layout_marginLeft="10px"
-                    android:src="@mipmap/icon_more_down" />
+                    android:src="@mipmap/icon_more_down"/>
 
             </LinearLayout>
 
@@ -155,7 +156,7 @@
         <TextView
             android:layout_width="match_parent"
             android:layout_height="1dp"
-            android:background="@color/colorBg" />
+            android:background="@color/colorBg"/>
 
     </LinearLayout>
 </RelativeLayout>

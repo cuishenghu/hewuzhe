@@ -39,6 +39,7 @@
             android:layout_marginLeft="10px"
             android:layout_marginRight="10px"
             android:padding="15px"
+            android:id="@+id/img_search"
             android:src="@mipmap/icon_search" />
     </LinearLayout>
 

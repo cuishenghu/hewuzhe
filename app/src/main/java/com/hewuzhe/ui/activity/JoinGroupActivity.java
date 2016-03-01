@@ -112,7 +112,7 @@ public class JoinGroupActivity extends RecycleViewActivity<JoinPresenter, JoinGr
         });
 
 
-        findViewById(R.id.img_search).setOnClickListener(new View.OnClickListener() {
+        header.findViewById(R.id.img_search).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 showDialog();

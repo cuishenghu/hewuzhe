@@ -15,6 +15,7 @@ import com.hewuzhe.ui.base.SwipeRecycleViewActivity;
 import com.hewuzhe.utils.Bun;
 import com.hewuzhe.utils.SessionUtil;
 import com.hewuzhe.view.RecordView;
+import com.timehop.stickyheadersrecyclerview.StickyRecyclerHeadersDecoration;
 
 import java.util.ArrayList;
 import java.util.LinkedList;
@@ -29,6 +30,9 @@ public class RecordActivity extends SwipeRecycleViewActivity<RecordPresenter, Re
     protected void initThings(Bundle savedInstanceState) {
         super.initThings(savedInstanceState);
         tvAction.setText("编辑");
+
+        recyclerView.addItemDecoration(new StickyRecyclerHeadersDecoration(adapter));
+
 
         presenter.getData(page, count);
 //        int i=getData();
@@ -168,11 +172,12 @@ public class RecordActivity extends SwipeRecycleViewActivity<RecordPresenter, Re
 
     /**
      * 判断传值过来的id是否是0,为0 返回当前用户ID,不为0返回传过来的ID值
+     *
      * @return
      */
     @Override
     public Integer getData() {
-        if (getIntentData().getInt("id")  != 0) {
+        if (getIntentData().getInt("id") != 0) {
             return getIntentData().getInt("id");
         } else {
             return new SessionUtil(RecordActivity.this).getUser().Id;

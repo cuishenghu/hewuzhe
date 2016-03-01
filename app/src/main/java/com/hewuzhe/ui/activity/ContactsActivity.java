@@ -201,6 +201,7 @@ public class ContactsActivity extends RecycleViewActivity<FriendsPresenter, Frie
             }
         });
 
+
         _EdtSearchContent.setOnEditorActionListener(new TextView.OnEditorActionListener() {
             @Override
             public boolean onEditorAction(TextView textView, int i, KeyEvent keyEvent) {

@@ -15,4 +15,5 @@ public interface JoinGroupView extends GetView<Group>, AreaView,ListView<Group> 
      * @param pos
      */
     void updateItem(boolean b, int pos);
+
 }

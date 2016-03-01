@@ -67,7 +67,7 @@ public class ProductInfoAdapter extends RecyclerView.Adapter<ProductInfoAdapter.
                 .into(holder.head_portrait);
 
 
-        holder.user_name.setText(getPhone(productComment.UserName));
+        holder.user_name.setText(productComment.NicName);
         holder.user_content.setText(productComment.Content);
         holder.user_date.setText(productComment.PublishTime);
         holder.user_sale.setText("规格：" + productComment.ColorAndSize);

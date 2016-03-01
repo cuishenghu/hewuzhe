@@ -161,7 +161,7 @@ public class RecordActivity extends SwipeRecycleViewActivity<RecordPresenter, Re
             ((CheckBox) view.findViewById(R.id.cb_plan)).setChecked(item.isChecked ? false : true);
         } else {
 
-            startActivity(BasicVideoTwoActivity.class, new Bun().putInt("Id", item.Id).ok());
+            startActivity(VideoDetail2Activity.class, new Bun().putInt("Id", item.Id).ok());
 
         }
     }

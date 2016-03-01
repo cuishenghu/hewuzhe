@@ -245,7 +245,7 @@ public class FriendsConditionActivity extends SwipeRecycleViewActivity<FriendCon
             if (b) {
                 adapter.data.get(position).LikeNum += 1;
                 adapter.data.get(position).IsLike = true;
-                adapter.notifyItemChanged(position);
+                adapter.notifyDataSetChanged();
             }
         }
 

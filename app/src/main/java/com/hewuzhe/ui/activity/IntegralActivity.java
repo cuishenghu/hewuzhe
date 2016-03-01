@@ -57,6 +57,12 @@ public class IntegralActivity extends RecycleViewActivity<IntegralPresenter, Int
                 .transform(new GlideCircleTransform(getContext()))
                 .placeholder(R.mipmap.img_avatar)
                 .into(imgAvatar);
+        imgAvatar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(ProfileActivity.class);
+            }
+        });
     }
 
 

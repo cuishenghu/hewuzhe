@@ -55,6 +55,13 @@ public class MyConditionActivity extends SwipeRecycleViewActivity<MyConditionPre
     @Override
     public void initListeners() {
 
+        _ImgAvatar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(ProfileActivity.class);
+            }
+        });
+
     }
 
     /**
@@ -91,6 +98,7 @@ public class MyConditionActivity extends SwipeRecycleViewActivity<MyConditionPre
             tvAction.setVisibility(View.GONE);
 
         }
+
 
     }
 
@@ -152,7 +160,8 @@ public class MyConditionActivity extends SwipeRecycleViewActivity<MyConditionPre
             if (b) {
                 adapter.data.get(position).LikeNum += 1;
                 adapter.data.get(position).IsLike = true;
-                adapter.notifyItemChanged(position);
+//              adapter.notifyItemChanged(position);
+                adapter.notifyDataSetChanged();
             }
         }
 

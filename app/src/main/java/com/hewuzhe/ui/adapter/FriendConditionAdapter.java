@@ -345,7 +345,7 @@ public class FriendConditionAdapter extends BaseAdapter<FriendConditionAdapter.V
 
             Glide.with(context)
                     .load(C.BASE_URL + pic.ImagePath)
-                    .fitCenter()
+                    .centerCrop()
                     .crossFade()
                     .into((ImageView) imgWraper.findViewById(R.id.img));
 

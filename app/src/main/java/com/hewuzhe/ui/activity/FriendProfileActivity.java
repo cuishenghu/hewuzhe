@@ -50,10 +50,12 @@ public class FriendProfileActivity extends ToolBarActivity<FriendProfilePresente
     Button _Btn;
     @Bind(R.id.img_avatar)
     ImageView _ImgAvatar;
+    @Bind(R.id.lay_friends_record)
+    LinearLayout lay_friends_record;//他的记录
     @Bind(R.id.lay_friends_condition)
-    LinearLayout _LayFriendsCondition;
+    LinearLayout _LayFriendsCondition;//他的动态
     @Bind(R.id.lay_friends_team)
-    LinearLayout _LayFriendsTeam;
+    LinearLayout _LayFriendsTeam;//他的战队
     private TextView _TvItemOne;
     private TextView _TvItemTwo;
     private TextView _TvItemThree;
@@ -98,7 +100,6 @@ public class FriendProfileActivity extends ToolBarActivity<FriendProfilePresente
      */
     @Override
     public void initListeners() {
-
     }
 
     /**
@@ -125,6 +126,19 @@ public class FriendProfileActivity extends ToolBarActivity<FriendProfilePresente
 
         _TvInfo.setText(StringUtil.getGender(friend.Sexuality) + " " + TimeUtil.timeHaved(friend.Birthday) + "岁 " + "   " + friend.HomeAreaprovinceName + " " + friend.HomeAreaCityName + " " + friend.HomeAreaCountyName);
 
+        /**
+         * 他的记录
+         */
+        lay_friends_record.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(RecordActivity.class, new Bun().putInt("id", friend.Id).ok());
+            }
+        });
+
+        /**
+         * 他的动态
+         */
         _LayFriendsCondition.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -132,6 +146,9 @@ public class FriendProfileActivity extends ToolBarActivity<FriendProfilePresente
             }
         });
 
+        /**
+         * 他的战队
+         */
         if (friend.TeamId == 0) {
             _TvLine.setVisibility(View.GONE);
             _LayFriendsTeam.setVisibility(View.GONE);

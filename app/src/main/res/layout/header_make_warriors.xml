@@ -40,7 +40,24 @@
             android:src="@mipmap/icon_search" />
 
     </LinearLayout>
-
+    <LinearLayout
+        android:id="@+id/lay_tongxunlu"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/lay_search"
+        android:layout_marginBottom="10px"
+        android:background="@color/colorListBg"
+        android:visibility="gone"
+        android:orientation="vertical"
+        android:paddingLeft="20px">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="75px"
+            android:gravity="center_vertical"
+            android:text="通讯录"
+            android:textColor="@color/white"
+            android:textSize="31px" />
+        </LinearLayout>
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

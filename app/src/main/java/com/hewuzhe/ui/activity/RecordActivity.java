@@ -29,7 +29,18 @@ public class RecordActivity extends SwipeRecycleViewActivity<RecordPresenter, Re
     protected void initThings(Bundle savedInstanceState) {
         super.initThings(savedInstanceState);
         tvAction.setText("编辑");
+
         presenter.getData(page, count);
+//        int i=getData();
+//        int j=new SessionUtil(RecordActivity.this).getUser().Id;
+        /**
+         * 判断ID是当前用户还是好友的ID,当前用户编辑显示,好友隐藏
+         */
+        if (getData() == new SessionUtil(RecordActivity.this).getUser().Id) {
+            tvAction.setVisibility(View.VISIBLE);
+        } else {
+            tvAction.setVisibility(View.GONE);
+        }
 
     }
 
@@ -155,9 +166,18 @@ public class RecordActivity extends SwipeRecycleViewActivity<RecordPresenter, Re
         }
     }
 
+    /**
+     * 判断传值过来的id是否是0,为0 返回当前用户ID,不为0返回传过来的ID值
+     * @return
+     */
     @Override
     public Integer getData() {
-        return new SessionUtil(getContext()).getUserId();
+        if (getIntentData().getInt("id")  != 0) {
+            return getIntentData().getInt("id");
+        } else {
+            return new SessionUtil(RecordActivity.this).getUser().Id;
+        }
+
     }
 
     @Override

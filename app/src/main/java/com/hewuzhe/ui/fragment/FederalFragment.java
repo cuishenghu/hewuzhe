@@ -104,13 +104,18 @@ public class FederalFragment extends BaseFragment<FederalPresenter> implements F
 
     @Override
     public void initListeners() {
-
+        /**
+         * 动态
+         */
         layFriendsCondition.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 getActivity().startActivity(new Intent(getActivity(), FriendsConditionActivity.class));
             }
         });
+        /**
+         * 群聊
+         */
         layGroupCondition.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -123,48 +128,72 @@ public class FederalFragment extends BaseFragment<FederalPresenter> implements F
 
             }
         });
+        /**
+         * 话题
+         */
         federalConfition.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 getActivity().startActivity(new Intent(getActivity(), FederalConditionActivity.class));
             }
         });
+        /**
+         * 交友
+         */
         layMakeWarriors.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 getActivity().startActivity(new Intent(getActivity(), MakeWarriorsActivity.class));
             }
         });
+        /**
+         * 同城
+         */
         layJoinGroup.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 getActivity().startActivity(new Intent(getActivity(), JoinGroupActivity.class));
             }
         });
+        /**
+         * 赛事
+         */
         layMegagame.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 getActivity().startActivity(new Intent(getActivity(), MegaGameActivity.class));
             }
         });
+        /**
+         * 资讯
+         */
         layStory.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 getActivity().startActivity(new Intent(getActivity(), StoryActivity.class));
             }
         });
+        /**
+         * 创业
+         */
         layCoorperation.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 getActivity().startActivity(new Intent(getActivity(), CoorperationActivity.class));
             }
         });
+        /**
+         * 扫码
+         */
         layScan.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 getActivity().startActivity(new Intent(getActivity(), CaptureActivity.class));
             }
         });
+        /**
+         * 右上角消息提示
+         */
         imgMsg.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -177,6 +206,9 @@ public class FederalFragment extends BaseFragment<FederalPresenter> implements F
                 startActivity(ConversationListActivity.class);
             }
         });
+        /**
+         * 左上角联系人图标
+         */
         imgBack.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

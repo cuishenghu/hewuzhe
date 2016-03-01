@@ -243,8 +243,8 @@ public class OrderConfirmFirstActivity extends BaseActivity2 {
      * 请求数据
      */
     public void requestData() {
-        tv_postage_price.setText("邮费：¥" + liveryPrice);
-        tv_postage.setText("邮费(¥" + liveryPrice + ")");
+        tv_postage_price.setText(liveryPrice);
+        tv_postage.setText("邮费(" + liveryPrice + ")");
         DecimalFormat df = new DecimalFormat("#####0.00");
         if (StringUtil.isEmpty(total_number)) {
             int number = 0;

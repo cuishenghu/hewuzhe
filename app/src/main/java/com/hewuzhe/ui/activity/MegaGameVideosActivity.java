@@ -113,7 +113,7 @@ public class MegaGameVideosActivity extends SwipeRecycleViewActivity<MegaGameVid
     @Override
     protected void initThings(Bundle savedInstanceState) {
         super.initThings(savedInstanceState);
-        tvAction.setText("赛事详情");
+        tvAction.setText("赛事介绍");
         recyclerView.addItemDecoration(new GridItemDecoration(10, 2));
         presenter.getData(page, count);
 

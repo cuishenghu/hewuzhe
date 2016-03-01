@@ -257,7 +257,8 @@ public class GroupConditionActivity extends SwipeRecycleViewActivity<GroupCondit
             if (b) {
                 adapter.data.get(position).LikeNum += 1;
                 adapter.data.get(position).IsLike = true;
-                adapter.notifyItemChanged(position);
+//              adapter.notifyItemChanged(position);
+                adapter.notifyDataSetChanged();
             }
         }
     }

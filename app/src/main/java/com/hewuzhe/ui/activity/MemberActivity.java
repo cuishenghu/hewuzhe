@@ -75,7 +75,6 @@ public class MemberActivity extends ToolBarActivity<MemberPresenter> implements 
 
     @Override
     public void setData(String s) {
-        _TvOverTime.setText(s);
-
+        _TvOverTime.setText("到期时间：" + s);
     }
 }

@@ -57,7 +57,7 @@ public class FederalConditionFragment extends SwipeRecycleViewFragment<ArticlesP
             flag = CORRPERATION;
         } else if (catId >= 57 && catId <= 61) {
             //联盟动态
-            title = "联盟动态";
+            title = "联盟详情";
 
             flag = CONDITION;
         } else if (catId >= 72 && catId <= 75) {

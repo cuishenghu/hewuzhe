@@ -14,7 +14,7 @@
             android:layout_width="180px"
             android:layout_height="140px"
             android:layout_marginRight="10px"
-            android:background="@mipmap/img_bg_videio"/>
+            android:background="@mipmap/img_mega"/>
 
         <TextView
             android:id="@+id/tv_title"

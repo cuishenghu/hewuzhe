@@ -48,7 +48,6 @@ public class JoinPresenter extends AreaPresenter<JoinGroupView> {
 
                     @Override
                     public void onCompleted() {
-
                         view.dismissDialog();
                     }
 

@@ -18,7 +18,7 @@
         android:id="@+id/img_above"
         android:layout_width="match_parent"
         android:layout_height="150dp"
-        android:background="@color/colorBg"
+        android:background="@color/transparent"
 
         />
 
@@ -50,20 +50,20 @@
     <ImageView android:layout_width="match_parent"
                android:layout_height="match_parent"
                android:layout_toLeftOf="@id/lay_scanner_viewfinder_view"
-               android:background="@color/colorBg"
+               android:background="@color/transparent"
         />
 
 
     <ImageView android:layout_width="match_parent"
                android:layout_height="match_parent"
                android:layout_below="@id/lay_scanner_viewfinder_view"
-               android:background="@color/colorBg"
+               android:background="@color/transparent"
         />
 
     <ImageView android:layout_width="match_parent"
                android:layout_height="match_parent"
                android:layout_toRightOf="@id/lay_scanner_viewfinder_view"
-               android:background="@color/colorBg"
+               android:background="@color/transparent"
         />
 
 

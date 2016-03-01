@@ -127,7 +127,8 @@ public class FederalConditionDetailActivity extends RecycleViewActivity<ArticleP
         webSettings.setJavaScriptEnabled(true);
 //		webSettings.setBuiltInZoomControls(true);
         webSettings.setSupportZoom(true);
-//      webSettings.setTextSize(WebSettings.TextSize.LARGER);
+//        webSettings.setTextSize(WebSettings.TextSize.LARGEST);
+        webSettings.setTextZoom(200);
 
         webContent.getSettings().setUseWideViewPort(true);
         webContent.getSettings().setLoadWithOverviewMode(true);

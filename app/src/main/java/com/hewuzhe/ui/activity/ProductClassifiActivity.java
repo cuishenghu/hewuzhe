@@ -95,7 +95,7 @@ public class ProductClassifiActivity extends ToolBarActivity<ClassificationPrese
                 /**点击三级分类*/
                 classification = ThreeAdapter.getItem(position);
                 startActivity(new Intent(getContext(),ProductListActivity.class).putExtra("classId", classification.Id));
-                finish();
+//                finish();
                 break;
             default:break;
         }

@@ -58,6 +58,7 @@ public class OrderDetailsActivity extends BaseActivity2 {
     private OrderDetailsItemAdaptet orderDetailsItemAdaptet;
     private String state;//判断是否评论过
     private String billId;//订单ID
+    private int IsCancle;
 
     //    private int[] pic = {R.drawable.icon_item_pic, R.drawable.icon_item_pic};
 //    private String data[][] = {{"男士哑铃10公斤一对", "规格：S/红色", "¥20.00", "x1"}, {"男士哑铃10公斤一对", "规格：S/红色", "¥20.00", "x1"}};
@@ -76,7 +77,7 @@ public class OrderDetailsActivity extends BaseActivity2 {
         super.onCreate(savedInstanceState);
         areaId = (String) getIntent().getSerializableExtra("areaId");
         billId = getIntent().getStringExtra("billId");
-        mType = getIntent().getIntExtra("mType",0);
+        mType = getIntent().getIntExtra("mType", 0);
 //        orders = (OrderNumber) getIntent().getSerializableExtra("order");
 //        total_number = Integer.parseInt((String) getIntent().getSerializableExtra("number"));
 //        total_price = Double.parseDouble((String) getIntent().getSerializableExtra("price"));
@@ -85,7 +86,7 @@ public class OrderDetailsActivity extends BaseActivity2 {
         setContentView(R.layout.activity_order_details);
         initView();
         requestData();
-        selectButtonFromType(mType);//根据传过来的mType值来显示底部Button按钮
+//        selectButtonFromType(mType);//根据传过来的mType值来显示底部Button按钮
     }
 
     /**
@@ -221,7 +222,7 @@ public class OrderDetailsActivity extends BaseActivity2 {
     private void getOrderDetailsByBillId() {
         RequestParams params = new RequestParams();
         params.put("startRowIndex", 0);
-        params.put("maximumRows", 100);
+        params.put("maximumRows", 1000);
         params.put("billId", billId);
         HttpUtils.getProductByOrderNo(new HttpErrorHandler() {
             @Override
@@ -245,7 +246,7 @@ public class OrderDetailsActivity extends BaseActivity2 {
                     orderContent.setNumber(jsonArray.getJSONObject(i).getString("Number"));
                     orderContent.setMiddleImagePath(jsonObject.getString("MiddleImagePath"));
                     orderContents.add(orderContent);
-
+                    IsCancle = Integer.parseInt(jsonObject.getString("IsCancle"));
                     tv_total_price.setText("合计：¥" + jsonObject.getString("BillPrice"));//订单价格
                     tv_order_sum.setText("共" + jsonArray.size() + "件商品");
                     tv_order_no.setText(jsonObject.getString("BillNo"));//订单编号
@@ -263,6 +264,7 @@ public class OrderDetailsActivity extends BaseActivity2 {
 //                    int getPostage = Integer.parseInt(orders.getPostage());
 //                    tv_postage_price.setText(getPostage == 0 ? "包邮" : getPostage == (-1) ? "货到付款" : "邮费：**元");    //上部邮费.....卖家包邮
                 }
+                selectButtonFromType(mType);//根据传过来的mType值来显示底部Button按钮
                 orderDetailsItemAdaptet.notifyDataSetChanged();
                 getReceiverInfo();
                 /**
@@ -299,7 +301,12 @@ public class OrderDetailsActivity extends BaseActivity2 {
         if (mType == 2) {
             tv_left_btn.setVisibility(View.GONE);
             tv_right_btn.setVisibility(View.VISIBLE);
-            tv_right_btn.setText("取消订单");
+            if (IsCancle == 1) {
+                tv_right_btn.setText("取消中");
+            } else {
+                tv_right_btn.setText("取消订单");
+            }
+
             tv_right_btn.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
@@ -321,7 +328,7 @@ public class OrderDetailsActivity extends BaseActivity2 {
             tv_right_btn.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    confirmReceived(mType);
+                    viewDialog(billId, mType);
                 }
             });
         }
@@ -384,7 +391,21 @@ public class OrderDetailsActivity extends BaseActivity2 {
                     dialog.dismiss();
                 }
             });
-        } else if (mType == 4) {
+        } else if (mType == 3) {
+            builder.setMessage("您确认收到此商品了吗？");
+            builder.setPositiveButton("确定", new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialog, int which) {
+                    confirmReceived(billId,mType);
+                }
+            }).setNegativeButton("取消", new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialog, int which) {
+                    dialog.dismiss();
+                }
+            });
+        }
+        else if (mType == 4) {
             builder.setMessage("您确定要删除该订单吗？");
             builder.setPositiveButton("确定", new DialogInterface.OnClickListener() {
                 @Override
@@ -421,7 +442,7 @@ public class OrderDetailsActivity extends BaseActivity2 {
     /**
      * 确认收货
      */
-    private void confirmReceived(final int mType) {
+    private void confirmReceived(final String billId,final int mType) {
         RequestParams params = new RequestParams();
         params.put("billId", billId);//订单ID
         params.put("userId", new SessionUtil(OrderDetailsActivity.this).getUserId()); //由于自己ID没有订单,现在传2,此ID为李发起的ID.待修改成自己的ID==========

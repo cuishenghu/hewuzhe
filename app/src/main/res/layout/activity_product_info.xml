@@ -285,6 +285,30 @@
         android:background="@color/hwz_bg_black">
 
         <LinearLayout
+            android:id="@+id/product_tel"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:background="@color/hwz_bg_black"
+            android:layout_weight="1"
+            android:padding="4dp"
+            android:orientation="vertical">
+            <ImageView
+                android:id="@+id/product_tel_pic"
+                android:layout_width="22dp"
+                android:layout_height="22dp"
+                android:layout_gravity="center_horizontal"
+                android:src="@mipmap/te"
+                android:layout_marginBottom="2dp"
+                android:layout_marginTop="6dp"/>
+            <TextView
+                android:id="@+id/product_tel_tit"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:text="@string/proinfo_tel"
+                android:textColor="@color/hwz_font_gray"/>
+        </LinearLayout>
+        <LinearLayout
             android:id="@+id/product_isfavorite_click"
             android:layout_width="0dp"
             android:layout_height="match_parent"
@@ -294,11 +318,12 @@
             android:orientation="vertical">
             <ImageView
                 android:id="@+id/product_isfavorite"
-                android:layout_width="30dp"
-                android:layout_height="30dp"
+                android:layout_width="22dp"
+                android:layout_height="22dp"
                 android:layout_gravity="center_horizontal"
                 android:src="@mipmap/icon_shoucang_click"
-                android:layout_marginBottom="2dp"/>
+                android:layout_marginBottom="2dp"
+                android:layout_marginTop="6dp"/>
             <TextView
                 android:id="@+id/product_isfavorite_tit"
                 android:layout_width="wrap_content"

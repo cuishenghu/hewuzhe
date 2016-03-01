@@ -8,6 +8,7 @@ import com.hewuzhe.model.Product;
 import com.hewuzhe.model.Res;
 import com.hewuzhe.model.Result;
 import com.hewuzhe.model.ShopCar;
+import com.hewuzhe.model.Tel;
 import com.hewuzhe.presenter.base.BasePresenterImp;
 import com.hewuzhe.ui.cons.C;
 import com.hewuzhe.utils.NetEngine;
@@ -229,4 +230,30 @@ public class ProductInfoPresenter extends BasePresenterImp<ProductInfoView> {
                 });
         addSubscription(subscription);
     }
+
+    public void SelectProductPhone() {
+        Subscription subscription = NetEngine.getService()
+                .SelectProductPhone()
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new SB<Res<ArrayList<Tel>>>() {
+                    @Override
+                    public void next(Res<ArrayList<Tel>> res) {
+                        if (res.code == C.OK) {
+                            view.bindTel(res.data);
+                        }
+                    }
+
+                    @Override
+                    public void onCompleted() {
+
+                    }
+
+                    @Override
+                    public void onError(Throwable e) {
+
+                    }
+                });
+    }
+
 }

@@ -22,6 +22,7 @@ import com.hewuzhe.ui.http.HttpErrorHandler;
 import com.hewuzhe.ui.http.HttpUtils;
 import com.hewuzhe.utils.SessionUtil;
 import com.hewuzhe.view.MyCommonTitle;
+import com.hewuzhe.view.MyRequestDailog;
 import com.hewuzhe.view.XListView;
 import com.hewuzhe.view.XListView.IXListViewListener;
 import com.loopj.android.http.AsyncHttpResponseHandler;
@@ -72,12 +73,14 @@ public class MoreShieldListActivity extends BaseActivity2 {
      */
     private void requestData() {
         RequestParams params = new RequestParams();
+        MyRequestDailog.showDialog(MoreShieldListActivity.this,"正在加载");
         params.put("userId", new SessionUtil(MoreShieldListActivity.this).getUserId());//兑换状态
         HttpUtils.getShieldNewsFriend(res_getShieldNewsFriend,params);
     }
     AsyncHttpResponseHandler res_getShieldNewsFriend = new EntityHandler<Friend2>(Friend2.class) {
         @Override
         public void onReadSuccess(List<Friend2> list) {
+            MyRequestDailog.closeDialog();
 //            if (pageNo == 0) {
 //                products.clear();
 //            }

@@ -10,12 +10,15 @@ import android.view.View;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import com.alibaba.fastjson.JSONObject;
 import com.hewuzhe.R;
 import com.hewuzhe.model.OrderNumber;
 import com.hewuzhe.ui.adapter.OrderGroupAdapter2;
 import com.hewuzhe.ui.base.BaseActivity2;
 import com.hewuzhe.ui.http.EntityHandler;
+import com.hewuzhe.ui.http.HttpErrorHandler;
 import com.hewuzhe.ui.http.HttpUtils;
+import com.hewuzhe.ui.http.UrlContants;
 import com.hewuzhe.utils.SessionUtil;
 import com.hewuzhe.view.MyCommonTitle;
 import com.hewuzhe.view.MyRequestDailog;
@@ -31,7 +34,7 @@ import java.util.List;
  * Created by Administrator on 2016/1/26 0026.
  */
 public class OrderCenterActivity2 extends BaseActivity2 implements XListView.IXListViewListener {
-    private static int pageSum = 5;// perpage默认每页显示5条信息
+    private static int pageSum = 10;// perpage默认每页显示5条信息
     private int pageNo = 0;// 当前显示的页面
     private int mType = 1;// 1、待付款 2、待发货 3、待收货 4、已收货
     private MyCommonTitle myCommonTitle;
@@ -64,7 +67,7 @@ public class OrderCenterActivity2 extends BaseActivity2 implements XListView.IXL
      */
     public void initView() {
         myCommonTitle = (MyCommonTitle) findViewById(R.id.aci_mytitle);
-        myCommonTitle.setTitle("确认订单");
+        myCommonTitle.setTitle("订单中心");
         myCommonTitle.setListener(this, null, null);
 
         ll_wait_to_pay = (RelativeLayout) findViewById(R.id.ll_wait_to_pay);
@@ -72,10 +75,10 @@ public class OrderCenterActivity2 extends BaseActivity2 implements XListView.IXL
         ll_wait_to_receive = (RelativeLayout) findViewById(R.id.ll_wait_to_receive);
         ll_received = (RelativeLayout) findViewById(R.id.ll_received);
 
-//        tv_wait_to_pay_count = (TextView) findViewById(R.id.tv_wait_to_pay_count);//统计订单中心待付款数量
-//        tv_wait_to_send_count = (TextView) findViewById(R.id.tv_wait_to_send_count);//统计订单中心已付款数量
-//        tv_wait_to_receive_count = (TextView) findViewById(R.id.tv_wait_to_receive_count);//统计订单中心待收货数量
-//        tv_received_count = (TextView) findViewById(R.id.tv_received_count);//统计订单中心已收货数量
+        tv_wait_to_pay_count = (TextView) findViewById(R.id.tv_wait_to_pay_count);//统计订单中心待付款数量
+        tv_wait_to_send_count = (TextView) findViewById(R.id.tv_wait_to_send_count);//统计订单中心已付款数量
+        tv_wait_to_receive_count = (TextView) findViewById(R.id.tv_wait_to_receive_count);//统计订单中心待收货数量
+        tv_received_count = (TextView) findViewById(R.id.tv_received_count);//统计订单中心已收货数量
 
         tv_wait_to_pay = (TextView) findViewById(R.id.tv_wait_to_pay);//统计订单中心待付款数量
         tv_wait_to_send = (TextView) findViewById(R.id.tv_wait_to_send);//统计订单中心已付款数量
@@ -200,6 +203,40 @@ public class OrderCenterActivity2 extends BaseActivity2 implements XListView.IXL
     }
 
     public void requestData(final int mType) {
+        /**
+         * 根据用户ID，查询订单个数
+         */
+        params = new RequestParams();
+        params.put("userId", new SessionUtil(OrderCenterActivity2.this).getUserId());
+        HttpUtils.getSelectBillCount(new HttpErrorHandler() {
+            @Override
+            public void onRecevieSuccess(JSONObject json) {
+                JSONObject jsonObject = json.getJSONObject(UrlContants.jsonData);
+                int i1 = Integer.parseInt(jsonObject.getString("State1"));
+                int i2 = Integer.parseInt(jsonObject.getString("State2"));
+                int i3 = Integer.parseInt(jsonObject.getString("State3"));
+                int i4 = Integer.parseInt(jsonObject.getString("State4"));
+                if (Integer.parseInt(jsonObject.getString("State1")) > 0) {
+                    tv_wait_to_pay_count.setVisibility(View.VISIBLE);
+                    tv_wait_to_pay_count.setText(jsonObject.getString("State1") + "");
+                }
+                if (Integer.parseInt(jsonObject.getString("State2")) > 0) {
+                    tv_wait_to_send_count.setVisibility(View.VISIBLE);
+                    tv_wait_to_send_count.setText(jsonObject.getString("State2") + "");
+                }
+                if (Integer.parseInt(jsonObject.getString("State3")) > 0) {
+                    tv_wait_to_receive_count.setVisibility(View.VISIBLE);
+                    tv_wait_to_receive_count.setText(jsonObject.getString("State3") + "");
+                }
+                if (Integer.parseInt(jsonObject.getString("State4")) > 0) {
+                    tv_received_count.setVisibility(View.VISIBLE);
+                    tv_received_count.setText(jsonObject.getString("State4") + "");
+                }
+            }
+        }, params);
+        /**
+         * 根据用户ID，分页查询订单
+         */
         params = new RequestParams();
         MyRequestDailog.showDialog(OrderCenterActivity2.this, "正在加载");
         params.put("startRowIndex", pageNo * pageSum);//开始行索引

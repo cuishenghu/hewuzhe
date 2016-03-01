@@ -41,17 +41,17 @@
                     android:textColor="@color/colorYellow"
                     android:textSize="16sp" />
 
-                <!--<TextView-->
-                    <!--android:id="@+id/tv_wait_to_pay_count"-->
-                    <!--style="@style/text_25_white"-->
-                    <!--android:layout_width="15dp"-->
-                    <!--android:layout_height="15dp"-->
-                    <!--android:layout_alignParentRight="true"-->
-                    <!--android:layout_marginRight="10dp"-->
-                    <!--android:background="@drawable/circle_red"-->
-                    <!--android:gravity="center"-->
-                    <!--android:text="0"-->
-                    <!--android:visibility="gone" />-->
+                <TextView
+                    android:id="@+id/tv_wait_to_pay_count"
+                    style="@style/text_25_white"
+                    android:layout_width="15dp"
+                    android:layout_height="15dp"
+                    android:layout_alignParentRight="true"
+                    android:layout_marginRight="10dp"
+                    android:background="@drawable/circle_red"
+                    android:gravity="center"
+                    android:text="1"
+                    android:visibility="gone"/>
             </RelativeLayout>
 
             <RelativeLayout
@@ -73,18 +73,17 @@
                     android:textColor="@drawable/tab_font_color"
                     android:textSize="16sp" />
 
-                <!--<TextView-->
-                    <!--android:id="@+id/tv_wait_to_send_count"-->
-                    <!--style="@style/text_25_white"-->
-                    <!--android:layout_width="15dp"-->
-                    <!--android:layout_height="15dp"-->
-                    <!--android:layout_alignParentRight="true"-->
-                    <!--android:layout_marginRight="10dp"-->
-                    <!--android:background="@drawable/circle_red"-->
-                    <!--android:gravity="center"-->
-                    <!--android:text="0"-->
-                    <!--android:visibility="gone"-->
-                    <!--tools:visibility="visible" />-->
+                <TextView
+                    android:id="@+id/tv_wait_to_send_count"
+                    style="@style/text_25_white"
+                    android:layout_width="15dp"
+                    android:layout_height="15dp"
+                    android:layout_alignParentRight="true"
+                    android:layout_marginRight="10dp"
+                    android:background="@drawable/circle_red"
+                    android:gravity="center"
+                    android:text="0"
+                    android:visibility="gone"/>
             </RelativeLayout>
 
 
@@ -106,18 +105,17 @@
                     android:textColor="@drawable/tab_font_color"
                     android:textSize="16sp" />
 
-                <!--<TextView-->
-                    <!--android:id="@+id/tv_wait_to_receive_count"-->
-                    <!--style="@style/text_25_white"-->
-                    <!--android:layout_width="15dp"-->
-                    <!--android:layout_height="15dp"-->
-                    <!--android:layout_alignParentRight="true"-->
-                    <!--android:layout_marginRight="10dp"-->
-                    <!--android:background="@drawable/circle_red"-->
-                    <!--android:gravity="center"-->
-                    <!--android:text="0"-->
-                    <!--android:visibility="gone"-->
-                    <!--tools:visibility="visible" />-->
+                <TextView
+                    android:id="@+id/tv_wait_to_receive_count"
+                    style="@style/text_25_white"
+                    android:layout_width="15dp"
+                    android:layout_height="15dp"
+                    android:layout_alignParentRight="true"
+                    android:layout_marginRight="10dp"
+                    android:background="@drawable/circle_red"
+                    android:gravity="center"
+                    android:text="0"
+                    android:visibility="gone"/>
             </RelativeLayout>
 
             <RelativeLayout
@@ -139,18 +137,17 @@
                     android:textColor="@drawable/tab_font_color"
                     android:textSize="16sp" />
 
-                <!--<TextView-->
-                    <!--android:id="@+id/tv_received_count"-->
-                    <!--style="@style/text_25_white"-->
-                    <!--android:layout_width="15dp"-->
-                    <!--android:layout_height="15dp"-->
-                    <!--android:layout_alignParentRight="true"-->
-                    <!--android:layout_marginRight="10dp"-->
-                    <!--android:background="@drawable/circle_red"-->
-                    <!--android:gravity="center"-->
-                    <!--android:text="0"-->
-                    <!--android:visibility="gone"-->
-                    <!--tools:visibility="visible" />-->
+                <TextView
+                    android:id="@+id/tv_received_count"
+                    style="@style/text_25_white"
+                    android:layout_width="15dp"
+                    android:layout_height="15dp"
+                    android:layout_alignParentRight="true"
+                    android:layout_marginRight="10dp"
+                    android:background="@drawable/circle_red"
+                    android:gravity="center"
+                    android:text="0"
+                    android:visibility="gone"/>
             </RelativeLayout>
         </LinearLayout>
 

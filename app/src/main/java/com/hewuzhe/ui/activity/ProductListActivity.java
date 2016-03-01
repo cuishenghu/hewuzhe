@@ -54,6 +54,7 @@ public class ProductListActivity extends RecycleViewActivity<ProductListPresente
     int id_t=0;
     int id_s=0;
     int id_f=0;
+    int classifi= 0;
 
     String searchText="";
 
@@ -76,8 +77,9 @@ public class ProductListActivity extends RecycleViewActivity<ProductListPresente
         Intent intent =getIntent();
         if(intent.getStringExtra("recommend")!=null&&intent.getStringExtra("recommend").equals("1"))
             presenter.getData(page, count,"",0,0,0,0,0,0,1);
-        else if(intent.getIntExtra("classId",0)!=0)
-            presenter.getData(page, count,"",intent.getIntExtra("classId",0),0,0,0,0,0,0);
+        else if(intent.getIntExtra("classId",0)!=0){
+            classifi = intent.getIntExtra("classId",0);
+            presenter.getData(page, count,"",intent.getIntExtra("classId",0),0,0,0,0,0,0);}
         else
             presenter.getData(page, count);
 
@@ -137,7 +139,10 @@ public class ProductListActivity extends RecycleViewActivity<ProductListPresente
                     salenum_top.setImageResource(R.mipmap.prolisttop);
                     id_o=2;
                 }
-                presenter.getData(page, count,searchText,0,id_t,id_o,id_s,id_f,0,0);
+                if(classifi!=0)
+                    presenter.getData(page, count,searchText,classifi,id_t,id_o,id_s,id_f,0,0);
+                else
+                    presenter.getData(page, count,searchText,0,id_t,id_o,id_s,id_f,0,0);
                 break;
             case R.id.price_title:
                 if(this.id_t==1) {
@@ -153,7 +158,10 @@ public class ProductListActivity extends RecycleViewActivity<ProductListPresente
                     price_top.setImageResource(R.mipmap.prolisttop);
                     id_t=2;
                 }
-                presenter.getData(page, count,searchText,0,id_t,id_o,id_s,id_f,0,0);
+                if(classifi!=0)
+                    presenter.getData(page, count,searchText,classifi,id_t,id_o,id_s,id_f,0,0);
+                else
+                    presenter.getData(page, count,searchText,0,id_t,id_o,id_s,id_f,0,0);
                 break;
             case R.id.comment_title:
                 if(this.id_s==1) {
@@ -169,7 +177,10 @@ public class ProductListActivity extends RecycleViewActivity<ProductListPresente
                     comment_top.setImageResource(R.mipmap.prolisttop);
                     id_s=2;
                 }
-                presenter.getData(page, count,searchText,0,id_t,id_o,id_s,id_f,0,0);
+                if(classifi!=0)
+                    presenter.getData(page, count,searchText,classifi,id_t,id_o,id_s,id_f,0,0);
+                else
+                    presenter.getData(page, count,searchText,0,id_t,id_o,id_s,id_f,0,0);
                 break;
             case R.id.new_title:
                 if(this.id_f==1) {
@@ -185,7 +196,10 @@ public class ProductListActivity extends RecycleViewActivity<ProductListPresente
                     new_top.setImageResource(R.mipmap.prolisttop);
                     id_f=2;
                 }
-                presenter.getData(page, count,searchText,0,id_t,id_o,id_s,id_f,0,0);
+                if(classifi!=0)
+                    presenter.getData(page, count,searchText,classifi,id_t,id_o,id_s,id_f,0,0);
+                else
+                    presenter.getData(page, count,searchText,0,id_t,id_o,id_s,id_f,0,0);
                 break;
         }
     }
@@ -193,7 +207,10 @@ public class ProductListActivity extends RecycleViewActivity<ProductListPresente
     @OnClick(R.id.product_list_search)
     public void proSearch(){
         searchText = edt_search_content.getText().toString();
-        presenter.getData(page, count,searchText,0,id_t,id_o,id_s,id_f,0,0);
+        if(classifi!=0)
+            presenter.getData(page, count,searchText,classifi,id_t,id_o,id_s,id_f,0,0);
+        else
+            presenter.getData(page, count,searchText,0,id_t,id_o,id_s,id_f,0,0);
     }
 
 }

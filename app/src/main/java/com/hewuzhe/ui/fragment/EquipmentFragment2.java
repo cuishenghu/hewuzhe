@@ -9,9 +9,15 @@ import android.support.v7.app.ActionBar;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
 
+import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 
+import com.hewuzhe.banner.CircleFlowIndicator;
+import com.hewuzhe.banner.ImagePagerAdapter;
+import com.hewuzhe.banner.ViewFlow;
+import com.hewuzhe.model.Bannar;
+import com.hewuzhe.model.ProductPic;
 import com.hewuzhe.model.ProductSort;
 import com.hewuzhe.ui.activity.OrderCenterActivity2;
 import com.hewuzhe.ui.activity.OrderDetailsActivity;
@@ -19,12 +25,16 @@ import com.hewuzhe.ui.activity.ProductClassifiActivity;
 import com.hewuzhe.ui.activity.ProductInfoActivity;
 import com.hewuzhe.ui.activity.ProductListActivity;
 import com.hewuzhe.ui.activity.ShopCarActivity;
+import com.hewuzhe.ui.cons.C;
+import com.hewuzhe.utils.StringUtil;
 import com.hewuzhe.view.XListView.IXListViewListener;
 
+import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.ViewFlipper;
 
 import com.hewuzhe.R;
 import com.hewuzhe.model.EquipmentSort;
@@ -77,6 +87,21 @@ public class EquipmentFragment2 extends BaseFragment implements IXListViewListen
     private int pageNo = 0;//页码
     private int pageSum = 10;//每页显示分类的条数
 
+
+    @Bind(R.id.viewflow)
+    ViewFlow mViewFlow;
+    @Bind(R.id.viewflowindic)
+    CircleFlowIndicator mFlowIndicator;
+    @Bind(R.id.framelayout)
+    FrameLayout framelayout;
+
+    List<Bannar> bannar = new ArrayList<Bannar>();
+
+    private int mCurrPos;
+    private ViewFlipper notice_vf;
+    ArrayList<String> imageUrlList = new ArrayList<String>();
+    ArrayList<String> linkUrlArray = new ArrayList<String>();
+    ArrayList<String> titleList = new ArrayList<String>();
     /**
      * 点击事件监听
      */
@@ -135,6 +160,13 @@ public class EquipmentFragment2 extends BaseFragment implements IXListViewListen
         mListView.setXListViewListener(this);
         initData();
         requestData();
+        getBannarList();
+        ViewGroup.LayoutParams para;
+        para = framelayout.getLayoutParams();
+        para.height= StringUtil.getScreenWidth(this.getActivity())/2;
+        framelayout.setLayoutParams(para);
+
+
     }
 
     /**
@@ -295,6 +327,71 @@ public class EquipmentFragment2 extends BaseFragment implements IXListViewListen
         mListView.stopLoadMore();
         mListView.setRefreshTime("刚刚");
     }
+
+    private void moveNext() {
+        setView(this.mCurrPos, this.mCurrPos + 1);
+        this.notice_vf.setInAnimation(getActivity(), R.anim.in_bottomtop);
+        this.notice_vf.setOutAnimation(getActivity(), R.anim.out_bottomtop);
+        this.notice_vf.showNext();
+    }
+
+    private void setView(int curr, int next) {
+
+        View noticeView = getActivity().getLayoutInflater().inflate(R.layout.notice_item, null);
+        TextView notice_tv = (TextView) noticeView.findViewById(R.id.notice_tv);
+        if ((curr < next) && (next > (titleList.size() - 1))) {
+            next = 0;
+        } else if ((curr > next) && (next < 0)) {
+            next = titleList.size() - 1;
+        }
+        notice_tv.setText(titleList.get(next));
+        notice_tv.setOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick(View arg0) {
+            }
+        });
+        if (notice_vf.getChildCount() > 1) {
+            notice_vf.removeViewAt(0);
+        }
+        notice_vf.addView(noticeView, notice_vf.getChildCount());
+        mCurrPos = next;
+
+    }
+
+    private void initBanner(ArrayList<String> imageUrlList) {
+        mViewFlow.setAdapter(new ImagePagerAdapter(getActivity(), imageUrlList, linkUrlArray, titleList,bannar).setInfiniteLoop(true));
+        mViewFlow.setmSideBuffer(imageUrlList.size()); // 实际图片张数，
+        // 我的ImageAdapter实际图片张数为3
+
+        mViewFlow.setFlowIndicator(mFlowIndicator);
+        mViewFlow.setTimeSpan(4500);
+        mViewFlow.setSelection(imageUrlList.size() * 1000); // 设置初始位置
+        mViewFlow.startAutoFlowTimer(); // 启动自动播放
+    }
+
+    private void getBannarList() {
+        RequestParams params = new RequestParams();
+        HttpUtils.getBannarList(res_getBannarList, params);
+    }
+
+    private AsyncHttpResponseHandler res_getBannarList = new EntityHandler<Bannar>(Bannar.class) {
+
+        @Override
+        public void onReadSuccess(List<Bannar> list) {
+//            int i = list.size();
+            bannar = list;
+            //banner轮播图
+            for (int i=0;i<list.size();i++){
+                imageUrlList.add(C.BASE_URL+list.get(i).getPath());
+                linkUrlArray.add("");
+                titleList.add(list.get(i).getTitle());
+
+                initBanner(imageUrlList);
+
+            }
+        }
+    };
 
 
 }

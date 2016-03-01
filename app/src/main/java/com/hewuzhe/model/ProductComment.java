@@ -8,7 +8,7 @@ public class ProductComment {
     public String Content;          //回复内容
     public String PublishTime;      //发布时间
     public int UserId;              //用户id
-    public String UserName;
+    public String NicName;
     public String PhotoPath;
     public String ColorAndSize;
 }

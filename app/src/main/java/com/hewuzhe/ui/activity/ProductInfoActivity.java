@@ -26,9 +26,11 @@ import com.hewuzhe.banner.ViewFlow;
 import com.hewuzhe.model.OrderContent;
 import com.hewuzhe.model.Pic;
 import com.hewuzhe.model.Product;
+import com.hewuzhe.model.Tel;
 import com.hewuzhe.presenter.ProductInfoPresenter;
 import com.hewuzhe.ui.adapter.ProductColorAdapter;
 import com.hewuzhe.ui.adapter.ProductInfoAdapter;
+import com.hewuzhe.ui.adapter.ProductTelAdapter;
 import com.hewuzhe.ui.base.SyLinearLayoutManager;
 import com.hewuzhe.ui.base.ToolBarActivity;
 import com.hewuzhe.ui.cons.C;
@@ -38,6 +40,7 @@ import com.hewuzhe.utils.StringUtil;
 import com.hewuzhe.utils.TagGroup;
 import com.hewuzhe.view.ProductInfoView;
 
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -60,6 +63,7 @@ public class ProductInfoActivity extends ToolBarActivity<ProductInfoPresenter> i
     @Bind(R.id.product_isfavorite_tit) TextView  product_isfavorite_tit;       //收藏标题
     @Bind(R.id.product_isfavorite)     ImageView product_isfavorite;           //收藏图
     @Bind(R.id.product_isfavorite_click) LinearLayout product_isfavorite_click;       //收藏click
+    @Bind(R.id.product_tel) LinearLayout product_tel;       //客服
 
     //    @Bind(R.id.pro_num)
     TextView pro_num;
@@ -80,7 +84,9 @@ public class ProductInfoActivity extends ToolBarActivity<ProductInfoPresenter> i
 
     //弹窗
     PopupWindow pop;
+    PopupWindow telpop;
     View mview;
+    View telmview;
     View selectview;
     boolean isOut, isIn;// 是否弹窗显示
     boolean isFavo; //是否收藏
@@ -102,9 +108,11 @@ public class ProductInfoActivity extends ToolBarActivity<ProductInfoPresenter> i
     ArrayList<String> titleList = new ArrayList<String>();
 
     public RecyclerView recyclerView;
+    public RecyclerView telrecyclerView;
     public RecyclerView recyclerView_color;
     public RecyclerView recyclerView_size;
     public ProductInfoAdapter adapter;
+    public ProductTelAdapter teladapter;
     public ImageView product_image;
     public ProductColorAdapter adapter_color;
     public RecyclerView.LayoutManager layoutManager;
@@ -268,10 +276,13 @@ public class ProductInfoActivity extends ToolBarActivity<ProductInfoPresenter> i
 
         product_title.setText(data.Name);
         product_content.setText(data.Content);
+        GetPostageState(data.LiveryPrice);
+        product_liveryPrice.setText("邮费："+Postage);
 //        product_liveryPrice.setText(data.LiveryPrice==0?"包邮":"邮费："+data.LiveryPrice);
-        product_liveryPrice.setText("货到付款");
-        product_price.setText("￥"+data.Price);
-        product_price_true.setText("￥"+data.Price);
+//        product_liveryPrice.setText("货到付款");
+        DecimalFormat df = new DecimalFormat("######0.00");
+        product_price.setText("￥"+df.format(data.Price));
+        product_price_true.setText("￥"+df.format(data.Price));
         product_saleNum.setText("销量："+data.SaleNum);
         product_visitNum.setText("浏览量：" + data.VisitNum);
         comment_num.setText("共" + data.CommentNum + "条");
@@ -328,6 +339,7 @@ public class ProductInfoActivity extends ToolBarActivity<ProductInfoPresenter> i
         framelayout.setLayoutParams(para);
 
         initBanner(imageUrlList);
+        presenter.SelectProductPhone();
     }
 
     @Override
@@ -354,14 +366,20 @@ public class ProductInfoActivity extends ToolBarActivity<ProductInfoPresenter> i
 
         initData();
 
+        LayoutInflater telinflater = LayoutInflater.from(this);
+        // 引入窗口配置文件 - 即弹窗的界面
+        telmview = telinflater.inflate(R.layout.pop_tel, null);
+
+        initTelData();
+
         product_image.setOnClickListener(new View.OnClickListener() {
 
             @Override
             public void onClick(View v) {
-                if(picurl.trim().equals(""))
-                    addImg(product.ImagePath,0);
+                if (picurl.trim().equals(""))
+                    addImg(product.ImagePath, 0);
                 else
-                    addImg(picurl,0);
+                    addImg(picurl, 0);
             }
         });
 
@@ -436,7 +454,7 @@ public class ProductInfoActivity extends ToolBarActivity<ProductInfoPresenter> i
 //
 //                    if (Postage.equals(""))
 //                        return;
-                    startActivity(new Intent(ProductInfoActivity.this, OrderConfirmFirstActivity.class).putExtra("state", "1").putExtra("list", temp).putExtra("LiveryPrice", "货到付款"));
+                    startActivity(new Intent(ProductInfoActivity.this, OrderConfirmFirstActivity.class).putExtra("state", "1").putExtra("list", temp).putExtra("LiveryPrice", Postage));
                 } else
                     Toast.makeText(ProductInfoActivity.this, "请重新选择规格", Toast.LENGTH_SHORT).show();
             }
@@ -503,8 +521,12 @@ public class ProductInfoActivity extends ToolBarActivity<ProductInfoPresenter> i
     public void GetPostageState(double state) {
         if(state==0)
             Postage= "包邮";
-        else
+        else if(state==-1)
             Postage= "货到付款";
+        else {
+            DecimalFormat df = new DecimalFormat("######0.00");
+            Postage = df.format(state).toString();
+        }
 
     }
 
@@ -516,6 +538,13 @@ public class ProductInfoActivity extends ToolBarActivity<ProductInfoPresenter> i
         } else {
             tv_count.setVisibility(View.GONE);
         }
+    }
+
+    @Override
+    public void bindTel(ArrayList<Tel> data) {
+        telrecyclerView = (RecyclerView) telmview.findViewById(R.id.recycler_tel);//findViewById(R.id.recycler_view_comment);
+        telrecyclerView.setLayoutManager(new SyLinearLayoutManager(this));
+        telrecyclerView.setAdapter(teladapter = new ProductTelAdapter(getContext(), data));
     }
 
     @Override
@@ -556,7 +585,7 @@ public class ProductInfoActivity extends ToolBarActivity<ProductInfoPresenter> i
 
     private void initBanner(ArrayList<String> imageUrlList) {
 
-        mViewFlow.setAdapter(new ImagePagerAdapter(this, imageUrlList, linkUrlArray, titleList,product.PicList).setInfiniteLoop(true));
+        mViewFlow.setAdapter(new ImagePagerAdapter(this, imageUrlList, linkUrlArray, titleList,product.PicList,true).setInfiniteLoop(true));
         mViewFlow.setmSideBuffer(imageUrlList.size()); // 实际图片张数，
         // 我的ImageAdapter实际图片张数为3
 
@@ -616,6 +645,50 @@ public class ProductInfoActivity extends ToolBarActivity<ProductInfoPresenter> i
         product.Id = getIntentData().getInt("proid");
         return product;
     }
+
+    @OnClick(R.id.product_tel)
+    public void proTel(){
+        changeTelPopupWindowState();
+    }
+
+    private void initTelData() {
+        telmview.setFocusableInTouchMode(true);
+//		view.setOnKeyListener(this);
+        // PopupWindow实例化
+        telpop = new PopupWindow(telmview, ViewGroup.LayoutParams.MATCH_PARENT,
+                ViewGroup.LayoutParams.WRAP_CONTENT, true);
+        /**
+         * PopupWindow 设置
+         */
+        // pop.setFocusable(true); //设置PopupWindow可获得焦点
+        // pop.setTouchable(true); //设置PopupWindow可触摸
+        // pop.setOutsideTouchable(true); // 设置非PopupWindow区域可触摸
+        // 设置PopupWindow显示和隐藏时的动画
+        telpop.setAnimationStyle(R.style.MenuAnimationFade);
+        /**
+         * 改变背景可拉的弹出窗口。后台可以设置为null。 这句话必须有，否则按返回键popwindow不能消失 或者加入这句话
+         * ColorDrawable dw = new
+         * ColorDrawable(-00000);pop.setBackgroundDrawable(dw);
+         */
+        telpop.setBackgroundDrawable(new BitmapDrawable());
+
+    }
+
+
+    /**
+     * 改变 PopupWindow 的显示和隐藏
+     */
+    private void changeTelPopupWindowState() {
+        if (telpop.isShowing()) {
+            // 隐藏窗口，如果设置了点击窗口外消失，则不需要此方式隐藏
+            telpop.dismiss();
+        } else {
+            // 弹出窗口显示内容视图,默认以锚定视图的左下角为起点，这里为点击按钮
+            telpop.showAtLocation(show_guige, Gravity.BOTTOM, 40, 130);
+//			pop.showAsDropDown(show_guige, 0, 0, Gravity.BOTTOM);
+        }
+    }
+
 
     @OnClick(R.id.product_isfavorite_click)
     public void proIsFavoriteClick(){

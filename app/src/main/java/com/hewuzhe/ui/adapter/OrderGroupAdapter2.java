@@ -197,7 +197,7 @@ public class OrderGroupAdapter2 extends BaseAdapter {
             holder.tv_right_btn.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    confirmReceived(position, mType);
+                    viewDialog(mType, position);//弹框提示
                 }
             });
         } else if (mType == 4) {
@@ -262,12 +262,24 @@ public class OrderGroupAdapter2 extends BaseAdapter {
                     dialog.dismiss();
                 }
             });
-        } else if (mType == 4) {
+        } else if (mType == 3) {
+            builder.setMessage("您确认收到此商品了吗？");
+            builder.setPositiveButton("确定", new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialog, int which) {
+                    confirmReceived(position, mType);
+                }
+            }).setNegativeButton("取消", new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialog, int which) {
+                    dialog.dismiss();
+                }
+            });
+        }else if (mType == 4) {
             builder.setMessage("您确定要删除该订单吗？");
             builder.setPositiveButton("确定", new DialogInterface.OnClickListener() {
                 @Override
                 public void onClick(DialogInterface dialog, int which) {
-                    dialog.dismiss();
                     deleteOrder(position);
                 }
             }).setNegativeButton("取消", new DialogInterface.OnClickListener() {

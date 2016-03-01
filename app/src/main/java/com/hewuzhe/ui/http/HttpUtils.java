@@ -114,9 +114,14 @@ public class HttpUtils {
         client.get(UrlContants.getUrl(UrlContants.SHIELDNEWSFRIEND), params, handler);
     }
 
-    /* 修改是否接收推送信息 */
-    public static void changeTuiSong(AsyncHttpResponseHandler handler, RequestParams params) {
-        client.get(UrlContants.getUrl(UrlContants.CHANGETUISONG), params, handler);
+    /* 获取被屏蔽信息的舞友 */
+    public static void getBannarList(AsyncHttpResponseHandler handler, RequestParams params) {
+        client.get(UrlContants.getUrl(UrlContants.BANNARLIST), params, handler);
+    }
+
+    /* 根据用户ID，查询订单个数 */
+    public static void getSelectBillCount(AsyncHttpResponseHandler handler, RequestParams params) {
+        client.get(UrlContants.getUrl(UrlContants.SELECTBILLCOUNT), params, handler);
     }
 
 }

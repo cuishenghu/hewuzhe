@@ -180,6 +180,36 @@ public class TimeUtil {
     }
 
 
+    /**
+     * @param timeStr 已经过了多长时间
+     * @return
+     */
+    public static String timeHavedDay(String timeStr) {
+        Date date = null;
+        try {
+            SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+            date = format.parse(timeStr);
+        } catch (ParseException e) {
+            e.printStackTrace();
+            return "";
+        }
+
+        long timeStamp = date.getTime();
+
+        Date currentTime = new Date();
+        long currentTimeStamp = currentTime.getTime();
+
+        long total = currentTimeStamp - timeStamp;
+
+        if (total <= 0) {
+            return "";
+        }
+
+        int days = Math.round(total / (DAY));
+
+        return days + "";
+    }
+
     public static String timeFormat(long time) {
         Date date = null;
 

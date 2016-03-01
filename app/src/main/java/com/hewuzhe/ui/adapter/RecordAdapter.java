@@ -3,6 +3,7 @@ package com.hewuzhe.ui.adapter;
 import android.content.Context;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.RecyclerView;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.CheckBox;
@@ -17,6 +18,7 @@ import com.hewuzhe.presenter.RecordPresenter;
 import com.hewuzhe.ui.adapter.base.BaseAdapter;
 import com.hewuzhe.ui.cons.C;
 import com.hewuzhe.utils.TimeUtil;
+import com.timehop.stickyheadersrecyclerview.StickyRecyclerHeadersAdapter;
 
 import java.util.LinkedList;
 
@@ -26,7 +28,7 @@ import butterknife.ButterKnife;
 /**
  * Created by xianguangjin on 15/12/25.
  */
-public class RecordAdapter extends BaseAdapter<RecordAdapter.ViewHolder, Record, RecordPresenter> {
+public class RecordAdapter extends BaseAdapter<RecordAdapter.ViewHolder, Record, RecordPresenter> implements StickyRecyclerHeadersAdapter {
 
 
     /**
@@ -66,7 +68,7 @@ public class RecordAdapter extends BaseAdapter<RecordAdapter.ViewHolder, Record,
     public void bindData(RecordAdapter.ViewHolder holder, int position) {
         final Record record = data.get(position);
 
-        holder.tvAddTime.setText(TimeUtil.timeAgo(record.PublishTime));
+        holder.tvAddTime.setText(record.PublishTime.substring(11, 19));
         holder.tvTitle.setText(record.Title);
         holder.tvContent.setText(record.Content);
         holder.tvTime.setText(record.VideoDuration);
@@ -101,6 +103,59 @@ public class RecordAdapter extends BaseAdapter<RecordAdapter.ViewHolder, Record,
             holder._CbPlan.setVisibility(View.GONE);
         }
 
+
+    }
+
+    /**
+     * Get the ID of the header associated with this item.  For example, if your headers group
+     * items by their first letter, you could return the character representation of the first letter.
+     * Return a value < 0 if the view should not have a header (like, a header view or footer view)
+     *
+     * @param position
+     * @return
+     */
+    @Override
+    public long getHeaderId(int position) {
+        if (position != getItemCount() - 1) {
+            Record item = data.get(position);
+            String publishTime = item.PublishTime.substring(0, 10);
+            return Long.parseLong(TimeUtil.timeHavedDay(publishTime));
+        } else {
+            return -1;
+        }
+    }
+
+    /**
+     * Creates a new ViewHolder for a header.  This works the same way onCreateViewHolder in
+     * Recycler.Adapter, ViewHolders can be reused for different views.  This is usually a good place
+     * to inflate the layout for the header.
+     *
+     * @param parent
+     * @return
+     */
+    @Override
+    public RecyclerView.ViewHolder onCreateHeaderViewHolder(ViewGroup parent) {
+        View view = LayoutInflater.from(parent.getContext())
+                .inflate(R.layout.view_header, parent, false);
+        return new RecyclerView.ViewHolder(view) {
+        };
+    }
+
+    /**
+     * Binds an existing ViewHolder to the specified adapter position.
+     *
+     * @param holder
+     * @param position
+     */
+    @Override
+    public void onBindHeaderViewHolder(RecyclerView.ViewHolder holder, int position) {
+        if (position != getItemCount() - 1) {
+            TextView textView = (TextView) holder.itemView.findViewById(R.id.tv_header);
+            Record item = data.get(position);
+            String publishTime = item.PublishTime.substring(0, 10);
+
+            textView.setText(publishTime);
+        }
 
     }
 

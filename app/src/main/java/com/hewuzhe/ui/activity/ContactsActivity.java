@@ -201,6 +201,7 @@ public class ContactsActivity extends RecycleViewActivity<FriendsPresenter, Frie
             }
         });
 
+
         _EdtSearchContent.setOnEditorActionListener(new TextView.OnEditorActionListener() {
             @Override
             public boolean onEditorAction(TextView textView, int i, KeyEvent keyEvent) {
@@ -213,7 +214,7 @@ public class ContactsActivity extends RecycleViewActivity<FriendsPresenter, Frie
         });
 
 
-        findViewById(R.id.img_search).setOnClickListener(new View.OnClickListener() {
+        header.findViewById(R.id.img_search).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 String keyWord = _EdtSearchContent.getText().toString().trim();

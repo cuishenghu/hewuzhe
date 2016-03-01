@@ -188,6 +188,7 @@ public class StudyOnlineOneFragment extends BaseFragment<StudyOnlineFragPresente
         ImageView imageView = (ImageView) child.getChildAt(0);
         TextView textView = (TextView) child.getChildAt(1);
         textView.setText(item.Name);
+//        textView.setText(item.Name);
 
         Glide.with(getContext())
                 .load(C.BASE_URL + item.ImagePath)

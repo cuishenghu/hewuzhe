@@ -55,7 +55,7 @@ public class MemberBuyActivity extends ToolBarActivity<BuyPresenter> implements 
      * 支付方式
      */
     private String _payWay = C.CHANNEL_ALIPAY;
-    private int _anount = 100 * 10 * 10;
+    private int _anount = 0;
     private String _desc = "1";
     private int month = 12;
     private ArrayList<VipPrice> list = null;
@@ -85,11 +85,11 @@ public class MemberBuyActivity extends ToolBarActivity<BuyPresenter> implements 
     public void initListeners() {
 
         list = (ArrayList<VipPrice>) getIntent().getSerializableExtra("list");
-        _TvVipPrice1.setText(list.get(0).Price+"");
-        _TvVipPrice2.setText(list.get(1).Price+"");
-        _TvVipPrice3.setText(list.get(2).Price+"");
-        _TvVipPrice4.setText(list.get(3).Price+"");
-
+        _TvVipPrice1.setText(list.get(0).Price + "");
+        _TvVipPrice2.setText(list.get(1).Price + "");
+        _TvVipPrice3.setText(list.get(2).Price + "");
+        _TvVipPrice4.setText(list.get(3).Price + "");
+        _anount = list.get(3).Price;
 
         _ImgOne.setOnClickListener(new View.OnClickListener() {
             @Override

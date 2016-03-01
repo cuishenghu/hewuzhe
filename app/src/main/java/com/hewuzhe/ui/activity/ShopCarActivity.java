@@ -45,11 +45,11 @@ public class ShopCarActivity extends RecycleViewActivity<ShopCarPresenter, ShopC
     TextView tv_postage;
 
     public boolean isSelectAll;
-    public String idList="";
-    public String Postage="";
-    public String state="编辑";
+    public String idList = "";
+    public String Postage = "";
+    public String state = "编辑";
 
-    public ArrayList<ShopCar> data=new ArrayList<ShopCar>();
+    public ArrayList<ShopCar> data = new ArrayList<ShopCar>();
 
     @Override
     protected String provideTitle() {
@@ -58,40 +58,40 @@ public class ShopCarActivity extends RecycleViewActivity<ShopCarPresenter, ShopC
 
     @Override
     protected void action() {
-        if(tv_action.getText().equals("编辑")){
+        if (tv_action.getText().equals("编辑")) {
             tv_action.setText("完成");
-            state="完成";
-            for (int i=0;i<data.size();i++){
-                data.get(i).is_show=true;
+            state = "完成";
+            for (int i = 0; i < data.size(); i++) {
+                data.get(i).is_show = true;
             }
             adapter.notifyDataSetChanged();
 
-        }else{
+        } else {
             tv_action.setText("编辑");
-            state="编辑";
-            for (int i=0;i<data.size();i++){
-                data.get(i).is_show=false;
+            state = "编辑";
+            for (int i = 0; i < data.size(); i++) {
+                data.get(i).is_show = false;
             }
 
-            for (int i=0;i<data.size();i++){
-                presenter.updateProductNum(data.get(i).Id,data.get(i).Number);
+            for (int i = 0; i < data.size(); i++) {
+                presenter.updateProductNum(data.get(i).Id, data.get(i).Number);
             }
             adapter.notifyDataSetChanged();
         }
     }
 
     protected void actionCheck() {
-        if(tv_action.getText().equals("完成")){
-            state="完成";
-            for (int i=0;i<data.size();i++){
-                data.get(i).is_show=true;
+        if (tv_action.getText().equals("完成")) {
+            state = "完成";
+            for (int i = 0; i < data.size(); i++) {
+                data.get(i).is_show = true;
             }
             adapter.notifyDataSetChanged();
 
-        }else{
-            state="编辑";
-            for (int i=0;i<data.size();i++){
-                data.get(i).is_show=false;
+        } else {
+            state = "编辑";
+            for (int i = 0; i < data.size(); i++) {
+                data.get(i).is_show = false;
             }
 
             adapter.notifyDataSetChanged();
@@ -148,18 +148,18 @@ public class ShopCarActivity extends RecycleViewActivity<ShopCarPresenter, ShopC
         return new LinearLayoutManager(getContext());
     }
 
-    public String GetPost(){
-        idList="";
-        for (int i = 0;i<data.size();i++){
-            if(data.get(i).select_state)
-                idList+=data.get(i).Id+"&";
+    public String GetPost() {
+        idList = "";
+        for (int i = 0; i < data.size(); i++) {
+            if (data.get(i).select_state)
+                idList += data.get(i).Id + "&";
         }
         return idList;
     }
 
     @Override
     public void onItemClick(View view, int pos, ShopCar shopCar) {
-        if(state.equals("编辑")) {
+        if (state.equals("编辑")) {
             DecimalFormat df = new DecimalFormat("######0.00");
             if (shopCar.select_state) {
                 shopCar.select_state = false;
@@ -170,7 +170,7 @@ public class ShopCarActivity extends RecycleViewActivity<ShopCarPresenter, ShopC
                 }
                 isSelectAll = true;
 //            shopcar_select.setImageResource(R.mipmap.icon_select_click);
-                if(GetPost().equals(""))
+                if (GetPost().equals(""))
                     tv_postage.setText("邮费：（无）");
                 else
                     presenter.GetPostage(GetPost());
@@ -184,7 +184,7 @@ public class ShopCarActivity extends RecycleViewActivity<ShopCarPresenter, ShopC
                         price += data.get(i).AllPrice;
                 }
                 isSelectAll = true;
-                if(GetPost().equals(""))
+                if (GetPost().equals(""))
                     tv_postage.setText("邮费：(无)");
                 else
                     presenter.GetPostage(GetPost());
@@ -217,8 +217,8 @@ public class ShopCarActivity extends RecycleViewActivity<ShopCarPresenter, ShopC
 
 
     @OnClick(R.id.shopcar_select)
-    public void allSelect(){
-        if(state.equals("编辑")) {
+    public void allSelect() {
+        if (state.equals("编辑")) {
             DecimalFormat df = new DecimalFormat("########0.00");
             if (isSelectAll) {
                 for (int i = 0; i < data.size(); i++) {
@@ -247,26 +247,26 @@ public class ShopCarActivity extends RecycleViewActivity<ShopCarPresenter, ShopC
 
     @Override
     public void GetPostageState(double state) {
-        if(state==0)
-            Postage= "包邮";
-        else if(state==-1)
-            Postage= "货到付款";
+        if (state == 0)
+            Postage = "包邮";
+        else if (state == -1)
+            Postage = "货到付款";
         else {
             DecimalFormat df = new DecimalFormat("######0.00");
             Postage = df.format(state).toString();
         }
 
-        tv_postage.setText("邮费："+Postage);
+        tv_postage.setText("邮费：" + Postage);
 
     }
 
     @OnClick(R.id.tv_submit_btn)
-    public void submitBtn(){
+    public void submitBtn() {
 
         ArrayList<OrderContent> temp = new ArrayList<OrderContent>();
-        for(int i=0;i<data.size();i++){
-            if(data.get(i).select_state){
-                OrderContent sc=new OrderContent();
+        for (int i = 0; i < data.size(); i++) {
+            if (data.get(i).select_state) {
+                OrderContent sc = new OrderContent();
                 sc.setId(data.get(i).Id + "");
                 sc.setMiddleImagePath(data.get(i).MiddleImagePath);
                 sc.setNumber(data.get(i).Number + "");
@@ -284,10 +284,11 @@ public class ShopCarActivity extends RecycleViewActivity<ShopCarPresenter, ShopC
 //        if(idList.equals(""))
 //            return;
 //        presenter.GetPostage(idList);
-        if(this.Postage.equals(""))
+        if (this.Postage.equals(""))
             return;
 
         startActivity(new Intent(this, OrderConfirmFirstActivity.class).putExtra("state", "2").putExtra("list", temp).putExtra("LiveryPrice", Postage));
+        finish();
     }
 
 }

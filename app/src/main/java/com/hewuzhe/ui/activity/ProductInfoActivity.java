@@ -52,18 +52,30 @@ import butterknife.OnClick;
  */
 public class ProductInfoActivity extends ToolBarActivity<ProductInfoPresenter> implements ProductInfoView, OnItemClickListener {
 
-    @Bind(R.id.product_title)       TextView product_title;         //商品名称
-    @Bind(R.id.tv_count)       TextView tv_count;         //商品名称
-    @Bind(R.id.product_price)       TextView product_price;         //商品价格
-    @Bind(R.id.product_liveryPrice) TextView product_liveryPrice;   //商品运费
-    @Bind(R.id.product_visitNum)    TextView product_visitNum;      //浏览数
-    @Bind(R.id.product_saleNum)     TextView product_saleNum;       //销量
-    @Bind(R.id.product_content)     TextView product_content;       //商品介绍
-    @Bind(R.id.comment_num)         TextView comment_num;           //回复数量
-    @Bind(R.id.product_isfavorite_tit) TextView  product_isfavorite_tit;       //收藏标题
-    @Bind(R.id.product_isfavorite)     ImageView product_isfavorite;           //收藏图
-    @Bind(R.id.product_isfavorite_click) LinearLayout product_isfavorite_click;       //收藏click
-    @Bind(R.id.product_tel) LinearLayout product_tel;       //客服
+    @Bind(R.id.product_title)
+    TextView product_title;         //商品名称
+    @Bind(R.id.tv_count)
+    TextView tv_count;         //商品名称
+    @Bind(R.id.product_price)
+    TextView product_price;         //商品价格
+    @Bind(R.id.product_liveryPrice)
+    TextView product_liveryPrice;   //商品运费
+    @Bind(R.id.product_visitNum)
+    TextView product_visitNum;      //浏览数
+    @Bind(R.id.product_saleNum)
+    TextView product_saleNum;       //销量
+    @Bind(R.id.product_content)
+    TextView product_content;       //商品介绍
+    @Bind(R.id.comment_num)
+    TextView comment_num;           //回复数量
+    @Bind(R.id.product_isfavorite_tit)
+    TextView product_isfavorite_tit;       //收藏标题
+    @Bind(R.id.product_isfavorite)
+    ImageView product_isfavorite;           //收藏图
+    @Bind(R.id.product_isfavorite_click)
+    LinearLayout product_isfavorite_click;       //收藏click
+    @Bind(R.id.product_tel)
+    LinearLayout product_tel;       //客服
 
     //    @Bind(R.id.pro_num)
     TextView pro_num;
@@ -75,12 +87,12 @@ public class ProductInfoActivity extends ToolBarActivity<ProductInfoPresenter> i
     ImageView shopcar_sub;
 
     LinearLayout pro_isFavo_click;
-    ImageView    pro_isFavo_img;
-    TextView     pro_isFavo_tit;
+    ImageView pro_isFavo_img;
+    TextView pro_isFavo_tit;
     Product product;
 
-    public String idList="";
-    public String Postage="";
+    public String idList = "";
+    public String Postage = "";
 
     //弹窗
     PopupWindow pop;
@@ -91,13 +103,20 @@ public class ProductInfoActivity extends ToolBarActivity<ProductInfoPresenter> i
     boolean isOut, isIn;// 是否弹窗显示
     boolean isFavo; //是否收藏
 
-    @Bind(R.id.viewflow)            ViewFlow mViewFlow;
-    @Bind(R.id.viewflowindic)       CircleFlowIndicator mFlowIndicator;
-    @Bind(R.id.framelayout)         FrameLayout framelayout;
-    @Bind(R.id.show_guige)          RelativeLayout show_guige;		        //规格
-    @Bind(R.id.user_comment)        RelativeLayout user_comment;		    //用户评价
-    @Bind(R.id.pro_buy_now)         TextView pro_buy_now;			        //立即购买
-    @Bind(R.id.pro_add_shopcar)     TextView pro_add_shopcar;			    //加入购物车
+    @Bind(R.id.viewflow)
+    ViewFlow mViewFlow;
+    @Bind(R.id.viewflowindic)
+    CircleFlowIndicator mFlowIndicator;
+    @Bind(R.id.framelayout)
+    FrameLayout framelayout;
+    @Bind(R.id.show_guige)
+    RelativeLayout show_guige;                //规格
+    @Bind(R.id.user_comment)
+    RelativeLayout user_comment;            //用户评价
+    @Bind(R.id.pro_buy_now)
+    TextView pro_buy_now;                    //立即购买
+    @Bind(R.id.pro_add_shopcar)
+    TextView pro_add_shopcar;                //加入购物车
 
     TextView product_price_true;
 
@@ -124,20 +143,20 @@ public class ProductInfoActivity extends ToolBarActivity<ProductInfoPresenter> i
 
     //tag标签
     private TagGroup mDefaultTagGroup;
-    public List<String> array=new ArrayList<String>();
+    public List<String> array = new ArrayList<String>();
 
     //tag尺码
     private TagGroup mDefaultTagGroup_size;
-    public List<String> array_size=new ArrayList<String>();
+    public List<String> array_size = new ArrayList<String>();
 
-    public String tag_color="";
-    public String tag_size="";
+    public String tag_color = "";
+    public String tag_size = "";
     public int tag_color_num;
     public int tag_size_num;
-    public String picurl="";
+    public String picurl = "";
     public int price_num;
     public double price;
-    public int number=1;
+    public int number = 1;
 
     @Override
     protected String provideTitle() {
@@ -146,7 +165,7 @@ public class ProductInfoActivity extends ToolBarActivity<ProductInfoPresenter> i
 
     @Override
     protected void action() {
-        startActivity(new Intent(this,ShopCarActivity.class));
+        startActivity(new Intent(this, ShopCarActivity.class));
     }
 
     @Override
@@ -166,23 +185,21 @@ public class ProductInfoActivity extends ToolBarActivity<ProductInfoPresenter> i
         presenter.getData();
 
 
-
     }
 
 
-
     @OnClick(R.id.user_comment)
-    public void userComment(){
-        startActivity(new Intent(this,ProductCommentActivity.class).putExtra("productId",product.Id));
+    public void userComment() {
+        startActivity(new Intent(this, ProductCommentActivity.class).putExtra("productId", product.Id));
     }
 
     private TagGroup.OnTagClickListener mTagClickListener = new TagGroup.OnTagClickListener() {
         @Override
         public void onTagClick(String tag) {
 //            Toast.makeText(ProductInfoActivity.this, tag, Toast.LENGTH_SHORT).show();
-            tag_color=tag;
-            for(int i=0;i<product.ColorList.size();i++){
-                if(product.ColorList.get(i).Name.equals(tag_color)) {
+            tag_color = tag;
+            for (int i = 0; i < product.ColorList.size(); i++) {
+                if (product.ColorList.get(i).Name.equals(tag_color)) {
                     tag_color_num = product.ColorList.get(i).Id;
                     break;
                 }
@@ -192,16 +209,15 @@ public class ProductInfoActivity extends ToolBarActivity<ProductInfoPresenter> i
                 if (product.PriceList.get(i).ColorId == tag_color_num && product.PriceList.get(i).SizeId == tag_size_num) {
 //                    price_num = product.PriceList.get(i).Id;
                     product_price_true.setText("￥" + product.PriceList.get(i).Price);
-                    if(product.PriceList.get(i).ImagePath.trim().equals("")){
+                    if (product.PriceList.get(i).ImagePath.trim().equals("")) {
                         Glide.with(ProductInfoActivity.this)
                                 .load(C.BASE_URL + product.ImagePath)
                                 .centerCrop()
                                 .crossFade()
                                 .placeholder(R.mipmap.img_bg)
                                 .into(product_image);
-                        picurl=product.ImagePath;
-                    }
-                    else {
+                        picurl = product.ImagePath;
+                    } else {
                         Glide.with(ProductInfoActivity.this)
                                 .load(C.BASE_URL + product.PriceList.get(i).ImagePath)
                                 .centerCrop()
@@ -209,7 +225,7 @@ public class ProductInfoActivity extends ToolBarActivity<ProductInfoPresenter> i
                                 .placeholder(R.mipmap.img_bg)
                                 .into(product_image);
 //                    price = product.PriceList.get(i).Price;
-                        picurl=product.PriceList.get(i).ImagePath;
+                        picurl = product.PriceList.get(i).ImagePath;
                     }
                     break;
                 }
@@ -221,11 +237,11 @@ public class ProductInfoActivity extends ToolBarActivity<ProductInfoPresenter> i
         @Override
         public void onTagClick(String tag) {
 //            Toast.makeText(ProductInfoActivity.this, tag, Toast.LENGTH_SHORT).show();
-            tag_size=tag;
+            tag_size = tag;
 
 
-            for(int i=0;i<product.SizeList.size();i++){
-                if(product.SizeList.get(i).Name.equals(tag_size)) {
+            for (int i = 0; i < product.SizeList.size(); i++) {
+                if (product.SizeList.get(i).Name.equals(tag_size)) {
                     tag_size_num = product.SizeList.get(i).Id;
                     break;
                 }
@@ -234,17 +250,16 @@ public class ProductInfoActivity extends ToolBarActivity<ProductInfoPresenter> i
             for (int i = 0; i < product.PriceList.size(); i++) {
                 if (product.PriceList.get(i).ColorId == tag_color_num && product.PriceList.get(i).SizeId == tag_size_num) {
 //                    price_num = product.PriceList.get(i).Id;
-                        product_price_true.setText("￥" + product.PriceList.get(i).Price);
-                    if(product.PriceList.get(i).ImagePath.trim().equals("")){
-                    Glide.with(ProductInfoActivity.this)
-                            .load(C.BASE_URL + product.ImagePath)
-                            .centerCrop()
-                            .crossFade()
-                            .placeholder(R.mipmap.img_bg)
-                            .into(product_image);
-                        picurl=product.ImagePath;
-                    }
-                    else {
+                    product_price_true.setText("￥" + product.PriceList.get(i).Price);
+                    if (product.PriceList.get(i).ImagePath.trim().equals("")) {
+                        Glide.with(ProductInfoActivity.this)
+                                .load(C.BASE_URL + product.ImagePath)
+                                .centerCrop()
+                                .crossFade()
+                                .placeholder(R.mipmap.img_bg)
+                                .into(product_image);
+                        picurl = product.ImagePath;
+                    } else {
                         Glide.with(ProductInfoActivity.this)
                                 .load(C.BASE_URL + product.PriceList.get(i).ImagePath)
                                 .centerCrop()
@@ -252,12 +267,11 @@ public class ProductInfoActivity extends ToolBarActivity<ProductInfoPresenter> i
                                 .placeholder(R.mipmap.img_bg)
                                 .into(product_image);
 //                    price = product.PriceList.get(i).Price;
-                        picurl=product.PriceList.get(i).ImagePath;
+                        picurl = product.PriceList.get(i).ImagePath;
                     }
                     break;
                 }
             }
-
 
 
         }
@@ -277,27 +291,27 @@ public class ProductInfoActivity extends ToolBarActivity<ProductInfoPresenter> i
         product_title.setText(data.Name);
         product_content.setText(data.Content);
         GetPostageState(data.LiveryPrice);
-        product_liveryPrice.setText("邮费："+Postage);
+        product_liveryPrice.setText("邮费：" + Postage);
 //        product_liveryPrice.setText(data.LiveryPrice==0?"包邮":"邮费："+data.LiveryPrice);
 //        product_liveryPrice.setText("货到付款");
         DecimalFormat df = new DecimalFormat("######0.00");
-        product_price.setText("￥"+df.format(data.Price));
-        product_price_true.setText("￥"+df.format(data.Price));
-        product_saleNum.setText("销量："+data.SaleNum);
+        product_price.setText("￥" + df.format(data.Price));
+        product_price_true.setText("￥" + df.format(data.Price));
+        product_saleNum.setText("销量：" + data.SaleNum);
         product_visitNum.setText("浏览量：" + data.VisitNum);
         comment_num.setText("共" + data.CommentNum + "条");
-        if(!data.isFavorite){
+        if (!data.isFavorite) {
             product_isfavorite_tit.setTextColor(this.getResources().getColor(R.color.hwz_font_gray));
             pro_isFavo_tit.setTextColor(this.getResources().getColor(R.color.hwz_font_gray));
             product_isfavorite.setImageResource(R.mipmap.icon_shoucang_click);
             pro_isFavo_img.setImageResource(R.mipmap.icon_shoucang_click);
-            isFavo=false;
-        }else{
+            isFavo = false;
+        } else {
             product_isfavorite_tit.setTextColor(this.getResources().getColor(R.color.hwz_font_yellow));
             pro_isFavo_tit.setTextColor(this.getResources().getColor(R.color.hwz_font_yellow));
             product_isfavorite.setImageResource(R.mipmap.icon_shoucang_normal);
             pro_isFavo_img.setImageResource(R.mipmap.icon_shoucang_normal);
-            isFavo=true;
+            isFavo = true;
         }
 
 
@@ -306,12 +320,12 @@ public class ProductInfoActivity extends ToolBarActivity<ProductInfoPresenter> i
         recyclerView.setAdapter(adapter = new ProductInfoAdapter(getContext(), data.CommentList));
 
 
-        for (int i=0;i<data.ColorList.size();i++){
+        for (int i = 0; i < data.ColorList.size(); i++) {
             array.add(data.ColorList.get(i).Name);
         }
         mDefaultTagGroup.setTags(array.toArray(new String[]{}));
 
-        for (int i=0;i<data.SizeList.size();i++){
+        for (int i = 0; i < data.SizeList.size(); i++) {
             array_size.add(data.SizeList.get(i).Name);
         }
         mDefaultTagGroup_size.setTags(array_size.toArray(new String[]{}));
@@ -326,8 +340,8 @@ public class ProductInfoActivity extends ToolBarActivity<ProductInfoPresenter> i
                 .into(product_image);
 
         //banner轮播图
-        for (int i=0;i<product.PicList.size();i++){
-            imageUrlList.add(C.BASE_URL+product.PicList.get(i).Path);
+        for (int i = 0; i < product.PicList.size(); i++) {
+            imageUrlList.add(C.BASE_URL + product.PicList.get(i).Path);
             linkUrlArray.add("");
             titleList.add("商品图片");
 
@@ -335,7 +349,7 @@ public class ProductInfoActivity extends ToolBarActivity<ProductInfoPresenter> i
 
         ViewGroup.LayoutParams para;
         para = framelayout.getLayoutParams();
-        para.height= StringUtil.getScreenWidth(this)/2;
+        para.height = StringUtil.getScreenWidth(this) / 2;
         framelayout.setLayoutParams(para);
 
         initBanner(imageUrlList);
@@ -350,16 +364,16 @@ public class ProductInfoActivity extends ToolBarActivity<ProductInfoPresenter> i
         // 引入窗口配置文件 - 即弹窗的界面
         mview = inflater.inflate(R.layout.menu_view, null);
 
-        pro_buy_now_true = (TextView)mview.findViewById(R.id.pro_buy_now_true);
-        pro_add_shopcar_true =(TextView) mview.findViewById(R.id.pro_add_shopcar_true);
+        pro_buy_now_true = (TextView) mview.findViewById(R.id.pro_buy_now_true);
+        pro_add_shopcar_true = (TextView) mview.findViewById(R.id.pro_add_shopcar_true);
 
-        selectview =(View) mview.findViewById(R.id.menu_selectclose);
+        selectview = (View) mview.findViewById(R.id.menu_selectclose);
 
         product_price_true = (TextView) mview.findViewById(R.id.product_price_true);
-        product_image = (ImageView)mview.findViewById(R.id.product_image);
-        pro_isFavo_click =(LinearLayout) mview.findViewById(R.id.pro_isFavo_click);
+        product_image = (ImageView) mview.findViewById(R.id.product_image);
+        pro_isFavo_click = (LinearLayout) mview.findViewById(R.id.pro_isFavo_click);
         pro_isFavo_img = (ImageView) mview.findViewById(R.id.pro_isFavo_img);
-        pro_isFavo_tit =(TextView) mview.findViewById(R.id.pro_isFavo_tit);
+        pro_isFavo_tit = (TextView) mview.findViewById(R.id.pro_isFavo_tit);
         shopcar_add = (ImageView) mview.findViewById(R.id.shopcar_add);
         shopcar_sub = (ImageView) mview.findViewById(R.id.shopcar_sub);
         pro_num = (TextView) mview.findViewById(R.id.pro_num);
@@ -455,6 +469,7 @@ public class ProductInfoActivity extends ToolBarActivity<ProductInfoPresenter> i
 //                    if (Postage.equals(""))
 //                        return;
                     startActivity(new Intent(ProductInfoActivity.this, OrderConfirmFirstActivity.class).putExtra("state", "1").putExtra("list", temp).putExtra("LiveryPrice", Postage));
+                    finish();
                 } else
                     Toast.makeText(ProductInfoActivity.this, "请重新选择规格", Toast.LENGTH_SHORT).show();
             }
@@ -500,15 +515,16 @@ public class ProductInfoActivity extends ToolBarActivity<ProductInfoPresenter> i
         });
 
     }
+
     //图片合集
-    private void addImg(String src,int pos) {
+    private void addImg(String src, int pos) {
         ArrayList<Pic> newPics = new ArrayList<Pic>();
 
 
-            Pic pic = new Pic();
-            pic.PictureUrl = src;
-            pic.ImagePath = "";
-            newPics.add(pic);
+        Pic pic = new Pic();
+        pic.PictureUrl = src;
+        pic.ImagePath = "";
+        newPics.add(pic);
 
 
         Intent intent = new Intent(this, PicsActivity.class);
@@ -519,10 +535,10 @@ public class ProductInfoActivity extends ToolBarActivity<ProductInfoPresenter> i
 
     @Override
     public void GetPostageState(double state) {
-        if(state==0)
-            Postage= "包邮";
-        else if(state==-1)
-            Postage= "货到付款";
+        if (state == 0)
+            Postage = "包邮";
+        else if (state == -1)
+            Postage = "货到付款";
         else {
             DecimalFormat df = new DecimalFormat("######0.00");
             Postage = df.format(state).toString();
@@ -585,7 +601,7 @@ public class ProductInfoActivity extends ToolBarActivity<ProductInfoPresenter> i
 
     private void initBanner(ArrayList<String> imageUrlList) {
 
-        mViewFlow.setAdapter(new ImagePagerAdapter(this, imageUrlList, linkUrlArray, titleList,product.PicList,true).setInfiniteLoop(true));
+        mViewFlow.setAdapter(new ImagePagerAdapter(this, imageUrlList, linkUrlArray, titleList, product.PicList, true).setInfiniteLoop(true));
         mViewFlow.setmSideBuffer(imageUrlList.size()); // 实际图片张数，
         // 我的ImageAdapter实际图片张数为3
 
@@ -633,21 +649,21 @@ public class ProductInfoActivity extends ToolBarActivity<ProductInfoPresenter> i
         }
     }
 
-    @OnClick({R.id.pro_buy_now,R.id.pro_add_shopcar,R.id.show_guige})
-    public void showPopupWindow(){
+    @OnClick({R.id.pro_buy_now, R.id.pro_add_shopcar, R.id.show_guige})
+    public void showPopupWindow() {
         changePopupWindowState();
     }
 
 
     @Override
     public Product getData() {
-        Product product=new Product();
+        Product product = new Product();
         product.Id = getIntentData().getInt("proid");
         return product;
     }
 
     @OnClick(R.id.product_tel)
-    public void proTel(){
+    public void proTel() {
         changeTelPopupWindowState();
     }
 
@@ -691,25 +707,25 @@ public class ProductInfoActivity extends ToolBarActivity<ProductInfoPresenter> i
 
 
     @OnClick(R.id.product_isfavorite_click)
-    public void proIsFavoriteClick(){
+    public void proIsFavoriteClick() {
         presenter.setFavoState(isFavo);
-        if (isFavo){
+        if (isFavo) {
             product_isfavorite_tit.setTextColor(this.getResources().getColor(R.color.hwz_font_gray));
             pro_isFavo_tit.setTextColor(this.getResources().getColor(R.color.hwz_font_gray));
             product_isfavorite.setImageResource(R.mipmap.icon_shoucang_click);
             pro_isFavo_img.setImageResource(R.mipmap.icon_shoucang_click);
-            isFavo=false;
-        }else{
+            isFavo = false;
+        } else {
             product_isfavorite_tit.setTextColor(this.getResources().getColor(R.color.hwz_font_yellow));
             pro_isFavo_tit.setTextColor(this.getResources().getColor(R.color.hwz_font_yellow));
             product_isfavorite.setImageResource(R.mipmap.icon_shoucang_normal);
             pro_isFavo_img.setImageResource(R.mipmap.icon_shoucang_normal);
-            isFavo=true;
+            isFavo = true;
         }
     }
 
     //RecycleViewAdapter开始==================================================================================
-    public void doRecyleViewF(){
+    public void doRecyleViewF() {
 
     }
 

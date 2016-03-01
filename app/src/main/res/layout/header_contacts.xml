@@ -33,7 +33,7 @@
             android:layout_width="70px"
             android:layout_height="70px"
             android:layout_marginLeft="10px"
-            android:layout_marginRight="10px"
+            android:layout_marginRight="60px"
             android:padding="15px"
             android:src="@mipmap/icon_search" />
     </LinearLayout>

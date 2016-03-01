@@ -30,6 +30,7 @@
             android:textColorHint="@color/colorLine" />
 
         <ImageView
+            android:id="@+id/img_search"
             android:layout_width="70px"
             android:layout_height="70px"
             android:layout_marginLeft="10px"

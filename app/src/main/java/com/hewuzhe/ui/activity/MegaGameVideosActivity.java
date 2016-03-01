@@ -100,12 +100,27 @@ public class MegaGameVideosActivity extends SwipeRecycleViewActivity<MegaGameVid
             @Override
             public boolean onEditorAction(TextView textView, int i, KeyEvent keyEvent) {
                 if (i == EditorInfo.IME_ACTION_SEARCH) {
+                    hideSoftMethod(_EdtSearchContent);
                     refresh(true);
-                    getData();
+                    page = 1;
+                    presenter.getData(page, count);
                 }
                 return false;
             }
         });
+
+
+
+        findViewById(R.id.img_search).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                hideSoftMethod(_EdtSearchContent);
+                refresh(true);
+                page = 1;
+                presenter.getData(page, count);
+            }
+        });
+
 
     }
 

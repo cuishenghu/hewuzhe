@@ -212,6 +212,16 @@ public class ContactsActivity extends RecycleViewActivity<FriendsPresenter, Frie
             }
         });
 
+
+        findViewById(R.id.img_search).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String keyWord = _EdtSearchContent.getText().toString().trim();
+                search(keyWord);
+            }
+        });
+
+
         _EdtSearchContent.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {

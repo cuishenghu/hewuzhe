@@ -166,20 +166,16 @@ public class StudyOnlineOneFragment extends BaseFragment<StudyOnlineFragPresente
                 StudyOnlineCatItem item = data.get(i * 3);
                 setItemData(childOne, item);
 
-
                 ViewGroup childThree = (ViewGroup) childTwo.getChildAt(0);
                 ViewGroup childFour = (ViewGroup) childTwo.getChildAt(1);
 
+
                 StudyOnlineCatItem itemOne = data.get(i * 3 + 1);
                 StudyOnlineCatItem itemTwo = data.get(i * 3 + 2);
-
                 setItemData(childThree, itemOne);
                 setItemData(childFour, itemTwo);
             }
-
         }
-
-
     }
 
 

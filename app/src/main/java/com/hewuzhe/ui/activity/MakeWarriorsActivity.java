@@ -159,11 +159,25 @@ public class MakeWarriorsActivity extends RecycleViewActivity<MakeWarriorsPresen
             public boolean onEditorAction(TextView textView, int i, KeyEvent keyEvent) {
                 if (i == EditorInfo.IME_ACTION_SEARCH) {
                     showDialog();
+                    hideSoftMethod(_EdtSearchContent);
+                    page = 1;
                     presenter.getData(page, count);
                 }
                 return false;
             }
         });
+
+
+        findViewById(R.id.img_search).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                showDialog();
+                hideSoftMethod(_EdtSearchContent);
+                page = 1;
+                presenter.getData(page, count);
+            }
+        });
+
 
     }
 

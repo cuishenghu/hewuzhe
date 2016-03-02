@@ -47,6 +47,8 @@ public class JoinGroupActivity extends RecycleViewActivity<JoinPresenter, JoinGr
     private View header;
     private EditText _EdtSearchContent;
 
+    public static boolean isFirst = true;
+
     @Override
     protected int provideContentViewId() {
         return R.layout.activity_join_group;
@@ -129,8 +131,7 @@ public class JoinGroupActivity extends RecycleViewActivity<JoinPresenter, JoinGr
         super.initThings(savedInstanceState);
         initHeader();
         User user = new SessionUtil(getContext()).getUser();
-
-        presenter.getData(page, count);
+        presenter.getDatas();
     }
 
     private void initHeader() {
@@ -154,7 +155,6 @@ public class JoinGroupActivity extends RecycleViewActivity<JoinPresenter, JoinGr
     protected String provideTitle() {
         return "同城";
     }
-
 
     /**
      * 设置province
@@ -271,5 +271,10 @@ public class JoinGroupActivity extends RecycleViewActivity<JoinPresenter, JoinGr
 //      adapter.data.get(pos).isJoined = b;
         snb(b ? "加入成功" : "退出成功", _TvCity);
         adapter.notifyItemChanged(pos);
+    }
+
+    @Override
+    public void bdDatas(ArrayList<Group> data) {
+        adapter.addDatas(data);
     }
 }

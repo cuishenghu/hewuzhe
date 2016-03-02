@@ -5,6 +5,8 @@ import com.hewuzhe.view.base.GetView;
 import com.hewuzhe.view.base.ListView;
 import com.hewuzhe.view.common.AreaView;
 
+import java.util.ArrayList;
+
 /**
  * Created by xianguangjin on 15/12/31.
  */
@@ -16,4 +18,5 @@ public interface JoinGroupView extends GetView<Group>, AreaView,ListView<Group> 
      */
     void updateItem(boolean b, int pos);
 
+    void bdDatas(ArrayList<Group> data);
 }

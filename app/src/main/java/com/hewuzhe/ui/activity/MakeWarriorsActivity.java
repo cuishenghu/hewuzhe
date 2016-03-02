@@ -7,6 +7,7 @@ import android.view.KeyEvent;
 import android.view.View;
 import android.view.inputmethod.EditorInfo;
 import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.hewuzhe.R;
@@ -25,7 +26,9 @@ import materialdialogs.MaterialDialog;
 
 public class MakeWarriorsActivity extends RecycleViewActivity<MakeWarriorsPresenter, SearchWarriorsAdapter, Friend> implements MakeWarriorsView {
 
-
+    private LinearLayout lay_select_condition;
+    private LinearLayout lay_select_condition_content;
+    private int state;//0显示,1为隐藏
     private TextView _TvProvince;
     private TextView _TvCity;
     private TextView _TvDistrict;
@@ -59,6 +62,9 @@ public class MakeWarriorsActivity extends RecycleViewActivity<MakeWarriorsPresen
     }
 
     private void initHeader() {
+        lay_select_condition = (LinearLayout) header.findViewById(R.id.lay_select_condition);
+        lay_select_condition_content = (LinearLayout) header.findViewById(R.id.lay_select_condition_content);
+
         _TvProvince = (TextView) header.findViewById(R.id.tv_province);
         _TvCity = (TextView) header.findViewById(R.id.tv_city);
         _TvDistrict = (TextView) header.findViewById(R.id.tv_district);
@@ -167,7 +173,6 @@ public class MakeWarriorsActivity extends RecycleViewActivity<MakeWarriorsPresen
             }
         });
 
-
         header.findViewById(R.id.img_search).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -177,9 +182,32 @@ public class MakeWarriorsActivity extends RecycleViewActivity<MakeWarriorsPresen
                 presenter.getData(page, count);
             }
         });
-
-
+//        header.findViewById(R.id.lay_select_condition).setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                viewContentByState(state);
+//            }
+//        });
+        lay_select_condition.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                viewContentByState(state);
+            }
+        });
     }
+
+    public void viewContentByState(int state) {
+        if (state == 0) {
+            lay_select_condition_content.setVisibility(View.VISIBLE);
+            header.findViewById(R.id.img_right).setBackgroundResource(R.drawable.symbol_below);
+            this.state = 1;
+        } else {
+            lay_select_condition_content.setVisibility(View.GONE);
+            header.findViewById(R.id.img_right).setBackgroundResource(R.drawable.symbol_right);
+            this.state = 0;
+        }
+    }
+
 
     /**
      * 绑定Presenter

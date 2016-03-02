@@ -40,11 +40,11 @@
                 android:textColor="@android:color/white"
                 android:textSize="20sp"/>
         <RelativeLayout
-            android:layout_width="70dp"
+            android:layout_width="60dp"
             android:layout_height="48dp"
             android:layout_gravity="center_vertical|right"
             android:padding="8dp"
-            android:layout_marginRight="10px">
+            android:layout_marginRight="0px">
 
             <ImageView
                 android:id="@+id/img_action"

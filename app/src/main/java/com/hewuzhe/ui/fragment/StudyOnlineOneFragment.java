@@ -142,18 +142,17 @@ public class StudyOnlineOneFragment extends BaseFragment<StudyOnlineFragPresente
                 LinearLayout childOne = (LinearLayout) child.getChildAt(0);
                 FrameLayout childTwo = (FrameLayout) child.getChildAt(1);
 
-
                 ViewGroup childThree = (ViewGroup) childOne.getChildAt(0);
                 ViewGroup childFour = (ViewGroup) childOne.getChildAt(1);
 
-                StudyOnlineCatItem itemOne = data.get(i * 3);
-                StudyOnlineCatItem itemTwo = data.get(i * 3 + 1);
+                StudyOnlineCatItem itemOne = data.get(i * 3 + 1);
+                StudyOnlineCatItem itemTwo = data.get(i * 3 + 2);
 
                 setItemData(childThree, itemOne);
                 setItemData(childFour, itemTwo);
 
 
-                StudyOnlineCatItem item = data.get(i * 3 + 2);
+                StudyOnlineCatItem item = data.get(i * 3);
                 setItemData(childTwo, item);
 
 
@@ -162,13 +161,11 @@ public class StudyOnlineOneFragment extends BaseFragment<StudyOnlineFragPresente
                 FrameLayout childOne = (FrameLayout) child.getChildAt(0);
                 LinearLayout childTwo = (LinearLayout) child.getChildAt(1);
 
-
                 StudyOnlineCatItem item = data.get(i * 3);
                 setItemData(childOne, item);
 
                 ViewGroup childThree = (ViewGroup) childTwo.getChildAt(0);
                 ViewGroup childFour = (ViewGroup) childTwo.getChildAt(1);
-
 
                 StudyOnlineCatItem itemOne = data.get(i * 3 + 1);
                 StudyOnlineCatItem itemTwo = data.get(i * 3 + 2);

@@ -98,7 +98,13 @@ public class GroupConditionAdapter extends BaseAdapter<GroupConditionAdapter.VHo
 
         if (condition.IsLike) {
             holder._ImgPraise.setImageResource(R.mipmap.icon_praise_focus);
-            holder._ImgPraise.setOnClickListener(null);
+            holder._ImgPraise.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    _presenter.collectAndOtherCanl(condition.Id, ConditionPresenter.PRAISE, v, position);
+                }
+            });
+
         } else {
             holder._ImgPraise.setImageResource(R.mipmap.icon_praise);
             holder._ImgPraise.setOnClickListener(new View.OnClickListener() {

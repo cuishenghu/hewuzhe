@@ -45,4 +45,6 @@ public interface ConditionView extends LoadMoreView {
 
 
     void deleteConditionSuccess(int position);
+
+    void isWuYou(Boolean data, int userid);
 }

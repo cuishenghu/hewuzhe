@@ -158,9 +158,14 @@ public class MyConditionActivity extends SwipeRecycleViewActivity<MyConditionPre
     public void collectAndOther(boolean b, int flag, int position) {
         if (flag == ConditionPresenter.PRAISE) {
             if (b) {
+                toast("点赞成功");
                 adapter.data.get(position).LikeNum += 1;
                 adapter.data.get(position).IsLike = true;
-//              adapter.notifyItemChanged(position);
+                adapter.notifyDataSetChanged();
+            } else {
+                toast("取消点赞");
+                adapter.data.get(position).LikeNum -= 1;
+                adapter.data.get(position).IsLike = false;
                 adapter.notifyDataSetChanged();
             }
         }
@@ -297,6 +302,16 @@ public class MyConditionActivity extends SwipeRecycleViewActivity<MyConditionPre
 
     @Override
     public void updateFriendNoReadNum(int count, String data) {
+
+    }
+
+    @Override
+    public void isWuYou(Boolean data, int userid) {
+        if (data) {
+            startActivity(FriendProfileActivity.class, new Bun().putInt("id", userid).ok());
+        } else {
+            startActivity(StrangerProfileSettingsActivity.class, new Bun().putInt("id", userid).ok());
+        }
 
     }
 }

@@ -28,6 +28,10 @@ public class SearchVideosPresenter extends RefreshAndLoadMorePresenter<SearchVid
     @Override
     public void getData(final int page, final int count) {
         String keyword = view.getData();
+        if (android.text.TextUtils.isEmpty(keyword)) {
+            view.toast("请输入搜索内容");
+            return;
+        }
         Subscription subscription = NetEngine.getService()
                 .getVideos("NewVideo", (page - 1) * count, count, keyword)
                 .subscribeOn(Schedulers.io())

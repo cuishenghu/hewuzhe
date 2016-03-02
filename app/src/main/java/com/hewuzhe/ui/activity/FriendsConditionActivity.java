@@ -243,8 +243,14 @@ public class FriendsConditionActivity extends SwipeRecycleViewActivity<FriendCon
     public void collectAndOther(boolean b, int flag, int position) {
         if (flag == ConditionPresenter.PRAISE) {
             if (b) {
+                toast("点赞成功");
                 adapter.data.get(position).LikeNum += 1;
                 adapter.data.get(position).IsLike = true;
+                adapter.notifyDataSetChanged();
+            } else {
+                toast("取消点赞");
+                adapter.data.get(position).LikeNum -= 1;
+                adapter.data.get(position).IsLike = false;
                 adapter.notifyDataSetChanged();
             }
         }
@@ -482,4 +488,16 @@ public class FriendsConditionActivity extends SwipeRecycleViewActivity<FriendCon
             presenter.getData(page, count);
         }
     }
+
+
+    @Override
+    public void isWuYou(Boolean data, int userid) {
+        if (data) {
+            startActivity(FriendProfileActivity.class, new Bun().putInt("id", userid).ok());
+        } else {
+            startActivity(StrangerProfileSettingsActivity.class, new Bun().putInt("id", userid).ok());
+        }
+    }
+
+
 }

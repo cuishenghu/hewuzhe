@@ -29,6 +29,10 @@ public class SearchOnlineVideosPresenter extends RefreshAndLoadMorePresenter<Sea
     @Override
     public void getData(final int page, final int count) {
         String keyword = view.getData();
+        if (android.text.TextUtils.isEmpty(keyword)) {
+            view.toast("请输入搜索内容");
+            return;
+        }
         Subscription subscription = NetEngine.getService()
                 .GetOnlineStudyList((page - 1) * count, count, SearchOnlineVideosActivity.CAT_ID, keyword)
                 .subscribeOn(Schedulers.io())

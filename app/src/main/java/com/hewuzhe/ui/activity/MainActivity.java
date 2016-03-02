@@ -17,7 +17,6 @@ import com.hewuzhe.R;
 import com.hewuzhe.presenter.base.BasePresenterImp;
 import com.hewuzhe.ui.base.BaseActivity;
 import com.hewuzhe.ui.cons.C;
-import com.hewuzhe.ui.fragment.EquipmentFragment;
 import com.hewuzhe.ui.fragment.EquipmentFragment2;
 import com.hewuzhe.ui.fragment.FederalFragment;
 import com.hewuzhe.ui.fragment.MoreFragment;
@@ -67,7 +66,7 @@ public class MainActivity extends BaseActivity {
 
     /**
      * @param savedInstanceState 缓存数据
-     *                           <p/>
+     *                           <p>
      *                           初始化一些事情
      */
     @Override
@@ -239,9 +238,7 @@ public class MainActivity extends BaseActivity {
             QupaiDraftManager draftManager = new QupaiDraftManager();
             draftManager.deleteDraft(data);
 
-
             KLog.d(path);
-
             Intent intent = new Intent(this, PublishVideoActivity.class);
             intent.putExtra("data", new Bun().putString("file_name", path).putInt("uploadType", C.UPLOAD_TYPE_RECORD).ok());
             startActivity(intent);

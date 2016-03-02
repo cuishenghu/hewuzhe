@@ -1,5 +1,6 @@
 package com.hewuzhe.ui.activity;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -15,6 +16,7 @@ import com.hewuzhe.model.StudyOnlineCatItem;
 import com.hewuzhe.presenter.StudyOnlineFragPresenter;
 import com.hewuzhe.ui.base.ToolBarActivity;
 import com.hewuzhe.ui.cons.C;
+import com.hewuzhe.utils.Bun;
 import com.hewuzhe.view.StudyOnlineFragView;
 
 import java.util.ArrayList;
@@ -161,13 +163,12 @@ public class CateSelectActivity extends ToolBarActivity<StudyOnlineFragPresenter
         }
     }
 
-
     private void setItemData(ViewGroup child, final StudyOnlineCatItem item) {
 
         ImageView imageView = (ImageView) child.getChildAt(0);
         TextView textView = (TextView) child.getChildAt(1);
         textView.setText(item.Name);
-//        textView.setText(item.Name);
+//      textView.setText(item.Name);
 
         Glide.with(getContext())
                 .load(C.BASE_URL + item.ImagePath)
@@ -178,12 +179,10 @@ public class CateSelectActivity extends ToolBarActivity<StudyOnlineFragPresenter
         child.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(getContext(), Videos_2Activity.class);
-                intent.putExtra("title", item.Name);
-                intent.putExtra("id", item.Id);
-                getContext().startActivity(intent);
+                Intent intent = new Intent();
+                intent.putExtra("data", new Bun().putInt("id", item.Id).putString("title", item.Name).ok());
+                setResult(Activity.RESULT_OK);
             }
         });
-
     }
 }

@@ -254,7 +254,7 @@ public class OrderGroupAdapter2 extends BaseAdapter {
             builder.setPositiveButton("确定", new DialogInterface.OnClickListener() {
                 @Override
                 public void onClick(DialogInterface dialog, int which) {
-                    cancleOrder(position);
+                    cancleOrder(position, mType);
                 }
             }).setNegativeButton("取消", new DialogInterface.OnClickListener() {
                 @Override
@@ -275,7 +275,7 @@ public class OrderGroupAdapter2 extends BaseAdapter {
                     dialog.dismiss();
                 }
             });
-        }else if (mType == 4) {
+        } else if (mType == 4) {
             builder.setMessage("您确定要删除该订单吗？");
             builder.setPositiveButton("确定", new DialogInterface.OnClickListener() {
                 @Override
@@ -303,8 +303,12 @@ public class OrderGroupAdapter2 extends BaseAdapter {
             @Override
             public void onRecevieSuccess(JSONObject json) {
                 orderNumbers.remove(position);
-                OrderGroupAdapter2.this.notifyDataSetChanged();
+//                OrderGroupAdapter2.this.notifyDataSetChanged();
                 Tools.toast(context, "订单删除成功！");
+                context.startActivity(new Intent(context, OrderCenterActivity2.class));
+                ((OrderCenterActivity2) context).finish();
+
+
             }
         }, params);
     }
@@ -340,7 +344,7 @@ public class OrderGroupAdapter2 extends BaseAdapter {
     /**
      * 取消订单
      */
-    private void cancleOrder(final int position) {
+    private void cancleOrder(final int position, final int mType) {
         RequestParams params = new RequestParams();
         params.put("billId", orderNumbers.get(position).getId());
         params.put("userId", new SessionUtil(context).getUserId()); //由于自己ID没有订单,现在传2,此ID为李发起的ID.待修改成自己的ID==============================================================================
@@ -348,8 +352,9 @@ public class OrderGroupAdapter2 extends BaseAdapter {
             @Override
             public void onRecevieSuccess(JSONObject json) {
                 Tools.toast(context, "订单" + orderNumbers.get(position).getBillNo() + "取消成功！");
-                OrderGroupAdapter2.this.notifyDataSetChanged();
-
+//                OrderGroupAdapter2.this.notifyDataSetChanged();
+                context.startActivity(new Intent(context, OrderCenterActivity2.class).putExtra("mType", mType));
+                ((OrderCenterActivity2) context).finish();
             }
 
             @Override

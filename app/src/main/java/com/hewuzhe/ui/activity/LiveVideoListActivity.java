@@ -8,7 +8,7 @@ import android.view.View;
 import com.hewuzhe.R;
 import com.hewuzhe.model.LiveVideo;
 import com.hewuzhe.presenter.LiveVideoPresenter;
-import com.hewuzhe.ui.adapter.LiveVideoAdapter;
+import com.hewuzhe.ui.adapter.LiveContentAdapter;
 import com.hewuzhe.ui.base.SwipeRecycleViewActivity;
 import com.hewuzhe.utils.Bun;
 import com.hewuzhe.view.LiveVideoView;
@@ -19,7 +19,7 @@ import java.util.ArrayList;
  * 视频直播列表
  * Created by csh on 2016/2/20.
  */
-public class LiveVideoListActivity extends SwipeRecycleViewActivity<LiveVideoPresenter, LiveVideoAdapter, LiveVideo> implements LiveVideoView {
+public class LiveVideoListActivity extends SwipeRecycleViewActivity<LiveVideoPresenter, LiveContentAdapter, LiveVideo> implements LiveVideoView {
 
     @Override
     protected void initThings(Bundle savedInstanceState) {
@@ -29,8 +29,8 @@ public class LiveVideoListActivity extends SwipeRecycleViewActivity<LiveVideoPre
     }
 
     @Override
-    protected LiveVideoAdapter provideAdapter() {
-        return new LiveVideoAdapter(getContext());
+    protected LiveContentAdapter provideAdapter() {
+        return new LiveContentAdapter(getContext());
     }
 
     @Override

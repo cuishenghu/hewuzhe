@@ -396,7 +396,7 @@ public class OrderDetailsActivity extends BaseActivity2 {
             builder.setPositiveButton("确定", new DialogInterface.OnClickListener() {
                 @Override
                 public void onClick(DialogInterface dialog, int which) {
-                    confirmReceived(billId,mType);
+                    confirmReceived(billId, mType);
                 }
             }).setNegativeButton("取消", new DialogInterface.OnClickListener() {
                 @Override
@@ -404,8 +404,7 @@ public class OrderDetailsActivity extends BaseActivity2 {
                     dialog.dismiss();
                 }
             });
-        }
-        else if (mType == 4) {
+        } else if (mType == 4) {
             builder.setMessage("您确定要删除该订单吗？");
             builder.setPositiveButton("确定", new DialogInterface.OnClickListener() {
                 @Override
@@ -442,7 +441,7 @@ public class OrderDetailsActivity extends BaseActivity2 {
     /**
      * 确认收货
      */
-    private void confirmReceived(final String billId,final int mType) {
+    private void confirmReceived(final String billId, final int mType) {
         RequestParams params = new RequestParams();
         params.put("billId", billId);//订单ID
         params.put("userId", new SessionUtil(OrderDetailsActivity.this).getUserId()); //由于自己ID没有订单,现在传2,此ID为李发起的ID.待修改成自己的ID==========
@@ -451,7 +450,7 @@ public class OrderDetailsActivity extends BaseActivity2 {
             public void onRecevieSuccess(JSONObject json) {
                 Tools.toast(OrderDetailsActivity.this, "订单" + orders.getId() + "收货成功！");
 //                setResult(99, new Intent().putExtra("mType", mType + 1));
-                startActivity(new Intent(OrderDetailsActivity.this, OrderCenterActivity2.class).putExtra("mType", 4));
+                startActivity(new Intent(OrderDetailsActivity.this, OrderCenterActivity2.class).putExtra("mType", mType + 1));
                 OrderCenterActivity2.OrderCenterActivity2.finish();
                 finish();
 //                reflush();
@@ -476,7 +475,7 @@ public class OrderDetailsActivity extends BaseActivity2 {
             @Override
             public void onRecevieSuccess(JSONObject json) {
                 Tools.toast(OrderDetailsActivity.this, "订单" + orders.getBillNo() + "取消成功！等待审核");
-                setResult(99, new Intent().putExtra("mType", mType + ""));
+                setResult(99, new Intent().putExtra("mType", mType));
 //                startActivity(new Intent(OrderDetailsActivity.this, OrderCenterActivity.class).putExtra("mType", mType+""));
                 finish();
 //                reflush();

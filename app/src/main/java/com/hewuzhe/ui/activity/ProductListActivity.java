@@ -7,6 +7,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 
 import com.hewuzhe.R;
@@ -48,6 +49,8 @@ public class ProductListActivity extends RecycleViewActivity<ProductListPresente
 
 
     @Bind(R.id.product_list_search) ImageView product_list_search;
+    @Bind(R.id.title_daohang) LinearLayout title_daohang;
+    @Bind(R.id.ll_sousuo) LinearLayout ll_sousuo;
     @Bind(R.id.edt_search_content) EditText edt_search_content;   //搜索框
 
     int id_o=0;
@@ -55,6 +58,7 @@ public class ProductListActivity extends RecycleViewActivity<ProductListPresente
     int id_s=0;
     int id_f=0;
     int classifi= 0;
+    int recommend=0;
 
     String searchText="";
 
@@ -75,8 +79,12 @@ public class ProductListActivity extends RecycleViewActivity<ProductListPresente
     protected void initThings(Bundle savedInstanceState) {
         super.initThings(savedInstanceState);
         Intent intent =getIntent();
-        if(intent.getStringExtra("recommend")!=null&&intent.getStringExtra("recommend").equals("1"))
-            presenter.getData(page, count,"",0,0,0,0,0,0,1);
+        if(intent.getStringExtra("recommend")!=null&&intent.getStringExtra("recommend").equals("1")){
+            recommend = Integer.parseInt(intent.getStringExtra("recommend"));
+            presenter.getData(page, count,"",0,0,2,0,0,0,1);
+            title_daohang.setVisibility(View.GONE);
+            ll_sousuo.setVisibility(View.GONE);
+        }
         else if(intent.getIntExtra("classId",0)!=0){
             classifi = intent.getIntExtra("classId",0);
             presenter.getData(page, count,"",intent.getIntExtra("classId",0),0,0,0,0,0,0);}
@@ -124,6 +132,7 @@ public class ProductListActivity extends RecycleViewActivity<ProductListPresente
 
     @OnClick({R.id.salenum_title,R.id.price_title,R.id.comment_title,R.id.new_title})
     public void onSearchMethod(View v){
+        init();
         switch (v.getId()){
             case R.id.salenum_title:
                 if(this.id_o==1) {
@@ -140,9 +149,11 @@ public class ProductListActivity extends RecycleViewActivity<ProductListPresente
                     id_o=2;
                 }
                 if(classifi!=0)
-                    presenter.getData(page, count,searchText,classifi,id_t,id_o,id_s,id_f,0,0);
+                    presenter.getData(page, count,searchText,classifi,0,id_o,0,0,0,recommend);
+//                    presenter.getData(page, count,searchText,classifi,id_t,id_o,id_s,id_f,0,recommend);
                 else
-                    presenter.getData(page, count,searchText,0,id_t,id_o,id_s,id_f,0,0);
+                    presenter.getData(page, count,searchText,0,0,id_o,0,0,0,recommend);
+//                    presenter.getData(page, count,searchText,0,id_t,id_o,id_s,id_f,0,recommend);
                 break;
             case R.id.price_title:
                 if(this.id_t==1) {
@@ -159,9 +170,11 @@ public class ProductListActivity extends RecycleViewActivity<ProductListPresente
                     id_t=2;
                 }
                 if(classifi!=0)
-                    presenter.getData(page, count,searchText,classifi,id_t,id_o,id_s,id_f,0,0);
+                    presenter.getData(page, count,searchText,classifi,id_t,0,0,0,0,recommend);
+//                    presenter.getData(page, count,searchText,classifi,id_t,id_o,id_s,id_f,0,recommend);
                 else
-                    presenter.getData(page, count,searchText,0,id_t,id_o,id_s,id_f,0,0);
+                    presenter.getData(page, count,searchText,0,id_t,0,0,0,0,recommend);
+//                    presenter.getData(page, count,searchText,0,id_t,id_o,id_s,id_f,0,recommend);
                 break;
             case R.id.comment_title:
                 if(this.id_s==1) {
@@ -178,9 +191,11 @@ public class ProductListActivity extends RecycleViewActivity<ProductListPresente
                     id_s=2;
                 }
                 if(classifi!=0)
-                    presenter.getData(page, count,searchText,classifi,id_t,id_o,id_s,id_f,0,0);
+                    presenter.getData(page, count,searchText,classifi,0,0,id_s,0,0,recommend);
+//                    presenter.getData(page, count,searchText,classifi,id_t,id_o,id_s,id_f,0,recommend);
                 else
-                    presenter.getData(page, count,searchText,0,id_t,id_o,id_s,id_f,0,0);
+                    presenter.getData(page, count,searchText,0,0,0,id_s,0,0,recommend);
+//                    presenter.getData(page, count,searchText,0,id_t,id_o,id_s,id_f,0,recommend);
                 break;
             case R.id.new_title:
                 if(this.id_f==1) {
@@ -197,9 +212,11 @@ public class ProductListActivity extends RecycleViewActivity<ProductListPresente
                     id_f=2;
                 }
                 if(classifi!=0)
-                    presenter.getData(page, count,searchText,classifi,id_t,id_o,id_s,id_f,0,0);
+                    presenter.getData(page, count,searchText,classifi,0,0,0,id_f,0,recommend);
+//                    presenter.getData(page, count,searchText,classifi,id_t,id_o,id_s,id_f,0,recommend);
                 else
-                    presenter.getData(page, count,searchText,0,id_t,id_o,id_s,id_f,0,0);
+                    presenter.getData(page, count,searchText,0,0,0,0,id_f,0,recommend);
+//                    presenter.getData(page, count,searchText,0,id_t,id_o,id_s,id_f,0,recommend);
                 break;
         }
     }
@@ -208,9 +225,22 @@ public class ProductListActivity extends RecycleViewActivity<ProductListPresente
     public void proSearch(){
         searchText = edt_search_content.getText().toString();
         if(classifi!=0)
-            presenter.getData(page, count,searchText,classifi,id_t,id_o,id_s,id_f,0,0);
+            presenter.getData(page, count,searchText,classifi,0,0,0,0,0,recommend);
+//            presenter.getData(page, count,searchText,classifi,id_t,id_o,id_s,id_f,0,recommend);
         else
-            presenter.getData(page, count,searchText,0,id_t,id_o,id_s,id_f,0,0);
+            presenter.getData(page, count,searchText,0,0,0,0,0,0,recommend);
+//            presenter.getData(page, count,searchText,0,id_t,id_o,id_s,id_f,0,recommend);
+    }
+
+    public void init(){
+        salenum_bottom.setImageResource(R.mipmap.prolistbottom);
+        salenum_top.setImageResource(R.mipmap.prolisttop);
+        price_bottom.setImageResource(R.mipmap.prolistbottom);
+        price_top.setImageResource(R.mipmap.prolisttop);
+        comment_bottom.setImageResource(R.mipmap.prolistbottom);
+        comment_top.setImageResource(R.mipmap.prolisttop);
+        new_bottom.setImageResource(R.mipmap.prolistbottom);
+        new_top.setImageResource(R.mipmap.prolisttop);
     }
 
 }

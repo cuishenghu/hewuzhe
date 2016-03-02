@@ -20,22 +20,38 @@ public class OrderContent implements Serializable{
     private String ProductPriceId;//商品价格ID
     private String  ProductId;//商品ID
     private String AssessType;
+    private String LiveryName;//快递公司名称
+    private String LiveryNo;//快递编号
+    private String LiveryType;//快递公司编号
+    private String OperateTime;//订单生成时间
+    private String AreaId;//收货地址ID
+    private String BuildTime;//创建订单时间
+    private String PayTime;//付款时间
+    private String SendTime;//发货时间
+
 
     public OrderContent() {
     }
 
-    public OrderContent(String  productId,String assessType,String productPriceId, String productName, String id, String middleImagePath, String number, String productPriceTotalPrice, String productSizeName, String productColorName,String LiveryPrice) {
-        ProductPriceId = productPriceId;
-        ProductName = productName;
+    public OrderContent(String id, String middleImagePath, String number, String productPriceTotalPrice, String productSizeName, String productColorName, String productName, String productPriceId, String productId, String assessType, String liveryName, String liveryNo, String liveryType, String operateTime, String areaId, String buildTime, String payTime, String sendTime) {
         Id = id;
         MiddleImagePath = middleImagePath;
         Number = number;
         ProductPriceTotalPrice = productPriceTotalPrice;
         ProductSizeName = productSizeName;
         ProductColorName = productColorName;
-        AssessType=assessType;
-        ProductId=productId;
-
+        ProductName = productName;
+        ProductPriceId = productPriceId;
+        ProductId = productId;
+        AssessType = assessType;
+        LiveryName = liveryName;
+        LiveryNo = liveryNo;
+        LiveryType = liveryType;
+        OperateTime = operateTime;
+        AreaId = areaId;
+        BuildTime = buildTime;
+        PayTime = payTime;
+        SendTime = sendTime;
     }
 
     public String getId() {
@@ -116,5 +132,69 @@ public class OrderContent implements Serializable{
 
     public void setAssessType(String assessType) {
         AssessType = assessType;
+    }
+
+    public String getLiveryName() {
+        return LiveryName;
+    }
+
+    public void setLiveryName(String liveryName) {
+        LiveryName = liveryName;
+    }
+
+    public String getLiveryNo() {
+        return LiveryNo;
+    }
+
+    public void setLiveryNo(String liveryNo) {
+        LiveryNo = liveryNo;
+    }
+
+    public String getLiveryType() {
+        return LiveryType;
+    }
+
+    public void setLiveryType(String liveryType) {
+        LiveryType = liveryType;
+    }
+
+    public String getOperateTime() {
+        return OperateTime;
+    }
+
+    public void setOperateTime(String operateTime) {
+        OperateTime = operateTime;
+    }
+
+    public String getAreaId() {
+        return AreaId;
+    }
+
+    public void setAreaId(String areaId) {
+        AreaId = areaId;
+    }
+
+    public String getBuildTime() {
+        return BuildTime;
+    }
+
+    public void setBuildTime(String buildTime) {
+        BuildTime = buildTime;
+    }
+
+    public String getPayTime() {
+        return PayTime;
+    }
+
+    public void setPayTime(String payTime) {
+        PayTime = payTime;
+    }
+
+    public String getSendTime() {
+        return SendTime;
+    }
+
+    public void setSendTime(String sendTime) {
+        SendTime = sendTime;
     }
 }

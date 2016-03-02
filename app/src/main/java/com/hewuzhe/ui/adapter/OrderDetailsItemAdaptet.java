@@ -65,7 +65,7 @@ public class OrderDetailsItemAdaptet extends BaseAdapter {
         }
         OrderContent order = orders.get(position);
         ImageLoader.getInstance().displayImage(
-                StringUtil.toString(UrlContants.IMAGE_URL+order.getMiddleImagePath(), "http://"),
+                StringUtil.toString(UrlContants.IMAGE_URL + order.getMiddleImagePath(), "http://"),
                 holder.img_equipment_pic);
         holder.tv_equipment_name.setText(order.getProductName());
         holder.tv_equipment_special.setText(order.getProductSizeName() + "/" + order.getProductColorName());

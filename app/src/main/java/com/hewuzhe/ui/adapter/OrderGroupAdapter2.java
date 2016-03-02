@@ -145,6 +145,7 @@ public class OrderGroupAdapter2 extends BaseAdapter {
                 intent.putExtra("mType", mType);
                 intent.putExtra("state", orderNumber.getState());
                 intent.putExtra("areaId", orderNumber.getAreaId());
+                intent.putExtra("order", orderNumber);
                 ((OrderCenterActivity2) context).startActivityForResult((intent), 11);
 
             }
@@ -190,7 +191,9 @@ public class OrderGroupAdapter2 extends BaseAdapter {
             holder.tv_left_btn.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    context.startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("http://m.kuaidi100.com/index_all.html?type=" + orderNumber.getLiveryName() + "&postid=" + orderNumber.getLiveryNo())));
+                    String name= orderNumber.getLiveryType();
+                    String id= orderNumber.getLiveryNo();
+                    context.startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("http://m.kuaidi100.com/index_all.html?type="+orderNumber.getLiveryType()+"&postid="+orderNumber.getLiveryNo())));
                 }
             });
             holder.tv_right_btn.setText("确认收货");

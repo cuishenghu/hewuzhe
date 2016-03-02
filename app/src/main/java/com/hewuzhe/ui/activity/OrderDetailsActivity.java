@@ -38,8 +38,9 @@ import java.util.List;
 public class OrderDetailsActivity extends BaseActivity2 {
 
     private MyCommonTitle myCommonTitle;
-    private LinearLayout ll_no_address, ll_address, ll_pay_time, ll_send_time,ll_liveryNo;
+    private LinearLayout ll_no_address, ll_address, ll_pay_time, ll_send_time, ll_liveryNo;
     private TextView tv_username;
+    private TextView tv_liveryNo;
     private TextView tv_mobile;
     private TextView tv_address;
     private TextView tv_order_time;//付款时间,发货时间,收货时间
@@ -78,7 +79,7 @@ public class OrderDetailsActivity extends BaseActivity2 {
         areaId = (String) getIntent().getSerializableExtra("areaId");
         billId = getIntent().getStringExtra("billId");
         mType = getIntent().getIntExtra("mType", 0);
-//        orders = (OrderNumber) getIntent().getSerializableExtra("order");
+        orders = (OrderNumber) getIntent().getSerializableExtra("order");
 //        total_number = Integer.parseInt((String) getIntent().getSerializableExtra("number"));
 //        total_price = Double.parseDouble((String) getIntent().getSerializableExtra("price"));
         state = (String) getIntent().getStringExtra("state");
@@ -113,14 +114,14 @@ public class OrderDetailsActivity extends BaseActivity2 {
         tv_order_no = (TextView) findViewById(R.id.tv_order_no);//订单编号
         tv_pay_time = (TextView) findViewById(R.id.tv_pay_time);//付款时间
         tv_create_order_time = (TextView) findViewById(R.id.tv_create_order_time);//订单创建时间
-        tv_dispatch_date = (TextView) findViewById(R.id.tv_dispatch_date);//发货时间
+//        tv_dispatch_date = (TextView) findViewById(R.id.tv_dispatch_date);//发货时间
         tv_left_btn = (TextView) findViewById(R.id.tv_left_btn);//左边按钮
         tv_right_btn = (TextView) findViewById(R.id.tv_right_btn);//右边按钮
 
         tv_order_time = (TextView) findViewById(R.id.tv_order_time);////付款时间,发货时间,收货时间
         ll_pay_time = (LinearLayout) findViewById(R.id.ll_pay_time);//付款时间
         ll_liveryNo = (LinearLayout) findViewById(R.id.ll_liveryNo);//物流单号
-
+        tv_liveryNo = (TextView) findViewById(R.id.tv_liveryNo);//物流单号
 
 
         order_list = (ListView) findViewById(R.id.list_order_details);
@@ -229,10 +230,13 @@ public class OrderDetailsActivity extends BaseActivity2 {
         HttpUtils.getProductByOrderNo(new HttpErrorHandler() {
             @Override
             public void onRecevieSuccess(JSONObject json) {
-//                "Id":481,   "MiddleImagePath":"UpLoad/Product/1b727b58-1570-4094-b377-79e724ae5621.jpg",    "ImagePath":"UpLoad/Product/1b727b58-1570-4094-b377-79e724ae5621.jpg",
-//                        "Number":1    "DetailTotalPrice":0.01,   "DetailPrice":0.01,     "ProductSizeName":"每平方米",     "ProductColorName":"海蓝色",    "ProductName":"空翻气垫",
-//                        "BillNo":"S2016022000000074",   "BillPrice":0.01,     "BuildTime":"2016-02-20 16:58:22",    "PayTime":"1900-01-01 00:00:00",   "SendTime":"1900-01-01 00:00:00",
-//                        "ReceiveTime":"1900-01-01 00:00:00",   "AreaId":2,   "AreaName":"/北京市/北京市",   "Address":"朗瑞大厦",   "Phone":"15363222221",   "ReceiverName":"路人甲"
+//
+//          "MiddleImagePath": "UpLoad/Product/1092ec21-6016-4a90-9fb6-fdedadec3dd3.jpg",   "ImagePath": "UpLoad/Product/1092ec21-6016-4a90-9fb6-fdedadec3dd3.jpg",
+//          "Number": 1,     "DetailTotalPrice": 0.01,     "DetailPrice": 0.01,     "ProductSizeName": "43",    "ProductColorName": "白色",
+//          "ProductPriceId": 1626,    "ProductName": "测试规格图及购买流程",    "ProductId": 110,   "BillNo": "B2016030200000023",     "BillPrice": 0.01,
+//          "BuildTime": "2016-03-02 11:08:59",     "PayTime": "2016-03-02 11:09:06",    "SendTime": "2016-03-02 14:52:46",    "ReceiveTime": "1900-01-01 00:00:00",
+//          "IsCancle": 3,    "LiveryName": "安捷快递",   "LiveryNo": "999999999999",     "KuaidiType": "anjie",      "State": 3,    "AreaId": 31,
+//          "AreaName": "北京市/宣武区/大栅栏街道",    "Address": "也我摸",     "Phone": "15265104981",     "ReceiverName": "楊玉龙",     "Postage": -1
                 JSONArray jsonArray = json.getJSONArray(UrlContants.jsonData);
                 JSONObject jsonObject;
                 DecimalFormat df = new DecimalFormat("#####0.00");
@@ -247,6 +251,8 @@ public class OrderDetailsActivity extends BaseActivity2 {
                     orderContent.setProductPriceTotalPrice(jsonObject.getString("DetailPrice"));
                     orderContent.setNumber(jsonArray.getJSONObject(i).getString("Number"));
                     orderContent.setMiddleImagePath(jsonObject.getString("MiddleImagePath"));
+                    orderContent.setLiveryNo(jsonObject.getString("LiveryNo"));
+                    orderContent.setLiveryName(jsonObject.getString("LiveryName"));
                     orderContents.add(orderContent);
                     IsCancle = Integer.parseInt(jsonObject.getString("IsCancle"));
                     tv_total_price.setText("合计：¥" + jsonObject.getString("BillPrice"));//订单价格
@@ -256,6 +262,8 @@ public class OrderDetailsActivity extends BaseActivity2 {
                     if (mType == 2) {
                         tv_pay_time.setText(jsonObject.getString("PayTime"));//付款时间
                     } else if (mType == 3) {
+                        ll_liveryNo.setVisibility(View.VISIBLE);
+                        tv_liveryNo.setText(jsonObject.getString("LiveryNo"));
                         tv_pay_time.setText(jsonObject.getString("SendTime"));//发货时间
                     } else if (mType == 4) {
                         tv_pay_time.setText(jsonObject.getString("ReceiveTime"));//收货时间
@@ -322,7 +330,9 @@ public class OrderDetailsActivity extends BaseActivity2 {
             tv_left_btn.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("http://m.kuaidi100.com/index_all.html?type=" + orders.getLiveryName() + "&postid=" + orders.getLiveryNo())));
+                   String name= orders.getLiveryType();
+                    String id= orders.getLiveryNo();
+                    startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("http://m.kuaidi100.com/index_all.html?type="+orders.getLiveryType()+"&postid="+orders.getLiveryNo())));
                 }
             });
             tv_right_btn.setVisibility(View.VISIBLE);

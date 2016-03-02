@@ -30,7 +30,7 @@
               android:visibility="gone"/>
 
     <TextView android:id="@+id/tv_conent"
-              style="@style/text_25_white"
+              style="@style/text_27_white"
               android:layout_width="wrap_content"
               android:layout_height="wrap_content"
               android:layout_marginLeft="8px"

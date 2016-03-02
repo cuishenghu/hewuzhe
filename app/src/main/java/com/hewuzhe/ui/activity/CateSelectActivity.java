@@ -131,14 +131,14 @@ public class CateSelectActivity extends ToolBarActivity<StudyOnlineFragPresenter
                 ViewGroup childThree = (ViewGroup) childOne.getChildAt(0);
                 ViewGroup childFour = (ViewGroup) childOne.getChildAt(1);
 
-                StudyOnlineCatItem itemOne = data.get(i * 3);
-                StudyOnlineCatItem itemTwo = data.get(i * 3 + 1);
+                StudyOnlineCatItem itemOne = data.get(i * 3 + 1);
+                StudyOnlineCatItem itemTwo = data.get(i * 3 + 2);
 
                 setItemData(childThree, itemOne);
                 setItemData(childFour, itemTwo);
 
 
-                StudyOnlineCatItem item = data.get(i * 3 + 2);
+                StudyOnlineCatItem item = data.get(i * 3);
                 setItemData(childTwo, item);
 
 
@@ -181,7 +181,7 @@ public class CateSelectActivity extends ToolBarActivity<StudyOnlineFragPresenter
             public void onClick(View v) {
                 Intent intent = new Intent();
                 intent.putExtra("data", new Bun().putInt("id", item.Id).putString("title", item.Name).ok());
-                setResult(Activity.RESULT_OK,intent);
+                setResult(Activity.RESULT_OK, intent);
             }
         });
     }

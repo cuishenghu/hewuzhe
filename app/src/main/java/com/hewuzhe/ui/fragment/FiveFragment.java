@@ -142,14 +142,14 @@ public class FiveFragment extends BaseFragment<StudyOnlineFragPresenter> impleme
                 ViewGroup childThree = (ViewGroup) childOne.getChildAt(0);
                 ViewGroup childFour = (ViewGroup) childOne.getChildAt(1);
 
-                StudyOnlineCatItem itemOne = data.get(i * 3);
-                StudyOnlineCatItem itemTwo = data.get(i * 3 + 1);
+                StudyOnlineCatItem itemOne = data.get(i * 3 + 1);
+                StudyOnlineCatItem itemTwo = data.get(i * 3 + 2);
 
                 setItemData(childThree, itemOne);
                 setItemData(childFour, itemTwo);
 
 
-                StudyOnlineCatItem item = data.get(i * 3 + 2);
+                StudyOnlineCatItem item = data.get(i * 3);
                 setItemData(childTwo, item);
 
 

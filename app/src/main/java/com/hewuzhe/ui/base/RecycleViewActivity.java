@@ -47,7 +47,6 @@ public abstract class RecycleViewActivity<P extends RefreshAndLoadMorePresenter,
                 @Override
                 public void onScrollStateChanged(RecyclerView recyclerView, int newState) {
                     super.onScrollStateChanged(recyclerView, newState);
-
                 }
 
                 @Override
@@ -104,7 +103,6 @@ public abstract class RecycleViewActivity<P extends RefreshAndLoadMorePresenter,
         } else {
             adapter.addMore(data);
         }
-
     }
 
 
@@ -115,7 +113,6 @@ public abstract class RecycleViewActivity<P extends RefreshAndLoadMorePresenter,
             presenter.getData(page, count);
             adapter.loading();
         }
-
     }
 
     @Override

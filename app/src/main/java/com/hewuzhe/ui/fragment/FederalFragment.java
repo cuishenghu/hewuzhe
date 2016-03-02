@@ -125,7 +125,6 @@ public class FederalFragment extends BaseFragment<FederalPresenter> implements F
                 } else {
                     startActivity(GroupConditionActivity.class, new Bun().putInt("teamid", new SessionUtil(getContext()).getUser().TeamId).ok());
                 }
-
             }
         });
         /**
@@ -143,7 +142,8 @@ public class FederalFragment extends BaseFragment<FederalPresenter> implements F
         layMakeWarriors.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                getActivity().startActivity(new Intent(getActivity(), MakeWarriorsActivity.class));
+//                getActivity().startActivity(new Intent(getActivity(), MakeWarriorsActivity.class));
+                startActivity(MakeWarriorsActivity.class);
             }
         });
         /**
@@ -152,7 +152,8 @@ public class FederalFragment extends BaseFragment<FederalPresenter> implements F
         layJoinGroup.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                getActivity().startActivity(new Intent(getActivity(), JoinGroupActivity.class));
+//                getActivity().startActivity(new Intent(getActivity(), JoinGroupActivity.class));
+                startActivity(JoinGroupActivity.class);
             }
         });
         /**

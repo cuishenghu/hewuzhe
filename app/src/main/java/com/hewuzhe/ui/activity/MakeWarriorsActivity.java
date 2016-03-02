@@ -58,6 +58,7 @@ public class MakeWarriorsActivity extends RecycleViewActivity<MakeWarriorsPresen
     protected void initThings(Bundle savedInstanceState) {
         super.initThings(savedInstanceState);
         initHeader();
+        JoinGroupActivity.isFirst = false;
         presenter.getData(page, count);
     }
 
@@ -88,7 +89,6 @@ public class MakeWarriorsActivity extends RecycleViewActivity<MakeWarriorsPresen
 
             }
         });
-
 
         _TvProvince.setOnClickListener(new View.OnClickListener() {
             @Override

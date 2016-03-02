@@ -93,11 +93,25 @@ public class FriendConditionAdapter extends BaseAdapter<FriendConditionAdapter.V
                 .transform(new GlideCircleTransform(context))
                 .into(holder._Img);
 
+        holder._Img.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                _presenter.isWuyou(condition.getUserId());
+            }
+        });
+
         if (condition.IsLike) {
             holder._ImgPraise.setImageResource(R.mipmap.icon_praise_focus);
-            holder._ImgPraise.setOnClickListener(null);
+            holder._ImgPraise.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    _presenter.collectAndOtherCanl(condition.Id, ConditionPresenter.PRAISE, v, position);
+                }
+            });
+
         } else {
             holder._ImgPraise.setImageResource(R.mipmap.icon_praise);
+
             holder._ImgPraise.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
@@ -156,7 +170,6 @@ public class FriendConditionAdapter extends BaseAdapter<FriendConditionAdapter.V
                         context.startActivity(intent);
                     }
                 });
-
             }
         }
 

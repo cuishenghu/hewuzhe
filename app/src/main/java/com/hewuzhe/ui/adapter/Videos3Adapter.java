@@ -114,6 +114,7 @@ public class Videos3Adapter extends BaseAdapter<Videos3Adapter.ViewHolder, Video
             holder.imgCollect.setImageResource(R.mipmap.icon_collect);
         }
         holder.imgRepeat.setVisibility(View.GONE);
+        holder.tvRepeatCount.setVisibility(View.GONE);
 
 //        if (video.IsRepeat) {
 //            holder.imgRepeat.setImageResource(R.mipmap.icon_share);

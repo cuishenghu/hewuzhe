@@ -109,7 +109,6 @@
                   android:layout_height="wrap_content"
                   android:layout_weight="1"/>
 
-
         <ImageView android:id="@+id/img_repeat"
                    android:layout_width="30px"
                    android:layout_height="30px"

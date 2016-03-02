@@ -151,7 +151,8 @@
                     android:id="@+id/comment_top"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:src="@mipmap/prolisttop" />
+                    android:src="@mipmap/prolisttop"
+                    android:visibility="invisible"/>
 
                 <ImageView
                     android:id="@+id/comment_bottom"
@@ -190,7 +191,8 @@
                     android:id="@+id/new_top"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:src="@mipmap/prolisttop" />
+                    android:src="@mipmap/prolisttop"
+                    android:visibility="invisible"/>
 
                 <ImageView
                     android:id="@+id/new_bottom"

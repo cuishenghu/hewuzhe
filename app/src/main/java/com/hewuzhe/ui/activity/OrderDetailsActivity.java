@@ -38,7 +38,7 @@ import java.util.List;
 public class OrderDetailsActivity extends BaseActivity2 {
 
     private MyCommonTitle myCommonTitle;
-    private LinearLayout ll_no_address, ll_address, ll_pay_time, ll_send_time;
+    private LinearLayout ll_no_address, ll_address, ll_pay_time, ll_send_time,ll_liveryNo;
     private TextView tv_username;
     private TextView tv_mobile;
     private TextView tv_address;
@@ -119,6 +119,8 @@ public class OrderDetailsActivity extends BaseActivity2 {
 
         tv_order_time = (TextView) findViewById(R.id.tv_order_time);////付款时间,发货时间,收货时间
         ll_pay_time = (LinearLayout) findViewById(R.id.ll_pay_time);//付款时间
+        ll_liveryNo = (LinearLayout) findViewById(R.id.ll_liveryNo);//物流单号
+
 
 
         order_list = (ListView) findViewById(R.id.list_order_details);

@@ -181,7 +181,7 @@ public class CateSelectActivity extends ToolBarActivity<StudyOnlineFragPresenter
             public void onClick(View v) {
                 Intent intent = new Intent();
                 intent.putExtra("data", new Bun().putInt("id", item.Id).putString("title", item.Name).ok());
-                setResult(Activity.RESULT_OK);
+                setResult(Activity.RESULT_OK, intent);
             }
         });
     }

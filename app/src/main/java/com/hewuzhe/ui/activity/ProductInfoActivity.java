@@ -207,7 +207,7 @@ public class ProductInfoActivity extends ToolBarActivity<ProductInfoPresenter> i
             }
 
             for (int i = 0; i < product.PriceList.size(); i++) {
-                if (product.PriceList.get(i).ColorId == tag_color_num && product.PriceList.get(i).SizeId == tag_size_num) {
+                if (product.PriceList.get(i).ColorId == tag_color_num) {
 //                    price_num = product.PriceList.get(i).Id;
                     product_price_true.setText("￥" + product.PriceList.get(i).Price);
                     if (product.PriceList.get(i).ImagePath.trim().equals("")) {

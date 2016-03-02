@@ -302,6 +302,7 @@
                         android:textSize="18sp" />
                 </LinearLayout>
                 <LinearLayout
+                    android:id="@+id/ll_liveryNo"
                     android:visibility="gone"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -317,7 +318,7 @@
                         android:textSize="18sp" />
 
                     <TextView
-                        android:id="@+id/tv_dispatch_date"
+                        android:id="@+id/tv_liveryNo"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:text="2015-12-13 08:08:20"

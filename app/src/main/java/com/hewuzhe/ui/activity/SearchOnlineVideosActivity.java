@@ -16,6 +16,7 @@ import com.hewuzhe.presenter.SearchOnlineVideosPresenter;
 import com.hewuzhe.ui.adapter.GridItemDecoration;
 import com.hewuzhe.ui.adapter.Videos2Adapter;
 import com.hewuzhe.ui.base.SwipeRecycleViewActivity;
+import com.hewuzhe.utils.Bun;
 import com.hewuzhe.view.SearchVideosView;
 
 import java.util.ArrayList;
@@ -137,8 +138,7 @@ public class SearchOnlineVideosActivity extends SwipeRecycleViewActivity<SearchO
      */
     @Override
     public void onItemClick(View view, int pos, Video item) {
-        if (item.UserId != 0) {
-        }
+        startActivity(VideoDetail2Activity.class, new Bun().putInt("Id", item.Id).ok());
     }
 
     @Override

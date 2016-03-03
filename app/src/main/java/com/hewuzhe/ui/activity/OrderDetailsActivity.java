@@ -3,10 +3,12 @@ package com.hewuzhe.ui.activity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.graphics.Paint;
 import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemClickListener;
+
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -21,21 +23,20 @@ import com.hewuzhe.ui.base.BaseActivity2;
 import com.hewuzhe.ui.http.HttpErrorHandler;
 import com.hewuzhe.ui.http.HttpUtils;
 import com.hewuzhe.ui.http.UrlContants;
+import com.hewuzhe.utils.Bun;
 import com.hewuzhe.utils.SessionUtil;
 import com.hewuzhe.utils.StringUtil;
 import com.hewuzhe.utils.Tools;
 import com.hewuzhe.view.MyCommonTitle;
 import com.loopj.android.http.RequestParams;
-import com.nostra13.universalimageloader.core.ImageLoader;
 
 import java.text.DecimalFormat;
 import java.util.ArrayList;
-import java.util.List;
 
 /**
  * Created by Administrator on 2016/1/25 0025.
  */
-public class OrderDetailsActivity extends BaseActivity2 {
+public class OrderDetailsActivity extends BaseActivity2 implements OnItemClickListener {
 
     private MyCommonTitle myCommonTitle;
     private LinearLayout ll_no_address, ll_address, ll_pay_time, ll_send_time, ll_liveryNo;
@@ -125,7 +126,7 @@ public class OrderDetailsActivity extends BaseActivity2 {
 
 
         order_list = (ListView) findViewById(R.id.list_order_details);
-
+        order_list.setOnItemClickListener(this);
 //        getOrderDetailsByBillId();
         getOrderDetailsByBillId();
         orderDetailsItemAdaptet = new OrderDetailsItemAdaptet(OrderDetailsActivity.this, orderContents);
@@ -330,9 +331,9 @@ public class OrderDetailsActivity extends BaseActivity2 {
             tv_left_btn.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                   String name= orders.getLiveryType();
-                    String id= orders.getLiveryNo();
-                    startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("http://m.kuaidi100.com/index_all.html?type="+orders.getLiveryType()+"&postid="+orders.getLiveryNo())));
+                    String name = orders.getLiveryType();
+                    String id = orders.getLiveryNo();
+                    startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("http://m.kuaidi100.com/index_all.html?type=" + orders.getLiveryType() + "&postid=" + orders.getLiveryNo())));
                 }
             });
             tv_right_btn.setVisibility(View.VISIBLE);
@@ -511,5 +512,12 @@ public class OrderDetailsActivity extends BaseActivity2 {
             }
         });
         builder.create().show();
+    }
+
+    @Override
+    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+        String iid = orderContents.get(position).getProductId();
+
+        startActivity(new Intent(OrderDetailsActivity.this, ProductInfoActivity.class).putExtra("data", new Bun().putInt("proid", Integer.parseInt(orderContents.get(position).getProductId())).ok()));
     }
 }

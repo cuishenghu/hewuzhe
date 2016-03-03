@@ -13,6 +13,7 @@
     <android.support.v4.widget.NestedScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:layout_weight="1"
         app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
         <FrameLayout
@@ -296,25 +297,6 @@
 
                 </LinearLayout>
 
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="200px"
-                    android:gravity="center_vertical"
-                    android:orientation="horizontal">
-
-                    <Button
-                        android:id="@+id/btn"
-                        style="@style/text_35_white"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginLeft="20px"
-                        android:layout_marginRight="20px"
-                        android:layout_weight="1"
-                        android:background="@drawable/select_yellow"
-                        android:text="" />
-
-
-                </LinearLayout>
             </LinearLayout>
 
             <ImageView
@@ -349,10 +331,19 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="200px"
+        android:layout_height="100px"
         android:layout_gravity="bottom"
+
         android:background="@color/colorBg">
 
+        <Button
+            android:id="@+id/btn"
+            style="@style/text_35_white"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="20px"
+            android:layout_marginRight="20px"
+            android:background="@drawable/select_yellow"
+            android:text="" />
     </LinearLayout>
-
 </LinearLayout>

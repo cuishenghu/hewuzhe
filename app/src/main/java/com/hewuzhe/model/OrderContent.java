@@ -9,7 +9,7 @@ import java.util.List;
  * Created by Administrator on 2016/1/29 0029.
  */
 
-public class OrderContent implements Serializable{
+public class OrderContent implements Serializable {
     private String Id;//订单明细ID
     private String MiddleImagePath;//商品图片
     private String Number;//购买个数
@@ -18,7 +18,7 @@ public class OrderContent implements Serializable{
     private String ProductColorName;//商品颜色
     private String ProductName;//商品名称
     private String ProductPriceId;//商品价格ID
-    private String  ProductId;//商品ID
+    private String ProductId;//商品ID
     private String AssessType;
     private String LiveryName;//快递公司名称
     private String LiveryNo;//快递编号

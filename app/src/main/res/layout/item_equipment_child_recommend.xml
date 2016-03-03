@@ -2,12 +2,12 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/colorBg"
     android:orientation="vertical">
     <View
         android:layout_width="match_parent"
-        android:layout_height="1dp"
-        android:layout_marginLeft="30dp"
-        android:background="@color/colorBg" />
+        android:layout_height="2dp"
+        android:layout_marginLeft="15dp" />
         <LinearLayout
             android:id="@+id/ll_item_equip"
             android:layout_width="match_parent"
@@ -15,7 +15,7 @@
             android:orientation="horizontal"
             android:paddingTop="5dp"
             android:paddingBottom="5dp"
-            android:background="@color/colorPrimary">
+            android:background="@color/colorListBg">
 
             <ImageView
                 android:id="@+id/img_equip_pic"

@@ -12,7 +12,7 @@
 
 
     <com.hewuzhe.view.XListView
-        android:background="@color/colorPrimary"
+        android:background="@color/colorListBg"
         android:id="@+id/list_duihuan_jilu"
         android:layout_width="match_parent"
         android:layout_height="match_parent"

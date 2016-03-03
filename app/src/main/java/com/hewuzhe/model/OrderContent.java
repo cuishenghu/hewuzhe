@@ -28,12 +28,13 @@ public class OrderContent implements Serializable {
     private String BuildTime;//创建订单时间
     private String PayTime;//付款时间
     private String SendTime;//发货时间
+    private String ReceiveTime;//收貨時間
 
 
     public OrderContent() {
     }
 
-    public OrderContent(String id, String middleImagePath, String number, String productPriceTotalPrice, String productSizeName, String productColorName, String productName, String productPriceId, String productId, String assessType, String liveryName, String liveryNo, String liveryType, String operateTime, String areaId, String buildTime, String payTime, String sendTime) {
+    public OrderContent( String receiveTime,String id, String middleImagePath, String number, String productPriceTotalPrice, String productSizeName, String productColorName, String productName, String productPriceId, String productId, String assessType, String liveryName, String liveryNo, String liveryType, String operateTime, String areaId, String buildTime, String payTime, String sendTime) {
         Id = id;
         MiddleImagePath = middleImagePath;
         Number = number;
@@ -52,6 +53,7 @@ public class OrderContent implements Serializable {
         BuildTime = buildTime;
         PayTime = payTime;
         SendTime = sendTime;
+        ReceiveTime=receiveTime;
     }
 
     public String getId() {
@@ -196,5 +198,13 @@ public class OrderContent implements Serializable {
 
     public void setSendTime(String sendTime) {
         SendTime = sendTime;
+    }
+
+    public String getReceiveTime() {
+        return ReceiveTime;
+    }
+
+    public void setReceiveTime(String receiveTime) {
+        ReceiveTime = receiveTime;
     }
 }

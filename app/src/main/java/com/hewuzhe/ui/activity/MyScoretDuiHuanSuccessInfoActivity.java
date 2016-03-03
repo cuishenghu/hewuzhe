@@ -102,7 +102,7 @@ public class MyScoretDuiHuanSuccessInfoActivity extends BaseActivity2 {
         super.onClick(view);
         switch (view.getId()) {
             case R.id.pro_buy_now:
-                startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("http://m.kuaidi100.com/index_all.html?type="+product.getLiveryName()+"&postid="+product.getLiveryNo())));
+                startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("http://m.kuaidi100.com/index_all.html?type="+product.getLiveryType()+"&postid="+product.getLiveryNo())));
                 break;
         }
     }

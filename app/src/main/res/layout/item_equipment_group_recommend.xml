@@ -8,7 +8,7 @@
         android:id="@+id/ll_item_sort"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@color/colorPrimary"
+        android:background="@color/colorListBg"
         android:orientation="vertical">
         <View
             android:layout_width="match_parent"

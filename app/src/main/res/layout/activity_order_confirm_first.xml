@@ -2,7 +2,6 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/colorBg"
     android:orientation="vertical">
 
     <com.hewuzhe.view.MyCommonTitle
@@ -14,6 +13,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_below="@id/aci_mytitle"
+        android:background="@color/colorBg"
         android:layout_marginBottom="65dp">
 
         <LinearLayout
@@ -26,7 +26,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="80dp"
                 android:layout_marginTop="5dp"
-                android:background="@color/colorPrimary"
+                android:background="@color/colorListBg"
                 android:gravity="center"
                 android:orientation="vertical"
                 android:visibility="gone">
@@ -45,7 +45,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="5dp"
-                android:background="@color/colorPrimary"
+                android:background="@color/colorListBg"
                 android:orientation="vertical"
                 android:paddingBottom="10dp"
                 android:paddingTop="10dp">
@@ -117,7 +117,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="5dp"
-                android:background="@color/colorPrimary"
+                android:background="@color/colorListBg"
                 android:orientation="vertical"
                 android:paddingBottom="10dp"
                 android:paddingTop="10dp">
@@ -131,7 +131,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="15dp"
-                        android:text="功夫库"
+                        android:text="核武者自营店"
                         android:textColor="@color/white"
                         android:textSize="16sp" />
 
@@ -145,11 +145,10 @@
                         android:textColor="@color/white"
                         android:visibility="gone" />
                 </LinearLayout>
-
                 <View
                     android:layout_width="match_parent"
-                    android:layout_height="1dp"
-                    android:layout_marginLeft="30dp"
+                    android:layout_height="2dp"
+                    android:layout_marginLeft="15dp"
                     android:layout_marginTop="10dp"
                     android:background="@color/colorBg" />
 
@@ -164,7 +163,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="35dp"
                 android:layout_marginTop="5dp"
-                android:background="@color/colorPrimary"
+                android:background="@color/colorListBg"
                 android:gravity="center_vertical"
                 android:orientation="horizontal">
 
@@ -192,7 +191,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="5dp"
-                android:background="@color/colorPrimary"
+                android:background="@color/colorListBg"
                 android:orientation="vertical"
                 android:visibility="visible">
 
@@ -215,7 +214,7 @@
 
                 <View
                     android:layout_width="match_parent"
-                    android:layout_height="1dp"
+                    android:layout_height="2dp"
                     android:layout_marginLeft="15dp"
                     android:background="@color/colorBg" />
 
@@ -255,8 +254,8 @@
 
                 <View
                     android:layout_width="match_parent"
-                    android:layout_height="1dp"
-                    android:layout_marginLeft="15dp"
+                    android:layout_height="2dp"
+                    android:layout_marginLeft="65dp"
                     android:background="@color/colorBg" />
 
                 <LinearLayout
@@ -300,7 +299,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="5dp"
-                android:background="@color/colorPrimary"
+                android:background="@color/colorListBg"
                 android:orientation="vertical"
                 android:visibility="gone">
 
@@ -337,7 +336,7 @@
 
                 <View
                     android:layout_width="match_parent"
-                    android:layout_height="1dp"
+                    android:layout_height="2dp"
                     android:layout_marginLeft="15dp"
                     android:background="@color/colorBg" />
 
@@ -379,7 +378,7 @@
                 android:layout_marginTop="5dp"
                 android:paddingBottom="8dp"
                 android:paddingTop="8dp"
-                android:background="@color/colorPrimary"
+                android:background="@color/colorListBg"
                 android:orientation="vertical">
                 <TextView
                     android:layout_width="wrap_content"
@@ -413,7 +412,7 @@
         android:layout_height="65dp"
         android:layout_alignParentBottom="true"
         android:layout_marginTop="8dp"
-        android:background="@color/colorPrimary"
+        android:background="@color/colorListBg"
         android:gravity="center_vertical"
         android:orientation="horizontal"
         android:paddingBottom="8dp"

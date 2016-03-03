@@ -39,7 +39,7 @@ import java.util.ArrayList;
 public class OrderDetailsActivity extends BaseActivity2 implements OnItemClickListener {
 
     private MyCommonTitle myCommonTitle;
-    private LinearLayout ll_no_address, ll_address, ll_pay_time, ll_send_time, ll_liveryNo;
+    private LinearLayout ll_no_address, ll_address, ll_pay_time, ll_send_time, ll_receive_time, ll_liveryNo;
     private TextView tv_username;
     private TextView tv_liveryNo;
     private TextView tv_mobile;
@@ -51,8 +51,9 @@ public class OrderDetailsActivity extends BaseActivity2 implements OnItemClickLi
     private TextView tv_total_price;
     private TextView tv_order_no;
     private TextView tv_pay_time;
+    private TextView tv_send_time;
+    private TextView tv_receive_time;
     private TextView tv_create_order_time;
-    private TextView tv_dispatch_date;
     private TextView tv_left_btn;
     private TextView tv_right_btn;
     private ListView order_list;
@@ -112,15 +113,21 @@ public class OrderDetailsActivity extends BaseActivity2 implements OnItemClickLi
         tv_postage_price = (TextView) findViewById(R.id.tv_postage_price);//上部邮费
         tv_order_sum = (TextView) findViewById(R.id.tv_order_sum);//订单数量
         tv_total_price = (TextView) findViewById(R.id.tv_total_price);//订单总价
-        tv_order_no = (TextView) findViewById(R.id.tv_order_no);//订单编号
-        tv_pay_time = (TextView) findViewById(R.id.tv_pay_time);//付款时间
-        tv_create_order_time = (TextView) findViewById(R.id.tv_create_order_time);//订单创建时间
+
+
+
 //        tv_dispatch_date = (TextView) findViewById(R.id.tv_dispatch_date);//发货时间
         tv_left_btn = (TextView) findViewById(R.id.tv_left_btn);//左边按钮
         tv_right_btn = (TextView) findViewById(R.id.tv_right_btn);//右边按钮
 
-        tv_order_time = (TextView) findViewById(R.id.tv_order_time);////付款时间,发货时间,收货时间
+        tv_create_order_time = (TextView) findViewById(R.id.tv_create_order_time);//订单创建时间
+        tv_order_no = (TextView) findViewById(R.id.tv_order_no);//订单编号
         ll_pay_time = (LinearLayout) findViewById(R.id.ll_pay_time);//付款时间
+        tv_pay_time = (TextView) findViewById(R.id.tv_pay_time);//付款时间
+        ll_send_time = (LinearLayout) findViewById(R.id.ll_send_time);//发货时间
+        tv_send_time = (TextView) findViewById(R.id.tv_send_time);//发货时间
+        ll_receive_time = (LinearLayout) findViewById(R.id.ll_receive_time);//收货时间
+        tv_receive_time = (TextView) findViewById(R.id.tv_receive_time);//收货时间
         ll_liveryNo = (LinearLayout) findViewById(R.id.ll_liveryNo);//物流单号
         tv_liveryNo = (TextView) findViewById(R.id.tv_liveryNo);//物流单号
 
@@ -206,18 +213,18 @@ public class OrderDetailsActivity extends BaseActivity2 implements OnItemClickLi
             tv_buyer_state.setVisibility(View.VISIBLE);
             tv_buyer_state.setText("已收货");
         }
-        /**
-         * 根据订单类型显示订单的明细时间
-         */
-        if (mType == 1) {
-            ll_pay_time.setVisibility(View.GONE);
-        } else if (mType == 2) {
-            tv_order_time.setText("付款时间：");
-        } else if (mType == 3) {
-            tv_order_time.setText("发货时间：");
-        } else if (mType == 4) {
-            tv_order_time.setText("收货时间：");
-        }
+//        /**
+//         * 根据订单类型显示订单的明细时间
+//         */
+//        if (mType == 1) {
+//            ll_pay_time.setVisibility(View.GONE);
+//        } else if (mType == 2) {
+//            tv_order_time.setText("付款时间：");
+//        } else if (mType == 3) {
+//            tv_order_time.setText("发货时间：");
+//        } else if (mType == 4) {
+//            tv_order_time.setText("收货时间：");
+//        }
     }
 
     /**
@@ -261,13 +268,24 @@ public class OrderDetailsActivity extends BaseActivity2 implements OnItemClickLi
                     tv_order_no.setText(jsonObject.getString("BillNo"));//订单编号
                     tv_create_order_time.setText(jsonObject.getString("BuildTime"));//创建订单时间
                     if (mType == 2) {
+                        ll_pay_time.setVisibility(View.VISIBLE);
                         tv_pay_time.setText(jsonObject.getString("PayTime"));//付款时间
                     } else if (mType == 3) {
+                        ll_pay_time.setVisibility(View.VISIBLE);
+                        tv_pay_time.setText(jsonObject.getString("PayTime"));//付款时间
                         ll_liveryNo.setVisibility(View.VISIBLE);
                         tv_liveryNo.setText(jsonObject.getString("LiveryNo"));
-                        tv_pay_time.setText(jsonObject.getString("SendTime"));//发货时间
+                        ll_send_time.setVisibility(View.VISIBLE);
+                        tv_send_time.setText(jsonObject.getString("SendTime"));//发货时间
                     } else if (mType == 4) {
-                        tv_pay_time.setText(jsonObject.getString("ReceiveTime"));//收货时间
+                        ll_pay_time.setVisibility(View.VISIBLE);
+                        tv_pay_time.setText(jsonObject.getString("PayTime"));//付款时间
+                        ll_liveryNo.setVisibility(View.VISIBLE);
+                        tv_liveryNo.setText(jsonObject.getString("LiveryNo"));
+                        ll_send_time.setVisibility(View.VISIBLE);
+                        tv_send_time.setText(jsonObject.getString("SendTime"));//发货时间
+                        ll_receive_time.setVisibility(View.VISIBLE);
+                        tv_receive_time.setText(jsonObject.getString("ReceiveTime"));
                     }
                     tv_postage_price.setText("货到付款");
                     buyerState = Integer.parseInt(jsonObject.getString("State"));

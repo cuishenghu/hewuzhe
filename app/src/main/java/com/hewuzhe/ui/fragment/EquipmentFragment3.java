@@ -7,42 +7,38 @@ import android.os.Handler;
 import android.support.design.widget.AppBarLayout;
 import android.support.v7.app.ActionBar;
 import android.support.v7.widget.Toolbar;
+import android.view.LayoutInflater;
 import android.view.View;
-
 import android.view.ViewGroup;
-
-import com.hewuzhe.banner.CircleFlowIndicator;
-import com.hewuzhe.banner.ImagePagerAdapter;
-import com.hewuzhe.banner.ViewFlow;
-import com.hewuzhe.model.Bannar;
-import com.hewuzhe.model.ProductSort;
-import com.hewuzhe.ui.activity.OrderCenterActivity2;
-import com.hewuzhe.ui.activity.ProductClassifiActivity;
-import com.hewuzhe.ui.activity.ProductListActivity;
-import com.hewuzhe.ui.activity.ShopCarActivity;
-import com.hewuzhe.ui.cons.C;
-import com.hewuzhe.utils.StringUtil;
-import com.hewuzhe.view.XListView.IXListViewListener;
-
 import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
-import android.widget.ListAdapter;
-import android.widget.ListView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.ViewFlipper;
 
 import com.hewuzhe.R;
+import com.hewuzhe.banner.CircleFlowIndicator;
+import com.hewuzhe.banner.ImagePagerAdapter;
+import com.hewuzhe.banner.ViewFlow;
+import com.hewuzhe.model.Bannar;
+import com.hewuzhe.model.ProductSort;
 import com.hewuzhe.model.User;
 import com.hewuzhe.presenter.base.BasePresenterImp;
 import com.hewuzhe.ui.activity.MainActivity;
+import com.hewuzhe.ui.activity.OrderCenterActivity2;
+import com.hewuzhe.ui.activity.ProductClassifiActivity;
+import com.hewuzhe.ui.activity.ProductListActivity;
+import com.hewuzhe.ui.activity.ShopCarActivity;
 import com.hewuzhe.ui.adapter.EquipmentSortRecommendAdapter2;
 import com.hewuzhe.ui.base.BaseFragment;
+import com.hewuzhe.ui.cons.C;
 import com.hewuzhe.ui.http.EntityHandler;
 import com.hewuzhe.ui.http.HttpUtils;
 import com.hewuzhe.utils.SessionUtil;
+import com.hewuzhe.utils.StringUtil;
 import com.hewuzhe.view.XListView;
+import com.hewuzhe.view.XListView.IXListViewListener;
 import com.loopj.android.http.AsyncHttpResponseHandler;
 import com.loopj.android.http.RequestParams;
 
@@ -54,7 +50,7 @@ import butterknife.Bind;
 /**
  * Created by xianguangjin on 15/12/8.
  */
-public class EquipmentFragment2 extends BaseFragment implements IXListViewListener{
+public class EquipmentFragment3 extends BaseFragment implements IXListViewListener {
     protected Toolbar toolBar;
     protected ActionBar actionBar;
     private ImageView imgBack;
@@ -63,13 +59,9 @@ public class EquipmentFragment2 extends BaseFragment implements IXListViewListen
     private boolean mIsHidden = false;
     private RelativeLayout llAction;
     private User user;
-    @Bind(R.id.ll_all_sort)
     LinearLayout ll_all_sort;
-    @Bind(R.id.ll_recommend)
     LinearLayout ll_recommend;
-    @Bind(R.id.ll_my_order)
     LinearLayout ll_my_order;
-    @Bind(R.id.ll_shopping_cart)
     LinearLayout ll_shopping_cart;
     @Bind(R.id.list_recomand_product)
     XListView mListView;
@@ -81,12 +73,8 @@ public class EquipmentFragment2 extends BaseFragment implements IXListViewListen
     private int pageNo = 0;//页码
     private int pageSum = 10;//每页显示分类的条数
 
-
-    @Bind(R.id.viewflow)
     ViewFlow mViewFlow;
-    @Bind(R.id.viewflowindic)
     CircleFlowIndicator mFlowIndicator;
-    @Bind(R.id.framelayout)
     FrameLayout framelayout;
 
     List<Bannar> bannar = new ArrayList<Bannar>();
@@ -96,6 +84,7 @@ public class EquipmentFragment2 extends BaseFragment implements IXListViewListen
     ArrayList<String> imageUrlList = new ArrayList<String>();
     ArrayList<String> linkUrlArray = new ArrayList<String>();
     ArrayList<String> titleList = new ArrayList<String>();
+
     /**
      * 点击事件监听
      */
@@ -117,7 +106,7 @@ public class EquipmentFragment2 extends BaseFragment implements IXListViewListen
         ll_recommend.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(getActivity(), ProductListActivity.class).putExtra("recommend","1"));
+                startActivity(new Intent(getActivity(), ProductListActivity.class).putExtra("recommend", "1"));
             }
         });
         ll_my_order.setOnClickListener(new View.OnClickListener() {
@@ -152,12 +141,22 @@ public class EquipmentFragment2 extends BaseFragment implements IXListViewListen
         mListView.setPullRefreshEnable(true);
         mListView.setPullLoadEnable(true);
         mListView.setXListViewListener(this);
+        View topView = LayoutInflater.from(getActivity()).inflate(R.layout.equipment_top, null);
+        mViewFlow = (ViewFlow) topView.findViewById(R.id.viewflow);
+        mFlowIndicator = (CircleFlowIndicator) topView.findViewById(R.id.viewflowindic);
+        framelayout = (FrameLayout) topView.findViewById(R.id.framelayout);
+
+        ll_all_sort = (LinearLayout) topView.findViewById(R.id.ll_all_sort);
+        ll_recommend = (LinearLayout) topView.findViewById(R.id.ll_recommend);
+        ll_my_order = (LinearLayout) topView.findViewById(R.id.ll_my_order);
+        ll_shopping_cart = (LinearLayout) topView.findViewById(R.id.ll_shopping_cart);
+        mListView.addHeaderView(topView);
         initData();
         requestData();
         getBannarList();
         ViewGroup.LayoutParams para;
         para = framelayout.getLayoutParams();
-        para.height= StringUtil.getScreenWidth(this.getActivity())/2;
+        para.height = StringUtil.getScreenWidth(this.getActivity()) / 2;
         framelayout.setLayoutParams(para);
 
 
@@ -168,7 +167,7 @@ public class EquipmentFragment2 extends BaseFragment implements IXListViewListen
      */
     @Override
     public int provideLayoutId() {
-        return R.layout.fragment_equipment2;
+        return R.layout.fragment_equipment3;
     }
 
     /**
@@ -353,7 +352,7 @@ public class EquipmentFragment2 extends BaseFragment implements IXListViewListen
     }
 
     private void initBanner(ArrayList<String> imageUrlList) {
-        mViewFlow.setAdapter(new ImagePagerAdapter(getActivity(), imageUrlList, linkUrlArray, titleList,bannar).setInfiniteLoop(true));
+        mViewFlow.setAdapter(new ImagePagerAdapter(getActivity(), imageUrlList, linkUrlArray, titleList, bannar).setInfiniteLoop(true));
         mViewFlow.setmSideBuffer(imageUrlList.size()); // 实际图片张数，
         // 我的ImageAdapter实际图片张数为3
 
@@ -375,8 +374,8 @@ public class EquipmentFragment2 extends BaseFragment implements IXListViewListen
 //            int i = list.size();
             bannar = list;
             //banner轮播图
-            for (int i=0;i<list.size();i++){
-                imageUrlList.add(C.BASE_URL+list.get(i).getPath());
+            for (int i = 0; i < list.size(); i++) {
+                imageUrlList.add(C.BASE_URL + list.get(i).getPath());
                 linkUrlArray.add("");
                 titleList.add(list.get(i).getTitle());
 

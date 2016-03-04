@@ -379,14 +379,14 @@ public class WarriorFragment extends ToolBarFragment<WarriorFragmentPresenter> i
         tvIntegral.setText(user.Credit + "");
         tvLevelName.setText(user.isVip() ? "会员" : "成为会员");
         /**
-         * 会员
+         * 会员======================暂时关闭
          */
-        layLevel.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                startActivity(MemberActivity.class);
-            }
-        });
+//        layLevel.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                startActivity(MemberActivity.class);
+//            }
+//        });
 
         Glide.with(getActivity())
                 .load(C.BASE_URL + user.PhotoPath)

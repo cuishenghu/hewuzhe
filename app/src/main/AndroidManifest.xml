@@ -240,6 +240,7 @@
         <activity android:name=".ui.activity.SiteAddActivity"></activity>
         <activity android:name=".ui.activity.FeedBackActivity"></activity>
         <activity android:name=".ui.activity.MoreShieldListActivity"></activity>
+        <activity android:name=".ui.activity.TongXunLuActivity"></activity>
 
         <!-- 支付 -->
         <!-- Ping++ SDK 注册 -->

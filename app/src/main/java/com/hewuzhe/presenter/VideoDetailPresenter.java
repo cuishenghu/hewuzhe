@@ -15,6 +15,9 @@ import com.hewuzhe.view.VideoDetailView;
 
 import java.util.ArrayList;
 
+import retrofit.Callback;
+import retrofit.Response;
+import retrofit.Retrofit;
 import rx.Subscription;
 import rx.android.schedulers.AndroidSchedulers;
 import rx.functions.Action0;

@@ -43,7 +43,7 @@
                         android:id="@+id/img_transpond"
                         android:layout_width="35px"
                         android:layout_height="35px"
-                        android:src="@mipmap/icon_share"/>
+                        android:src="@mipmap/icon_transpond"/>
 
                     <TextView android:layout_width="wrap_content"
                               android:layout_height="wrap_content"

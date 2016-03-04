@@ -1,5 +1,6 @@
 package com.hewuzhe.ui.activity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -7,6 +8,7 @@ import android.view.KeyEvent;
 import android.view.View;
 import android.view.inputmethod.EditorInfo;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
@@ -30,6 +32,7 @@ public class MakeWarriorsActivity extends RecycleViewActivity<MakeWarriorsPresen
     private LinearLayout lay_select_condition_content;
     private LinearLayout lay_tongxunlu;
     private int state;//0显示,1为隐藏
+    private ImageView img_right;
     private TextView _TvProvince;
     private TextView _TvCity;
     private TextView _TvDistrict;
@@ -65,6 +68,7 @@ public class MakeWarriorsActivity extends RecycleViewActivity<MakeWarriorsPresen
     private void initHeader() {
         lay_select_condition = (LinearLayout) header.findViewById(R.id.lay_select_condition);
         lay_select_condition_content = (LinearLayout) header.findViewById(R.id.lay_select_condition_content);
+        img_right = (ImageView) header.findViewById(R.id.img_right);
         lay_tongxunlu = (LinearLayout) header.findViewById(R.id.lay_tongxunlu);
 
         _TvProvince = (TextView) header.findViewById(R.id.tv_province);
@@ -86,7 +90,8 @@ public class MakeWarriorsActivity extends RecycleViewActivity<MakeWarriorsPresen
         lay_tongxunlu.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+//                startActivity(new Intent(MakeWarriorsActivity.this,TongXunLuActivity.class));
+//                startActivity(TongXunLuActivity.class);
             }
         });
 
@@ -210,12 +215,15 @@ public class MakeWarriorsActivity extends RecycleViewActivity<MakeWarriorsPresen
     public void viewContentByState(int state) {
         if (state == 0) {
             lay_select_condition_content.setVisibility(View.VISIBLE);
-            header.findViewById(R.id.img_right).setBackgroundResource(R.drawable.symbol_below);
             this.state = 1;
+            img_right.setMaxWidth(40);
+            img_right.setMaxHeight(15);
+            img_right.setAdjustViewBounds(true);
+            img_right.setImageResource(R.drawable.symbol_below);
         } else {
             lay_select_condition_content.setVisibility(View.GONE);
-            header.findViewById(R.id.img_right).setBackgroundResource(R.drawable.symbol_right);
             this.state = 0;
+            img_right.setImageResource(R.drawable.symbol_right);
         }
     }
 

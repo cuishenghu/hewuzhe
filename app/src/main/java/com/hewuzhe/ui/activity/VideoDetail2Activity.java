@@ -1,5 +1,7 @@
 package com.hewuzhe.ui.activity;
 
+import android.app.AlertDialog;
+import android.app.AlertDialog.Builder;
 import android.content.Context;
 import android.content.Intent;
 import android.content.res.Configuration;
@@ -28,6 +30,7 @@ import com.hewuzhe.ui.adapter.CommentAdapter;
 import com.hewuzhe.ui.adapter.OtherVideosAdapter;
 import com.hewuzhe.ui.base.RecycleViewActivity;
 import com.hewuzhe.ui.cons.C;
+import com.hewuzhe.ui.http.UrlContants;
 import com.hewuzhe.ui.inter.OnItemClickListener;
 import com.hewuzhe.ui.widget.GlideCircleTransform;
 import com.hewuzhe.ui.widget.YsnowEditDialog;
@@ -36,6 +39,7 @@ import com.hewuzhe.utils.SessionUtil;
 import com.hewuzhe.utils.StringUtil;
 import com.hewuzhe.utils.TimeUtil;
 import com.hewuzhe.view.VideoDetailView;
+import com.nostra13.universalimageloader.core.ImageLoader;
 import com.sina.sinavideo.coreplayer.util.LogS;
 import com.sina.sinavideo.sdk.VDVideoExtListeners;
 import com.sina.sinavideo.sdk.VDVideoView;
@@ -49,6 +53,7 @@ import java.util.ArrayList;
 import butterknife.Bind;
 import cn.sharesdk.framework.ShareSDK;
 import cn.sharesdk.onekeyshare.OnekeyShare;
+import materialdesign.widgets.Dialog;
 import materialdialogs.DialogAction;
 import materialdialogs.MaterialDialog;
 
@@ -179,15 +184,18 @@ public class VideoDetail2Activity extends RecycleViewActivity<VideoDetailPresent
                 getContext().startActivity(new Intent(getContext(), MemberActivity.class));
             }
         });
-
-
+        /**
+         * 发布
+         */
         btnPublish.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 presenter.publisComment(id, edtComment.getText().toString().trim(), view);
             }
         });
-
+        /**
+         * 分享
+         */
         imgShare.setOnClickListener(new View.OnClickListener() {
 
             @Override
@@ -195,8 +203,9 @@ public class VideoDetail2Activity extends RecycleViewActivity<VideoDetailPresent
                 showShare();
             }
         });
-
-
+        /**
+         * 举报
+         */
         tvReport.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -227,8 +236,9 @@ public class VideoDetail2Activity extends RecycleViewActivity<VideoDetailPresent
                 ysnowEditDialog.show();
             }
         });
-
-
+        /**
+         * 发布者头像
+         */
         imgAvatar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -241,7 +251,9 @@ public class VideoDetail2Activity extends RecycleViewActivity<VideoDetailPresent
                 }
             }
         });
-
+        /**
+         * 评论者头像
+         */
         imgAvatar2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -291,7 +303,7 @@ public class VideoDetail2Activity extends RecycleViewActivity<VideoDetailPresent
     }
 
     @Override
-    public void setData(Video video) {
+    public void setData(final Video video) {
         _Video = video;
         presenter.getOtherVideos(_Video.UserId, id);
 
@@ -376,11 +388,38 @@ public class VideoDetail2Activity extends RecycleViewActivity<VideoDetailPresent
             });
         }
 
-        imgTranspond.setImageResource(R.mipmap.icon_share);
-        imgTranspond.setOnClickListener(new View.OnClickListener() {
+        imgTranspond.setImageResource(R.mipmap.icon_transpond);
+        layTranspond.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View view) {
-                presenter.collectAndOther(id, 0, view, position, "");
+            public void onClick(final View view) {
+                final AlertDialog alertDialog = new AlertDialog.Builder(VideoDetail2Activity.this).create();
+                final View videoView = getLayoutInflater().inflate(R.layout.item_transpond, null);
+                ImageView img_video_pic = (ImageView) videoView.findViewById(R.id.img_video_pic);
+                TextView tv_video_title = (TextView) videoView.findViewById(R.id.tv_video_title);
+                TextView tv_video_content = (TextView) videoView.findViewById(R.id.tv_video_content);
+                ImageLoader.getInstance().displayImage(UrlContants.IMAGE_URL + video.ImagePath, img_video_pic);
+                tv_video_title.setText(video.Title);
+                tv_video_content.setText(video.Content);
+                final EditText ed_content = (EditText) videoView.findViewById(R.id.ed_content);
+                TextView tv_cancle = (TextView) videoView.findViewById(R.id.tv_cancle);
+                TextView tv_confirm = (TextView) videoView.findViewById(R.id.tv_confirm);
+                alertDialog.setView(videoView);
+                tv_cancle.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        alertDialog.dismiss();
+                    }
+                });
+
+                tv_confirm.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        presenter.collectAndOther(id, 0, view, position, ed_content.getText().toString().trim());
+                        alertDialog.dismiss();
+                    }
+                });
+                alertDialog.show();
+
             }
         });
 
@@ -527,6 +566,7 @@ public class VideoDetail2Activity extends RecycleViewActivity<VideoDetailPresent
 //
 //                    }
 //                });
+
 
                 snb("转发成功", imgAvatar);
 

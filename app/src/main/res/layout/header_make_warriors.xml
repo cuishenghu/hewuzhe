@@ -91,13 +91,13 @@
 
             <ImageView
                 android:id="@+id/img_right"
-                android:layout_width="25dp"
+                android:layout_width="10dp"
                 android:layout_height="25dp"
                 android:layout_gravity="center_vertical"
                 android:layout_marginRight="10dp"
                 android:contentDescription="@string/app_name"
-                android:visibility="gone"
-                android:src="@drawable/symbol_right" />
+                android:visibility="visible"
+                android:src="@drawable/symbol_right"/>
         </LinearLayout>
 
         <View

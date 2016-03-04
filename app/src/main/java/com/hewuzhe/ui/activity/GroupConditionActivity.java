@@ -43,30 +43,13 @@ import io.rong.imkit.RongIM;
 public class GroupConditionActivity extends SwipeRecycleViewActivity<GroupConditionPresenter, GroupConditionAdapter, FriendCondition> implements AppBarLayout.OnOffsetChangedListener, GroupConditionView {
 
     private static final int PERCENTAGE_TO_ANIMATE_AVATAR = 30;
-    @Bind(R.id.img_avatar)
-    ImageView imgAvatar;
-    @Bind(R.id.tv_name)
-    TextView tvName;
-    @Bind(R.id.tv_address)
-    TextView tvAddress;
     @Bind(R.id.edt_comment)
     EditText _EdtComment;
     @Bind(R.id.btn_publish)
     Button _BtnPublish;
     @Bind(R.id.lay_comment)
     LinearLayout _LayComment;
-    @Bind(R.id.lay_members)
-    LinearLayout _LayMembers;
-    @Bind(R.id.lay_desc)
-    LinearLayout _LayDesc;
-    @Bind(R.id.lay_anounce)
-    LinearLayout _LayAnounce;
-    @Bind(R.id.lay_chat)
-    LinearLayout _LayChat;
-    @Bind(R.id.btn_join)
-    Button _BtnJoin;
-    @Bind(R.id.tv_tip)
-    TextView _TvTip;
+
 
     private int mMaxScrollSize;
     private boolean mIsAvatarShown = true;
@@ -79,6 +62,18 @@ public class GroupConditionActivity extends SwipeRecycleViewActivity<GroupCondit
     private int myTeamId;
     private String _PhotoPath = "";
     private SPUtil spData;
+    private View header;
+
+
+    private ImageView imgAvatar;
+    private TextView tvName;
+    private TextView tvAddress;
+    private LinearLayout _LayMembers;
+    private LinearLayout _LayDesc;
+    private LinearLayout _LayAnounce;
+    private LinearLayout _LayChat;
+    private Button _BtnJoin;
+    private TextView _TvTip;
 
 
     @Override
@@ -91,8 +86,6 @@ public class GroupConditionActivity extends SwipeRecycleViewActivity<GroupCondit
      */
     @Override
     public void initListeners() {
-        appBar.addOnOffsetChangedListener(this);
-        mMaxScrollSize = appBar.getTotalScrollRange();
         _LayMembers.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -111,7 +104,6 @@ public class GroupConditionActivity extends SwipeRecycleViewActivity<GroupCondit
                 startActivity(TeamAnnounceActivity.class, new Bun().putInt("id", getData()).ok());
             }
         });
-
     }
 
 
@@ -185,6 +177,7 @@ public class GroupConditionActivity extends SwipeRecycleViewActivity<GroupCondit
     protected void initThings(Bundle savedInstanceState) {
         super.initThings(savedInstanceState);
         EventBus.getDefault().register(this);
+        initHeader();
         spData = new SPUtil(getContext()).open("data");
         String friendcondition = spData.getString("groupcondition");
         if (!StringUtil.isEmpty(friendcondition)) {
@@ -193,6 +186,20 @@ public class GroupConditionActivity extends SwipeRecycleViewActivity<GroupCondit
             bindData(friendConditions);
         }
         presenter.getBasicInfo();
+
+    }
+
+    private void initHeader() {
+        imgAvatar = (ImageView) header.findViewById(R.id.img_avatar);
+        tvName = (TextView) header.findViewById(R.id.tv_name);
+        tvAddress = (TextView) header.findViewById(R.id.tv_address);
+        _LayMembers = (LinearLayout) header.findViewById(R.id.lay_members);
+        _LayDesc = (LinearLayout) header.findViewById(R.id.lay_desc);
+        _LayAnounce = (LinearLayout) header.findViewById(R.id.lay_anounce);
+        _LayChat = (LinearLayout) header.findViewById(R.id.lay_chat);
+        _BtnJoin = (Button) header.findViewById(R.id.btn_join);
+        _TvTip = (TextView) header.findViewById(R.id.tv_tip);
+
 
     }
 
@@ -221,7 +228,8 @@ public class GroupConditionActivity extends SwipeRecycleViewActivity<GroupCondit
      */
     @Override
     protected GroupConditionAdapter provideAdapter() {
-        return new GroupConditionAdapter(getContext(), presenter);
+        header = getLayoutInflater().inflate(R.layout.header_group_condition, null);
+        return new GroupConditionAdapter(getContext(), presenter, header);
 
     }
 
@@ -465,6 +473,5 @@ public class GroupConditionActivity extends SwipeRecycleViewActivity<GroupCondit
         }
 
     }
-
 
 }

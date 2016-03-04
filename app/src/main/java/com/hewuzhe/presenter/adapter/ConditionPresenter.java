@@ -91,6 +91,38 @@ public abstract class ConditionPresenter<V extends ConditionView> extends Refres
     }
 
 
+    public void collectAndOtherCanl(int id, final int flag, final View v, final int position) {
+        view.showDialog();
+        NetEngine.getService()
+                .MessageRepeatAndFavoriteCancel(id, new SessionUtil(view.getContext()).getUser().Id, flag)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new SB<Res>() {
+                    @Override
+                    public void next(Res res) {
+                        if (res.code == C.OK) {
+                            view.collectAndOther(false, flag, position);
+                        } else {
+                            view.snb("操作失败", v);
+                        }
+                    }
+
+                    @Override
+                    public void onCompleted() {
+
+                        view.dismissDialog();
+                    }
+
+                    @Override
+                    public void onError(Throwable e) {
+                        view.snb("操作失败", v);
+                        view.dismissDialog();
+
+                    }
+                });
+    }
+
+
     /**
      * 评论
      */
@@ -309,4 +341,35 @@ public abstract class ConditionPresenter<V extends ConditionView> extends Refres
         });
 
     }
+
+
+    public void isWuyou(final int userid) {
+        Subscription subscription = NetEngine.getService()
+                .IsWuyou(new SessionUtil(view.getContext()).getUserId(), userid)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new SB<Res<Boolean>>() {
+                    @Override
+                    public void next(Res<Boolean> res) {
+                        if (res.code == C.OK) {
+                            view.isWuYou(res.data, userid);
+                        }
+                    }
+
+                    @Override
+                    public void onCompleted() {
+
+                    }
+
+                    @Override
+                    public void onError(Throwable e) {
+
+                    }
+                });
+
+        addSubscription(subscription);
+
+    }
+
+
 }

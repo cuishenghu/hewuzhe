@@ -291,6 +291,7 @@ public class MegaGameDetailActivity extends ToolBarActivity<MegaGameDetailPresen
 
         Glide.with(getContext())
                 .load(C.BASE_URL + megaGame.MatchImage)
+                .placeholder(R.mipmap.img_bg_videio)
                 .crossFade()
                 .into(_Img);
     }

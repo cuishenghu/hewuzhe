@@ -39,6 +39,7 @@ public class PublishConditionVideoActivity extends ToolBarActivity<PublishCondit
     private int catId = -1;
     private String title;
     private String thumnail = "";
+    private String duration;
 
     @Override
     protected int provideContentViewId() {
@@ -62,6 +63,7 @@ public class PublishConditionVideoActivity extends ToolBarActivity<PublishCondit
         super.initThings(savedInstanceState);
         tvAction.setText("发送");
         fileName = getIntentData().getString("file_name");
+        duration = getIntentData().getString("duration");
 
         try {
             thumnail = createThumbnailOfVideo(fileName);
@@ -90,7 +92,7 @@ public class PublishConditionVideoActivity extends ToolBarActivity<PublishCondit
     @Override
     protected void action() {
         super.action();
-        presenter.UpLoadConditionVideo(tvAction, fileName, thumnail);
+        presenter.UpLoadConditionVideo(tvAction, fileName, thumnail,duration);
     }
 
 

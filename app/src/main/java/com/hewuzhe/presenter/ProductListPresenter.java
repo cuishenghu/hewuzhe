@@ -3,6 +3,7 @@ package com.hewuzhe.presenter;
 import com.hewuzhe.model.Product;
 import com.hewuzhe.model.Res;
 import com.hewuzhe.presenter.base.BasePresenterImp;
+import com.hewuzhe.presenter.base.RefreshAndLoadMoreForListPresenter;
 import com.hewuzhe.presenter.base.RefreshAndLoadMorePresenter;
 import com.hewuzhe.ui.cons.C;
 import com.hewuzhe.utils.NetEngine;
@@ -20,8 +21,9 @@ import rx.schedulers.Schedulers;
 /**
  * Created by zycom on 2016/1/23.
  */
-public class ProductListPresenter extends RefreshAndLoadMorePresenter<ProductListView> {
+public class ProductListPresenter extends RefreshAndLoadMoreForListPresenter<ProductListView> {
 
+    @Override
     public void getData(final int page,final int count,final String search,final int categoryId,final int isPriceAsc,final int isSalesAsc,final int CommentAsc,final int isNewAsc,final int isCredit,final int isRecommend) {
         Product product = view.getData();
         Subscription subscription = NetEngine.getService()
@@ -54,7 +56,7 @@ public class ProductListPresenter extends RefreshAndLoadMorePresenter<ProductLis
         addSubscription(subscription);
     }
 
-    @Override
+
     public void getData(int page, int count) {
         getData(page,count,"",0,0,0,0,0,0,0);
     }

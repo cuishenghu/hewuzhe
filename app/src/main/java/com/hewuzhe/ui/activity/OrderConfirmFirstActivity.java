@@ -41,6 +41,7 @@ import org.apache.http.Header;
 import org.apache.http.protocol.HTTP;
 
 import java.io.UnsupportedEncodingException;
+import java.math.BigDecimal;
 import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.List;
@@ -69,8 +70,7 @@ public class OrderConfirmFirstActivity extends BaseActivity2 {
 //    private String data[][] = {{"男士哑铃一对10公斤", "规格：S/红色", "¥50", "x1"}, {"男士哑铃一对10公斤", "规格：S/红色", "¥50", "x1"}};
 //    private SimpleAdapter simpleAdapter = null;
 //    private List<Map<String, String>> list = new ArrayList<Map<String, String>>();
-    private OrderNumber order;
-    private List<OrderContent> list;
+    private ArrayList<OrderContent> list = new ArrayList<OrderContent>();
     private String total_number;//订单商品数量
     private String total_price;//订单总价
     private Site site;
@@ -79,17 +79,20 @@ public class OrderConfirmFirstActivity extends BaseActivity2 {
     private String deliveryId;//默认收货地址ID
     //    private String postageState;//邮费状态0包邮  -1货到付款  其他显示邮费金额
     private String liveryPrice;
+    private double x;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-//        order.getProList()=(List<OrderContent>)getIntent().getSerializableExtra("list");
+//        list=(List<OrderContent>)getIntent().getSerializableExtra("list");
         liveryPrice = getIntent().getStringExtra("LiveryPrice");
         list = (ArrayList<OrderContent>) getIntent().getSerializableExtra("list");
         state = (String) getIntent().getStringExtra("state");
         areaId = (String) getIntent().getSerializableExtra("areaId");
+        billId = (String) getIntent().getSerializableExtra("billId");
+
         score = (String) getIntent().getSerializableExtra("score");//积分兑换商品跳转传值
-        order = (OrderNumber) getIntent().getSerializableExtra("order");//由订单中心的付款按钮传值过来的OrderGroup
+//        order =   (ArrayList<OrderContent>)getIntent().getSerializableExtra("order");//由订单中心的付款按钮传值过来的OrderGroup
         total_number = (String) getIntent().getSerializableExtra("number");
         total_price = (String) getIntent().getSerializableExtra("price");
         setContentView(R.layout.activity_order_confirm_first);
@@ -158,13 +161,12 @@ public class OrderConfirmFirstActivity extends BaseActivity2 {
 //            orderChild.setPrice2("00");
 //            list.add(orderChild);
 //        }
-        if (list != null) {
-            OrderConfirmFirstAdaptet orderDetailsItemAdaptet = new OrderConfirmFirstAdaptet(OrderConfirmFirstActivity.this, list);
-            order_list.setAdapter(orderDetailsItemAdaptet);
-        } else {
-            OrderConfirmFirstAdaptet orderDetailsItemAdaptet = new OrderConfirmFirstAdaptet(OrderConfirmFirstActivity.this, order.getProList());
-            order_list.setAdapter(orderDetailsItemAdaptet);
-        }
+//        if (list != null) {
+//            OrderConfirmFirstAdaptet orderDetailsItemAdaptet = new OrderConfirmFirstAdaptet(OrderConfirmFirstActivity.this, list);
+//            order_list.setAdapter(orderDetailsItemAdaptet);
+//        } else {
+        OrderConfirmFirstAdaptet orderDetailsItemAdaptet = new OrderConfirmFirstAdaptet(OrderConfirmFirstActivity.this, list);
+        order_list.setAdapter(orderDetailsItemAdaptet);
         /**
          * ListView自适应高度
          */
@@ -241,6 +243,8 @@ public class OrderConfirmFirstActivity extends BaseActivity2 {
      * 请求数据
      */
     public void requestData() {
+        tv_postage_price.setText(liveryPrice);
+        tv_postage.setText("邮费(" + liveryPrice + ")");
         DecimalFormat df = new DecimalFormat("#####0.00");
         if (StringUtil.isEmpty(total_number)) {
             int number = 0;
@@ -258,13 +262,17 @@ public class OrderConfirmFirstActivity extends BaseActivity2 {
                 price = Double.parseDouble(list.get(i).getProductPriceTotalPrice());//单价
                 number = Integer.parseInt(list.get(i).getNumber());//个数
                 totlePrice += price * number;
-                total_price = totlePrice + "";
             }
+            try {
+                x = Double.parseDouble(liveryPrice);
+            } catch (Exception e) {
+
+            }
+            total_price = totlePrice + x + "";
             tv_total_price.setText("总金额：¥" + df.format(Double.parseDouble(total_price)));
         } else {
             tv_total_price.setText("总金额：¥" + df.format(Double.parseDouble(total_price)));
         }
-
 //        int postage = Integer.parseInt(order.getPostage());
 //        double postage = 0.00;
 //        for (int i = 0; i < list.size(); i++) {
@@ -275,8 +283,7 @@ public class OrderConfirmFirstActivity extends BaseActivity2 {
 //        }
         img_alipay.setSelected(true);
         type = "alipay";
-        tv_postage_price.setText(liveryPrice);
-        tv_postage.setText(liveryPrice);
+
     }
 
     @Override
@@ -304,31 +311,32 @@ public class OrderConfirmFirstActivity extends BaseActivity2 {
                     Tools.toast(OrderConfirmFirstActivity.this, "请先添加收货地址");
                     break;
                 }
-                if (totlePrice==0.00){
-                break;
-            }
-            if (!StringUtil.isEmpty(state)) {
-                if (Integer.parseInt(state) == 2) {
+                DecimalFormat df = new DecimalFormat("#####0.00");
+                if (df.format(Double.parseDouble(total_price)).equals("0.00")) {
+                    break;
+                }
+                if (!StringUtil.isEmpty(state)) {
+                    if (Integer.parseInt(state) == 2) {
 //                    userId 用户ID
 //                    deliveryId 收货地址ID
 //                    description 订单备注
 //                    basketDeatilIdList 购物车明细ID 用“&”拼接
-                    for (int i = 0; i < list.size(); i++) {
-                        String productId = list.get(i).getId();
-                        basketDeatilIdList = basketDeatilIdList + productId + "&";
+                        for (int i = 0; i < list.size(); i++) {
+                            String productId = list.get(i).getId();
+                            basketDeatilIdList = basketDeatilIdList + productId + "&";
+                        }
+                        basketDeatilIdList = basketDeatilIdList.substring(0, basketDeatilIdList.length() - 1);
+                        submitBasket();
+                    } else if (Integer.parseInt(state) == 1) {
+                        for (int i = 0; i < list.size(); i++) {
+                            buyNow(i);
+                        }
                     }
-                    basketDeatilIdList = basketDeatilIdList.substring(0, basketDeatilIdList.length() - 1);
-                    submitBasket();
-                } else if (Integer.parseInt(state) == 1) {
-                    for (int i = 0; i < list.size(); i++) {
-                        buyNow(i);
-                    }
+                } else {
+//                    billId = order.getId();
+                    confirmSubmitCharge(billId);
                 }
-            } else {
-                billId = order.getId();
-                confirmSubmitCharge(billId);
-            }
-            break;
+                break;
         }
     }
 
@@ -383,7 +391,7 @@ public class OrderConfirmFirstActivity extends BaseActivity2 {
         String o = total_price;
         params.put("amount", (int) (Double.parseDouble(total_price) * 100));//金额
 //                params.put("amount", 1);//金额
-        params.put("description", "dsfg");//描述
+        params.put("description", "是电风扇的");//描述
         params.put("billId", billId);//订单号
         params.put("flg", "1");//flg 类型 0：充值会员 1：购买商品
         HttpUtils.confirmSubmitCharge(new AbstractHttpHandler() {
@@ -440,31 +448,46 @@ public class OrderConfirmFirstActivity extends BaseActivity2 {
 //                showMsg(result, errorMsg, extraMsg);
                 if (result.equals("success")) {
                     Tools.toast(this, "您已经付款成功");
-//                    startActivity(new Intent(OrderConfirmFirstActivity.this, OrderCenterActivity.class).putExtra("mType", 2 + ""));
+                    startActivity(new Intent(OrderConfirmFirstActivity.this, OrderCenterActivity2.class).putExtra("mType", 2));
 //                    reflush();
+                    if (OrderCenterActivity2.OrderCenterActivity2 != null) {
+                        OrderCenterActivity2.OrderCenterActivity2.finish();
+                    }
                     finish();
                 } else if (result.equals("fail")) {
                     Tools.toast(this, "支付失败，请重试！");
 //                    setResult(RESULT_OK);
-//                    startActivity(new Intent(OrderConfirmFirstActivity.this, OrderCenterActivity.class).putExtra("mType", 1 + ""));
+                    startActivity(new Intent(OrderConfirmFirstActivity.this, OrderCenterActivity2.class).putExtra("mType", 1));
+                    if (OrderCenterActivity2.OrderCenterActivity2 != null) {
+                        OrderCenterActivity2.OrderCenterActivity2.finish();
+                    }
 //                    reflush();
-//                    finish();
+                    finish();
                 } else if (result.equals("invalid")) {
                     Tools.toast(this, "支付失败，请重试！");
 //                    setResult(99, new Intent().putExtra("mType", 2 + ""));
-//                    startActivity(new Intent(OrderConfirmFirstActivity.this, OrderCenterActivity.class));
+                    startActivity(new Intent(OrderConfirmFirstActivity.this, OrderCenterActivity2.class).putExtra("mType", 1));
+                    if (OrderCenterActivity2.OrderCenterActivity2 != null) {
+                        OrderCenterActivity2.OrderCenterActivity2.finish();
+                    }
 //                    reflush();
-//                    finish();
+                    finish();
                 } else if (result.equals("cancel")) {
                     Tools.toast(this, "取消支付！");
 //                    setResult(RESULT_OK);
-//                    startActivity(new Intent(OrderConfirmFirstActivity.this, OrderCenterActivity.class).putExtra("mType", 1 + ""));
-//                    reflush();
+                    startActivity(new Intent(OrderConfirmFirstActivity.this, OrderCenterActivity2.class).putExtra("mType", 1));
+                    if (OrderCenterActivity2.OrderCenterActivity2 != null) {
+                        OrderCenterActivity2.OrderCenterActivity2.finish();
+                    }
+//                      reflush();
                     finish();
                 } else if (resultCode == Activity.RESULT_CANCELED) {
                     Tools.toast(this, "支付取消！");
 //                    setResult(RESULT_OK);
-//                    startActivity(new Intent(OrderConfirmFirstActivity.this, OrderCenterActivity.class).putExtra("mType", 1 + ""));
+                    startActivity(new Intent(OrderConfirmFirstActivity.this, OrderCenterActivity2.class).putExtra("mType", 1));
+                    if (OrderCenterActivity2.OrderCenterActivity2 != null) {
+                        OrderCenterActivity2.OrderCenterActivity2.finish();
+                    }
 //                    reflush();
                     finish();
                 }

@@ -253,7 +253,7 @@ public class ConditionDetialTwoActivity extends SwipeRecycleViewActivity<Condito
             _LayImg.setVisibility(View.VISIBLE);
             Glide.with(getContext())
                     .load(C.BASE_URL + condition.ImagePath)
-                    .centerCrop()
+                    .fitCenter()
                     .crossFade()
                     .into(_ImgVideo);
             _LayImg.setOnClickListener(new View.OnClickListener() {
@@ -328,7 +328,7 @@ public class ConditionDetialTwoActivity extends SwipeRecycleViewActivity<Condito
                         view.setOnClickListener(new View.OnClickListener() {
                             @Override
                             public void onClick(final View view) {
-//                                presenter.showReplyInput(comment.Id, comment.NicName, comment.Id, view);
+//                              presenter.showReplyInput(comment.Id, comment.NicName, comment.Id, view);
                                 if (comment.CommenterId == new SessionUtil(getContext()).getUserId()) {
                                     showDefautInfoDialog("温馨提示", "确定要删除评论吗？", new MaterialDialog.SingleButtonCallback() {
                                         @Override
@@ -339,12 +339,9 @@ public class ConditionDetialTwoActivity extends SwipeRecycleViewActivity<Condito
                                 } else {
                                     presenter.showReplyInput(comment.Id, comment.NicName, comment.Id, view);
                                 }
-
                             }
                         });
-
                     }
-
 
                 } else {
                     for (int i = 0; i < 3; i++) {
@@ -355,7 +352,6 @@ public class ConditionDetialTwoActivity extends SwipeRecycleViewActivity<Condito
                         TextView tvConent = (TextView) view.findViewById(R.id.tv_conent);
 
                         String content = "";
-
                         if (comment.ParentId == 0) {
                             content = comment.NicName + "：" + comment.Content;
                             spannableString = new SpannableString(content);
@@ -491,6 +487,7 @@ public class ConditionDetialTwoActivity extends SwipeRecycleViewActivity<Condito
                 _TvPraise.setText(_condition.LikeNum + "");
                 _ImgPraise.setImageResource(R.mipmap.icon_praise_focus);
 
+                toast("点赞成功");
                 _ImgPraise.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
@@ -500,6 +497,8 @@ public class ConditionDetialTwoActivity extends SwipeRecycleViewActivity<Condito
 
 
             } else {
+                toast("取消点赞");
+
                 _condition.LikeNum--;
                 _TvPraise.setText(_condition.LikeNum + "");
                 _ImgPraise.setImageResource(R.mipmap.icon_praise);

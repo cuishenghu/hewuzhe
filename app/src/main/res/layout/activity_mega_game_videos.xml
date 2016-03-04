@@ -1,47 +1,53 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="@color/colorBg"
-    android:orientation="vertical"
-    tools:context="com.hewuzhe.ui.activity.MegaGameVideosActivity">
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              xmlns:tools="http://schemas.android.com/tools"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              android:background="@color/colorBg"
+              android:orientation="vertical"
+              tools:context="com.hewuzhe.ui.activity.MegaGameVideosActivity">
 
     <include layout="@layout/toolbar_layout"/>
 
 
-    <LinearLayout android:layout_width="match_parent"
-                  android:layout_height="90px"
-                  android:layout_marginBottom="10px"
-                  android:layout_marginTop="10px"
-                  android:background="@color/colorListBg"
-                  android:gravity="center_vertical"
-                  android:orientation="horizontal">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="90px"
+        android:layout_marginBottom="10px"
+        android:layout_marginTop="10px"
+        android:background="@color/colorListBg"
+        android:gravity="center_vertical"
+        android:orientation="horizontal">
 
-        <ImageView android:layout_width="70px"
-                   android:layout_height="70px"
-                   android:layout_marginLeft="20px"
-                   android:padding="18px"
-                   android:src="@mipmap/icon_search"/>
+        <EditText
+            android:id="@+id/edt_search_content"
+            android:layout_width="0dp"
+            android:layout_height="70px"
+            android:layout_marginLeft="20px"
+            android:layout_weight="1"
+            android:background="@null"
+            android:hint="搜索参赛者的编号"
+            android:imeActionId="@+id/edt_search_content_actionid"
+            android:imeOptions="actionSearch"
+            android:inputType="text"
+            android:textColor="@color/colorLine"
+            android:textColorHint="@color/colorLine"/>
 
-        <EditText android:id="@+id/edt_search_content"
-                  android:layout_width="match_parent"
-                  android:layout_height="70px"
-                  android:layout_marginLeft="20px"
-                  android:background="@null"
-                  android:hint="搜索参赛者的编号"
-                  android:imeActionId="@+id/edt_search_content_actionid"
-                  android:imeOptions="actionSearch"
-                  android:inputType="text"
-                  android:textColor="@color/colorLine"
-                  android:textColorHint="@color/colorLine"/>
-
+        <ImageView
+            android:id="@+id/img_search"
+            android:layout_width="70px"
+            android:layout_height="70px"
+            android:layout_marginLeft="10px"
+            android:layout_marginRight="10px"
+            android:padding="15px"
+            android:src="@mipmap/icon_search"/>
 
     </LinearLayout>
 
-    <FrameLayout android:layout_width="match_parent"
-                 android:layout_height="match_parent">
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
         <com.hewuzhe.ui.widget.MultiSwipeRefreshLayout
             android:id="@+id/swipe_refresh_layout"
             android:layout_width="match_parent"
@@ -58,20 +64,22 @@
 
         </com.hewuzhe.ui.widget.MultiSwipeRefreshLayout>
 
-        <LinearLayout android:id="@+id/lay_no_data"
-                      android:layout_width="match_parent"
-                      android:layout_height="match_parent"
-                      android:background="@color/colorBg"
-                      android:gravity="center"
-                      android:orientation="vertical"
-                      android:visibility="gone"
-                      tools:visibility="visible">
+        <LinearLayout
+            android:id="@+id/lay_no_data"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/colorBg"
+            android:gravity="center"
+            android:orientation="vertical"
+            android:visibility="gone"
+            tools:visibility="visible">
 
-            <TextView android:id="@+id/tv_tip"
-                      style="@style/text_30_white"
-                      android:layout_width="wrap_content"
-                      android:layout_height="wrap_content"
-                      android:text="嘛都没有~~"/>
+            <TextView
+                android:id="@+id/tv_tip"
+                style="@style/text_30_white"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="嘛都没有~~"/>
 
 
         </LinearLayout>

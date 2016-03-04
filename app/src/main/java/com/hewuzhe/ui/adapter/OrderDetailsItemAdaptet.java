@@ -1,6 +1,7 @@
 package com.hewuzhe.ui.adapter;
 
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,6 +13,7 @@ import com.hewuzhe.R;
 import com.hewuzhe.model.Equipment;
 import com.hewuzhe.model.OrderChild;
 import com.hewuzhe.model.OrderContent;
+import com.hewuzhe.ui.activity.ProductInfoActivity;
 import com.hewuzhe.ui.http.UrlContants;
 import com.hewuzhe.utils.StringUtil;
 import com.nostra13.universalimageloader.core.ImageLoader;
@@ -26,11 +28,13 @@ import retrofit.http.Url;
 public class OrderDetailsItemAdaptet extends BaseAdapter {
     private LayoutInflater mLayoutInflater;
     private List<OrderContent> orders;
+    private Context context;
 
     public OrderDetailsItemAdaptet(Context context, List<OrderContent> orders) {
         super();
         mLayoutInflater = LayoutInflater.from(context);
         this.orders = orders;
+        this.context = context;
     }
 
     @Override
@@ -65,14 +69,14 @@ public class OrderDetailsItemAdaptet extends BaseAdapter {
         }
         OrderContent order = orders.get(position);
         ImageLoader.getInstance().displayImage(
-                StringUtil.toString(order.getMiddleImagePath(), "http://"),
+                StringUtil.toString(UrlContants.IMAGE_URL + order.getMiddleImagePath(), "http://"),
                 holder.img_equipment_pic);
         holder.tv_equipment_name.setText(order.getProductName());
         holder.tv_equipment_special.setText(order.getProductSizeName() + "/" + order.getProductColorName());
         holder.tv_equipment_price.setText("¥" + order.getProductPriceTotalPrice());
         holder.tv_equipment_num.setText("x" + order.getNumber());
-
-
+//        int id = Integer.parseInt(orders.get(position).getProductId());
+//        context.startActivity(new Intent(context, ProductInfoActivity.class).putExtra("proid", Integer.parseInt(orders.get(position).getProductId())));
         return convertView;
     }
 

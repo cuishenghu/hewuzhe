@@ -11,11 +11,13 @@ import android.widget.LinearLayout;
 import com.hewuzhe.R;
 import com.hewuzhe.presenter.base.BasePresenterImp;
 import com.hewuzhe.ui.activity.AboutActivity;
+import com.hewuzhe.ui.activity.FeedBackActivity;
 import com.hewuzhe.ui.activity.SettingsActivity;
 import com.hewuzhe.ui.activity.SignInActivity;
 import com.hewuzhe.ui.activity.SiteActivity;
 import com.hewuzhe.ui.base.ToolBarFragment;
 import com.hewuzhe.ui.cons.C;
+import com.hewuzhe.ui.widget.Line;
 import com.hewuzhe.utils.SessionUtil;
 
 import butterknife.Bind;
@@ -35,8 +37,10 @@ public class MoreFragment extends ToolBarFragment {
     LinearLayout layCheckUpdate;
     @Bind(R.id.lay_clear_data)
     LinearLayout layClearData;
+    @Bind(R.id.lay_feedback)
+    LinearLayout lay_feedback;
     @Bind(R.id.lay_service)
-    LinearLayout layService;
+    LinearLayout ll_service;
     @Bind(R.id.lay_address)
     LinearLayout layAddress;
     @Bind(R.id.btn_exit)
@@ -97,10 +101,17 @@ public class MoreFragment extends ToolBarFragment {
             }
         });
 
-
-        layService.setOnClickListener(new View.OnClickListener() {
+        lay_feedback.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                getActivity().startActivity(new Intent(getActivity(), FeedBackActivity.class));
+            }
+        });
+        ll_service.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+//                getActivity().startActivity(new Intent(getActivity(), FeedBackActivity.class));
+
                 MaterialDialog materialDialog = new MaterialDialog.Builder(getActivity())
                         .title("拨打客服电话")
                         .titleGravity(GravityEnum.CENTER)

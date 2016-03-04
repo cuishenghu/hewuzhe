@@ -1,6 +1,7 @@
 package com.hewuzhe.ui.activity;
 
 import android.graphics.drawable.Drawable;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.Environment;
 import android.os.Handler;
@@ -24,6 +25,7 @@ import com.bumptech.glide.Glide;
 import com.hewuzhe.R;
 import com.hewuzhe.model.Article;
 import com.hewuzhe.model.Comment;
+import com.hewuzhe.model.WebContents;
 import com.hewuzhe.presenter.ArticlePresenter;
 import com.hewuzhe.ui.adapter.ArticleCommentAdapter;
 import com.hewuzhe.ui.base.RecycleViewActivity;
@@ -78,6 +80,7 @@ public class FederalConditionDetailActivity extends RecycleViewActivity<ArticleP
     private WebView webContent;
     private String visitNum = "";
     private boolean IsFavorite = false;
+    private HtmlTextView tvContent;
 
 
     @Override
@@ -95,13 +98,12 @@ public class FederalConditionDetailActivity extends RecycleViewActivity<ArticleP
         presenter.getArticleDetail(id);
         presenter.getWeb(id);
         presenter.getData(page, count);
-
     }
 
     private void initHeader() {
         tvName = (TextView) header.findViewById(R.id.tv_name);
         tvFroms = (TextView) header.findViewById(R.id.tv_froms);
-//        tvContent = (HtmlTextView) header.findViewById(R.id.tv_content);
+        tvContent = (HtmlTextView) header.findViewById(R.id.tv_content);
         webContent = (WebView) header.findViewById(R.id.web_content);
         imgPraise = (ImageView) header.findViewById(R.id.img_praise);
         tvPraiseCount = (TextView) header.findViewById(R.id.tv_praise_count);
@@ -122,16 +124,29 @@ public class FederalConditionDetailActivity extends RecycleViewActivity<ArticleP
             }
         });
 
-        webContent.setInitialScale(1);
         WebSettings webSettings = webContent.getSettings();
         webSettings.setJavaScriptEnabled(true);
 //		webSettings.setBuiltInZoomControls(true);
         webSettings.setSupportZoom(true);
-//      webSettings.setTextSize(WebSettings.TextSize.LARGER);
+//        webSettings.setTextSize(WebSettings.TextSize.LARGEST);
+//        webSettings.setTextZoom(160);
 
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
+            webSettings.setLayoutAlgorithm(WebSettings.LayoutAlgorithm.TEXT_AUTOSIZING);
+        } else {
+            webSettings.setLayoutAlgorithm(WebSettings.LayoutAlgorithm.NORMAL);
+        }
         webContent.getSettings().setUseWideViewPort(true);
         webContent.getSettings().setLoadWithOverviewMode(true);
 
+    }
+
+    private String getHtmlData(String bodyHTML) {
+        String head = "<head>" +
+                "<meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0, user-scalable=no\"> " +
+                "<style>img{max-width: 100%; width:auto; height:auto;} body{ background-color: #292a2f; color: White;font-size:large;}</style>" +
+                "</head>";
+        return "<html>" + head + "<body>" + bodyHTML + "</body></html>";
     }
 
     /**
@@ -192,8 +207,8 @@ public class FederalConditionDetailActivity extends RecycleViewActivity<ArticleP
 //        tvTitle.setText(StringUtil.isEmpty(getIntentData().getString("title")) ? article.Title : getIntentData().getString("title"));
         tvName.setText(article.Title);
         _content = article.Content;
-        HtmlTextView.RemoteImageGetter remoteGetter = new HtmlTextView.RemoteImageGetter();
-        remoteGetter.baseUrl = C.BASE_URL;
+//        HtmlTextView.RemoteImageGetter remoteGetter = new HtmlTextView.RemoteImageGetter();
+//        remoteGetter.baseUrl = C.BASE_URL;
 //        tvContent.setHtmlFromString(_content, remoteGetter);
 //      tvContent.setText(Html.fromHtml(_content, new MyImageGetter(), null));
 
@@ -450,8 +465,8 @@ public class FederalConditionDetailActivity extends RecycleViewActivity<ArticleP
     }
 
     @Override
-    public void setWeb(String res) {
-        webContent.loadDataWithBaseURL(C.BASE_URL, res, "text/html", "UTF-8", "");
+    public void setWeb(WebContents res) {
+        webContent.loadDataWithBaseURL(C.BASE_URL, getHtmlData(res.Content), "text/html", "UTF-8", "");
     }
 
 }

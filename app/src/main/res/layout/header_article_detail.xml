@@ -13,8 +13,8 @@
                       android:layout_height="match_parent"
                       android:background="@color/colorListBg"
                       android:orientation="vertical"
-                      android:paddingLeft="20px"
-                      android:paddingRight="20px">
+
+            >
 
             <TextView android:id="@+id/tv_name"
                       style="@style/text_35_white"
@@ -25,7 +25,7 @@
                       android:gravity="center"
                       android:singleLine="true"
                       android:text="核武着联盟详情"
-                      android:visibility="gone"/>
+                      android:visibility="visible"/>
 
             <TextView android:id="@+id/tv_froms"
                       style="@style/text_25_colorLine"
@@ -34,7 +34,7 @@
                       android:layout_marginTop="10px"
                       android:gravity="center"
                       android:text="来自：公益培训 2013232332"
-                      android:visibility="gone"/>
+                      android:visibility="visible"/>
 
             <!--<TextView-->
             <!--android:id="@+id/tv_content"-->
@@ -45,25 +45,27 @@
             <!--android:lineSpacingExtra="2dp"-->
             <!--android:text="来自：公益培训 2013232332"/>-->
 
-            <!--<org.sufficientlysecure.htmltextview.HtmlTextView-->
-            <!--android:id="@+id/tv_content"-->
-            <!--style="@style/text_30_white"-->
-            <!--android:layout_width="match_parent"-->
-            <!--android:layout_height="wrap_content"-->
-            <!--android:layout_marginTop="10px"-->
-            <!--android:lineSpacingExtra="2dp"/>-->
-
+            <org.sufficientlysecure.htmltextview.HtmlTextView
+                android:id="@+id/tv_content"
+                style="@style/text_30_white"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10px"
+                android:lineSpacingExtra="2dp"
+                android:visibility="gone"/>
 
             <WebView
                 android:id="@+id/web_content"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 >
-
             </WebView>
+
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="85px"
+                android:paddingLeft="20px"
+                android:paddingRight="20px"
                 android:gravity="center_vertical"
                 android:orientation="horizontal">
                 <ImageView android:id="@+id/img_praise"

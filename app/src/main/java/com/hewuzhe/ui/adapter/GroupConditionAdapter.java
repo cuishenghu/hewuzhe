@@ -98,7 +98,13 @@ public class GroupConditionAdapter extends BaseAdapter<GroupConditionAdapter.VHo
 
         if (condition.IsLike) {
             holder._ImgPraise.setImageResource(R.mipmap.icon_praise_focus);
-            holder._ImgPraise.setOnClickListener(null);
+            holder._ImgPraise.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    _presenter.collectAndOtherCanl(condition.Id, ConditionPresenter.PRAISE, v, position);
+                }
+            });
+
         } else {
             holder._ImgPraise.setImageResource(R.mipmap.icon_praise);
             holder._ImgPraise.setOnClickListener(new View.OnClickListener() {
@@ -128,23 +134,22 @@ public class GroupConditionAdapter extends BaseAdapter<GroupConditionAdapter.VHo
 
         if (StringUtil.isEmpty(condition.ImagePath)) {
             holder._LayImg.setVisibility(View.GONE);
-
         } else {
             holder._LayImg.setVisibility(View.VISIBLE);
+            holder._TvTime.setText(condition.VideoDuration);
             Glide.with(context)
                     .load(C.BASE_URL + condition.ImagePath)
                     .centerCrop()
                     .crossFade()
                     .into(holder._ImgVideo);
+
             if (StringUtil.isEmpty(condition.VideoPath)) {
                 holder._LayImg.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
-//                        context.startActivity(new Intent(context, ConditionDetialTwoActivity.class), new Bun().putInt("id", condition.Id).putString("_NickName", _NickName).putString("_PhotoPath", _PhotoPath).putInt("whitch", C.WHITCH_TWO).ok());
                         Intent intent = new Intent(context, ConditionDetialTwoActivity.class);
-                        intent.putExtra("data", new Bun().putInt("id", condition.Id).putString("_NickName", _NickName).putString("_PhotoPath", _PhotoPath).putInt("whitch", C.WHITCH_TWO).ok());
+                        intent.putExtra("data", new Bun().putInt("id", condition.Id).putInt("whitch", C.WHITCH_ONE).ok());
                         context.startActivity(intent);
-
                     }
                 });
 
@@ -160,6 +165,7 @@ public class GroupConditionAdapter extends BaseAdapter<GroupConditionAdapter.VHo
                         context.startActivity(intent);
                     }
                 });
+
             }
         }
 
@@ -397,6 +403,9 @@ public class GroupConditionAdapter extends BaseAdapter<GroupConditionAdapter.VHo
         @Nullable
         @Bind(R.id.lay_img)
         FrameLayout _LayImg;
+        @Nullable
+        @Bind(R.id.tv_time)
+        TextView _TvTime;
 
         VHolder(View view) {
             super(view);

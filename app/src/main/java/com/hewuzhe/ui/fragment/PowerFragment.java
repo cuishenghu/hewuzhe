@@ -9,7 +9,6 @@ import android.support.v4.view.ViewPager;
 import android.support.v7.widget.Toolbar;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.ImageView;
@@ -311,7 +310,7 @@ public class PowerFragment extends BaseFragment implements PowerView, VideoChoos
                 .setCaptureHeight(getResources().getDimension(R.dimen.qupai_recorder_capture_height_size))
                 .setBeautySkinViewOn(false)
                 .setFlashLightOn(true)
-                .setTimelineTimeIndicator(false)
+                .setTimelineTimeIndicator(true)
                 .build();
 
         _CreateInfo.setSessionCreateInfo(create_info);

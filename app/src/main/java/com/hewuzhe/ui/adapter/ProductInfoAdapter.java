@@ -20,6 +20,7 @@ import com.hewuzhe.ui.activity.ProductInfoActivity;
 import com.hewuzhe.ui.adapter.base.BaseAdapter;
 import com.hewuzhe.ui.cons.C;
 import com.hewuzhe.ui.widget.GlideCircleTransform;
+import com.hewuzhe.utils.StringUtil;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -65,12 +66,24 @@ public class ProductInfoAdapter extends RecyclerView.Adapter<ProductInfoAdapter.
                 .transform(new GlideCircleTransform(context))
                 .into(holder.head_portrait);
 
-        holder.user_name.setText(productComment.UserName);
+
+        holder.user_name.setText(productComment.NicName);
         holder.user_content.setText(productComment.Content);
         holder.user_date.setText(productComment.PublishTime);
         holder.user_sale.setText("规格：" + productComment.ColorAndSize);
     }
 
+    private String getPhone(String phone) {
+        if (StringUtil.isMobile(phone)) {
+            String start = phone.substring(0, 3);
+            String end = phone.substring(8, 11);
+            return start + "*****" + end;
+        } else if (!StringUtil.isEmpty(phone)) {
+            return phone;
+        } else {
+            return "";
+        }
+    }
     @Override
     public int getItemCount()
     {

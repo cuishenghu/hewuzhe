@@ -65,6 +65,7 @@ public class MegaGameAdapter extends BaseAdapter<MegaGameAdapter.VHolder, MegaGa
         Glide.with(context)
                 .load(C.BASE_URL + megaGame.MatchImage)
                 .centerCrop()
+                .placeholder(R.mipmap.img_mega)
                 .crossFade()
                 .into(holder._Img);
 

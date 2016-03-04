@@ -78,6 +78,7 @@ public class MyConditionPresenter extends ConditionPresenter<FriendsConditionVie
                     }
                 });
 
-
     }
+
+
 }

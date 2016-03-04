@@ -11,27 +11,21 @@
     <include layout="@layout/toolbar_layout"/>
 
     <LinearLayout android:layout_width="match_parent"
-                  android:layout_height="wrap_content"
+                  android:layout_height="match_parent"
                   android:background="@color/colorListBg"
                   android:orientation="vertical">
 
         <EditText android:id="@+id/edt_content"
-                  android:layout_width="match_parent"
-                  android:layout_height="300px"
-                  android:background="@null"
                   style="@style/text_35_white"
+                  android:layout_width="match_parent"
+                  android:layout_height="match_parent"
+                  android:layout_weight="1"
+                  android:background="@null"
                   android:gravity="top"
                   android:hint="说点什么吧"
                   android:padding="15px"
                   android:textColorHint="@color/colorLine"/>
 
-
-        <android.support.v7.widget.RecyclerView
-            android:id="@+id/recycler_view"
-            android:layout_width="match_parent"
-            android:layout_height="200px"
-            android:layout_marginLeft="20px">
-        </android.support.v7.widget.RecyclerView>
 
         <TextView android:layout_width="match_parent"
                   android:layout_height="2px"
@@ -39,7 +33,66 @@
                   android:layout_marginLeft="20px"
                   android:layout_marginTop="20px"
                   android:background="@color/colorBg"
-        />
+                  android:visibility="gone"
+            />
+
+
+        <LinearLayout
+            android:id="@+id/lay_content"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:visibility="gone"
+            tools:visibility="visible">
+
+            <TextView android:layout_width="match_parent"
+                      android:layout_height="8px"
+                      android:background="@color/colorBg"/>
+
+
+            <TextView style="@style/text_30_white"
+                      android:layout_width="match_parent"
+                      android:layout_height="wrap_content"
+                      android:layout_marginLeft="30px"
+                      android:layout_marginTop="10px"
+                      android:text="文章图片"/>
+
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/recycler_view"
+                android:layout_width="match_parent"
+                android:layout_height="200px"
+                android:layout_marginBottom="10px"
+                android:layout_marginLeft="30px"
+                android:layout_marginTop="20px"
+                >
+
+            </android.support.v7.widget.RecyclerView>
+
+        </LinearLayout>
+
+        <TextView android:layout_width="match_parent"
+                  android:layout_height="8px"
+                  android:background="@color/colorBg"/>
+
+        <LinearLayout android:layout_width="match_parent"
+                      android:layout_height="85px"
+                      android:gravity="center_vertical"
+                      android:orientation="horizontal">
+
+            <ImageView android:id="@+id/img_select_pic"
+                       android:layout_width="70px"
+                       android:layout_height="50px"
+                       android:layout_marginLeft="30px"
+                       android:src="@mipmap/icon_selectpic"/>
+
+            <ImageView android:id="@+id/img_take_pic"
+                       android:layout_width="70px"
+                       android:layout_height="50px"
+                       android:layout_marginLeft="30px"
+                       android:src="@mipmap/icon_takepic"/>
+
+
+        </LinearLayout>
 
 
     </LinearLayout>

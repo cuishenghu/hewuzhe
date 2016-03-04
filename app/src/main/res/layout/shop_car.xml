@@ -1,30 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
-<com.hewuzhe.utils.swipe.SwipeLayout
-    android:id="@+id/swipe"
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical" android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="@color/hwz_background">
-    <LinearLayout
-        android:id="@+id/trash_button"
-        android:tag="Bottom2"
-        android:background="#333"
-        android:layout_width="40dp"
-        android:gravity="center"
-        android:layout_height="match_parent">
-        <ImageView
-            android:id="@+id/trash"
-            android:src="@mipmap/trash"
-            android:layout_width="22dp"
-            android:layout_height="22dp" />
-    </LinearLayout>
-    <RelativeLayout
-        android:id="@+id/shop_one"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@color/hwz_bg_black"
-        android:paddingTop="8dp"
-        android:paddingLeft="8dp" >
+
+<RelativeLayout
+    android:id="@+id/shop_one"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:background="@color/hwz_bg_black"
+    android:paddingTop="8dp"
+    android:paddingLeft="8dp"
+    xmlns:android="http://schemas.android.com/apk/res/android">
 
         <ImageView
             android:id="@+id/shopcar_select"
@@ -51,31 +34,26 @@
             android:layout_toRightOf="@+id/icon_title"
             android:orientation="vertical" >
 
-            <TextView
-                android:id="@+id/shopcar_title"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="0dp"
-                android:lines="1"
-                android:text="@string/prolist_title_shopcar"
-                android:maxLines="2"
-                android:textColor="@color/hwz_font_white"
-                android:textSize="16sp" />
+
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_marginBottom="4dp"
                 android:orientation="horizontal">
+
                 <TextView
-                    android:id="@+id/shopcar_guige"
+                    android:id="@+id/shopcar_title"
                     android:layout_width="wrap_content"
-                    android:layout_height="34dp"
-                    android:lines="2"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="0dp"
+                    android:lines="1"
                     android:maxEms="10"
-                    android:text="@string/proinfo_user_guige"
-                    android:textColor="@color/hwz_font_gray"
-                    android:textSize="11sp" />
+                    android:text="@string/prolist_title_shopcar"
+                    android:maxLines="2"
+                    android:textColor="@color/hwz_font_white"
+                    android:textSize="16sp" />
+
 
                 <TextView
                     android:id="@+id/pro_price"
@@ -88,6 +66,16 @@
                     android:textSize="16sp" />
             </LinearLayout>
 
+            <TextView
+                android:id="@+id/shopcar_guige"
+                android:layout_width="wrap_content"
+                android:layout_height="34dp"
+                android:lines="2"
+                android:maxEms="10"
+                android:text="@string/proinfo_user_guige"
+                android:textColor="@color/hwz_font_gray"
+                android:textSize="11sp" />
+
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
@@ -98,7 +86,8 @@
                     android:id="@+id/shopcar_hint"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:gravity="center">
+                    android:gravity="center"
+                    android:visibility="gone">
 
                 <ImageView
                     android:id="@+id/shopcar_add"
@@ -133,24 +122,39 @@
 
                 <TextView
                     android:id="@+id/shopcar_buynum"
-                    android:layout_width="match_parent"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:gravity="right"
                     android:text="x1"
                     android:textColor="@color/hwz_font_gray"
                     android:textSize="16sp" />
             </LinearLayout>
 
         </LinearLayout>
+
         <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="1dp"
-            android:layout_marginLeft="15dp"
-            android:background="@color/hwz_background"
-            android:layout_alignParentBottom="true">
+            android:id="@+id/trash_button"
+            android:layout_width="70dp"
+            android:layout_height="60dp"
+            android:layout_alignParentRight="true"
+            android:layout_marginTop="25dp"
+            android:gravity="center"
+            android:background="@color/yancy_red700"
+            android:layout_marginRight="0dp">
+
+            <ImageView
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:src="@drawable/trash"
+                />
         </LinearLayout>
 
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_marginLeft="15dp"
+        android:background="@color/hwz_background"
+        android:layout_below="@+id/trash_button">
+    </LinearLayout>
     </RelativeLayout>
 
 
-</com.hewuzhe.utils.swipe.SwipeLayout>

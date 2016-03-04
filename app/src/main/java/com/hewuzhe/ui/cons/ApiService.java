@@ -36,9 +36,12 @@ import com.hewuzhe.model.StudyOnlineCatItem;
 import com.hewuzhe.model.StudyOnlineCate;
 import com.hewuzhe.model.TeamAnnounce;
 import com.hewuzhe.model.TeamIntroduce;
+import com.hewuzhe.model.Tel;
 import com.hewuzhe.model.UploadImage;
 import com.hewuzhe.model.User;
 import com.hewuzhe.model.Video;
+import com.hewuzhe.model.VipPrice;
+import com.hewuzhe.model.WebContents;
 import com.hewuzhe.model.WrapFriend;
 
 import java.util.ArrayList;
@@ -59,6 +62,9 @@ public interface ApiService {
 
     @GET("LoginAndRegister.asmx/Login")
     Observable<Res<User>> Login(@Query("username") String usernmae, @Query("password") String password);
+
+    @GET("LoginAndRegister.asmx/ForgetPassword")
+    Observable<Res> ForgetPassword(@Query("phone") String usernmae, @Query("password") String password);
 
     @GET("LoginAndRegister.asmx/ChangePassWord")
     Observable<Res> ChangePassWord(@Query("userid") int userid, @Query("oldpwd") String oldpwd, @Query("password") String password);
@@ -155,7 +161,7 @@ public interface ApiService {
 
 
     @GET("Helianmeng.asmx/SaveDongtai")
-    Observable<Res> SaveDongtai(@Query("pathlist") String pathlist, @Query("userid") int userid, @Query("content") String content, @Query("videoImage") String videoImage, @Query("videopath") String videopath, @Query("videoDuration") int videoDuration);
+    Observable<Res> SaveDongtai(@Query("pathlist") String pathlist, @Query("userid") int userid, @Query("content") String content, @Query("videoImage") String videoImage, @Query("videopath") String videopath, @Query("videoDuration") String videoDuration);
 
     @GET("Hewuzhe.asmx/SavePlan")
     Observable<Res> SavePlan(@Query("piclist") String piclist, @Query("userid") int userid, @Query("content") String content, @Query("title") String title, @Query("cateid") int cateid, @Query("starttime") String starttime, @Query("endtime") String endtime);
@@ -375,8 +381,9 @@ public interface ApiService {
     @GET("Helianmeng.asmx/DeleteComment")
     Observable<Res> DeleteComment(@Query("id") int id);
 
-    @GET("MessageAndImageNews.aspx")
-    Observable<String> MessageAndImageNews(@Query("id") int id);
+    @FormUrlEncoded
+    @POST("Admin/Hander/SaveMessageAndImageNews.ashx")
+    Observable<WebContents> SaveMessageAndImageNews(@Field("id") int id, @Field("flg") int flg);
 
     @GET("Hewuzhe.asmx/SelectVideoLiveList")
     Call<Res<ArrayList<LiveVideo>>> SelectVideoLiveList(@Query("startRowIndex") int startRowIndex, @Query("maximumRows") int maximumRows, @Query("userid") int userid);
@@ -409,35 +416,44 @@ public interface ApiService {
     Observable<Res<ArrayList<Product>>> SelectProductBySearch(@Query("startRowIndex") int startRowIndex, @Query("maximumRows") int maximumRows, @Query("search") String search, @Query("categoryId") int categoryId, @Query("isPriceAsc") int isPriceAsc, @Query("isSalesAsc") int isSalesAsc, @Query("isCommentAsc") int isCommentAsc, @Query("isNewAsc") int isNewAsc, @Query("isCredit") int isCredit, @Query("isRecommend") int isRecommend);
 
     @GET("Hezhuangbei.asmx/SelectProduct")
-    Observable<Res<Product>> SelectProduct(@Query("id") int id,@Query("userid") int userid,@Query("maximumRows") int maximumRows);
+    Observable<Res<Product>> SelectProduct(@Query("id") int id, @Query("userid") int userid, @Query("maximumRows") int maximumRows);
 
     @GET("Hezhuangbei.asmx/SelectBasketProduct")
     Observable<Res<ArrayList<ShopCar>>> SelectBasketProduct(@Query("startRowIndex") int startRowIndex, @Query("maximumRows") int maximumRows, @Query("userId") int userId);
 
     @GET("Hezhuangbei.asmx/FavoriteProduct")
-    Observable<Res> FavoriteProduct(@Query("userid") int userid,@Query("productId") int productId);
+    Observable<Res> FavoriteProduct(@Query("userid") int userid, @Query("productId") int productId);
 
     @GET("Hezhuangbei.asmx/CancleFavoriteProduct")
-    Observable<Res> CancleFavoriteProduct(@Query("userid") int userid,@Query("productId") int productId);
+    Observable<Res> CancleFavoriteProduct(@Query("userid") int userid, @Query("productId") int productId);
 
     @GET("Hezhuangbei.asmx/SelectCommentByProductId")
     Observable<Res<ArrayList<ProductComment>>> SelectCommentByProductId(@Query("productId") int productId, @Query("startRowIndex") int startRowIndex, @Query("maximumRows") int maximumRows);
 
     @GET("Hezhuangbei.asmx/InsertBasket")
-    Observable<Res> InsertBasket(@Query("productId") int productId,@Query("num") int num,@Query("priceId") int priceId,@Query("userId") int userId,@Query("price") double price);
+    Observable<Res> InsertBasket(@Query("productId") int productId, @Query("num") int num, @Query("priceId") int priceId, @Query("userId") int userId, @Query("price") double price);
 
     @GET("Hezhuangbei.asmx/DeleteBasketProduct")
-    Observable<Res> DeleteBasketProduct(@Query("idList") String idList,@Query("userId") int userId);
+    Observable<Res> DeleteBasketProduct(@Query("idList") String idList, @Query("userId") int userId);
 
     @GET("Hezhuangbei.asmx/ChangeBasketProductNum")
-    Observable<Res> ChangeBasketProductNum(@Query("id") int id,@Query("num") int num,@Query("userId") int userId);
+    Observable<Res> ChangeBasketProductNum(@Query("id") int id, @Query("num") int num, @Query("userId") int userId);
 
     @GET("Hezhuangbei.asmx/BuyNow")
-    Observable<Res> BuyNow(@Query("productId") int productId,@Query("num") int num,@Query("priceId") int priceId,@Query("userId") int userId,@Query("price") double price,@Query("deliveryId") int deliveryId,@Query("description") String description);
+    Observable<Res> BuyNow(@Query("productId") int productId, @Query("num") int num, @Query("priceId") int priceId, @Query("userId") int userId, @Query("price") double price, @Query("deliveryId") int deliveryId, @Query("description") String description);
 
     @GET("Hezhuangbei.asmx/SelectFavoriteByUserIdAndSearch")
     Observable<Res<ArrayList<ProductCollection>>> SelectFavoriteByUserIdAndSearch(@Query("startRowIndex") int startRowIndex, @Query("maximumRows") int maximumRows, @Query("userId") int userId, @Query("search") String search);
 
     @GET("Hezhuangbei.asmx/GetPostage")
-    Observable<Res<Result>> GetPostage(@Query("userid") int userid,@Query("idList") String idList);
+    Observable<Res<Result>> GetPostage(@Query("userid") int userid, @Query("idList") String idList);
+
+    @GET("LoginAndRegister.asmx/ChangeTuiSong")
+    Observable<Res> ChangeTuiSong(@Query("userid") int userid, @Query("istuisong") boolean istuisong);
+
+    @GET("LoginAndRegister.asmx/SelectUserPayList")
+    Observable<Res<ArrayList<VipPrice>>> SelectUserPayList();
+
+    @GET("Hezhuangbei.asmx/SelectProductPhone")
+    Observable<Res<ArrayList<Tel>>> SelectProductPhone();
 }

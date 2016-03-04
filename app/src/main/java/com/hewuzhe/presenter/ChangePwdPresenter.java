@@ -55,6 +55,11 @@ public class ChangePwdPresenter extends BasePresenterImp<ChangePwdView> {
                     @Override
                     public void next(Res res) {
                         if (res.code == C.OK) {
+
+//                            SessionUtil sessionUtil = new SessionUtil(view.getContext());
+//                            UP up = new UP(phoneNum, pwdModel.pwd);
+//                            sessionUtil.putUP(up);
+//
                             Toast.makeText(view.getContext(), "修改成功", Toast.LENGTH_SHORT).show();
                             view.finishActivity();
                         } else {

@@ -13,11 +13,13 @@ import android.widget.TextView;
 import com.hewuzhe.R;
 import com.hewuzhe.model.Address;
 import com.hewuzhe.model.Group;
+import com.hewuzhe.model.User;
 import com.hewuzhe.presenter.JoinPresenter;
 import com.hewuzhe.ui.adapter.AddressAdapter;
 import com.hewuzhe.ui.adapter.JoinGroupAdapter;
 import com.hewuzhe.ui.base.RecycleViewActivity;
 import com.hewuzhe.utils.Bun;
+import com.hewuzhe.utils.SessionUtil;
 import com.hewuzhe.view.JoinGroupView;
 
 import java.util.ArrayList;
@@ -33,7 +35,7 @@ public class JoinGroupActivity extends RecycleViewActivity<JoinPresenter, JoinGr
     private TextView _TvDistrict;
 
 
-    private int mCityCode = 0;
+    private int mCityCode = 371302;
 
     private int provinceId;
     private int cityId;
@@ -44,6 +46,8 @@ public class JoinGroupActivity extends RecycleViewActivity<JoinPresenter, JoinGr
     private int areaId;
     private View header;
     private EditText _EdtSearchContent;
+
+    public static boolean isFirst = true;
 
     @Override
     protected int provideContentViewId() {
@@ -87,7 +91,7 @@ public class JoinGroupActivity extends RecycleViewActivity<JoinPresenter, JoinGr
                         _TvDistrict.setText(ad.Name);
                         countyId = Integer.parseInt(ad.Code);
                         mCityCode = Integer.parseInt(ad.Code);
-
+                        page = 1;
                         presenter.getData(page, count);
                         dialog.dismiss();
                     }
@@ -101,21 +105,33 @@ public class JoinGroupActivity extends RecycleViewActivity<JoinPresenter, JoinGr
             public boolean onEditorAction(TextView textView, int i, KeyEvent keyEvent) {
                 if (i == EditorInfo.IME_ACTION_SEARCH) {
                     showDialog();
+                    page = 1;
+                    hideSoftMethod(_EdtSearchContent);
                     presenter.getData(page, count);
                 }
                 return false;
             }
         });
-    }
 
+
+        header.findViewById(R.id.img_search).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                showDialog();
+                hideSoftMethod(_EdtSearchContent);
+                page = 1;
+                presenter.getData(page, count);
+            }
+        });
+
+    }
 
     @Override
     protected void initThings(Bundle savedInstanceState) {
         super.initThings(savedInstanceState);
-
         initHeader();
-        presenter.getData(page, count);
-
+        User user = new SessionUtil(getContext()).getUser();
+        presenter.getDatas();
     }
 
     private void initHeader() {
@@ -124,8 +140,6 @@ public class JoinGroupActivity extends RecycleViewActivity<JoinPresenter, JoinGr
         _TvCity = (TextView) header.findViewById(R.id.tv_city);
         _TvDistrict = (TextView) header.findViewById(R.id.tv_district);
         _EdtSearchContent = (EditText) header.findViewById(R.id.edt_search_content);
-
-
     }
 
     /**
@@ -139,9 +153,8 @@ public class JoinGroupActivity extends RecycleViewActivity<JoinPresenter, JoinGr
 
     @Override
     protected String provideTitle() {
-            return "同城";
+        return "同城";
     }
-
 
     /**
      * 设置province
@@ -258,5 +271,10 @@ public class JoinGroupActivity extends RecycleViewActivity<JoinPresenter, JoinGr
 //      adapter.data.get(pos).isJoined = b;
         snb(b ? "加入成功" : "退出成功", _TvCity);
         adapter.notifyItemChanged(pos);
+    }
+
+    @Override
+    public void bdDatas(ArrayList<Group> data) {
+        adapter.addDatas(data);
     }
 }

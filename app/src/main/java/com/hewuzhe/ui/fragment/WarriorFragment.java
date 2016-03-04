@@ -245,6 +245,9 @@ public class WarriorFragment extends ToolBarFragment<WarriorFragmentPresenter> i
 
     @Override
     public void initListeners() {
+        /**
+         * 个人资料
+         */
         imgAvatar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -257,7 +260,9 @@ public class WarriorFragment extends ToolBarFragment<WarriorFragmentPresenter> i
                 }
             }
         });
-
+        /**
+         * 梦想
+         */
         tvFlyDream.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -268,48 +273,72 @@ public class WarriorFragment extends ToolBarFragment<WarriorFragmentPresenter> i
 
             }
         });
+        /**
+         * 学习
+         */
         tvStudyOnline.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 startActivity(new Intent(getActivity(), StudyOnlineActivity.class));
             }
         });
+        /**
+         * 收藏
+         */
         tvMyCollections.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 startActivity(new Intent(getActivity(), MyCollectionsActivity.class));
             }
         });
+        /**
+         *课程
+         */
         layTrain.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 startActivity(new Intent(getActivity(), TrainActivity.class));
             }
         });
+        /**
+         * 记录
+         */
         layRecord.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 startActivity(new Intent(getActivity(), RecordActivity.class));
             }
         });
+        /**
+         * 兑换
+         */
         layIntegral.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 startActivity(new Intent(getActivity(), MyScoreActivity.class));
             }
         });
+        /**
+         * 直播
+         */
         layLive.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 startActivity(new Intent(getActivity(), LiveVideoListActivity.class));
             }
         });
+        /**
+         * 场馆
+         */
         tvDojoRecommend.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 startActivity(new Intent(getActivity(), DoJoRecommendActivity.class));
             }
         });
+        /**
+         * 积分
+         */
         getLayIntegralOne.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -349,7 +378,9 @@ public class WarriorFragment extends ToolBarFragment<WarriorFragmentPresenter> i
         tvLevel.setText("lv" + user.Rank);
         tvIntegral.setText(user.Credit + "");
         tvLevelName.setText(user.isVip() ? "会员" : "成为会员");
-
+        /**
+         * 会员
+         */
         layLevel.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

@@ -7,7 +7,9 @@
 
     <include layout="@layout/toolbar_layout"/>
 
-    <LinearLayout android:layout_width="match_parent"
+    <LinearLayout
+        android:id="@+id/ll_sousuo"
+        android:layout_width="match_parent"
         android:layout_height="90px"
         android:layout_marginBottom="10px"
         android:layout_marginTop="10px"
@@ -15,23 +17,23 @@
         android:gravity="center_vertical"
         android:orientation="horizontal">
 
-        <ImageView
-            android:id="@+id/product_list_search"
-            android:layout_width="70px"
-            android:layout_height="70px"
-            android:layout_marginLeft="20px"
-            android:padding="18px"
-            android:src="@mipmap/icon_search"/>
-
         <EditText android:id="@+id/edt_search_content"
             android:layout_width="match_parent"
             android:layout_height="70px"
-            android:layout_marginLeft="20px"
+            android:layout_marginLeft="10px"
+            android:layout_weight="1"
             android:background="@null"
             android:hint="搜索商品名称"
             android:inputType="text"
             android:textColor="@color/colorLine"
             android:textColorHint="@color/colorLine"/>
+
+        <ImageView
+            android:id="@+id/product_list_search"
+            android:layout_width="70px"
+            android:layout_height="70px"
+            android:padding="18px"
+            android:src="@mipmap/icon_search"/>
 
 
     </LinearLayout>
@@ -149,7 +151,8 @@
                     android:id="@+id/comment_top"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:src="@mipmap/prolisttop" />
+                    android:src="@mipmap/prolisttop"
+                    android:visibility="invisible"/>
 
                 <ImageView
                     android:id="@+id/comment_bottom"
@@ -188,7 +191,8 @@
                     android:id="@+id/new_top"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:src="@mipmap/prolisttop" />
+                    android:src="@mipmap/prolisttop"
+                    android:visibility="invisible"/>
 
                 <ImageView
                     android:id="@+id/new_bottom"

@@ -40,7 +40,7 @@ import java.util.List;
 
 public class OrderGroupAdapter extends BaseAdapter {
     private LayoutInflater mLayoutInflater;
-    private List<OrderNumber> orderNumbers;
+    private ArrayList<OrderNumber> orderNumbers;
     private Context context;
     private int mType;
     private int total_number = 0;
@@ -48,7 +48,7 @@ public class OrderGroupAdapter extends BaseAdapter {
     List total_num = null;
     List total_all_price = null;
 
-    public OrderGroupAdapter(Context context, List<OrderNumber> orderNumbers, int mType) {
+    public OrderGroupAdapter(Context context, ArrayList<OrderNumber> orderNumbers, int mType) {
         super();
         mLayoutInflater = LayoutInflater.from(context);
         this.context = context;
@@ -109,12 +109,12 @@ public class OrderGroupAdapter extends BaseAdapter {
         /**
          * 订单中商品件数累加
          */
-        for (int i = 0; i < list.size(); i++) {
-            int number = Integer.parseInt(list.get(i).getNumber());
-            double price = Double.parseDouble(list.get(i).getProductPriceTotalPrice());
-            total_number += number;
-            total_price += number * price;
-        }
+//        for (int i = 0; i < list.size(); i++) {
+//            int number = Integer.parseInt(list.get(i).getNumber());
+//            double price = Double.parseDouble(list.get(i).getProductPriceTotalPrice());
+//            total_number += number;
+//            total_price += number * price;
+//        }
         DecimalFormat df = new DecimalFormat("######0.00");
         holder.tv_order_total_num.setText("共计" + orderNumber.getCount() + "件商品");//订单中商品的件数
         holder.tv_order_total_price.setText("合计：¥" + df.format(Double.parseDouble(orderNumber.getPrice())));
@@ -147,13 +147,17 @@ public class OrderGroupAdapter extends BaseAdapter {
 //                Toast.makeText(context, position+"", Toast.LENGTH_LONG).show();
                 Intent intent = new Intent(context, OrderDetailsActivity.class);
                 intent.putExtra("billId", orderNumber.getId());
-                ((FragmentActivity)context).startActivityForResult((intent), 11);
+                intent.putExtra("mType", mType);
+                intent.putExtra("state", orderNumber.getState());
+                intent.putExtra("areaId", orderNumber.getAreaId());
+                ((FragmentActivity) context).startActivityForResult((intent), 11);
             }
         });
 
         /**
          * 不同页面显示不同的按钮
          */
+       final ArrayList<OrderContent> orderContents = (ArrayList<OrderContent>) orderNumber.getProList();
         if (mType == 1) {
             holder.tv_left_btn.setText("取消订单");
             holder.tv_left_btn.setOnClickListener(new View.OnClickListener() {
@@ -166,15 +170,16 @@ public class OrderGroupAdapter extends BaseAdapter {
             holder.tv_right_btn.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    ((FragmentActivity)context).startActivityForResult(new Intent(context, OrderConfirmFirstActivity.class).putExtra("areaId", orderNumber.getAreaId()).putExtra("order", orderNumbers.get(position)).putExtra("number", total_num.get(position).toString()).putExtra("price", total_all_price.get(position).toString()),11);
+
+                    ((FragmentActivity) context).startActivityForResult(new Intent(context, OrderConfirmFirstActivity.class).putExtra("billId", orderNumber.getId()).putExtra("areaId", orderNumber.getAreaId()).putExtra("list", orderContents).putExtra("number", orderNumber.getCount()).putExtra("price", orderNumber.getPrice()), 11);
 //                    context.startActivity(new Intent(context, OrderConfirmFirstActivity.class).putExtra("order", orderNumbers.get(position)).putExtra("number", total_num.get(position).toString()).putExtra("price", orderNumber.getPrice()));
                 }
             });
         } else if (mType == 2) {
             holder.tv_left_btn.setVisibility(View.GONE);
-            if(Integer.parseInt(orderNumber.getIsCancle())==1){
+            if (Integer.parseInt(orderNumber.getIsCancle()) == 1) {
                 holder.tv_right_btn.setText("取消中");
-            }else{
+            } else {
                 holder.tv_right_btn.setText("取消订单");
             }
             holder.tv_right_btn.setOnClickListener(new View.OnClickListener() {
@@ -195,7 +200,7 @@ public class OrderGroupAdapter extends BaseAdapter {
             holder.tv_right_btn.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    confirmReceived(position);
+                    confirmReceived(position,mType);
                 }
             });
         } else if (mType == 4) {
@@ -215,7 +220,7 @@ public class OrderGroupAdapter extends BaseAdapter {
                 holder.tv_right_btn.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        context.startActivity(new Intent(context, OrderAssessActivity.class).putExtra("order", orderNumbers.get(position)));
+                        context.startActivity(new Intent(context, OrderAssessActivity.class).putExtra("list", orderContents).putExtra("billId",orderNumber.getId()));
                     }
                 });
             }
@@ -297,7 +302,7 @@ public class OrderGroupAdapter extends BaseAdapter {
     /**
      * 确认收货
      */
-    private void confirmReceived(final int position) {
+    private void confirmReceived(final int position,final int mType) {
         final RequestParams params = new RequestParams();
         params.put("billId", orderNumbers.get(position).getId());//订单ID
         params.put("userId", new SessionUtil(context).getUserId()); //由于自己ID没有订单,现在传2,此ID为李发起的ID.待修改成自己的ID==========
@@ -307,6 +312,7 @@ public class OrderGroupAdapter extends BaseAdapter {
                 Tools.toast(context, "订单" + orderNumbers.get(position).getId() + "收货成功！");
                 orderNumbers.remove(position);
                 OrderGroupAdapter.this.notifyDataSetChanged();
+//                context.startActivity(new Intent(context,OrderDetailsActivity.class).putExtra("mType",mType+1).putExtra("billId",orderNumbers.get(position).getId()));//确认收货跳转到已收货的订单详情
             }
 
             @Override

@@ -398,7 +398,6 @@ public class VideoDetail2Activity extends RecycleViewActivity<VideoDetailPresent
 
             @Override
             public void onClick(View arg0) {
-                // TODO Auto-generated method stub
                 Toast.makeText(VideoDetail2Activity.this, "点击了静帧广告",
                         Toast.LENGTH_LONG).show();
             }
@@ -428,7 +427,7 @@ public class VideoDetail2Activity extends RecycleViewActivity<VideoDetailPresent
 
         info = new VDVideoInfo();
         info.mTitle = "视频";
-//        info.mPlayUrl = "http://120.27.115.235/UpLoad/Video/a3a4eb2c-f953-4699-a6ee-b18217afcb35.mp4";
+//      info.mPlayUrl = "http://120.27.115.235/UpLoad/Video/a3a4eb2c-f953-4699-a6ee-b18217afcb35.mp4";
         info.mPlayUrl = C.BASE_URL + video.VideoPath;
         infoList.addVideoInfo(info);
 
@@ -472,8 +471,6 @@ public class VideoDetail2Activity extends RecycleViewActivity<VideoDetailPresent
             layShare.setVisibility(View.VISIBLE);
             mVDVideoView.play(0);
         }
-
-
     }
 
     /**

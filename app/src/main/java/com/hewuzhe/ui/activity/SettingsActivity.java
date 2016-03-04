@@ -1,12 +1,15 @@
 package com.hewuzhe.ui.activity;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.hewuzhe.R;
+import com.hewuzhe.presenter.AssessSettingsPressenter;
 import com.hewuzhe.presenter.base.BasePresenterImp;
 import com.hewuzhe.ui.base.ToolBarActivity;
 import com.hewuzhe.utils.SPUtil;
@@ -15,14 +18,16 @@ import com.socks.library.KLog;
 import butterknife.Bind;
 import io.rong.imlib.RongIMClient;
 
-public class SettingsActivity extends ToolBarActivity {
+public class SettingsActivity extends ToolBarActivity<AssessSettingsPressenter> {
 
-    @Bind(R.id.lay_friends_condition)
-    LinearLayout _LayFriendsCondition;
+    @Bind(R.id.lay_friends_assess_notic)
+    LinearLayout _LayFriendsAssessNotic;//\
+    @Bind(R.id.switch_assess)
+    CheckBox _SwitchAssess;//朋友圈评论提示开关
     @Bind(R.id.lay_noti)
     TextView _LayNoti;
     @Bind(R.id.switch_msg)
-    CheckBox _SwitchMsg;
+    CheckBox _SwitchMsg;//是否接受新的聊天
     @Bind(R.id.lay_settings)
     LinearLayout _LaySettings;
     @Bind(R.id.switch_sound)
@@ -34,7 +39,7 @@ public class SettingsActivity extends ToolBarActivity {
     @Bind(R.id.lay_vibrate)
     LinearLayout _LayVibrate;
     @Bind(R.id.lay_shield_list)
-    LinearLayout _LayShieldList;
+    LinearLayout _LayShieldList;//屏蔽列表
     private SPUtil spUtil;
 
     @Override
@@ -48,6 +53,15 @@ public class SettingsActivity extends ToolBarActivity {
      */
     @Override
     public void initListeners() {
+/**
+ * 跳转屏蔽列表
+ */
+        _LayShieldList.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(SettingsActivity.this, MoreShieldListActivity.class));
+            }
+        });
 
     }
 
@@ -57,10 +71,23 @@ public class SettingsActivity extends ToolBarActivity {
 
         spUtil = new SPUtil(getContext())
                 .open("settings");
-
+        _SwitchAssess.setChecked(spUtil.getBoolean("assess"));
         _SwitchMsg.setChecked(spUtil.getBoolean("msg"));
         _SwitchSound.setChecked(spUtil.getBoolean("sound"));
         _SwitchVibrate.setChecked(spUtil.getBoolean("vibrate"));
+
+        _SwitchAssess.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                spUtil.putBoolean("assess", isChecked);
+                if (isChecked) {
+                    presenter.AssessState(true, SettingsActivity.this);
+                } else {
+                    presenter.AssessState(false, SettingsActivity.this);
+                }
+            }
+        });
 
 
         _SwitchMsg.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
@@ -124,8 +151,8 @@ public class SettingsActivity extends ToolBarActivity {
      * 绑定Presenter
      */
     @Override
-    public BasePresenterImp createPresenter() {
-        return null;
+    public AssessSettingsPressenter createPresenter() {
+        return new AssessSettingsPressenter();
     }
 
     @Override

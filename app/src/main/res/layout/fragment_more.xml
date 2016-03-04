@@ -1,174 +1,196 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-              xmlns:tools="http://schemas.android.com/tools"
-              android:layout_width="match_parent"
-              android:layout_height="match_parent"
-              android:background="@color/colorBg"
-              android:orientation="vertical"
-              tools:context="com.hewuzhe.ui.fragment.WarriorFragment">
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/colorBg"
+    android:orientation="vertical"
+    tools:context="com.hewuzhe.ui.fragment.WarriorFragment">
 
-    <include layout="@layout/toolbar_layout"/>
+    <include layout="@layout/toolbar_layout" />
 
-    <LinearLayout android:layout_width="match_parent"
-                  android:layout_height="wrap_content"
-                  android:layout_marginTop="8px"
-                  android:background="@color/colorListBg"
-                  android:orientation="vertical"
-                  android:paddingLeft="15dp">
+
+    <LinearLayout
+        android:id="@+id/lay_settings"
+        android:layout_width="match_parent"
+        android:layout_height="80px"
+        android:layout_marginTop="8dp"
+        android:background="@color/colorListBg"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        android:paddingLeft="15dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="聊天通知设置"
+            android:textColor="@color/white"
+            android:textSize="30px" />
+
+        <ImageView
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:padding="12dp"
+            android:src="@mipmap/icon_arrow_right" />
+
+
+    </LinearLayout>
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:background="@color/colorListBg"
+        android:orientation="vertical"
+        android:paddingLeft="15dp">
 
         <LinearLayout
-            android:id="@+id/lay_settings"
+            android:id="@+id/lay_clear_data"
             android:layout_width="match_parent"
             android:layout_height="80px"
 
             android:gravity="center_vertical"
-            android:orientation="horizontal"
-            >
+            android:orientation="horizontal">
 
-            <TextView android:layout_width="wrap_content"
-                      android:layout_height="wrap_content"
-                      android:layout_weight="1"
-                      android:text="聊天通知设置"
-                      android:textColor="@color/white"
-                      android:textSize="30px"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="清除缓存"
+                android:textColor="@color/white"
+                android:textSize="30px" />
 
-            <ImageView android:layout_width="40dp"
-                       android:layout_height="40dp"
-                       android:padding="12dp"
-                       android:src="@mipmap/icon_arrow_right"/>
-
-
-        </LinearLayout>
-
-        <TextView android:layout_width="match_parent"
-                  android:layout_height="1dp"
-                  android:layout_marginLeft="8dp"
-                  android:background="@color/colorBg"/>
-
-
-        <LinearLayout android:id="@+id/lay_check_update"
-                      android:layout_width="match_parent"
-                      android:layout_height="80px"
-                      android:gravity="center_vertical"
-                      android:orientation="horizontal"
-            >
-
-            <TextView android:layout_width="wrap_content"
-                      android:layout_height="wrap_content"
-                      android:layout_weight="1"
-                      android:text="关于艾特功夫"
-                      android:textColor="@color/white"
-                      android:textSize="30px"/>
-
-            <ImageView android:layout_width="40dp"
-                       android:layout_height="40dp"
-                       android:padding="12dp"
-                       android:src="@mipmap/icon_arrow_right"/>
+            <ImageView
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:padding="12dp"
+                android:src="@mipmap/icon_arrow_right" />
 
 
         </LinearLayout>
 
-        <TextView android:layout_width="match_parent"
-                  android:layout_height="1dp"
-                  android:layout_marginLeft="8dp"
-                  android:background="@color/colorBg"/>
-
-
-        <LinearLayout android:id="@+id/lay_address"
-                      android:layout_width="match_parent"
-                      android:layout_height="80px"
-                      android:gravity="center_vertical"
-                      android:orientation="horizontal">
-
-            <TextView android:layout_width="wrap_content"
-                      android:layout_height="wrap_content"
-                      android:layout_weight="1"
-                      android:text="收货地址"
-                      android:textColor="@color/white"
-                      android:textSize="30px"/>
-
-            <ImageView android:layout_width="40dp"
-                       android:layout_height="40dp"
-                       android:padding="12dp"
-                       android:src="@mipmap/icon_arrow_right"/>
-
-
-        </LinearLayout>
-
-
-    </LinearLayout>
-
-
-    <LinearLayout android:layout_width="match_parent"
-                  android:layout_height="wrap_content"
-                  android:layout_marginTop="8px"
-                  android:background="@color/colorListBg"
-                  android:orientation="vertical"
-                  android:paddingLeft="15dp">
-
-
-        <LinearLayout android:id="@+id/lay_clear_data"
-                      android:layout_width="match_parent"
-                      android:layout_height="80px"
-
-                      android:gravity="center_vertical"
-                      android:orientation="horizontal"
-            >
-
-            <TextView android:layout_width="wrap_content"
-                      android:layout_height="wrap_content"
-                      android:layout_weight="1"
-                      android:text="清除缓存"
-                      android:textColor="@color/white"
-                      android:textSize="30px"/>
-
-            <ImageView android:layout_width="40dp"
-                       android:layout_height="40dp"
-                       android:padding="12dp"
-                       android:src="@mipmap/icon_arrow_right"/>
-
-
-        </LinearLayout>
-
-        <TextView android:layout_width="match_parent"
-                  android:layout_height="1dp"
-                  android:layout_marginLeft="8dp"
-                  android:background="@color/colorBg"/>
-
-
-        <LinearLayout android:id="@+id/lay_service"
-                      android:layout_width="match_parent"
-                      android:layout_height="80px"
-
-                      android:gravity="center_vertical"
-                      android:orientation="horizontal"
-            >
-
-            <TextView android:layout_width="wrap_content"
-                      android:layout_height="wrap_content"
-                      android:layout_weight="1"
-                      android:text="在线客服 (12345645)"
-                      android:textColor="@color/white"
-                      android:textSize="30px"/>
-
-
-        </LinearLayout>
-
-
-    </LinearLayout>
-
-
-    <Button android:id="@+id/btn_exit"
+        <TextView
             android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_marginLeft="8dp"
+            android:background="@color/colorBg" />
+
+        <LinearLayout
+            android:id="@+id/lay_check_update"
+            android:layout_width="match_parent"
+            android:layout_height="80px"
+            android:gravity="center_vertical"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="关于iKungfu"
+                android:textColor="@color/white"
+                android:textSize="30px" />
+
+            <ImageView
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:padding="12dp"
+                android:src="@mipmap/icon_arrow_right" />
+
+
+        </LinearLayout>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_marginLeft="8dp"
+            android:background="@color/colorBg" />
+
+
+        <LinearLayout
+            android:id="@+id/lay_address"
+            android:layout_width="match_parent"
+            android:layout_height="80px"
+            android:gravity="center_vertical"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="收货地址"
+                android:textColor="@color/white"
+                android:textSize="30px" />
+
+            <ImageView
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:padding="12dp"
+                android:src="@mipmap/icon_arrow_right" />
+
+
+        </LinearLayout>
+
+
+    </LinearLayout>
+
+
+    <LinearLayout
+        android:id="@+id/lay_service"
+        android:layout_width="match_parent"
+        android:layout_height="80px"
+        android:layout_marginTop="5dp"
+        android:background="@color/colorListBg"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        android:paddingLeft="15dp">
+
+        <TextView
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="25px"
-            android:layout_marginRight="25px"
-            android:layout_marginTop="60px"
-            android:background="@drawable/select_bg"
-            android:gravity="center"
-            android:padding="20px"
-            android:text="退出"
-            android:textColor="@color/colorLine"
-            android:textSize="30px"/>
+            android:layout_weight="1"
+            android:text="在线客服 (12345645)"
+            android:textColor="@color/white"
+            android:textSize="30px" />
+
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/lay_feedback"
+        android:layout_width="match_parent"
+        android:layout_height="80px"
+        android:layout_marginTop="5dp"
+        android:background="@color/colorListBg"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        android:paddingLeft="15dp"
+        android:visibility="gone">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="留言反馈"
+            android:textColor="@color/white"
+            android:textSize="30px" />
+
+
+    </LinearLayout>
+
+    <Button
+        android:id="@+id/btn_exit"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="25px"
+        android:layout_marginRight="25px"
+        android:layout_marginTop="60px"
+        android:background="@drawable/select_bg"
+        android:gravity="center"
+        android:padding="20px"
+        android:text="退出"
+        android:textColor="@color/colorLine"
+        android:textSize="30px" />
 
 
 </LinearLayout>

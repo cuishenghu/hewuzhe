@@ -19,7 +19,7 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@color/colorPrimary"
+            android:background="@color/colorListBg"
             android:orientation="vertical"
             android:paddingBottom="10dp"
             android:paddingTop="10dp">
@@ -39,13 +39,14 @@
             android:id="@+id/list_product"
             android:layout_width="match_parent"
             android:layout_height="66dp"
+            android:background="@color/colorListBg"
             android:visibility="visible" />
 
         <LinearLayout
             android:id="@+id/ll_bottom"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@color/colorPrimary"
+            android:background="@color/colorListBg"
             android:orientation="vertical"
             android:paddingBottom="10dp"
             android:visibility="visible">
@@ -53,7 +54,7 @@
             <View
                 android:layout_width="match_parent"
                 android:layout_height="1dp"
-                android:layout_marginLeft="30dp"
+                android:layout_marginLeft="15dp"
                 android:background="@color/colorBg" />
 
             <LinearLayout

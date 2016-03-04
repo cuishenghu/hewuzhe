@@ -2,7 +2,6 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/colorBg"
     android:orientation="vertical">
 
     <com.hewuzhe.view.MyCommonTitle
@@ -14,21 +13,19 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_above="@+id/ll_bottom"
+        android:background="@color/colorBg"
         android:layout_below="@+id/aci_mytitle">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-
-
-            android:background="@color/colorPrimary"
+            android:background="@color/colorListBg"
             android:orientation="vertical">
 
             <ListView
                 android:id="@+id/list_order"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:background="@color/colorPrimary" />
+                android:layout_height="wrap_content" />
         </LinearLayout>
     </ScrollView>
 
@@ -36,9 +33,8 @@
         android:id="@+id/ll_bottom"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
         android:layout_alignParentBottom="true"
-        android:background="@color/colorPrimary"
+        android:background="@color/colorListBg"
         android:orientation="vertical">
 
 

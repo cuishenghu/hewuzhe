@@ -17,8 +17,8 @@ import com.hewuzhe.R;
 import com.hewuzhe.presenter.base.BasePresenterImp;
 import com.hewuzhe.ui.base.BaseActivity;
 import com.hewuzhe.ui.cons.C;
-import com.hewuzhe.ui.fragment.EquipmentFragment;
 import com.hewuzhe.ui.fragment.EquipmentFragment2;
+import com.hewuzhe.ui.fragment.EquipmentFragment3;
 import com.hewuzhe.ui.fragment.FederalFragment;
 import com.hewuzhe.ui.fragment.MoreFragment;
 import com.hewuzhe.ui.fragment.PowerFragment;
@@ -49,7 +49,7 @@ public class MainActivity extends BaseActivity {
     private Fragment curFragment;
     private FederalFragment federalFragment;
     private PowerFragment powerFragment;
-    private EquipmentFragment2 equipmentFragment2;
+    private EquipmentFragment3 equipmentFragment3;
     private MoreFragment moreFragment;
 
     @Override
@@ -67,7 +67,7 @@ public class MainActivity extends BaseActivity {
 
     /**
      * @param savedInstanceState 缓存数据
-     *                           <p/>
+     *                           <p>
      *                           初始化一些事情
      */
     @Override
@@ -162,11 +162,11 @@ public class MainActivity extends BaseActivity {
                 menuFive.setBackgroundColor(primary);
 
 
-                if (null == equipmentFragment2) {
-                    equipmentFragment2 = new EquipmentFragment2();
+                if (null == equipmentFragment3) {
+                    equipmentFragment3 = new EquipmentFragment3();
                 }
 
-                switchContent(curFragment, equipmentFragment2);
+                switchContent(curFragment, equipmentFragment3);
 
 
             }
@@ -239,9 +239,7 @@ public class MainActivity extends BaseActivity {
             QupaiDraftManager draftManager = new QupaiDraftManager();
             draftManager.deleteDraft(data);
 
-
             KLog.d(path);
-
             Intent intent = new Intent(this, PublishVideoActivity.class);
             intent.putExtra("data", new Bun().putString("file_name", path).putInt("uploadType", C.UPLOAD_TYPE_RECORD).ok());
             startActivity(intent);

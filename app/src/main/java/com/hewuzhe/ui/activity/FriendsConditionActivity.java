@@ -243,9 +243,15 @@ public class FriendsConditionActivity extends SwipeRecycleViewActivity<FriendCon
     public void collectAndOther(boolean b, int flag, int position) {
         if (flag == ConditionPresenter.PRAISE) {
             if (b) {
+                toast("点赞成功");
                 adapter.data.get(position).LikeNum += 1;
                 adapter.data.get(position).IsLike = true;
-                adapter.notifyItemChanged(position);
+                adapter.notifyDataSetChanged();
+            } else {
+                toast("取消点赞");
+                adapter.data.get(position).LikeNum -= 1;
+                adapter.data.get(position).IsLike = false;
+                adapter.notifyDataSetChanged();
             }
         }
 
@@ -434,7 +440,7 @@ public class FriendsConditionActivity extends SwipeRecycleViewActivity<FriendCon
                 .setCaptureHeight(getResources().getDimension(R.dimen.qupai_recorder_capture_height_size))
                 .setBeautySkinViewOn(false)
                 .setFlashLightOn(true)
-                .setTimelineTimeIndicator(false)
+                .setTimelineTimeIndicator(true)
                 .build();
 
         _CreateInfo.setSessionCreateInfo(create_info);
@@ -459,7 +465,9 @@ public class FriendsConditionActivity extends SwipeRecycleViewActivity<FriendCon
             //得到视频path，和缩略图path的数组，返回十张缩略图,和视频时长
             String path = result.getPath();
             result.getThumbnail();
-            result.getDuration();
+            Long duration = result.getDuration();
+            duration = duration / 1000000;
+            KLog.d("duration:" + duration);
 
             //开始上传，上传前请务必确认已调用授权接口
 //           startUpload();
@@ -470,7 +478,7 @@ public class FriendsConditionActivity extends SwipeRecycleViewActivity<FriendCon
 
             KLog.d(path);
             Intent intent = new Intent(this, PublishConditionVideoActivity.class);
-            intent.putExtra("data", new Bun().putString("file_name", path).putInt("uploadType", C.UPLOAD_TYPE_RECORD).ok());
+            intent.putExtra("data", new Bun().putString("file_name", path).putString("duration", duration + "").putInt("uploadType", C.UPLOAD_TYPE_RECORD).ok());
             startActivityForResult(intent, 102);
 
         } else if (resultCode == Activity.RESULT_OK && requestCode == 102) {
@@ -480,4 +488,16 @@ public class FriendsConditionActivity extends SwipeRecycleViewActivity<FriendCon
             presenter.getData(page, count);
         }
     }
+
+
+    @Override
+    public void isWuYou(Boolean data, int userid) {
+        if (data) {
+            startActivity(FriendProfileActivity.class, new Bun().putInt("id", userid).ok());
+        } else {
+            startActivity(StrangerProfileSettingsActivity.class, new Bun().putInt("id", userid).ok());
+        }
+    }
+
+
 }

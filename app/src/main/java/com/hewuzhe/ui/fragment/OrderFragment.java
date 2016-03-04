@@ -37,7 +37,7 @@ public class OrderFragment extends Fragment implements IXListViewListener {
     private static int pageSum = 5;// perpage默认每页显示5条信息
     private int pageNo = 0;// 当前显示的页面
     private int mType = 1;// 1、待付款 2、待发货 3、待收货 4、已收货
-    private List<OrderNumber> orders = new ArrayList<OrderNumber>();
+    private ArrayList<OrderNumber> orders = new ArrayList<OrderNumber>();
     private OrderGroupAdapter orderGroupAdapter;
     private int groupCount;
     private int sumtiaoshu = 0;
@@ -106,7 +106,7 @@ public class OrderFragment extends Fragment implements IXListViewListener {
         params.put("startRowIndex", pageNo * pageSum);//开始行索引
         params.put("maximumRows", pageSum);//每页条数
         params.put("userId", new SessionUtil(getActivity()).getUserId());//用户ID   由于自己ID没有订单,现在传2,此ID为李发起的ID.待修改成自己的ID=============================================================================
-        params.put("proNum", 2);//每个订单下显示商品个数
+        params.put("proNum", 1000);//每个订单下显示商品个数
         params.put("state", mType);//订单状态 1：未付款 2：代发货 3：已发货 4：已签收 5：买家已评价 6：卖家已评价 7：已过期 8：全部 9:申请取消订单 10：已取消订单
         HttpUtils.getOrderByUserId(res_getOrderByUserId, params);
     }

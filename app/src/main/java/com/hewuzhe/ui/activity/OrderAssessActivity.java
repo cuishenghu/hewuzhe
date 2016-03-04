@@ -13,6 +13,7 @@ import android.widget.TextView;
 import com.google.gson.Gson;
 import com.hewuzhe.R;
 import com.hewuzhe.model.Assess;
+import com.hewuzhe.model.OrderContent;
 import com.hewuzhe.model.OrderGroup;
 import com.hewuzhe.model.OrderNumber;
 import com.hewuzhe.ui.adapter.OrderAssessAdapter;
@@ -50,11 +51,15 @@ public class OrderAssessActivity extends BaseActivity2 {
     private Assess assess;
     boolean ping1 = false, ping2 = false, ping3 = false;
     private List<Map<String, String>> lists = new ArrayList<Map<String, String>>();
+    private List<OrderContent> list;
+    private String billId;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         order = (OrderNumber) getIntent().getSerializableExtra("order");
+        list = (ArrayList<OrderContent>) getIntent().getSerializableExtra("list");
+        billId = (String) getIntent().getSerializableExtra("billId");
         setContentView(R.layout.activity_order_assess);
 
         initView();
@@ -73,7 +78,7 @@ public class OrderAssessActivity extends BaseActivity2 {
         mListView = (ListView) findViewById(R.id.list_order);
         tv_submit = (TextView) findViewById(R.id.tv_submit_btn);//提交
 
-        orderAssessAdapter = new OrderAssessAdapter(OrderAssessActivity.this, order.getProList());
+        orderAssessAdapter = new OrderAssessAdapter(OrderAssessActivity.this, list);
         mListView.setAdapter(orderAssessAdapter);
         /**
          * ListView自适应高度
@@ -111,13 +116,12 @@ public class OrderAssessActivity extends BaseActivity2 {
 //            comlist = gson.toJson(lists).toString();
 //        }
 //    }
-
     @Override
     public void onClick(View view) {
         super.onClick(view);
         switch (view.getId()) {
             case R.id.tv_submit_btn://提交评论
-                for (int i = 0; i < mListView.getChildCount(); i++) {
+                for (int i = 0; i < list.size(); i++) {
                     Map<String, String> map = new HashMap<String, String>();
                     LinearLayout layout = (LinearLayout) mListView.getChildAt(i);
                     EditText et = (EditText) layout.findViewById(R.id.ed_content);
@@ -126,10 +130,10 @@ public class OrderAssessActivity extends BaseActivity2 {
                     img_haoping = (ImageView) layout.findViewById(R.id.img_haoping);
                     String content = et.getText().toString();
                     String userId = new SessionUtil(OrderAssessActivity.this).getUserId() + "";
-                    String productId = order.getProList().get(i).getProductId();
-                    String productPriceId = order.getProList().get(i).getProductPriceId();
-                    ping1= img_chaping.isSelected();
-                    ping2= img_zhongping.isSelected();
+                    String productId = list.get(i).getProductId();
+                    String productPriceId = list.get(i).getProductPriceId();
+                    ping1 = img_chaping.isSelected();
+                    ping2 = img_zhongping.isSelected();
                     String type = ping1 ? "0" : (ping2 ? "1" : "2");
                     map.put("userId", userId);
                     map.put("productId", productId);
@@ -143,11 +147,13 @@ public class OrderAssessActivity extends BaseActivity2 {
                 }
                 RequestParams params = new RequestParams();
                 params.put("comlist", comlist);
-                params.put("billid", order.getId());
+                params.put("billid", billId);
                 HttpUtils.submitCommentOrder(new HttpErrorHandler() {
                     @Override
                     public void onRecevieSuccess(com.alibaba.fastjson.JSONObject json) {
                         Tools.toast(OrderAssessActivity.this, "提交评论成功");
+                        startActivity(new Intent(OrderAssessActivity.this, OrderCenterActivity2.class).putExtra("mType", 4));
+                        OrderCenterActivity2.OrderCenterActivity2.finish();
                         finish();
                     }
                 }, params);

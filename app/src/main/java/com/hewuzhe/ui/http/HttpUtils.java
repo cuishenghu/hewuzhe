@@ -108,4 +108,20 @@ public class HttpUtils {
     public static void buyNow(AsyncHttpResponseHandler handler, RequestParams params) {
         client.get(UrlContants.getUrl(UrlContants.BUYNOW), params, handler);
     }
+
+    /* 获取被屏蔽信息的舞友 */
+    public static void getShieldNewsFriend(AsyncHttpResponseHandler handler, RequestParams params) {
+        client.get(UrlContants.getUrl(UrlContants.SHIELDNEWSFRIEND), params, handler);
+    }
+
+    /* 获取被屏蔽信息的舞友 */
+    public static void getBannarList(AsyncHttpResponseHandler handler, RequestParams params) {
+        client.get(UrlContants.getUrl(UrlContants.BANNARLIST), params, handler);
+    }
+
+    /* 根据用户ID，查询订单个数 */
+    public static void getSelectBillCount(AsyncHttpResponseHandler handler, RequestParams params) {
+        client.get(UrlContants.getUrl(UrlContants.SELECTBILLCOUNT), params, handler);
+    }
+
 }

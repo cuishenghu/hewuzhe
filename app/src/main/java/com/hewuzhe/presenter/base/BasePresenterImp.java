@@ -30,6 +30,14 @@ public abstract class BasePresenterImp<V> implements BasePresenter<V> {
     }
 
 
+    public void stopTask() {
+        if (this.mCompositeSubscription != null) {
+            this.mCompositeSubscription.unsubscribe();
+        }
+
+    }
+
+
     public CompositeSubscription getCompositeSubscription() {
         if (this.mCompositeSubscription == null) {
             this.mCompositeSubscription = new CompositeSubscription();

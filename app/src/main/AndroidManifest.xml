@@ -227,6 +227,7 @@
         <activity android:name=".ui.activity.OrderConfirmFirstActivity"></activity>
         <activity android:name=".ui.activity.OrderConfirmSecondActivity"></activity>
         <activity android:name=".ui.activity.OrderCenterActivity"></activity>
+        <activity android:name=".ui.activity.OrderCenterActivity2"></activity>
         <activity android:name=".ui.activity.OrderDetailsActivity"></activity>
         <activity android:name=".ui.activity.OrderAssessActivity"></activity>
         <activity android:name=".ui.activity.MyScoreActivity"></activity>
@@ -237,6 +238,9 @@
         <activity android:name=".ui.activity.ProductClassifiActivity"></activity>
         <activity android:name=".ui.activity.SiteActivity"></activity>
         <activity android:name=".ui.activity.SiteAddActivity"></activity>
+        <activity android:name=".ui.activity.FeedBackActivity"></activity>
+        <activity android:name=".ui.activity.MoreShieldListActivity"></activity>
+
         <!-- 支付 -->
         <!-- Ping++ SDK 注册 -->
         <activity

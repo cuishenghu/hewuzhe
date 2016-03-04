@@ -343,6 +343,12 @@ public class LocationActivity extends AppCompatActivity
                     .longitude(location.getLongitude()).build();
             mBaiduMap.setMyLocationData(locData);
 
+//            mCurrentMarker = BitmapDescriptorFactory
+//                    .fromResource(R.mipmap.icon_loc);
+//            MyLocationConfiguration config = new MyLocationConfiguration(mCurrentMode, true, mCurrentMarker);
+//            mBaiduMap.setMyLocationConfigeration(config);
+
+
             cityName = location.getCity();
 
             if (isFirstLoc) {
@@ -375,7 +381,7 @@ public class LocationActivity extends AppCompatActivity
             _SearchLl.setVisibility(View.VISIBLE);
             if (list != null && list.size() > 0) {
                 searchAddresses.clear();
-                searchAddresses.addAll(list);
+                searchAddresses.add(list.get(0));
                 searchAddressAdapter.notifyDataSetChanged();
             }
         }

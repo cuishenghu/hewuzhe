@@ -14,6 +14,9 @@ public class TimeUtil {
     public static long MINUTE = 1000 * 60;
     public static long HOUR = 1000 * 60 * 60;
     public static long DAY = 1000 * 60 * 60 * 24;
+    private static String hoursString = "";
+    private static String minutesString = "";
+    private static String secondsString = "";
 
     public static int getCurrentYear() {
         Time t = new Time();
@@ -177,6 +180,36 @@ public class TimeUtil {
     }
 
 
+    /**
+     * @param timeStr 已经过了多长时间
+     * @return
+     */
+    public static String timeHavedDay(String timeStr) {
+        Date date = null;
+        try {
+            SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+            date = format.parse(timeStr);
+        } catch (ParseException e) {
+            e.printStackTrace();
+            return "";
+        }
+
+        long timeStamp = date.getTime();
+
+        Date currentTime = new Date();
+        long currentTimeStamp = currentTime.getTime();
+
+        long total = currentTimeStamp - timeStamp;
+
+        if (total <= 0) {
+            return "";
+        }
+
+        int days = Math.round(total / (DAY));
+
+        return days + "";
+    }
+
     public static String timeFormat(long time) {
         Date date = null;
 
@@ -190,10 +223,20 @@ public class TimeUtil {
             return "";
         }
 
-        long minutes = Math.abs(total_seconds / 60);
-        long seconds = Math.abs((total_seconds - minutes * 60));
+        long hours = Math.abs(time / HOUR);
+        long minutes = Math.abs((time - hours * HOUR) / MINUTE);
+        long seconds = Math.abs((time - (minutes * MINUTE + hours * HOUR)) / 1000);
 
-        String leftTime = minutes + ":" + seconds;
+        if (hours < 10) {
+            hoursString = "0" + hours;
+        }
+        if (minutes < 10) {
+            minutesString = "0" + minutes;
+        }
+        if (seconds < 10) {
+            secondsString = "0" + seconds;
+        }
+        String leftTime = hoursString + ":" + minutesString + ":" + secondsString;
 
         return leftTime;
     }
@@ -247,6 +290,7 @@ public class TimeUtil {
             return "";
         }
     }
+
     public static String timeFormatFive(String timeStr) {
         Date date = null;
         if (StringUtil.isEmpty(timeStr)) {

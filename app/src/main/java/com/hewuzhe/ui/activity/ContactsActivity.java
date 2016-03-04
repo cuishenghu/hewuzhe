@@ -89,7 +89,6 @@ public class ContactsActivity extends RecycleViewActivity<FriendsPresenter, Frie
         ArrayList<Friends> friends = (ArrayList<Friends>) DataSupport.findAll(Friends.class);
 
         if (friends != null && friends.size() > 0) {
-            recyclerView.setAdapter(adapter);
             ArrayList<Friend> friends3 = new ArrayList<>();
             for (Friends friends1 : friends) {
                 Friend friend = new Friend();
@@ -108,7 +107,7 @@ public class ContactsActivity extends RecycleViewActivity<FriendsPresenter, Frie
                 friend.Rank = friends1.rank;
                 friends3.add(friend);
             }
-
+            _Friends = friends3;
             adapter.addDatas(friends3);
             presenter.getFriends();
 
@@ -202,6 +201,7 @@ public class ContactsActivity extends RecycleViewActivity<FriendsPresenter, Frie
             }
         });
 
+
         _EdtSearchContent.setOnEditorActionListener(new TextView.OnEditorActionListener() {
             @Override
             public boolean onEditorAction(TextView textView, int i, KeyEvent keyEvent) {
@@ -212,6 +212,16 @@ public class ContactsActivity extends RecycleViewActivity<FriendsPresenter, Frie
                 return false;
             }
         });
+
+
+        header.findViewById(R.id.img_search).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String keyWord = _EdtSearchContent.getText().toString().trim();
+                search(keyWord);
+            }
+        });
+
 
         _EdtSearchContent.addTextChangedListener(new TextWatcher() {
             @Override
@@ -229,7 +239,6 @@ public class ContactsActivity extends RecycleViewActivity<FriendsPresenter, Frie
                 if (_EdtSearchContent.getText().toString().trim().length() == 0) {
                     if (_Friends.size() > 0) {
                         adapter.addDatas(_Friends);
-                        recyclerView.setAdapter(adapter);
                     }
 
                 }
@@ -242,19 +251,14 @@ public class ContactsActivity extends RecycleViewActivity<FriendsPresenter, Frie
 
     private void search(String keyWord) {
         hideSoftMethod(_EdtSearchContent);
-
+        _NewFriends.clear();
         for (Friend friend : _Friends) {
-
             if (friend.NicName.contains(keyWord)) {
                 _NewFriends.add(friend);
             }
         }
-
         recyclerView.setAdapter(adapter);
         adapter.addDatas(_NewFriends);
-//        if (_NewFriends.size() > 0) {
-//            _TvRecyclerindexviewTopc.setText(adapter.getItem(0).topc);
-//        }
     }
 
     /**
@@ -290,7 +294,6 @@ public class ContactsActivity extends RecycleViewActivity<FriendsPresenter, Frie
         _Friends = friends;
         if (_Friends.size() > 0) {
             DataSupport.deleteAll(Friends.class);
-
             for (Friend friend : friends) {
                 Friends friends1 = new Friends();
                 friends1.friendid = friend.Id;
@@ -307,17 +310,10 @@ public class ContactsActivity extends RecycleViewActivity<FriendsPresenter, Frie
                 friends1.teamid = friend.TeamId;
                 friends1.rank = friend.Rank;
                 boolean isSuccess = friends1.save();
-
                 KLog.d("isSuccess:" + isSuccess);
-
             }
         }
-        recyclerView.setAdapter(adapter);
-//        mAdapter.getDatas().clear();
-//        mAdapter.getDatas().addAll(_Friends);
-//        mAdapter.notifyDataSetChanged();
         adapter.addDatas(friends);
-//        _TvRecyclerindexviewTopc.setText(mAdapter.getItem(0).topc);
     }
 
     @Override
@@ -347,7 +343,7 @@ public class ContactsActivity extends RecycleViewActivity<FriendsPresenter, Frie
     protected void onResume() {
         super.onResume();
         if (!isFirstRun) {
-//            presenter.getFriends();
+            presenter.getFriends();
         } else {
             isFirstRun = false;
         }
@@ -363,4 +359,9 @@ public class ContactsActivity extends RecycleViewActivity<FriendsPresenter, Frie
         startActivity(FriendProfileActivity.class, new Bun().putInt("id", item.Id).ok());
     }
 
+    @Override
+    protected void onPause() {
+        super.onPause();
+        presenter.stopTask();
+    }
 }

@@ -18,6 +18,8 @@ import com.hewuzhe.ui.adapter.base.BaseAdapter;
 import com.hewuzhe.ui.cons.C;
 import com.hewuzhe.ui.widget.GlideCircleTransform;
 
+import java.text.DecimalFormat;
+
 import butterknife.Bind;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
@@ -27,7 +29,7 @@ import butterknife.OnClick;
  */
 public class ShopCarAdapter extends BaseAdapter<ShopCarAdapter.VHolder, ShopCar, ShopCarPresenter> {
 
-    public int number=0;
+//    public int number=0;
     public int res_select=0;
 
     public ShopCarAdapter(Context context, ShopCarPresenter shopCarPresenter) {
@@ -56,42 +58,47 @@ public class ShopCarAdapter extends BaseAdapter<ShopCarAdapter.VHolder, ShopCar,
                 .placeholder(R.mipmap.img_bg)
                 .into(holder.icon_title);
 
-        number=shopCar.Number;
+//        number=shopCar.Number;
         shopCar.AllPrice = shopCar.Number*shopCar.ProductPriceTotalPrice;
         holder.shopcar_buynum.setText("x" + shopCar.Number);
-        holder.pro_price.setText("￥"+shopCar.ProductPriceTotalPrice);
+        DecimalFormat df = new DecimalFormat("########0.00");
+        holder.pro_price.setText("￥"+df.format(shopCar.ProductPriceTotalPrice));
         holder.shopcar_guige.setText("规格：" +shopCar.ProductSizeName+"/"+shopCar.ProductColorName);
         holder.shopcar_title.setText( shopCar.ProductName);
         holder.pro_num.setText(shopCar.Number + "");
         holder.shopcar_select.setImageResource(shopCar.select_state ? R.mipmap.icon_select_click : R.mipmap.icon_select_normal);
-        holder.shopcar_hint.setVisibility(shopCar.is_show?View.VISIBLE:View.INVISIBLE);
+        holder.shopcar_hint.setVisibility(shopCar.is_show ? View.VISIBLE : View.GONE);
+        holder.trash_button.setVisibility(shopCar.is_show?View.VISIBLE:View.INVISIBLE);
+        holder.shopcar_buynum.setVisibility(shopCar.is_show?View.GONE:View.VISIBLE);
 
         holder.trash_button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 _presenter.deleteShopCar(shopCar.Id + "");
+                Toast.makeText(context, "商品删除成功！！", Toast.LENGTH_SHORT).show();
+//                for (int i=0;i<data.size();i++){
+//                    data.get(i).is_show=true;
+//                }
             }
         });
 
         holder.shopcar_add.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                number++;
-                shopCar.Number=number;
-                holder.shopcar_buynum.setText("x"+number);
-                holder.pro_num.setText(number + "");
+                shopCar.Number++;
+                holder.shopcar_buynum.setText("x"+shopCar.Number);
+                holder.pro_num.setText(shopCar.Number + "");
             }
         });
 
         holder.shopcar_sub.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(number==1)
+                if(shopCar.Number==1)
                     return;
-                number--;
-                shopCar.Number=number;
-                holder.shopcar_buynum.setText("x"+number);
-                holder.pro_num.setText(number+"");
+                shopCar.Number--;
+                holder.shopcar_buynum.setText("x"+shopCar.Number);
+                holder.pro_num.setText(shopCar.Number+"");
             }
         });
 

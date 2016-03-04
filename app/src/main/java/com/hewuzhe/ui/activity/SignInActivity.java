@@ -9,6 +9,8 @@ import android.os.Message;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.CheckBox;
+import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -63,6 +65,8 @@ public class SignInActivity extends BaseActivity<SignInPresenter> implements Sig
     EditText edtUsername;
     @Bind(R.id.edt_pwd)
     EditText edtPwd;
+    @Bind(R.id.cb_remember_pwd)
+    CheckBox _CbRememberPwd;
     private LoadingDialog loadingDialog;
 
     private Handler handler;
@@ -70,6 +74,8 @@ public class SignInActivity extends BaseActivity<SignInPresenter> implements Sig
     private PopupWindowHelper popupWindowHelper;
     private ArrayList<UP> ups;
     private PopupWindow popupWindow;
+    private boolean isRememberPwd = true;
+
 
     @Override
     protected int provideContentViewId() {
@@ -98,7 +104,7 @@ public class SignInActivity extends BaseActivity<SignInPresenter> implements Sig
         tvSignIn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                presenter.signin(view);
+                presenter.signin(view, isRememberPwd);
             }
         });
 
@@ -126,6 +132,13 @@ public class SignInActivity extends BaseActivity<SignInPresenter> implements Sig
                 } else {
                     dismissUPs();
                 }
+            }
+        });
+
+        _CbRememberPwd.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                isRememberPwd = isChecked;
 
             }
         });
@@ -151,7 +164,7 @@ public class SignInActivity extends BaseActivity<SignInPresenter> implements Sig
                             dismissUPs();
                             edtUsername.setText(up.userName);
                             edtPwd.setText(up.passWord);
-                            presenter.signin(textView);
+//                          presenter.signin(textView, isRememberPwd);
 
                         }
                     });
@@ -200,9 +213,19 @@ public class SignInActivity extends BaseActivity<SignInPresenter> implements Sig
     public void showDialog() {
         if (loadingDialog == null) {
             loadingDialog = new LoadingDialog(SignInActivity.this, "正在登录...");
+            loadingDialog.setCanceledOnTouchOutside(false);
         }
         loadingDialog.show();
     }
+
+    public void showDialog(String content) {
+        if (loadingDialog == null) {
+            loadingDialog = new LoadingDialog(SignInActivity.this, content);
+            loadingDialog.setCanceledOnTouchOutside(false);
+        }
+        loadingDialog.show();
+    }
+
 
     @Override
     public void dismissDialog() {
@@ -225,13 +248,12 @@ public class SignInActivity extends BaseActivity<SignInPresenter> implements Sig
         return user;
     }
 
-
     private void authorize(Platform plat) {
+        showDialog("正在调起授权");
         if (plat == null) {
 //          popupOthers();
             return;
         }
-
         /**
          * 清除之前的账户
          * */
@@ -252,11 +274,11 @@ public class SignInActivity extends BaseActivity<SignInPresenter> implements Sig
         plat.SSOSetting(false);
         //获取用户资料
         plat.showUser(null);
-
     }
 
 
     public void onComplete(Platform platform, int action, HashMap<String, Object> res) {
+        dismissDialog();
         if (action == Platform.ACTION_USER_INFOR) {
             Message msg = new Message();
             msg.what = MSG_AUTH_COMPLETE;
@@ -266,6 +288,8 @@ public class SignInActivity extends BaseActivity<SignInPresenter> implements Sig
     }
 
     public void onError(Platform platform, int action, Throwable t) {
+        dismissDialog();
+
         if (action == Platform.ACTION_USER_INFOR) {
             handler.sendEmptyMessage(MSG_AUTH_ERROR);
         }
@@ -273,13 +297,16 @@ public class SignInActivity extends BaseActivity<SignInPresenter> implements Sig
     }
 
     public void onCancel(Platform platform, int action) {
+        dismissDialog();
         if (action == Platform.ACTION_USER_INFOR) {
             handler.sendEmptyMessage(MSG_AUTH_CANCEL);
         }
     }
 
+
     @SuppressWarnings("unchecked")
     public boolean handleMessage(Message msg) {
+        dismissDialog();
         switch (msg.what) {
             case MSG_AUTH_CANCEL: {
                 //取消授权
@@ -308,4 +335,11 @@ public class SignInActivity extends BaseActivity<SignInPresenter> implements Sig
         }
         return false;
     }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        dismissDialog();
+    }
+
 }

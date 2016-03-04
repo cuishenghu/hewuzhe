@@ -6,12 +6,15 @@ import android.support.annotation.Nullable;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.CheckBox;
+import android.widget.CompoundButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.hewuzhe.R;
+import com.hewuzhe.model.ArticleCollection;
 import com.hewuzhe.model.Product;
 import com.hewuzhe.model.ProductCollection;
 import com.hewuzhe.presenter.ProductCollectionPresenter;
@@ -86,32 +89,42 @@ public class ProductCollectionAdapter extends BaseAdapter<ProductCollectionAdapt
                 .into(holder.icon_title);
 
         holder.pro_name.setText(product.ProductName);
-        holder.pro_price.setText("￥"+product.Price);
+        holder.pro_price.setText("￥" + product.Price);
         holder.pro_visitnum.setText(product.VisitNum+"人");
         holder.pro_salenum.setText("销售量" + product.SaleNum);
 
-        holder.icon_title.setOnClickListener(new View.OnClickListener() {
+        holder._CbPlan.setChecked(product.isChecked);
+
+        holder._CbPlan.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
-            public void onClick(View v) {
-                context.startActivity(new Intent(context, ProductInfoActivity.class).putExtra("data", new Bun().putInt("proid", product.ProductId).ok()));
+            public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
+                if (b) {
+                    if (!ProductCollectionAdapter.this.checkedList.contains(product)) {
+                        product.isChecked = true;
+                        ProductCollectionAdapter.this.checkedList.add(product);
+                    }
+                } else {
+                    if (ProductCollectionAdapter.this.checkedList.contains(product)) {
+                        product.isChecked = false;
+                        ProductCollectionAdapter.this.checkedList.remove(product);
+                    }
+                }
             }
         });
 
-        holder.pro_name.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                context.startActivity(new Intent(context, ProductInfoActivity.class).putExtra("data", new Bun().putInt("proid", product.ProductId).ok()));
-            }
-        });
-
-        holder.trash_button.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                presenter.deleteCollection(product.ProductId, recyclerView);
-                removeItem(product);
-                showCheck();
-            }
-        });
+        if (this.isNeedShow) {
+            holder._CbPlan.setVisibility(View.VISIBLE);
+        } else {
+            holder._CbPlan.setVisibility(View.GONE);
+        }
+//        holder.trash_button.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                presenter.deleteCollection(product.ProductId, recyclerView);
+//                removeItem(product);
+//                showCheck();
+//            }
+//        });
     }
 
 
@@ -146,6 +159,10 @@ public class ProductCollectionAdapter extends BaseAdapter<ProductCollectionAdapt
         @Bind(R.id.trash_button)
         LinearLayout trash_button;
 
+        @Nullable
+        @Bind(R.id.cb_plan)
+        CheckBox _CbPlan;
+
 
         VHolder(View view) {
             super(view);
@@ -157,8 +174,14 @@ public class ProductCollectionAdapter extends BaseAdapter<ProductCollectionAdapt
     /**
      * 设置是否显示checkBox
      */
-    public void showCheck() {
-//        this.isNeedShow = isNeedShow;
+    public void showCheck(boolean isNeedShow) {
+        this.isNeedShow = isNeedShow;
+
+        if (!isNeedShow) {
+            for (ProductCollection articleCollection : data) {
+                articleCollection.isChecked = false;
+            }
+        }
         this.notifyDataSetChanged();
     }
 

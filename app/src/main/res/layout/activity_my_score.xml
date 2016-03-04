@@ -19,7 +19,7 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@color/colorPrimary"
+            android:background="@color/colorListBg"
             android:orientation="horizontal"
             android:paddingLeft="25dp"
             android:paddingTop="25dp">
@@ -76,7 +76,7 @@
             android:layout_height="0dp"
             android:layout_marginTop="5dp"
             android:layout_weight="1"
-            android:background="@color/colorPrimary"
+            android:background="@color/colorListBg"
             android:orientation="vertical">
 
             <TextView
@@ -90,7 +90,7 @@
 
             <View
                 android:layout_width="match_parent"
-                android:layout_height="1dp"
+                android:layout_height="2dp"
                 android:layout_marginLeft="15dp"
                 android:background="@color/colorBg" />
 

@@ -7,13 +7,16 @@ import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
+import android.widget.TextView;
 
 import com.hewuzhe.R;
 import com.hewuzhe.model.Product;
 import com.hewuzhe.presenter.ProductListPresenter;
 import com.hewuzhe.ui.adapter.ProductListAdapter;
 import com.hewuzhe.ui.base.RecycleViewActivity;
+import com.hewuzhe.ui.base.RecycleViewForListActivity;
 import com.hewuzhe.ui.base.ToolBarActivity;
 import com.hewuzhe.utils.Bun;
 import com.hewuzhe.view.ProductListView;
@@ -29,7 +32,7 @@ import butterknife.OnClick;
  * Created by zycom on 2016/1/22.
  */
 
-public class ProductListActivity extends RecycleViewActivity<ProductListPresenter, ProductListAdapter, Product> implements ProductListView{
+public class ProductListActivity extends RecycleViewForListActivity<ProductListPresenter, ProductListAdapter, Product> implements ProductListView{
 
 
     @Bind(R.id.salenum_title)   RelativeLayout salenum_title;       //销量
@@ -45,21 +48,18 @@ public class ProductListActivity extends RecycleViewActivity<ProductListPresente
     @Bind(R.id.comment_bottom)  ImageView comment_bottom;
     @Bind(R.id.new_top)         ImageView new_top;
     @Bind(R.id.new_bottom)      ImageView new_bottom;
-
+    @Bind(R.id.tv_title) TextView tvTitle;
 
     @Bind(R.id.product_list_search) ImageView product_list_search;
+    @Bind(R.id.title_daohang) LinearLayout title_daohang;
+    @Bind(R.id.ll_sousuo) LinearLayout ll_sousuo;
     @Bind(R.id.edt_search_content) EditText edt_search_content;   //搜索框
 
-    int id_o=0;
-    int id_t=0;
-    int id_s=0;
-    int id_f=0;
 
-    String searchText="";
 
     @Override
     protected String provideTitle() {
-        return "商品列表";
+            return "商品列表";
     }
 
     @Override
@@ -74,10 +74,16 @@ public class ProductListActivity extends RecycleViewActivity<ProductListPresente
     protected void initThings(Bundle savedInstanceState) {
         super.initThings(savedInstanceState);
         Intent intent =getIntent();
-        if(intent.getStringExtra("recommend")!=null&&intent.getStringExtra("recommend").equals("1"))
+        if(intent.getStringExtra("recommend")!=null&&intent.getStringExtra("recommend").equals("1")){
+            recommend = Integer.parseInt(intent.getStringExtra("recommend"));
             presenter.getData(page, count,"",0,0,0,0,0,0,1);
-        else if(intent.getIntExtra("classId",0)!=0)
-            presenter.getData(page, count,"",intent.getIntExtra("classId",0),0,0,0,0,0,0);
+            tvTitle.setText("推荐商品");
+//            title_daohang.setVisibility(View.GONE);
+//            ll_sousuo.setVisibility(View.GONE);
+        }
+        else if(intent.getIntExtra("classId",0)!=0){
+            classifi = intent.getIntExtra("classId",0);
+            presenter.getData(page, count,"",intent.getIntExtra("classId",0),0,0,0,0,0,0);}
         else
             presenter.getData(page, count);
 
@@ -122,8 +128,13 @@ public class ProductListActivity extends RecycleViewActivity<ProductListPresente
 
     @OnClick({R.id.salenum_title,R.id.price_title,R.id.comment_title,R.id.new_title})
     public void onSearchMethod(View v){
+        init();
         switch (v.getId()){
             case R.id.salenum_title:
+                id_f=0;
+//                id_o=0;
+                id_s=0;
+                id_t=0;
                 if(this.id_o==1) {
                     salenum_bottom.setImageResource(R.mipmap.prolistbottom_click);
                     salenum_top.setImageResource(R.mipmap.prolisttop);
@@ -137,9 +148,18 @@ public class ProductListActivity extends RecycleViewActivity<ProductListPresente
                     salenum_top.setImageResource(R.mipmap.prolisttop);
                     id_o=2;
                 }
-                presenter.getData(page, count,searchText,0,id_t,id_o,id_s,id_f,0,0);
+                if(classifi!=0)
+                    presenter.getData(page, count, searchText, classifi, 0, id_o, 0, 0, 0, recommend);
+//                    presenter.getData(page, count,searchText,classifi,id_t,id_o,id_s,id_f,0,recommend);
+                else
+                    presenter.getData(page, count, searchText, 0, 0, id_o, 0, 0, 0, recommend);
+//                    presenter.getData(page, count,searchText,0,id_t,id_o,id_s,id_f,0,recommend);
                 break;
             case R.id.price_title:
+                id_f=0;
+                id_o=0;
+                id_s=0;
+//                id_t=0;
                 if(this.id_t==1) {
                     price_bottom.setImageResource(R.mipmap.prolistbottom_click);
                     price_top.setImageResource(R.mipmap.prolisttop);
@@ -153,9 +173,18 @@ public class ProductListActivity extends RecycleViewActivity<ProductListPresente
                     price_top.setImageResource(R.mipmap.prolisttop);
                     id_t=2;
                 }
-                presenter.getData(page, count,searchText,0,id_t,id_o,id_s,id_f,0,0);
+                if(classifi!=0)
+                    presenter.getData(page, count,searchText,classifi,id_t,0,0,0,0,recommend);
+//                    presenter.getData(page, count,searchText,classifi,id_t,id_o,id_s,id_f,0,recommend);
+                else
+                    presenter.getData(page, count,searchText,0,id_t,0,0,0,0,recommend);
+//                    presenter.getData(page, count,searchText,0,id_t,id_o,id_s,id_f,0,recommend);
                 break;
             case R.id.comment_title:
+                id_f=0;
+                id_o=0;
+//                id_s=0;
+                id_t=0;
                 if(this.id_s==1) {
                     comment_bottom.setImageResource(R.mipmap.prolistbottom_click);
                     comment_top.setImageResource(R.mipmap.prolisttop);
@@ -169,9 +198,18 @@ public class ProductListActivity extends RecycleViewActivity<ProductListPresente
                     comment_top.setImageResource(R.mipmap.prolisttop);
                     id_s=2;
                 }
-                presenter.getData(page, count,searchText,0,id_t,id_o,id_s,id_f,0,0);
+                if(classifi!=0)
+                    presenter.getData(page, count,searchText,classifi,0,0,id_s,0,0,recommend);
+//                    presenter.getData(page, count,searchText,classifi,id_t,id_o,id_s,id_f,0,recommend);
+                else
+                    presenter.getData(page, count,searchText,0,0,0,id_s,0,0,recommend);
+//                    presenter.getData(page, count,searchText,0,id_t,id_o,id_s,id_f,0,recommend);
                 break;
             case R.id.new_title:
+//                id_f=0;
+                id_o=0;
+                id_s=0;
+                id_t=0;
                 if(this.id_f==1) {
                     new_bottom.setImageResource(R.mipmap.prolistbottom_click);
                     new_top.setImageResource(R.mipmap.prolisttop);
@@ -185,7 +223,12 @@ public class ProductListActivity extends RecycleViewActivity<ProductListPresente
                     new_top.setImageResource(R.mipmap.prolisttop);
                     id_f=2;
                 }
-                presenter.getData(page, count,searchText,0,id_t,id_o,id_s,id_f,0,0);
+                if(classifi!=0)
+                    presenter.getData(page, count,searchText,classifi,0,0,0,id_f,0,recommend);
+//                    presenter.getData(page, count,searchText,classifi,id_t,id_o,id_s,id_f,0,recommend);
+                else
+                    presenter.getData(page, count,searchText,0,0,0,0,id_f,0,recommend);
+//                    presenter.getData(page, count,searchText,0,id_t,id_o,id_s,id_f,0,recommend);
                 break;
         }
     }
@@ -193,7 +236,25 @@ public class ProductListActivity extends RecycleViewActivity<ProductListPresente
     @OnClick(R.id.product_list_search)
     public void proSearch(){
         searchText = edt_search_content.getText().toString();
-        presenter.getData(page, count,searchText,0,id_t,id_o,id_s,id_f,0,0);
+        if(classifi!=0)
+            presenter.getData(page, count,searchText,classifi,0,0,0,0,0,recommend);
+//            presenter.getData(page, count,searchText,classifi,id_t,id_o,id_s,id_f,0,recommend);
+        else
+            presenter.getData(page, count,searchText,0,0,0,0,0,0,recommend);
+//            presenter.getData(page, count,searchText,0,id_t,id_o,id_s,id_f,0,recommend);
+    }
+
+    public void init(){
+
+        page=1;
+        salenum_bottom.setImageResource(R.mipmap.prolistbottom);
+        salenum_top.setImageResource(R.mipmap.prolisttop);
+        price_bottom.setImageResource(R.mipmap.prolistbottom);
+        price_top.setImageResource(R.mipmap.prolisttop);
+        comment_bottom.setImageResource(R.mipmap.prolistbottom);
+        comment_top.setImageResource(R.mipmap.prolisttop);
+        new_bottom.setImageResource(R.mipmap.prolistbottom);
+        new_top.setImageResource(R.mipmap.prolisttop);
     }
 
 }

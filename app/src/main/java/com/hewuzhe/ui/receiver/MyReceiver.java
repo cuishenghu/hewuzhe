@@ -86,7 +86,7 @@ public class MyReceiver extends BroadcastReceiver {
                                     i = new Intent(context, CondtionCommetnsActivity.class);
                                     break;
                                 case 9:
-                                    i = new Intent(context, OrderDetailsActivity.class).putExtra("billId", msgExtra.id);
+                                    i = new Intent(context, OrderDetailsActivity.class).putExtra("billId", msgExtra.id).putExtra("mType",2);
                                     break;
                                 default:
                                     break;

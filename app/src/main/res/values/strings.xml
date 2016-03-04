@@ -96,8 +96,7 @@
     <string name="action_settings">Settings</string>
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="member_detail">
-        会员详情，凡是会员均有资格查看在线课堂中的课程，每位普通会员如果想成为付费会员的话必须要充值，每位会员充值的费用有期限，希望大家能定期检查自己的会员，过期不能查看概不负责。
-    </string>
+万部会员片库免费看、最新片最早看、高清不卡顿.专属身份标识彰显尊贵、VIP会员活动、VIP会员独享高速下载通道，离线观看高清视频，随时随地精彩不断    </string>
     <string name="member_price_1">
         <html>一个月
             <font color="#aabb00">20元</font>
@@ -122,7 +121,7 @@
         userId”执行登录请求，如果服务端判定此userId为未注册用户，可以将userInfo发送给注册接口，获取用户在此平台上的昵称、头像等数据，然后执行注册
     </string>
     <string name="about">
-        艾特·功夫（iKungfu）是专为武术，功夫，格斗等爱好者打造的一款集在线学习，视频教程，直播课堂，名师讲堂，即时通讯，互动交流，在线购物，行业资讯等服务为一体的平台！艾特功夫学校
+        iKungfu是专为武术，功夫，格斗等爱好者打造的一款集在线学习，视频教程，直播课堂，名师讲堂，即时通讯，互动交流，在线购物，行业资讯等服务为一体的平台！艾特功夫学校
         新校区完善使用，5800平方米超大豪华综合型培训学院，空翻、花技、战舞、格斗、养生、斗秀、影武、冷兵，学院配有宿舍食堂，校区配有卫生间，洗澡间，电视，空调，健身房，全校覆盖Wi-Fi，等，来学习的朋友们，到临沂后打电话给我们，会有专车接送
         ，前来学校参观，试学满意后再报名学习。
     </string>
@@ -141,28 +140,29 @@
     <string name="prolist_price">价格</string>
     <string name="prolist_good">好评</string>
     <string name="prolist_new">最新</string>
-    <string name="prolist_title">男士哑铃一对10公斤</string>
-    <string name="prolist_title_shopcar">男士哑铃一对10公斤男士哑铃一对10公斤</string>
-    <string name="prolist_price_s">￥20.00</string>
-    <string name="prolist_exchange_point">2000积分</string>
-    <string name="prolist_price_m">1000人</string>
+    <string name="prolist_title">title</string>
+    <string name="prolist_title_shopcar">title</string>
+    <string name="prolist_price_s">￥0.00</string>
+    <string name="prolist_exchange_point">0积分</string>
+    <string name="prolist_price_m">0人</string>
     <string name="prolist_exchange_s">兑换成功</string>
-    <string name="prolist_pay_num">销量：1000</string>
-    <string name="proinfo_title">瑜伽球大号一个</string>
+    <string name="prolist_pay_num">销量：0</string>
+    <string name="proinfo_title">title</string>
     <string name="proinfo_baoyou">包邮</string>
     <string name="proinfo_com_date">2016年1月26日11:41</string>
     <string name="proinfo_user_guige">规格：S/黑色</string>
-    <string name="proinfo_liulan">浏览量：1000</string>
-    <string name="proinfo_xiaoliang">销量：1000</string>
+    <string name="proinfo_liulan">浏览量：0</string>
+    <string name="proinfo_xiaoliang">销量：0</string>
     <string name="proinfo_guige">请选择规格</string>
     <string name="proinfo_user_comment">用户评价</string>
     <string name="proinfo_exchange_time">兑换时间：2016年1月26日16:52:03</string>
     <string name="proinfo_productinfo">商品介绍</string>
-    <string name="proinfo_pinglunnum">共100条</string>
+    <string name="proinfo_pinglunnum">共0条</string>
     <string name="proinfo_username">寒露</string>
-    <string name="proinfo_usercontent">我是谁，我在哪，今天晚上吃什么？我是谁，我在哪，今天晚上吃什么？我是谁，我在哪，今天晚上吃什么？我是谁，我在哪，今天晚上吃什么？我是谁，我在哪，今天晚上吃什么？我是谁，我在哪，今天晚上吃什么？我是谁，我在哪，今天晚上吃什么？我是谁，我在哪，今天晚上吃什么？我是谁，我在哪，今天晚上吃什么？我是谁，我在哪，今天晚上吃什么？我是谁，我在哪，今天晚上吃什么？</string>
-    <string name="proinfo_like">20</string>
+    <string name="proinfo_usercontent">data</string>
+    <string name="proinfo_like">0</string>
     <string name="proinfo_shoucang">收藏</string>
+    <string name="proinfo_tel">客服</string>
     <string name="proinfo_add_car">加入购物车</string>
     <string name="proinfo_buy">立即购买</string>
     <string name="proinfo_select_guige">请选择规格</string>
@@ -173,7 +173,7 @@
     <string name="proguige_chima_l">L</string>
     <string name="proguige_chima_m">M</string>
     <string name="procar_sum_price">合计：</string>
-    <string name="procar_price">￥20.00</string>
+    <string name="procar_price">￥0.00</string>
     <string name="procar_yunfei">不含运费</string>
     <string name="procar_buy">结算</string>
     <string name="procar_shop_title">功夫库</string>

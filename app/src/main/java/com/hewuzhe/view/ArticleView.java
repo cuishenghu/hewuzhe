@@ -2,6 +2,7 @@ package com.hewuzhe.view;
 
 import com.hewuzhe.model.Article;
 import com.hewuzhe.model.Comment;
+import com.hewuzhe.model.WebContents;
 import com.hewuzhe.view.adapter.ConditionView;
 import com.hewuzhe.view.base.CommentView;
 import com.hewuzhe.view.base.GetView;
@@ -18,5 +19,5 @@ public interface ArticleView extends SetView<Article>, CommentView, ConditionVie
 
     void isWuYou(Boolean data, int userid);
 
-    void setWeb(String res);
+    void setWeb(WebContents res);
 }

@@ -48,14 +48,14 @@ public class MegaGameActivity extends TabToolBarActivity<MegaGamesPresenter> {
     public void initTabs() {
         ViewPager mViewPager = (ViewPager) findViewById(R.id.viewpager);
         MyViewPagerAdapter viewPagerAdapter = new MyViewPagerAdapter(getSupportFragmentManager());
-        viewPagerAdapter.addFragment(MegaGameFragment.newInstance(new Bun().putString("path", "SelectMatchPageByPerson").ok()), "武者大赛");//添加Fragment
+        viewPagerAdapter.addFragment(MegaGameFragment.newInstance(new Bun().putString("path", "SelectMatchPageByPerson").ok()), "武者赛事");//添加Fragment
         viewPagerAdapter.addFragment(MegaGameFragment.newInstance(new Bun().putString("path", "SelectMatchPageByTeam").ok()), "战队赛事");
         mViewPager.setAdapter(viewPagerAdapter);
 
         mViewPager.setOffscreenPageLimit(0);
 
         TabLayout mTabLayout = (TabLayout) findViewById(R.id.tabLayout);
-        mTabLayout.addTab(mTabLayout.newTab().setText("武者大赛"));//给TabLayout添加Tab
+        mTabLayout.addTab(mTabLayout.newTab().setText("武者赛事"));//给TabLayout添加Tab
         mTabLayout.addTab(mTabLayout.newTab().setText("战队赛事"));
         mTabLayout.setupWithViewPager(mViewPager);//给TabLayout设置关联ViewPager，如果设置了ViewPager，那么ViewPagerAdapter中的getPageTitle()方法返回的就是Tab上的标题
 

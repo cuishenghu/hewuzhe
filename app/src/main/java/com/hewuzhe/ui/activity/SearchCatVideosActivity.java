@@ -16,6 +16,7 @@ import com.hewuzhe.presenter.SearchCatVideosPresenter;
 import com.hewuzhe.ui.adapter.GridItemDecoration;
 import com.hewuzhe.ui.adapter.Videos2Adapter;
 import com.hewuzhe.ui.base.SwipeRecycleViewActivity;
+import com.hewuzhe.utils.Bun;
 import com.hewuzhe.view.SearchVideosView;
 
 import java.util.ArrayList;
@@ -31,6 +32,7 @@ public class SearchCatVideosActivity extends SwipeRecycleViewActivity<SearchCatV
     TextView _TvTip;
     @Bind(R.id.lay_no_data)
     LinearLayout _LayNoData;
+
 
     /**
      * @return 提供Adapter
@@ -88,9 +90,19 @@ public class SearchCatVideosActivity extends SwipeRecycleViewActivity<SearchCatV
             public boolean onEditorAction(TextView textView, int i, KeyEvent keyEvent) {
                 if (i == EditorInfo.IME_ACTION_SEARCH) {
                     refresh(true);
+                    page = 1;
                     presenter.getData(page, count);
                 }
                 return false;
+            }
+        });
+
+        findViewById(R.id.img_search).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                refresh(true);
+                page = 1;
+                presenter.getData(page, count);
             }
         });
     }
@@ -124,8 +136,7 @@ public class SearchCatVideosActivity extends SwipeRecycleViewActivity<SearchCatV
      */
     @Override
     public void onItemClick(View view, int pos, Video item) {
-        if (item.UserId != 0) {
-        }
+        startActivity(VideoDetail2Activity.class, new Bun().putInt("Id", item.Id).ok());
     }
 
     @Override

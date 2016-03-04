@@ -125,23 +125,26 @@ public class MyScoretDuiHuanInfoActivity extends BaseActivity2 {
                 tv_product_remain.setText("剩余：" + jsonObject.getString("StockNum") + "件");
                 tv_content.setText(jsonObject.getString("Content"));
 
+
+                /**
+                 * 判断用户积分<商品兑换所需要的积分或者商品库存不足,兑换按钮背景为灰色,且不能使用
+                 */
+                String num=product.getStockNum();
+                String need_score=tv_product_score.getText().toString();
+//                if (Integer.parseInt(myScore) < Integer.parseInt(need_score.substring(0, need_score.length()-2))) {
+                if (Integer.parseInt(myScore) < Integer.parseInt(jsonObject.getString("CreditTotal"))) {
+                    Tools.toast(MyScoretDuiHuanInfoActivity.this, "您的积分不足!");
+                    tv_submit.setBackgroundResource(R.color.colorBg);
+                    tv_submit.setText("积分不足");
+                } else if (Integer.parseInt(product.getStockNum()) < 1) {
+                    Tools.toast(MyScoretDuiHuanInfoActivity.this, "您兑换的商品库存不足!");
+                    tv_submit.setBackgroundResource(R.color.colorBg);
+                } else {
+                    setListener(tv_submit);
+                }
             }
         }, params);
-        /**
-         * 判断用户积分<商品兑换所需要的积分或者商品库存不足,兑换按钮背景为灰色,且不能使用
-         */
-        String num=product.getStockNum();
-        String need_score=tv_product_score.getText().toString();
-        if (Integer.parseInt(myScore) < Integer.parseInt(need_score.substring(0, need_score.length()-2))) {
-            Tools.toast(MyScoretDuiHuanInfoActivity.this, "您的积分不足!");
-            tv_submit.setBackgroundResource(R.color.colorBg);
-            tv_submit.setText("积分不足");
-        } else if (Integer.parseInt(product.getStockNum()) < 1) {
-            Tools.toast(MyScoretDuiHuanInfoActivity.this, "您兑换的商品库存不足!");
-            tv_submit.setBackgroundResource(R.color.colorBg);
-        } else {
-            setListener(tv_submit);
-        }
+
     }
 
     private void moveNext() {

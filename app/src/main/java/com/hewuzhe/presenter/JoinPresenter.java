@@ -31,7 +31,6 @@ import rx.schedulers.Schedulers;
 public class JoinPresenter extends AreaPresenter<JoinGroupView> {
 
     public void getData(final int page, final int count) {
-
         Group group = view.getData();
         Subscription subscription = NetEngine.getService()
                 .SelectTeamPage((page - 1) * count, count, group.citycode, group.name)
@@ -48,7 +47,6 @@ public class JoinPresenter extends AreaPresenter<JoinGroupView> {
 
                     @Override
                     public void onCompleted() {
-
                         view.dismissDialog();
                     }
 
@@ -60,6 +58,35 @@ public class JoinPresenter extends AreaPresenter<JoinGroupView> {
                 });
         addSubscription(subscription);
 
+    }
+
+    public void getDatas() {
+        Group group = view.getData();
+        Subscription subscription = NetEngine.getService()
+                .SelectTeamPage(0, 10, group.citycode, group.name)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new SB<Res<ArrayList<Group>>>() {
+                    @Override
+                    public void next(Res<ArrayList<Group>> res) {
+                        if (res.code == C.OK) {
+                            view.bdDatas(res.data);
+                            setDataStatus(1, 10, res);
+                        }
+                    }
+
+                    @Override
+                    public void onCompleted() {
+                        view.dismissDialog();
+                    }
+
+                    @Override
+                    public void onError(Throwable e) {
+                        view.dismissDialog();
+
+                    }
+                });
+        addSubscription(subscription);
     }
 
     public void joinGroup(final int id, final String name, final int pos) {

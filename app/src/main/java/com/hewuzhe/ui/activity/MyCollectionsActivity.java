@@ -112,11 +112,6 @@ public class MyCollectionsActivity extends TabToolBarActivity {
             public void onPageSelected(int position) {
                 if (!NU.isNull(mViewPager)) {
                     OnReceiveListener<Integer, Boolean> onReceiveListener = (OnReceiveListener) viewPagerAdapter.getItem(position);
-                    if(position==1){
-                        tvAction.setVisibility(View.INVISIBLE);
-                    }else{
-                        tvAction.setVisibility(View.VISIBLE);
-                    }
 
                     if (onReceiveListener.getMsg()) {
                         tvAction.setText("确定");

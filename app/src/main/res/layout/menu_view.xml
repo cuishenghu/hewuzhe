@@ -40,7 +40,14 @@
             android:text="@string/proinfo_select_guige"
             android:textColor="@color/hwz_font_gray"
             android:textSize="18sp" />
-
+        <ScrollView
+            android:layout_width="wrap_content"
+            android:layout_height="150dp">
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                >
         <TextView
             android:id="@+id/product_color"
             android:layout_width="wrap_content"
@@ -49,12 +56,16 @@
             android:textColor="@color/hwz_font_gray"
             android:textSize="18sp" />
 
-
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                >
         <com.hewuzhe.utils.TagGroup
             android:id="@+id/tag_group"
             style="@style/TagGroup"
             android:layout_marginTop="10dp" />
-
+</LinearLayout>
 
         <TextView
             android:id="@+id/product_size"
@@ -64,22 +75,31 @@
             android:text="@string/proguige_chima"
             android:textColor="@color/hwz_font_gray"
             android:textSize="18sp" />
-
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                >
         <com.hewuzhe.utils.TagGroup
             android:id="@+id/tag_group_size"
             style="@style/TagGroup"
             android:layout_marginTop="10dp" />
+            </LinearLayout>
+            </LinearLayout>
+
+        </ScrollView>
 
         <LinearLayout
             android:id="@+id/shopcar_hint"
             android:layout_width="match_parent"
             android:gravity="center_vertical|right"
+            android:layout_marginTop="8dp"
             android:layout_height="wrap_content">
 
             <ImageView
                 android:id="@+id/shopcar_add"
-                android:layout_width="18dp"
-                android:layout_height="18dp"
+                android:layout_width="20dp"
+                android:layout_height="20dp"
                 android:layout_marginTop="4dp"
                 android:layout_marginLeft="4dp"
                 android:layout_marginBottom="4dp"
@@ -95,11 +115,11 @@
                 android:text="1"
 
                 android:textColor="@color/hwz_font_white"
-                android:textSize="14sp" />
+                android:textSize="16sp" />
             <ImageView
                 android:id="@+id/shopcar_sub"
-                android:layout_width="18dp"
-                android:layout_height="18dp"
+                android:layout_width="20dp"
+                android:layout_height="20dp"
                 android:layout_marginTop="4dp"
                 android:layout_marginLeft="10dp"
                 android:layout_marginBottom="4dp"

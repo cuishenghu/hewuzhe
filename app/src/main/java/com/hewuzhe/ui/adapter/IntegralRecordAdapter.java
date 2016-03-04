@@ -61,9 +61,14 @@ public class IntegralRecordAdapter extends BaseAdapter<IntegralRecordAdapter.VHo
         IntegralRecord item = data.get(position);
         holder.tvFrom.setText("来源：" + item.CreditCome);
         holder.tvAddTime.setText(TimeUtil.timeAgo(item.CreditTime));
-        holder._TvNum.setText("+" + item.CreditNum + "个");
+        holder._TvNum.setText(type(item.CreditType) + item.CreditNum + "个");
 
     }
+
+    private String type(int creditType) {
+        return creditType==0?"+":"-";
+    }
+
 
     /**
      * This class contains all butterknife-injected Views & Layouts from layout file 'header_integral.xml'

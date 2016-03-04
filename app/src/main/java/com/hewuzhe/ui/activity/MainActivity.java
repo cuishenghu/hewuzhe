@@ -11,6 +11,7 @@ import android.view.View;
 import android.widget.FrameLayout;
 import android.widget.LinearLayout;
 
+import com.baidu.mapapi.SDKInitializer;
 import com.duanqu.qupai.android.app.QupaiDraftManager;
 import com.duanqu.qupai.editor.EditorResult;
 import com.hewuzhe.R;
@@ -57,6 +58,12 @@ public class MainActivity extends BaseActivity {
         return R.layout.activity_main;
     }
 
+    @Override
+    public void beforeSetCView(Bundle savedInstanceState) {
+        super.beforeSetCView(savedInstanceState);
+        SDKInitializer.initialize(getApplicationContext());
+
+    }
     /**
      * 初始化事件监听者
      */

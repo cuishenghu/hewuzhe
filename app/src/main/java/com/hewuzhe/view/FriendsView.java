@@ -10,10 +10,10 @@ import java.util.ArrayList;
 /**
  * Created by xianguangjin on 15/12/31.
  */
-public interface FriendsView extends GetView<Integer>,LoadMoreView {
+    public interface FriendsView extends GetView<Integer>,LoadMoreView {
 
-    void bindData(ArrayList<Friend> friends);
+        void bindData(ArrayList<Friend> friends);
 
-    void setGroupData(Group data);
+        void setGroupData(Group data);
 
 }

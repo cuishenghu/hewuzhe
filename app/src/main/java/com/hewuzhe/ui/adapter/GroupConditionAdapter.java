@@ -49,9 +49,10 @@ public class GroupConditionAdapter extends BaseAdapter<GroupConditionAdapter.VHo
     public String _PhotoPath = "";
     private SpannableString spannableString;
 
-    public GroupConditionAdapter(Context context, ConditionPresenter conditionPresenter) {
-        super(context, conditionPresenter);
+    public GroupConditionAdapter(Context context, ConditionPresenter conditionPresenter, View header) {
+        super(context, conditionPresenter, header);
     }
+
 
     /**
      * @return ItemView的LayoutId

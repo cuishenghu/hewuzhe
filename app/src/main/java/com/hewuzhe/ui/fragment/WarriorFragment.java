@@ -14,10 +14,17 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.baidu.location.BDLocation;
+import com.baidu.location.BDLocationListener;
+import com.baidu.location.LocationClient;
+import com.baidu.location.LocationClientOption;
+import com.baidu.mapapi.map.MyLocationConfiguration;
 import com.bumptech.glide.Glide;
 import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 import com.hewuzhe.R;
 import com.hewuzhe.model.AboutUs;
+import com.hewuzhe.model.CityInfo;
 import com.hewuzhe.model.User;
 import com.hewuzhe.model.Weather;
 import com.hewuzhe.presenter.WarriorFragmentPresenter;
@@ -27,7 +34,6 @@ import com.hewuzhe.ui.activity.DoJoRecommendActivity;
 import com.hewuzhe.ui.activity.FlyDreamActivity;
 import com.hewuzhe.ui.activity.FriendProfileActivity;
 import com.hewuzhe.ui.activity.IntegralActivity;
-import com.hewuzhe.ui.activity.LiveVideoActivity;
 import com.hewuzhe.ui.activity.LiveVideoListActivity;
 import com.hewuzhe.ui.activity.LocationActivity;
 import com.hewuzhe.ui.activity.MemberActivity;
@@ -56,6 +62,9 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import butterknife.Bind;
 import butterknife.ButterKnife;
 import io.rong.imkit.RongIM;
@@ -69,10 +78,6 @@ import io.rong.message.LocationMessage;
 import io.rong.message.RichContentMessage;
 import okhttp3.Request;
 
-//import com.amap.api.location.AMapLocation;
-//import com.amap.api.location.AMapLocationClient;
-//import com.amap.api.location.AMapLocationClientOption;
-//import com.amap.api.location.AMapLocationListener;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -143,7 +148,13 @@ public class WarriorFragment extends ToolBarFragment<WarriorFragmentPresenter> i
     private SPUtil spUtil;
     private boolean isFirstRun = true;
     private boolean hasConnected = false;
+    private ArrayList<CityInfo> cityInfos = new ArrayList<>();
+    private LocationClient mLocClient;
 
+
+    public MyLocationListenner myListener = new MyLocationListenner();
+    private MyLocationConfiguration.LocationMode mCurrentMode = MyLocationConfiguration.LocationMode.NORMAL;
+    private String city = "";
 
     public WarriorFragment() {
         // Required empty public constructor
@@ -163,40 +174,72 @@ public class WarriorFragment extends ToolBarFragment<WarriorFragmentPresenter> i
     @Override
     protected void initThings(View v) {
         super.initThings(v);
+
+        //定位
+
+        // 定位初始化
+        mLocClient = new LocationClient(getActivity());
+        mLocClient.registerLocationListener(myListener);
+        LocationClientOption option = new LocationClientOption();
+        option.setOpenGps(true); // 打开gps
+        option.setCoorType("bd09ll"); // 设置坐标类型
+        option.setIsNeedAddress(true);
+        mLocClient.setLocOption(option);
+        mLocClient.start();
+
+
         presenter.getUserData();
 
         spUtil = new SPUtil(getContext())
                 .open("settings");
 
-//        SQLiteDatabase db = SQLiteDatabase.openOrCreateDatabase(DBManager.DB_PATH + "/" + DBManager.DB_NAME, null);
-//
-//        Cursor cursor = db.rawQuery("SELECT city_id FROM city_id WHERE city_area=?", new String[]{_cityName});
-//
-//        if (cursor.moveToFirst()) {
-//            String _CityId = cursor.getString(cursor.getColumnIndex("city_id"));
-//            KLog.d(_CityId);
-//
-//        } else {
-//
-//        }
-//
-//        cursor.close();
-
-
-//        locationClient = new AMapLocationClient(getActivity().getApplicationContext());
-//        locationClient.setLocationListener(this);
-
-//        initLoc();
-
-
         PgyUpdateManager.register(getActivity());
-        getWeather();
-
         presenter.getIndexImg();
     }
 
-    private void getWeather() {
-        String url = "https://api.heweather.com/x3/weather?cityid=" + cityId + "&key=df75b4ca1fae4a70b131669142d4cbee";
+    private void getCityId() {
+
+        String url = "https://api.heweather.com/x3/citylist?search=allchina" + "&key=df75b4ca1fae4a70b131669142d4cbee";
+        OkHttpUtils
+                .get()
+                .url(url)
+                .build()
+                .execute(new StringCallback() {
+                    @Override
+                    public void onError(Request request, Exception e) {
+
+                    }
+
+                    @Override
+                    public void onResponse(String response) {
+                        KLog.json(response);
+
+
+                        try {
+                            JSONObject jsonObject = new JSONObject(response);
+                            JSONArray jsonArray = jsonObject.optJSONArray("city_info");
+                            cityInfos = new Gson().fromJson(jsonArray.toString(), new TypeToken<List<CityInfo>>() {
+                            }.getType());
+
+                            for (CityInfo cityInfo : cityInfos) {
+                                if (city.equals(cityInfo.city)) {
+                                    getWeather(cityInfo.id);
+                                }
+                            }
+
+
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+
+                    }
+                });
+
+
+    }
+
+    private void getWeather(String city) {
+        String url = "https://api.heweather.com/x3/weather?cityid=" + city + "&key=df75b4ca1fae4a70b131669142d4cbee";
         OkHttpUtils
                 .get()
                 .url(url)
@@ -223,7 +266,6 @@ public class WarriorFragment extends ToolBarFragment<WarriorFragmentPresenter> i
                                 tvAirQuality.setText(weather.daily_forecast.get(0).cond.txt_d);
 
                                 tvTemperature.setText(weather.now.tmp + "℃");
-
 
                                 tvAddress.setText(_cityName);
 
@@ -645,96 +687,34 @@ public class WarriorFragment extends ToolBarFragment<WarriorFragmentPresenter> i
     }
 
 
-///*
-//    public void initLoc() {
-//        //声明mLocationOption对象
-////        AMapLocationClientOption mLocationOption = null;
-////初始化定位参数
-//        mLocationOption = new AMapLocationClientOption();
-////设置定位模式为高精度模式，Battery_Saving为低功耗模式，Device_Sensors是仅设备模式
-//        mLocationOption.setLocationMode(AMapLocationClientOption.AMapLocationMode.Hight_Accuracy);
-////设置是否返回地址信息（默认返回地址信息）
-//        mLocationOption.setNeedAddress(true);
-////设置是否只定位一次,默认为false
-//        mLocationOption.setOnceLocation(true);
-////设置是否强制刷新WIFI，默认为强制刷新
-//        mLocationOption.setWifiActiveScan(true);
-////设置是否允许模拟位置,默认为false，不允许模拟位置
-//        mLocationOption.setMockEnable(false);
-////设置定位间隔,单位毫秒,默认为2000ms
-////        mLocationOption.setInterval(2000);
-////给定位客户端对象设置定位参数
-//        locationClient.setLocationOption(mLocationOption);
-////启动定位
-//
-//        locationClient.startLocation();
-//
-//    }
-//*/
+    /**
+     * 定位SDK监听函数
+     */
+    public class MyLocationListenner implements BDLocationListener {
+
+        @Override
+        public void onReceiveLocation(BDLocation location) {
+            // map view 销毁后不在处理新接收的位置
+            if (location == null) {
+                return;
+            }
+            _cityName = location.getCity() + "";
+
+            city = _cityName.substring(0, _cityName.length() - 1);
+
+            KLog.d(city);
+
+            getCityId();
 
 
-//    @Override
-//    public void onLocationChanged(AMapLocation aMapLocation) {
-//        if (aMapLocation != null) {
-//            if (aMapLocation.getErrorCode() == 0) {
-//                //定位成功回调信息，设置相关消息
-//                _Lat = aMapLocation.getLatitude();//获取纬度
-//                _Lng = aMapLocation.getLongitude();//获取经度
-//                _cityName = aMapLocation.getCity();
-//                if (!StringUtil.isEmpty(_cityName)) {
-//                    _cityName = _cityName.substring(0, _cityName.length() - 1);
-//                }
-//
-//                KLog.d(_cityName + _Lat + "---" + _Lng);
-//                String cityId = "";
-//
-//                if (_cityName.equals("临沂")) {
-//                    cityId = "CN101120901";
-//                } else if (_cityName.equals("北京")) {
-//                    cityId = "CN101010100";
-//                } else if (_cityName.equals("上海")) {
-//                    cityId = "CN101020100";
-//                }
-//
-//                String url = "https://api.heweather.com/x3/weather?cityid=" + cityId + "&key=df75b4ca1fae4a70b131669142d4cbee";
-//                OkHttpUtils
-//                        .get()
-//                        .url(url)
-//                        .build()
-//                        .execute(new StringCallback() {
-//                            @Override
-//                            public void onError(Request request, Exception e) {
-//
-//                            }
-//
-//                            @Override
-//                            public void onResponse(String response) {
-//
-//                                try {
-//                                    JSONObject jsonObject = new JSONObject(response);
-//
-//                                    JSONArray jsonArray = jsonObject.optJSONArray("HeWeather data service 3.0");
-//
-//                                    JSONObject jsonObject1 = jsonArray.optJSONObject(0);
-//
-//                                    Weather weather = new Gson().fromJson(jsonObject1.toString(), Weather.class);
-//
-//                                    tvAirQuality.setText("空气质量：无数据");
-//                                    tvTemperature.setText(weather.now.tmp + "C");
-//                                    tvPm.setText("PM：无数据");
-//                                    tvAddress.setText(_cityName);
-//
-//
-//                                } catch (JSONException e) {
-//                                    e.printStackTrace();
-//                                }
-//
-//
-//                            }
-//                        });
-//
-//
-//            }
-//        }
-//    }
+        }
+
+
+        public void onReceivePoi(BDLocation poiLocation) {
+
+
+        }
+    }
+
+
 }

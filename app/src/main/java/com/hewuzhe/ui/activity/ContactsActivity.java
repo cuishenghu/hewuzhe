@@ -43,6 +43,7 @@ public class ContactsActivity extends RecycleViewActivity<FriendsPresenter, Frie
 
     @Bind(R.id.indexview)
     IndexView _Indexview;
+
     private LinearLayout _LayFollowed;
     private TextView _TvGroup;
     private LinearLayout _LayGroup;

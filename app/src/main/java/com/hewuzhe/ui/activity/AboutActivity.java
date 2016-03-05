@@ -12,7 +12,7 @@ public class AboutActivity extends ToolBarActivity {
      */
     @Override
     protected String provideTitle() {
-        return "关于iKungfu";
+        return "关于C-iKungfu";
     }
 
     /**

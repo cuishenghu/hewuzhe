@@ -419,9 +419,11 @@ public class WarriorFragment extends ToolBarFragment<WarriorFragmentPresenter> i
         tvId.setText("ID:" + getUserId());
         tvLevel.setText("lv" + user.Rank);
         tvIntegral.setText(user.Credit + "");
-        tvLevelName.setText(user.isVip() ? "会员" : "成为会员");
+//        tvLevelName.setText(user.isVip() ? "会员" : "成为会员");
+        tvLevelName.setText("会员");
+
         /**
-         * 会员======================暂时关闭
+         * 会员======================暂时关闭============用时再打开========================
          */
 //        layLevel.setOnClickListener(new View.OnClickListener() {
 //            @Override
@@ -465,6 +467,10 @@ public class WarriorFragment extends ToolBarFragment<WarriorFragmentPresenter> i
         }
     }
 
+    /**
+     * 中间广告链接
+     * @param data
+     */
     @Override
     public void setIndexImg(final AboutUs data) {
         Glide.with(getActivity())
@@ -478,9 +484,9 @@ public class WarriorFragment extends ToolBarFragment<WarriorFragmentPresenter> i
             public void onClick(View view) {
 //                startActivity(BasicWebActivity.class, new Bun().putString("url", data.ImageUrl).putString("title", "首页广告").ok());
 
-                Intent intent = new Intent(Intent.ACTION_VIEW);
-                intent.setData(Uri.parse(data.ImageUrl));
-                startActivity(intent);
+//                Intent intent = new Intent(Intent.ACTION_VIEW);
+//                intent.setData(Uri.parse(data.ImageUrl));
+//                startActivity(intent);
 
             }
         });

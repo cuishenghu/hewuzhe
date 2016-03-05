@@ -1,1 +1,1 @@
-include ':app', ':IMKit', ':sinavideo_playersdk_v2.0', ':sinavideo_playercore_v2.0', ':Minisdk-release', ':BGAAdapter', ':autolayout', ':MaterialProgressBar'
+include ':app', ':IMKit', ':Minisdk-release', ':BGAAdapter', ':autolayout', ':MaterialProgressBar', ':vitamio'

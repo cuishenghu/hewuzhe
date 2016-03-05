@@ -1,6 +1,7 @@
 package com.hewuzhe.ui.activity;
 
 import android.content.Context;
+import android.content.pm.ActivityInfo;
 import android.content.res.Configuration;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
@@ -13,7 +14,6 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.hewuzhe.MegaVideo;
@@ -28,26 +28,25 @@ import com.hewuzhe.ui.adapter.MegaCommentAdapter;
 import com.hewuzhe.ui.base.RecycleViewActivity;
 import com.hewuzhe.ui.cons.C;
 import com.hewuzhe.ui.widget.GlideCircleTransform;
+import com.hewuzhe.ui.widget.VideoControllerView;
 import com.hewuzhe.utils.SessionUtil;
+import com.hewuzhe.utils.StringUtil;
 import com.hewuzhe.view.MegaVideoDetailView;
-import com.sina.sinavideo.coreplayer.util.LogS;
-import com.sina.sinavideo.sdk.VDVideoView;
-import com.sina.sinavideo.sdk.data.VDVideoInfo;
-import com.sina.sinavideo.sdk.data.VDVideoListInfo;
-import com.sina.sinavideo.sdk.utils.VDVideoFullModeController;
 
 import java.util.ArrayList;
 
 import butterknife.Bind;
 import cn.sharesdk.framework.ShareSDK;
 import cn.sharesdk.onekeyshare.OnekeyShare;
+import io.vov.vitamio.LibsChecker;
+import io.vov.vitamio.widget.VideoView;
 
 public class MegaVideoDetailActivity extends RecycleViewActivity<MegaVideoDetailPresenter, MegaCommentAdapter, MegaComment> implements MegaVideoDetailView {
 
 
     private static final String TAG = "video";
     @Bind(R.id.vv1)
-    VDVideoView mVDVideoView;
+    VideoControllerView mVDVideoView;
 
     private ImageView imgAvatar;
     private TextView tvUsername;
@@ -85,10 +84,6 @@ public class MegaVideoDetailActivity extends RecycleViewActivity<MegaVideoDetail
     @Override
     protected void initThings(Bundle savedInstanceState) {
         super.initThings(savedInstanceState);
-
-        // 手动这是播放窗口父类，横屏的时候，会用这个做为容器使用，如果不设置，那么默认直接跳转到DecorView
-        mVDVideoView.setVDVideoViewContainer((ViewGroup) mVDVideoView
-                .getParent());
 
         initHeader();
         windowManager = (WindowManager) getSystemService(Context.WINDOW_SERVICE);
@@ -159,6 +154,40 @@ public class MegaVideoDetailActivity extends RecycleViewActivity<MegaVideoDetail
                 presenter.publisComment(getData(), edtComment.getText().toString().trim(), view);
             }
         });
+
+        mVDVideoView.setOnFullScreenBtnClickListener(new VideoControllerView.OnFullScreenBtnClick() {
+            @Override
+            public void onClick(View v) {
+                int mCurrentOrientation = MegaVideoDetailActivity.this.getResources().getConfiguration().orientation;
+                WindowManager.LayoutParams attrs = getWindow().getAttributes();
+                if (mCurrentOrientation == Configuration.ORIENTATION_PORTRAIT) {
+                    MegaVideoDetailActivity.this.setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
+                    attrs.flags |= WindowManager.LayoutParams.FLAG_FULLSCREEN;
+                    getWindow().setAttributes(attrs);
+                    //设置全屏
+                    recyclerView.setVisibility(View.GONE);
+                    toolBar.setVisibility(View.GONE);
+//                    v.setSystemUiVisibility(View.SYSTEM_UI_FLAG_HIDE_NAVIGATION);
+                    getWindow().addFlags(WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS);
+
+                    mVDVideoView.btnFullScreen.setImageResource(R.mipmap.icon_origin_screen);
+
+                }
+                if (mCurrentOrientation == Configuration.ORIENTATION_LANDSCAPE) {
+                    MegaVideoDetailActivity.this.setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
+                    attrs.flags &= (~WindowManager.LayoutParams.FLAG_FULLSCREEN);
+                    getWindow().setAttributes(attrs);
+                    //取消全屏设置
+                    toolBar.setVisibility(View.VISIBLE);
+                    recyclerView.setVisibility(View.VISIBLE);
+                    hideOrShowToolbar();
+                    getWindow().clearFlags(WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS);
+
+                    mVDVideoView.btnFullScreen.setImageResource(R.mipmap.icon_full_screen);
+                }
+            }
+        });
+
     }
 
     private void showShare() {
@@ -252,73 +281,11 @@ public class MegaVideoDetailActivity extends RecycleViewActivity<MegaVideoDetail
         tvPageViews.setText("查看人数：" + video.VisitNum);
 
 
-        ImageView adIV = (ImageView) findViewById(R.id.adFrameImageView);
-        adIV.setOnClickListener(new View.OnClickListener() {
+        if (!LibsChecker.checkVitamioLibs(this))
+            return;
 
-            @Override
-            public void onClick(View arg0) {
-                // TODO Auto-generated method stub
-                Toast.makeText(MegaVideoDetailActivity.this, "点击了静帧广告",
-                        Toast.LENGTH_LONG).show();
-            }
-        });
-        // 从layout里面得到播放器ID
-        // 手动这是播放窗口父类，横屏的时候，会用这个做为容器使用，如果不设置，那么默认直接跳转到DecorView
-
-        VDVideoListInfo infoList = new VDVideoListInfo();
-        VDVideoInfo info = new VDVideoInfo();
-
-        // 多流广告方式，就是在播放列表中配置广告流的方式
-        // 单流方式：INSERTAD_TYPE_SINGLE，暂时不支持，如果设置了，会报exception
-//		infoList.mInsertADType = VDVideoListInfo.INSERTAD_TYPE_MULTI;
-        // 如果是两个或者以上的广告流，因为没办法直接取到每条流的时间，所以需要手动设置，否则会报exception
-        // BTW：ticker组件最大显示长度为两位，也就是99，如果超过99秒的广告时长设置，会一直显示99，直到当前播放时间小于99为止
-        // infoList.mInsertADSecNum = 133;
-        // 填充播放列表，第一个是广告，理论上，可以在任何位置
-//		info.mTitle = "这个是一个测试广告";
-//		info.mPlayUrl = "http://v.iask.com/v_play_ipad.php?vid=137535755&tags=videoapp_android";
-//		info.mIsInsertAD = true;
-//		infoList.addVideoInfo(info);
-
-//		info = new VDVideoInfo();
-//		info.mTitle = "这就是一个测试视频0";
-//		info.mPlayUrl = "http://120.27.115.235/UpLoad/Video/d82b761e-99f9-4bfe-843c-349472073759.mov";
-//		infoList.addVideoInfo(info);
-
-        info = new VDVideoInfo();
-        info.mTitle = "视频";
-//      info.mPlayUrl = "http://120.27.115.235/UpLoad/Video/a3a4eb2c-f953-4699-a6ee-b18217afcb35.mp4";
-        info.mPlayUrl = C.BASE_URL + video.MatchVideo;
-        infoList.addVideoInfo(info);
-
-
-//		info = new VDVideoInfo();
-//		info.mTitle = "这就是一个测试视频2";
-//		info.mPlayUrl = "http://v.iask.com/v_play_ipad.php?vid=131386882&tags=videoapp_android";
-//		infoList.addVideoInfo(info);
-//
-//		info = new VDVideoInfo();
-//		info.mTitle = "这就是一个测试视频3";
-//		info.mPlayUrl = "http://v.iask.com/v_play_ipad.php?vid=131386882&tags=videoapp_android";
-//		infoList.addVideoInfo(info);
-
-        // 广告回调接口
-        // FrameAD表明是一个帧间广告（点击暂停等出现的那个图）
-//		mVDVideoView.setFrameADListener(this);
-//		 InsertAD表明是一个前贴片广告，（插入广告）
-//		mVDVideoView.setInsertADListener(this);
-//		 播放列表回调接口
-//		mVDVideoView.setPlaylistListener(this);
-
-        // 简单方式处理的视频列表
-//        VDVideoPlayListView listView = (VDVideoPlayListView) findViewById(R.id.play_list_view);
-//        if (listView != null) {
-//            listView.onVideoList(infoList);
-//        }
-        // 初始化播放器以及播放列表
-        mVDVideoView.open(MegaVideoDetailActivity.this, infoList);
-        // 开始播放，直接选择序号即可
-        mVDVideoView.play(0);
+        mVDVideoView.setVideoPath(C.BASE_URL + video.MatchVideo);
+        mVDVideoView.start();
 
 
     }
@@ -404,10 +371,6 @@ public class MegaVideoDetailActivity extends RecycleViewActivity<MegaVideoDetail
         return teamid == -1 ? userid : teamid;
     }
 
-    @Override
-    protected void onDestroy() {
-        super.onDestroy();
-    }
 
     @Override
     public void bindData(ArrayList<MegaComment> data) {
@@ -416,38 +379,34 @@ public class MegaVideoDetailActivity extends RecycleViewActivity<MegaVideoDetail
 
 
     @Override
-    protected void onResume() {
-        // TODO Auto-generated method stub
-        super.onResume();
-        mVDVideoView.onResume();
-    }
-
-    @Override
-    protected void onPause() {
-        // TODO Auto-generated method stub
-        super.onPause();
-        mVDVideoView.onPause();
-    }
-
-    @Override
-    protected void onStop() {
-        // TODO Auto-generated method stub
-        super.onStop();
-        mVDVideoView.onStop();
-    }
-
-    @Override
     public void onConfigurationChanged(Configuration newConfig) {
         super.onConfigurationChanged(newConfig);
 
         if (newConfig.orientation == Configuration.ORIENTATION_LANDSCAPE) {
-            mVDVideoView.setIsFullScreen(true);
-            LogS.e(VDVideoFullModeController.TAG, "onConfigurationChanged---横屏");
-        } else if (newConfig.orientation == Configuration.ORIENTATION_PORTRAIT) {
-            mVDVideoView.setIsFullScreen(false);
-            LogS.e(VDVideoFullModeController.TAG, "onConfigurationChanged---竖屏");
-        }
+            mLayout = VideoView.VIDEO_LAYOUT_STRETCH;//全屏
+            ViewGroup.LayoutParams params = mVDVideoView.getLayoutParams();
+            params.height = windowManager.getDefaultDisplay().getHeight();
+            params.width = windowManager.getDefaultDisplay().getWidth();
+            mVDVideoView.setLayoutParams(params);
 
+        } else if (newConfig.orientation == Configuration.ORIENTATION_PORTRAIT) {
+            mLayout = VideoView.VIDEO_LAYOUT_FIT_PARENT;//原始尺寸
+
+            ViewGroup.LayoutParams params = mVDVideoView.getLayoutParams();
+            params.height = StringUtil.dip2px(getContext(), 350);
+            params.width = windowManager.getDefaultDisplay().getWidth();
+            mVDVideoView.setLayoutParams(params);
+        }
+        if (mVDVideoView.getVideoView() != null)
+            mVDVideoView.getVideoView().setVideoLayout(mLayout, 0);
+
+    }
+
+
+    @Override
+    protected void onDestroy() {
+        mVDVideoView.release();
+        super.onDestroy();
     }
 
 

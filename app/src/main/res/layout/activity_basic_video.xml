@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -10,12 +9,12 @@
     tools:context="com.hewuzhe.ui.activity.BasicVideoActivity">
 
     <include layout="@layout/toolbar_layout"/>
-    <com.sina.sinavideo.sdk.VDVideoView
-        android:id="@+id/vv1"
+    <com.hewuzhe.ui.widget.VideoControllerView
+        android:id="@+id/video_controller"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="#000000"
-        app:layerAttrs="@array/sv_videoview_layers2">
-    </com.sina.sinavideo.sdk.VDVideoView>
+        android:visibility="visible">
+    </com.hewuzhe.ui.widget.VideoControllerView>
+
 
 </LinearLayout>

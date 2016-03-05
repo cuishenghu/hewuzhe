@@ -4,13 +4,8 @@ dependencies {
 }
 
 android {
-    compileSdkVersion 23
-    buildToolsVersion "23.0.2"
-
-    defaultConfig {
-        minSdkVersion 15
-        targetSdkVersion 23
-    }
+    compileSdkVersion 22
+    buildToolsVersion '22.0.1'
     sourceSets {
         main {
             manifest.srcFile 'AndroidManifest.xml'
@@ -22,5 +17,13 @@ android {
         }
 
     }
-
+    dexOptions {
+        incremental true
+    }
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_7
+        targetCompatibility JavaVersion.VERSION_1_7
+    }
+    productFlavors {
+    }
 }

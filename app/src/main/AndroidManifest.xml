@@ -165,11 +165,11 @@
         </activity>
         <activity android:name=".ui.activity.VideosActivity">
         </activity>
-        <activity
-            android:name=".ui.activity.VideoDetailActivity"
-            android:configChanges="keyboardHidden|orientation|screenSize"
-            android:windowSoftInputMode="adjustPan">
-        </activity>
+        <!--<activity-->
+            <!--android:name=".ui.activity.VideoDetailActivity"-->
+            <!--android:configChanges="keyboardHidden|orientation|screenSize"-->
+            <!--android:windowSoftInputMode="adjustPan">-->
+        <!--</activity>-->
         <activity
             android:name=".ui.activity.VideoDetail2Activity"
             android:configChanges="orientation|screenSize|keyboardHidden"
@@ -615,20 +615,20 @@
         <activity
             android:name=".ui.activity.BasicWebActivity"
             android:configChanges="screenSize|keyboardHidden|orientation"/>
-        <activity
-            android:name=".ui.activity.BasicVideoTwoActivity"
-            android:configChanges="screenSize|keyboardHidden|orientation"/>
-        <activity
-            android:name=".SimpleTestActivity"
-            android:configChanges="orientation|screenSize|keyboardHidden">
+        <!--<activity-->
+            <!--android:name=".ui.activity.BasicVideoTwoActivity"-->
+            <!--android:configChanges="screenSize|keyboardHidden|orientation"/>-->
+        <!--<activity-->
+            <!--android:name=".SimpleTestActivity"-->
+            <!--android:configChanges="orientation|screenSize|keyboardHidden">-->
 
-            <!-- <intent-filter> -->
-            <!-- <action android:name="android.intent.action.MAIN"/> -->
+            <!--&lt;!&ndash; <intent-filter> &ndash;&gt;-->
+            <!--&lt;!&ndash; <action android:name="android.intent.action.MAIN"/> &ndash;&gt;-->
 
 
-            <!-- <category android:name="android.intent.category.LAUNCHER"/> -->
-            <!-- </intent-filter> -->
-        </activity>
+            <!--&lt;!&ndash; <category android:name="android.intent.category.LAUNCHER"/> &ndash;&gt;-->
+            <!--&lt;!&ndash; </intent-filter> &ndash;&gt;-->
+        <!--</activity>-->
         <activity android:name=".ui.activity.ChangePwdActivity">
         </activity>
         <activity android:name=".ui.activity.LiveVideoListActivity">
@@ -641,8 +641,6 @@
         <activity android:name=".ui.activity.ShopCarActivity">
         </activity>
         <activity android:name=".ui.activity.ProductCommentActivity">
-        </activity>
-        <activity android:name=".ui.activity.LiveVideoListActivity">
         </activity>
     </application>
 

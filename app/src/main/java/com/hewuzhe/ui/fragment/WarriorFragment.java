@@ -484,9 +484,9 @@ public class WarriorFragment extends ToolBarFragment<WarriorFragmentPresenter> i
             public void onClick(View view) {
 //                startActivity(BasicWebActivity.class, new Bun().putString("url", data.ImageUrl).putString("title", "首页广告").ok());
 
-//                Intent intent = new Intent(Intent.ACTION_VIEW);
-//                intent.setData(Uri.parse(data.ImageUrl));
-//                startActivity(intent);
+                Intent intent = new Intent(Intent.ACTION_VIEW);
+                intent.setData(Uri.parse(data.ImageUrl));
+                startActivity(intent);
 
             }
         });

@@ -1,9 +1,9 @@
 package com.hewuzhe.ui.activity;
 
 import android.app.AlertDialog;
-import android.app.AlertDialog.Builder;
 import android.content.Context;
 import android.content.Intent;
+import android.content.pm.ActivityInfo;
 import android.content.res.Configuration;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -19,7 +19,6 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.hewuzhe.R;
@@ -33,6 +32,7 @@ import com.hewuzhe.ui.cons.C;
 import com.hewuzhe.ui.http.UrlContants;
 import com.hewuzhe.ui.inter.OnItemClickListener;
 import com.hewuzhe.ui.widget.GlideCircleTransform;
+import com.hewuzhe.ui.widget.VideoControllerView;
 import com.hewuzhe.ui.widget.YsnowEditDialog;
 import com.hewuzhe.utils.Bun;
 import com.hewuzhe.utils.SessionUtil;
@@ -40,30 +40,22 @@ import com.hewuzhe.utils.StringUtil;
 import com.hewuzhe.utils.TimeUtil;
 import com.hewuzhe.view.VideoDetailView;
 import com.nostra13.universalimageloader.core.ImageLoader;
-import com.sina.sinavideo.coreplayer.util.LogS;
-import com.sina.sinavideo.sdk.VDVideoExtListeners;
-import com.sina.sinavideo.sdk.VDVideoView;
-import com.sina.sinavideo.sdk.VDVideoViewController;
-import com.sina.sinavideo.sdk.data.VDVideoInfo;
-import com.sina.sinavideo.sdk.data.VDVideoListInfo;
-import com.sina.sinavideo.sdk.utils.VDVideoFullModeController;
 
 import java.util.ArrayList;
 
 import butterknife.Bind;
 import cn.sharesdk.framework.ShareSDK;
 import cn.sharesdk.onekeyshare.OnekeyShare;
-import materialdesign.widgets.Dialog;
+import io.vov.vitamio.widget.VideoView;
 import materialdialogs.DialogAction;
 import materialdialogs.MaterialDialog;
 
-public class VideoDetail2Activity extends RecycleViewActivity<VideoDetailPresenter, CommentAdapter, Comment> implements VideoDetailView,
-        VDVideoExtListeners.OnVDVideoInsertADListener, VDVideoExtListeners.OnVDVideoFrameADListener,
-        VDVideoExtListeners.OnVDVideoPlaylistListener {
+public class VideoDetail2Activity extends RecycleViewActivity<VideoDetailPresenter, CommentAdapter, Comment> implements VideoDetailView {
 
     private static final String TAG = "video";
+    private static int HEITH_VIDEO = 200;
     @Bind(R.id.vv1)
-    VDVideoView mVDVideoView;
+    VideoControllerView mVDVideoView;
     @Bind(R.id.lay_no_vip)
     LinearLayout _LayNoVip;
     @Bind(R.id.btn_to_member)
@@ -110,11 +102,9 @@ public class VideoDetail2Activity extends RecycleViewActivity<VideoDetailPresent
      */
     @Override
     protected void initThings(Bundle savedInstanceState) {
+        io.vov.vitamio.LibsChecker.checkVitamioLibs(this);
         super.initThings(savedInstanceState);
         // 手动这是播放窗口父类，横屏的时候，会用这个做为容器使用，如果不设置，那么默认直接跳转到DecorView
-        mVDVideoView.setVDVideoViewContainer((ViewGroup) mVDVideoView
-                .getParent());
-
         initHeader();
         windowManager = (WindowManager) getSystemService(Context.WINDOW_SERVICE);
         id = getIntentData().getInt("Id");
@@ -176,6 +166,39 @@ public class VideoDetail2Activity extends RecycleViewActivity<VideoDetailPresent
      */
     @Override
     public void initListeners() {
+
+        mVDVideoView.setOnFullScreenBtnClickListener(new VideoControllerView.OnFullScreenBtnClick() {
+            @Override
+            public void onClick(View v) {
+                int mCurrentOrientation = VideoDetail2Activity.this.getResources().getConfiguration().orientation;
+                WindowManager.LayoutParams attrs = getWindow().getAttributes();
+                if (mCurrentOrientation == Configuration.ORIENTATION_PORTRAIT) {
+                    VideoDetail2Activity.this.setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
+                    attrs.flags |= WindowManager.LayoutParams.FLAG_FULLSCREEN;
+                    getWindow().setAttributes(attrs);
+                    //设置全屏
+                    recyclerView.setVisibility(View.GONE);
+                    toolBar.setVisibility(View.GONE);
+//                    v.setSystemUiVisibility(View.SYSTEM_UI_FLAG_HIDE_NAVIGATION);
+                    getWindow().addFlags(WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS);
+
+                    mVDVideoView.btnFullScreen.setImageResource(R.mipmap.icon_origin_screen);
+
+                }
+                if (mCurrentOrientation == Configuration.ORIENTATION_LANDSCAPE) {
+                    VideoDetail2Activity.this.setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
+                    attrs.flags &= (~WindowManager.LayoutParams.FLAG_FULLSCREEN);
+                    getWindow().setAttributes(attrs);
+                    //取消全屏设置
+                    toolBar.setVisibility(View.VISIBLE);
+                    recyclerView.setVisibility(View.VISIBLE);
+                    hideOrShowToolbar();
+                    getWindow().clearFlags(WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS);
+
+                    mVDVideoView.btnFullScreen.setImageResource(R.mipmap.icon_full_screen);
+                }
+            }
+        });
 
 
         _BtnToMember.setOnClickListener(new View.OnClickListener() {
@@ -311,10 +334,12 @@ public class VideoDetail2Activity extends RecycleViewActivity<VideoDetailPresent
         params.width = ViewGroup.LayoutParams.MATCH_PARENT;
 
         if (video.UserId == 0) {
-            params.height = StringUtil.dip2px(getContext(), 200);
+            HEITH_VIDEO = 200;
         } else {
-            params.height = StringUtil.dip2px(getContext(), 320);
+            HEITH_VIDEO = 320;
         }
+        params.height = StringUtil.dip2px(getContext(), HEITH_VIDEO);
+
         mVDVideoView.setLayoutParams(params);
 
         final int position = 0;
@@ -432,84 +457,35 @@ public class VideoDetail2Activity extends RecycleViewActivity<VideoDetailPresent
             tvCommentCount.setText(video.CommentNum + "次");
         }
 
-        ImageView adIV = (ImageView) findViewById(R.id.adFrameImageView);
-        adIV.setOnClickListener(new View.OnClickListener() {
-
-            @Override
-            public void onClick(View arg0) {
-                Toast.makeText(VideoDetail2Activity.this, "点击了静帧广告",
-                        Toast.LENGTH_LONG).show();
-            }
-        });
-        // 从layout里面得到播放器ID
-        // 手动这是播放窗口父类，横屏的时候，会用这个做为容器使用，如果不设置，那么默认直接跳转到DecorView
-
-        VDVideoListInfo infoList = new VDVideoListInfo();
-        VDVideoInfo info = new VDVideoInfo();
-
-        // 多流广告方式，就是在播放列表中配置广告流的方式
-        // 单流方式：INSERTAD_TYPE_SINGLE，暂时不支持，如果设置了，会报exception
-//		infoList.mInsertADType = VDVideoListInfo.INSERTAD_TYPE_MULTI;
-        // 如果是两个或者以上的广告流，因为没办法直接取到每条流的时间，所以需要手动设置，否则会报exception
-        // BTW：ticker组件最大显示长度为两位，也就是99，如果超过99秒的广告时长设置，会一直显示99，直到当前播放时间小于99为止
-        // infoList.mInsertADSecNum = 133;
-        // 填充播放列表，第一个是广告，理论上，可以在任何位置
-//		info.mTitle = "这个是一个测试广告";
-//		info.mPlayUrl = "http://v.iask.com/v_play_ipad.php?vid=137535755&tags=videoapp_android";
-//		info.mIsInsertAD = true;
-//		infoList.addVideoInfo(info);
-
-//		info = new VDVideoInfo();
-//		info.mTitle = "这就是一个测试视频0";
-//		info.mPlayUrl = "http://120.27.115.235/UpLoad/Video/d82b761e-99f9-4bfe-843c-349472073759.mov";
-//		infoList.addVideoInfo(info);
-
-        info = new VDVideoInfo();
-        info.mTitle = "视频";
-//      info.mPlayUrl = "http://120.27.115.235/UpLoad/Video/a3a4eb2c-f953-4699-a6ee-b18217afcb35.mp4";
-        info.mPlayUrl = C.BASE_URL + video.VideoPath;
-        infoList.addVideoInfo(info);
-
-//		info = new VDVideoInfo();
-//		info.mTitle = "这就是一个测试视频2";
-//		info.mPlayUrl = "http://v.iask.com/v_play_ipad.php?vid=131386882&tags=videoapp_android";
-//		infoList.addVideoInfo(info);
-//
-//		info = new VDVideoInfo();
-//		info.mTitle = "这就是一个测试视频3";
-//		info.mPlayUrl = "http://v.iask.com/v_play_ipad.php?vid=131386882&tags=videoapp_android";
-//		infoList.addVideoInfo(info);
-
-        // 广告回调接口
-        // FrameAD表明是一个帧间广告（点击暂停等出现的那个图）
-//		mVDVideoView.setFrameADListener(this);
-//		 InsertAD表明是一个前贴片广告，（插入广告）
-//		mVDVideoView.setInsertADListener(this);
-//		 播放列表回调接口
-//		mVDVideoView.setPlaylistListener(this);
-
-        // 简单方式处理的视频列表
-//        VDVideoPlayListView listView = (VDVideoPlayListView) findViewById(R.id.play_list_view);
-//        if (listView != null) {
-//            listView.onVideoList(infoList);
-//        }
-        // 初始化播放器以及播放列表
-        mVDVideoView.open(VideoDetail2Activity.this, infoList);
         // 开始播放，直接选择序号即可
         if (!video.IsFree) {
             layTranspond.setVisibility(View.GONE);
             layShare.setVisibility(View.GONE);
-
             if (new SessionUtil(getContext()).getUser().isVip()) {
-                mVDVideoView.play(0);
+                startPlay(video);
+
             } else {
                 _LayNoVip.setVisibility(View.VISIBLE);
             }
         } else {
             layTranspond.setVisibility(View.VISIBLE);
             layShare.setVisibility(View.VISIBLE);
-            mVDVideoView.play(0);
+            startPlay(video);
         }
+
+    }
+
+    private void startPlay(Video video) {
+        mVDVideoView.setonPreparedListener(new VideoControllerView.OnPreparedListener() {
+            @Override
+            public void onPrepared() {
+                mVDVideoView.getVideoView().setVideoLayout(VideoView.VIDEO_LAYOUT_FIT_PARENT, 0);
+            }
+        });
+//       mVDVideoView.btnFullScreen.setVisibility(View.GONE);
+        mVDVideoView.setVideoPath(C.BASE_URL + video.VideoPath);
+        mVDVideoView.start();
+
     }
 
     /**
@@ -748,30 +724,8 @@ public class VideoDetail2Activity extends RecycleViewActivity<VideoDetailPresent
 
     @Override
     protected void onDestroy() {
-        ShareSDK.stopSDK(this);
+        mVDVideoView.release();
         super.onDestroy();
-    }
-
-
-    @Override
-    protected void onResume() {
-        // TODO Auto-generated method stub
-        super.onResume();
-        mVDVideoView.onResume();
-    }
-
-    @Override
-    protected void onPause() {
-        // TODO Auto-generated method stub
-        super.onPause();
-        mVDVideoView.onPause();
-    }
-
-    @Override
-    protected void onStop() {
-        // TODO Auto-generated method stub
-        super.onStop();
-        mVDVideoView.onStop();
     }
 
     @Override
@@ -779,55 +733,21 @@ public class VideoDetail2Activity extends RecycleViewActivity<VideoDetailPresent
         super.onConfigurationChanged(newConfig);
 
         if (newConfig.orientation == Configuration.ORIENTATION_LANDSCAPE) {
-            mVDVideoView.setIsFullScreen(true);
-            isFulllScreen = true;
+            mLayout = VideoView.VIDEO_LAYOUT_STRETCH;//全屏
+            ViewGroup.LayoutParams params = mVDVideoView.getLayoutParams();
+            params.height = windowManager.getDefaultDisplay().getHeight();
+            params.width = windowManager.getDefaultDisplay().getWidth();
+            mVDVideoView.setLayoutParams(params);
 
-            LogS.e(VDVideoFullModeController.TAG, "onConfigurationChanged---横屏");
         } else if (newConfig.orientation == Configuration.ORIENTATION_PORTRAIT) {
-            mVDVideoView.setIsFullScreen(false);
-            isFulllScreen = false;
-            LogS.e(VDVideoFullModeController.TAG, "onConfigurationChanged---竖屏");
+            mLayout = VideoView.VIDEO_LAYOUT_FIT_PARENT;//原始尺寸
+            ViewGroup.LayoutParams params = mVDVideoView.getLayoutParams();
+            params.height = StringUtil.dip2px(getContext(), HEITH_VIDEO);
+            params.width = windowManager.getDefaultDisplay().getWidth();
+            mVDVideoView.setLayoutParams(params);
         }
-    }
-
-
-    /**
-     * 播放列表里面点击了某个视频，触发外部事件
-     */
-    @Override
-    public void onPlaylistClick(VDVideoInfo info, int p) {
-        // TODO Auto-generated method stub
-        if (info == null) {
-            LogS.e(TAG, "info is null");
-        }
-        mVDVideoView.play(p);
-    }
-
-    /**
-     * 视频插入广告传回的接口，表明当前的广告被点击了『了解更多』
-     */
-    @Override
-    public void onInsertADClick(VDVideoInfo info) {
-        // TODO Auto-generated method stub
-        Toast.makeText(this, "插入广告被点击了", Toast.LENGTH_LONG).show();
-    }
-
-    /**
-     * 视频插入广告传回的接口，表明当前的广告被点击了『去掉广告』，按照其他视频逻辑，直接跳转会员页
-     */
-    @Override
-    public void onInsertADStepOutClick(VDVideoInfo info) {
-        // TODO Auto-generated method stub
-        Toast.makeText(this, "去掉广告被点击了", Toast.LENGTH_LONG).show();
-    }
-
-    /**
-     * 静帧广告换图，从这儿来
-     */
-    @Override
-    public void onFrameADPrepared(VDVideoInfo info) {
-        // TODO Auto-generated method stub
-        Toast.makeText(this, "开始换图", Toast.LENGTH_LONG).show();
+        if (mVDVideoView.getVideoView() != null)
+            mVDVideoView.getVideoView().setVideoLayout(mLayout, 0);
     }
 
 
@@ -836,10 +756,6 @@ public class VideoDetail2Activity extends RecycleViewActivity<VideoDetailPresent
 //        Toast.makeText(this, "isFulllScreen:" + isFulllScreen, Toast.LENGTH_SHORT).show();
 
         if (isFulllScreen) {
-            VDVideoViewController controller = VDVideoViewController
-                    .getInstance(getContext());
-            if (null != controller)
-                controller.setIsFullScreen(false);
         } else {
             super.onBackPressed();
         }

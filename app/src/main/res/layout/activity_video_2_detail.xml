@@ -10,13 +10,13 @@
                  android:layout_width="match_parent"
                  android:layout_height="wrap_content">
 
-        <com.sina.sinavideo.sdk.VDVideoView
+        <com.hewuzhe.ui.widget.VideoControllerView
             android:id="@+id/vv1"
             android:layout_width="match_parent"
             android:layout_height="200dp"
             android:background="#000000"
-            app:layerAttrs="@array/sv_videoview_layers2">
-        </com.sina.sinavideo.sdk.VDVideoView>
+            >
+        </com.hewuzhe.ui.widget.VideoControllerView>
 
         <LinearLayout android:id="@+id/lay_no_vip"
                       android:layout_width="match_parent"

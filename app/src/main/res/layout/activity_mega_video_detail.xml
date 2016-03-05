@@ -60,14 +60,14 @@
         </android.support.v7.widget.Toolbar>
     </android.support.design.widget.AppBarLayout>
 
-    <com.sina.sinavideo.sdk.VDVideoView
+    <com.hewuzhe.ui.widget.VideoControllerView
         android:id="@+id/vv1"
         android:layout_width="match_parent"
         android:layout_height="190dp"
         android:layout_below="@id/app_bar_layout"
         android:background="#000000"
-        app:layerAttrs="@array/sv_videoview_layers2">
-    </com.sina.sinavideo.sdk.VDVideoView>
+        >
+    </com.hewuzhe.ui.widget.VideoControllerView>
 
     <android.support.v7.widget.RecyclerView
         android:id="@+id/recycler_view"

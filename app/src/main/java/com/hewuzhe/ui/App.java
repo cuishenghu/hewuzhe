@@ -19,8 +19,6 @@ import com.nostra13.universalimageloader.core.ImageLoader;
 import com.nostra13.universalimageloader.core.ImageLoaderConfiguration;
 import com.nostra13.universalimageloader.core.assist.QueueProcessingType;
 import com.pgyersdk.crash.PgyCrashManager;
-import com.sina.sinavideo.sdk.utils.VDApplication;
-import com.sina.sinavideo.sdk.utils.VDResolutionManager;
 import com.socks.library.KLog;
 import com.yancy.imageselector.ImageConfig;
 
@@ -63,11 +61,6 @@ public class App extends Application {
 //                        .enableWebKitInspector(
 //                                Stetho.defaultInspectorModulesProvider(this))
 //                        .build());
-
-
-        VDApplication.getInstance().initPlayer(this);
-        VDResolutionManager.getInstance(this).init(
-                VDResolutionManager.RESOLUTION_SOLUTION_NONE);
 
 
         Stetho.initialize(
@@ -231,6 +224,7 @@ public class App extends Application {
         });
         service.startAuth(context, appKey, appsecret, space);
     }
+
     /**
      * 初始化ImageLoader
      */

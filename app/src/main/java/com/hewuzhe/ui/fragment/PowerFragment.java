@@ -82,10 +82,10 @@ public class PowerFragment extends BaseFragment implements PowerView, VideoChoos
         swicthButton.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                ((OneFragment)viewPagerAdapter.getItem(0)).changeSpanCount(isChecked);
-                ((OneFragment)viewPagerAdapter.getItem(1)).changeSpanCount(isChecked);
-                ((OneFragment)viewPagerAdapter.getItem(2)).changeSpanCount(isChecked);
-                ((OneFragment)viewPagerAdapter.getItem(3)).changeSpanCount(isChecked);
+                ((OneFragment) viewPagerAdapter.getItem(0)).changeSpanCount(isChecked);
+                ((OneFragment) viewPagerAdapter.getItem(1)).changeSpanCount(isChecked);
+                ((OneFragment) viewPagerAdapter.getItem(2)).changeSpanCount(isChecked);
+                ((OneFragment) viewPagerAdapter.getItem(3)).changeSpanCount(isChecked);
             }
         });
     }
@@ -154,14 +154,16 @@ public class PowerFragment extends BaseFragment implements PowerView, VideoChoos
             @Override
             public void onTabSelected(TabLayout.Tab tab) {
                 mViewPager.setCurrentItem(tab.getPosition());
-                swicthButton.setVisibility(tab.getPosition() == 4?View.GONE:View.VISIBLE);
+                swicthButton.setVisibility(tab.getPosition() == 4 ? View.GONE : View.VISIBLE);
             }
 
             @Override
-            public void onTabUnselected(TabLayout.Tab tab) {}
+            public void onTabUnselected(TabLayout.Tab tab) {
+            }
 
             @Override
-            public void onTabReselected(TabLayout.Tab tab) {}
+            public void onTabReselected(TabLayout.Tab tab) {
+            }
         });
     }
 
@@ -218,6 +220,8 @@ public class PowerFragment extends BaseFragment implements PowerView, VideoChoos
                 reinitializeVideoChooser();
             }
             videoChooserManager.submit(requestCode, data);
+        } else {
+            dismissDialog();
         }
     }
 
@@ -231,12 +235,14 @@ public class PowerFragment extends BaseFragment implements PowerView, VideoChoos
 
 
     public void pickVideo(View view) {
+
         chooserType = ChooserType.REQUEST_PICK_VIDEO;
         videoChooserManager = new VideoChooserManager(this,
                 ChooserType.REQUEST_PICK_VIDEO);
         videoChooserManager.setVideoChooserListener(this);
         try {
             videoChooserManager.choose();
+            showDialog("提示", "正在解析视频...");
         } catch (IllegalArgumentException e) {
             e.printStackTrace();
         } catch (Exception e) {
@@ -253,6 +259,7 @@ public class PowerFragment extends BaseFragment implements PowerView, VideoChoos
      */
     @Override
     public void onVideoChosen(final ChosenVideo video) {
+        dismissDialog();
         getActivity().runOnUiThread(new Runnable() {
             @Override
             public void run() {

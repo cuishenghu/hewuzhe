@@ -9,4 +9,5 @@ public class ProductPrice {
     public int SizeId=-1;
     public double Price;
     public String ImagePath;
+    public int StockNum;
 }

@@ -31,7 +31,7 @@ public class ProductInfoPresenter extends BasePresenterImp<ProductInfoView> {
     public void getData() {
         Product product = view.getData();
         Subscription subscription = NetEngine.getService()
-                .SelectProduct(product.Id,new SessionUtil(view.getContext()).getUserId(), 5)
+                .SelectProductNew(product.Id,new SessionUtil(view.getContext()).getUserId(), 5)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new SB<Res<Product>>() {

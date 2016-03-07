@@ -96,14 +96,24 @@
                 android:layout_gravity="center_vertical"
                 android:layout_marginRight="10dp"
                 android:contentDescription="@string/app_name"
-                android:visibility="visible"
-                android:src="@drawable/symbol_right"/>
+                android:src="@drawable/symbol_right"
+                android:visibility="visible" />
+
+            <ImageView
+                android:id="@+id/img_below"
+                android:layout_width="25dp"
+                android:layout_height="10dp"
+                android:layout_gravity="center_vertical"
+                android:layout_marginRight="10dp"
+                android:contentDescription="@string/app_name"
+                android:src="@drawable/symbol_below"
+                android:visibility="gone" />
         </LinearLayout>
 
         <View
             android:layout_width="match_parent"
             android:layout_height="1dp"
-            android:background="@color/colorBg"/>
+            android:background="@color/colorBg" />
 
         <LinearLayout
             android:id="@+id/lay_select_condition_content"

@@ -14,4 +14,5 @@ public class ShopCar {
     public Double AllPrice=0.0;
     public boolean select_state;
     public boolean is_show;
+    public int StockNum;
 }

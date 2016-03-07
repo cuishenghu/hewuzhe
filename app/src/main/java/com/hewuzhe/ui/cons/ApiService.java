@@ -415,11 +415,11 @@ public interface ApiService {
     @GET("Hezhuangbei.asmx/SelectProductBySearch")
     Observable<Res<ArrayList<Product>>> SelectProductBySearch(@Query("startRowIndex") int startRowIndex, @Query("maximumRows") int maximumRows, @Query("search") String search, @Query("categoryId") int categoryId, @Query("isPriceAsc") int isPriceAsc, @Query("isSalesAsc") int isSalesAsc, @Query("isCommentAsc") int isCommentAsc, @Query("isNewAsc") int isNewAsc, @Query("isCredit") int isCredit, @Query("isRecommend") int isRecommend);
 
-    @GET("Hezhuangbei.asmx/SelectProduct")
+    @GET("Hezhuangbei.asmx/SelectProductNew")
     Observable<Res<Product>> SelectProductNew(@Query("id") int id, @Query("userid") int userid, @Query("maximumRows") int maximumRows);
 
-    @GET("Hezhuangbei.asmx/SelectBasketProduct")
-    Observable<Res<ArrayList<ShopCar>>> SelectBasketProduct(@Query("startRowIndex") int startRowIndex, @Query("maximumRows") int maximumRows, @Query("userId") int userId);
+    @GET("Hezhuangbei.asmx/SelectBasketProductNew")
+    Observable<Res<ArrayList<ShopCar>>> SelectBasketProductNew(@Query("startRowIndex") int startRowIndex, @Query("maximumRows") int maximumRows, @Query("userId") int userId);
 
     @GET("Hezhuangbei.asmx/FavoriteProduct")
     Observable<Res> FavoriteProduct(@Query("userid") int userid, @Query("productId") int productId);

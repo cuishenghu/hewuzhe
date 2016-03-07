@@ -614,6 +614,7 @@
         </activity>
         <activity
             android:name=".ui.activity.BasicWebActivity"
+            android:hardwareAccelerated="true"
             android:configChanges="screenSize|keyboardHidden|orientation"/>
         <!--<activity-->
             <!--android:name=".ui.activity.BasicVideoTwoActivity"-->

@@ -13,10 +13,142 @@
         android:layout_height="2dp"
         android:max="100"
         android:visibility="gone"/>
-    <WebView
-        android:id="@+id/pay_web"
-        android:layout_width="fill_parent"
-        android:layout_height="match_parent"
-        android:layout_weight="1"/>
+
+    <ScrollView android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:scrollbars="none">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/colorListBg"
+            android:orientation="vertical">
+
+            <WebView
+                android:id="@+id/pay_web"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"/>
+
+            <TextView
+                android:id="@+id/tv_line"
+                style="@style/text_30_white"
+                android:layout_width="match_parent"
+                android:layout_height="0px"
+                android:background="@color/colorBg"
+                android:text=""
+                android:visibility="visible"/>
+
+            <TextView
+                style="@style/text_30_white"
+                android:layout_width="match_parent"
+                android:layout_height="10px"
+                android:background="@color/colorBg"
+                android:text=""/>
+
+            <TextView
+                android:id="@+id/tv_name"
+                style="@style/text_35_white"
+                android:layout_width="wrap_content"
+                android:layout_height="105px"
+                android:gravity="center_vertical"
+                android:paddingLeft="20px"
+                android:text="活动详情："/>
+
+
+            <TextView
+                style="@style/text_30_white"
+                android:layout_width="match_parent"
+                android:layout_height="10px"
+                android:background="@color/colorBg"
+                android:text=""/>
+
+            <LinearLayout android:layout_width="match_parent"
+                          android:layout_height="wrap_content"
+                          android:orientation="horizontal"
+                          android:visibility="visible">
+
+                <LinearLayout android:layout_width="match_parent"
+                              android:layout_height="wrap_content"
+                              android:layout_weight="1"
+                              android:orientation="vertical"
+                              android:paddingLeft="30px">
+                    <TextView
+                        style="@style/text_27_white"
+                        android:layout_width="wrap_content"
+                        android:layout_height="75px"
+                        android:gravity="center_vertical"
+                        android:paddingLeft="20px"
+                        android:text="直播开始时间："/>
+
+
+                    <TextView android:id="@+id/tv_time_start"
+                              style="@style/text_25_yellow"
+                              android:layout_width="wrap_content"
+                              android:layout_height="wrap_content"
+                              android:paddingLeft="20px"
+                              android:text="介绍"/>
+
+                </LinearLayout>
+
+                <LinearLayout android:layout_width="match_parent"
+                              android:layout_height="wrap_content"
+                              android:layout_weight="1"
+                              android:orientation="vertical"
+                              android:paddingLeft="30px">
+
+                    <TextView
+                        style="@style/text_27_white"
+                        android:layout_width="wrap_content"
+                        android:layout_height="75px"
+                        android:gravity="center_vertical"
+                        android:paddingLeft="20px"
+                        android:text="直播结束时间："/>
+
+
+                    <TextView android:id="@+id/tv_apply_end"
+                              style="@style/text_25_yellow"
+                              android:layout_width="wrap_content"
+                              android:layout_height="wrap_content"
+                              android:paddingLeft="20px"
+                              android:text="介绍"/>
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+
+            <TextView
+                style="@style/text_30_white"
+                android:layout_width="match_parent"
+                android:layout_height="10px"
+                android:background="@color/colorBg"
+                android:lineSpacingExtra="1.5dp"
+
+                android:text=""
+                android:visibility="visible"/>
+
+
+            <TextView
+                style="@style/text_30_white"
+                android:layout_width="wrap_content"
+                android:layout_height="75px"
+                android:gravity="center_vertical"
+                android:paddingLeft="20px"
+                android:text="内容介绍："/>
+
+
+            <TextView android:id="@+id/tv_require"
+                      style="@style/text_27_white"
+                      android:layout_width="match_parent"
+                      android:layout_height="match_parent"
+                      android:layout_marginBottom="10px"
+                      android:layout_weight="1"
+                      android:minLines="5"
+                      android:paddingLeft="20px"
+                      android:text="介绍"/>
+
+        </LinearLayout>
+
+    </ScrollView>
 
 </LinearLayout>

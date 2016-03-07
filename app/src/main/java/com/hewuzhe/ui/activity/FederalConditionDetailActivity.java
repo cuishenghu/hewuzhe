@@ -116,7 +116,6 @@ public class FederalConditionDetailActivity extends RecycleViewActivity<ArticleP
 
 
         webContent.setWebViewClient(new WebViewClient() { // 通过webView打开链接，不调用系统浏览器
-
             @Override
             public boolean shouldOverrideUrlLoading(WebView view, String url) {
                 view.loadUrl(url);

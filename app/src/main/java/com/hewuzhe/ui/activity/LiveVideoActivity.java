@@ -1,6 +1,9 @@
 package com.hewuzhe.ui.activity;
 
+import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
+import android.os.Environment;
 import android.text.method.ScrollingMovementMethod;
 import android.view.View;
 import android.widget.Button;
@@ -18,6 +21,7 @@ import com.hewuzhe.ui.base.ToolBarActivity;
 import com.hewuzhe.ui.cons.C;
 import com.hewuzhe.ui.widget.AutoScrollViewPager;
 import com.hewuzhe.utils.Bun;
+import com.hewuzhe.utils.StringUtil;
 import com.hewuzhe.utils.TimeUtil;
 import com.hewuzhe.view.LiveVideoView;
 
@@ -89,7 +93,7 @@ public class LiveVideoActivity extends ToolBarActivity<LiveVideoPresenter> imple
 
 
     @Override
-    public void setData(LiveVideo liveVideo) {
+    public void setData(final LiveVideo liveVideo) {
 
         _TvName.setText(liveVideo.Title);
         _TvTimeStart.setText(liveVideo.TimeStart);
@@ -128,17 +132,33 @@ public class LiveVideoActivity extends ToolBarActivity<LiveVideoPresenter> imple
             _BtnOthers.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    startActivity(BasicWebActivity.class, new Bun().putString("title", "视频直播").putString("url", "http://115.28.67.86:8033/zhibo.aspx").ok());
+                    startActivity(BasicWebActivity.class, new Bun()
+                            .putString("title", liveVideo.Title)
+                            .putString("url", C.BASE_URL + "zhibo.aspx?id=" + liveVideo.Id).ok());
                 }
             });
         }
 
         if (!TimeUtil.timeComparedNow(liveVideo.TimeEnd)) {
             //比赛已经结束
-            _BtnOthers.setText("直播已结束");
-            _BtnOthers.setOnClickListener(null);
+            if(StringUtil.isEmpty(liveVideo.LiveBack)){
+                _BtnOthers.setText("直播已结束");
+                _BtnOthers.setOnClickListener(null);
+            }else{
+                _BtnOthers.setText("查看回放");
+                _BtnOthers.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        Uri uri = Uri.parse(C.BASE_URL+liveVideo.LiveBack);
+                        //调用系统自带的播放器
+                        Intent intent = new Intent(Intent.ACTION_VIEW);
+                        String extStr = liveVideo.LiveBack.substring(liveVideo.LiveBack.lastIndexOf("."));
+                        intent.setDataAndType(uri, "video/"+extStr);
+                        startActivity(intent);
+                    }
+                });
+            }
         }
-
     }
 
     @Override

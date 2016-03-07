@@ -10,7 +10,9 @@ import com.hewuzhe.model.LiveVideo;
 import com.hewuzhe.presenter.LiveVideoPresenter;
 import com.hewuzhe.ui.adapter.LiveContentAdapter;
 import com.hewuzhe.ui.base.SwipeRecycleViewActivity;
+import com.hewuzhe.ui.cons.C;
 import com.hewuzhe.utils.Bun;
+import com.hewuzhe.utils.TimeUtil;
 import com.hewuzhe.view.LiveVideoView;
 
 import java.util.ArrayList;
@@ -69,7 +71,16 @@ public class LiveVideoListActivity extends SwipeRecycleViewActivity<LiveVideoPre
 
     @Override
     public void onItemClick(View view, int pos, LiveVideo item) {
-        startActivity(LiveVideoActivity.class, new Bun().putInt("Id", item.Id).ok());
+        if (!TimeUtil.timeComparedNow(item.TimeStart) && TimeUtil.timeComparedNow(item.TimeEnd)) {
+            startActivity(BasicWebActivity.class, new Bun()
+                    .putString("title", item.Title)
+                    .putString("url", C.BASE_URL + "zhibo.aspx?id=" + item.Id)
+                    .putString("start", item.TimeStart)
+                    .putString("end", item.TimeEnd)
+                    .putString("content", item.Content).ok());
+        }else{
+            startActivity(LiveVideoActivity.class, new Bun().putInt("Id", item.Id).ok());
+        }
     }
 
     @Override

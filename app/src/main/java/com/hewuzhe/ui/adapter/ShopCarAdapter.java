@@ -31,6 +31,7 @@ public class ShopCarAdapter extends BaseAdapter<ShopCarAdapter.VHolder, ShopCar,
 
 //    public int number=0;
     public int res_select=0;
+    public int StockNum;
 
     public ShopCarAdapter(Context context, ShopCarPresenter shopCarPresenter) {
         super(context, shopCarPresenter);
@@ -68,9 +69,9 @@ public class ShopCarAdapter extends BaseAdapter<ShopCarAdapter.VHolder, ShopCar,
         holder.pro_num.setText(shopCar.Number + "");
         holder.shopcar_select.setImageResource(shopCar.select_state ? R.mipmap.icon_select_click : R.mipmap.icon_select_normal);
         holder.shopcar_hint.setVisibility(shopCar.is_show ? View.VISIBLE : View.GONE);
-        holder.trash_button.setVisibility(shopCar.is_show?View.VISIBLE:View.INVISIBLE);
+        holder.trash_button.setVisibility(shopCar.is_show ? View.VISIBLE : View.INVISIBLE);
         holder.shopcar_buynum.setVisibility(shopCar.is_show?View.GONE:View.VISIBLE);
-
+        this.StockNum = shopCar.StockNum;
         holder.trash_button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -85,8 +86,12 @@ public class ShopCarAdapter extends BaseAdapter<ShopCarAdapter.VHolder, ShopCar,
         holder.shopcar_add.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                if (shopCar.Number >= StockNum) {
+                    Toast.makeText(context,"您选择的商品数量超过库存数量，已不能添加",Toast.LENGTH_SHORT).show();
+                    return;
+                }
                 shopCar.Number++;
-                holder.shopcar_buynum.setText("x"+shopCar.Number);
+                holder.shopcar_buynum.setText("x" + shopCar.Number);
                 holder.pro_num.setText(shopCar.Number + "");
             }
         });

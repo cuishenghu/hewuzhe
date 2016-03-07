@@ -43,6 +43,7 @@ public class VideoMessageActivity extends BaseActivity{//extends BaseActionBarAc
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.de_ac_video);
+        io.vov.vitamio.LibsChecker.checkVitamioLibs(this);
         ButterKnife.bind(this);
         windowManager = (WindowManager) getSystemService(Context.WINDOW_SERVICE);
         initView();

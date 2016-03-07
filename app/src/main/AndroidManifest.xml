@@ -642,6 +642,8 @@
         </activity>
         <activity android:name=".ui.activity.ProductCommentActivity">
         </activity>
+        <activity android:name=".ui.activity.VideoMessageActivity">
+        </activity>
     </application>
 
 </manifest>

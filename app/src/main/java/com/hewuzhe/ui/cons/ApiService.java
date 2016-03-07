@@ -416,7 +416,7 @@ public interface ApiService {
     Observable<Res<ArrayList<Product>>> SelectProductBySearch(@Query("startRowIndex") int startRowIndex, @Query("maximumRows") int maximumRows, @Query("search") String search, @Query("categoryId") int categoryId, @Query("isPriceAsc") int isPriceAsc, @Query("isSalesAsc") int isSalesAsc, @Query("isCommentAsc") int isCommentAsc, @Query("isNewAsc") int isNewAsc, @Query("isCredit") int isCredit, @Query("isRecommend") int isRecommend);
 
     @GET("Hezhuangbei.asmx/SelectProduct")
-    Observable<Res<Product>> SelectProduct(@Query("id") int id, @Query("userid") int userid, @Query("maximumRows") int maximumRows);
+    Observable<Res<Product>> SelectProductNew(@Query("id") int id, @Query("userid") int userid, @Query("maximumRows") int maximumRows);
 
     @GET("Hezhuangbei.asmx/SelectBasketProduct")
     Observable<Res<ArrayList<ShopCar>>> SelectBasketProduct(@Query("startRowIndex") int startRowIndex, @Query("maximumRows") int maximumRows, @Query("userId") int userId);

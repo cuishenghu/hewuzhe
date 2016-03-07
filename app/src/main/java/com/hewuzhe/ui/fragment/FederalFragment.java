@@ -14,6 +14,7 @@ import android.widget.TextView;
 import com.Zxing.CaptureActivity;
 import com.hewuzhe.R;
 import com.hewuzhe.presenter.FederalPresenter;
+import com.hewuzhe.rongc.provider.VideoInputProvider;
 import com.hewuzhe.ui.activity.ContactsActivity;
 import com.hewuzhe.ui.activity.ConversationListActivity;
 import com.hewuzhe.ui.activity.CoorperationActivity;
@@ -249,6 +250,7 @@ public class FederalFragment extends BaseFragment<FederalPresenter> implements F
                         new ImageInputProvider(RongContext.getInstance()),//图片
                         new CameraInputProvider(RongContext.getInstance()),//相机
                         new LocationInputProvider(RongContext.getInstance()),//地理位置
+                        new VideoInputProvider(RongContext.getInstance()),
                 };
 
                 RongIM.getInstance().resetInputExtensionProvider(Conversation.ConversationType.PRIVATE, provider);

@@ -45,6 +45,7 @@ import com.hewuzhe.ui.activity.RecordActivity;
 import com.hewuzhe.ui.activity.StrangerProfileSettingsActivity;
 import com.hewuzhe.ui.activity.StudyOnlineActivity;
 import com.hewuzhe.ui.activity.TrainActivity;
+import com.hewuzhe.ui.activity.VideoMessageActivity;
 import com.hewuzhe.ui.base.ToolBarFragment;
 import com.hewuzhe.ui.cons.C;
 import com.hewuzhe.ui.widget.GlideCircleTransform;
@@ -662,14 +663,23 @@ public class WarriorFragment extends ToolBarFragment<WarriorFragmentPresenter> i
             Log.d("Begavior", "extra:" + mRichContentMessage.getExtra());
 
         } else if (message.getContent() instanceof ImageMessage) {
-            ImageMessage imageMessage = (ImageMessage) message.getContent();
-            Intent intent = new Intent(context, PhotoActivity.class);
+            if(((ImageMessage) message.getContent()).getExtra()!=null){
+            String path = ((ImageMessage) message.getContent()).getExtra().toString().substring(0,7);
+            String video = ((ImageMessage) message.getContent()).getExtra().toString().substring(7);
+            if(path.equals("123456;")){
+                context.startActivity(new Intent(context, VideoMessageActivity.class).putExtra("videoPath",video));
+            }
+            }
+            else{
+                ImageMessage imageMessage = (ImageMessage) message.getContent();
+                Intent intent = new Intent(context, PhotoActivity.class);
 
-            intent.putExtra("photo", imageMessage.getLocalUri() == null ? imageMessage.getRemoteUri() : imageMessage.getLocalUri());
-            if (imageMessage.getThumUri() != null)
-                intent.putExtra("thumbnail", imageMessage.getThumUri());
+                intent.putExtra("photo", imageMessage.getLocalUri() == null ? imageMessage.getRemoteUri() : imageMessage.getLocalUri());
+                if (imageMessage.getThumUri() != null)
+                    intent.putExtra("thumbnail", imageMessage.getThumUri());
 
-            context.startActivity(intent);
+                context.startActivity(intent);
+            }
         }
 
         return false;

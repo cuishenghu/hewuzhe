@@ -152,8 +152,8 @@ public class ProductInfoActivity extends ToolBarActivity<ProductInfoPresenter> i
 
     public String tag_color = "";
     public String tag_size = "";
-    public int tag_color_num;
-    public int tag_size_num;
+    public int tag_color_num=0;
+    public int tag_size_num=0;
     public String picurl = "";
     public int price_num;
     public double price;
@@ -194,22 +194,26 @@ public class ProductInfoActivity extends ToolBarActivity<ProductInfoPresenter> i
         startActivity(new Intent(this, ProductCommentActivity.class).putExtra("productId", product.Id));
     }
 
-    private TagGroup.OnTagClickListener mTagClickListener = new TagGroup.OnTagClickListener() {
-        @Override
-        public void onTagClick(String tag) {
-//            Toast.makeText(ProductInfoActivity.this, tag, Toast.LENGTH_SHORT).show();
-            tag_color = tag;
-            for (int i = 0; i < product.ColorList.size(); i++) {
-                if (product.ColorList.get(i).Name.equals(tag_color)) {
-                    tag_color_num = product.ColorList.get(i).Id;
-                    break;
+    private boolean tellNumber(int num){
+        for (int i = 0; i < product.PriceList.size(); i++) {
+            if (product.PriceList.get(i).ColorId == tag_color_num&&product.PriceList.get(i).SizeId == tag_size_num) {
+                if(product.PriceList.get(i).StockNum<num){
+                    Toast.makeText(this,"您选择的商品数量已超出库存，请重新选择数量，库存数为："+product.PriceList.get(i).StockNum,Toast.LENGTH_SHORT).show();
+                    return false;
                 }
             }
+        }
+        return true;
+    }
 
+    private void showGuiGe(){
+
+        if(tag_color_num!=0&&tag_size_num!=0){
             for (int i = 0; i < product.PriceList.size(); i++) {
-                if (product.PriceList.get(i).ColorId == tag_color_num) {
-//                    price_num = product.PriceList.get(i).Id;
-                    product_price_true.setText("￥" + product.PriceList.get(i).Price);
+                if (product.PriceList.get(i).ColorId == tag_color_num&&product.PriceList.get(i).SizeId == tag_size_num) {
+
+                    DecimalFormat df = new DecimalFormat("######0.00");
+                    product_price_true.setText("￥" + df.format(product.PriceList.get(i).Price));
                     if (product.PriceList.get(i).ImagePath.trim().equals("")) {
                         Glide.with(ProductInfoActivity.this)
                                 .load(C.BASE_URL + product.ImagePath)
@@ -225,20 +229,65 @@ public class ProductInfoActivity extends ToolBarActivity<ProductInfoPresenter> i
                                 .crossFade()
                                 .placeholder(R.mipmap.img_bg)
                                 .into(product_image);
-//                    price = product.PriceList.get(i).Price;
+                        picurl = product.PriceList.get(i).ImagePath;
+                    }
+
+                    if(product.PriceList.get(i).StockNum==0){
+                        Toast.makeText(this,"您选择的商品已售空，请选择其他规格的商品",Toast.LENGTH_SHORT).show();
+                    }
+                    break;
+                }
+            }
+        }
+
+        if(tag_color_num!=0){
+            for (int i = 0; i < product.PriceList.size(); i++) {
+                if (product.PriceList.get(i).ColorId == tag_color_num) {
+//                    DecimalFormat df = new DecimalFormat("######0.00");
+//                    product_price_true.setText("￥" + df.format(product.PriceList.get(i).Price));
+                    if (product.PriceList.get(i).ImagePath.trim().equals("")) {
+                        Glide.with(ProductInfoActivity.this)
+                                .load(C.BASE_URL + product.ImagePath)
+                                .centerCrop()
+                                .crossFade()
+                                .placeholder(R.mipmap.img_bg)
+                                .into(product_image);
+                        picurl = product.ImagePath;
+                    } else {
+                        Glide.with(ProductInfoActivity.this)
+                                .load(C.BASE_URL + product.PriceList.get(i).ImagePath)
+                                .centerCrop()
+                                .crossFade()
+                                .placeholder(R.mipmap.img_bg)
+                                .into(product_image);
                         picurl = product.PriceList.get(i).ImagePath;
                     }
                     break;
                 }
             }
+        }
 
+    }
+
+    private TagGroup.OnTagClickListener mTagClickListener = new TagGroup.OnTagClickListener() {
+        @Override
+        public void onTagClick(String tag) {
+            tag_color = tag;
+            for (int i = 0; i < product.ColorList.size(); i++) {
+                if (product.ColorList.get(i).Name.equals(tag_color)) {
+                    tag_color_num = product.ColorList.get(i).Id;
+                    break;
+                }
+            }
+
+            showGuiGe();
         }
     };
     private TagGroup.OnTagClickListener mTagClickListener_size = new TagGroup.OnTagClickListener() {
         @Override
         public void onTagClick(String tag) {
-//            Toast.makeText(ProductInfoActivity.this, tag, Toast.LENGTH_SHORT).show();
             tag_size = tag;
+
 
 
             for (int i = 0; i < product.SizeList.size(); i++) {
@@ -248,32 +297,8 @@ public class ProductInfoActivity extends ToolBarActivity<ProductInfoPresenter> i
                 }
             }
 
-            for (int i = 0; i < product.PriceList.size(); i++) {
-                if (product.PriceList.get(i).ColorId == tag_color_num && product.PriceList.get(i).SizeId == tag_size_num) {
-//                    price_num = product.PriceList.get(i).Id;
-                    product_price_true.setText("￥" + product.PriceList.get(i).Price);
-                    if (product.PriceList.get(i).ImagePath.trim().equals("")) {
-                        Glide.with(ProductInfoActivity.this)
-                                .load(C.BASE_URL + product.ImagePath)
-                                .centerCrop()
-                                .crossFade()
-                                .placeholder(R.mipmap.img_bg)
-                                .into(product_image);
-                        picurl = product.ImagePath;
-                    } else {
-                        Glide.with(ProductInfoActivity.this)
-                                .load(C.BASE_URL + product.PriceList.get(i).ImagePath)
-                                .centerCrop()
-                                .crossFade()
-                                .placeholder(R.mipmap.img_bg)
-                                .into(product_image);
-//                    price = product.PriceList.get(i).Price;
-                        picurl = product.PriceList.get(i).ImagePath;
-                    }
-                    break;
-                }
-            }
 
+            showGuiGe();
 
         }
     };
@@ -418,6 +443,9 @@ public class ProductInfoActivity extends ToolBarActivity<ProductInfoPresenter> i
 
             @Override
             public void onClick(View v) {
+                if(!tellNumber(number)){
+                    return;
+                }
 
                 for (int i = 0; i < product.PriceList.size(); i++) {
                     if (product.PriceList.get(i).ColorId == tag_color_num && product.PriceList.get(i).SizeId == tag_size_num) {
@@ -446,6 +474,9 @@ public class ProductInfoActivity extends ToolBarActivity<ProductInfoPresenter> i
 
             @Override
             public void onClick(View v) {
+                if(!tellNumber(number)){
+                    return;
+                }
 
                 for (int i = 0; i < product.PriceList.size(); i++) {
                     if (product.PriceList.get(i).ColorId == tag_color_num && product.PriceList.get(i).SizeId == tag_size_num) {

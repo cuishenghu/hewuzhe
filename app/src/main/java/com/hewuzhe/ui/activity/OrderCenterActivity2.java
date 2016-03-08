@@ -219,18 +219,26 @@ public class OrderCenterActivity2 extends BaseActivity2 implements XListView.IXL
                 if (Integer.parseInt(jsonObject.getString("State1")) > 0) {
                     tv_wait_to_pay_count.setVisibility(View.VISIBLE);
                     tv_wait_to_pay_count.setText(jsonObject.getString("State1") + "");
+                } else {
+                    tv_wait_to_pay_count.setVisibility(View.GONE);
                 }
                 if (Integer.parseInt(jsonObject.getString("State2")) > 0) {
                     tv_wait_to_send_count.setVisibility(View.VISIBLE);
                     tv_wait_to_send_count.setText(jsonObject.getString("State2") + "");
+                } else {
+                    tv_wait_to_send_count.setVisibility(View.GONE);
                 }
                 if (Integer.parseInt(jsonObject.getString("State3")) > 0) {
                     tv_wait_to_receive_count.setVisibility(View.VISIBLE);
                     tv_wait_to_receive_count.setText(jsonObject.getString("State3") + "");
+                } else {
+                    tv_wait_to_receive_count.setVisibility(View.GONE);
                 }
                 if (Integer.parseInt(jsonObject.getString("State4")) > 0) {
                     tv_received_count.setVisibility(View.VISIBLE);
                     tv_received_count.setText(jsonObject.getString("State4") + "");
+                } else {
+                    tv_received_count.setVisibility(View.GONE);
                 }
             }
         }, params);
@@ -360,7 +368,7 @@ public class OrderCenterActivity2 extends BaseActivity2 implements XListView.IXL
         if (requestCode == 11) {
             if (resultCode == 99) {
                 mType = data.getIntExtra("mType", 0);
-                initView();
+                requestData(mType);
             }
 
         }

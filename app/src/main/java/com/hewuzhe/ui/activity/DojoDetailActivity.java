@@ -1,11 +1,16 @@
 package com.hewuzhe.ui.activity;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.pm.ActivityInfo;
+import android.content.res.Configuration;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
+import android.view.ViewGroup;
+import android.view.WindowManager;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -21,12 +26,15 @@ import com.hewuzhe.ui.adapter.common.OtherImgsAdapter;
 import com.hewuzhe.ui.base.ToolBarActivity;
 import com.hewuzhe.ui.cons.C;
 import com.hewuzhe.ui.inter.OnItemClickListener;
+import com.hewuzhe.ui.widget.VideoControllerView;
 import com.hewuzhe.utils.Bun;
+import com.hewuzhe.utils.StringUtil;
 import com.hewuzhe.view.DojoDetailView;
 
 import java.util.ArrayList;
 
 import butterknife.Bind;
+import io.vov.vitamio.widget.VideoView;
 
 public class DojoDetailActivity extends ToolBarActivity<DojoDetailPresenter> implements DojoDetailView {
 
@@ -55,6 +63,10 @@ public class DojoDetailActivity extends ToolBarActivity<DojoDetailPresenter> imp
     TextView _TvCommentCount;
     @Bind(R.id.recycler_view)
     RecyclerView _RecyclerView;
+    private WindowManager windowManager;
+    private int mLayout;
+    @Bind(R.id.vvvv)
+    VideoControllerView mVDVideoView;
     private Integer id;
 
     /**
@@ -78,13 +90,41 @@ public class DojoDetailActivity extends ToolBarActivity<DojoDetailPresenter> imp
      */
     @Override
     public void initListeners() {
+        mVDVideoView.setOnFullScreenBtnClickListener(new VideoControllerView.OnFullScreenBtnClick() {
+            @Override
+            public void onClick(View v) {
+                int mCurrentOrientation = DojoDetailActivity.this.getResources().getConfiguration().orientation;
+                WindowManager.LayoutParams attrs = getWindow().getAttributes();
+                if (mCurrentOrientation == Configuration.ORIENTATION_PORTRAIT) {
+                    DojoDetailActivity.this.setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
+                    attrs.flags |= WindowManager.LayoutParams.FLAG_FULLSCREEN;
+                    getWindow().setAttributes(attrs);
+                    //设置全屏
+//                    v.setSystemUiVisibility(View.SYSTEM_UI_FLAG_HIDE_NAVIGATION);
+                    getWindow().addFlags(WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS);
 
+                    mVDVideoView.btnFullScreen.setImageResource(R.mipmap.icon_origin_screen);
+
+                }
+                if (mCurrentOrientation == Configuration.ORIENTATION_LANDSCAPE) {
+                    DojoDetailActivity.this.setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
+                    attrs.flags &= (~WindowManager.LayoutParams.FLAG_FULLSCREEN);
+                    getWindow().setAttributes(attrs);
+                    //取消全屏设置
+                    getWindow().clearFlags(WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS);
+
+                    mVDVideoView.btnFullScreen.setImageResource(R.mipmap.icon_full_screen);
+                }
+            }
+        });
 
     }
 
     @Override
     protected void initThings(Bundle savedInstanceState) {
         super.initThings(savedInstanceState);
+        io.vov.vitamio.LibsChecker.checkVitamioLibs(this);
+        windowManager = (WindowManager) getSystemService(Context.WINDOW_SERVICE);
         id = getIntentData().getInt("id");
         presenter.getDetail();
         presenter.getOthers();
@@ -105,22 +145,38 @@ public class DojoDetailActivity extends ToolBarActivity<DojoDetailPresenter> imp
 
     @Override
     public void setData(final Dojo dojo) {
-        Glide.with(getContext())
-                .load(C.BASE_URL + dojo.ImagePath)
-                .fitCenter()
-                .crossFade()
-                .into(_Img);
+        if(dojo.VideoPath.trim().equals("")) {
+            mVDVideoView.setVisibility(View.GONE);
+            _Img.setVisibility(View.VISIBLE);
+            Glide.with(getContext())
+                    .load(C.BASE_URL + dojo.ImagePath)
+                    .fitCenter()
+                    .crossFade()
+                    .into(_Img);
 
-        _Img.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Pic pic = new Pic();
-                pic.PictureUrl = dojo.ImagePath;
-                ArrayList<Pic> pics = new ArrayList();
-                pics.add(pic);
-                startActivity(PicsActivity.class, new Bun().putString("pics", new Gson().toJson(pics)).ok());
-            }
-        });
+            _Img.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Pic pic = new Pic();
+                    pic.PictureUrl = dojo.ImagePath;
+                    ArrayList<Pic> pics = new ArrayList();
+                    pics.add(pic);
+                    startActivity(PicsActivity.class, new Bun().putString("pics", new Gson().toJson(pics)).ok());
+                }
+            });
+        }else{
+            mVDVideoView.setVisibility(View.VISIBLE);
+            _Img.setVisibility(View.GONE);
+            ViewGroup.LayoutParams params = mVDVideoView.getLayoutParams();
+            params.width = ViewGroup.LayoutParams.MATCH_PARENT;
+
+            params.height = 350;
+
+            mVDVideoView.setLayoutParams(params);
+            startPlay(C.BASE_URL+dojo.VideoPath);
+
+        }
+
 
 
         _TvName.setText(dojo.Title);
@@ -179,5 +235,46 @@ public class DojoDetailActivity extends ToolBarActivity<DojoDetailPresenter> imp
 
         }
 
+    }
+
+    @Override
+    protected void onDestroy() {
+        mVDVideoView.release();
+        super.onDestroy();
+    }
+
+    private void startPlay(String video) {
+        mVDVideoView.setonPreparedListener(new VideoControllerView.OnPreparedListener() {
+            @Override
+            public void onPrepared() {
+                mVDVideoView.getVideoView().setVideoLayout(VideoView.VIDEO_LAYOUT_FIT_PARENT, 0);
+            }
+        });
+//       mVDVideoView.btnFullScreen.setVisibility(View.GONE);
+        mVDVideoView.setVideoPath(video);
+        mVDVideoView.start();
+
+    }
+
+    @Override
+    public void onConfigurationChanged(Configuration newConfig) {
+        super.onConfigurationChanged(newConfig);
+
+        if (newConfig.orientation == Configuration.ORIENTATION_LANDSCAPE) {
+            mLayout = VideoView.VIDEO_LAYOUT_STRETCH;//全屏
+            ViewGroup.LayoutParams params = mVDVideoView.getLayoutParams();
+            params.height = windowManager.getDefaultDisplay().getHeight();
+            params.width = windowManager.getDefaultDisplay().getWidth();
+            mVDVideoView.setLayoutParams(params);
+
+        } else if (newConfig.orientation == Configuration.ORIENTATION_PORTRAIT) {
+            mLayout = VideoView.VIDEO_LAYOUT_FIT_PARENT;//原始尺寸
+            ViewGroup.LayoutParams params = mVDVideoView.getLayoutParams();
+            params.height = 350;
+            params.width = windowManager.getDefaultDisplay().getWidth();
+            mVDVideoView.setLayoutParams(params);
+        }
+        if (mVDVideoView.getVideoView() != null)
+            mVDVideoView.getVideoView().setVideoLayout(mLayout, 0);
     }
 }

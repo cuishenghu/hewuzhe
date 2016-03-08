@@ -42,7 +42,7 @@ public class LiveContentAdapter extends BaseAdapter<LiveContentAdapter.VHolder, 
     public void bindData(VHolder holder, int position) {
         LiveVideo liveVideo = data.get(position);
         holder._TvAddTime.setVisibility(View.GONE);
-        holder._TvTitle.setText(liveVideo.Title);
+        holder._TvTitle.setText(liveVideo.Id+liveVideo.Title);
         holder._TvContent.setText(liveVideo.Content);
         Glide.with(context)
                 .load(C.BASE_URL + liveVideo.ImagePath)

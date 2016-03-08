@@ -9,6 +9,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.hewuzhe.R;
 import com.hewuzhe.model.Tel;
@@ -44,15 +45,15 @@ public class ProductTelAdapter extends RecyclerView.Adapter<ProductTelAdapter.VH
     }
 
     @Override
-    public void onBindViewHolder(VHolder holder, int position)
+    public void onBindViewHolder(final VHolder holder, int position)
     {
         tel =(Tel) data.get(position);
         holder.pro_tel.setText(tel.Phone);
         holder.pro_tel.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
-                context.startActivity(new Intent(Intent.ACTION_CALL, Uri.parse("tel:" + tel.Phone)));
+//                Toast.makeText(context,tel.Phone,Toast.LENGTH_SHORT).show();
+                context.startActivity(new Intent(Intent.ACTION_CALL, Uri.parse("tel:" + holder.pro_tel.getText().toString())));
             }
         });
     }

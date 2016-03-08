@@ -15,6 +15,7 @@ package com.hewuzhe.ui.activity;
 
 import android.os.Build;
 import android.os.Bundle;
+import android.view.ViewGroup;
 import android.webkit.WebChromeClient;
 import android.webkit.WebSettings;
 import android.webkit.WebSettings.PluginState;
@@ -23,12 +24,15 @@ import android.webkit.WebViewClient;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
+import com.Zxing.decoding.Utils;
 import com.hewuzhe.R;
 import com.hewuzhe.presenter.base.BasePresenterImp;
 import com.hewuzhe.ui.base.ToolBarActivity;
 import com.hewuzhe.ui.cons.C;
+import com.hewuzhe.utils.StringUtil;
 
 import butterknife.Bind;
+import io.vov.vitamio.utils.StringUtils;
 
 
 public class BasicWebActivity extends ToolBarActivity {
@@ -69,6 +73,9 @@ public class BasicWebActivity extends ToolBarActivity {
         _textEnd.setText(getIntentData().getString("end"));
         _textContent.setText(getIntentData().getString("content"));
 
+        ViewGroup.LayoutParams params = _PayWeb.getLayoutParams();
+        params.width = StringUtil.getScreenWidth(this);
+        params.height = StringUtil.getScreenWidth(this) * 409 / 498;
         String url = getIntentData().getString("url");
         _PayWeb.setWebViewClient(new WebViewClient() { // 通过webView打开链接，不调用系统浏览器
             @Override
@@ -81,12 +88,11 @@ public class BasicWebActivity extends ToolBarActivity {
         _PayWeb.setInitialScale(25);
         WebSettings webSettings = _PayWeb.getSettings();
         webSettings.setJavaScriptEnabled(true);
+//        webSettings.setBuiltInZoomControls(true);
         webSettings.setSupportZoom(true);
-        webSettings.setPluginState(PluginState.ON);
         webSettings.setLoadWithOverviewMode(true);
-
+//        webSettings.setLayoutAlgorithm(WebSettings.LayoutAlgorithm.SINGLE_COLUMN);
         webSettings.setUseWideViewPort(true);
-        webSettings.setLoadWithOverviewMode(true);
 
         _PayWeb.loadUrl(url);
     }

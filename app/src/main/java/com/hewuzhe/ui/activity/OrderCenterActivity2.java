@@ -120,7 +120,7 @@ public class OrderCenterActivity2 extends BaseActivity2 implements XListView.IXL
             tv_wait_to_receive.setTextColor(Color.WHITE);
 //            tv_wait_to_pay.setSelected(true);
             initData();
-//            requestData(mType);
+            requestData(mType);
         } else if (mType == 2) {
             tv_wait_to_send.setTextColor(getResources().getColor(R.color.colorYellow));
             tv_received.setTextColor(Color.WHITE);
@@ -128,7 +128,7 @@ public class OrderCenterActivity2 extends BaseActivity2 implements XListView.IXL
             tv_wait_to_pay.setTextColor(Color.WHITE);
 //            tv_wait_to_send.setSelected(true);
             initData();
-//            requestData(mType);
+            requestData(mType);
         } else if (mType == 3) {
             tv_wait_to_receive.setTextColor(getResources().getColor(R.color.colorYellow));
             tv_wait_to_pay.setTextColor(Color.WHITE);
@@ -136,7 +136,7 @@ public class OrderCenterActivity2 extends BaseActivity2 implements XListView.IXL
             tv_received.setTextColor(Color.WHITE);
 //            tv_wait_to_receive.setSelected(true);
             initData();
-//            requestData(mType);
+            requestData(mType);
         } else if (mType == 4) {
             tv_received.setTextColor(getResources().getColor(R.color.colorYellow));
             tv_wait_to_receive.setTextColor(Color.WHITE);
@@ -144,7 +144,7 @@ public class OrderCenterActivity2 extends BaseActivity2 implements XListView.IXL
             tv_wait_to_send.setTextColor(Color.WHITE);
 //            tv_received.setSelected(true);
             initData();
-//            requestData(mType);
+            requestData(mType);
         }
     }
 

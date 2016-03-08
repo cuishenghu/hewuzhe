@@ -49,6 +49,7 @@ public class VideoInputProvider extends InputProvider.ExtendProvider implements 
     public View mview;
     String pic="";
     String ider="";
+    String type="";
     UploadVideoPresenter uploadVideoPresenter = new UploadVideoPresenter();
 
     public VideoInputProvider(RongContext context) {
@@ -72,7 +73,8 @@ public class VideoInputProvider extends InputProvider.ExtendProvider implements 
     @Override
     public void onPluginClick(View view) {
         ider = this.getCurrentFragment().getUri().toString();
-        ider = ider.substring(ider.indexOf("=")+1);
+        ider = ider.substring(ider.indexOf("=") + 1);
+        type = this.getCurrentFragment().getUri().toString().substring(this.getCurrentFragment().getUri().toString().lastIndexOf("/")+1,this.getCurrentFragment().getUri().toString().indexOf("?"));
         startRecordActivity(view);
     }
 
@@ -266,6 +268,7 @@ public class VideoInputProvider extends InputProvider.ExtendProvider implements 
 
     @Override
     public void sendMessage(String path) {
-        sendVideoMessage(pic,C.BASE_URL+path,Conversation.ConversationType.PRIVATE,ider);
+            sendVideoMessage(pic,C.BASE_URL+path,type.equals("group")?Conversation.ConversationType.GROUP:Conversation.ConversationType.PRIVATE,ider);
+
     }
 }

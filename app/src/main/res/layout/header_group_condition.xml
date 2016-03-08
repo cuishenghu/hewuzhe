@@ -91,7 +91,7 @@
                           android:layout_height="wrap_content"
                           android:layout_weight="1"
                           android:gravity="center"
-                          android:text="战队成员"
+                          android:text="成员"
                           android:textColor="@color/white"
                           android:textSize="15sp"/>
 
@@ -120,7 +120,7 @@
                           android:layout_height="wrap_content"
                           android:layout_weight="1"
                           android:gravity="center"
-                          android:text="战队介绍"
+                          android:text="介绍"
                           android:textColor="@color/white"
                           android:textSize="15sp"/>
 
@@ -149,7 +149,7 @@
                           android:layout_height="wrap_content"
                           android:layout_weight="1"
                           android:gravity="center"
-                          android:text="战队公告"
+                          android:text="公告"
                           android:textColor="@color/white"
                           android:textSize="15sp"/>
 
@@ -180,7 +180,7 @@
                           android:layout_height="wrap_content"
                           android:layout_weight="1"
                           android:gravity="center"
-                          android:text="战队聊天"
+                          android:text="聊天"
                           android:textColor="@color/white"
                           android:textSize="15sp"/>
 

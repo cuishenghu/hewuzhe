@@ -27,7 +27,7 @@ public class TeamIntroduceActivity extends ToolBarActivity<TeamIntroducePresente
      */
     @Override
     protected String provideTitle() {
-        return "战队介绍";
+        return "介绍";
     }
 
     /**

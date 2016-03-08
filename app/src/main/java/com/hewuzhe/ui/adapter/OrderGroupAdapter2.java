@@ -116,11 +116,34 @@ public class OrderGroupAdapter2 extends BaseAdapter {
 //        holder.tv_order_total_price.setText(orderNumber.getPrice());
         total_num.add(total_number);
         total_all_price.add(total_price);
+        if (list.size() != 0) {
+            holder.list_product.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                @Override
+                public void onItemClick(AdapterView<?> parent, View view, int psition, long id) {
+//                Toast.makeText(context, position+"", Toast.LENGTH_LONG).show();
+                    Intent intent = new Intent(context, OrderDetailsActivity.class);
+                    intent.putExtra("billId", orderNumber.getId());
+                    intent.putExtra("mType", mType);
+                    intent.putExtra("state", orderNumber.getState());
+                    intent.putExtra("areaId", orderNumber.getAreaId());
+                    intent.putExtra("order", orderNumber);
+                    ((OrderCenterActivity2) context).startActivityForResult((intent), 11);
+                }
+            });
+        }
         /**
-         * 当订单中没有商品,不显示
+         * 当后台修改商品信息或者删除商品,订单中没有商品
+         * 默认显示此商品已删除,不显示付款,不能查看详情
          */
         if (list.size() == 0) {
-            holder.ll_order_no.setVisibility(View.GONE);
+            holder.ll_order_no.setVisibility(View.VISIBLE);
+            holder.tv_right_btn.setVisibility(View.GONE);
+
+        }
+        if (list.size() == 0) {
+            OrderContent orderContent = new OrderContent();
+            orderContent.setProductName("此商品已下架");
+            list.add(orderContent);
         }
         OrderChildAdapter orderChildAdapter = new OrderChildAdapter(context, list);
         holder.list_product.setAdapter(orderChildAdapter);
@@ -136,20 +159,7 @@ public class OrderGroupAdapter2 extends BaseAdapter {
 //                context.startActivity(new Intent(context, OrderDetailsActivity.class).putExtra("order", orderNumber).putExtra("mType", mType).putExtra("number", total_num.get(position).toString()));
 //            }
 //        });
-        holder.list_product.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view, int psition, long id) {
-//                Toast.makeText(context, position+"", Toast.LENGTH_LONG).show();
-                Intent intent = new Intent(context, OrderDetailsActivity.class);
-                intent.putExtra("billId", orderNumber.getId());
-                intent.putExtra("mType", mType);
-                intent.putExtra("state", orderNumber.getState());
-                intent.putExtra("areaId", orderNumber.getAreaId());
-                intent.putExtra("order", orderNumber);
-                ((OrderCenterActivity2) context).startActivityForResult((intent), 11);
 
-            }
-        });
 
         /**
          * 不同页面显示不同的按钮
@@ -191,9 +201,9 @@ public class OrderGroupAdapter2 extends BaseAdapter {
             holder.tv_left_btn.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    String name= orderNumber.getLiveryType();
-                    String id= orderNumber.getLiveryNo();
-                    context.startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("http://m.kuaidi100.com/index_all.html?type="+orderNumber.getLiveryType()+"&postid="+orderNumber.getLiveryNo())));
+                    String name = orderNumber.getLiveryType();
+                    String id = orderNumber.getLiveryNo();
+                    context.startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("http://m.kuaidi100.com/index_all.html?type=" + orderNumber.getLiveryType() + "&postid=" + orderNumber.getLiveryNo())));
                 }
             });
             holder.tv_right_btn.setText("确认收货");

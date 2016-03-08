@@ -136,7 +136,7 @@
                             style="@style/text_32_white"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="好友战队" />
+                            android:text="好友圈子" />
 
                         <TextView
                             style="@style/text_27_colorLine"

@@ -152,8 +152,8 @@ public class ProductInfoActivity extends ToolBarActivity<ProductInfoPresenter> i
 
     public String tag_color = "";
     public String tag_size = "";
-    public int tag_color_num=0;
-    public int tag_size_num=0;
+    public int tag_color_num = 0;
+    public int tag_size_num = 0;
     public String picurl = "";
     public int price_num;
     public double price;
@@ -194,11 +194,11 @@ public class ProductInfoActivity extends ToolBarActivity<ProductInfoPresenter> i
         startActivity(new Intent(this, ProductCommentActivity.class).putExtra("productId", product.Id));
     }
 
-    private boolean tellNumber(int num){
+    private boolean tellNumber(int num) {
         for (int i = 0; i < product.PriceList.size(); i++) {
-            if (product.PriceList.get(i).ColorId == tag_color_num&&product.PriceList.get(i).SizeId == tag_size_num) {
-                if(product.PriceList.get(i).StockNum<num){
-                    Toast.makeText(this,"您选择的商品数量已超出库存，请重新选择数量，库存数为："+product.PriceList.get(i).StockNum,Toast.LENGTH_SHORT).show();
+            if (product.PriceList.get(i).ColorId == tag_color_num && product.PriceList.get(i).SizeId == tag_size_num) {
+                if (product.PriceList.get(i).StockNum < num) {
+                    Toast.makeText(this, "您选择的商品数量已超出库存，请重新选择数量，库存数为：" + product.PriceList.get(i).StockNum, Toast.LENGTH_SHORT).show();
                     return false;
                 }
             }
@@ -206,11 +206,11 @@ public class ProductInfoActivity extends ToolBarActivity<ProductInfoPresenter> i
         return true;
     }
 
-    private void showGuiGe(){
+    private void showGuiGe() {
 
-        if(tag_color_num!=0&&tag_size_num!=0){
+        if (tag_color_num != 0 && tag_size_num != 0) {
             for (int i = 0; i < product.PriceList.size(); i++) {
-                if (product.PriceList.get(i).ColorId == tag_color_num&&product.PriceList.get(i).SizeId == tag_size_num) {
+                if (product.PriceList.get(i).ColorId == tag_color_num && product.PriceList.get(i).SizeId == tag_size_num) {
 
                     DecimalFormat df = new DecimalFormat("######0.00");
                     product_price_true.setText("￥" + df.format(product.PriceList.get(i).Price));
@@ -232,15 +232,15 @@ public class ProductInfoActivity extends ToolBarActivity<ProductInfoPresenter> i
                         picurl = product.PriceList.get(i).ImagePath;
                     }
 
-                    if(product.PriceList.get(i).StockNum==0){
-                        Toast.makeText(this,"您选择的商品已售空，请选择其他规格的商品",Toast.LENGTH_SHORT).show();
+                    if (product.PriceList.get(i).StockNum == 0) {
+                        Toast.makeText(this, "您选择的商品已售空，请选择其他规格的商品", Toast.LENGTH_SHORT).show();
                     }
                     break;
                 }
             }
         }
 
-        if(tag_color_num!=0){
+        if (tag_color_num != 0) {
             for (int i = 0; i < product.PriceList.size(); i++) {
                 if (product.PriceList.get(i).ColorId == tag_color_num) {
 //                    DecimalFormat df = new DecimalFormat("######0.00");
@@ -287,7 +287,6 @@ public class ProductInfoActivity extends ToolBarActivity<ProductInfoPresenter> i
         @Override
         public void onTagClick(String tag) {
             tag_size = tag;
-
 
 
             for (int i = 0; i < product.SizeList.size(); i++) {
@@ -359,7 +358,7 @@ public class ProductInfoActivity extends ToolBarActivity<ProductInfoPresenter> i
         mDefaultTagGroup.setOnTagClickListener(mTagClickListener);
         mDefaultTagGroup_size.setOnTagClickListener(mTagClickListener_size);
         Glide.with(ProductInfoActivity.this)
-                .load(C.BASE_URL + product.ImagePath)
+                .load(C.BASE_URL + product.PicList.get(0).Path)
                 .centerCrop()
                 .crossFade()
                 .placeholder(R.mipmap.img_bg)
@@ -424,7 +423,7 @@ public class ProductInfoActivity extends ToolBarActivity<ProductInfoPresenter> i
             @Override
             public void onClick(View v) {
                 if (picurl.trim().equals(""))
-                    addImg(product.ImagePath, 0);
+                    addImg(product.PicList.get(0).Path, 0);
                 else
                     addImg(picurl, 0);
             }
@@ -443,7 +442,7 @@ public class ProductInfoActivity extends ToolBarActivity<ProductInfoPresenter> i
 
             @Override
             public void onClick(View v) {
-                if(!tellNumber(number)){
+                if (!tellNumber(number)) {
                     return;
                 }
 
@@ -474,7 +473,7 @@ public class ProductInfoActivity extends ToolBarActivity<ProductInfoPresenter> i
 
             @Override
             public void onClick(View v) {
-                if(!tellNumber(number)){
+                if (!tellNumber(number)) {
                     return;
                 }
 

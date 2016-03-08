@@ -121,7 +121,7 @@ public class FederalFragment extends BaseFragment<FederalPresenter> implements F
             @Override
             public void onClick(View view) {
                 if (new SessionUtil(getContext()).getUser().TeamId == 0) {
-                    snb("请先加入战队", layGroupCondition);
+                    snb("请先加入圈子", layGroupCondition);
 
                 } else {
                     startActivity(GroupConditionActivity.class, new Bun().putInt("teamid", new SessionUtil(getContext()).getUser().TeamId).ok());

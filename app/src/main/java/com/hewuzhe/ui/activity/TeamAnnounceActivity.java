@@ -55,7 +55,7 @@ public class TeamAnnounceActivity extends SwipeRecycleViewActivity<TreamAnnounce
      */
     @Override
     protected String provideTitle() {
-        return "战队公告";
+        return "公告";
     }
 
     /**

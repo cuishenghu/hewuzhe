@@ -53,23 +53,33 @@ public class OrderChildAdapter extends BaseAdapter {
         if (convertView == null) {
             holder = new ViewHolder();
             convertView = mLayoutInflater.inflate(R.layout.item_order_child, parent, false);
-
             holder.img_product_pic = (ImageView) convertView.findViewById(R.id.img_equip_pic);
             holder.tv_product_name = (TextView) convertView.findViewById(R.id.tv_equip_name);
             holder.tv_product_spcial = (TextView) convertView.findViewById(R.id.tv_equip_special);
             holder.tv_product_price = (TextView) convertView.findViewById(R.id.tv_equip_price);
             holder.tv_product_num = (TextView) convertView.findViewById(R.id.tv_equip_buy_num);
             convertView.setTag(holder);
+
         } else {
             holder = (ViewHolder) convertView.getTag();
         }
         OrderContent orderContent = orderContents.get(position);//外层商品分类的JSONObject对象
-        ImageLoader.getInstance().displayImage(StringUtil.toString(UrlContants.IMAGE_URL +
-                orderContent.getMiddleImagePath(), "http://"), holder.img_product_pic);
-        holder.tv_product_name.setText(orderContent.getProductName());//商品名称
-        holder.tv_product_spcial.setText("规格："+orderContent.getProductSizeName()+"/"+orderContent.getProductColorName());
-        holder.tv_product_price.setText("¥"+orderContent.getProductPriceTotalPrice());
-        holder.tv_product_num.setText("x"+orderContent.getNumber());
+
+        if (orderContent.getProductId() == null) {
+
+            holder.tv_product_name.setText(orderContent.getProductName());//商品名称
+            holder.tv_product_name.setTextSize(18);
+            holder.tv_product_spcial.setVisibility(View.GONE);
+            holder.tv_product_price.setVisibility(View.GONE);
+            holder.tv_product_num.setVisibility(View.GONE);
+        } else {
+            ImageLoader.getInstance().displayImage(StringUtil.toString(UrlContants.IMAGE_URL +
+                    orderContent.getMiddleImagePath(), "http://"), holder.img_product_pic);
+            holder.tv_product_name.setText(orderContent.getProductName());//商品名称
+            holder.tv_product_spcial.setText("规格：" + orderContent.getProductSizeName() + "/" + orderContent.getProductColorName());
+            holder.tv_product_price.setText("¥" + orderContent.getProductPriceTotalPrice());
+            holder.tv_product_num.setText("x" + orderContent.getNumber());
+        }
         return convertView;
     }
 

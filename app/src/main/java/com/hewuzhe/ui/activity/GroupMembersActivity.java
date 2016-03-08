@@ -119,7 +119,7 @@ public class GroupMembersActivity extends RecycleViewActivity<GroupMembersPresen
 
     @Override
     protected String provideTitle() {
-        return "战队成员";
+        return "成员";
     }
 
 

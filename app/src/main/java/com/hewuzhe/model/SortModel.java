@@ -7,7 +7,7 @@ public class SortModel {
 
     private String name;   //显示的数值
     private String sortLetters;  //显示数据拼音的首字母
-    private String id;  // 家和Id
+    private String id;  // Id
     private String state;  // 通讯录状态
     private String phone;  // 手机号
 

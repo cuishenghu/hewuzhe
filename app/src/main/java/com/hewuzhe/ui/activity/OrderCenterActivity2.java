@@ -176,8 +176,8 @@ public class OrderCenterActivity2 extends BaseActivity2 implements XListView.IXL
                 tv_wait_to_receive.setTextColor(Color.WHITE);
                 tv_wait_to_pay.setTextColor(Color.WHITE);
 //                tv_wait_to_send.setSelected(true);
-                initData();
                 requestData(mType);
+                initData();
                 break;
             case R.id.ll_wait_to_receive:
                 mType = 3;

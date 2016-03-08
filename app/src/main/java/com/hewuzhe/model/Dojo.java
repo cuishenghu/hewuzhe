@@ -22,4 +22,6 @@ public class Dojo {
     public String Address;
     public String Lat;
     public String Lng;
+    public String Duration;
+    public String VideoPath;
 }

@@ -20,6 +20,14 @@
         <LinearLayout android:layout_width="match_parent"
                       android:layout_height="wrap_content"
                       android:orientation="vertical">
+            <com.hewuzhe.ui.widget.VideoControllerView
+                android:id="@+id/vvvv"
+                android:layout_width="match_parent"
+                android:layout_height="350px"
+                android:background="#000000"
+                android:visibility="gone"
+                >
+            </com.hewuzhe.ui.widget.VideoControllerView>
 
             <ImageView android:id="@+id/img"
                        android:layout_width="match_parent"

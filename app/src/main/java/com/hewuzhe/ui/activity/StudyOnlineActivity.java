@@ -42,7 +42,7 @@ public class StudyOnlineActivity extends ToolBarActivity<StudyOnlinePresenter> i
 
     @Override
     protected String provideTitle() {
-        return "学习";
+        return "学习计划";
     }
 
     @Override

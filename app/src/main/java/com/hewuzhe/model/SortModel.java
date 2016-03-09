@@ -7,38 +7,58 @@ public class SortModel {
 
     private String name;   //显示的数值
     private String sortLetters;  //显示数据拼音的首字母
-    private String id;  // Id
-    private String state;  // 通讯录状态
-    private String phone;  // 手机号
+    private String Id;  // Id
+    private String IsFriend;  // 通讯录状态
+    private String Phone;  // 手机号
+
+    public SortModel() {
+    }
+
+    public SortModel(String name, String sortLetters, String id, String isFriend, String phone) {
+        this.name = name;
+        this.sortLetters = sortLetters;
+        Id = id;
+        IsFriend = isFriend;
+        Phone = phone;
+    }
 
     public String getName() {
         return name;
     }
+
     public void setName(String name) {
         this.name = name;
     }
+
     public String getSortLetters() {
         return sortLetters;
     }
+
     public void setSortLetters(String sortLetters) {
         this.sortLetters = sortLetters;
     }
+
     public String getId() {
-        return id;
+        return Id;
     }
+
     public void setId(String id) {
-        this.id = id;
+        Id = id;
     }
-    public String getState() {
-        return state;
+
+    public String getIsFriend() {
+        return IsFriend;
     }
-    public void setState(String state) {
-        this.state = state;
+
+    public void setIsFriend(String isFriend) {
+        IsFriend = isFriend;
     }
+
     public String getPhone() {
-        return phone;
+        return Phone;
     }
+
     public void setPhone(String phone) {
-        this.phone = phone;
+        Phone = phone;
     }
 }

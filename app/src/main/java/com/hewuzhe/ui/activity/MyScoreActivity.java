@@ -77,7 +77,7 @@ public class MyScoreActivity extends BaseActivity2 implements XListView.IXListVi
      */
     public void initView() {
         myCommonTitle = (MyCommonTitle) findViewById(R.id.aci_mytitle);
-        myCommonTitle.setTitle("兑换");
+        myCommonTitle.setTitle("积分兑换");
         mHandler = new Handler();
         img_avatar = (CircleImageView) findViewById(R.id.img_avatar);//头像
 

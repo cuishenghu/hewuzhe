@@ -732,4 +732,6 @@ public class WarriorFragment extends ToolBarFragment<WarriorFragmentPresenter> i
     }
 
 
+
+
 }

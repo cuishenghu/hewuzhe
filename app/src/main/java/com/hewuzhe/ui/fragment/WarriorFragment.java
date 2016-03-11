@@ -87,26 +87,27 @@ public class WarriorFragment extends ToolBarFragment<WarriorFragmentPresenter> i
 
     @Bind(R.id.img_avatar)
     ImageView imgAvatar;
-    @Bind(R.id.tv_fly_dream)
-    TextView tvFlyDream;
-    @Bind(R.id.tv_study_online)
-    TextView tvStudyOnline;
+    @Bind(R.id.tv_train)
+    TextView tvTrain;//课程
     @Bind(R.id.tv_dojo_recommend)
-    TextView tvDojoRecommend;
-    @Bind(R.id.tv_my_collections)
-    TextView tvMyCollections;
-    @Bind(R.id.lay_live)
-    LinearLayout layLive;
-    @Bind(R.id.lay_train)
-    LinearLayout layTrain;
-    @Bind(R.id.lay_integral_one)
-    LinearLayout getLayIntegralOne;
-    @Bind(R.id.lay_level)
-    LinearLayout layLevel;
+    TextView tvDojoRecommend;//场馆
+    @Bind(R.id.tv_fly_dream)
+    TextView tvFlyDream;//私教
+    @Bind(R.id.tv_live)
+    TextView tvLive;//直播
+    @Bind(R.id.lay_study_online)
+    LinearLayout layStudyOnline;//学习计划
     @Bind(R.id.lay_record)
-    LinearLayout layRecord;
-    @Bind(R.id.lay_integral)
-    LinearLayout layIntegral;
+    LinearLayout layRecord;//成长记录
+    @Bind(R.id.lay_my_collections)
+    LinearLayout layMyCollections;//精品收藏
+    @Bind(R.id.lay_exchange)
+    LinearLayout layExchange;//积分兑换
+    @Bind(R.id.lay_integral_one)
+    LinearLayout getLayIntegralOne;//积分
+    @Bind(R.id.lay_level)
+    LinearLayout layLevel;//会员
+
     @Nullable
     @Bind(R.id.tv_air_quality)
     TextView tvAirQuality;
@@ -164,7 +165,7 @@ public class WarriorFragment extends ToolBarFragment<WarriorFragmentPresenter> i
 
     @Override
     protected String provideTitle() {
-        return "功夫";
+        return "训练";
     }
 
     /**
@@ -304,7 +305,7 @@ public class WarriorFragment extends ToolBarFragment<WarriorFragmentPresenter> i
             }
         });
         /**
-         * 梦想
+         * 私教
          */
         tvFlyDream.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -317,18 +318,18 @@ public class WarriorFragment extends ToolBarFragment<WarriorFragmentPresenter> i
             }
         });
         /**
-         * 学习
+         * 学习计划
          */
-        tvStudyOnline.setOnClickListener(new View.OnClickListener() {
+        layStudyOnline.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 startActivity(new Intent(getActivity(), StudyOnlineActivity.class));
             }
         });
         /**
-         * 收藏
+         * 精品收藏
          */
-        tvMyCollections.setOnClickListener(new View.OnClickListener() {
+        layMyCollections.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 startActivity(new Intent(getActivity(), MyCollectionsActivity.class));
@@ -337,14 +338,14 @@ public class WarriorFragment extends ToolBarFragment<WarriorFragmentPresenter> i
         /**
          *课程
          */
-        layTrain.setOnClickListener(new View.OnClickListener() {
+        tvTrain.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 startActivity(new Intent(getActivity(), TrainActivity.class));
             }
         });
         /**
-         * 记录
+         * 成长记录
          */
         layRecord.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -353,9 +354,9 @@ public class WarriorFragment extends ToolBarFragment<WarriorFragmentPresenter> i
             }
         });
         /**
-         * 兑换
+         * 积分兑换
          */
-        layIntegral.setOnClickListener(new View.OnClickListener() {
+        layExchange.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 startActivity(new Intent(getActivity(), MyScoreActivity.class));
@@ -364,7 +365,7 @@ public class WarriorFragment extends ToolBarFragment<WarriorFragmentPresenter> i
         /**
          * 直播
          */
-        layLive.setOnClickListener(new View.OnClickListener() {
+        tvLive.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 startActivity(new Intent(getActivity(), LiveVideoListActivity.class));

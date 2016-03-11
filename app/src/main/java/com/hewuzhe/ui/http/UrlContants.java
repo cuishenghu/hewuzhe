@@ -74,6 +74,11 @@ public class UrlContants {
 
     public static final String SELECTBILLCOUNT = "Hezhuangbei.asmx/SelectBillCount?";//根据用户ID，查询订单个数
 
+    public static final String CONTACTSMATCH =  "Helianmeng.asmx/ContactsMatch?";   //通讯录匹配，未注册不返回，注册之后判断是否为好友
+
+    public static final String SAVEFRIEND =  "Helianmeng.asmx/SaveFriend?";   //添加武友
+
+
 
     public static String getUrl(String token) {
         if (token == null || token.equals("")) {

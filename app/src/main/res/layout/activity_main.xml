@@ -37,7 +37,7 @@
             <TextView android:layout_width="wrap_content"
                       android:layout_height="wrap_content"
                       android:layout_marginTop="5px"
-                      android:text="功夫"
+                      android:text="训练"
                       android:textColor="@color/white"/>
 
 
@@ -60,7 +60,7 @@
             <TextView android:layout_width="wrap_content"
                       android:layout_height="wrap_content"
                       android:layout_marginTop="5px"
-                      android:text="发现"
+                      android:text="聊天"
 
                       android:textColor="@color/white"/>
 
@@ -83,7 +83,7 @@
             <TextView android:layout_width="wrap_content"
                       android:layout_height="wrap_content"
                       android:layout_marginTop="5px"
-                      android:text="视界"
+                      android:text="视频"
 
                       android:textColor="@color/white"/>
 

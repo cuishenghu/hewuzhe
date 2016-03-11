@@ -22,7 +22,7 @@ public class TeamManagerActivity extends ToolBarActivity<TeamManagerPresenter> i
      */
     @Override
     protected String provideTitle() {
-        return "战队管理";
+        return "管理";
     }
 
     /**
@@ -57,7 +57,7 @@ public class TeamManagerActivity extends ToolBarActivity<TeamManagerPresenter> i
     @Override
     public void updateItem(boolean b) {
         if (!b) {
-            snb("退出战队成功", _LayExit);
+            snb("退出圈子成功", _LayExit);
             EventBus.getDefault().post(C.MSG_CLOSE_GROUP_CONDITION);
             finishActivity();
         }

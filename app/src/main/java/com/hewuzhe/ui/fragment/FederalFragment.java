@@ -98,7 +98,7 @@ public class FederalFragment extends BaseFragment<FederalPresenter> implements F
         imgBack = (ImageView) rootView.findViewById(R.id.img_back);
         tvTitle = (TextView) rootView.findViewById(R.id.tv_title);
         appBar = (AppBarLayout) rootView.findViewById(R.id.app_bar_layout);
-        tvTitle.setText("发现");
+        tvTitle.setText("聊天");
 
     }
 
@@ -121,7 +121,7 @@ public class FederalFragment extends BaseFragment<FederalPresenter> implements F
             @Override
             public void onClick(View view) {
                 if (new SessionUtil(getContext()).getUser().TeamId == 0) {
-                    snb("请先加入战队", layGroupCondition);
+                    snb("请先加入圈子", layGroupCondition);
 
                 } else {
                     startActivity(GroupConditionActivity.class, new Bun().putInt("teamid", new SessionUtil(getContext()).getUser().TeamId).ok());

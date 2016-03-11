@@ -73,7 +73,7 @@ public class FlyDreamActivity extends ToolBarActivity<FlyDreamPresenter> impleme
 
     @Override
     protected String provideTitle() {
-        return "梦想";
+        return "私教";
     }
 
 

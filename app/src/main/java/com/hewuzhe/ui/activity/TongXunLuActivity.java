@@ -132,24 +132,30 @@ public class TongXunLuActivity extends BaseActivity2 {
                 ll_resultdata.setVisibility(View.VISIBLE);
                 loadingView.setVisibility(View.GONE);
                 final List<String> contact = new ArrayList<String>();
+                final List<String> number = new ArrayList<String>();
+
                 for (Iterator<String> keys = callRecords.keySet().iterator(); keys.hasNext(); ) {
                     String key = keys.next();
-                    phones.append(callRecords.get(key) + ",");
+                    contact.add(key);
+                    number.add(callRecords.get(key));
+                    phones.append("'" + callRecords.get(key) + "'" + "&");
                 }
                 if (phones.length() > 0) {
                     /**
                      * 调匹配手机通讯录接口
                      */
                     RequestParams params = new RequestParams();
-                    params.put("", new SessionUtil(TongXunLuActivity.this).getUser().Id);
-                    params.put("", phones.substring(0, phones.length() - 1));
-                    HttpUtils.getAddressByAreaId(new HttpErrorHandler() {//===修改===修改=修改==修改==修改==修改==修改===修改==修改===修改
+                    params.put("userid", new SessionUtil(TongXunLuActivity.this).getUser().Id);
+                    params.put("contacts", phones.substring(0, phones.length() - 1));
+                    HttpUtils.contactsMatch(new HttpErrorHandler() {
                         @Override
                         public void onRecevieSuccess(JSONObject json) {
-                            JSONArray jsonArray = json.getJSONObject(UrlContants.jsonData).getJSONArray("list");
+                            JSONArray jsonArray = json.getJSONArray(UrlContants.jsonData);
                             String[] names = new String[]{};
                             names = contact.toArray(names);
-                            SourceDataList = filledData(names, jsonArray);
+                            String[] phoneNumbers = new String[]{};
+                            phoneNumbers = number.toArray(phoneNumbers);
+                            SourceDataList = filledData(names, phoneNumbers, jsonArray);
                             // 根据a-z进行排序源数据
                             Collections.sort(SourceDataList, pinyinComparator);
 
@@ -171,20 +177,31 @@ public class TongXunLuActivity extends BaseActivity2 {
         }
     }
 
-    private List<SortModel> filledData(String[] data, JSONArray jsonArray) {
+    private List<SortModel> filledData(String[] data, String[] phoneNumbers, JSONArray jsonArray) {
         List<SortModel> mSorList = new ArrayList<SortModel>();
+        int isFriend = -1;
         for (int i = 0; i < data.length; i++) {
             SortModel sortModel = new SortModel();
             sortModel.setName(data[i]);
-            sortModel.setId(jsonArray.getJSONObject(i).getString("id"));
-            sortModel.setPhone(jsonArray.getJSONObject(i).getString("mob"));
-            sortModel.setState(jsonArray.getJSONObject(i).getString("state"));
+            sortModel.setPhone(phoneNumbers[i]);
+            sortModel.setIsFriend(isFriend + "");
+            for (int j = 0; j < jsonArray.size(); j++) {
+                String Id=jsonArray.getJSONObject(j).getString("Id");
+                String isf = jsonArray.getJSONObject(j).getString("IsFriend");
+                String num = jsonArray.getJSONObject(j).getString("Phone");
+                if (num.equals(phoneNumbers[i])) {
+                    sortModel.setIsFriend(isf);
+                    sortModel.setId(Id);
+                    break;
+                }
+            }
+//            sortModel.setId(jsonArray.getJSONObject(i).getString("Id"));
+//            sortModel.setIsFriend(jsonArray.getJSONObject(i).getString("IsFriend"));
             //汉子转拼音
             String pinyin = characterParser.getSelling(data[i]);
             String sortString = pinyin.substring(0, 1).toUpperCase(Locale.getDefault());
-
             // 正则表达式，判断首字母是否是英文字母
-            if (sortString.matches("[A-Z]]")) {
+            if (sortString.matches("[A-Z]")) {
                 sortModel.setSortLetters(sortString.toUpperCase(Locale.getDefault()));
             } else {
                 sortModel.setSortLetters("#");

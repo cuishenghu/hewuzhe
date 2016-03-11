@@ -55,7 +55,7 @@ public class RecordActivity extends SwipeRecycleViewActivity<RecordPresenter, Re
 
     @Override
     protected String provideTitle() {
-        return "记录";
+        return "成长记录";
     }
 
     /**

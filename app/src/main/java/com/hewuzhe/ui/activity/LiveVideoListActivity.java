@@ -42,7 +42,7 @@ public class LiveVideoListActivity extends SwipeRecycleViewActivity<LiveVideoPre
 
     @Override
     protected String provideTitle() {
-        return "直播列表";
+        return "直播";
     }
 
     @Override

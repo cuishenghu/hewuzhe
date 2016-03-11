@@ -1,27 +1,32 @@
 package com.hewuzhe.ui.adapter;
-        import java.util.List;
-        import android.content.Context;
-        import android.content.Intent;
-        import android.graphics.Color;
-        import android.net.Uri;
-        import android.view.LayoutInflater;
-        import android.view.View;
-        import android.view.View.OnClickListener;
-        import android.view.ViewGroup;
-        import android.widget.BaseAdapter;
-        import android.widget.SectionIndexer;
-        import android.widget.TextView;
-        import com.alibaba.fastjson.JSONObject;
-        import com.hewuzhe.R;
-        import com.hewuzhe.model.SortModel;
-        import com.hewuzhe.ui.http.HttpErrorHandler;
-        import com.hewuzhe.ui.http.HttpUtils;
-        import com.hewuzhe.utils.SessionUtil;
-        import com.hewuzhe.utils.Tools;
-        import com.loopj.android.http.AsyncHttpResponseHandler;
-        import com.loopj.android.http.RequestParams;
 
-public class SortAdapter extends BaseAdapter implements SectionIndexer{
+import java.io.InputStream;
+import java.util.List;
+
+import android.content.Context;
+import android.content.Intent;
+import android.graphics.Color;
+import android.net.Uri;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.View.OnClickListener;
+import android.view.ViewGroup;
+import android.widget.BaseAdapter;
+import android.widget.ImageView;
+import android.widget.SectionIndexer;
+import android.widget.TextView;
+
+import com.alibaba.fastjson.JSONObject;
+import com.hewuzhe.R;
+import com.hewuzhe.model.SortModel;
+import com.hewuzhe.ui.http.HttpErrorHandler;
+import com.hewuzhe.ui.http.HttpUtils;
+import com.hewuzhe.utils.SessionUtil;
+import com.hewuzhe.utils.Tools;
+import com.loopj.android.http.AsyncHttpResponseHandler;
+import com.loopj.android.http.RequestParams;
+
+public class SortAdapter extends BaseAdapter implements SectionIndexer {
     private List<SortModel> list = null;
     private Context mContext;
 
@@ -32,9 +37,10 @@ public class SortAdapter extends BaseAdapter implements SectionIndexer{
 
     /**
      * 当ListView数据发生变化时,调用此方法来更新ListView
+     *
      * @param list
      */
-    public void updateListView(List<SortModel> list){
+    public void updateListView(List<SortModel> list) {
         this.list = list;
         notifyDataSetChanged();
     }
@@ -57,7 +63,8 @@ public class SortAdapter extends BaseAdapter implements SectionIndexer{
         if (view == null) {
             viewHolder = new ViewHolder();
             view = LayoutInflater.from(mContext).inflate(R.layout.item_tongxunlu, null);
-            viewHolder.tvTitle = (TextView) view.findViewById(R.id.title);
+            viewHolder.tv_username = (TextView) view.findViewById(R.id.tv_username);
+            viewHolder.img_avatar = (ImageView) view.findViewById(R.id.img_user_avatar);
             viewHolder.tvLetter = (TextView) view.findViewById(R.id.catalog);
             viewHolder.tvEdit = (TextView) view.findViewById(R.id.edit);
             view.setTag(viewHolder);
@@ -69,32 +76,37 @@ public class SortAdapter extends BaseAdapter implements SectionIndexer{
         int section = getSectionForPosition(position);
 
         //如果当前位置等于该分类首字母的Char的位置 ，则认为是第一次出现
-        if(position == getPositionForSection(section)){
+        if (position == getPositionForSection(section)) {
             viewHolder.tvLetter.setVisibility(View.VISIBLE);
             viewHolder.tvLetter.setText(mContent.getSortLetters());
-        }else{
+        } else {
             viewHolder.tvLetter.setVisibility(View.GONE);
         }
 
-        viewHolder.tvTitle.setText(this.list.get(position).getName());
-        String random = list.get(position).getState();
-        viewHolder.tvEdit.setText("1".equals(random)?"已同意":"2".equals(random)?"添加":"邀请");
-        viewHolder.tvEdit.setTextColor(Color.parseColor("1".equals(random)?"#AAAAAA":"#FFFFFF"));
-        viewHolder.tvEdit.setBackgroundColor(Color.parseColor("1".equals(random)?"#FFFFFF":"2".equals(random)?"#01CF97":"#EA5414"));
-        if("1".equals(random)){
+        viewHolder.tv_username.setText(this.list.get(position).getName());
+        String random = list.get(position).getIsFriend();
+        viewHolder.tvEdit.setText("1".equals(random) ? "已同意" : "0".equals(random) ? "添加" : "邀请");
+        viewHolder.tvEdit.setTextColor(Color.parseColor("1".equals(random) ? "#AAAAAA" : "#FFFFFF"));
+        viewHolder.tvEdit.setBackgroundColor(Color.parseColor("1".equals(random) ? "#FFFFFF" : "0".equals(random) ? "#01CF97" : "#EA5414"));
+        if ("1".equals(random)) {
             viewHolder.tvEdit.setOnClickListener(null);
-        }else if("2".equals(random)){
+        } else if ("0".equals(random)) {
             viewHolder.tvEdit.setOnClickListener(new OnClickListener() {
                 @Override
                 public void onClick(View arg0) {
                     RequestParams params = new RequestParams();
-                    params.put("fid", list.get(position).getId());
-                    params.put("uid", new SessionUtil(mContext).getUser().Id);
-                    params.put("intro", "请求添加好友");
-//                    HttpUtils.addFriend(res_addFriend, params);
+                    params.put("friendid", list.get(position).getId());
+                    params.put("userid", new SessionUtil(mContext).getUser().Id);
+                    HttpUtils.addFriend(new HttpErrorHandler() {
+                        @Override
+                        public void onRecevieSuccess(JSONObject json) {
+                            Tools.toast(mContext,"添加成功");
+                            updateListView(list);
+                        }
+                    }, params);
                 }
             });
-        }else{
+        } else {
             viewHolder.tvEdit.setOnClickListener(new OnClickListener() {
                 @Override
                 public void onClick(View arg0) {
@@ -105,6 +117,31 @@ public class SortAdapter extends BaseAdapter implements SectionIndexer{
                 }
             });
         }
+
+//        //通话电话号码获取头像uri
+//        Uri uriNumber2Contacts = Uri
+//                .parse("content://com.android.contacts/"
+//                        + "data/phones/filter/" + list.get(position).getPhone());
+//        Cursor cursorCantacts = SApplication.nowSApplication
+//                .getContentResolver().query(uriNumber2Contacts, null, null,
+//                        null, null);
+//        if (cursorCantacts.getCount() > 0) { //若游标不为0则说明有头像,游标指向第一条记录
+//            cursorCantacts.moveToFirst();
+//            Long contactID = cursorCantacts.getLong(cursorCantacts
+//                    .getColumnIndex("contact_id"));
+//            Uri uri = ContentUris.withAppendedId(
+//                    ContactsContract.Contacts.CONTENT_URI, contactID);
+//            InputStream input = ContactsContract.Contacts
+//                    .openContactPhotoInputStream(
+//                            SApplication.nowSApplication
+//                                    .getContentResolver(), uri);
+//            btContactImage = BitmapFactory.decodeStream(input);
+//            Log.i("info", "bt======" + btContactImage);
+//            ivShowImage.setImageBitmap(btContactImage);
+//
+//        }
+
+
         return view;
     }
 
@@ -113,6 +150,7 @@ public class SortAdapter extends BaseAdapter implements SectionIndexer{
         public void onRecevieSuccess(JSONObject json) {
             Tools.toast(mContext, json.getString("message"));
         }
+
         @Override
         public void onRecevieFailed(String status, JSONObject json) {
             Tools.toast(mContext, json.getString("message"));
@@ -120,11 +158,11 @@ public class SortAdapter extends BaseAdapter implements SectionIndexer{
     };
 
 
-
     final static class ViewHolder {
         TextView tvLetter;
-        TextView tvTitle;
+        TextView tv_username;
         TextView tvEdit;
+        ImageView img_avatar;
     }
 
 
@@ -157,7 +195,7 @@ public class SortAdapter extends BaseAdapter implements SectionIndexer{
      * @return
      */
     private String getAlpha(String str) {
-        String  sortStr = str.trim().substring(0, 1).toUpperCase();
+        String sortStr = str.trim().substring(0, 1).toUpperCase();
         // 正则表达式，判断首字母是否是英文字母
         if (sortStr.matches("[A-Z]")) {
             return sortStr;

@@ -124,4 +124,14 @@ public class HttpUtils {
         client.get(UrlContants.getUrl(UrlContants.SELECTBILLCOUNT), params, handler);
     }
 
+    /* 通讯录匹配，未注册不返回，注册之后判断是否为好友 */
+    public static void contactsMatch(AsyncHttpResponseHandler handler, RequestParams params) {
+        client.post(UrlContants.getUrl(UrlContants.CONTACTSMATCH), params, handler);
+    }
+
+    /* 添加武友 */
+    public static void addFriend(AsyncHttpResponseHandler handler, RequestParams params) {
+        client.post(UrlContants.getUrl(UrlContants.SAVEFRIEND), params, handler);
+    }
+
 }

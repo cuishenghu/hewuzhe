@@ -90,7 +90,7 @@ public class MakeWarriorsActivity extends RecycleViewActivity<MakeWarriorsPresen
         lay_tongxunlu.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-//                startActivity(new Intent(MakeWarriorsActivity.this,TongXunLuActivity.class));
+                startActivity(new Intent(MakeWarriorsActivity.this,TongXunLuActivity.class));
 //                startActivity(TongXunLuActivity.class);
             }
         });

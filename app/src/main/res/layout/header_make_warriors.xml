@@ -51,7 +51,7 @@
         android:background="@color/colorListBg"
         android:orientation="horizontal"
         android:paddingLeft="20px"
-        android:visibility="gone">
+        android:visibility="visible">
 
         <TextView
             android:layout_width="0dp"

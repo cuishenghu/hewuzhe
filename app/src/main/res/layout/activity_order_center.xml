@@ -23,12 +23,11 @@
             android:gravity="center"
             android:orientation="horizontal">
 
-                <RadioButton
-                    android:id="@+id/rb_wait_to_pay"
-                    android:checked="true"
-                    style="@style/my_radiobutton"
-                    android:text="待付款"/>
-
+            <RadioButton
+                android:id="@+id/rb_wait_to_pay"
+                style="@style/my_radiobutton"
+                android:checked="true"
+                android:text="待付款" />
 
 
             <RadioButton

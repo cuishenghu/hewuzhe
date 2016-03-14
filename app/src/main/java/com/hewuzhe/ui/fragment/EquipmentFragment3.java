@@ -71,7 +71,7 @@ public class EquipmentFragment3 extends BaseFragment implements IXListViewListen
     private int sumtiaoshu = 0;
     private Handler mHandler;
     private int pageNo = 0;//页码
-    private int pageSum = 10;//每页显示分类的条数
+    private int pageSum = 100;//每页显示分类的条数
 
     ViewFlow mViewFlow;
     CircleFlowIndicator mFlowIndicator;
@@ -133,7 +133,6 @@ public class EquipmentFragment3 extends BaseFragment implements IXListViewListen
     @Override
     protected void initThings(View v) {
         initToolBar(v);
-
         mHandler = new Handler();
 //        mListView.setGroupIndicator(null);
         mListView.setDividerHeight(0);
@@ -151,8 +150,7 @@ public class EquipmentFragment3 extends BaseFragment implements IXListViewListen
         ll_my_order = (LinearLayout) topView.findViewById(R.id.ll_my_order);
         ll_shopping_cart = (LinearLayout) topView.findViewById(R.id.ll_shopping_cart);
         mListView.addHeaderView(topView);
-        initData();
-        requestData();
+
         getBannarList();
         ViewGroup.LayoutParams para;
         para = framelayout.getLayoutParams();
@@ -190,7 +188,8 @@ public class EquipmentFragment3 extends BaseFragment implements IXListViewListen
 //        tvAction.setVisibility(View.VISIBLE);
 //        tvAction.setText("搜索");
         imgBack.setVisibility(View.GONE);
-
+        initData();
+        requestData();
     }
 
     private void requestData() {

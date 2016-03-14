@@ -375,7 +375,9 @@ public class VideoDetail2Activity extends RecycleViewActivity<VideoDetailPresent
                 .into(imgAvatar2);
 
         tvUsername.setText(video.UserNicName);
-
+        /**
+         * 点赞
+         */
         if (video.Islike) {
             imgPraise.setImageResource(R.mipmap.icon_praise_focus);
             imgPraise.setOnClickListener(new View.OnClickListener() {
@@ -393,7 +395,9 @@ public class VideoDetail2Activity extends RecycleViewActivity<VideoDetailPresent
                 }
             });
         }
-
+        /**
+         * 收藏
+         */
         if (video.IsFavorite) {
             imgCollect.setImageResource(R.mipmap.icon_collect_focus);
 
@@ -412,7 +416,9 @@ public class VideoDetail2Activity extends RecycleViewActivity<VideoDetailPresent
                 }
             });
         }
-
+        /**
+         * 转发
+         */
         imgTranspond.setImageResource(R.mipmap.icon_transpond);
         layTranspond.setOnClickListener(new View.OnClickListener() {
             @Override

@@ -1,6 +1,7 @@
 package com.hewuzhe.ui.adapter;
 
 import android.content.Context;
+import android.content.Intent;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
@@ -12,9 +13,11 @@ import com.bumptech.glide.Glide;
 import com.hewuzhe.R;
 import com.hewuzhe.model.Friend;
 import com.hewuzhe.presenter.MakeWarriorsPresenter;
+import com.hewuzhe.ui.activity.FriendProfileActivity;
 import com.hewuzhe.ui.adapter.base.BaseAdapter;
 import com.hewuzhe.ui.cons.C;
 import com.hewuzhe.ui.widget.GlideCircleTransform;
+import com.hewuzhe.utils.Bun;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;

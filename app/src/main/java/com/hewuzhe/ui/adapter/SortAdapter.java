@@ -3,10 +3,16 @@ package com.hewuzhe.ui.adapter;
 import java.io.InputStream;
 import java.util.List;
 
+import android.content.ContentUris;
 import android.content.Context;
 import android.content.Intent;
+import android.database.Cursor;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.graphics.Color;
 import android.net.Uri;
+import android.provider.ContactsContract;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -23,6 +29,7 @@ import com.hewuzhe.ui.http.HttpErrorHandler;
 import com.hewuzhe.ui.http.HttpUtils;
 import com.hewuzhe.utils.SessionUtil;
 import com.hewuzhe.utils.Tools;
+import com.hewuzhe.view.CircleImageView;
 import com.loopj.android.http.AsyncHttpResponseHandler;
 import com.loopj.android.http.RequestParams;
 
@@ -64,7 +71,7 @@ public class SortAdapter extends BaseAdapter implements SectionIndexer {
             viewHolder = new ViewHolder();
             view = LayoutInflater.from(mContext).inflate(R.layout.item_tongxunlu, null);
             viewHolder.tv_username = (TextView) view.findViewById(R.id.tv_username);
-            viewHolder.img_avatar = (ImageView) view.findViewById(R.id.img_user_avatar);
+            viewHolder.img_avatar = (CircleImageView) view.findViewById(R.id.img_user_avatar);
             viewHolder.tvLetter = (TextView) view.findViewById(R.id.catalog);
             viewHolder.tvEdit = (TextView) view.findViewById(R.id.edit);
             view.setTag(viewHolder);
@@ -82,9 +89,26 @@ public class SortAdapter extends BaseAdapter implements SectionIndexer {
         } else {
             viewHolder.tvLetter.setVisibility(View.GONE);
         }
-
-        viewHolder.tv_username.setText(this.list.get(position).getName());
-        String random = list.get(position).getIsFriend();
+        /**
+         *  通话电话号码获取头像uri
+         */
+        Uri uriNumber2Contacts = Uri.parse("content://com.android.contacts/" + "data/phones/filter/" + list.get(position).getPhone());
+        Cursor cursorCantacts = mContext.getContentResolver().query(uriNumber2Contacts, null, null, null, null);
+        if (cursorCantacts.getCount() > 0) { //若游标不为0则说明有头像,游标指向第一条记录
+            cursorCantacts.moveToFirst();
+            Long contactID = cursorCantacts.getLong(cursorCantacts.getColumnIndex("contact_id"));
+            Uri uri = ContentUris.withAppendedId(ContactsContract.Contacts.CONTENT_URI, contactID);
+            InputStream input = ContactsContract.Contacts.openContactPhotoInputStream(mContext.getContentResolver(), uri);
+            Bitmap btContactImage = BitmapFactory.decodeStream(input);
+            Log.i("info", "bt======" + btContactImage);
+            if (input == null) {
+                viewHolder.img_avatar.setImageResource(R.mipmap.img_avatar);//如果该联系人没有头像,显示默认
+            }else{
+                viewHolder.img_avatar.setImageBitmap(btContactImage);//有则显示该联系人头像
+            }
+        }
+        viewHolder.tv_username.setText(this.list.get(position).getName());//联系人姓名
+        String random = list.get(position).getIsFriend();//0为注册不是好友,1是好友,其他未注册
         viewHolder.tvEdit.setText("1".equals(random) ? "已同意" : "0".equals(random) ? "添加" : "邀请");
         viewHolder.tvEdit.setTextColor(Color.parseColor("1".equals(random) ? "#AAAAAA" : "#FFFFFF"));
         viewHolder.tvEdit.setBackgroundColor(Color.parseColor("1".equals(random) ? "#FFFFFF" : "0".equals(random) ? "#01CF97" : "#EA5414"));
@@ -100,7 +124,7 @@ public class SortAdapter extends BaseAdapter implements SectionIndexer {
                     HttpUtils.addFriend(new HttpErrorHandler() {
                         @Override
                         public void onRecevieSuccess(JSONObject json) {
-                            Tools.toast(mContext,"添加成功");
+                            Tools.toast(mContext, "添加成功");
                             updateListView(list);
                         }
                     }, params);
@@ -112,35 +136,11 @@ public class SortAdapter extends BaseAdapter implements SectionIndexer {
                 public void onClick(View arg0) {
                     Uri uri = Uri.parse("smsto:" + list.get(position).getPhone());
                     Intent sendIntent = new Intent(Intent.ACTION_VIEW, uri);
-                    sendIntent.putExtra("sms_body", "http://www.xiaojia.com");
+                    sendIntent.putExtra("sms_body", "https://www.pgyer.com/ybow");
                     mContext.startActivity(sendIntent);
                 }
             });
         }
-
-//        //通话电话号码获取头像uri
-//        Uri uriNumber2Contacts = Uri
-//                .parse("content://com.android.contacts/"
-//                        + "data/phones/filter/" + list.get(position).getPhone());
-//        Cursor cursorCantacts = SApplication.nowSApplication
-//                .getContentResolver().query(uriNumber2Contacts, null, null,
-//                        null, null);
-//        if (cursorCantacts.getCount() > 0) { //若游标不为0则说明有头像,游标指向第一条记录
-//            cursorCantacts.moveToFirst();
-//            Long contactID = cursorCantacts.getLong(cursorCantacts
-//                    .getColumnIndex("contact_id"));
-//            Uri uri = ContentUris.withAppendedId(
-//                    ContactsContract.Contacts.CONTENT_URI, contactID);
-//            InputStream input = ContactsContract.Contacts
-//                    .openContactPhotoInputStream(
-//                            SApplication.nowSApplication
-//                                    .getContentResolver(), uri);
-//            btContactImage = BitmapFactory.decodeStream(input);
-//            Log.i("info", "bt======" + btContactImage);
-//            ivShowImage.setImageBitmap(btContactImage);
-//
-//        }
-
 
         return view;
     }
@@ -162,7 +162,7 @@ public class SortAdapter extends BaseAdapter implements SectionIndexer {
         TextView tvLetter;
         TextView tv_username;
         TextView tvEdit;
-        ImageView img_avatar;
+        CircleImageView img_avatar;
     }
 
 

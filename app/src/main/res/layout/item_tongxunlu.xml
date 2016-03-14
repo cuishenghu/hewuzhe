@@ -3,50 +3,53 @@
     android:layout_width="fill_parent"
     android:layout_height="wrap_content"
     android:gravity="center_vertical"
-    android:orientation="vertical" >
+    android:orientation="vertical">
 
     <TextView
         android:id="@+id/catalog"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:textColor="@color/white"
+        android:background="@color/colorBg"
+        android:paddingBottom="5dip"
         android:paddingLeft="5dip"
         android:paddingTop="5dip"
-        android:paddingBottom="5dip"
-        android:background="@color/colorBg"/>
+        android:textColor="@color/white" />
+
     <LinearLayout
         android:id="@+id/ll_constact"
-        android:layout_height="wrap_content"
         android:layout_width="match_parent"
-        android:orientation="horizontal"
-        android:padding="10dp"
+        android:layout_height="wrap_content"
+        android:background="@color/colorListBg"
         android:gravity="center_vertical"
-        android:background="@color/colorListBg">
-        <ImageView
+        android:orientation="horizontal"
+        android:padding="10dp">
+
+        <com.hewuzhe.view.CircleImageView
             android:id="@+id/img_user_avatar"
-            android:layout_height="60dp"
             android:layout_width="60dp"
-            android:src="@drawable/rc_ic_picture"
-            android:scaleType="fitXY"
-            android:contentDescription="@string/app_name"/>
+            android:layout_height="60dp"
+            android:contentDescription="@string/app_name"
+            android:src="@mipmap/img_avatar" />
+
         <TextView
             android:id="@+id/tv_username"
-            android:layout_height="wrap_content"
             android:layout_width="0.0dip"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
             android:layout_weight="1"
             android:textColor="@color/white"
-            android:layout_marginLeft="10dp"
-            android:textSize="18sp"/>
+            android:textSize="18sp" />
+
         <TextView
             android:id="@+id/edit"
-            android:layout_height="30dp"
             android:layout_width="60dp"
-            android:text="邀请"
+            android:layout_height="30dp"
+            android:layout_marginRight="20dp"
+            android:background="@color/colorYellow"
             android:gravity="center"
-            android:layout_marginRight="10dp"
+            android:text="邀请"
             android:textColor="@color/white"
-            android:textSize="16sp"
-            android:background="@color/colorYellow"/>
+            android:textSize="16sp" />
     </LinearLayout>
 
 </LinearLayout>

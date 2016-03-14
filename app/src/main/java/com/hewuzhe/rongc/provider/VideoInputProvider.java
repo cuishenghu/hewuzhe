@@ -3,6 +3,10 @@ package com.hewuzhe.rongc.provider;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.graphics.Canvas;
+import android.graphics.Matrix;
 import android.graphics.drawable.Drawable;
 import android.hardware.Camera;
 import android.net.Uri;
@@ -24,7 +28,11 @@ import com.hewuzhe.ui.cons.Contant;
 import com.hewuzhe.ui.cons.FileUtils;
 import com.hewuzhe.view.UploadVideoView;
 
+import java.io.ByteArrayOutputStream;
 import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
 
 import io.rong.imkit.R;
 import io.rong.imkit.RongContext;
@@ -50,6 +58,7 @@ public class VideoInputProvider extends InputProvider.ExtendProvider implements 
     String pic="";
     String ider="";
     String type="";
+    String picSrc="";
     UploadVideoPresenter uploadVideoPresenter = new UploadVideoPresenter();
 
     public VideoInputProvider(RongContext context) {
@@ -141,6 +150,15 @@ public class VideoInputProvider extends InputProvider.ExtendProvider implements 
             EditorResult result = new EditorResult(data);
             String path = result.getPath();//"file://"+
             pic = result.getThumbnail()[0];
+            Bitmap bmp = BitmapFactory.decodeFile(pic);
+//            Bitmap bmp1 = BitmapFactory.decodeFile("/storage/emulated/0/Android/data/com.hewuzhe/files/qupai_simple_workspace/Play.png");
+            Bitmap bmp1 = BitmapFactory.decodeResource(mContext.getResources(), R.drawable.rc_bg_play);
+            String picName = pic.substring(pic.lastIndexOf("/")+1,pic.lastIndexOf("."))+"_play.png";
+            try {
+                saveBitmap(mergeBitmap(bmp, bmp1),picName);
+            } catch (IOException e) {
+                return;
+            }
 
 //            sendVideoMessage(pic, path, Conversation.ConversationType.PRIVATE, ider);
 //            sendVideoMessage(pic,C.BASE_URL+path,Conversation.ConversationType.PRIVATE,"86");
@@ -268,7 +286,42 @@ public class VideoInputProvider extends InputProvider.ExtendProvider implements 
 
     @Override
     public void sendMessage(String path) {
-            sendVideoMessage(pic,C.BASE_URL+path,type.equals("group")?Conversation.ConversationType.GROUP:Conversation.ConversationType.PRIVATE,ider);
+            sendVideoMessage(picSrc,C.BASE_URL+path,type.equals("group")?Conversation.ConversationType.GROUP:Conversation.ConversationType.PRIVATE,ider);
 
+    }
+
+    //合并图片
+    private Bitmap mergeBitmap(Bitmap firstBitmap, Bitmap secondBitmap) {
+        Bitmap bitmap = Bitmap.createBitmap(firstBitmap.getWidth(), firstBitmap.getHeight(),
+                firstBitmap.getConfig());
+        Canvas canvas = new Canvas(bitmap);
+        canvas.drawBitmap(firstBitmap, new Matrix(), null);
+        canvas.drawBitmap(secondBitmap, firstBitmap.getWidth()/2-39, firstBitmap.getHeight()/2-40, null);
+        return bitmap;
+    }
+    private void saveBitmap(Bitmap bitmap,String bitName) throws IOException
+    {
+        picSrc = "/storage/emulated/0/Android/data/com.hewuzhe/files/qupai_simple_workspace/"+bitName;
+        File file = new File("/storage/emulated/0/Android/data/com.hewuzhe/files/qupai_simple_workspace/"+bitName);
+        if(file.exists()){
+            file.delete();
+        }
+        FileOutputStream out;
+        try{
+            out = new FileOutputStream(file);
+            if(bitmap.compress(Bitmap.CompressFormat.PNG, 90, out))
+            {
+                out.flush();
+                out.close();
+            }
+        }
+        catch (FileNotFoundException e)
+        {
+            e.printStackTrace();
+        }
+        catch (IOException e)
+        {
+            e.printStackTrace();
+        }
     }
 }

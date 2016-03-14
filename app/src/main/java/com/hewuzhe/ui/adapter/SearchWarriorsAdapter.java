@@ -85,6 +85,8 @@ public class SearchWarriorsAdapter extends BaseAdapter<SearchWarriorsAdapter.VHo
                 @Override
                 public void onClick(View view) {
                     _presenter.follow(friend.Id, position);
+
+            context.startActivity(new Intent(context, FriendProfileActivity.class).putExtra("data", new Bun().putInt("id", friend.Id).ok()));
                 }
             });
         }

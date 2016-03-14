@@ -35,14 +35,23 @@
             android:textColor="@color/white"
             android:textSize="28px"/>
 
+        <TextView android:id="@+id/tv_comment"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/img"
+            android:layout_marginLeft="35px"
+            android:layout_marginTop="10px"
+            android:text=""
+            android:textColor="@color/white"
+            android:textSize="25px"/>
 
         <TextView android:id="@+id/tv_content"
                   android:layout_width="wrap_content"
                   android:layout_height="wrap_content"
-                  android:layout_below="@id/img"
-                  android:layout_marginBottom="20px"
+                  android:layout_below="@id/tv_comment"
+                  android:layout_marginBottom="10px"
                   android:layout_marginLeft="35px"
-                  android:layout_marginTop="20px"
+                  android:layout_marginTop="10px"
                   android:text="我是内容............"
                   android:textColor="@color/white"
                   android:textSize="25px"/>

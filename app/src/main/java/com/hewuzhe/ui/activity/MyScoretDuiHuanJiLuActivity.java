@@ -144,6 +144,6 @@ public class MyScoretDuiHuanJiLuActivity extends BaseActivity2 implements IXList
 
     @Override
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-        startActivity(new Intent(MyScoretDuiHuanJiLuActivity.this, MyScoretDuiHuanSuccessInfoActivity.class).putExtra("product", products.get(position-1)));
+        startActivity(new Intent(MyScoretDuiHuanJiLuActivity.this, MyScoretDuiHuanSuccessInfoActivity.class).putExtra("product", products.get(position-1)).putExtra("LiveryNo",products.get(position-1).getLiveryNo()));
     }
 }

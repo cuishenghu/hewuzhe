@@ -113,8 +113,7 @@
                    android:layout_height="30px"
                    android:layout_marginLeft="28px"
                    android:src="@mipmap/icon_share_gray"
-                   android:visibility="gone"
-                   tools:visibility="visible"/>
+                   android:visibility="gone"/>
 
         <TextView
             android:id="@+id/tv_repeat_count"
@@ -123,9 +122,7 @@
             android:layout_height="wrap_content"
             android:layout_marginLeft="10px"
             android:text="100"
-            android:visibility="gone"
-            tools:visibility="visible"
-            />
+            android:visibility="gone"/>
 
         <TextView android:layout_width="wrap_content"
                   android:layout_height="wrap_content"

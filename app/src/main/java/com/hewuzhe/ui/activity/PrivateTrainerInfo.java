@@ -4,24 +4,36 @@ import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.os.Handler;
+import android.view.Gravity;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.widget.AbsListView;
 import android.widget.AdapterView;
 import android.widget.GridView;
 import android.widget.ImageView;
+import android.widget.SimpleAdapter;
 import android.widget.TextView;
 
 import android.widget.AdapterView.OnItemClickListener;
 
 import com.hewuzhe.R;
+import com.hewuzhe.model.PrivateTrainer;
+import com.hewuzhe.ui.adapter.FocusAndFansAdapter;
 import com.hewuzhe.ui.base.BaseActivity2;
 import com.hewuzhe.view.MyCommonTitle;
 import com.hewuzhe.view.XListView;
 import com.hewuzhe.view.XListView.IXListViewListener;
 
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Hashtable;
+import java.util.List;
+import java.util.Map;
+
 /**
  * Created by Administrator on 2016/3/11 0011.
  */
-public class PrivateTrainerInfo extends BaseActivity2 implements  OnItemClickListener {
+public class PrivateTrainerInfo extends BaseActivity2 implements OnItemClickListener {
     private int nowPage = 1;
     private static int PERPAGE = 10;
     private MyCommonTitle myCommonTitle;
@@ -31,6 +43,9 @@ public class PrivateTrainerInfo extends BaseActivity2 implements  OnItemClickLis
     private GridView mListView;
     private Handler mHandler;
     private int mType = 1;
+    private String[] names = {"张三", "李四", "王五", "张三", "李四", "王五", "张三", "李四", "王五"};
+    private int[] avatars = {R.mipmap.img_avatar, R.mipmap.img_avatar, R.mipmap.img_avatar, R.mipmap.img_avatar, R.mipmap.img_avatar, R.mipmap.img_avatar, R.mipmap.img_avatar, R.mipmap.img_avatar, R.mipmap.img_avatar};
+    private List<Map<String, String>> list = new ArrayList<Map<String, String>>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -116,7 +131,18 @@ public class PrivateTrainerInfo extends BaseActivity2 implements  OnItemClickLis
      * 请求数据
      */
     private void requestData() {
-
+        for (int i = 0; i < names.length; i++) {
+            Map<String, String> map = new HashMap<String, String>();
+            map.put("name", names[i]);
+            map.put("avatar", String.valueOf(avatars[i]));
+            list.add(map);
+        }
+        View view = LayoutInflater.from(this).inflate(R.layout.item_fans, null);
+        view.setLayoutParams(new AbsListView.LayoutParams((int) (mListView.getWidth() / 3) - 1, (int) (mListView.getHeight() / 2)));
+        SimpleAdapter simpleAdapter = new SimpleAdapter(this, list, R.layout.item_fans,
+                new String[]{"name", "avatar"}, new int[]{R.id.tv_nick_name, R.id.img_avatar});
+        mListView.setGravity(Gravity.CENTER);
+        mListView.setAdapter(simpleAdapter);
     }
 
 //    @Override

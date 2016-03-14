@@ -1,5 +1,8 @@
 package com.hewuzhe.ui.activity;
 
+import android.app.AlertDialog;
+import android.app.AlertDialog.Builder;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
@@ -20,6 +23,7 @@ import com.hewuzhe.ui.http.HttpErrorHandler;
 import com.hewuzhe.ui.http.HttpUtils;
 import com.hewuzhe.ui.http.UrlContants;
 import com.hewuzhe.utils.SessionUtil;
+import com.hewuzhe.utils.StringUtil;
 import com.hewuzhe.view.MyCommonTitle;
 import com.loopj.android.http.RequestParams;
 
@@ -50,11 +54,14 @@ public class MyScoretDuiHuanSuccessInfoActivity extends BaseActivity2 {
     ArrayList<String> imageUrlList = new ArrayList<String>();
     ArrayList<String> linkUrlArray = new ArrayList<String>();
     ArrayList<String> titleList = new ArrayList<String>();
+    private String liveryNo;
+    private String billDetailId;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
+        liveryNo=getIntent().getStringExtra("LiveryNo");//物流编号为空时显示正在发货,否则为查看物流
+        billDetailId=getIntent().getStringExtra("billDetailId");//兑换成功后传过来的ID
         product = (ProductScore) getIntent().getSerializableExtra("product");
         setContentView(R.layout.activity_point_exchange_success_info);
         ButterKnife.bind(this);
@@ -102,7 +109,23 @@ public class MyScoretDuiHuanSuccessInfoActivity extends BaseActivity2 {
         super.onClick(view);
         switch (view.getId()) {
             case R.id.pro_buy_now:
-                startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("http://m.kuaidi100.com/index_all.html?type="+product.getLiveryType()+"&postid="+product.getLiveryNo())));
+                /**
+                 * 物流编号为空时显示正在发货,否则为查看物流
+                 */
+                if(StringUtil.isEmpty(liveryNo)){
+                    AlertDialog.Builder builder=new Builder(MyScoretDuiHuanSuccessInfoActivity.this);
+                    builder.setTitle("温馨提示");
+                    builder.setMessage("该商品还未发货!");
+                    builder.setPositiveButton("确定", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            dialog.dismiss();
+                        }
+                    });
+                    builder.create().show();
+                }else{
+                    startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("http://m.kuaidi100.com/index_all.html?type="+product.getLiveryType()+"&postid="+product.getLiveryNo())));
+                }
                 break;
         }
     }
@@ -112,9 +135,9 @@ public class MyScoretDuiHuanSuccessInfoActivity extends BaseActivity2 {
      */
     public void requestData() {
         RequestParams params = new RequestParams();
-        params.put("productId", product.getProductId());//    productId 产品ID
+        params.put("productId", product.getProductId() == null ? product.getId() : product.getProductId());//    productId 产品ID
         params.put("userId", new SessionUtil(MyScoretDuiHuanSuccessInfoActivity.this).getUserId());//    userId 用户ID
-        params.put("billDetailId", product.getBillDetailId());// 兑换记录的ID
+        params.put("billDetailId", billDetailId==null?product.getBillDetailId():billDetailId);// 兑换记录的ID
         HttpUtils.getChangeInfo(new HttpErrorHandler() {
             @Override
             public void onRecevieSuccess(JSONObject json) {

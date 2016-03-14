@@ -42,6 +42,7 @@
             android:layout_marginLeft="35px"
             android:layout_marginTop="10px"
             android:text=""
+            android:visibility="gone"
             android:textColor="@color/white"
             android:textSize="25px"/>
 

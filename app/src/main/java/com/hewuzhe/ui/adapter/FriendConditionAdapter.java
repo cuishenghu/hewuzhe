@@ -82,9 +82,8 @@ public class FriendConditionAdapter extends BaseAdapter<FriendConditionAdapter.V
 
         holder._TvUsername.setText(condition.NicName);
         if (condition.Description != null) {//转发时评论不为空显示,为空不显示
+            holder._TvComment.setVisibility(View.VISIBLE);
             holder._TvComment.setText(condition.Description);
-        } else {
-            holder._TvComment.setVisibility(View.GONE);
         }
         holder._TvContent.setText(condition.IsRepeat ? "//转发：" + condition.Content : condition.Content);
         holder._TvAddTime.setText(TimeUtil.timeFormatFour(condition.PublishTime));

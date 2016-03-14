@@ -296,11 +296,6 @@ public class VideoControllerView extends FrameLayout implements View.OnTouchList
      * @param mp    the MediaPlayer the info pertains to.
      * @param what  the type of info or warning.
      *              <ul>
-     *              <li>{@link #MEDIA_INFO_VIDEO_TRACK_LAGGING}
-     *              <li>{@link #MEDIA_INFO_BUFFERING_START}
-     *              <li>{@link #MEDIA_INFO_BUFFERING_END}
-     *              <li>{@link #MEDIA_INFO_NOT_SEEKABLE}
-     *              <li>{@link #MEDIA_INFO_DOWNLOAD_RATE_CHANGED}
      *              </ul>
      * @param extra an extra code, specific to the info. Typically implementation
      *              dependant.

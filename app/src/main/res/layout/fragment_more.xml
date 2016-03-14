@@ -146,10 +146,11 @@
         android:paddingLeft="15dp">
 
         <TextView
+            android:id="@+id/tele_more"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="在线客服 (12345645)"
+            android:text="联系客服"
             android:textColor="@color/white"
             android:textSize="30px" />
 

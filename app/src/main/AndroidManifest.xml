@@ -646,6 +646,8 @@
         </activity>
         <activity android:name=".ui.activity.VideoMessageActivity">
         </activity>
+        <activity android:name=".ui.activity.PrivateTrainerListActivity">
+        </activity>
     </application>
 
 </manifest>

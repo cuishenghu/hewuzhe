@@ -96,7 +96,7 @@ public class VideoControllerView extends FrameLayout implements View.OnTouchList
         mVideoView = findView(R.id.videoView);
         mVideoView.setOnTouchListener(this);
         mVideoView.setOnPreparedListener(this);
-        mVideoView.setBufferSize(2048);
+        mVideoView.setBufferSize(5120);
         mVideoView.setOnBufferingUpdateListener(this);
         mVideoView.setOnInfoListener(this);
 

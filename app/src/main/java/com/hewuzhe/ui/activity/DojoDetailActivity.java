@@ -51,6 +51,8 @@ public class DojoDetailActivity extends ToolBarActivity<DojoDetailPresenter> imp
     ImageView _ImgPraise;
     @Bind(R.id.lay_praise)
     LinearLayout _LayPraise;
+    @Bind(R.id.show_changguan)
+    LinearLayout show_changguan;
     @Bind(R.id.tv_address)
     TextView _TvAddress;
     @Bind(R.id.tv_call)
@@ -68,7 +70,8 @@ public class DojoDetailActivity extends ToolBarActivity<DojoDetailPresenter> imp
     @Bind(R.id.vvvv)
     VideoControllerView mVDVideoView;
     private Integer id;
-
+    private boolean isFulllScreen = false;
+    private static int HEITH_VIDEO = 320;
     /**
      * @return 提供标题
      */
@@ -100,6 +103,8 @@ public class DojoDetailActivity extends ToolBarActivity<DojoDetailPresenter> imp
                     attrs.flags |= WindowManager.LayoutParams.FLAG_FULLSCREEN;
                     getWindow().setAttributes(attrs);
                     //设置全屏
+                    show_changguan.setVisibility(View.GONE);
+                    toolBar.setVisibility(View.GONE);
 //                    v.setSystemUiVisibility(View.SYSTEM_UI_FLAG_HIDE_NAVIGATION);
                     getWindow().addFlags(WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS);
 
@@ -111,6 +116,9 @@ public class DojoDetailActivity extends ToolBarActivity<DojoDetailPresenter> imp
                     attrs.flags &= (~WindowManager.LayoutParams.FLAG_FULLSCREEN);
                     getWindow().setAttributes(attrs);
                     //取消全屏设置
+                    toolBar.setVisibility(View.VISIBLE);
+                    show_changguan.setVisibility(View.VISIBLE);
+                    hideOrShowToolbar();
                     getWindow().clearFlags(WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS);
 
                     mVDVideoView.btnFullScreen.setImageResource(R.mipmap.icon_full_screen);
@@ -118,12 +126,15 @@ public class DojoDetailActivity extends ToolBarActivity<DojoDetailPresenter> imp
             }
         });
 
+
+
     }
 
     @Override
     protected void initThings(Bundle savedInstanceState) {
-        super.initThings(savedInstanceState);
         io.vov.vitamio.LibsChecker.checkVitamioLibs(this);
+        super.initThings(savedInstanceState);
+
         windowManager = (WindowManager) getSystemService(Context.WINDOW_SERVICE);
         id = getIntentData().getInt("id");
         presenter.getDetail();
@@ -170,7 +181,8 @@ public class DojoDetailActivity extends ToolBarActivity<DojoDetailPresenter> imp
             ViewGroup.LayoutParams params = mVDVideoView.getLayoutParams();
             params.width = ViewGroup.LayoutParams.MATCH_PARENT;
 
-            params.height = 350;
+            HEITH_VIDEO = 320;
+            params.height = StringUtil.dip2px(getContext(), HEITH_VIDEO);
 
             mVDVideoView.setLayoutParams(params);
             startPlay(C.BASE_URL+dojo.VideoPath);
@@ -270,11 +282,21 @@ public class DojoDetailActivity extends ToolBarActivity<DojoDetailPresenter> imp
         } else if (newConfig.orientation == Configuration.ORIENTATION_PORTRAIT) {
             mLayout = VideoView.VIDEO_LAYOUT_FIT_PARENT;//原始尺寸
             ViewGroup.LayoutParams params = mVDVideoView.getLayoutParams();
-            params.height = 350;
+            params.height = StringUtil.dip2px(getContext(), HEITH_VIDEO);
             params.width = windowManager.getDefaultDisplay().getWidth();
             mVDVideoView.setLayoutParams(params);
         }
         if (mVDVideoView.getVideoView() != null)
             mVDVideoView.getVideoView().setVideoLayout(mLayout, 0);
     }
+
+    @Override
+    public void onBackPressed() {
+        if (isFulllScreen) {
+        } else {
+            super.onBackPressed();
+        }
+
+    }
+
 }

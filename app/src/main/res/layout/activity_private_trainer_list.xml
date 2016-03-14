@@ -1,0 +1,115 @@
+<android.support.design.widget.CoordinatorLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/colorBg"
+    tools:context="com.hewuzhe.ui.activity.DoJoRecommendActivity">
+
+    <android.support.design.widget.AppBarLayout
+        android:id="@+id/app_bar_layout"
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:theme="@style/AppTheme.AppBarOverlay"
+        app:elevation="4dp">
+
+        <android.support.v7.widget.Toolbar
+            android:id="@+id/toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            android:background="?attr/colorPrimary"
+            app:contentInsetLeft="0dp"
+            app:contentInsetStart="0dp"
+            app:layout_scrollFlags="scroll|enterAlways"
+            >
+
+            <FrameLayout android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="horizontal">
+
+                <ImageView
+                    android:id="@+id/img_back"
+                    android:layout_width="48dp"
+                    android:layout_height="48dp"
+                    android:layout_gravity="center_vertical"
+                    android:padding="14dp"
+                    android:src="@mipmap/icon_back"
+                    />
+
+                <LinearLayout android:id="@+id/lay_city"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_gravity="center"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal">
+                    <TextView
+                        android:id="@+id/tv_title"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="临沂"
+                        android:textColor="@android:color/white"
+                        android:textSize="20sp"/>
+
+                    <ImageView android:layout_width="30px"
+                        android:layout_height="30px"
+                        android:layout_marginLeft="10px"
+                        android:src="@mipmap/icon_to_select"/>
+
+
+                </LinearLayout>
+
+                <TextView
+                    android:id="@+id/tv_action"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical|right"
+                    android:layout_marginRight="10px"
+                    android:text="确定"
+                    android:textColor="@android:color/white"
+                    android:textSize="17sp"/>
+
+
+            </FrameLayout>
+        </android.support.v7.widget.Toolbar>
+    </android.support.design.widget.AppBarLayout>
+
+    <RelativeLayout android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior">
+
+        <com.hewuzhe.ui.widget.MultiSwipeRefreshLayout
+            android:id="@+id/swipe_refresh_layout"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            >
+
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/recycler_view"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:visibility="visible">
+
+            </android.support.v7.widget.RecyclerView>
+        </com.hewuzhe.ui.widget.MultiSwipeRefreshLayout>
+        <LinearLayout android:id="@+id/lay_no_loc"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/colorBg"
+            android:gravity="center"
+            android:visibility="gone">
+            <TextView style="@style/text_30_white"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="没有武馆(若定位失败请手动选择城市)"/>
+
+
+        </LinearLayout>
+
+    </RelativeLayout>
+
+
+</android.support.design.widget.CoordinatorLayout>

@@ -203,7 +203,7 @@ public class ProductInfoPresenter extends BasePresenterImp<ProductInfoView> {
     public void getCount(){
         int i = new SessionUtil(view.getContext()).getUserId();
         Subscription subscription = NetEngine.getService()
-                .SelectBasketProductNew(0, 1000, new SessionUtil(view.getContext()).getUserId())
+                .SelectBasketProductNewNew(0, 1000, new SessionUtil(view.getContext()).getUserId())
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new SB<Res<ArrayList<ShopCar>>>() {

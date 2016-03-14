@@ -1,7 +1,10 @@
 package com.hewuzhe.ui.activity;
 
 import android.content.Intent;
+import android.graphics.Color;
+import android.net.Uri;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
@@ -16,6 +19,7 @@ import com.hewuzhe.model.TeamAnnounce;
 import com.hewuzhe.presenter.ShopCarPresenter;
 import com.hewuzhe.ui.adapter.ShopCarAdapter;
 import com.hewuzhe.ui.base.RecycleViewActivity;
+import com.hewuzhe.ui.cons.C;
 import com.hewuzhe.view.ShopCarView;
 
 import java.text.DecimalFormat;
@@ -23,6 +27,9 @@ import java.util.ArrayList;
 
 import butterknife.Bind;
 import butterknife.OnClick;
+import materialdialogs.DialogAction;
+import materialdialogs.GravityEnum;
+import materialdialogs.MaterialDialog;
 
 /**
  * Created by zycom on 2016/2/2.
@@ -262,6 +269,43 @@ public class ShopCarActivity extends RecycleViewActivity<ShopCarPresenter, ShopC
 
     @OnClick(R.id.tv_submit_btn)
     public void submitBtn() {
+        boolean isShowMsg=false;
+        String message_head="您购物车里的：";
+        String message_context="";
+        String message_foot="商品已被修改，请删除后再结算。";
+
+        for (int i = 0; i < data.size(); i++) {
+
+            if (data.get(i).select_state&&data.get(i).IsDelete==1) {
+                message_context+="\""+data.get(i).ProductName+"\"";
+                isShowMsg=true;
+            }
+
+        }
+        if(isShowMsg){
+            MaterialDialog materialDialog = new MaterialDialog.Builder(this)
+                    .title("购物车提示")
+                    .titleGravity(GravityEnum.CENTER)
+                    .titleColor(Color.WHITE)
+                    .contentColor(Color.WHITE)
+                    .positiveColor(C.COLOR_YELLOW)
+                    .negativeColor(C.COLOR_YELLOW)
+                    .content(message_head+message_context+message_foot)
+                    .backgroundColor(C.COLOR_BG)
+                    .positiveText("确定")
+                    .backgroundColor(C.COLOR_BG)
+                    .onPositive(new MaterialDialog.SingleButtonCallback() {
+                        @Override
+                        public void onClick(@NonNull MaterialDialog dialog, @NonNull DialogAction which) {
+                            dialog.dismiss();
+                        }
+                    })
+                    .show();
+
+            return;
+
+        }
+
 
         ArrayList<OrderContent> temp = new ArrayList<OrderContent>();
         for (int i = 0; i < data.size(); i++) {

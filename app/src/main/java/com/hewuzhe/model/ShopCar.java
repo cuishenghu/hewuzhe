@@ -15,4 +15,5 @@ public class ShopCar {
     public boolean select_state;
     public boolean is_show;
     public int StockNum;
+    public int IsDelete;
 }

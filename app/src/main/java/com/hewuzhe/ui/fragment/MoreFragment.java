@@ -7,8 +7,11 @@ import android.support.annotation.NonNull;
 import android.view.View;
 import android.widget.Button;
 import android.widget.LinearLayout;
+import android.widget.TextView;
 
 import com.hewuzhe.R;
+import com.hewuzhe.model.AboutUs;
+import com.hewuzhe.presenter.WarriorFragmentPresenter;
 import com.hewuzhe.presenter.base.BasePresenterImp;
 import com.hewuzhe.ui.activity.AboutActivity;
 import com.hewuzhe.ui.activity.FeedBackActivity;
@@ -19,6 +22,7 @@ import com.hewuzhe.ui.base.ToolBarFragment;
 import com.hewuzhe.ui.cons.C;
 import com.hewuzhe.ui.widget.Line;
 import com.hewuzhe.utils.SessionUtil;
+import com.hewuzhe.view.WarriorFragmentView;
 
 import butterknife.Bind;
 import io.rong.imkit.RongIM;
@@ -29,7 +33,7 @@ import materialdialogs.MaterialDialog;
 /**
  * Created by xianguangjin on 15/12/8.
  */
-public class MoreFragment extends ToolBarFragment {
+public class MoreFragment extends ToolBarFragment<WarriorFragmentPresenter> implements WarriorFragmentView {
 
     @Bind(R.id.lay_settings)
     LinearLayout laySettings;
@@ -45,6 +49,10 @@ public class MoreFragment extends ToolBarFragment {
     LinearLayout layAddress;
     @Bind(R.id.btn_exit)
     Button btnExit;
+    @Bind(R.id.tele_more)
+    TextView tele_more;
+
+    private AboutUs au;
 
     @Override
     protected String provideTitle() {
@@ -53,6 +61,7 @@ public class MoreFragment extends ToolBarFragment {
 
     @Override
     public void initListeners() {
+        presenter.getIndexImg();
 
         laySettings.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -129,7 +138,7 @@ public class MoreFragment extends ToolBarFragment {
                             public void onClick(@NonNull MaterialDialog dialog, @NonNull DialogAction which) {
                                 dialog.dismiss();
                                 Intent intent = new Intent(Intent.ACTION_CALL);
-                                intent.setData(Uri.parse("tel:12345678901"));
+                                intent.setData(Uri.parse("tel:"+au.TelePhone));
                                 startActivity(intent);
                             }
                         })
@@ -183,8 +192,8 @@ public class MoreFragment extends ToolBarFragment {
      * 绑定Presenter
      */
     @Override
-    public BasePresenterImp createPresenter() {
-        return null;
+    public WarriorFragmentPresenter createPresenter() {
+        return new WarriorFragmentPresenter();
     }
 
     @Override
@@ -192,4 +201,19 @@ public class MoreFragment extends ToolBarFragment {
         return false;
     }
 
+    @Override
+    public void setUserData() {
+
+    }
+
+    @Override
+    public void isWuYou(Boolean data, int userid) {
+
+    }
+
+    @Override
+    public void setIndexImg(AboutUs data) {
+        this.au=data;
+        tele_more.setText("联系客服（"+au.TelePhone+"）");
+    }
 }

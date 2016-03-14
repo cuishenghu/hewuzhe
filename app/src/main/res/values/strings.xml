@@ -176,6 +176,6 @@
     <string name="procar_price">￥0.00</string>
     <string name="procar_yunfei">不含运费</string>
     <string name="procar_buy">结算</string>
-    <string name="procar_shop_title">功夫库</string>
+    <string name="procar_shop_title">自营店</string>
 
 </resources>

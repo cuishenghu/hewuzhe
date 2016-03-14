@@ -418,8 +418,8 @@ public interface ApiService {
     @GET("Hezhuangbei.asmx/SelectProductNew")
     Observable<Res<Product>> SelectProductNew(@Query("id") int id, @Query("userid") int userid, @Query("maximumRows") int maximumRows);
 
-    @GET("Hezhuangbei.asmx/SelectBasketProductNew")
-    Observable<Res<ArrayList<ShopCar>>> SelectBasketProductNew(@Query("startRowIndex") int startRowIndex, @Query("maximumRows") int maximumRows, @Query("userId") int userId);
+    @GET("Hezhuangbei.asmx/SelectBasketProductNewNew")
+    Observable<Res<ArrayList<ShopCar>>> SelectBasketProductNewNew(@Query("startRowIndex") int startRowIndex, @Query("maximumRows") int maximumRows, @Query("userId") int userId);
 
     @GET("Hezhuangbei.asmx/FavoriteProduct")
     Observable<Res> FavoriteProduct(@Query("userid") int userid, @Query("productId") int productId);

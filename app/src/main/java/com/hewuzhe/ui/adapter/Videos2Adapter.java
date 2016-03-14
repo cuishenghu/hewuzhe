@@ -90,8 +90,8 @@ public class Videos2Adapter extends BaseAdapter<Videos2Adapter.ViewHolder, Video
 
         if (video.IsFree) {
             holder.tvIsFree.setVisibility(View.GONE);
-            holder.tvRepeatCount.setVisibility(View.VISIBLE);
-            holder.imgRepeat.setVisibility(View.VISIBLE);
+//            holder.tvRepeatCount.setVisibility(View.VISIBLE);//转发次数不显示
+//            holder.imgRepeat.setVisibility(View.VISIBLE);
         } else {
             holder.tvIsFree.setVisibility(View.VISIBLE);
         }

@@ -182,6 +182,7 @@ public class OrderConfirmSecondActivity extends BaseActivity2 {
             @Override
             public void onRecevieSuccess(JSONObject json) {
                 Tools.toast(OrderConfirmSecondActivity.this, "兑换成功");
+                startActivity(new Intent(OrderConfirmSecondActivity.this, MyScoretDuiHuanSuccessInfoActivity.class).putExtra("product",product).putExtra("billDetailId", json.getString("data")));
                 finish();
             }
         }, params);

@@ -48,6 +48,8 @@ public class ConstactUtil {
                                         .getColumnIndex(ContactsContract.CommonDataKinds.Phone.NUMBER));
                     }
                     phones.close();
+                }else{//当phoneCount为0表示该联系人没有号码,跳出此次循环
+                    continue;
                 }
                 number = number.replaceAll("[^0-9\\+]", "");
                 temp.put(name, number);

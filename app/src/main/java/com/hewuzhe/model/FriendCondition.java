@@ -39,6 +39,7 @@ public class FriendCondition extends DataSupport implements Parcelable {
     public String PhotoPath;
     public int LikeNum;
     public boolean IsLike;
+    public String Description;
     /**
      * Id : 28
      * ImagePath : UpLoad/Image/f81479f6-1a38-4e9c-a27c-77d1559be701.png

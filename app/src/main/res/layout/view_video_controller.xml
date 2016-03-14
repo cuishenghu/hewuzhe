@@ -100,9 +100,8 @@
             android:layout_height="wrap_content"
             android:layout_gravity="bottom|right"
             android:layout_marginBottom="10px"
-            android:layout_marginRight="66px"
-            android:text="/100:00"
-
+            android:layout_marginRight="86px"
+            android:text="/100:00:12"
             android:textColor="@color/colorBg"
             android:textSize="22px"/>
 
@@ -113,7 +112,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="bottom|right"
             android:layout_marginBottom="10px"
-            android:layout_marginRight="136px"
+            android:layout_marginRight="180px"
             android:text="09:00"
 
             android:textColor="@color/colorLine"

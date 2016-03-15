@@ -242,6 +242,7 @@
         <activity android:name=".ui.activity.MoreShieldListActivity"></activity>
         <activity android:name=".ui.activity.TongXunLuActivity"></activity>
         <activity android:name=".ui.activity.PrivateTrainerInfo"></activity>
+        <activity android:name=".ui.activity.PrivateTrainerInfoActivity"></activity>
 
         <!-- 支付 -->
         <!-- Ping++ SDK 注册 -->

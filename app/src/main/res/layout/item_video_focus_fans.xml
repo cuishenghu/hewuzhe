@@ -76,6 +76,30 @@
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="5dp"
                     android:layout_weight="1"
+                    android:gravity="center"
+                    android:visibility="gone"
+                    android:orientation="horizontal">
+
+                    <ImageView
+                        android:layout_width="10dp"
+                        android:layout_height="10dp"
+                        android:src="@drawable/icon_msg" />
+
+                    <TextView
+                        android:id="@+id/tv_fri_comment_num"
+                        android:layout_width="wrap_content"
+                        android:layout_height="15dp"
+                        android:gravity="center_vertical"
+                        android:text="李某某"
+                        android:textColor="@color/white"
+                        android:textSize="8sp" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="5dp"
+                    android:layout_weight="1"
                     android:layout_marginRight="5dp"
                     android:gravity="center"
                     android:orientation="horizontal">

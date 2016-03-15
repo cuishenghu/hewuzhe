@@ -60,7 +60,7 @@ public class VideoAndFocusAndFansAdapter extends BaseAdapter {
             holder.ll_video_content = (LinearLayout) convertView.findViewById(R.id.ll_video_content);
             holder.img_avatar = (ImageView) convertView.findViewById(R.id.img_fri_avatar);
             holder.tv_fri_username = (TextView) convertView.findViewById(R.id.tv_fri_username);
-            holder.tv_fri_comment_num = (TextView) convertView.findViewById(R.id.tv_fri_comment_num);
+//            holder.tv_fri_comment_num = (TextView) convertView.findViewById(R.id.tv_fri_comment_num);
             holder.tv_fri_publish_time = (TextView) convertView.findViewById(R.id.tv_fri_publish_time);
             convertView.setTag(holder);
         } else {
@@ -72,7 +72,7 @@ public class VideoAndFocusAndFansAdapter extends BaseAdapter {
         if (mType == 1) {
             ImageLoader.getInstance().displayImage(StringUtil.toString(UrlContants.IMAGE_URL + privateTrainer.getAvatar(), "http://"), holder.img_avatar);
             holder.tv_fri_username.setText(privateTrainer.getNickname());
-            holder.tv_fri_comment_num.setText(privateTrainer.getCommentNum() + "条评论");
+//            holder.tv_fri_comment_num.setText(privateTrainer.getCommentNum() + "条评论");
             holder.tv_fri_publish_time.setText(privateTrainer.getPublishDate());
         } else {
             holder.ll_video_content.setVisibility(View.GONE);

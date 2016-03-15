@@ -312,7 +312,7 @@ public class WarriorFragment extends ToolBarFragment<WarriorFragmentPresenter> i
         tvFlyDream.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-//                startActivity(new Intent(getActivity(), PrivateTrainerListActivity.class));
+                startActivity(new Intent(getActivity(), PrivateTrainerListActivity.class));
 
 //                startActivity(SignupProfileActivity.class);
 

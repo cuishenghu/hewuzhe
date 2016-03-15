@@ -1,20 +1,24 @@
 package com.hewuzhe.ui.activity;
 
+import android.app.Fragment;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.os.Handler;
+import android.provider.MediaStore;
+import android.support.v4.app.FragmentActivity;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.AbsListView;
 import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemClickListener;
 import android.widget.GridView;
 import android.widget.ImageView;
+import android.widget.RadioButton;
+import android.widget.RadioGroup;
 import android.widget.SimpleAdapter;
 import android.widget.TextView;
-
-import android.widget.AdapterView.OnItemClickListener;
 
 import com.hewuzhe.R;
 import com.hewuzhe.ui.base.BaseActivity2;
@@ -28,13 +32,14 @@ import java.util.Map;
 /**
  * Created by Administrator on 2016/3/11 0011.
  */
-public class PrivateTrainerInfo extends BaseActivity2 implements OnItemClickListener {
-    private int nowPage = 1;
-    private static int PERPAGE = 10;
+public class PrivateTrainerInfoActivity extends FragmentActivity {
     private MyCommonTitle myCommonTitle;
     private ImageView img_avatar;
     private TextView tv_user_name, tv_profession, tv_address, tv_focus, tv_contact;
     private TextView tv_video, tv_photo, tv_focused, tv_fans;
+    private Fragment vdeoFragment, signFragment, focusFragment, fansFragment;
+    private RadioGroup tab_trainer;
+    private RadioButton rb_video, rb_sign, rb_focus, rb_fans;
     private GridView mListView;
     private Handler mHandler;
     private int mType = 1;
@@ -46,9 +51,8 @@ public class PrivateTrainerInfo extends BaseActivity2 implements OnItemClickList
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_private_trainer2);
-
         initView();
-        requestData();
+//        requestData();
     }
 
     private void initView() {
@@ -75,11 +79,14 @@ public class PrivateTrainerInfo extends BaseActivity2 implements OnItemClickList
 //        mListView.setPullLoadEnable(true);
 //        mListView.setXListViewListener(this);
 //        mListView.setOnItemClickListener(this);
+        tab_trainer = (RadioGroup) findViewById(R.id.tab_trainer);
+        rb_video = (RadioButton) findViewById(R.id.rb_video);
+        rb_sign = (RadioButton) findViewById(R.id.rb_sign);
+        rb_focus = (RadioButton) findViewById(R.id.rb_focus);
+        rb_fans = (RadioButton) findViewById(R.id.rb_fans);
 
+//        setListener(tv_focus, tv_contact, tv_video, tv_photo, tv_focused, tv_fans);
 
-        setListener(tv_focus, tv_contact, tv_video, tv_photo, tv_focused, tv_fans);
-
-        mHandler = new Handler();
     }
 
     /**
@@ -87,58 +94,58 @@ public class PrivateTrainerInfo extends BaseActivity2 implements OnItemClickList
      *
      * @param view
      */
-    @Override
-    public void onClick(View view) {
-        super.onClick(view);
-        switch (view.getId()) {
-            case R.id.tv_video:
-                mType = 1;
-                tv_video.setTextColor(getResources().getColor(R.color.colorYellow));
-                tv_photo.setTextColor(Color.WHITE);
-                tv_focused.setTextColor(Color.WHITE);
-                tv_fans.setTextColor(Color.WHITE);
-                break;
-            case R.id.tv_photo:
-                mType = 2;
-                tv_video.setTextColor(Color.WHITE);
-                tv_photo.setTextColor(getResources().getColor(R.color.colorYellow));
-                tv_focused.setTextColor(Color.WHITE);
-                tv_fans.setTextColor(Color.WHITE);
-                break;
-            case R.id.tv_focused:
-                mType = 3;
-                tv_video.setTextColor(Color.WHITE);
-                tv_photo.setTextColor(Color.WHITE);
-                tv_focused.setTextColor(getResources().getColor(R.color.colorYellow));
-                tv_fans.setTextColor(Color.WHITE);
-                break;
-            case R.id.tv_fans:
-                mType = 4;
-                tv_video.setTextColor(Color.WHITE);
-                tv_photo.setTextColor(Color.WHITE);
-                tv_focused.setTextColor(Color.WHITE);
-                tv_fans.setTextColor(getResources().getColor(R.color.colorYellow));
-                break;
-        }
-    }
-
-    /**
-     * 请求数据
-     */
-    private void requestData() {
-        for (int i = 0; i < names.length; i++) {
-            Map<String, String> map = new HashMap<String, String>();
-            map.put("name", names[i]);
-            map.put("avatar", String.valueOf(avatars[i]));
-            list.add(map);
-        }
-        View view = LayoutInflater.from(this).inflate(R.layout.item_video_focus_fans, null);
-        view.setLayoutParams(new AbsListView.LayoutParams((int) (mListView.getWidth() / 3) - 1, (int) (mListView.getHeight() / 2)));
-        SimpleAdapter simpleAdapter = new SimpleAdapter(this, list, R.layout.item_video_focus_fans,
-                new String[]{"name", "avatar"}, new int[]{R.id.tv_nick_name, R.id.img_avatar});
-        mListView.setGravity(Gravity.CENTER);
-        mListView.setAdapter(simpleAdapter);
-    }
+//    @Override
+//    public void onClick(View view) {
+//        super.onClick(view);
+//        switch (view.getId()) {
+//            case R.id.tv_video:
+//                mType = 1;
+//                tv_video.setTextColor(getResources().getColor(R.color.colorYellow));
+//                tv_photo.setTextColor(Color.WHITE);
+//                tv_focused.setTextColor(Color.WHITE);
+//                tv_fans.setTextColor(Color.WHITE);
+//                break;
+//            case R.id.tv_photo:
+//                mType = 2;
+//                tv_video.setTextColor(Color.WHITE);
+//                tv_photo.setTextColor(getResources().getColor(R.color.colorYellow));
+//                tv_focused.setTextColor(Color.WHITE);
+//                tv_fans.setTextColor(Color.WHITE);
+//                break;
+//            case R.id.tv_focused:
+//                mType = 3;
+//                tv_video.setTextColor(Color.WHITE);
+//                tv_photo.setTextColor(Color.WHITE);
+//                tv_focused.setTextColor(getResources().getColor(R.color.colorYellow));
+//                tv_fans.setTextColor(Color.WHITE);
+//                break;
+//            case R.id.tv_fans:
+//                mType = 4;
+//                tv_video.setTextColor(Color.WHITE);
+//                tv_photo.setTextColor(Color.WHITE);
+//                tv_focused.setTextColor(Color.WHITE);
+//                tv_fans.setTextColor(getResources().getColor(R.color.colorYellow));
+//                break;
+//        }
+//    }
+//
+//    /**
+//     * 请求数据
+//     */
+//    private void requestData() {
+//        for (int i = 0; i < names.length; i++) {
+//            Map<String, String> map = new HashMap<String, String>();
+//            map.put("name", names[i]);
+//            map.put("avatar", String.valueOf(avatars[i]));
+//            list.add(map);
+//        }
+//        View view = LayoutInflater.from(this).inflate(R.layout.item_video_focus_fans, null);
+//        view.setLayoutParams(new AbsListView.LayoutParams((int) (mListView.getWidth() / 3) - 1, (int) (mListView.getHeight() / 2)));
+//        SimpleAdapter simpleAdapter = new SimpleAdapter(this, list, R.layout.item_video_focus_fans,
+//                new String[]{"name", "avatar"}, new int[]{R.id.tv_nick_name, R.id.img_avatar});
+//        mListView.setGravity(Gravity.CENTER);
+//        mListView.setAdapter(simpleAdapter);
+//    }
 
 //    @Override
 //    public void onRefresh() {
@@ -172,8 +179,4 @@ public class PrivateTrainerInfo extends BaseActivity2 implements OnItemClickList
 //    }
 
 
-    @Override
-    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-
-    }
 }

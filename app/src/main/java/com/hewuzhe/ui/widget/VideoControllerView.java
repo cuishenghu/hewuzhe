@@ -59,7 +59,7 @@ public class VideoControllerView extends FrameLayout implements View.OnTouchList
         }
     };
     private TextView tvCurDuration;
-    private TextView tvDuration;
+    public TextView tvDuration;
     public ImageButton btnFullScreen;
     private OnFullScreenBtnClick clickListener;
     private ImageButton viewPlayCenter;
@@ -96,7 +96,7 @@ public class VideoControllerView extends FrameLayout implements View.OnTouchList
         mVideoView = findView(R.id.videoView);
         mVideoView.setOnTouchListener(this);
         mVideoView.setOnPreparedListener(this);
-        mVideoView.setBufferSize(5120);
+        mVideoView.setBufferSize(1024);
         mVideoView.setOnBufferingUpdateListener(this);
         mVideoView.setOnInfoListener(this);
 
@@ -232,7 +232,7 @@ public class VideoControllerView extends FrameLayout implements View.OnTouchList
     public void onPrepared(MediaPlayer mediaPlayer) {
         Log.d("VideoControllerView", "mediaPlayer.getDuration():" + mediaPlayer.getDuration());
         slider.setMax(DataTypeUtils.toInt(mediaPlayer.getDuration()));
-        tvDuration.setText("/" + TimeUtil.timeFormat(mediaPlayer.getDuration()));
+//      tvDuration.setText("/" + TimeUtil.timeFormat(mediaPlayer.getDuration()));
         mediaPlayer.setPlaybackSpeed(1.0f);
         updateTimeTask();
         handler.sendEmptyMessage(MSG_PROGRESS_CHANGE);

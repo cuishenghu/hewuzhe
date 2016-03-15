@@ -98,7 +98,7 @@ public class VideoDetail2Activity extends RecycleViewActivity<VideoDetailPresent
 
     /**
      * @param savedInstanceState 缓存数据
-     *                           <p/>
+     *                           <p>
      */
     @Override
     protected void initThings(Bundle savedInstanceState) {
@@ -325,6 +325,9 @@ public class VideoDetail2Activity extends RecycleViewActivity<VideoDetailPresent
 //        return getIntent().getStringExtra("title");
     }
 
+    /**
+     * @param video
+     */
     @Override
     public void setData(final Video video) {
         _Video = video;
@@ -416,6 +419,13 @@ public class VideoDetail2Activity extends RecycleViewActivity<VideoDetailPresent
                 }
             });
         }
+
+/**
+ *设置时间
+ * */
+        mVDVideoView.tvDuration.setText(video.VideoDuration + "");
+
+
         /**
          * 转发
          */

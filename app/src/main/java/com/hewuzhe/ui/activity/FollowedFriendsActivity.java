@@ -85,7 +85,7 @@ public class FollowedFriendsActivity extends RecycleViewActivity<FollowedFriends
                 showDialog();
                 hideSoftMethod(edt_search_content);
                 page = 1;
-                presenter.getDataBySearch(page, count);
+                presenter.getData(page, count);
             }
         });
     }

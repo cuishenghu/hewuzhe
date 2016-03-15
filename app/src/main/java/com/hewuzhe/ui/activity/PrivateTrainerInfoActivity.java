@@ -1,13 +1,16 @@
 package com.hewuzhe.ui.activity;
 
+import android.app.Activity;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.os.Handler;
+import android.view.Display;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.WindowManager;
 import android.widget.AbsListView;
 import android.widget.AdapterView;
 import android.widget.GridView;
@@ -85,7 +88,9 @@ public class PrivateTrainerInfoActivity extends BaseActivity2 implements OnItemC
         viewItem = LayoutInflater.from(this).inflate(R.layout.item_trainer_focus_fans, null);
 
         setListener(tv_focus, tv_contact, tv_video, tv_sign, tv_focused, tv_fans);
-
+        if(mType==1){
+            setListViewHeightBasedOnChildren(mListView, 2,this);
+        }
         mHandler = new Handler();
     }
 
@@ -105,7 +110,7 @@ public class PrivateTrainerInfoActivity extends BaseActivity2 implements OnItemC
                 tv_focused.setTextColor(Color.WHITE);
                 tv_fans.setTextColor(Color.WHITE);
                 mListView.setNumColumns(2);
-                setListViewHeightBasedOnChildren(mListView, 2);
+                setListViewHeightBasedOnChildren(mListView, 2,this);
                 break;
             case R.id.tv_sign:
                 mType = 2;
@@ -114,7 +119,7 @@ public class PrivateTrainerInfoActivity extends BaseActivity2 implements OnItemC
                 tv_focused.setTextColor(Color.WHITE);
                 tv_fans.setTextColor(Color.WHITE);
                 mListView.setNumColumns(1);
-                setListViewHeightBasedOnChildren(mListView, 1);
+                setListViewHeightBasedOnChildren(mListView, 1,this);
 //                trainerSignAdapter=new TrainerSignAdapter()
                 break;
             case R.id.tv_focused:
@@ -124,7 +129,7 @@ public class PrivateTrainerInfoActivity extends BaseActivity2 implements OnItemC
                 tv_focused.setTextColor(getResources().getColor(R.color.colorYellow));
                 tv_fans.setTextColor(Color.WHITE);
                 mListView.setNumColumns(3);
-                setListViewHeightBasedOnChildren(mListView, 3);
+                setListViewHeightBasedOnChildren(mListView, 3,this);
                 break;
             case R.id.tv_fans:
                 mType = 4;
@@ -133,12 +138,12 @@ public class PrivateTrainerInfoActivity extends BaseActivity2 implements OnItemC
                 tv_focused.setTextColor(Color.WHITE);
                 tv_fans.setTextColor(getResources().getColor(R.color.colorYellow));
                 mListView.setNumColumns(3);
-                setListViewHeightBasedOnChildren(mListView, 3);
+                setListViewHeightBasedOnChildren(mListView, 3,this);
                 break;
         }
     }
 
-    public static void setListViewHeightBasedOnChildren(GridView listView, int col) {
+    public static void setListViewHeightBasedOnChildren(GridView listView, int col,Activity activity) {
         // 获取listview的adapter
         ListAdapter listAdapter = listView.getAdapter();
         if (listAdapter == null) {
@@ -147,12 +152,19 @@ public class PrivateTrainerInfoActivity extends BaseActivity2 implements OnItemC
         // 固定列宽，有多少列
 //        int col = 4;// listView.getNumColumns();
         int totalHeight = 0;
+        WindowManager manager = activity.getWindowManager();
+        Display display = manager.getDefaultDisplay();
+        //屏幕高度
+        int screenHeight = display.getHeight();
+        //屏幕宽度
+        int screenWidth = display.getWidth();
         // i每次加4，相当于listAdapter.getCount()小于等于4时 循环一次，计算一次item的高度，
         // listAdapter.getCount()小于等于8时计算两次高度相加
         for (int i = 0; i < listAdapter.getCount(); i += col) {
             // 获取listview的每一个item
             View listItem = listAdapter.getView(i, null, listView);
-            listItem.measure(0, 0);
+            int w=screenWidth/col;
+            listItem.measure(screenWidth/col,0);
             // 获取item的高度和
             totalHeight += listItem.getMeasuredHeight();
         }

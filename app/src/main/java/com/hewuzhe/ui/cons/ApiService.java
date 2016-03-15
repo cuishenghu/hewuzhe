@@ -256,6 +256,9 @@ public interface ApiService {
     @GET("Helianmeng.asmx/SelectMatchDetail")
     Call<Res<MegaGame>> SelectMatchDetail(@Query("matchId") int matchId);
 
+    @GET("Helianmeng.asmx/DeleteFriended")
+    Observable<Res> DeleteFriended(@Query("id") int id);
+
     @GET("Helianmeng.asmx/SelectMatchDetailWithIsJoin")
     Observable<Res<MegaGame>> SelectMatchDetailWithIsJoin(@Query("userid") int userid, @Query("matchId") int matchId);
 

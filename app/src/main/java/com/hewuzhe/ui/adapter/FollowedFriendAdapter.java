@@ -18,11 +18,12 @@ import com.hewuzhe.ui.widget.GlideCircleTransform;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
+import cn.easydone.swipemenuviewholder.SwipeMenuViewHolder;
 
 /**
  * Created by xianguangjin on 15/12/31.
  */
-public class FollowedFriendAdapter extends BaseAdapter<FollowedFriendAdapter.VHolder, Friend, FollowedFriendsPresenter> {
+public class FollowedFriendAdapter extends BaseAdapter<RecyclerView.ViewHolder, Friend, FollowedFriendsPresenter> {
     /**
      * RecycleView的头部
      *
@@ -49,19 +50,33 @@ public class FollowedFriendAdapter extends BaseAdapter<FollowedFriendAdapter.VHo
      * @return 创建ViewHolder
      */
     @Override
-    public VHolder createVH(ViewGroup parent, int viewType, View view) {
-        return new VHolder(view);
+    public RecyclerView.ViewHolder createVH(ViewGroup parent, int viewType, View view) {
+        View swipeMenuView = _inflater.inflate(R.layout.swipe_menu_view, parent, false);
+        swipeMenuView.setLayoutParams(new ViewGroup.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.MATCH_PARENT));
+        return new VHolder(context, (ViewGroup) swipeMenuView, (ViewGroup) view, SwipeMenuViewHolder.EDGE_RIGHT).getDragViewHolder();
+
+
     }
 
     /**
-     * @param holder
      * @param position 绑定数据
      */
     @Override
-    public void bindData(VHolder holder, final int position) {
+    public void bindData(RecyclerView.ViewHolder viewHolder, final int position) {
+        final VHolder holder = (VHolder) VHolder.getHolder(viewHolder);
         final Friend friend = data.get(position);
         holder._TvUsername.setText(friend.NicName);
         holder._TvLevel.setText(friend.JoinTime + "关注了你");
+
+        holder.tv_delete.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                _presenter.DeleteFriended(friend.Id);
+                FollowedFriendAdapter.this.data.remove(position);
+                notifyItemRemoved(position);
+                notifyItemRangeChanged(position, getItemCount());
+            }
+        });
 
         Glide.with(context)
                 .load(C.BASE_URL + friend.PhotoPath)
@@ -100,7 +115,10 @@ public class FollowedFriendAdapter extends BaseAdapter<FollowedFriendAdapter.VHo
      *
      * @author ButterKnifeZelezny, plugin for Android Studio by Avast Developers (http://github.com/avast)
      */
-    static class VHolder extends RecyclerView.ViewHolder {
+    class VHolder extends SwipeMenuViewHolder {
+        @Nullable
+        @Bind(R.id.tv_delete)
+        TextView tv_delete;
         @Nullable
         @Bind(R.id.img_avatar)
         ImageView _ImgAvatar;
@@ -114,10 +132,20 @@ public class FollowedFriendAdapter extends BaseAdapter<FollowedFriendAdapter.VHo
         @Bind(R.id.tv_follow)
         TextView _TvFollow;
 
+        public VHolder(Context context, View swipMenuView, View captureView, int mTrackingEdges) {
+            super(context, swipMenuView, captureView, mTrackingEdges);
+        }
 
-        VHolder(View view) {
-            super(view);
-            ButterKnife.bind(this, view);
+
+        /**
+         * 初始化控件
+         *
+         * @param itemView 条目的布局
+         */
+        @Override
+        public void initView(View itemView) {
+            ButterKnife.bind(this, itemView);
+
         }
     }
 }

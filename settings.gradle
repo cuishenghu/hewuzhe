@@ -1,1 +1,1 @@
-include ':app', ':IMKit', ':Minisdk-release', ':BGAAdapter', ':autolayout', ':MaterialProgressBar', ':vitamio'
+include ':app', ':IMKit', ':Minisdk-release', ':BGAAdapter', ':autolayout', ':MaterialProgressBar', ':vitamio', ':lib:swipemenuviewholder'

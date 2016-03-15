@@ -7,6 +7,7 @@ import android.widget.LinearLayout;
 import com.hewuzhe.model.Comment;
 import com.hewuzhe.model.Res;
 import com.hewuzhe.presenter.base.RefreshAndLoadMorePresenter;
+import com.hewuzhe.ui.activity.ProfileActivity;
 import com.hewuzhe.ui.cons.C;
 import com.hewuzhe.utils.NetEngine;
 import com.hewuzhe.utils.SB;
@@ -344,6 +345,11 @@ public abstract class ConditionPresenter<V extends ConditionView> extends Refres
 
 
     public void isWuyou(final int userid) {
+
+        if (new SessionUtil(view.getContext()).getUserId() == userid) {
+            view.startActivity(ProfileActivity.class);
+            return;
+        }
         Subscription subscription = NetEngine.getService()
                 .IsWuyou(new SessionUtil(view.getContext()).getUserId(), userid)
                 .subscribeOn(Schedulers.io())

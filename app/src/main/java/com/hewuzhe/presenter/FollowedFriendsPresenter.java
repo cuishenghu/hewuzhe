@@ -57,7 +57,6 @@ public class FollowedFriendsPresenter extends RefreshAndLoadMorePresenter<Follow
 
     }
 
-
     /**
      * 关注武友
      *

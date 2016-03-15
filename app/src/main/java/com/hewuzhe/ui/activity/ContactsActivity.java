@@ -194,7 +194,9 @@ public class ContactsActivity extends RecycleViewActivity<FriendsPresenter, Frie
                 }
             }
         });
-
+        /**
+         * 新关注的好友
+         */
         _LayFollowed.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

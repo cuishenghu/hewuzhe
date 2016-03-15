@@ -4,7 +4,6 @@ import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AbsListView;
 import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -54,7 +53,7 @@ public class VideoAndFocusAndFansAdapter extends BaseAdapter {
         ViewHolder holder = null;
         if (convertView == null) {
             holder = new ViewHolder();
-            convertView = mLayoutInflater.inflate(R.layout.item_video_focus_fans, parent, false);
+            convertView = mLayoutInflater.inflate(R.layout.item_trainer_focus_fans, parent, false);
             holder.imagePath = (ImageView) convertView.findViewById(R.id.img_image);
             holder.tv_username = (TextView) convertView.findViewById(R.id.tv_nick_name);
             holder.ll_video_content = (LinearLayout) convertView.findViewById(R.id.ll_video_content);

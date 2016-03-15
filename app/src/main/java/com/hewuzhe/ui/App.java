@@ -3,11 +3,14 @@ package com.hewuzhe.ui;
 import android.app.ActivityManager;
 import android.app.Application;
 import android.content.Context;
+import android.os.Environment;
 import android.support.multidex.MultiDex;
 import android.util.Log;
 
 import com.duanqu.qupai.upload.AuthService;
 import com.duanqu.qupai.upload.QupaiAuthListener;
+import com.easefun.polyvsdk.PolyvSDKClient;
+import com.easefun.polyvsdk.server.AndroidService;
 import com.facebook.stetho.Stetho;
 import com.hewuzhe.BuildConfig;
 import com.hewuzhe.R;
@@ -24,6 +27,7 @@ import com.yancy.imageselector.ImageConfig;
 
 import org.litepal.LitePalApplication;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.LinkedList;
 
@@ -81,6 +85,11 @@ public class App extends Application {
         JPushInterface.setDebugMode(true);
         JPushInterface.init(this);
 
+
+        /**
+         * 视频直播初始化
+         * */
+        initPolyvCilent();
 
         PgyCrashManager.register(this);
 
@@ -241,5 +250,18 @@ public class App extends Application {
         ImageLoader.getInstance().init(config.build());
     }
 
+    /**
+     * 初始化Live直播
+     */
+    public void initPolyvCilent() {
+        if (Environment.getExternalStorageState().equals(Environment.MEDIA_MOUNTED)) {
+            File saveDir = new File(Environment.getExternalStorageDirectory().getPath() + "/polyvdownload");
+            if (!saveDir.exists())
+                saveDir.mkdir();
+        }
 
+        PolyvSDKClient client = PolyvSDKClient.getInstance();
+        client.initCrashReport(getApplicationContext());
+        client.startService(getApplicationContext(), AndroidService.class);
+    }
 }

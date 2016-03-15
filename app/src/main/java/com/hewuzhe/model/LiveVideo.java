@@ -27,6 +27,8 @@ public class LiveVideo {
     public String LiveFront;
     public String TimeEnd;
     public String TimeStart;
+    public String LiveUId;
+    public String LiveVId;
     /**
      * Id : 1
      * ImagePath : UpLoad/Image/04d05099-61d3-4cb1-a8fb-aa4e80a3642f.jpg

@@ -17,16 +17,11 @@ import android.widget.TextView;
 import android.widget.AdapterView.OnItemClickListener;
 
 import com.hewuzhe.R;
-import com.hewuzhe.model.PrivateTrainer;
-import com.hewuzhe.ui.adapter.FocusAndFansAdapter;
 import com.hewuzhe.ui.base.BaseActivity2;
 import com.hewuzhe.view.MyCommonTitle;
-import com.hewuzhe.view.XListView;
-import com.hewuzhe.view.XListView.IXListViewListener;
 
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.Hashtable;
 import java.util.List;
 import java.util.Map;
 
@@ -137,9 +132,9 @@ public class PrivateTrainerInfo extends BaseActivity2 implements OnItemClickList
             map.put("avatar", String.valueOf(avatars[i]));
             list.add(map);
         }
-        View view = LayoutInflater.from(this).inflate(R.layout.item_fans, null);
+        View view = LayoutInflater.from(this).inflate(R.layout.item_video_focus_fans, null);
         view.setLayoutParams(new AbsListView.LayoutParams((int) (mListView.getWidth() / 3) - 1, (int) (mListView.getHeight() / 2)));
-        SimpleAdapter simpleAdapter = new SimpleAdapter(this, list, R.layout.item_fans,
+        SimpleAdapter simpleAdapter = new SimpleAdapter(this, list, R.layout.item_video_focus_fans,
                 new String[]{"name", "avatar"}, new int[]{R.id.tv_nick_name, R.id.img_avatar});
         mListView.setGravity(Gravity.CENTER);
         mListView.setAdapter(simpleAdapter);

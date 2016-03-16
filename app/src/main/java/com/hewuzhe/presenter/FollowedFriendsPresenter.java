@@ -57,7 +57,6 @@ public class FollowedFriendsPresenter extends RefreshAndLoadMorePresenter<Follow
 
     }
 
-
     /**
      * 关注武友
      *
@@ -176,4 +175,29 @@ public class FollowedFriendsPresenter extends RefreshAndLoadMorePresenter<Follow
     }
 
 
+    public void DeleteFriended(int id) {
+
+        Subscription subscription = NetEngine.getService()
+                .DeleteFriended(id)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new SB<Res>() {
+                    @Override
+                    public void next(Res res) {
+
+                    }
+
+                    @Override
+                    public void onCompleted() {
+
+                    }
+
+                    @Override
+                    public void onError(Throwable e) {
+
+                    }
+                });
+
+        addSubscription(subscription);
+    }
 }

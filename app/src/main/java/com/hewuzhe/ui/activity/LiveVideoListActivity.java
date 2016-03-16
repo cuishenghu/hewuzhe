@@ -72,17 +72,20 @@ public class LiveVideoListActivity extends SwipeRecycleViewActivity<LiveVideoPre
     @Override
     public void onItemClick(View view, int pos, LiveVideo item) {
         if (!TimeUtil.timeComparedNow(item.TimeStart) && TimeUtil.timeComparedNow(item.TimeEnd)) {
-            startActivity(BasicWebActivity.class, new Bun()
-                    .putString("title", item.Title)
-                    .putString("url", C.BASE_URL + "zhibo.aspx?id=" + item.Id)
-                    .putString("start", item.TimeStart)
-                    .putString("end", item.TimeEnd)
-                    .putString("content", item.Content).ok());
-        }else{
+            presenter.SelectVideoLive(item.Id);
+        } else {
             startActivity(LiveVideoActivity.class, new Bun().putInt("Id", item.Id).ok());
         }
     }
 
     @Override
-    public void setData(LiveVideo liveVideo) {}
+    public void setData(LiveVideo liveVideo) {
+        startActivityForResult(IjkVideoActicity.class, new Bun()
+                .putString("title", liveVideo.Title)
+                .putString("start", liveVideo.TimeStart)
+                .putString("end", liveVideo.TimeEnd)
+                .putString("content", liveVideo.Content)
+                .putString("uid", liveVideo.LiveUId)
+                .putString("vid", liveVideo.LiveVId).ok(), 1);
+    }
 }

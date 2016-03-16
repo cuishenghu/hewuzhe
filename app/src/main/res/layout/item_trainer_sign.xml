@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="150dp"
+        android:background="@color/colorListBg"
+        android:orientation="vertical">
+
+        <ImageView
+            android:id="@+id/img_image"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:src="@drawable/icon_top_pic" />
+
+        <TextView
+            android:id="@+id/tv_sign_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="5dp"
+            android:layout_marginTop="15dp"
+            android:singleLine="true"
+            android:text="李教练跆拳道报名课程开始了"
+            android:textColor="@color/white"
+            android:textSize="16sp" />
+        <TextView
+            android:id="@+id/tv_sign_date"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/tv_sign_title"
+            android:layout_marginLeft="5dp"
+            android:layout_marginTop="10dp"
+            android:singleLine="true"
+            android:text="开始时间：2016-3.18"
+            android:textColor="@color/white"
+            android:textSize="16sp" />
+        <TextView
+            android:id="@+id/tv_sign_num"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:gravity="right|center_vertical"
+            android:layout_marginRight="15dp"
+            android:layout_marginBottom="20dp"
+            android:singleLine="true"
+            android:text="2000人参加"
+            android:textColor="@color/white"
+            android:textSize="16sp" />
+
+    </RelativeLayout>
+</LinearLayout>

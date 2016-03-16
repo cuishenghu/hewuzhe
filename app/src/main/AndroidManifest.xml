@@ -241,8 +241,15 @@
         <activity android:name=".ui.activity.FeedBackActivity"></activity>
         <activity android:name=".ui.activity.MoreShieldListActivity"></activity>
         <activity android:name=".ui.activity.TongXunLuActivity"></activity>
-        <activity android:name=".ui.activity.PrivateTrainerInfo"></activity>
-
+        <activity android:name=".ui.activity.PrivateTrainerInfoActivity"></activity>
+        <activity android:name="com.easefun.polyvsdk.VideoViewActivity"
+            android:configChanges="orientation|screenSize|keyboardHidden" >
+        </activity>
+        <activity android:name=".ui.activity.IjkVideoActicity"
+            android:configChanges="orientation|screenSize|keyboardHidden">
+        </activity>
+        <service android:name="com.easefun.polyvsdk.server.AndroidService" >
+        </service>
         <!-- 支付 -->
         <!-- Ping++ SDK 注册 -->
         <activity

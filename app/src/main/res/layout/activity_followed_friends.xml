@@ -9,7 +9,66 @@
     tools:context="com.hewuzhe.ui.activity.FollowedFriendsActivity">
 
     <include layout="@layout/toolbar_layout"/>
+    <LinearLayout
+        android:id="@+id/lay_search"
+        android:layout_width="match_parent"
+        android:layout_height="90px"
+        android:layout_marginBottom="10px"
+        android:layout_marginTop="10px"
+        android:background="@color/colorListBg"
+        android:gravity="center_vertical"
+        android:orientation="horizontal">
 
+
+        <EditText
+            android:id="@+id/edt_search_content"
+            android:layout_width="0dp"
+            android:layout_height="70px"
+            android:layout_marginLeft="10px"
+            android:layout_weight="1"
+            android:background="@null"
+            android:hint="搜索用户昵称、手机号"
+            android:imeActionId="@+id/edt_search_content_actionid"
+            android:imeOptions="actionSearch"
+            android:inputType="text"
+            android:textColor="@color/colorLine"
+            android:textColorHint="@color/colorLine" />
+
+        <ImageView
+            android:id="@+id/img_search"
+            android:layout_width="70px"
+            android:layout_height="70px"
+            android:layout_marginLeft="10px"
+            android:layout_marginRight="10px"
+            android:padding="15px"
+            android:src="@mipmap/icon_search" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/lay_tongxunlu"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="10px"
+        android:gravity="center"
+        android:background="@color/colorListBg"
+        android:orientation="vertical">
+        <ImageView
+            android:layout_width="70px"
+            android:layout_height="70px"
+            android:layout_marginLeft="10px"
+            android:layout_marginTop="5dp"
+            android:src="@drawable/icon_tongxunlu" />
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:text="添加手机联系人"
+            android:layout_marginTop="5dp"
+            android:textColor="@color/grey_text"
+            android:textSize="31px" />
+
+    </LinearLayout>
     <android.support.v7.widget.RecyclerView
         android:id="@+id/recycler_view"
         android:layout_width="match_parent"

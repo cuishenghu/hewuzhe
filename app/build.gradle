@@ -116,4 +116,5 @@ dependencies {
     compile 'com.timehop.stickyheadersrecyclerview:library:0.4.3'
     compile 'org.sufficientlysecure:html-textview:1.4'
     compile project(':vitamio')
+    compile project(':lib:swipemenuviewholder')
 }

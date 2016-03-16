@@ -229,12 +229,20 @@ public class TimeUtil {
 
         if (hours < 10) {
             hoursString = "0" + hours;
+        } else {
+            hoursString = "" + hours;
+
         }
         if (minutes < 10) {
             minutesString = "0" + minutes;
+        } else {
+            minutesString = "" + minutes;
+
         }
         if (seconds < 10) {
             secondsString = "0" + seconds;
+        } else {
+            secondsString = seconds+"";
         }
         String leftTime = hoursString + ":" + minutesString + ":" + secondsString;
 

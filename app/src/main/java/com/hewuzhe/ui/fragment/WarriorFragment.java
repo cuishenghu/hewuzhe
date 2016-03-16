@@ -31,17 +31,14 @@ import com.hewuzhe.presenter.WarriorFragmentPresenter;
 import com.hewuzhe.ui.App;
 import com.hewuzhe.ui.activity.BasicMapActivity;
 import com.hewuzhe.ui.activity.DoJoRecommendActivity;
-import com.hewuzhe.ui.activity.FlyDreamActivity;
 import com.hewuzhe.ui.activity.FriendProfileActivity;
 import com.hewuzhe.ui.activity.IntegralActivity;
 import com.hewuzhe.ui.activity.LiveVideoListActivity;
 import com.hewuzhe.ui.activity.LocationActivity;
-import com.hewuzhe.ui.activity.MemberActivity;
 import com.hewuzhe.ui.activity.MyCollectionsActivity;
 import com.hewuzhe.ui.activity.MyScoreActivity;
 import com.hewuzhe.ui.activity.PhotoActivity;
-import com.hewuzhe.ui.activity.PrivateTrainerInfo;
-import com.hewuzhe.ui.activity.PrivateTrainerListActivity;
+import com.hewuzhe.ui.activity.PrivateTrainerInfoActivity;
 import com.hewuzhe.ui.activity.ProfileActivity;
 import com.hewuzhe.ui.activity.RecordActivity;
 import com.hewuzhe.ui.activity.StrangerProfileSettingsActivity;
@@ -312,7 +309,7 @@ public class WarriorFragment extends ToolBarFragment<WarriorFragmentPresenter> i
         tvFlyDream.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-//                startActivity(new Intent(getActivity(), PrivateTrainerListActivity.class));
+//                startActivity(new Intent(getActivity(), PrivateTrainerInfoActivity.class));
 
 //                startActivity(SignupProfileActivity.class);
 

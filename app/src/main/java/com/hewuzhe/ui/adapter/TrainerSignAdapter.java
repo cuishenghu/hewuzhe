@@ -4,9 +4,9 @@ import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AbsListView;
 import android.widget.BaseAdapter;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.hewuzhe.R;
@@ -20,15 +20,17 @@ import java.util.List;
 /**
  * Created by Administrator on 2016/3/14 0014.
  */
-public class FocusAndFansAdapter extends BaseAdapter {
+public class TrainerSignAdapter extends BaseAdapter {
     private Context mContext;
     private LayoutInflater mLayoutInflater;
     private List<PrivateTrainer> privateTrainers;
+    private int mType;
 
-    public FocusAndFansAdapter(Context mContext, List<PrivateTrainer> privateTrainers) {
+    public TrainerSignAdapter(Context mContext, List<PrivateTrainer> privateTrainers, int mType) {
         this.mContext = mContext;
         this.mLayoutInflater = LayoutInflater.from(mContext);
         this.privateTrainers = privateTrainers;
+        this.mType = mType;
     }
 
     @Override
@@ -51,24 +53,31 @@ public class FocusAndFansAdapter extends BaseAdapter {
         ViewHolder holder = null;
         if (convertView == null) {
             holder = new ViewHolder();
-            convertView = mLayoutInflater.inflate(R.layout.item_fans, parent, false);
-            holder.img_avatar = (ImageView) convertView.findViewById(R.id.img_avatar);
-            holder.tv_username = (TextView) convertView.findViewById(R.id.tv_nick_name);
-            convertView.setLayoutParams(new AbsListView.LayoutParams((int) (parent.getWidth() / 3) - 1, (int) (parent.getHeight() / 2)));
+            convertView = mLayoutInflater.inflate(R.layout.item_trainer_sign, parent, false);
+            holder.imagePath = (ImageView) convertView.findViewById(R.id.img_image);//视频图片
+            holder.tv_sign_title = (TextView) convertView.findViewById(R.id.tv_sign_title);//报名科目标题
+            holder.tv_sign_date = (TextView) convertView.findViewById(R.id.tv_sign_date);//报名科目开始日期
+            holder.tv_sign_num = (TextView) convertView.findViewById(R.id.tv_sign_num);//报名该科目的人数
             convertView.setTag(holder);
         } else {
             holder = (ViewHolder) convertView.getTag();
         }
         PrivateTrainer privateTrainer = privateTrainers.get(position);
-        holder.tv_username.setText(privateTrainer.getUsername());
-        ImageLoader.getInstance().displayImage(StringUtil.toString(UrlContants.IMAGE_URL + privateTrainer.getAvatar(), "http://"), holder.img_avatar);
+        ImageLoader.getInstance().displayImage(StringUtil.toString(UrlContants.IMAGE_URL + privateTrainer.getImagePath(), "http://"), holder.imagePath);
+        holder.tv_sign_title.setText(privateTrainer.getUsername());
+        holder.tv_sign_date.setText(privateTrainer.getUsername());
+        holder.tv_sign_num.setText(privateTrainer.getUsername());
+
 
         return convertView;
     }
 
     class ViewHolder {
-        TextView tv_username;
-        ImageView img_avatar;
+        ImageView imagePath;
+        TextView tv_sign_title;
+        TextView tv_sign_date;
+        TextView tv_sign_num;
+
     }
 
 }

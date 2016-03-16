@@ -34,7 +34,7 @@ import materialdesign.views.ProgressWheel;
 public class VideoControllerView extends FrameLayout implements View.OnTouchListener, MediaPlayer.OnBufferingUpdateListener, MediaPlayer.OnPreparedListener, MediaPlayer.OnCompletionListener, SeekBar.OnSeekBarChangeListener, MediaPlayer.OnInfoListener {
     private static final long delayMillis = 2000;
     private static final int MSG_PROGRESS_CHANGE = 2;
-    private VideoView mVideoView;
+    public VideoView mVideoView;
     private ProgressWheel mProgressWheel;
     private ImageButton viewPlay;
     public SeekBar slider;

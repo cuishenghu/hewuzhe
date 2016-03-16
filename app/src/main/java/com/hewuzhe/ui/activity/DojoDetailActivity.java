@@ -72,6 +72,7 @@ public class DojoDetailActivity extends ToolBarActivity<DojoDetailPresenter> imp
     private Integer id;
     private boolean isFulllScreen = false;
     private static int HEITH_VIDEO = 320;
+    private Dojo dojo;
     /**
      * @return 提供标题
      */
@@ -96,33 +97,8 @@ public class DojoDetailActivity extends ToolBarActivity<DojoDetailPresenter> imp
         mVDVideoView.setOnFullScreenBtnClickListener(new VideoControllerView.OnFullScreenBtnClick() {
             @Override
             public void onClick(View v) {
-                int mCurrentOrientation = DojoDetailActivity.this.getResources().getConfiguration().orientation;
-                WindowManager.LayoutParams attrs = getWindow().getAttributes();
-                if (mCurrentOrientation == Configuration.ORIENTATION_PORTRAIT) {
-                    DojoDetailActivity.this.setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
-                    attrs.flags |= WindowManager.LayoutParams.FLAG_FULLSCREEN;
-                    getWindow().setAttributes(attrs);
-                    //设置全屏
-                    show_changguan.setVisibility(View.GONE);
-                    toolBar.setVisibility(View.GONE);
-//                    v.setSystemUiVisibility(View.SYSTEM_UI_FLAG_HIDE_NAVIGATION);
-                    getWindow().addFlags(WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS);
-
-                    mVDVideoView.btnFullScreen.setImageResource(R.mipmap.icon_origin_screen);
-
-                }
-                if (mCurrentOrientation == Configuration.ORIENTATION_LANDSCAPE) {
-                    DojoDetailActivity.this.setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
-                    attrs.flags &= (~WindowManager.LayoutParams.FLAG_FULLSCREEN);
-                    getWindow().setAttributes(attrs);
-                    //取消全屏设置
-                    toolBar.setVisibility(View.VISIBLE);
-                    show_changguan.setVisibility(View.VISIBLE);
-                    hideOrShowToolbar();
-                    getWindow().clearFlags(WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS);
-
-                    mVDVideoView.btnFullScreen.setImageResource(R.mipmap.icon_full_screen);
-                }
+//               startActivity(new Intent(DojoDetailActivity.this,VideoAllActivity.class).putExtra("videoPath",C.BASE_URL+dojo.VideoPath).putExtra("data",new Bun().putInt("id", id).ok()));
+//                finish();
             }
         });
 
@@ -135,6 +111,7 @@ public class DojoDetailActivity extends ToolBarActivity<DojoDetailPresenter> imp
         io.vov.vitamio.LibsChecker.checkVitamioLibs(this);
         super.initThings(savedInstanceState);
 
+        mVDVideoView.btnFullScreen.setVisibility(View.GONE);
         windowManager = (WindowManager) getSystemService(Context.WINDOW_SERVICE);
         id = getIntentData().getInt("id");
         presenter.getDetail();
@@ -156,6 +133,7 @@ public class DojoDetailActivity extends ToolBarActivity<DojoDetailPresenter> imp
 
     @Override
     public void setData(final Dojo dojo) {
+        this.dojo = dojo;
         if(dojo.VideoPath.trim().equals("")) {
             mVDVideoView.setVisibility(View.GONE);
             _Img.setVisibility(View.VISIBLE);

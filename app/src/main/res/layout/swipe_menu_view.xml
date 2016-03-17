@@ -1,11 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-              xmlns:tools="http://schemas.android.com/tools"
-              android:layout_width="80dp"
-              android:layout_height="match_parent"
-              android:layout_gravity="end"
-              android:orientation="horizontal"
-              android:paddingTop="18px">
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="80dp"
+    android:layout_height="match_parent"
+    android:layout_gravity="end"
+    android:background="@color/colorListBg"
+    android:orientation="horizontal"
+    android:paddingBottom="18px"
+    android:paddingTop="18px">
 
     <TextView
         android:id="@+id/tv_delete"
@@ -18,7 +20,7 @@
         android:text="删除"
         android:textColor="#FFFFFF"
         android:textSize="18sp"
-        tools:ignore="HardcodedText"/>
+        tools:ignore="HardcodedText" />
 
 
 </LinearLayout>

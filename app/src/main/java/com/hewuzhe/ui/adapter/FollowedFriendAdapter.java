@@ -66,7 +66,7 @@ public class FollowedFriendAdapter extends BaseAdapter<RecyclerView.ViewHolder, 
         final VHolder holder = (VHolder) VHolder.getHolder(viewHolder);
         final Friend friend = data.get(position);
         holder._TvUsername.setText(friend.NicName);
-        holder._TvLevel.setText(friend.JoinTime + "关注了你");
+        holder._TvLevel.setText(friend.JoinTime + "添加了你");
 
         holder.tv_delete.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -87,7 +87,7 @@ public class FollowedFriendAdapter extends BaseAdapter<RecyclerView.ViewHolder, 
                 .into(holder._ImgAvatar);
 
         if (friend.IsFriend) {
-            holder._TvFollow.setText("取消关注");
+            holder._TvFollow.setText("删除武友");
             holder._TvFollow.setBackgroundResource(R.color.colorBg);
             holder._TvFollow.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -97,7 +97,7 @@ public class FollowedFriendAdapter extends BaseAdapter<RecyclerView.ViewHolder, 
             });
 
         } else {
-            holder._TvFollow.setText("关注");
+            holder._TvFollow.setText("添加武友");
             holder._TvFollow.setBackgroundResource(R.color.colorYellow);
             holder._TvFollow.setOnClickListener(new View.OnClickListener() {
                 @Override

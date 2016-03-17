@@ -145,10 +145,6 @@ public class IjkVideoActicity extends Activity {
 
 	// 切换到横屏
 	public void changeToLandscape() {
-		WindowManager.LayoutParams attrs = getWindow().getAttributes();
-		attrs.flags |= WindowManager.LayoutParams.FLAG_FULLSCREEN;
-		getWindow().setAttributes(attrs);
-
 		RelativeLayout.LayoutParams p = new RelativeLayout.LayoutParams(h, w);
 		rl.setLayoutParams(p);
 		stopPosition = videoview.getCurrentPosition();
@@ -160,10 +156,6 @@ public class IjkVideoActicity extends Activity {
 
 	// 切换到竖屏
 	public void changeToPortrait() {
-		WindowManager.LayoutParams attrs = getWindow().getAttributes();
-		attrs.flags &= (~WindowManager.LayoutParams.FLAG_FULLSCREEN);
-		getWindow().setAttributes(attrs);
-
 		RelativeLayout.LayoutParams p = new RelativeLayout.LayoutParams(w, adjusted_h);
 		rl.setLayoutParams(p);
 		stopPosition = videoview.getCurrentPosition();

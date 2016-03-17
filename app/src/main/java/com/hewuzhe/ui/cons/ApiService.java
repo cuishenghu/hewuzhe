@@ -24,6 +24,7 @@ import com.hewuzhe.model.MyDream;
 import com.hewuzhe.model.OtherImage;
 import com.hewuzhe.model.OverTime;
 import com.hewuzhe.model.Plan;
+import com.hewuzhe.model.PrivateTrainerList;
 import com.hewuzhe.model.Product;
 import com.hewuzhe.model.ProductCollection;
 import com.hewuzhe.model.ProductComment;
@@ -459,4 +460,7 @@ public interface ApiService {
 
     @GET("Hezhuangbei.asmx/SelectProductPhone")
     Observable<Res<ArrayList<Tel>>> SelectProductPhone();
+
+    @GET("Hewuzhe.asmx/SelectTeacherList")
+    Observable<Res<ArrayList<PrivateTrainerList>>> SelectTeacherList(@Query("userid") int userid,@Query("startRowIndex") int startRowIndex,@Query("maximumRows") int maximumRows,@Query("areaname") String areaname,@Query("lat") String lat,@Query("lng") String lng,@Query("search") String search);
 }

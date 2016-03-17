@@ -137,7 +137,7 @@ public class DoJoRecommendActivity extends SwipeRecycleViewActivity<DojoRecommen
      */
     @Override
     public void onItemClick(View view, int pos, Dojo item) {
-        startActivity(DojoDetailActivity.class, new Bun().putInt("id", item.Id).ok());
+        startActivity(DojoDetail2Activity.class, new Bun().putInt("id", item.Id).ok());
     }
 
     /**

@@ -659,6 +659,10 @@
         </activity>
         <activity android:name=".ui.activity.PrivateTrainerListActivity">
         </activity>
+        <activity android:name=".ui.activity.VideoAllActivity">
+        </activity>
+        <activity android:name=".ui.activity.DojoDetail2Activity">
+        </activity>
     </application>
 
 </manifest>

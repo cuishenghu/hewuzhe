@@ -195,7 +195,7 @@ public class ContactsActivity extends RecycleViewActivity<FriendsPresenter, Frie
             }
         });
         /**
-         * 新关注的好友
+         * 新添加的好友
          */
         _LayFollowed.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -245,11 +245,8 @@ public class ContactsActivity extends RecycleViewActivity<FriendsPresenter, Frie
                     }
 
                 }
-
-
             }
         });
-
     }
 
     private void search(String keyWord) {

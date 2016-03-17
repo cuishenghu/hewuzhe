@@ -24,8 +24,13 @@ public abstract class EntityHandler<T> extends HttpErrorHandler{
     	Object object = json.get(UrlContants.jsonData);
     	if (object instanceof JSONArray) {
             JSONArray jsonArray = (JSONArray)object;
-            List<T> list=JSONArray.parseArray(jsonArray.toString(), c);
-            onReadSuccess(list);
+            try {
+                List<T> list=JSONArray.parseArray(jsonArray.toString(), c);
+                onReadSuccess(list);
+            }catch (Exception e){
+                e.toString();
+            }
+
     	} else if (object instanceof JSONObject) {
     		JSONObject jsonObject = (JSONObject)object;
     		JSONArray jsonArray = jsonObject.getJSONArray("list");

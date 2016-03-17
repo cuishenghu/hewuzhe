@@ -181,7 +181,7 @@
                     android:layout_weight="1"
                     android:background="@drawable/select_yellow"
                     android:clickable="true"
-                    android:text="关注好友"/>
+                    android:text="添加武友"/>
 
         </LinearLayout>
     </LinearLayout>

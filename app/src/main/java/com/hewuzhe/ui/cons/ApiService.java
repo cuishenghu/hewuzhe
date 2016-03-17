@@ -146,6 +146,11 @@ public interface ApiService {
     @GET("Hewuzhe.asmx/MessageRepeatAndFavoriteCancel")
     Observable<Res> MessageRepeatAndFavoriteCancel(@Query("id") int id, @Query("userid") int userid, @Query("flg") int flg);
 
+    @GET("Hewuzhe.asmx/GuanzhuTeacher")
+    Observable<Res> guanzhuTeacher(@Query("teacherid") int teacherid, @Query("userid") int userid);
+
+    @GET("Hewuzhe.asmx/CancelGuanzhuTeacher")
+    Observable<Res> cancelGuanzhuTeacher(@Query("teacherid") int teacherid, @Query("userid") int userid);
 
     @GET("Helianmeng.asmx/MessageRepeatAndFavorite")
     Call<Res> MessageRepeatAndFavorite(@Query("id") int id, @Query("userid") int userid, @Query("flg") int flg);

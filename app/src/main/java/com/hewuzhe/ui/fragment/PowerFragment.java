@@ -137,9 +137,10 @@ public class PowerFragment extends BaseFragment implements PowerView, VideoChoos
         viewPagerAdapter = new MyViewPagerAdapter(getActivity().getSupportFragmentManager());
         viewPagerAdapter.addFragment(OneFragment.newInstance("NewVideo"), "最新");//添加Fragment
         viewPagerAdapter.addFragment(OneFragment.newInstance("HotVideo"), "热门");
-        viewPagerAdapter.addFragment(OneFragment.newInstance("TuijianVideo"), "推荐");
-        viewPagerAdapter.addFragment(OneFragment.newInstance("YuanchuangVideo"), "原创");
-        viewPagerAdapter.addFragment(FiveFragment.newInstance(), "频道");
+        viewPagerAdapter.addFragment(OneFragment.newInstance("YuanchuangVideo"), "关注");
+//        viewPagerAdapter.addFragment(OneFragment.newInstance("TuijianVideo"), "推荐");
+        viewPagerAdapter.addFragment(FiveFragment.newInstance(), "推荐");
+        viewPagerAdapter.addFragment(FiveFragment.newInstance(), "交流");
         mViewPager.setOffscreenPageLimit(5);
         mViewPager.setAdapter(viewPagerAdapter);
 
@@ -154,7 +155,7 @@ public class PowerFragment extends BaseFragment implements PowerView, VideoChoos
             @Override
             public void onTabSelected(TabLayout.Tab tab) {
                 mViewPager.setCurrentItem(tab.getPosition());
-                swicthButton.setVisibility(tab.getPosition() == 4 ? View.GONE : View.VISIBLE);
+                swicthButton.setVisibility(tab.getPosition() == 4||tab.getPosition() == 3 ? View.GONE : View.VISIBLE);
             }
 
             @Override

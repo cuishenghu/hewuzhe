@@ -379,14 +379,14 @@ public class VideoDetail2Activity extends RecycleViewActivity<VideoDetailPresent
 
         tvUsername.setText(video.UserNicName);
         /**
-         * 点赞
+         * 关注与取消关注
          */
         if (video.Islike) {
             imgPraise.setImageResource(R.mipmap.icon_praise_focus);
             imgPraise.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    presenter.collectAndFavorateCance(id, 2, view);
+                    presenter.cancelGuanzhuTeacher(_Video.UserId, view);
                 }
             });
         } else {
@@ -394,7 +394,7 @@ public class VideoDetail2Activity extends RecycleViewActivity<VideoDetailPresent
             imgPraise.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    presenter.collectAndOther(id, 2, view, position, "");
+                    presenter.guanzhuTeacher(_Video.UserId, view);
                 }
             });
         }

@@ -173,6 +173,7 @@ public class IjkVideoActicity extends Activity {
 		video_content.setVisibility(View.VISIBLE);
 	}
 
+
 	// 配置文件设置congfigchange 切屏调用一次该方法，hide()之后再次show才会出现在正确位置
 	@Override
 	public void onConfigurationChanged(Configuration arg0) {

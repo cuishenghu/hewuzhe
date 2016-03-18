@@ -134,4 +134,29 @@ public class HttpUtils {
         client.post(UrlContants.getUrl(UrlContants.SAVEFRIEND), params, handler);
     }
 
+    /* 根据教练的ID查询教练信息 */
+    public static void getTrainerById(AsyncHttpResponseHandler handler, RequestParams params) {
+        client.post(UrlContants.getUrl(UrlContants.SELECTTEACHERBYID), params, handler);
+    }
+
+    /* 根据私教ID获取私教视频 */
+    public static void getVideoByTeacherId(AsyncHttpResponseHandler handler, RequestParams params) {
+        client.post(UrlContants.getUrl(UrlContants.SELECTVIDEOBYTEACHERID), params, handler);
+    }
+
+    /* 根据私教ID获取私教课程 */
+    public static void getLessonByTeacherId(AsyncHttpResponseHandler handler, RequestParams params) {
+        client.post(UrlContants.getUrl(UrlContants.SELECTLESSONBYTEACHERID), params, handler);
+    }
+
+    /* 根据私教ID获取私教关注 */
+    public static void getGuanZhuByTeacherId(AsyncHttpResponseHandler handler, RequestParams params) {
+        client.post(UrlContants.getUrl(UrlContants.SELECTGUANZHUBYTEACHERID), params, handler);
+    }
+
+    /* 根据私教ID获取私教粉丝 */
+    public static void getFenSiByTeacherId(AsyncHttpResponseHandler handler, RequestParams params) {
+        client.post(UrlContants.getUrl(UrlContants.SELECTFENSIBYTEACHERID), params, handler);
+    }
+
 }

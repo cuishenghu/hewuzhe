@@ -54,10 +54,10 @@ public class TrainerLessonActivity extends ToolBarActivity<TrainerLessonPresente
     private String getHtmlData(String bodyHTML) {
         String head = "<head>" +
                 "<meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0, user-scalable=no\"> " +
-                "<style>img{max-width: 100%; width:auto; height:auto;} body{  color: White;font-size:large;}</style>" +
+                "<style>img{max-width: 100%; width:auto; height:auto;} body{ color:#ffffff; background-color: #3e3e40;font-size:large;}</style>" +
                 "</head>";
         return "<html>" + head + "<body>" + bodyHTML + "</body></html>";
-//        background-color: #292a2f;
+//
     }
 
     @Override

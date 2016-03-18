@@ -88,6 +88,8 @@ public class UrlContants {
 
     public static final String SELECTFENSIBYTEACHERID =  "Hewuzhe.asmx/SelectFensiByTeacherId?";   //根据私教ID获取私教粉丝
 
+    public static final String ISWUYOU =  "Helianmeng.asmx/IsWuyou?";   // /* 根据id判断是否为武友 true:是 false:不是 */
+
 
 
     public static String getUrl(String token) {

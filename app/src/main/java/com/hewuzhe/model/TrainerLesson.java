@@ -13,7 +13,7 @@ public class TrainerLesson {
     private int JoinNum;//报名人数
     private int IsJoin;//是否报名
 
-    public void TrainerLesson() {
+    public TrainerLesson() {
     }
 
     public TrainerLesson(int id, int joinNum, int isJoin, String title, String content, String startTime, String endTime, String imagePath) {

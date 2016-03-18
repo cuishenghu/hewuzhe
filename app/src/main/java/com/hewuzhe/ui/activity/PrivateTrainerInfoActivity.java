@@ -20,12 +20,15 @@ import android.widget.TextView;
 import android.widget.AdapterView.OnItemClickListener;
 
 import com.alibaba.fastjson.JSONObject;
+import com.google.common.reflect.TypeToken;
+import com.google.gson.Gson;
 import com.hewuzhe.R;
 import com.hewuzhe.model.PrivateTrainer;
 import com.hewuzhe.model.TrainerFans;
 import com.hewuzhe.model.TrainerGuanZhu;
 import com.hewuzhe.model.TrainerLesson;
 import com.hewuzhe.model.TrainerVideo;
+import com.hewuzhe.model.WuYou;
 import com.hewuzhe.ui.adapter.TrainerSignAdapter;
 import com.hewuzhe.ui.adapter.TrainerVideoAdapter;
 import com.hewuzhe.ui.adapter.TrainerVideoAndFocusAndFansAdapter;
@@ -51,8 +54,8 @@ import java.util.Map;
  * Created by Administrator on 2016/3/11 0011.
  */
 public class PrivateTrainerInfoActivity extends BaseActivity2 implements OnItemClickListener {
-    private int nowPage = 1;
-    private static int PERPAGE = 10;
+    private int pageNo = 0;
+    private static int pageSum = 100;
     private MyCommonTitle myCommonTitle;
     private CircleImageView img_avatar;
     private String phoneNumber;
@@ -69,7 +72,7 @@ public class PrivateTrainerInfoActivity extends BaseActivity2 implements OnItemC
     private TrainerVideoAndFocusAndFansAdapter trainerVideoAndFocusAndFansAdapter;
     private Handler mHandler;
     private int mType = 1;
-    private int IsGuanzhu;
+    private String IsGuanzhu;
     private int Id;
     private View viewItem;
     private String[] names = {"张三", "李四", "王五", "张三", "李四", "王五", "张三", "李四", "王五"};
@@ -152,13 +155,13 @@ public class PrivateTrainerInfoActivity extends BaseActivity2 implements OnItemC
                 tv_profession.setText(jsonObject.getString("Speciality"));
                 tv_address.setText(jsonObject.getString("HomeAddress"));
                 phoneNumber = jsonObject.getString("Phone");
-                IsGuanzhu = jsonObject.getIntValue("IsGuanZhu");
-                    if (IsGuanzhu==1) {
-                        tv_focus.setText("已关注");
-                    }else {
-                        tv_focus.setText("关注Ta");
-                    }
-               
+                IsGuanzhu = jsonObject.getString("IsGuanzhu");
+                if (Integer.parseInt(IsGuanzhu) == 1) {
+                    tv_focus.setText("已关注");
+                } else {
+                    tv_focus.setText("关注Ta");
+                }
+
             }
         }, params);
     }
@@ -251,8 +254,8 @@ public class PrivateTrainerInfoActivity extends BaseActivity2 implements OnItemC
      */
     public void getVideoByTeancherId() {
         params = new RequestParams();
-        params.put("startRowIndex", 0);
-        params.put("maximumRows", 10);
+        params.put("startRowIndex", pageNo * pageSum);
+        params.put("maximumRows", pageSum);
         params.put("search", "");
         params.put("userid", new SessionUtil(PrivateTrainerInfoActivity.this).getUser().Id);
         params.put("teacherid", Id);//======待修改=======待修改========待修改======待修改========待修改======待修改=========待修改===
@@ -264,7 +267,7 @@ public class PrivateTrainerInfoActivity extends BaseActivity2 implements OnItemC
 
         @Override
         public void onReadSuccess(List<TrainerVideo> list) {
-            if (nowPage == 0) {
+            if (pageNo == 0) {
                 trainerVideos.clear();
             }
             trainerVideos.addAll(list);
@@ -277,8 +280,8 @@ public class PrivateTrainerInfoActivity extends BaseActivity2 implements OnItemC
      */
     public void getLessonByTeancherId() {
         params = new RequestParams();
-        params.put("startRowIndex", 0);
-        params.put("maximumRows", 10);
+        params.put("startRowIndex", pageNo * pageSum);
+        params.put("maximumRows", pageSum);
         params.put("search", "");
         params.put("userid", new SessionUtil(PrivateTrainerInfoActivity.this).getUser().Id);
         params.put("teacherid", Id);//======待修改=======待修改========待修改======待修改========待修改======待修改=========待修改===
@@ -289,7 +292,7 @@ public class PrivateTrainerInfoActivity extends BaseActivity2 implements OnItemC
 
         @Override
         public void onReadSuccess(List<TrainerLesson> list) {
-            if (nowPage == 0) {
+            if (pageNo == 0) {
                 trainerLessons.clear();
             }
             trainerLessons.addAll(list);
@@ -302,8 +305,8 @@ public class PrivateTrainerInfoActivity extends BaseActivity2 implements OnItemC
      */
     public void getGuanZhuByTeancherId() {
         params = new RequestParams();
-        params.put("startRowIndex", 0);
-        params.put("maximumRows", 10);
+        params.put("startRowIndex", pageNo * pageSum);
+        params.put("maximumRows", pageSum);
         params.put("search", "");
         params.put("userid", new SessionUtil(PrivateTrainerInfoActivity.this).getUser().Id);
         params.put("teacherid", Id);//======待修改=======待修改========待修改======待修改========待修改
@@ -314,7 +317,7 @@ public class PrivateTrainerInfoActivity extends BaseActivity2 implements OnItemC
 
         @Override
         public void onReadSuccess(List<PrivateTrainer> list) {
-            if (nowPage == 0) {
+            if (pageNo == 0) {
                 privateTrainers.clear();
             }
             privateTrainers.addAll(list);
@@ -327,8 +330,8 @@ public class PrivateTrainerInfoActivity extends BaseActivity2 implements OnItemC
      */
     public void getFenSiByTeancherId() {
         params = new RequestParams();
-        params.put("startRowIndex", 0);
-        params.put("maximumRows", 10);
+        params.put("startRowIndex", pageNo * pageSum);
+        params.put("maximumRows", pageSum);
         params.put("search", "");
         params.put("userid", new SessionUtil(PrivateTrainerInfoActivity.this).getUser().Id);
         params.put("teacherid", Id);//======待修改=======待修改========待修改======待修改========待修改
@@ -339,7 +342,7 @@ public class PrivateTrainerInfoActivity extends BaseActivity2 implements OnItemC
 
         @Override
         public void onReadSuccess(List<PrivateTrainer> list) {
-            if (nowPage == 0) {
+            if (pageNo == 0) {
                 privateTrainers.clear();
             }
             privateTrainers.addAll(list);
@@ -362,15 +365,41 @@ public class PrivateTrainerInfoActivity extends BaseActivity2 implements OnItemC
                     putExtra("data", new Bun().putInt("Id", trainerVideos.get(position).getId()).ok()));
         } else if (mType == 2) {//报名课程详情
 
-        } else if (mType == 3) {//关注的私教详情
-//            startActivity(new Intent(PrivateTrainerInfoActivity.this, PrivateTrainerInfoActivity.class).
-//                    putExtra("data", new Bun().putInt("Id", privateTrainers.get(position).getId()).ok()));
-        } else if (mType == 4) {//粉丝的详情
+        } else {//关注的私教详情
+            isWuYou(position);
 //            startActivity(new Intent(PrivateTrainerInfoActivity.this, PrivateTrainerInfoActivity.class).
 //                    putExtra("data", new Bun().putInt("Id", privateTrainers.get(position).getId()).ok()));
         }
     }
 
+    /**
+     * 判断是否是武友
+     *
+     * @param position
+     */
+    private void isWuYou(final int position) {
+        params = new RequestParams();
+        params.put("userid", new SessionUtil(PrivateTrainerInfoActivity.this).getUser().Id);
+        params.put("friendid", privateTrainers.get(position).getId());
+        HttpUtils.isWuYou(new HttpErrorHandler() {
+            @Override
+            public void onRecevieSuccess(JSONObject json) {
+                Gson gson = new Gson();
+                WuYou wuYou = new Gson().fromJson(json.toString(), new TypeToken<WuYou>() {
+                }.getType());
+//                json.getString("data");
+                boolean is = wuYou.isData();
+                if (is) {
+                    startActivity(new Intent(PrivateTrainerInfoActivity.this, FriendProfileActivity.class)
+                            .putExtra("data", new Bun().putInt("id", privateTrainers.get(position).getId()).ok()));
+                } else {
+                    startActivity(new Intent(PrivateTrainerInfoActivity.this, StrangerProfileSettingsActivity.class)
+                            .putExtra("data", new Bun().putInt("id", privateTrainers.get(position).getId()).ok()));
+                }
+
+            }
+        }, params);
+    }
 
     /**
      * @param listView

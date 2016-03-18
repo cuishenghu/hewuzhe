@@ -159,4 +159,8 @@ public class HttpUtils {
         client.post(UrlContants.getUrl(UrlContants.SELECTFENSIBYTEACHERID), params, handler);
     }
 
+    /* 根据id判断是否为武友 true:是 false:不是 */
+    public static void isWuYou(AsyncHttpResponseHandler handler, RequestParams params) {
+        client.post(UrlContants.getUrl(UrlContants.ISWUYOU), params, handler);
+    }
 }

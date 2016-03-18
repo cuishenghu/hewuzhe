@@ -1,9 +1,11 @@
 package com.hewuzhe.ui.adapter;
 
 import android.content.Context;
+import android.view.Display;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.WindowManager;
 import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -69,6 +71,14 @@ public class TrainerVideoAndFocusAndFansAdapter extends BaseAdapter {
         PrivateTrainer privateTrainer = privateTrainers.get(position);
         holder.tv_username.setText(privateTrainer.getNicName());
         ImageLoader.getInstance().displayImage(StringUtil.toString(UrlContants.IMAGE_URL + privateTrainer.getPhotoPath(), "http://"), holder.imagePath);
+
+        WindowManager manager = (WindowManager)mContext.getSystemService(Context.WINDOW_SERVICE);
+        Display display = manager.getDefaultDisplay();
+        int width =display.getWidth();
+        ViewGroup.LayoutParams para;
+        para = holder.imagePath.getLayoutParams();
+        para.height = (width- StringUtil.dip2px(mContext, 40))/3;
+        holder.imagePath.setLayoutParams(para);
 //            holder.tv_fri_username.setText(privateTrainer.getNickname());
 ////            holder.tv_fri_comment_num.setText(privateTrainer.getCommentNum() + "条评论");
 //            holder.tv_fri_publish_time.setText(privateTrainer.getPublishDate());

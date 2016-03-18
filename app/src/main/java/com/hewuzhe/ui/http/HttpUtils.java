@@ -163,4 +163,9 @@ public class HttpUtils {
     public static void isWuYou(AsyncHttpResponseHandler handler, RequestParams params) {
         client.post(UrlContants.getUrl(UrlContants.ISWUYOU), params, handler);
     }
+
+    /* 关注私教*/
+    public static void guanzhuTeacher(AsyncHttpResponseHandler handler, RequestParams params) {
+        client.post(UrlContants.getUrl(UrlContants.GUANZHUTEACHER), params, handler);
+    }
 }

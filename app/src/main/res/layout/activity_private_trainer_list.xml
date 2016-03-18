@@ -79,6 +79,7 @@
     <RelativeLayout android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical"
+        android:paddingLeft="10dp"
         app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
         <com.hewuzhe.ui.widget.MultiSwipeRefreshLayout
@@ -104,7 +105,7 @@
             <TextView style="@style/text_30_white"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="没有武馆(若定位失败请手动选择城市)"/>
+                android:text="没有私教(若定位失败请手动选择城市)"/>
 
 
         </LinearLayout>

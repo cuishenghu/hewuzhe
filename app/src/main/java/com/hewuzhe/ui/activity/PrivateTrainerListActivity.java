@@ -2,6 +2,7 @@ package com.hewuzhe.ui.activity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.StaggeredGridLayoutManager;
@@ -14,15 +15,20 @@ import com.baidu.location.LocationClient;
 import com.baidu.location.LocationClientOption;
 import com.hewuzhe.R;
 import com.hewuzhe.model.Dojo;
+import com.hewuzhe.model.PrivateTrainerList;
 import com.hewuzhe.presenter.DojoRecommendPresenter;
+import com.hewuzhe.presenter.PrivateTrainerListPresenter;
 import com.hewuzhe.ui.App;
 import com.hewuzhe.ui.adapter.DojoRecommendAdapter;
+import com.hewuzhe.ui.adapter.PrivateTrainerListAdapter;
 import com.hewuzhe.ui.adapter.base.BaseAdapter;
 import com.hewuzhe.ui.base.SwipeRecycleViewActivity;
+import com.hewuzhe.ui.base.SwipeRecycleViewNoMoreActivity;
 import com.hewuzhe.ui.cons.C;
 import com.hewuzhe.ui.inter.OnLocListener;
 import com.hewuzhe.utils.Bun;
 import com.hewuzhe.view.DojoRecommendView;
+import com.hewuzhe.view.PrivateTrainerListView;
 
 import java.util.ArrayList;
 
@@ -31,7 +37,7 @@ import butterknife.Bind;
 /**
  * Created by zycom on 2016/3/14.
  */
-public class PrivateTrainerListActivity extends SwipeRecycleViewActivity<DojoRecommendPresenter, DojoRecommendAdapter, Dojo> implements DojoRecommendView, OnLocListener {
+public class PrivateTrainerListActivity extends SwipeRecycleViewNoMoreActivity<PrivateTrainerListPresenter, PrivateTrainerListAdapter, PrivateTrainerList> implements PrivateTrainerListView, OnLocListener {
 
     @Bind(R.id.lay_city)
     LinearLayout _LayCity;
@@ -40,7 +46,9 @@ public class PrivateTrainerListActivity extends SwipeRecycleViewActivity<DojoRec
     private String name;
     private int id;
 
+
     private int cityId = -1;
+    private String cityName="";
 
     private String _cityName = "临沂";
     private double _Lat = 34;
@@ -77,7 +85,6 @@ public class PrivateTrainerListActivity extends SwipeRecycleViewActivity<DojoRec
     @Override
     protected void initThings(Bundle savedInstanceState) {
         super.initThings(savedInstanceState);
-
         mLocationClient = new LocationClient(getApplicationContext());     //声明LocationClient类
         mLocationClient.registerLocationListener(myListener);    //注册监听函数
 
@@ -107,16 +114,16 @@ public class PrivateTrainerListActivity extends SwipeRecycleViewActivity<DojoRec
      * 绑定Presenter
      */
     @Override
-    public DojoRecommendPresenter createPresenter() {
-        return new DojoRecommendPresenter();
+    public PrivateTrainerListPresenter createPresenter() {
+        return new PrivateTrainerListPresenter();
     }
 
     /**
      * @return 提供Adapter
      */
     @Override
-    protected DojoRecommendAdapter provideAdapter() {
-        return new DojoRecommendAdapter(getContext());
+    protected PrivateTrainerListAdapter provideAdapter() {
+        return new PrivateTrainerListAdapter(getContext(),presenter);
     }
 
     /**
@@ -124,12 +131,12 @@ public class PrivateTrainerListActivity extends SwipeRecycleViewActivity<DojoRec
      */
     @Override
     protected RecyclerView.LayoutManager provideLayoutManager() {
-        return new StaggeredGridLayoutManager(3, StaggeredGridLayoutManager.VERTICAL);
+        return new GridLayoutManager(this,3);
     }
 
 
     @Override
-    public void bindData(ArrayList<Dojo> data) {
+    public void bindData(ArrayList<PrivateTrainerList> data) {
         bd(data);
     }
 
@@ -140,8 +147,8 @@ public class PrivateTrainerListActivity extends SwipeRecycleViewActivity<DojoRec
      * @param item
      */
     @Override
-    public void onItemClick(View view, int pos, Dojo item) {
-        startActivity(PrivateTrainerInfoActivity.class, new Bun().putInt("Id", item.Id).ok());
+    public void onItemClick(View view, int pos, PrivateTrainerList item) {
+        startActivity(PrivateTrainerInfoActivity.class, new Bun().putInt("id", item.Id).ok());
     }
 
     /**
@@ -182,6 +189,7 @@ public class PrivateTrainerListActivity extends SwipeRecycleViewActivity<DojoRec
                     tvTitle.setText(name);
                     page = 1;
                     cityId = id;
+                    cityName = name;
                     presenter.getData(page, count);
                 }
             }
@@ -198,6 +206,12 @@ public class PrivateTrainerListActivity extends SwipeRecycleViewActivity<DojoRec
     @Override
     public Integer getData() {
         return cityId;
+    }
+
+    @Override
+    public String []getStringData() {
+        String []s = {cityName,_Lat+"",_Lng+""};
+        return s;
     }
 
 
@@ -273,6 +287,4 @@ public class PrivateTrainerListActivity extends SwipeRecycleViewActivity<DojoRec
             mLocationClient = null;
         }
     }
-
-
 }

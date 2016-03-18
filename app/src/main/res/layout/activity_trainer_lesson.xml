@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/hwz_background"
+    android:orientation="vertical">
+
+    <include
+        android:id="@+id/title"
+        layout="@layout/toolbar_layout" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
+        android:layout_marginBottom="5dp"
+        android:background="@color/hwz_bg_black"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/product_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="15dp"
+            android:layout_marginLeft="15dp"
+            android:layout_marginTop="15dp"
+            android:maxLines="1"
+            android:text="@string/proinfo_title"
+            android:textColor="@color/hwz_font_white"
+            android:textSize="18sp" />
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/hwz_background"
+            >
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="33dp"
+                android:background="@color/hwz_bg_black">
+
+            </View>
+
+            <ImageView
+                android:id="@+id/head_portrait"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:layout_marginLeft="12dp"
+                android:layout_marginRight="10dp"
+                android:layout_marginTop="4dp"
+                android:adjustViewBounds="true"
+                android:src="@mipmap/icon" />
+
+
+            <TextView
+                android:id="@+id/user_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:layout_toRightOf="@+id/head_portrait"
+                android:text="name"
+                android:textColor="@color/hwz_font_white"
+                android:textSize="14sp"></TextView>
+
+            <TextView
+                android:id="@+id/user_content"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/user_name"
+                android:layout_marginTop="7dp"
+                android:layout_toRightOf="@+id/head_portrait"
+                android:text="@string/proinfo_usercontent"
+                android:textColor="@color/hwz_font_white"
+                android:textSize="14sp"></TextView>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/user_content"
+                android:layout_marginBottom="5dp"
+                android:layout_marginTop="5dp"
+                android:layout_toRightOf="@+id/head_portrait"
+                android:orientation="vertical">
+
+            </LinearLayout>
+        </RelativeLayout>
+    </LinearLayout>
+    <WebView
+        android:id="@+id/web_content"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/hwz_background"
+        >
+    </WebView>
+    <!--<ScrollView-->
+    <!--android:layout_width="match_parent"-->
+    <!--android:layout_height="match_parent"-->
+    <!--android:layout_marginBottom="60dp"-->
+    <!--android:layout_below="@+id/title"-->
+    <!--android:fillViewport="true">-->
+
+    <!--<LinearLayout-->
+    <!--android:layout_width="match_parent"-->
+    <!--android:layout_height="wrap_content"-->
+    <!--android:orientation="vertical" >-->
+
+    <!-- -->
+    <!--</LinearLayout>-->
+    <!--</ScrollView>-->
+</LinearLayout>

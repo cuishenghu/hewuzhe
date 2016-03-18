@@ -59,6 +59,8 @@ public class PrivateTrainerInfoActivity extends BaseActivity2 implements OnItemC
     private MyCommonTitle myCommonTitle;
     private CircleImageView img_avatar;
     private String phoneNumber;
+    private String imgPath;
+    private String name;
     private boolean isGuanZhu;
     private RequestParams params;
     private TextView tv_user_name, tv_profession, tv_address, tv_focus, tv_contact;
@@ -149,9 +151,11 @@ public class PrivateTrainerInfoActivity extends BaseActivity2 implements OnItemC
             @Override
             public void onRecevieSuccess(JSONObject json) {
                 JSONObject jsonObject = json.getJSONObject(UrlContants.jsonData);
+                imgPath=jsonObject.getString("PhotoPath");
                 ImageLoader.getInstance().displayImage(StringUtil.toString(
                         UrlContants.IMAGE_URL + jsonObject.getString("PhotoPath"), "http://"), img_avatar);
                 tv_user_name.setText(jsonObject.getString("NicName"));
+                name=jsonObject.getString("NicName");
                 tv_profession.setText(jsonObject.getString("Speciality"));
                 tv_address.setText(jsonObject.getString("HomeAddress"));
                 phoneNumber = jsonObject.getString("Phone");
@@ -367,8 +371,13 @@ public class PrivateTrainerInfoActivity extends BaseActivity2 implements OnItemC
             startActivity(new Intent(PrivateTrainerInfoActivity.this, VideoDetail2Activity.class).
                     putExtra("data", new Bun().putInt("Id", trainerVideos.get(position).getId()).ok()));
         } else if (mType == 2) {//报名课程详情
-//            startActivity(new Intent(PrivateTrainerInfoActivity.this, TrainerLessonActivity.class).
-//                    putExtra("data", new Bun().putInt("Id", trainerLessons.get(position).getId()).ok()));
+            ArrayList<String> arrayList=new ArrayList<>();
+            arrayList.add(0,trainerLessons.get(position).getId()+"");
+            arrayList.add(1,name+"");
+            arrayList.add(2,phoneNumber+"");
+            arrayList.add(3,imgPath+"");
+            startActivity(new Intent(PrivateTrainerInfoActivity.this, TrainerLessonActivity.class).
+                    putStringArrayListExtra("data", arrayList));
         } else {//关注的私教详情
             isWuYou(position);
 //            startActivity(new Intent(PrivateTrainerInfoActivity.this, PrivateTrainerInfoActivity.class).

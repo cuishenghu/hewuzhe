@@ -78,6 +78,7 @@ public class VideoDetail2Activity extends RecycleViewActivity<VideoDetailPresent
     private RecyclerView reOthers;
     private TextView tvCommentCount;
     private ImageView imgAvatar2;
+    private TextView tv_focus_praise;
 
     private int id;
     private boolean isFulllScreen = false;
@@ -98,7 +99,7 @@ public class VideoDetail2Activity extends RecycleViewActivity<VideoDetailPresent
 
     /**
      * @param savedInstanceState 缓存数据
-     *                           <p>
+     *                           <p/>
      */
     @Override
     protected void initThings(Bundle savedInstanceState) {
@@ -133,6 +134,7 @@ public class VideoDetail2Activity extends RecycleViewActivity<VideoDetailPresent
         imgAvatar2 = (ImageView) headerView.findViewById(R.id.img_avatar_2);
         btnPublish = (Button) headerView.findViewById(R.id.btn_publish);
         edtComment = (EditText) headerView.findViewById(R.id.edt_comment);
+        tv_focus_praise = (TextView) headerView.findViewById(R.id.tv_focus_praise);
     }
 
     /**
@@ -380,7 +382,15 @@ public class VideoDetail2Activity extends RecycleViewActivity<VideoDetailPresent
         tvUsername.setText(video.UserNicName);
         /**
          * 关注与取消关注
+         * 点赞和取消点赞
          */
+        if (_Video.UserId == 0) {
+            tv_focus_praise.setText("点赞");
+        }else{
+            tv_focus_praise.setText("关注");
+        }
+        
+
         if (video.Islike) {
             imgPraise.setImageResource(R.mipmap.icon_praise_focus);
             imgPraise.setOnClickListener(new View.OnClickListener() {

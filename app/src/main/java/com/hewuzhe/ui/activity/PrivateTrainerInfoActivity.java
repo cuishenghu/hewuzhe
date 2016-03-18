@@ -175,8 +175,11 @@ public class PrivateTrainerInfoActivity extends BaseActivity2 implements OnItemC
     public void onClick(View view) {
         super.onClick(view);
         switch (view.getId()) {
-            case R.id.img_avatar:
-                startActivity(new Intent(PrivateTrainerInfoActivity.this, ProfileActivity.class).putExtra("data", new Bun().putInt("Id", Id).ok()));
+            case R.id.img_avatar://头像跳转个人资料
+                startActivity(new Intent(PrivateTrainerInfoActivity.this, ProfileActivity.class).putExtra("data", new Bun().putInt("id", Id).ok()));
+                break;
+            case R.id.tv_focus://关注,如果关注过了,提示已关注
+
                 break;
             case R.id.tv_contact://联系他,拨打电话
                 startActivity(new Intent(Intent.ACTION_CALL, Uri.parse("tel:" + phoneNumber)));
@@ -373,7 +376,7 @@ public class PrivateTrainerInfoActivity extends BaseActivity2 implements OnItemC
     }
 
     /**
-     * 判断是否是武友
+     * 判断是否是武友 true跳转好友资料,false跳转陌生人资料
      *
      * @param position
      */

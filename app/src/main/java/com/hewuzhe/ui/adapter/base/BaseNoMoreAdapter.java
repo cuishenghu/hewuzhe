@@ -6,6 +6,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.hewuzhe.R;
@@ -42,6 +43,7 @@ public abstract class BaseNoMoreAdapter<VH extends RecyclerView.ViewHolder, M, P
     public OnItemClickListener mOnItemClickListener;
     public P _presenter;
     private View footer;
+    private RelativeLayout lay_footer;
     @Nullable
     private TextView tvStatus;
     @Nullable
@@ -51,10 +53,13 @@ public abstract class BaseNoMoreAdapter<VH extends RecyclerView.ViewHolder, M, P
 
     private void init() {
         if (isAddFooter) {
-            footer = _inflater.inflate(R.layout.footer_recycleview, null);
+            footer = _inflater.inflate(R.layout.footer_no_recycleview, null);
             tvStatus = (TextView) footer.findViewById(R.id.tv_status);
             progressView = (ProgressBarCircularIndeterminate) footer.findViewById(R.id.progress_view);
+            lay_footer= (RelativeLayout) footer.findViewById(R.id.lay_footer);
         }
+        lay_footer.setVisibility(View.VISIBLE);
+        tvStatus.setVisibility(View.VISIBLE);
 
     }
 
@@ -297,26 +302,29 @@ public abstract class BaseNoMoreAdapter<VH extends RecyclerView.ViewHolder, M, P
     public void loading() {
         STATUS = STATUS_LOADING;
         if (NU.notNull(tvStatus)) {
-
-//            tvStatus.setText("正在加载...");
-//            progressView.setVisibility(View.GONE);
+            lay_footer.setVisibility(View.VISIBLE);
+            tvStatus.setVisibility(View.VISIBLE);
+            tvStatus.setText("正在加载...");
+            progressView.setVisibility(View.GONE);
         }
     }
 
     public void hasMore() {
         STATUS = STATUS_HASMORE;
         if (NU.notNull(tvStatus)) {
-
-//            tvStatus.setText("加载更多");
-//            progressView.setVisibility(View.GONE);
+            lay_footer.setVisibility(View.VISIBLE);
+            tvStatus.setVisibility(View.VISIBLE);
+            tvStatus.setText("加载更多");
+            progressView.setVisibility(View.GONE);
         }
     }
 
     public void noMore() {
         STATUS = STATUS_NOMORE;
         if (NU.notNull(tvStatus)) {
-//            tvStatus.setText("已经全部加载完毕");
-//            progressView.setVisibility(View.GONE);
+            lay_footer.setVisibility(View.GONE);
+            tvStatus.setVisibility(View.GONE);
+            progressView.setVisibility(View.GONE);
         }
     }
 
@@ -324,17 +332,20 @@ public abstract class BaseNoMoreAdapter<VH extends RecyclerView.ViewHolder, M, P
     public void loading(String tip) {
         STATUS = STATUS_LOADING;
         if (NU.notNull(tvStatus)) {
-
-//            tvStatus.setText(tip);
-//            progressView.setVisibility(View.GONE);
+            lay_footer.setVisibility(View.VISIBLE);
+            tvStatus.setVisibility(View.VISIBLE);
+            tvStatus.setText(tip);
+            progressView.setVisibility(View.GONE);
         }
     }
 
     public void hasMore(String tip) {
         STATUS = STATUS_HASMORE;
         if (NU.notNull(tvStatus)) {
-//            tvStatus.setText(tip);
-//            progressView.setVisibility(View.GONE);
+            lay_footer.setVisibility(View.VISIBLE);
+            tvStatus.setVisibility(View.VISIBLE);
+            tvStatus.setText(tip);
+            progressView.setVisibility(View.GONE);
         }
     }
 
@@ -342,8 +353,10 @@ public abstract class BaseNoMoreAdapter<VH extends RecyclerView.ViewHolder, M, P
     public void noMore(String tip) {
         STATUS = STATUS_NOMORE;
         if (NU.notNull(tvStatus)) {
-//            tvStatus.setText(tip);
-//            progressView.setVisibility(View.GONE);
+            lay_footer.setVisibility(View.VISIBLE);
+            tvStatus.setVisibility(View.VISIBLE);
+            tvStatus.setText(tip);
+            progressView.setVisibility(View.GONE);
         }
     }
 

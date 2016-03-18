@@ -8,6 +8,7 @@ import android.support.v7.widget.RecyclerView;
 import com.hewuzhe.R;
 import com.hewuzhe.presenter.base.RefreshAndLoadMorePresenter;
 import com.hewuzhe.ui.adapter.base.BaseAdapter;
+import com.hewuzhe.ui.adapter.base.BaseNoMoreAdapter;
 import com.hewuzhe.ui.inter.OnItemClickListener;
 import com.hewuzhe.view.base.LoadMoreView;
 

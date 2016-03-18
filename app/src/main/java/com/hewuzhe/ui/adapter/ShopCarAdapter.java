@@ -15,6 +15,7 @@ import com.hewuzhe.R;
 import com.hewuzhe.model.ShopCar;
 import com.hewuzhe.presenter.ShopCarPresenter;
 import com.hewuzhe.ui.adapter.base.BaseAdapter;
+import com.hewuzhe.ui.adapter.base.BaseNoMoreAdapter;
 import com.hewuzhe.ui.cons.C;
 import com.hewuzhe.ui.widget.GlideCircleTransform;
 
@@ -27,7 +28,7 @@ import butterknife.OnClick;
 /**
  * Created by zycom on 2016/2/3.
  */
-public class ShopCarAdapter extends BaseAdapter<ShopCarAdapter.VHolder, ShopCar, ShopCarPresenter> {
+public class ShopCarAdapter extends BaseNoMoreAdapter<ShopCarAdapter.VHolder, ShopCar, ShopCarPresenter> {
 
 //    public int number=0;
     public int res_select=0;

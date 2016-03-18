@@ -8,6 +8,7 @@ import android.support.v7.widget.RecyclerView;
 import com.hewuzhe.R;
 import com.hewuzhe.presenter.base.RefreshAndLoadMorePresenter;
 import com.hewuzhe.ui.adapter.base.BaseAdapter;
+import com.hewuzhe.ui.adapter.base.BaseNoMoreAdapter;
 import com.hewuzhe.ui.inter.OnItemClickListener;
 import com.hewuzhe.view.base.LoadMoreView;
 
@@ -18,7 +19,7 @@ import butterknife.Bind;
 /**
  * Created by zycom on 2016/3/17.
  */
-public abstract class RecycleViewNoMoreActivity<P extends RefreshAndLoadMorePresenter, A extends BaseAdapter, M> extends ToolBarActivity<P> implements OnItemClickListener<M>, LoadMoreView {
+public abstract class RecycleViewNoMoreActivity<P extends RefreshAndLoadMorePresenter, A extends BaseNoMoreAdapter, M> extends ToolBarActivity<P> implements OnItemClickListener<M>, LoadMoreView {
 
     @Bind(R.id.recycler_view)
     public RecyclerView recyclerView;
@@ -110,18 +111,18 @@ public abstract class RecycleViewNoMoreActivity<P extends RefreshAndLoadMorePres
         if (adapter.getStatus() == BaseAdapter.STATUS_HASMORE) {
             page++;
             presenter.getData(page, count);
-//            adapter.loading();
+            adapter.loading();
         }
     }
 
     @Override
     public void hasMore() {
-//        adapter.hasMore();
+        adapter.hasMore();
     }
 
     @Override
     public void noMore() {
-//        adapter.noMore();
+        adapter.noMore();
     }
 
     @Override
@@ -129,18 +130,18 @@ public abstract class RecycleViewNoMoreActivity<P extends RefreshAndLoadMorePres
         if (adapter.getStatus() == BaseAdapter.STATUS_HASMORE) {
             page++;
             presenter.getData(page, count);
-//            adapter.loading(tip);
+            adapter.loading(tip);
         }
     }
 
     @Override
     public void hasMore(String tip) {
-//        adapter.hasMore(tip);
+        adapter.hasMore(tip);
     }
 
     @Override
     public void noMore(String tip) {
-//        adapter.noMore(tip);
+        adapter.noMore(tip);
     }
 
 }

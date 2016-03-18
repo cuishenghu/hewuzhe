@@ -131,7 +131,7 @@ public class PrivateTrainerListActivity extends SwipeRecycleViewNoMoreActivity<P
      */
     @Override
     protected RecyclerView.LayoutManager provideLayoutManager() {
-        return new GridLayoutManager(this,3);
+        return new GridLayoutManager(this,2);
     }
 
 

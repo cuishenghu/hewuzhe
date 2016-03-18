@@ -52,7 +52,7 @@ public class PrivateTrainerListAdapter extends BaseNoMoreAdapter<PrivateTrainerL
         ViewGroup.LayoutParams para;
         para = holder.pt_photo.getLayoutParams();
 
-        para.height = (width- StringUtil.dip2px(context, 40))/3;
+        para.height = (width- StringUtil.dip2px(context, 30))/2;
         holder.pt_photo.setLayoutParams(para);
         Glide.with(context)
                 .load(C.BASE_URL + privateTrainerList.PhotoPath)

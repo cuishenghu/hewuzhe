@@ -19,6 +19,7 @@ import com.hewuzhe.model.TeamAnnounce;
 import com.hewuzhe.presenter.ShopCarPresenter;
 import com.hewuzhe.ui.adapter.ShopCarAdapter;
 import com.hewuzhe.ui.base.RecycleViewActivity;
+import com.hewuzhe.ui.base.RecycleViewNoMoreActivity;
 import com.hewuzhe.ui.cons.C;
 import com.hewuzhe.view.ShopCarView;
 
@@ -34,7 +35,7 @@ import materialdialogs.MaterialDialog;
 /**
  * Created by zycom on 2016/2/2.
  */
-public class ShopCarActivity extends RecycleViewActivity<ShopCarPresenter, ShopCarAdapter, ShopCar> implements ShopCarView {
+public class ShopCarActivity extends RecycleViewNoMoreActivity<ShopCarPresenter, ShopCarAdapter, ShopCar> implements ShopCarView {
 
     @Bind(R.id.tv_action)
     TextView tv_action;

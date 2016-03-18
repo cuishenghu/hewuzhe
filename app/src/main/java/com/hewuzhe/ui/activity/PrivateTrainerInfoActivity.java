@@ -367,7 +367,8 @@ public class PrivateTrainerInfoActivity extends BaseActivity2 implements OnItemC
             startActivity(new Intent(PrivateTrainerInfoActivity.this, VideoDetail2Activity.class).
                     putExtra("data", new Bun().putInt("Id", trainerVideos.get(position).getId()).ok()));
         } else if (mType == 2) {//报名课程详情
-
+//            startActivity(new Intent(PrivateTrainerInfoActivity.this, TrainerLessonActivity.class).
+//                    putExtra("data", new Bun().putInt("Id", trainerLessons.get(position).getId()).ok()));
         } else {//关注的私教详情
             isWuYou(position);
 //            startActivity(new Intent(PrivateTrainerInfoActivity.this, PrivateTrainerInfoActivity.class).

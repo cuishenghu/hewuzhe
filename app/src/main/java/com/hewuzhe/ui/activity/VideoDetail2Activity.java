@@ -381,15 +381,48 @@ public class VideoDetail2Activity extends RecycleViewActivity<VideoDetailPresent
 
         tvUsername.setText(video.UserNicName);
         /**
-         * 关注与取消关注
          * 点赞和取消点赞
          */
         if (_Video.UserId == 0) {
             tv_focus_praise.setText("点赞");
-        }else{
+            if (video.Islike) {
+                imgPraise.setImageResource(R.mipmap.icon_praise_focus);
+                imgPraise.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        presenter.collectAndFavorateCance(id, 2, view);
+                    }
+                });
+            } else {
+                imgPraise.setImageResource(R.mipmap.icon_praise);
+                imgPraise.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        presenter.collectAndOther(id, 2, view, position, "");
+                    }
+                });
+            }
+        }else{//关注与取消关注
             tv_focus_praise.setText("关注");
+            if (video.Islike) {
+                imgPraise.setImageResource(R.mipmap.icon_praise_focus);
+                imgPraise.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        presenter.cancelGuanzhuTeacher(_Video.UserId, view);
+                    }
+                });
+            } else {
+                imgPraise.setImageResource(R.mipmap.icon_praise);
+                imgPraise.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        presenter.guanzhuTeacher(_Video.UserId, view);
+                    }
+                });
+            }
         }
-        
+
 
         if (video.Islike) {
             imgPraise.setImageResource(R.mipmap.icon_praise_focus);

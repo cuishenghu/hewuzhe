@@ -663,6 +663,8 @@
         </activity>
         <activity android:name=".ui.activity.DojoDetail2Activity">
         </activity>
+        <activity android:name=".ui.activity.TrainerLessonActivity">
+        </activity>
     </application>
 
 </manifest>

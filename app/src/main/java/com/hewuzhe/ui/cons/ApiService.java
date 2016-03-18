@@ -38,6 +38,7 @@ import com.hewuzhe.model.StudyOnlineCate;
 import com.hewuzhe.model.TeamAnnounce;
 import com.hewuzhe.model.TeamIntroduce;
 import com.hewuzhe.model.Tel;
+import com.hewuzhe.model.TrainerLessonTwo;
 import com.hewuzhe.model.UploadImage;
 import com.hewuzhe.model.User;
 import com.hewuzhe.model.Video;
@@ -471,4 +472,7 @@ public interface ApiService {
 
     @GET("Hewuzhe.asmx/SelectTeacherList")
     Observable<Res<ArrayList<PrivateTrainerList>>> SelectTeacherList(@Query("userid") int userid,@Query("startRowIndex") int startRowIndex,@Query("maximumRows") int maximumRows,@Query("areaname") String areaname,@Query("lat") String lat,@Query("lng") String lng,@Query("search") String search);
+
+    @GET("Hewuzhe.asmx/SelectLessonById")
+    Observable<Res<TrainerLessonTwo>> SelectLessonById(@Query("userid") int userid, @Query("lessonid") int lessonid);
 }

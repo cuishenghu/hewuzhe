@@ -4,6 +4,8 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.KeyEvent;
 import android.view.View;
 import android.view.inputmethod.EditorInfo;
@@ -30,6 +32,8 @@ public class FollowedFriendsActivity extends RecycleViewActivity<FollowedFriends
     private LinearLayout lay_search, lay_tongxunlu;
     private EditText edt_search_content;
     private ImageView img_search;
+    private ArrayList<Friend> _Friends = new ArrayList<>();
+    private ArrayList<Friend> _NewFriends = new ArrayList<>();
 
     /**
      * @return 提供LayoutId
@@ -82,14 +86,44 @@ public class FollowedFriendsActivity extends RecycleViewActivity<FollowedFriends
         img_search.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                showDialog();
-                hideSoftMethod(edt_search_content);
-                page = 1;
-//                presenter.getDataBySearch(page, count);
+                String keyWord = edt_search_content.getText().toString().trim();
+                search(keyWord);
+            }
+        });
+
+        edt_search_content.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable editable) {
+                if (edt_search_content.getText().toString().trim().length() == 0) {
+                    if (_Friends.size() > 0) {
+                        adapter.addDatas(_Friends);
+                    }
+                }
             }
         });
     }
 
+    private void search(String keyWord) {
+        hideSoftMethod(edt_search_content);
+        _NewFriends.clear();
+        for (Friend friend : _Friends) {
+            if (friend.NicName.contains(keyWord)) {
+                _NewFriends.add(friend);
+            }
+        }
+        recyclerView.setAdapter(adapter);
+        adapter.addDatas(_NewFriends);
+    }
     @Override
     protected void initThings(Bundle savedInstanceState) {
         super.initThings(savedInstanceState);
@@ -153,7 +187,7 @@ public class FollowedFriendsActivity extends RecycleViewActivity<FollowedFriends
      */
     @Override
     protected String provideTitle() {
-        return "新关注好友";
+        return "新添加武友";
     }
 
     /**

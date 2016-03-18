@@ -196,10 +196,76 @@ public class VideoDetailPresenter extends CommentPresenter<VideoDetailView> {
                 });
 
         addSubscription(subscription);
-
-
     }
+    public void cancelGuanzhuTeacher(int id, final View v) {
 
+        view.showDialog();
+        Subscription subscription = NetEngine.getService()
+                .cancelGuanzhuTeacher(id, new SessionUtil(view.getContext()).getUser().Id)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new SB<Res>() {
+                    @Override
+                    public void next(Res res) {
+                        if (res.code == C.OK) {
+                           view.snb("取消关注成功", v);
+                        } else {
+                            view.snb("操作失败", v);
+                        }
+                    }
+
+                    @Override
+                    public void onCompleted() {
+                        view.dismissDialog();
+                    }
+
+                    @Override
+                    public void onError(Throwable e) {
+                        view.dismissDialog();
+                        view.snb("操作失败", v);
+
+                    }
+                });
+
+        addSubscription(subscription);
+    }
+    public void guanzhuTeacher(int id,  final View v) {
+
+        Subscription subscription = NetEngine.getService()
+                .guanzhuTeacher(id, new SessionUtil(view.getContext()).getUser().Id)
+                .subscribeOn(Schedulers.io())
+                .doOnSubscribe(new Action0() {
+                    @Override
+                    public void call() {
+                        view.showDialog();
+                    }
+                })
+                .subscribeOn(AndroidSchedulers.mainThread())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new SB<Res>() {
+                    @Override
+                    public void next(Res res) {
+                        if (res.code == C.OK) {
+                            view.snb("关注成功", v);
+                        } else {
+                            view.snb("操作失败", v);
+                        }
+                    }
+
+                    @Override
+                    public void onCompleted() {
+                        view.dismissDialog();
+                    }
+
+                    @Override
+                    public void onError(Throwable e) {
+                        view.dismissDialog();
+                        view.snb("操作失败", v);
+                    }
+                });
+
+        addSubscription(subscription);
+    }
     public void publisComment(int id, String content, final View v) {
         if (StringUtil.isEmpty(content)) {
             view.snb("内容不能为空", v);

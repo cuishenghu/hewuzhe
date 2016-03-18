@@ -78,6 +78,16 @@ public class UrlContants {
 
     public static final String SAVEFRIEND =  "Helianmeng.asmx/SaveFriend?";   //添加武友
 
+    public static final String SELECTTEACHERBYID =  "Hewuzhe.asmx/SelectTeacherById?";   //根据教练的ID查询教练信息
+
+    public static final String SELECTVIDEOBYTEACHERID =  "Hewuzhe.asmx/SelectVideoByTeacherId?";   //根据私教ID获取私教视频
+
+    public static final String SELECTLESSONBYTEACHERID =  "Hewuzhe.asmx/SelectLessonByTeacherId?"; //根据私教ID获取私教课程
+
+    public static final String SELECTGUANZHUBYTEACHERID =  "Hewuzhe.asmx/SelectGuanzhuByTeacherId?";   //根据私教ID获取私教关注
+
+    public static final String SELECTFENSIBYTEACHERID =  "Hewuzhe.asmx/SelectFensiByTeacherId?";   //根据私教ID获取私教粉丝
+
 
 
     public static String getUrl(String token) {

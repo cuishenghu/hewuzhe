@@ -73,7 +73,7 @@ public class FriendProfileActivity extends ToolBarActivity<FriendProfilePresente
      */
     @Override
     protected String provideTitle() {
-        return "好友资料";
+        return "武友资料";
     }
 
     /**
@@ -204,7 +204,7 @@ public class FriendProfileActivity extends ToolBarActivity<FriendProfilePresente
 
     @Override
     public void followSuccess() {
-        _Btn.setText("已关注");
+        _Btn.setText("已添加");
     }
 
     public void onEvent(Integer msg) {

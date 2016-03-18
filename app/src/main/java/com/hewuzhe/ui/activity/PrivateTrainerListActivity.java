@@ -148,7 +148,7 @@ public class PrivateTrainerListActivity extends SwipeRecycleViewNoMoreActivity<P
      */
     @Override
     public void onItemClick(View view, int pos, PrivateTrainerList item) {
-        startActivity(DojoDetailActivity.class, new Bun().putInt("id", item.Id).ok());
+        startActivity(PrivateTrainerInfoActivity.class, new Bun().putInt("id", item.Id).ok());
     }
 
     /**

@@ -11,13 +11,13 @@
         android:background="@color/colorBg"
         android:orientation="horizontal">
 
-        <ImageView
+        <com.hewuzhe.view.CircleImageView
             android:id="@+id/img_avatar"
             android:layout_width="100dp"
             android:layout_height="100dp"
             android:layout_centerVertical="true"
             android:layout_gravity="center"
-            android:layout_marginLeft="5dp"
+            android:layout_marginLeft="15dp"
             android:src="@mipmap/img_avatar" />
 
         <LinearLayout
@@ -36,7 +36,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="5dp"
                 android:singleLine="true"
-                android:text="李某某"
+                android:text=""
                 android:textColor="@color/white"
                 android:textSize="16sp" />
 
@@ -47,7 +47,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="15dp"
                 android:singleLine="true"
-                android:text="战舞教练、跆拳道教练"
+                android:text=""
                 android:textColor="@color/white"
                 android:textSize="16sp" />
 
@@ -57,7 +57,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="5dp"
                 android:singleLine="true"
-                android:text="临沂市兰山区沂蒙路与北京路交汇财政局2801"
+                android:text=""
                 android:textColor="@color/white"
                 android:textSize="16sp" />
         </LinearLayout>
@@ -78,11 +78,11 @@
                 <TextView
                     android:id="@+id/tv_focus"
                     android:layout_width="match_parent"
-                    android:layout_height="30dp"
+                    android:layout_height="35dp"
                     android:background="@color/colorListBg"
                     android:gravity="center"
                     android:text="关注Ta"
-                    android:textColor="@color/white"
+                    android:textColor="@color/colorYellow"
                     android:textSize="16sp" />
 
 
@@ -98,7 +98,7 @@
                 <TextView
                     android:id="@+id/tv_contact"
                     android:layout_width="match_parent"
-                    android:layout_height="30dp"
+                    android:layout_height="35dp"
                     android:background="@color/colorListBg"
                     android:gravity="center"
                     android:text="联系Ta"

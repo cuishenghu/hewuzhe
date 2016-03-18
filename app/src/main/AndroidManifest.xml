@@ -242,6 +242,10 @@
         <activity android:name=".ui.activity.MoreShieldListActivity"></activity>
         <activity android:name=".ui.activity.TongXunLuActivity"></activity>
         <activity android:name=".ui.activity.PrivateTrainerInfoActivity"></activity>
+        <activity android:name=".ui.activity.PrivateTrainerInfoActivity2"></activity>
+
+
+
         <activity android:name="com.easefun.polyvsdk.VideoViewActivity"
             android:configChanges="orientation|screenSize|keyboardHidden" >
         </activity>

@@ -12,8 +12,9 @@
 
         <ImageView
             android:id="@+id/img_image"
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:scaleType="fitXY"
             android:src="@mipmap/img_avatar" />
 
         <TextView
@@ -26,12 +27,13 @@
             android:text="李某某"
             android:singleLine="true"
             android:textColor="@color/white"
-            android:textSize="16sp" />
+            android:textSize="12sp" />
 
         <LinearLayout
             android:id="@+id/ll_video_content"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:visibility="gone"
             android:orientation="vertical">
 
             <View
@@ -52,7 +54,6 @@
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="5dp"
                     android:layout_weight="1"
-                    android:gravity="center"
                     android:orientation="horizontal">
 
                     <ImageView
@@ -66,6 +67,7 @@
                         android:id="@+id/tv_fri_username"
                         android:layout_width="wrap_content"
                         android:layout_height="15dp"
+                        android:layout_marginLeft="10dp"
                         android:gravity="center_vertical"
                         android:text="李某某"
                         android:textColor="@color/white"
@@ -104,6 +106,7 @@
                     android:layout_weight="1"
                     android:layout_marginRight="5dp"
                     android:gravity="center"
+                    android:visibility="gone"
                     android:orientation="horizontal">
 
                     <ImageView

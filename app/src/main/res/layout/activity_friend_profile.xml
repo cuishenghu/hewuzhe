@@ -82,7 +82,6 @@
                     </LinearLayout>
 
                     <TextView
-                        android:id="@+id/tv_line"
                         android:layout_width="match_parent"
                         android:layout_height="2px"
                         android:background="@color/colorBg" />
@@ -99,7 +98,7 @@
                             style="@style/text_32_white"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="好友动态" />
+                            android:text="武友动态" />
 
                         <TextView
                             style="@style/text_27_colorLine"
@@ -120,6 +119,7 @@
 
 
                     <TextView
+                        android:id="@+id/tv_line"
                         android:layout_width="match_parent"
                         android:layout_height="2px"
                         android:background="@color/colorBg" />
@@ -136,7 +136,7 @@
                             style="@style/text_32_white"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="好友圈子" />
+                            android:text="武友圈子" />
 
                         <TextView
                             style="@style/text_27_colorLine"

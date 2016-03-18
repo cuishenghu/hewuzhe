@@ -39,6 +39,7 @@ import com.hewuzhe.ui.activity.MyCollectionsActivity;
 import com.hewuzhe.ui.activity.MyScoreActivity;
 import com.hewuzhe.ui.activity.PhotoActivity;
 import com.hewuzhe.ui.activity.PrivateTrainerInfoActivity;
+import com.hewuzhe.ui.activity.PrivateTrainerInfoActivity2;
 import com.hewuzhe.ui.activity.PrivateTrainerListActivity;
 import com.hewuzhe.ui.activity.ProfileActivity;
 import com.hewuzhe.ui.activity.RecordActivity;

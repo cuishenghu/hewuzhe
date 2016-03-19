@@ -51,10 +51,14 @@ public class OneFragment extends SwipeRecycleViewFragment<OneFragmentPresenter, 
         path = getArguments().getString("path");
         presenter.getData(page, count);
         /**
+         * 获取关注视频的列表和热门列表参数不一致(path一致,请求参数不一致),接口分开写
+         * 因为刷新列表抽为公用只是getData,所以把判定条件写在presenter里面了(根据不同的path调用不同的接口)
          * 获取关注的视频
          */
-//        if (path.equals("GuanzhuVideo")) {
+//        if (path.equals("SelectGuanzhuVideoList")) {
 //            presenter.SelectGuanzhuVideoList(page, count);
+//        }else{
+//            presenter.getData(page, count);
 //        }
     }
 

@@ -243,6 +243,7 @@
         <activity android:name=".ui.activity.TongXunLuActivity"></activity>
         <activity android:name=".ui.activity.PrivateTrainerInfoActivity"></activity>
         <activity android:name=".ui.activity.PrivateTrainerInfoActivity2"></activity>
+        <activity android:name=".ui.activity.MySignLessonListActivity"></activity>
 
 
 

@@ -111,8 +111,8 @@ public interface ApiService {
     @GET("Hedongli.asmx/{path}")
     Observable<Res<ArrayList<Video>>> getVideos(@Path("path") String path, @Query("startRowIndex") int startRowIndex, @Query("maximumRows") int maximumRows, @Query("search") String search);
 
-    @GET("Hewuzhe.asmx/SelectGuanzhuVideoList")
-    Observable<Res<ArrayList<Video>>> SelectGuanzhuVideoList(@Query("startRowIndex") int startRowIndex, @Query("maximumRows") int maximumRows, @Query("userid") int userId);
+    @GET("Hedongli.asmx/{path}")
+    Observable<Res<ArrayList<Video>>> SelectGuanzhuVideoList(@Path("path") String path,@Query("startRowIndex") int startRowIndex, @Query("maximumRows") int maximumRows, @Query("userid") int userId);
 
 
     @GET("Hewuzhe.asmx/GetPlanByCate")

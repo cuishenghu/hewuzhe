@@ -168,4 +168,9 @@ public class HttpUtils {
     public static void guanzhuTeacher(AsyncHttpResponseHandler handler, RequestParams params) {
         client.post(UrlContants.getUrl(UrlContants.GUANZHUTEACHER), params, handler);
     }
+
+    /* 分页查询报名记录*/
+    public static void selectJoinRecord(AsyncHttpResponseHandler handler, RequestParams params) {
+        client.post(UrlContants.getUrl(UrlContants.SELECTJOINRECORD), params, handler);
+    }
 }

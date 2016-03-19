@@ -1,6 +1,7 @@
 package com.hewuzhe.ui.adapter;
 
 import android.content.Context;
+import android.content.Intent;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
@@ -12,9 +13,11 @@ import com.bumptech.glide.Glide;
 import com.hewuzhe.R;
 import com.hewuzhe.model.Friend;
 import com.hewuzhe.presenter.FollowedFriendsPresenter;
+import com.hewuzhe.ui.activity.FriendProfileActivity;
 import com.hewuzhe.ui.adapter.base.BaseAdapter;
 import com.hewuzhe.ui.cons.C;
 import com.hewuzhe.ui.widget.GlideCircleTransform;
+import com.hewuzhe.utils.Bun;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
@@ -67,6 +70,13 @@ public class FollowedFriendAdapter extends BaseAdapter<RecyclerView.ViewHolder, 
         final Friend friend = data.get(position);
         holder._TvUsername.setText(friend.NicName);
         holder._TvLevel.setText(friend.JoinTime + "添加了你");
+
+//        holder._ImgAvatar.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                context.startActivity(new Intent(context, FriendProfileActivity.class).putExtra("data", new Bun().putInt("id",friend.Id).ok()));
+//            }
+//        });
 
         holder.tv_delete.setOnClickListener(new View.OnClickListener() {
             @Override

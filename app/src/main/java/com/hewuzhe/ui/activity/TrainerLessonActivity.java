@@ -38,6 +38,8 @@ public class TrainerLessonActivity extends ToolBarActivity<TrainerLessonPresente
     ImageView head_portrait;
     @Bind(R.id.baoming_btn)
     LinearLayout baoming_btn;
+    @Bind(R.id.tv_sign)
+    TextView tv_sign;
 
     private ArrayList<String> arrayList;
     @Override
@@ -79,6 +81,11 @@ public class TrainerLessonActivity extends ToolBarActivity<TrainerLessonPresente
     @Override
     public void bindData(TrainerLessonTwo trainerLessonTwo) {
         product_title.setText(trainerLessonTwo.Title);
+        if(trainerLessonTwo.IsJoin==1){
+            tv_sign.setText("已报名");
+        }else{
+        tv_sign.setText("报名课程");
+        }
         user_name.setText(arrayList.get(1));
         user_content.setText(arrayList.get(2));
         Glide.with(this)

@@ -22,40 +22,45 @@ public class OneFragmentPresenter extends RefreshAndLoadMorePresenter<OneFragmen
 
     public void getData(final int page, final int count) {
         String path = view.getData();
-        Subscription subscription = NetEngine.getService()
-                .getVideos(path, (page - 1) * count, count, "")
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new SB<Res<ArrayList<Video>>>() {
-                    @Override
-                    public void next(Res<ArrayList<Video>> res) {
-                        if (res.code == C.OK) {
-                            view.bindData(res.data);
-                            setDataStatus(page, count, res);
+        /**
+         * 如果path的值是SelectGuanzhuVideoList获取关注的视频
+         */
+        if (path.equals("SelectGuanzhuVideoList")) {
+            SelectGuanzhuVideoList(path, page, count);
+        } else {//否则是获取最新和热门的视频的列表
+            Subscription subscription = NetEngine.getService()
+                    .getVideos(path, (page - 1) * count, count, "")
+                    .subscribeOn(Schedulers.io())
+                    .observeOn(AndroidSchedulers.mainThread())
+                    .subscribe(new SB<Res<ArrayList<Video>>>() {
+                        @Override
+                        public void next(Res<ArrayList<Video>> res) {
+                            if (res.code == C.OK) {
+                                view.bindData(res.data);
+                                setDataStatus(page, count, res);
+                            }
                         }
-                    }
 
-                    @Override
-                    public void onCompleted() {
+                        @Override
+                        public void onCompleted() {
 
-                        view.refresh(false);
-                    }
+                            view.refresh(false);
+                        }
 
-                    @Override
-                    public void onError(Throwable e) {
-                        view.refresh(false);
+                        @Override
+                        public void onError(Throwable e) {
+                            view.refresh(false);
 
-                    }
-                });
+                        }
+                    });
 
-        addSubscription(subscription);
+            addSubscription(subscription);
+        }
     }
 
-
-    public void SelectGuanzhuVideoList(final int page, final int count) {
-
+    public void SelectGuanzhuVideoList(String path, final int page, final int count) {
         Subscription subscription = NetEngine.getService()
-                .SelectGuanzhuVideoList((page - 1) * count,count,new SessionUtil(view.getContext()).getUserId())
+                .SelectGuanzhuVideoList(path, (page - 1) * count, count, new SessionUtil(view.getContext()).getUserId())
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new SB<Res<ArrayList<Video>>>() {

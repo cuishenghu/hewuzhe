@@ -126,7 +126,7 @@ public class TrainerLessonTwoActivity extends ToolBarActivity<TrainerLessonPrese
 
     @Override
     protected void action() {
-//        startActivity(MySignLessonListActivity.class);
+        startActivity(MySignLessonListActivity.class);
     }
 
     @Override

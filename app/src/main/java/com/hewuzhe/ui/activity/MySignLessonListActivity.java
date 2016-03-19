@@ -55,7 +55,7 @@ public class MySignLessonListActivity extends BaseActivity2 implements IXListVie
         myCommonTitle.setTitle("报名记录");
 
         mListView = (XListView) findViewById(R.id.list_sign_lesson);//listView
-        mListView.setDividerHeight(3);
+        mListView.setDividerHeight(0);
         mListView.setSelector(new ColorDrawable(Color.TRANSPARENT));
         mListView.setPullRefreshEnable(true);
         mListView.setPullLoadEnable(true);
@@ -131,10 +131,10 @@ public class MySignLessonListActivity extends BaseActivity2 implements IXListVie
     @Override
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
         ArrayList<String> arrayList = new ArrayList<>();
-        arrayList.add(0, trainerLessonSigners.get(position).getLesson().getId() + "");
-        arrayList.add(1, trainerLessonSigners.get(position).getTeacher().getNicName() + "");
-        arrayList.add(2, trainerLessonSigners.get(position).getTeacher().getPhone() + "");
-        arrayList.add(3, trainerLessonSigners.get(position).getTeacher().getPhotoPath() + "");
+        arrayList.add(0, trainerLessonSigners.get(position-1).getLesson().getId() + "");
+        arrayList.add(1, trainerLessonSigners.get(position-1).getTeacher().getNicName() + "");
+        arrayList.add(2, trainerLessonSigners.get(position-1).getTeacher().getPhone() + "");
+        arrayList.add(3, trainerLessonSigners.get(position-1).getTeacher().getPhotoPath() + "");
         startActivity(new Intent(MySignLessonListActivity.this, TrainerLessonActivity.class).putStringArrayListExtra("data", arrayList));
     }
 }

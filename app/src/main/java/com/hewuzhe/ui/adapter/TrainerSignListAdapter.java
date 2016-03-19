@@ -14,6 +14,7 @@ import com.hewuzhe.model.TrainerLesson;
 import com.hewuzhe.model.TrainerLessonSigner;
 import com.hewuzhe.ui.http.UrlContants;
 import com.hewuzhe.utils.StringUtil;
+import com.hewuzhe.view.CircleImageView;
 import com.nostra13.universalimageloader.core.ImageLoader;
 
 import java.util.List;
@@ -57,7 +58,7 @@ public class TrainerSignListAdapter extends BaseAdapter {
             holder.tv_sign_title = (TextView) convertView.findViewById(R.id.tv_sign_title);//报名科目标题
             holder.tv_sign_date = (TextView) convertView.findViewById(R.id.tv_sign_date);//报名科目开始日期
             holder.tv_sign_num = (TextView) convertView.findViewById(R.id.tv_sign_num);//报名该科目的人数
-            holder.img_avatar = (ImageView) convertView.findViewById(R.id.img_avatar);
+            holder.img_avatar = (CircleImageView) convertView.findViewById(R.id.img_avatar);
             holder.tv_username = (TextView) convertView.findViewById(R.id.tv_username);
             holder.tv_prefession = (TextView) convertView.findViewById(R.id.tv_prefession);
             convertView.setTag(holder);
@@ -80,7 +81,7 @@ public class TrainerSignListAdapter extends BaseAdapter {
         TextView tv_sign_title;
         TextView tv_sign_date;
         TextView tv_sign_num;
-        ImageView img_avatar;
+        CircleImageView img_avatar;
         TextView tv_username;
         TextView tv_prefession;
 

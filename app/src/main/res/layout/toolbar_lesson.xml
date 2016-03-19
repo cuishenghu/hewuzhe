@@ -6,8 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:theme="@style/AppTheme.AppBarOverlay"
-    app:elevation="4dp"
-    xmlns:tools="http://schemas.android.com/tools">
+    app:elevation="4dp">
     <android.support.v7.widget.Toolbar
         android:id="@+id/toolbar"
         android:layout_width="match_parent"
@@ -51,8 +50,7 @@
                     android:layout_width="28dp"
                     android:layout_height="28dp"
                     android:layout_gravity="center_vertical|right"
-                    android:src="@mipmap/baomingjilu"
-                    />
+                    android:src="@mipmap/icon_baomingjilu"/>
 
             </RelativeLayout>
 

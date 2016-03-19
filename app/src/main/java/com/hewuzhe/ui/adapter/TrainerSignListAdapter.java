@@ -1,7 +1,6 @@
 package com.hewuzhe.ui.adapter;
 
 import android.content.Context;
-import android.media.Image;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -10,7 +9,6 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.hewuzhe.R;
-import com.hewuzhe.model.TrainerLesson;
 import com.hewuzhe.model.TrainerLessonSigner;
 import com.hewuzhe.ui.http.UrlContants;
 import com.hewuzhe.utils.StringUtil;
@@ -66,7 +64,7 @@ public class TrainerSignListAdapter extends BaseAdapter {
             holder = (ViewHolder) convertView.getTag();
         }
         TrainerLessonSigner trainerLessonSigner = trainerLessonSigners.get(position);
-        ImageLoader.getInstance().displayImage(StringUtil.toString(UrlContants.IMAGE_URL + trainerLessonSigner.getLesson().getImagePath(), "http://"), holder.imagePath);
+        ImageLoader.getInstance().displayImage(StringUtil.toString(UrlContants.IMAGE_URL + trainerLessonSigner.getImagePath(), "http://"), holder.imagePath);
         holder.tv_sign_title.setText(trainerLessonSigner.getLesson().getTitle());
         holder.tv_sign_date.setText("报名时间：" + trainerLessonSigner.getJoinTime());
         holder.tv_sign_num.setText(trainerLessonSigner.getJoinNum() + "人参加");

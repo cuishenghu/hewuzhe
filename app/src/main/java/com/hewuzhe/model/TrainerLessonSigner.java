@@ -1,5 +1,7 @@
 package com.hewuzhe.model;
 
+import android.media.Image;
+
 /**
  * Created by Administrator on 2016/3/14 0014.
  */
@@ -13,11 +15,12 @@ public class TrainerLessonSigner {
     private String JoinTime;//报名时间
     private TrainerLesson Lesson;//用户报名课程
     private PrivateTrainer Teacher;//用户报名的教练
+    private String ImagePath;
 
     public TrainerLessonSigner() {
     }
 
-    public TrainerLessonSigner(int id, String name, String phone, String joinTime,int sex, int userId, int joinNum, TrainerLesson lesson, PrivateTrainer teacher) {
+    public TrainerLessonSigner(int id, String name, String phone, String joinTime,String imagePath,int sex, int userId, int joinNum, TrainerLesson lesson, PrivateTrainer teacher) {
         Id = id;
         Name = name;
         Phone = phone;
@@ -27,6 +30,7 @@ public class TrainerLessonSigner {
         Lesson = lesson;
         Teacher = teacher;
         JoinTime=joinTime;
+        ImagePath=imagePath;
     }
 
     public int getId() {
@@ -99,5 +103,13 @@ public class TrainerLessonSigner {
 
     public void setJoinTime(String joinTime) {
         JoinTime = joinTime;
+    }
+
+    public String getImagePath() {
+        return ImagePath;
+    }
+
+    public void setImagePath(String imagePath) {
+        ImagePath = imagePath;
     }
 }

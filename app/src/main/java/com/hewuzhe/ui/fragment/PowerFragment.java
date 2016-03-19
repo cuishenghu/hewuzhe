@@ -137,7 +137,7 @@ public class PowerFragment extends BaseFragment implements PowerView, VideoChoos
         viewPagerAdapter = new MyViewPagerAdapter(getActivity().getSupportFragmentManager());
         viewPagerAdapter.addFragment(OneFragment.newInstance("NewVideo"), "最新");//添加Fragment
         viewPagerAdapter.addFragment(OneFragment.newInstance("HotVideo"), "热门");
-        viewPagerAdapter.addFragment(OneFragment.newInstance("YuanchuangVideo"), "关注");
+        viewPagerAdapter.addFragment(OneFragment.newInstance("SelectGuanzhuVideoList"), "关注");
 //        viewPagerAdapter.addFragment(OneFragment.newInstance("TuijianVideo"), "推荐");
         viewPagerAdapter.addFragment(FiveFragment.newInstance(), "推荐");
         viewPagerAdapter.addFragment(FiveFragment.newInstance(), "交流");

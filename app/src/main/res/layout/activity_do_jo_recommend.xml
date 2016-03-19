@@ -57,7 +57,7 @@
                     <ImageView android:layout_width="30px"
                                android:layout_height="30px"
                                android:layout_marginLeft="10px"
-                               android:src="@mipmap/icon_to_select"/>
+                               android:src="@drawable/icon_address"/>
 
 
                 </LinearLayout>

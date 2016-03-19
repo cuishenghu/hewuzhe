@@ -124,6 +124,7 @@ public class FollowedFriendsActivity extends RecycleViewActivity<FollowedFriends
         recyclerView.setAdapter(adapter);
         adapter.addDatas(_NewFriends);
     }
+
     @Override
     protected void initThings(Bundle savedInstanceState) {
         super.initThings(savedInstanceState);
@@ -198,7 +199,7 @@ public class FollowedFriendsActivity extends RecycleViewActivity<FollowedFriends
     @Override
     public void onItemClick(View view, int pos, Friend item) {
         _Item = item;
-
+        presenter.isWuyou(item.Id);
         if (item.IsFriend) {
             startActivity(FriendProfileActivity.class, new Bun().putInt("id", _Item.UserId).ok());
         } else {

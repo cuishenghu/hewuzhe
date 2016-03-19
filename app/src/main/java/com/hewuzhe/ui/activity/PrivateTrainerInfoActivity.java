@@ -152,14 +152,14 @@ public class PrivateTrainerInfoActivity extends BaseActivity2 implements OnItemC
             @Override
             public void onRecevieSuccess(JSONObject json) {
                 JSONObject jsonObject = json.getJSONObject(UrlContants.jsonData);
-                imgPath=jsonObject.getString("PhotoPath");
                 ImageLoader.getInstance().displayImage(StringUtil.toString(
                         UrlContants.IMAGE_URL + jsonObject.getString("PhotoPath"), "http://"), img_avatar);
                 tv_user_name.setText(jsonObject.getString("NicName"));
-                name=jsonObject.getString("NicName");
                 tv_profession.setText(jsonObject.getString("Speciality"));
                 tv_address.setText(jsonObject.getString("HomeAddress"));
                 phoneNumber = jsonObject.getString("Phone");
+                name=jsonObject.getString("NicName");
+                imgPath=jsonObject.getString("PhotoPath");
                 IsGuanzhu = jsonObject.getString("IsGuanzhu");
                 if (Integer.parseInt(IsGuanzhu) == 1) {
                     tv_focus.setText("已关注");
@@ -200,6 +200,7 @@ public class PrivateTrainerInfoActivity extends BaseActivity2 implements OnItemC
                 }
                 break;
             case R.id.tv_contact://联系他,拨打电话
+//                startActivity(new Intent(PrivateTrainerInfoActivity.this,MySignLessonListActivity.class));
                 startActivity(new Intent(Intent.ACTION_CALL, Uri.parse("tel:" + phoneNumber)));
             case R.id.tv_video:
                 mType = 1;

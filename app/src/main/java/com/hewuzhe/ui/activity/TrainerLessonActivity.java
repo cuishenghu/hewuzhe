@@ -118,5 +118,6 @@ public class TrainerLessonActivity extends ToolBarActivity<TrainerLessonPresente
     public void baomingClick(){
         startActivity(new Intent(this,TrainerLessonTwoActivity.class).
                 putStringArrayListExtra("data", arrayList));
+        finish();
     }
 }

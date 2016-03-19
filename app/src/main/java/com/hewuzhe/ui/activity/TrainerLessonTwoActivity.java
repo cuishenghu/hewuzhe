@@ -43,7 +43,7 @@ import framework.picker.DatePicker;
 /**
  * Created by zycom on 2016/3/18.
  */
-public class TrainerLessonTwoActivity extends ToolBarActivity<TrainerLessonPresenter> implements TrainerLessonView,OnWheelChangedListener {
+public class TrainerLessonTwoActivity extends ToolBarActivity<TrainerLessonPresenter> implements TrainerLessonView, OnWheelChangedListener {
     @Bind(R.id.product_title)
     TextView product_title;
     @Bind(R.id.user_name)
@@ -74,7 +74,7 @@ public class TrainerLessonTwoActivity extends ToolBarActivity<TrainerLessonPrese
     @Bind(R.id.cb_female)
     CheckBox cb_female;
     private Site site;
-    private ArrayList<Address> provinces,citys;
+    private ArrayList<Address> provinces, citys;
     private Dialog dialog;
     private WheelView mViewProvince;
     private WheelView mViewCity;
@@ -107,13 +107,14 @@ public class TrainerLessonTwoActivity extends ToolBarActivity<TrainerLessonPrese
     /**
      * 当前区的名称
      */
-    private String mCurrentDistrictName ="";
+    private String mCurrentDistrictName = "";
     /**
      * 当前区----区域ID
      */
-    protected String mCurrentAreaId ="";
+    protected String mCurrentAreaId = "";
 
     private ArrayList<String> arrayList;
+
     @Override
     protected CharSequence provideTitle() {
         return "报名详情";
@@ -127,6 +128,7 @@ public class TrainerLessonTwoActivity extends ToolBarActivity<TrainerLessonPrese
     @Override
     protected void action() {
         startActivity(MySignLessonListActivity.class);
+        finish();
     }
 
     @Override
@@ -191,7 +193,7 @@ public class TrainerLessonTwoActivity extends ToolBarActivity<TrainerLessonPrese
     }
 
     @OnCheckedChanged(R.id.cb_female)
-    public void femaleClick(CompoundButton compoundButton, boolean b){
+    public void femaleClick(CompoundButton compoundButton, boolean b) {
         if (b) {
             if (cb_male.isChecked()) {
                 cb_male.setChecked(false);
@@ -204,7 +206,7 @@ public class TrainerLessonTwoActivity extends ToolBarActivity<TrainerLessonPrese
     }
 
     @OnCheckedChanged(R.id.cb_male)
-    public void maleClick(CompoundButton compoundButton, boolean b){
+    public void maleClick(CompoundButton compoundButton, boolean b) {
         if (b) {
             if (cb_female.isChecked()) {
                 cb_female.setChecked(false);
@@ -218,13 +220,15 @@ public class TrainerLessonTwoActivity extends ToolBarActivity<TrainerLessonPrese
 
 
     @OnClick(R.id.baoming_back)
-    public void backClick(){
+    public void backClick() {
         finish();
     }
+
     @OnClick(R.id.tv_province)
-    public void province(){
+    public void province() {
         showDatePicker();
     }
+
     private void showDatePicker() {
         DatePicker picker = new DatePicker(this);
         picker.setRange(1900, 2016);//年份范围
@@ -245,7 +249,7 @@ public class TrainerLessonTwoActivity extends ToolBarActivity<TrainerLessonPrese
     }
 
     @OnClick(R.id.usr_adds)
-    public void addsClick(){
+    public void addsClick() {
         /**初始化默认选中的省、市、区*/
         if (mProvinceDatas.length > 0) {
             mCurrentProviceName = mProvinceDatas[0];
@@ -256,21 +260,22 @@ public class TrainerLessonTwoActivity extends ToolBarActivity<TrainerLessonPrese
                 if (countyNames.length > 0) {
                     mCurrentDistrictName = countyNames[0];
                     String countyCodes = mDistrictAreaIdsMap.get(mCurrentCityName);
-                    int end = countyCodes.length()==0?0:(countyCodes.length()-1);
-                    mCurrentAreaId = countyCodes.substring(0,end).split(",")[0];
+                    int end = countyCodes.length() == 0 ? 0 : (countyCodes.length() - 1);
+                    mCurrentAreaId = countyCodes.substring(0, end).split(",")[0];
                 }
             }
         }
         initPopWindowForCitys();
         dialog.show();
     }
+
     @Override
     public void setDistricts(ArrayList<Address> countys) {
-        for (Address city:citys) {
+        for (Address city : citys) {
             StringBuffer countyNames = new StringBuffer();
             StringBuffer countyIds = new StringBuffer();
-            for (Address county:countys) {
-                if(county.Code.startsWith(city.Code)){
+            for (Address county : countys) {
+                if (county.Code.startsWith(city.Code)) {
                     // 遍历市下面所有区/县的数据
                     countyNames.append(county.Name + ",");
                     countyIds.append(county.Id + ",");
@@ -278,29 +283,30 @@ public class TrainerLessonTwoActivity extends ToolBarActivity<TrainerLessonPrese
             }
             // 市-区/县的数据，保存到mDistrictDatasMap
 //            Log.e(city.Name+","+countyNames.length(), city.Name);
-            int end = countyNames.length()==0?0:(countyNames.length()-1);
+            int end = countyNames.length() == 0 ? 0 : (countyNames.length() - 1);
             mDistrictDatasMap.put(city.Name, countyNames.substring(0, end).split(","));
             mDistrictAreaIdsMap.put(city.Name, countyIds.toString());
         }
         StringBuffer provinceNames = new StringBuffer();
         mProvinceDatas = new String[provinces.size()];
-        for (int i=0; i< provinces.size(); i++) {
+        for (int i = 0; i < provinces.size(); i++) {
             // 遍历所有省的数据
             mProvinceDatas[i] = provinces.get(i).Name;
             StringBuffer cityNames = new StringBuffer();
-            for (Address city:citys) {
-                if(city.Code.startsWith(provinces.get(i).Code)){
+            for (Address city : citys) {
+                if (city.Code.startsWith(provinces.get(i).Code)) {
                     // 遍历省下面的所有市的数据
                     cityNames.append(city.Name + ",");
                 }
             }
             // 省-市的数据，保存到mCitisDatasMap
 //            Log.e(provinces.get(i).Name+","+cityNames.length(), provinces.get(i).Name);
-            int end = cityNames.length()==0?0:(cityNames.length()-1);
+            int end = cityNames.length() == 0 ? 0 : (cityNames.length() - 1);
             mCitisDatasMap.put(provinces.get(i).Name, cityNames.substring(0, end).split(","));
         }
     }
-    private void initPopWindowForCitys(){
+
+    private void initPopWindowForCitys() {
         dialog = new Dialog(this, R.style.dialog);
         dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
         dialog.setContentView(R.layout.dialog_select_city);
@@ -338,10 +344,11 @@ public class TrainerLessonTwoActivity extends ToolBarActivity<TrainerLessonPrese
         });
         updateCities();
     }
+
     private void showSelectedResult() {
         StringBuffer str = new StringBuffer();
-        str.append(StringUtil.isEmpty(mCurrentProviceName)?"":(mCurrentProviceName+"/"));
-        str.append(StringUtil.isEmpty(mCurrentCityName)?"":(mCurrentCityName+"/"));
+        str.append(StringUtil.isEmpty(mCurrentProviceName) ? "" : (mCurrentProviceName + "/"));
+        str.append(StringUtil.isEmpty(mCurrentCityName) ? "" : (mCurrentCityName + "/"));
         str.append(StringUtil.isEmpty(mCurrentDistrictName) ? "" : (mCurrentDistrictName));
 
         usr_adds.setText(str.toString());
@@ -361,14 +368,14 @@ public class TrainerLessonTwoActivity extends ToolBarActivity<TrainerLessonPrese
         mViewCity.setCurrentItem(0);
         if (!StringUtil.isEmpty(cities[0])) {
             updateAreas();
-        }else{
+        } else {
             mViewDistrict.setViewAdapter(new ArrayWheelAdapter<String>(this, new String[]{""}));
             mViewDistrict.setCurrentItem(0);
             mCurrentCityName = "";
             mCurrentDistrictName = "";
-            for (Address province:provinces) {
-                if(province.Name.equals(mCurrentProviceName)){
-                    mCurrentAreaId = province.Id+"";
+            for (Address province : provinces) {
+                if (province.Name.equals(mCurrentProviceName)) {
+                    mCurrentAreaId = province.Id + "";
                 }
             }
         }
@@ -383,11 +390,11 @@ public class TrainerLessonTwoActivity extends ToolBarActivity<TrainerLessonPrese
         mViewDistrict.setCurrentItem(0);
         if (!StringUtil.isEmpty(areas[0])) {
             updateCounty();
-        }else{
+        } else {
             mCurrentDistrictName = "";
-            for (Address city:citys) {
-                if(city.Name.equals(mCurrentCityName)){
-                    mCurrentAreaId = city.Id+"";
+            for (Address city : citys) {
+                if (city.Name.equals(mCurrentCityName)) {
+                    mCurrentAreaId = city.Id + "";
                 }
             }
         }
@@ -400,8 +407,8 @@ public class TrainerLessonTwoActivity extends ToolBarActivity<TrainerLessonPrese
         int pCurrent = mViewDistrict.getCurrentItem();
         mCurrentDistrictName = mDistrictDatasMap.get(mCurrentCityName)[pCurrent];
         String countyCodes = mDistrictAreaIdsMap.get(mCurrentCityName);
-        int end = countyCodes.length()==0?0:(countyCodes.length()-1);
-        mCurrentAreaId = countyCodes.substring(0,end).split(",")[pCurrent];
+        int end = countyCodes.length() == 0 ? 0 : (countyCodes.length() - 1);
+        mCurrentAreaId = countyCodes.substring(0, end).split(",")[pCurrent];
     }
 
     @Override
@@ -417,18 +424,19 @@ public class TrainerLessonTwoActivity extends ToolBarActivity<TrainerLessonPrese
     }
 
     @OnClick(R.id.submit_usrinfo)
-    public void submitClick(){
+    public void submitClick() {
         String trueName = usr_true_name_et.getText().toString();
         String truePhone = usr_true_phone_et.getText().toString();
         String age = tv_province.getText().toString();
-        int f = cb_male.isChecked()?0:1;
+        int f = cb_male.isChecked() ? 0 : 1;
         String adds = usr_adds.getText().toString();
 
-        if(trueName.equals("")||truePhone.equals("")||age.equals("")||adds.equals("")){
-            Toast.makeText(this,"请确保所有信息填写正确！请重新填写。",Toast.LENGTH_SHORT).show();
+        if (trueName.equals("") || truePhone.equals("") || age.equals("") || adds.equals("")) {
+            Toast.makeText(this, "请确保所有信息填写正确！请重新填写。", Toast.LENGTH_SHORT).show();
             return;
         }
-        presenter.JoinLessonByLessonId(submit_usrinfo,Integer.parseInt(arrayList.get(0)),trueName,truePhone,Integer.parseInt(age),f,mCurrentAreaId);
+        presenter.JoinLessonByLessonId(submit_usrinfo, Integer.parseInt(arrayList.get(0)), trueName, truePhone, Integer.parseInt(age), f, mCurrentAreaId);
+        finish();
     }
 
 }

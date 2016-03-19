@@ -11,5 +11,4 @@ import com.hewuzhe.view.common.SwipeRefreshView;
  */
 public interface Videos2View extends LoadMoreView, ListView<Video>, GetView<Integer>, SwipeRefreshView {
 
-
 }

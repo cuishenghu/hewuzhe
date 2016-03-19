@@ -15,6 +15,7 @@ import com.hewuzhe.ui.adapter.GridItemDecoration;
 import com.hewuzhe.ui.adapter.Videos3Adapter;
 import com.hewuzhe.ui.base.SwipeRecycleViewActivity;
 import com.hewuzhe.utils.Bun;
+import com.hewuzhe.utils.SessionUtil;
 import com.hewuzhe.view.Videos2View;
 
 import java.util.ArrayList;
@@ -28,6 +29,7 @@ public class Videos_2Activity extends SwipeRecycleViewActivity<Videos2Presenter,
     ImageView imgSearch;
     @Bind(R.id.swicth_button)
     CheckBox swicthButton;
+    String where;
 
     private GridLayoutManager gridLayoutManager;
     private GridItemDecoration decoration;
@@ -45,9 +47,12 @@ public class Videos_2Activity extends SwipeRecycleViewActivity<Videos2Presenter,
     protected void initThings(Bundle savedInstanceState) {
         super.initThings(savedInstanceState);
         catId = getIntent().getIntExtra("id", 0);
+        this.where = getIntent().getStringExtra("where");
         refresh(true);
-        presenter.getData(page, count);
-
+        if(where.equals("five"))
+            presenter.getData(page, count);
+        if(where.equals("six"))
+            presenter.SelectVideoByRecommendCategory(page, count, new SessionUtil(this).getUserId());
         imgSearch.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

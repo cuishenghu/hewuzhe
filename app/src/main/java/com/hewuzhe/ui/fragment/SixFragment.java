@@ -1,8 +1,6 @@
 package com.hewuzhe.ui.fragment;
 
-
 import android.content.Intent;
-import android.support.v4.app.Fragment;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.FrameLayout;
@@ -24,9 +22,9 @@ import java.util.ArrayList;
 import butterknife.Bind;
 
 /**
- * A simple {@link Fragment} subclass.
+ * Created by zycom on 2016/3/19.
  */
-public class FiveFragment extends BaseFragment<StudyOnlineFragPresenter> implements StudyOnlineFragView {
+public class SixFragment extends BaseFragment<StudyOnlineFragPresenter> implements StudyOnlineFragView {
 
 //    @Bind(R.id.layout)
 //    MosaicLayout _Layout;
@@ -42,12 +40,12 @@ public class FiveFragment extends BaseFragment<StudyOnlineFragPresenter> impleme
 //    BlockPattern.BLOCK_PATTERN pattern2[] = {BlockPattern.BLOCK_PATTERN.HORIZONTAL, BlockPattern.BLOCK_PATTERN.HORIZONTAL, BlockPattern.BLOCK_PATTERN.BIG, BlockPattern.BLOCK_PATTERN.BIG, BlockPattern.BLOCK_PATTERN.HORIZONTAL,
 //            BlockPattern.BLOCK_PATTERN.HORIZONTAL, BlockPattern.BLOCK_PATTERN.BIG, BlockPattern.BLOCK_PATTERN.BIG};
 
-    public static FiveFragment newInstance() {
-        FiveFragment instance = new FiveFragment();
+    public static SixFragment newInstance() {
+        SixFragment instance = new SixFragment();
         return instance;
     }
 
-    public FiveFragment() {
+    public SixFragment() {
 
     }
 
@@ -68,7 +66,7 @@ public class FiveFragment extends BaseFragment<StudyOnlineFragPresenter> impleme
     @Override
     protected void initThings(View view) {
 
-        presenter.GetChannel();
+        presenter.SelectCategory();
 //        orderedSelectedPatterns();
 
     }
@@ -194,7 +192,7 @@ public class FiveFragment extends BaseFragment<StudyOnlineFragPresenter> impleme
                 Intent intent = new Intent(getActivity(), Videos_2Activity.class);
                 intent.putExtra("title", item.Name);
                 intent.putExtra("id", item.Id);
-                intent.putExtra("where","five");
+                intent.putExtra("where","six");
                 getActivity().startActivity(intent);
             }
         });

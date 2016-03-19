@@ -478,4 +478,10 @@ public interface ApiService {
 
     @GET("Hewuzhe.asmx/JoinLessonByLessonId")
     Observable<Res> JoinLessonByLessonId(@Query("userid") int userid, @Query("Lessonid") int Lessonid, @Query("realname") String realname, @Query("phone") String phone , @Query("age") int age, @Query("sex") int sex, @Query("areaid") String areaid);
+
+    @GET("Hedongli.asmx/SelectCategory")
+    Observable<Res<ArrayList<StudyOnlineCatItem>>> SelectCategory();
+
+    @GET("Hedongli.asmx/SelectVideoByRecommendCategory")
+    Observable<Res<ArrayList<Video>>> SelectVideoByRecommendCategory(@Query("userid") int userid,@Query("startRowIndex") int startRowIndex, @Query("maximumRows") int maximumRows, @Query("cateid") int categoryid, @Query("search") String search);
 }

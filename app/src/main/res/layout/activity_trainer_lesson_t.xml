@@ -157,15 +157,15 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="18dp"
-                        android:text="姓名："
+                        android:layout_marginTop="20dp"
+                        android:text="真实姓名："
                         android:textColor="@color/white"
                         android:textSize="16sp" />
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="28dp"
+                        android:layout_marginTop="26dp"
                         android:text="手机号："
                         android:textColor="@color/white"
                         android:textSize="16sp" />
@@ -173,7 +173,7 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="28dp"
+                        android:layout_marginTop="26dp"
                         android:text="年龄："
                         android:textColor="@color/white"
                         android:textSize="16sp" />
@@ -189,7 +189,7 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="28dp"
+                        android:layout_marginTop="26dp"
                         android:text="所在地："
                         android:textColor="@color/white"
                         android:textSize="16sp" />
@@ -222,9 +222,9 @@
 
                     <LinearLayout
                         android:id="@+id/usr_true_name_ll"
-                        android:layout_width="330px"
-                        android:layout_height="80px"
-                        android:layout_marginTop="10px"
+                        android:layout_width="165dp"
+                        android:layout_height="40dp"
+                        android:layout_marginTop="10dp"
                         android:background="@color/colorBg"
                         android:gravity="center"
                         android:orientation="horizontal">
@@ -232,10 +232,11 @@
                         <EditText
                             android:id="@+id/usr_true_name_et"
                             style="@style/text_30_white"
-                            android:layout_width="300px"
+                            android:layout_width="150dp"
                             android:layout_height="match_parent"
                             android:background="@null"
                             android:gravity="center_vertical"
+                            android:maxLines="1"
                             android:hint="请输入您的真实名字"
                             android:textColorHint="@color/colorLine"
                             android:textSize="16sp" />
@@ -243,9 +244,9 @@
 
                     <LinearLayout
                         android:id="@+id/usr_true_phone_ll"
-                        android:layout_width="330px"
-                        android:layout_height="80px"
-                        android:layout_marginTop="10px"
+                        android:layout_width="165dp"
+                        android:layout_height="40dp"
+                        android:layout_marginTop="10dp"
                         android:background="@color/colorBg"
                         android:gravity="center"
                         android:orientation="horizontal">
@@ -253,11 +254,12 @@
                         <EditText
                             android:id="@+id/usr_true_phone_et"
                             style="@style/text_30_white"
-                            android:layout_width="300px"
+                            android:layout_width="150dp"
                             android:layout_height="match_parent"
                             android:background="@null"
                             android:gravity="center_vertical"
                             android:hint="请输入手机号"
+                            android:maxLines="1"
                             android:inputType="number"
                             android:textColorHint="@color/colorLine"
                             android:textSize="16sp" />
@@ -269,9 +271,9 @@
 
                         <TextView
                             android:id="@+id/tv_province"
-                            android:layout_width="330px"
-                            android:layout_height="80px"
-                            android:layout_marginTop="10px"
+                            android:layout_width="165dp"
+                            android:layout_height="40dp"
+                            android:layout_marginTop="10dp"
                             android:background="@color/colorBg"
                             android:hint="请选择年龄"
                             android:textColor="@color/white"
@@ -280,8 +282,8 @@
                             android:textSize="16sp" />
 
                         <ImageView
-                            android:layout_width="25px"
-                            android:layout_height="25px"
+                            android:layout_width="13dp"
+                            android:layout_height="13dp"
                             android:layout_gravity="bottom|right"
                             android:src="@mipmap/icon_bottom_select" />
 
@@ -290,10 +292,10 @@
 
                     <LinearLayout
                         android:layout_width="match_parent"
-                        android:layout_height="80px"
+                        android:layout_height="40dp"
                         android:gravity="center_vertical"
                         android:orientation="horizontal"
-                        android:paddingLeft="20px">
+                        android:paddingLeft="10dp">
 
                         <LinearLayout
                             android:id="@+id/lay_male"
@@ -303,9 +305,9 @@
 
                             <CheckBox
                                 android:id="@+id/cb_male"
-                                android:layout_width="30px"
-                                android:layout_height="30px"
-                                android:layout_marginLeft="18px"
+                                android:layout_width="15dp"
+                                android:layout_height="15dp"
+                                android:layout_marginLeft="9dp"
                                 android:background="@drawable/icon_cb_selector"
                                 android:button="@null"
                                 android:checked="true" />
@@ -314,10 +316,10 @@
                             <TextView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:layout_marginLeft="18px"
+                                android:layout_marginLeft="9dp"
                                 android:text="男"
                                 android:textColor="@color/colorLine"
-                                android:textSize="30px" />
+                                android:textSize="15sp" />
                         </LinearLayout>
 
                         <LinearLayout
@@ -328,9 +330,9 @@
 
                             <CheckBox
                                 android:id="@+id/cb_female"
-                                android:layout_width="30px"
-                                android:layout_height="30px"
-                                android:layout_marginLeft="38px"
+                                android:layout_width="15dp"
+                                android:layout_height="15dp"
+                                android:layout_marginLeft="19dp"
                                 android:background="@drawable/icon_cb_selector"
                                 android:button="@null" />
 
@@ -338,10 +340,10 @@
                             <TextView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:layout_marginLeft="18px"
+                                android:layout_marginLeft="9dp"
                                 android:text="女"
                                 android:textColor="@color/colorLine"
-                                android:textSize="30px" />
+                                android:textSize="15sp" />
                         </LinearLayout>
                     </LinearLayout>
 
@@ -351,9 +353,9 @@
 
                         <TextView
                             android:id="@+id/usr_adds"
-                            android:layout_width="330px"
-                            android:layout_height="80px"
-                            android:layout_marginTop="10px"
+                            android:layout_width="165dp"
+                            android:layout_height="40dp"
+                            android:layout_marginTop="5dp"
                             android:background="@color/colorBg"
                             android:gravity="center"
                             android:hint="请选择所在地"
@@ -362,8 +364,8 @@
                             android:textSize="16sp" />
 
                         <ImageView
-                            android:layout_width="25px"
-                            android:layout_height="25px"
+                            android:layout_width="13dp"
+                            android:layout_height="13dp"
                             android:layout_gravity="bottom|right"
                             android:src="@mipmap/icon_bottom_select" />
 

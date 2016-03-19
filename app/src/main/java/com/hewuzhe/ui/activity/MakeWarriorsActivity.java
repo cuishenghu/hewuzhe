@@ -371,12 +371,12 @@ public class MakeWarriorsActivity extends RecycleViewActivity<MakeWarriorsPresen
     @Override
     protected void onResume() {
         super.onResume();
-        if (!isFirstRun) {
-            page = 1;
-            presenter.getData(page, count);
-        } else {
-            isFirstRun = false;
-        }
+//        if (!isFirstRun) {
+//            page = 1;
+//            presenter.getData(page, count);
+//        } else {
+//            isFirstRun = false;
+//        }
     }
 }
 

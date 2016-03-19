@@ -666,6 +666,8 @@
         </activity>
         <activity android:name=".ui.activity.TrainerLessonActivity">
         </activity>
+        <activity android:name=".ui.activity.TrainerLessonTwoActivity"  android:windowSoftInputMode="adjustUnspecified|stateHidden">
+        </activity>
     </application>
 
 </manifest>

@@ -10,7 +10,7 @@
         android:id="@+id/title"
         layout="@layout/toolbar_layout" />
 
-    <LinearLayout
+    <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="5dp"
@@ -30,11 +30,16 @@
             android:textColor="@color/hwz_font_white"
             android:textSize="18sp" />
 
+
+
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginTop="50dp"
             android:background="@color/hwz_background"
             >
+
+
 
             <View
                 android:layout_width="match_parent"
@@ -43,6 +48,8 @@
 
             </View>
 
+
+
             <ImageView
                 android:id="@+id/head_portrait"
                 android:layout_width="50dp"
@@ -50,7 +57,7 @@
                 android:layout_marginLeft="12dp"
                 android:layout_marginRight="10dp"
                 android:layout_marginTop="4dp"
-                android:adjustViewBounds="true"
+                android:layout_gravity="center"
                 android:src="@mipmap/icon" />
 
 
@@ -85,8 +92,27 @@
                 android:orientation="vertical">
 
             </LinearLayout>
+
         </RelativeLayout>
-    </LinearLayout>
+        <LinearLayout
+            android:id="@+id/baoming_btn"
+            android:layout_width="100dp"
+            android:layout_height="35dp"
+            android:layout_alignParentRight="true"
+            android:layout_marginTop="45dp"
+            android:layout_marginRight="10dp"
+            android:gravity="center"
+            android:background="@color/colorYellow">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="报名课程"
+                android:textSize="16sp"
+                android:textColor="@color/white"/>
+
+        </LinearLayout>
+    </RelativeLayout>
     <WebView
         android:id="@+id/web_content"
         android:layout_width="match_parent"

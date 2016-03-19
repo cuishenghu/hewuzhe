@@ -472,4 +472,7 @@ public interface ApiService {
 
     @GET("Hewuzhe.asmx/SelectLessonById")
     Observable<Res<TrainerLessonTwo>> SelectLessonById(@Query("userid") int userid, @Query("lessonid") int lessonid);
+
+    @GET("Hewuzhe.asmx/JoinLessonByLessonId")
+    Observable<Res> JoinLessonByLessonId(@Query("userid") int userid, @Query("Lessonid") int Lessonid, @Query("realname") String realname, @Query("phone") String phone , @Query("age") int age, @Query("sex") int sex, @Query("areaid") String areaid);
 }

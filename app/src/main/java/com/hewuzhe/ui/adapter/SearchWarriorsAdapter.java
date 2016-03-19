@@ -61,7 +61,7 @@ public class SearchWarriorsAdapter extends BaseAdapter<SearchWarriorsAdapter.VHo
      * @param position 绑定数据
      */
     @Override
-    public void bindData(VHolder holder, final int position) {
+    public void bindData(final VHolder holder, final int position) {
         final Friend friend = data.get(position);
         holder._TvUsername.setText(friend.NicName);
 //        holder._TvLevel.setText("等级：lv" + friend.Rank);
@@ -86,7 +86,9 @@ public class SearchWarriorsAdapter extends BaseAdapter<SearchWarriorsAdapter.VHo
                 public void onClick(View view) {
                     _presenter.follow(friend.Id, position);
 
-            context.startActivity(new Intent(context, FriendProfileActivity.class).putExtra("data", new Bun().putInt("id", friend.Id).ok()));
+                    context.startActivity(new Intent(context, FriendProfileActivity.class).putExtra("data", new Bun().putInt("id", friend.Id).ok()));
+                    holder._TvFollow.setText("已添加");
+                    holder._TvFollow.setBackgroundResource(R.color.colorYellow);
                 }
             });
         }

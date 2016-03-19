@@ -1,12 +1,15 @@
 package com.hewuzhe.ui.activity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.webkit.WebView;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.hewuzhe.R;
+import com.hewuzhe.model.Address;
 import com.hewuzhe.model.TrainerLessonTwo;
 import com.hewuzhe.presenter.TrainerLessonPresenter;
 import com.hewuzhe.ui.base.ToolBarActivity;
@@ -17,6 +20,7 @@ import com.hewuzhe.view.TrainerLessonView;
 import java.util.ArrayList;
 
 import butterknife.Bind;
+import butterknife.OnClick;
 
 /**
  * Created by zycom on 2016/3/18.
@@ -32,6 +36,8 @@ public class TrainerLessonActivity extends ToolBarActivity<TrainerLessonPresente
     WebView web_content;
     @Bind(R.id.head_portrait)
     ImageView head_portrait;
+    @Bind(R.id.baoming_btn)
+    LinearLayout baoming_btn;
 
     private ArrayList<String> arrayList;
     @Override
@@ -84,5 +90,26 @@ public class TrainerLessonActivity extends ToolBarActivity<TrainerLessonPresente
                 .into(head_portrait);
         web_content.loadDataWithBaseURL(C.BASE_URL, getHtmlData(trainerLessonTwo.Content), "text/html", "UTF-8", "");
 
+    }
+
+    @Override
+    public void setProvinces(ArrayList<Address> address) {
+
+    }
+
+    @Override
+    public void setCitys(ArrayList<Address> address) {
+
+    }
+
+    @Override
+    public void setDistricts(ArrayList<Address> address) {
+
+    }
+
+    @OnClick(R.id.baoming_btn)
+    public void baomingClick(){
+        startActivity(new Intent(this,TrainerLessonTwoActivity.class).
+                putStringArrayListExtra("data", arrayList));
     }
 }

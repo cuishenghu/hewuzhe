@@ -74,4 +74,31 @@ public class StudyOnlineFragPresenter extends BasePresenterImp<StudyOnlineFragVi
         addSubscription(subscription);
     }
 
+    public void SelectCategory() {
+
+        Subscription subscription = NetEngine.getService()
+                .SelectCategory()
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new SB<Res<ArrayList<StudyOnlineCatItem>>>() {
+                    @Override
+                    public void next(Res<ArrayList<StudyOnlineCatItem>> res) {
+                        if (res.code == C.OK) {
+                            view.bindData(res.data);
+                        }
+                    }
+
+                    @Override
+                    public void onCompleted() {
+
+                    }
+
+                    @Override
+                    public void onError(Throwable e) {
+
+                    }
+                });
+
+        addSubscription(subscription);
+    }
 }

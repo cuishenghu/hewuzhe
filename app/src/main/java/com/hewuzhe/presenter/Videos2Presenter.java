@@ -54,5 +54,39 @@ public class Videos2Presenter extends RefreshAndLoadMorePresenter<Videos2View> {
 
     }
 
+    public void SelectVideoByRecommendCategory(final int page, final int count,int userid) {
+        int catId = view.getData();
+        Subscription subscription = NetEngine.getService()
+                .SelectVideoByRecommendCategory(userid,(page - 1) * count, count, catId, "")
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new SB<Res<ArrayList<Video>>>() {
+                    @Override
+                    public void next(Res<ArrayList<Video>> res) {
+                        if (res.code == C.OK) {
+                            view.bindData(res.data);
+                            setDataStatus(page, count, res);
+
+                        } else {
+
+
+                        }
+                    }
+
+                    @Override
+                    public void onCompleted() {
+                        view.refresh(false);
+                    }
+
+                    @Override
+                    public void onError(Throwable e) {
+                        view.refresh(false);
+                    }
+                });
+
+        addSubscription(subscription);
+
+    }
+
 
 }

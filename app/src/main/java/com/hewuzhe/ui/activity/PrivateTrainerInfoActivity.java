@@ -41,6 +41,7 @@ import com.hewuzhe.ui.http.UrlContants;
 import com.hewuzhe.utils.Bun;
 import com.hewuzhe.utils.SessionUtil;
 import com.hewuzhe.utils.StringUtil;
+import com.hewuzhe.utils.Tools;
 import com.hewuzhe.view.CircleImageView;
 import com.hewuzhe.view.MyCommonTitle;
 import com.loopj.android.http.RequestParams;
@@ -183,7 +184,20 @@ public class PrivateTrainerInfoActivity extends BaseActivity2 implements OnItemC
                 startActivity(new Intent(PrivateTrainerInfoActivity.this, ProfileActivity.class).putExtra("data", new Bun().putInt("id", Id).ok()));
                 break;
             case R.id.tv_focus://关注,如果关注过了,提示已关注
-
+                if (!tv_focus.getText().toString().trim().equals("已关注")) {
+                    params = new RequestParams();
+                    params.put("userid", new SessionUtil(PrivateTrainerInfoActivity.this).getUser().Id);
+                    params.put("teacherid", Id);
+                    HttpUtils.guanzhuTeacher(new HttpErrorHandler() {
+                        @Override
+                        public void onRecevieSuccess(JSONObject json) {
+                            tv_focus.setText("已关注");
+                            Tools.toast(PrivateTrainerInfoActivity.this,"关注成功");
+                        }
+                    }, params);
+                }else{
+                    Tools.toast(PrivateTrainerInfoActivity.this,"您已经关注!");
+                }
                 break;
             case R.id.tv_contact://联系他,拨打电话
                 startActivity(new Intent(Intent.ACTION_CALL, Uri.parse("tel:" + phoneNumber)));

@@ -380,6 +380,7 @@ public class VideoDetail2Activity extends RecycleViewActivity<VideoDetailPresent
                 .into(imgAvatar2);
 
         tvUsername.setText(video.UserNicName);
+
         /**
          * 点赞和取消点赞
          */
@@ -402,14 +403,15 @@ public class VideoDetail2Activity extends RecycleViewActivity<VideoDetailPresent
                     }
                 });
             }
-        }else{//关注与取消关注
+        } else {//关注与取消关注
             tv_focus_praise.setText("关注");
-            if (video.Islike) {
+            if (video.IsGuanzhu == 1) {
                 imgPraise.setImageResource(R.mipmap.icon_praise_focus);
                 imgPraise.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
                         presenter.cancelGuanzhuTeacher(_Video.UserId, view);
+                        imgPraise.setImageResource(R.mipmap.icon_praise);
                     }
                 });
             } else {
@@ -418,29 +420,13 @@ public class VideoDetail2Activity extends RecycleViewActivity<VideoDetailPresent
                     @Override
                     public void onClick(View view) {
                         presenter.guanzhuTeacher(_Video.UserId, view);
+                        imgPraise.setImageResource(R.mipmap.icon_praise_focus);
                     }
                 });
             }
         }
 
 
-        if (video.Islike) {
-            imgPraise.setImageResource(R.mipmap.icon_praise_focus);
-            imgPraise.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    presenter.cancelGuanzhuTeacher(_Video.UserId, view);
-                }
-            });
-        } else {
-            imgPraise.setImageResource(R.mipmap.icon_praise);
-            imgPraise.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    presenter.guanzhuTeacher(_Video.UserId, view);
-                }
-            });
-        }
         /**
          * 收藏
          */
@@ -463,11 +449,10 @@ public class VideoDetail2Activity extends RecycleViewActivity<VideoDetailPresent
             });
         }
 
-/**
- *设置时间
- * */
+        /**
+         *设置时间
+         * */
         mVDVideoView.tvDuration.setText(video.VideoDuration + "");
-
 
         /**
          * 转发

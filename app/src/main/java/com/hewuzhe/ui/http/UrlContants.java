@@ -90,6 +90,8 @@ public class UrlContants {
 
     public static final String ISWUYOU =  "Helianmeng.asmx/IsWuyou?";   // /* 根据id判断是否为武友 true:是 false:不是 */
 
+    public static final String GUANZHUTEACHER =  "Hewuzhe.asmx/GuanzhuTeacher?";   // 关注私教 */
+
 
 
     public static String getUrl(String token) {

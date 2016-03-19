@@ -50,6 +50,12 @@ public class OneFragment extends SwipeRecycleViewFragment<OneFragmentPresenter, 
         super.initThings(view);
         path = getArguments().getString("path");
         presenter.getData(page, count);
+        /**
+         * 获取关注的视频
+         */
+//        if (path.equals("GuanzhuVideo")) {
+//            presenter.SelectGuanzhuVideoList(page, count);
+//        }
     }
 
     /**
@@ -73,7 +79,7 @@ public class OneFragment extends SwipeRecycleViewFragment<OneFragmentPresenter, 
             @Override
             public int getSpanSize(int position) {
                 if (position == adapter.getItemCount() - 1) {
-                    return isChecked?1:2;
+                    return isChecked ? 1 : 2;
                 }
                 return 1;
             }
@@ -122,10 +128,10 @@ public class OneFragment extends SwipeRecycleViewFragment<OneFragmentPresenter, 
         return path;
     }
 
-    public void changeSpanCount(boolean isChecked){
+    public void changeSpanCount(boolean isChecked) {
         this.isChecked = isChecked;
-        decoration.setSpanCount(isChecked?1:2);
-        gridLayoutManager.setSpanCount(isChecked?1:2);
+        decoration.setSpanCount(isChecked ? 1 : 2);
+        gridLayoutManager.setSpanCount(isChecked ? 1 : 2);
         adapter.changeViewHeight(isChecked);
         adapter.notifyDataSetChanged();
     }

@@ -85,7 +85,7 @@ public class PowerFragment extends BaseFragment implements PowerView, VideoChoos
                 ((OneFragment) viewPagerAdapter.getItem(0)).changeSpanCount(isChecked);
                 ((OneFragment) viewPagerAdapter.getItem(1)).changeSpanCount(isChecked);
                 ((OneFragment) viewPagerAdapter.getItem(2)).changeSpanCount(isChecked);
-                ((OneFragment) viewPagerAdapter.getItem(3)).changeSpanCount(isChecked);
+//                ((OneFragment) viewPagerAdapter.getItem(3)).changeSpanCount(isChecked);
             }
         });
     }

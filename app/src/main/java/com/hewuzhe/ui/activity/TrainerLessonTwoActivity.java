@@ -1,6 +1,7 @@
 package com.hewuzhe.ui.activity;
 
 import android.app.Dialog;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.Gravity;
 import android.view.View;
@@ -18,6 +19,7 @@ import com.bumptech.glide.Glide;
 import com.hewuzhe.R;
 import com.hewuzhe.model.Address;
 import com.hewuzhe.model.Site;
+import com.hewuzhe.model.TrainerLessonInfo;
 import com.hewuzhe.model.TrainerLessonTwo;
 import com.hewuzhe.presenter.TrainerLessonPresenter;
 import com.hewuzhe.ui.base.ToolBarActivity;
@@ -73,12 +75,15 @@ public class TrainerLessonTwoActivity extends ToolBarActivity<TrainerLessonPrese
     CheckBox cb_male;
     @Bind(R.id.cb_female)
     CheckBox cb_female;
+    @Bind(R.id.sub_info)
+    TextView sub_info;
     private Site site;
     private ArrayList<Address> provinces, citys;
     private Dialog dialog;
     private WheelView mViewProvince;
     private WheelView mViewCity;
     private WheelView mViewDistrict;
+    private TrainerLessonInfo trainerLessonInfo;
 
     /**
      * 所有省
@@ -141,6 +146,7 @@ public class TrainerLessonTwoActivity extends ToolBarActivity<TrainerLessonPrese
         super.initThings(savedInstanceState);
         arrayList = getIntent().getStringArrayListExtra("data");
         presenter.SelectLessonById(Integer.parseInt(arrayList.get(0)));
+        presenter.GetJoinLessonRecordByUserIdAndLessonId(Integer.parseInt(arrayList.get(0)));
         usr_name.setText(new SessionUtil(this).getUser().NicName);
         usr_phone.setText(new SessionUtil(this).getUser().Phone);
         presenter.getProvince();
@@ -221,7 +227,8 @@ public class TrainerLessonTwoActivity extends ToolBarActivity<TrainerLessonPrese
 
     @OnClick(R.id.baoming_back)
     public void backClick() {
-        finish();
+        startActivity(new Intent(TrainerLessonTwoActivity.this, TrainerLessonActivity.class).
+                putStringArrayListExtra("data", arrayList));
     }
 
     @OnClick(R.id.tv_province)
@@ -304,6 +311,30 @@ public class TrainerLessonTwoActivity extends ToolBarActivity<TrainerLessonPrese
             int end = cityNames.length() == 0 ? 0 : (cityNames.length() - 1);
             mCitisDatasMap.put(provinces.get(i).Name, cityNames.substring(0, end).split(","));
         }
+    }
+
+    @Override
+    public void bindInfo(TrainerLessonInfo trainerLessonInfo) {
+        this.trainerLessonInfo = trainerLessonInfo;
+        usr_true_name_et.setText(trainerLessonInfo.Name);
+        usr_true_phone_et.setText(trainerLessonInfo.Phone);
+        tv_province.setText(trainerLessonInfo.Age+"");
+        if(trainerLessonInfo.Sex==0){
+            cb_male.setChecked(true);
+            cb_female.setChecked(false);
+        }else{
+            cb_male.setChecked(false);
+            cb_female.setChecked(true);
+        }
+        usr_adds.setText(trainerLessonInfo.AreaName);
+        sub_info.setText("取消报名");
+        submit_usrinfo.setBackgroundResource(R.color.grey_text);
+
+    }
+
+    @Override
+    public void finishing() {
+        finish();
     }
 
     private void initPopWindowForCitys() {
@@ -425,18 +456,21 @@ public class TrainerLessonTwoActivity extends ToolBarActivity<TrainerLessonPrese
 
     @OnClick(R.id.submit_usrinfo)
     public void submitClick() {
-        String trueName = usr_true_name_et.getText().toString();
-        String truePhone = usr_true_phone_et.getText().toString();
-        String age = tv_province.getText().toString();
-        int f = cb_male.isChecked() ? 0 : 1;
-        String adds = usr_adds.getText().toString();
+        if(sub_info.getText().equals("取消报名")){
+            presenter.CancelJoinLessonRecordById(trainerLessonInfo.Id,this.getContext());
+        }else {
+            String trueName = usr_true_name_et.getText().toString();
+            String truePhone = usr_true_phone_et.getText().toString();
+            String age = tv_province.getText().toString();
+            int f = cb_male.isChecked() ? 0 : 1;
+            String adds = usr_adds.getText().toString();
 
-        if (trueName.equals("") || truePhone.equals("") || age.equals("") || adds.equals("")) {
-            Toast.makeText(this, "请确保所有信息填写正确！请重新填写。", Toast.LENGTH_SHORT).show();
-            return;
+            if (trueName.equals("") || truePhone.equals("") || age.equals("") || adds.equals("")) {
+                Toast.makeText(this, "请确保所有信息填写正确！请重新填写。", Toast.LENGTH_SHORT).show();
+                return;
+            }
+            presenter.JoinLessonByLessonId(submit_usrinfo, Integer.parseInt(arrayList.get(0)), trueName, truePhone, Integer.parseInt(age), f, mCurrentAreaId, this.getContext());
         }
-        presenter.JoinLessonByLessonId(submit_usrinfo, Integer.parseInt(arrayList.get(0)), trueName, truePhone, Integer.parseInt(age), f, mCurrentAreaId);
-        finish();
     }
 
 }

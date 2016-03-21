@@ -10,6 +10,7 @@ import android.widget.TextView;
 import com.bumptech.glide.Glide;
 import com.hewuzhe.R;
 import com.hewuzhe.model.Address;
+import com.hewuzhe.model.TrainerLessonInfo;
 import com.hewuzhe.model.TrainerLessonTwo;
 import com.hewuzhe.presenter.TrainerLessonPresenter;
 import com.hewuzhe.ui.base.ToolBarActivity;
@@ -116,9 +117,19 @@ public class TrainerLessonActivity extends ToolBarActivity<TrainerLessonPresente
 
     }
 
+    @Override
+    public void bindInfo(TrainerLessonInfo trainerLessonInfo) {
+
+    }
+
+    @Override
+    public void finishing() {
+
+    }
+
     @OnClick(R.id.baoming_btn)
     public void baomingClick(){
-        startActivity(new Intent(this,TrainerLessonTwoActivity.class).
+        startActivity(new Intent(this, TrainerLessonTwoActivity.class).
                 putStringArrayListExtra("data", arrayList));
         finish();
     }

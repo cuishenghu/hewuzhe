@@ -16,6 +16,7 @@ import com.hewuzhe.ui.adapter.Videos3Adapter;
 import com.hewuzhe.ui.base.SwipeRecycleViewActivity;
 import com.hewuzhe.utils.Bun;
 import com.hewuzhe.utils.SessionUtil;
+import com.hewuzhe.utils.StringUtil;
 import com.hewuzhe.view.Videos2View;
 
 import java.util.ArrayList;
@@ -29,7 +30,7 @@ public class Videos_2Activity extends SwipeRecycleViewActivity<Videos2Presenter,
     ImageView imgSearch;
     @Bind(R.id.swicth_button)
     CheckBox swicthButton;
-    String where;
+    String where = "";
 
     private GridLayoutManager gridLayoutManager;
     private GridItemDecoration decoration;
@@ -41,7 +42,7 @@ public class Videos_2Activity extends SwipeRecycleViewActivity<Videos2Presenter,
 
     /**
      * @param savedInstanceState 缓存数据
-     *                           <p>
+     *                           <p/>
      */
     @Override
     protected void initThings(Bundle savedInstanceState) {
@@ -49,16 +50,20 @@ public class Videos_2Activity extends SwipeRecycleViewActivity<Videos2Presenter,
         catId = getIntent().getIntExtra("id", 0);
         this.where = getIntent().getStringExtra("where");
         refresh(true);
-        if(where.equals("five"))
+        if (!StringUtil.isEmpty(where)) {
+            if (where.equals("five"))
+                presenter.getData(page, count);
+            if (where.equals("six"))
+                presenter.SelectVideoByRecommendCategory(page, count, new SessionUtil(this).getUserId());
+            imgSearch.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    startActivity(SearchOnlineVideosActivity.class, new Bun().putString("title", "搜索").putInt("catId", catId).ok());
+                }
+            });
+        } else {
             presenter.getData(page, count);
-        if(where.equals("six"))
-            presenter.SelectVideoByRecommendCategory(page, count, new SessionUtil(this).getUserId());
-        imgSearch.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                startActivity(SearchOnlineVideosActivity.class, new Bun().putString("title", "搜索").putInt("catId", catId).ok());
-            }
-        });
+        }
     }
 
     /**

@@ -7,6 +7,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
@@ -32,11 +33,12 @@ public class VideoAdapter extends BaseAdapter<VideoAdapter.ViewHolder, Video, Ba
 
     /**
      * RecycleView的头部
+     *
      * @param context
      */
     public VideoAdapter(Context context) {
         super(context);
-        this.screenWidth = StringUtil.getScreenWidth((FragmentActivity)context);
+        this.screenWidth = StringUtil.getScreenWidth((FragmentActivity) context);
     }
 
     /**
@@ -63,27 +65,38 @@ public class VideoAdapter extends BaseAdapter<VideoAdapter.ViewHolder, Video, Ba
      * @param position 绑定数据
      */
     @Override
-    public void bindData(ViewHolder holder, int position) {
-        Video video = data.get(position);
-
-        holder.tvCommentCount.setText(video.CommentNum + "条评论");
-        holder.tvAddTime.setText(TimeUtil.timeAgo(video.PublishTime) + "发布");
-        if (StringUtil.isEmpty(video.NicName)) {
-            holder.tvUsername.setText(video.UserNicName);
+    public void bindData(final ViewHolder holder, int position) {
+         Video video = data.get(position);
+        if (isChecked) {
+            holder.ll_single_item.setVisibility(View.VISIBLE);
+            holder.ll_double_item.setVisibility(View.GONE);
+            getData1(holder, video);
         } else {
-            holder.tvUsername.setText(video.NicName);
+            holder.ll_double_item.setVisibility(View.VISIBLE);
+            holder.ll_single_item.setVisibility(View.GONE);
+            getData2(holder, video);
+        }
+    }
+
+    private void getData1(ViewHolder holder, Video video) {
+        holder.tvAddTime1.setText(TimeUtil.timeAgo(video.PublishTime) + "发布");
+        holder.tvVisitSum1.setText(video.VisitNum + "人已浏览");
+        if (StringUtil.isEmpty(video.NicName)) {
+            holder.tvUsername1.setText(video.UserNicName);
+        } else {
+            holder.tvUsername1.setText(video.NicName);
         }
 
-        holder.tvTitle.setText(video.Title);
+        holder.tvTitle1.setText(video.Title);
 
 
-        ViewGroup.LayoutParams pageParms = holder.imgBg.getLayoutParams();
-        pageParms.height = isChecked?screenWidth*2/3:screenWidth/3;
+        ViewGroup.LayoutParams pageParms = holder.imgBg1.getLayoutParams();
+        pageParms.height = isChecked ? screenWidth * 2 / 3 : screenWidth / 3;
         Glide.with(context)
                 .load(C.BASE_URL + video.ImagePath)
                 .crossFade()
                 .placeholder(R.mipmap.img_bg_videio)
-                .into(holder.imgBg);
+                .into(holder.imgBg1);
 
         if (video.UserId == 0) {
 //            holder.imgAvatar.setImageResource(R.mipmap.ic_launcher);
@@ -94,7 +107,7 @@ public class VideoAdapter extends BaseAdapter<VideoAdapter.ViewHolder, Video, Ba
                     .crossFade()
                     .transform(new GlideCircleTransform(context))
                     .placeholder(R.mipmap.img_avatar)
-                    .into(holder.imgAvatar);
+                    .into(holder.imgAvatar1);
 
 
         } else {
@@ -104,10 +117,51 @@ public class VideoAdapter extends BaseAdapter<VideoAdapter.ViewHolder, Video, Ba
                     .crossFade()
                     .transform(new GlideCircleTransform(context))
                     .placeholder(R.mipmap.img_avatar)
-                    .into(holder.imgAvatar);
+                    .into(holder.imgAvatar1);
+        }
+    }
+
+    private void getData2(ViewHolder holder, Video video) {
+        holder.tvAddTime2.setText(TimeUtil.timeAgo(video.PublishTime) + "发布");
+        holder.tvVisitSum2.setText(video.VisitNum+"");
+        if (StringUtil.isEmpty(video.NicName)) {
+            holder.tvUsername2.setText(video.UserNicName);
+        } else {
+            holder.tvUsername2.setText(video.NicName);
         }
 
+        holder.tvTitle2.setText(video.Title);
 
+
+        ViewGroup.LayoutParams pageParms = holder.imgBg2.getLayoutParams();
+        pageParms.height = isChecked ? screenWidth * 2 / 3 : screenWidth / 3;
+        Glide.with(context)
+                .load(C.BASE_URL + video.ImagePath)
+                .crossFade()
+                .placeholder(R.mipmap.img_bg_videio)
+                .into(holder.imgBg2);
+
+        if (video.UserId == 0) {
+//            holder.imgAvatar.setImageResource(R.mipmap.ic_launcher);
+
+            Glide.with(context)
+                    .load(R.mipmap.ic_launcher)
+                    .centerCrop()
+                    .crossFade()
+                    .transform(new GlideCircleTransform(context))
+                    .placeholder(R.mipmap.img_avatar)
+                    .into(holder.imgAvatar2);
+
+
+        } else {
+            Glide.with(context)
+                    .load(C.BASE_URL + video.PhotoPath)
+                    .centerCrop()
+                    .crossFade()
+                    .transform(new GlideCircleTransform(context))
+                    .placeholder(R.mipmap.img_avatar)
+                    .into(holder.imgAvatar2);
+        }
     }
 
     /**
@@ -118,26 +172,53 @@ public class VideoAdapter extends BaseAdapter<VideoAdapter.ViewHolder, Video, Ba
      */
     class ViewHolder extends RecyclerView.ViewHolder {
         @Nullable
-        @Bind(R.id.img_bg)
-        ImageView imgBg;
+        @Bind(R.id.img_bg1)
+        ImageView imgBg1;
         @Nullable
-        @Bind(R.id.tv_title)
-        TextView tvTitle;
+        @Bind(R.id.img_bg2)
+        ImageView imgBg2;
+        @Nullable
+        @Bind(R.id.tv_title1)
+        TextView tvTitle1;
+        @Nullable
+        @Bind(R.id.tv_title2)
+        TextView tvTitle2;
         @Nullable
         @Bind(R.id.img_share)
         ImageView imgShare;
         @Nullable
-        @Bind(R.id.img_avatar)
-        ImageView imgAvatar;
+        @Bind(R.id.img_avatar1)
+        ImageView imgAvatar1;
         @Nullable
-        @Bind(R.id.tv_username)
-        TextView tvUsername;
+        @Bind(R.id.img_avatar2)
+        ImageView imgAvatar2;
+        @Nullable
+        @Bind(R.id.tv_username1)
+        TextView tvUsername1;
+        @Nullable
+        @Bind(R.id.tv_username2)
+        TextView tvUsername2;
         @Nullable
         @Bind(R.id.tv_comment_count)
         TextView tvCommentCount;
         @Nullable
-        @Bind(R.id.tv_add_time)
-        TextView tvAddTime;
+        @Bind(R.id.tv_add_time1)
+        TextView tvAddTime1;
+        @Nullable
+        @Bind(R.id.tv_add_time2)
+        TextView tvAddTime2;
+        @Nullable
+        @Bind(R.id.tv_visit_sum1)
+        TextView tvVisitSum1;
+        @Nullable
+        @Bind(R.id.tv_visit_sum2)
+        TextView tvVisitSum2;
+        @Nullable
+        @Bind(R.id.ll_single_item)
+        RelativeLayout ll_single_item;
+        @Nullable
+        @Bind(R.id.ll_double_item)
+        RelativeLayout ll_double_item;
 
         ViewHolder(View view) {
             super(view);
@@ -145,7 +226,7 @@ public class VideoAdapter extends BaseAdapter<VideoAdapter.ViewHolder, Video, Ba
         }
     }
 
-    public void changeViewHeight(boolean isChecked){
+    public void changeViewHeight(boolean isChecked) {
         this.isChecked = isChecked;
     }
 }

@@ -38,6 +38,7 @@ import com.hewuzhe.model.StudyOnlineCate;
 import com.hewuzhe.model.TeamAnnounce;
 import com.hewuzhe.model.TeamIntroduce;
 import com.hewuzhe.model.Tel;
+import com.hewuzhe.model.TrainerLessonInfo;
 import com.hewuzhe.model.TrainerLessonTwo;
 import com.hewuzhe.model.UploadImage;
 import com.hewuzhe.model.User;
@@ -484,4 +485,10 @@ public interface ApiService {
 
     @GET("Hedongli.asmx/SelectVideoByRecommendCategory")
     Observable<Res<ArrayList<Video>>> SelectVideoByRecommendCategory(@Query("userid") int userid,@Query("startRowIndex") int startRowIndex, @Query("maximumRows") int maximumRows, @Query("cateid") int categoryid, @Query("search") String search);
+
+    @GET("Hewuzhe.asmx/GetJoinLessonRecordByUserIdAndLessonId")
+    Observable<Res<TrainerLessonInfo>> GetJoinLessonRecordByUserIdAndLessonId(@Query("userid") int userid, @Query("lessonid") int lessonid);
+
+    @GET("Hewuzhe.asmx/CancelJoinLessonRecordById")
+    Observable<Res> CancelJoinLessonRecordById(@Query("joinlessonrecordid") int joinlessonrecordid);
 }

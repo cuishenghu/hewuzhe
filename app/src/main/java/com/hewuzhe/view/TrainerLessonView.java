@@ -1,6 +1,7 @@
 package com.hewuzhe.view;
 
 import com.hewuzhe.model.Address;
+import com.hewuzhe.model.TrainerLessonInfo;
 import com.hewuzhe.model.TrainerLessonTwo;
 import com.hewuzhe.view.base.BaseView;
 
@@ -30,4 +31,7 @@ public interface TrainerLessonView extends BaseView {
      * @param address
      */
     void setDistricts(ArrayList<Address> address);
+
+    void bindInfo(TrainerLessonInfo trainerLessonInfo);
+    void finishing();
 }

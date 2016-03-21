@@ -7,11 +7,15 @@ public class TrainerLessonInfo {
     public int Id;
     public int Age;
     public int AreaId;
-    public int Iclose;
+    public String AreaName;
+    public boolean Iclose;
     public String JoinTime;
     public String LessonName;
     public int LessonId;
     public String Name;
     public String Phone;
     public int Sex;
+    public String ProvinceName;
+    public String CityName;
+    public String CountyName;
 }

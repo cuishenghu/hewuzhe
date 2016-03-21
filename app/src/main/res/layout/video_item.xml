@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:background="@color/colorBg"
-                android:orientation="vertical">
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/colorBg"
+    android:orientation="vertical">
 
     <FrameLayout android:layout_width="match_parent"
-                 android:layout_height="wrap_content">
+        android:layout_height="wrap_content">
 
         <ImageView
             android:id="@+id/img_bg"
@@ -16,14 +16,14 @@
             android:src="@mipmap/img_bg_videio"/>
 
         <TextView android:id="@+id/tv_title"
-                  android:layout_width="match_parent"
-                  android:layout_height="wrap_content"
-                  android:layout_gravity="bottom"
-                  android:layout_marginBottom="85px"
-                  android:layout_marginLeft="30px"
-                  android:text="咏春拳最快制服敌人的拳法"
-                  android:textColor="@color/white"
-                  android:textSize="22px"/>
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom"
+            android:layout_marginBottom="85px"
+            android:layout_marginLeft="30px"
+            android:text="咏春拳最快制服敌人的拳法"
+            android:textColor="@color/white"
+            android:textSize="22px"/>
 
         <ImageView
             android:id="@+id/img_share"
@@ -37,20 +37,20 @@
 
 
         <TextView android:layout_width="match_parent"
-                  android:layout_height="1dp"
-                  android:layout_gravity="bottom"
-                  android:layout_marginBottom="81px"
-                  android:layout_marginLeft="30px"
-                  android:background="@color/colorLine"/>
+            android:layout_height="1dp"
+            android:layout_gravity="bottom"
+            android:layout_marginBottom="81px"
+            android:layout_marginLeft="30px"
+            android:background="@color/colorLine"/>
 
 
         <LinearLayout android:layout_width="match_parent"
-                      android:layout_height="80px"
-                      android:layout_gravity="bottom"
-                      android:gravity="center_vertical"
-                      android:orientation="horizontal"
-                      android:paddingLeft="30px"
-                      android:paddingRight="30px"
+            android:layout_height="80px"
+            android:layout_gravity="bottom"
+            android:gravity="center_vertical"
+            android:orientation="horizontal"
+            android:paddingLeft="30px"
+            android:paddingRight="30px"
             >
 
             <ImageView
@@ -60,19 +60,19 @@
                 android:src="@mipmap/img_avatar"
                 />
             <TextView android:id="@+id/tv_username"
-                      android:layout_width="wrap_content"
-                      android:layout_height="wrap_content"
-                      android:layout_marginLeft="10px"
-                      android:layout_weight="1"
-                      android:singleLine="true"
-                      android:text=""
-                      android:textColor="@color/white"
-                      android:textSize="20px"/>
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10px"
+                android:layout_weight="1"
+                android:singleLine="true"
+                android:text=""
+                android:textColor="@color/white"
+                android:textSize="20px"/>
 
             <ImageView android:layout_width="20px"
-                       android:layout_height="20px"
-                       android:layout_marginLeft="18px"
-                       android:src="@mipmap/icon_comment"/>
+                android:layout_height="20px"
+                android:layout_marginLeft="18px"
+                android:src="@mipmap/icon_comment"/>
 
             <TextView
                 android:id="@+id/tv_comment_count"
@@ -85,9 +85,9 @@
 
 
             <ImageView android:layout_width="20px"
-                       android:layout_height="20px"
-                       android:layout_marginLeft="38px"
-                       android:src="@mipmap/icon_nearly"/>
+                android:layout_height="20px"
+                android:layout_marginLeft="38px"
+                android:src="@mipmap/icon_nearly"/>
 
             <TextView
                 android:id="@+id/tv_add_time"

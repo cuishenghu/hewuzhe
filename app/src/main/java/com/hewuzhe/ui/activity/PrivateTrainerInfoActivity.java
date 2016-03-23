@@ -37,6 +37,7 @@ import com.hewuzhe.ui.http.HttpUtils;
 import com.hewuzhe.ui.http.UrlContants;
 import com.hewuzhe.ui.pulltorefresh.library.PullToRefreshBase;
 import com.hewuzhe.ui.pulltorefresh.library.PullToRefreshGridView;
+import com.hewuzhe.ui.pulltorefresh.library.PullToRefreshBase.OnRefreshListener2;
 import com.hewuzhe.utils.Bun;
 import com.hewuzhe.utils.SessionUtil;
 import com.hewuzhe.utils.StringUtil;
@@ -119,22 +120,23 @@ public class PrivateTrainerInfoActivity extends BaseActivity2 implements OnItemC
         tv_focused = (TextView) findViewById(R.id.tv_focused);//关注
         tv_fans = (TextView) findViewById(R.id.tv_fans);//粉丝
 
-//        mListView = (PullToRefreshGridView) findViewById(R.id.list_content);
-        mGridView = (GridView) findViewById(R.id.list_content);
-//        mGridView = mListView.getRefreshableView();
+        mListView = (PullToRefreshGridView) findViewById(R.id.list_content);
+//        mGridView = (GridView) findViewById(R.id.list_content);
+        mGridView = mListView.getRefreshableView();
 
-//        mListView.setOnRefreshListener(new PullToRefreshBase.OnRefreshListener2<GridView>() {
-//            @Override
-//            public void onPullDownToRefresh(PullToRefreshBase<GridView> refreshView) {
-//
-//                new GetDataTask().execute();
-//            }
-//
-//            @Override
-//            public void onPullUpToRefresh(PullToRefreshBase<GridView> refreshView) {
-//                new GetDataTask().execute();
-//            }
-//        });
+        mListView.setOnRefreshListener(new OnRefreshListener2<GridView>() {
+            @Override
+            public void onPullDownToRefresh(PullToRefreshBase<GridView> refreshView) {
+
+                new GetDataTask().execute();
+            }
+
+            @Override
+            public void onPullUpToRefresh(PullToRefreshBase<GridView> refreshView) {
+                pageNo+=1;
+                new GetDataTask().execute();
+            }
+        });
 
 //        mListView.setDividerHeight(0);
 //        mListView.setSelector(new ColorDrawable(Color.TRANSPARENT));
@@ -148,6 +150,13 @@ public class PrivateTrainerInfoActivity extends BaseActivity2 implements OnItemC
         mHandler = new Handler();
 
         mListItems = new LinkedList<Object>();
+        if(mType==1){
+            initData(mType);
+        }else if(mType==2){
+            initData(mType);
+        }else{
+            initData(mType);
+        }
     }
 
     private class GetDataTask extends AsyncTask<Void, Void, Object[]> {
@@ -179,6 +188,7 @@ public class PrivateTrainerInfoActivity extends BaseActivity2 implements OnItemC
             } else {
                 trainerVideoAndFocusAndFansAdapter.notifyDataSetChanged();
             }
+            mListView.onRefreshComplete();
             super.onPostExecute(objects);
         }
     }

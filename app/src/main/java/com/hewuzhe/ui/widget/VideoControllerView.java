@@ -66,6 +66,7 @@ public class VideoControllerView extends FrameLayout implements View.OnTouchList
     public LinearLayout _LayNoVip;
     private Button _BtnToMember;
     private OnPreparedListener _OnPreparedListener;
+    private String videoUrl;
 
     private void setProgress() {
         slider.setProgress(DataTypeUtils.toInt(mVideoView.getCurrentPosition()));
@@ -152,8 +153,10 @@ public class VideoControllerView extends FrameLayout implements View.OnTouchList
             @Override
             public void onClick(View v) {
                 viewPlayCenter.setVisibility(GONE);
-                mVideoView.seekTo(0);
-                start();
+                viewPlay.setImageResource(R.mipmap.icon_play);
+
+                mVideoView.setVideoPath(videoUrl);
+                mVideoView.start();
             }
         });
     }
@@ -193,6 +196,7 @@ public class VideoControllerView extends FrameLayout implements View.OnTouchList
     }
 
     public void setVideoPath(String videoUrl) {
+        this.videoUrl = videoUrl;
         mVideoView.setVideoPath(videoUrl);
     }
 

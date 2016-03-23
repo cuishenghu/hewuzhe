@@ -79,6 +79,7 @@ public class VideoAdapter extends BaseAdapter<VideoAdapter.ViewHolder, Video, Ba
     }
 
     private void getData1(ViewHolder holder, Video video) {
+        holder.tvTitle1.setText(video.Title);
         holder.tvAddTime1.setText(TimeUtil.timeAgo(video.PublishTime) + "发布");
         holder.tvVisitSum1.setText(video.VisitNum + "人已浏览");
         if (StringUtil.isEmpty(video.NicName)) {
@@ -86,9 +87,6 @@ public class VideoAdapter extends BaseAdapter<VideoAdapter.ViewHolder, Video, Ba
         } else {
             holder.tvUsername1.setText(video.NicName);
         }
-
-        holder.tvTitle1.setText(video.Title);
-
 
         ViewGroup.LayoutParams pageParms = holder.imgBg1.getLayoutParams();
         pageParms.height = isChecked ? screenWidth * 2 / 3 : screenWidth / 3;
@@ -122,16 +120,14 @@ public class VideoAdapter extends BaseAdapter<VideoAdapter.ViewHolder, Video, Ba
     }
 
     private void getData2(ViewHolder holder, Video video) {
-        holder.tvAddTime2.setText(TimeUtil.timeAgo(video.PublishTime) + "发布");
-        holder.tvVisitSum2.setText(video.VisitNum+"");
+        holder.tvTitle2.setText(video.Title);
+//        holder.tvAddTime2.setText(TimeUtil.timeAgo(video.PublishTime) + "发布");
+        holder.tvVisitSum2.setText(video.VisitNum+"人已浏览");
         if (StringUtil.isEmpty(video.NicName)) {
             holder.tvUsername2.setText(video.UserNicName);
         } else {
             holder.tvUsername2.setText(video.NicName);
         }
-
-        holder.tvTitle2.setText(video.Title);
-
 
         ViewGroup.LayoutParams pageParms = holder.imgBg2.getLayoutParams();
         pageParms.height = isChecked ? screenWidth * 2 / 3 : screenWidth / 3;
@@ -172,52 +168,52 @@ public class VideoAdapter extends BaseAdapter<VideoAdapter.ViewHolder, Video, Ba
      */
     class ViewHolder extends RecyclerView.ViewHolder {
         @Nullable
-        @Bind(R.id.img_bg1)
+        @Bind(R.id.img_bg1)//视频封面图片
         ImageView imgBg1;
         @Nullable
-        @Bind(R.id.img_bg2)
+        @Bind(R.id.img_bg2)//视频封面图片
         ImageView imgBg2;
         @Nullable
-        @Bind(R.id.tv_title1)
+        @Bind(R.id.tv_title1)//视频标题
         TextView tvTitle1;
         @Nullable
-        @Bind(R.id.tv_title2)
+        @Bind(R.id.tv_title2)//视频标题
         TextView tvTitle2;
         @Nullable
         @Bind(R.id.img_share)
         ImageView imgShare;
         @Nullable
-        @Bind(R.id.img_avatar1)
+        @Bind(R.id.img_avatar1)//发布者头像
         ImageView imgAvatar1;
         @Nullable
-        @Bind(R.id.img_avatar2)
+        @Bind(R.id.img_avatar2)//发布者头像
         ImageView imgAvatar2;
         @Nullable
-        @Bind(R.id.tv_username1)
+        @Bind(R.id.tv_username1)//发布者昵称
         TextView tvUsername1;
         @Nullable
-        @Bind(R.id.tv_username2)
+        @Bind(R.id.tv_username2)//发布者昵称
         TextView tvUsername2;
         @Nullable
         @Bind(R.id.tv_comment_count)
         TextView tvCommentCount;
         @Nullable
-        @Bind(R.id.tv_add_time1)
+        @Bind(R.id.tv_add_time1)//发布时间
         TextView tvAddTime1;
         @Nullable
-        @Bind(R.id.tv_add_time2)
+        @Bind(R.id.tv_add_time2)//发布时间
         TextView tvAddTime2;
         @Nullable
-        @Bind(R.id.tv_visit_sum1)
+        @Bind(R.id.tv_visit_sum1)//浏览量
         TextView tvVisitSum1;
         @Nullable
-        @Bind(R.id.tv_visit_sum2)
+        @Bind(R.id.tv_visit_sum2)//浏览量
         TextView tvVisitSum2;
         @Nullable
-        @Bind(R.id.ll_single_item)
+        @Bind(R.id.ll_single_item)//单列显示布局
         RelativeLayout ll_single_item;
         @Nullable
-        @Bind(R.id.ll_double_item)
+        @Bind(R.id.ll_double_item)//双列显示布局
         RelativeLayout ll_double_item;
 
         ViewHolder(View view) {

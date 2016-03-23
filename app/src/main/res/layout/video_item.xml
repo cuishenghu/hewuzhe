@@ -122,6 +122,7 @@
                     android:layout_width="25px"
                     android:layout_height="25px"
                     android:layout_marginLeft="38px"
+					android:visibility="gone"
                     android:src="@drawable/icon_dianjiliang" />
 
                 <TextView
@@ -266,6 +267,7 @@
                             android:layout_width="25px"
                             android:layout_height="25px"
                             android:layout_marginLeft="5px"
+							android:visibility="gone"
                             android:src="@drawable/icon_dianjiliang" />
 
                         <TextView

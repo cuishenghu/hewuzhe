@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.net.Uri;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Handler;
 import android.view.Display;
@@ -12,20 +13,16 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.WindowManager;
 import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemClickListener;
 import android.widget.GridView;
-import android.widget.ImageView;
 import android.widget.ListAdapter;
 import android.widget.TextView;
-
-import android.widget.AdapterView.OnItemClickListener;
 
 import com.alibaba.fastjson.JSONObject;
 import com.google.common.reflect.TypeToken;
 import com.google.gson.Gson;
 import com.hewuzhe.R;
 import com.hewuzhe.model.PrivateTrainer;
-import com.hewuzhe.model.TrainerFans;
-import com.hewuzhe.model.TrainerGuanZhu;
 import com.hewuzhe.model.TrainerLesson;
 import com.hewuzhe.model.TrainerVideo;
 import com.hewuzhe.model.WuYou;
@@ -38,6 +35,8 @@ import com.hewuzhe.ui.http.EntityHandler;
 import com.hewuzhe.ui.http.HttpErrorHandler;
 import com.hewuzhe.ui.http.HttpUtils;
 import com.hewuzhe.ui.http.UrlContants;
+import com.hewuzhe.ui.pulltorefresh.library.PullToRefreshBase;
+import com.hewuzhe.ui.pulltorefresh.library.PullToRefreshGridView;
 import com.hewuzhe.utils.Bun;
 import com.hewuzhe.utils.SessionUtil;
 import com.hewuzhe.utils.StringUtil;
@@ -48,6 +47,8 @@ import com.loopj.android.http.RequestParams;
 import com.nostra13.universalimageloader.core.ImageLoader;
 
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 
@@ -66,7 +67,9 @@ public class PrivateTrainerInfoActivity extends BaseActivity2 implements OnItemC
     private RequestParams params;
     private TextView tv_user_name, tv_profession, tv_address, tv_focus, tv_contact;
     private TextView tv_video, tv_sign, tv_focused, tv_fans;
-    private GridView mListView;
+    private PullToRefreshGridView mListView;
+    private GridView mGridView;
+    private LinkedList<Object> mListItems;
     private List<TrainerVideo> trainerVideos = new ArrayList<TrainerVideo>();
     private List<TrainerLesson> trainerLessons = new ArrayList<TrainerLesson>();
     private ArrayList<PrivateTrainer> privateTrainers = new ArrayList<PrivateTrainer>();
@@ -92,7 +95,8 @@ public class PrivateTrainerInfoActivity extends BaseActivity2 implements OnItemC
         getTrainerInfoById();
 //        requestData();
         if (mType == 1) {
-            mListView.setNumColumns(2);
+            mGridView.setColumnWidth(2);
+//            mListView.setNumColumns(2);
             initData(mType);
             getVideoByTeancherId();
 //            setListViewHeightBasedOnChildren(mListView, 2,this);
@@ -100,6 +104,7 @@ public class PrivateTrainerInfoActivity extends BaseActivity2 implements OnItemC
     }
 
     private void initView() {
+
         myCommonTitle = (MyCommonTitle) findViewById(R.id.aci_mytitle);
         myCommonTitle.setTitle("私教详情");
 
@@ -114,30 +119,81 @@ public class PrivateTrainerInfoActivity extends BaseActivity2 implements OnItemC
         tv_focused = (TextView) findViewById(R.id.tv_focused);//关注
         tv_fans = (TextView) findViewById(R.id.tv_fans);//粉丝
 
-        mListView = (GridView) findViewById(R.id.list_content);
+//        mListView = (PullToRefreshGridView) findViewById(R.id.list_content);
+        mGridView = (GridView) findViewById(R.id.list_content);
+//        mGridView = mListView.getRefreshableView();
+
+//        mListView.setOnRefreshListener(new PullToRefreshBase.OnRefreshListener2<GridView>() {
+//            @Override
+//            public void onPullDownToRefresh(PullToRefreshBase<GridView> refreshView) {
+//
+//                new GetDataTask().execute();
+//            }
+//
+//            @Override
+//            public void onPullUpToRefresh(PullToRefreshBase<GridView> refreshView) {
+//                new GetDataTask().execute();
+//            }
+//        });
 
 //        mListView.setDividerHeight(0);
-        mListView.setSelector(new ColorDrawable(Color.TRANSPARENT));
+//        mListView.setSelector(new ColorDrawable(Color.TRANSPARENT));
 //        mListView.setPullRefreshEnable(true);
 //        mListView.setPullLoadEnable(true);
 //        mListView.setXListViewListener(this);
-        mListView.setOnItemClickListener(this);
+        mGridView.setOnItemClickListener(this);
 
         setListener(tv_focus, tv_contact, tv_video, tv_sign, tv_focused, tv_fans);
 
         mHandler = new Handler();
+
+        mListItems = new LinkedList<Object>();
     }
+
+    private class GetDataTask extends AsyncTask<Void, Void, Object[]> {
+        @Override
+        protected Object[] doInBackground(Void... params) {
+            try {
+                Thread.sleep(2000);
+            } catch (InterruptedException e) {
+            }
+            if (mType == 1) {
+                requestData(mType);
+                return trainerVideos.toArray();
+            } else if (mType == 2) {
+                requestData(mType);
+                return trainerLessons.toArray();
+            } else {
+                requestData(mType);
+                return privateTrainers.toArray();
+            }
+        }
+
+        @Override
+        protected void onPostExecute(Object[] objects) {
+            mListItems.addAll(Arrays.asList(objects));
+            if (mType == 1) {
+                trainerVideoAdapter.notifyDataSetChanged();
+            } else if (mType == 2) {
+                trainerSignAdapter.notifyDataSetChanged();
+            } else {
+                trainerVideoAndFocusAndFansAdapter.notifyDataSetChanged();
+            }
+            super.onPostExecute(objects);
+        }
+    }
+
 
     private void initData(int mType) {
         if (mType == 1) {
             trainerVideoAdapter = new TrainerVideoAdapter(PrivateTrainerInfoActivity.this, trainerVideos, mType);
-            mListView.setAdapter(trainerVideoAdapter);
+            mGridView.setAdapter(trainerVideoAdapter);
         } else if (mType == 2) {
             trainerSignAdapter = new TrainerSignAdapter(PrivateTrainerInfoActivity.this, trainerLessons, mType);
-            mListView.setAdapter(trainerSignAdapter);
+            mGridView.setAdapter(trainerSignAdapter);
         } else {
             trainerVideoAndFocusAndFansAdapter = new TrainerVideoAndFocusAndFansAdapter(PrivateTrainerInfoActivity.this, privateTrainers, mType);
-            mListView.setAdapter(trainerVideoAndFocusAndFansAdapter);
+            mGridView.setAdapter(trainerVideoAndFocusAndFansAdapter);
         }
     }
 
@@ -158,8 +214,8 @@ public class PrivateTrainerInfoActivity extends BaseActivity2 implements OnItemC
                 tv_profession.setText(jsonObject.getString("Speciality"));
                 tv_address.setText(jsonObject.getString("HomeAddress"));
                 phoneNumber = jsonObject.getString("Phone");
-                name=jsonObject.getString("NicName");
-                imgPath=jsonObject.getString("PhotoPath");
+                name = jsonObject.getString("NicName");
+                imgPath = jsonObject.getString("PhotoPath");
                 IsGuanzhu = jsonObject.getString("IsGuanzhu");
                 if (Integer.parseInt(IsGuanzhu) == 1) {
                     tv_focus.setText("已关注");
@@ -192,11 +248,11 @@ public class PrivateTrainerInfoActivity extends BaseActivity2 implements OnItemC
                         @Override
                         public void onRecevieSuccess(JSONObject json) {
                             tv_focus.setText("已关注");
-                            Tools.toast(PrivateTrainerInfoActivity.this,"关注成功");
+                            Tools.toast(PrivateTrainerInfoActivity.this, "关注成功");
                         }
                     }, params);
-                }else{
-                    Tools.toast(PrivateTrainerInfoActivity.this,"您已经关注!");
+                } else {
+                    Tools.toast(PrivateTrainerInfoActivity.this, "您已经关注!");
                 }
                 break;
             case R.id.tv_contact://联系他,拨打电话
@@ -208,7 +264,8 @@ public class PrivateTrainerInfoActivity extends BaseActivity2 implements OnItemC
                 tv_sign.setTextColor(Color.WHITE);
                 tv_focused.setTextColor(Color.WHITE);
                 tv_fans.setTextColor(Color.WHITE);
-                mListView.setNumColumns(2);
+//                mListView.getRefreshableView().setColumnWidth(2);
+                mGridView.setNumColumns(2);
                 initData(mType);
                 trainerVideos.clear();
                 requestData(mType);
@@ -220,7 +277,8 @@ public class PrivateTrainerInfoActivity extends BaseActivity2 implements OnItemC
                 tv_sign.setTextColor(getResources().getColor(R.color.colorYellow));
                 tv_focused.setTextColor(Color.WHITE);
                 tv_fans.setTextColor(Color.WHITE);
-                mListView.setNumColumns(1);
+//                mListView.getRefreshableView().setColumnWidth(1);
+                mGridView.setNumColumns(1);
                 initData(mType);
                 trainerLessons.clear();
                 requestData(mType);
@@ -233,7 +291,8 @@ public class PrivateTrainerInfoActivity extends BaseActivity2 implements OnItemC
                 tv_sign.setTextColor(Color.WHITE);
                 tv_focused.setTextColor(getResources().getColor(R.color.colorYellow));
                 tv_fans.setTextColor(Color.WHITE);
-                mListView.setNumColumns(3);
+//                mListView.getRefreshableView().setColumnWidth(3);
+                mGridView.setNumColumns(3);
                 initData(mType);
                 privateTrainers.clear();
                 requestData(mType);
@@ -245,7 +304,8 @@ public class PrivateTrainerInfoActivity extends BaseActivity2 implements OnItemC
                 tv_sign.setTextColor(Color.WHITE);
                 tv_focused.setTextColor(Color.WHITE);
                 tv_fans.setTextColor(getResources().getColor(R.color.colorYellow));
-                mListView.setNumColumns(3);
+//                mListView.getRefreshableView().setColumnWidth(3);
+                mGridView.setNumColumns(3);
                 initData(mType);
                 privateTrainers.clear();
                 requestData(mType);
@@ -386,11 +446,11 @@ public class PrivateTrainerInfoActivity extends BaseActivity2 implements OnItemC
             startActivity(new Intent(PrivateTrainerInfoActivity.this, VideoDetail2Activity.class).
                     putExtra("data", new Bun().putInt("Id", trainerVideos.get(position).getId()).ok()));
         } else if (mType == 2) {//报名课程详情
-            ArrayList<String> arrayList=new ArrayList<>();
-            arrayList.add(0,trainerLessons.get(position).getId()+"");
-            arrayList.add(1,name+"");
-            arrayList.add(2,phoneNumber+"");
-            arrayList.add(3,imgPath+"");
+            ArrayList<String> arrayList = new ArrayList<>();
+            arrayList.add(0, trainerLessons.get(position).getId() + "");
+            arrayList.add(1, name + "");
+            arrayList.add(2, phoneNumber + "");
+            arrayList.add(3, imgPath + "");
             startActivity(new Intent(PrivateTrainerInfoActivity.this, TrainerLessonActivity.class).
                     putStringArrayListExtra("data", arrayList));
         } else {//关注的私教详情

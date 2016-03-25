@@ -167,9 +167,9 @@ public class SignInPresenter extends BasePresenterImp<SignInView> {
     }
 
 
-    public void otherSigin(String nickName, String openid, final View v) {
+    public void otherSigin(String nickName, String openid,String photopath, final View v) {
         Subscription subscription = NetEngine.getService()
-                .LoginByOther(openid, nickName)
+                .LoginByOther(openid, nickName,photopath)
                 .subscribeOn(Schedulers.io())
                 .doOnSubscribe(new Action0() {
                     @Override

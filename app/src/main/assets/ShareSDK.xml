@@ -53,7 +53,7 @@
     -->
     
     <ShareSDK 
-        AppKey = "10cf6119853aa"/> <!-- 修改成你在sharesdk后台注册的应用的appkey"-->
+        AppKey = "10ce9971c055f"/> <!-- 修改成你在sharesdk后台注册的应用的appkey"-->
     
     <!-- ShareByAppClient标识是否使用微博客户端分享，默认是false -->
     <SinaWeibo
@@ -77,11 +77,18 @@
     <QZone
         Id="3"
         SortId="3"
-        AppId="1105020970"
-        AppKey="QfVL5BJzt8hpGCN9"
+        AppId="1105098689"
+        AppKey="7nzgvcWCalBmnslt"
         ShareByAppClient="false"
         Enable="true" />
-    
+    <!-- ShareByAppClient标识是否使用微博客户端分享，默认是false -->
+    <QQ
+        Id="7"
+        SortId="7"
+        AppId="1105098689"
+        AppKey="7nzgvcWCalBmnslt"
+        ShareByAppClient="true"
+        Enable="true" />
     <!-- 
     	Wechat微信和WechatMoments微信朋友圈的appid是一样的；
     
@@ -117,14 +124,7 @@
         AppSecret="64020361b8ec4c99936c0e3999a9f249"
         Enable="true" />
     
-	<!-- ShareByAppClient标识是否使用微博客户端分享，默认是false -->
-	<QQ
-        Id="7"
-        SortId="7"
-        AppId="1105020970"
-        AppKey="QfVL5BJzt8hpGCN9"
-        ShareByAppClient="true"
-        Enable="true" />
+
     
     <Facebook
         Id="8"

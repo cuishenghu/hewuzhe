@@ -527,6 +527,7 @@ public class VideoDetail2Activity extends RecycleViewActivity<VideoDetailPresent
             }
         });
 //       mVDVideoView.btnFullScreen.setVisibility(View.GONE);
+//        mVDVideoView.setVideoPath(C.BASE_URL + video.VideoPath);
         mVDVideoView.setVideoPath(C.BASE_URL + video.VideoPath);
         mVDVideoView.start();
 

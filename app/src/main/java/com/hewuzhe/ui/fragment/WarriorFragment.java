@@ -43,6 +43,7 @@ import com.hewuzhe.ui.activity.PrivateTrainerInfoActivity2;
 import com.hewuzhe.ui.activity.PrivateTrainerListActivity;
 import com.hewuzhe.ui.activity.ProfileActivity;
 import com.hewuzhe.ui.activity.RecordActivity;
+import com.hewuzhe.ui.activity.ScreenListActivity;
 import com.hewuzhe.ui.activity.StrangerProfileSettingsActivity;
 import com.hewuzhe.ui.activity.StudyOnlineActivity;
 import com.hewuzhe.ui.activity.TrainActivity;
@@ -311,7 +312,7 @@ public class WarriorFragment extends ToolBarFragment<WarriorFragmentPresenter> i
         tvFlyDream.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startActivity(new Intent(getActivity(), PrivateTrainerListActivity.class));
+                startActivity(new Intent(getActivity(), ScreenListActivity.class));
 
 //                startActivity(SignupProfileActivity.class);
 

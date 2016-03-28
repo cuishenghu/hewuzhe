@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:orientation="vertical" >
+
+    <com.amap.api.maps2d.MapView
+        android:id="@+id/map"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:layout_marginBottom="45dp"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="45dp"
+        android:layout_alignParentBottom="true"
+        android:orientation="horizontal"
+        android:background="@color/hwz_bg_black">
+
+        <TextView
+            android:id="@+id/gdm_back"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_margin="8dp"
+            android:background="@color/hwz_background"
+            android:layout_weight="2"
+            android:text="返回上页"
+            android:textSize="18sp"
+            android:gravity="center"
+            android:textColor="@color/hwz_font_white"/>
+
+        <TextView
+            android:id="@+id/gdm_newaddr"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_margin="8dp"
+            android:background="@color/hwz_font_yellow"
+            android:layout_weight="2"
+            android:text="使用地址"
+            android:textSize="18sp"
+            android:gravity="center"
+            android:textColor="@color/hwz_font_white" />
+
+    </LinearLayout>
+
+</RelativeLayout>

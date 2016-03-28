@@ -121,4 +121,7 @@ dependencies {
     compile files('libs/jikmediaplayer.jar')
     compile files('libs/jikmediawidget.jar')
     compile files('libs/polyvSDKLive1.0.1.jar')
+    compile files('libs/AMap_2DMap_V2.8.1_20160202.jar')
+    compile files('libs/AMap_Location_v2.3.0_20160112.jar')
+    compile files('libs/AMap_Search_V3.2.1_20160308.jar.jar')
 }

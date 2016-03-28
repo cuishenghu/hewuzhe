@@ -31,6 +31,7 @@ import com.hewuzhe.model.ProductComment;
 import com.hewuzhe.model.Record;
 import com.hewuzhe.model.Res;
 import com.hewuzhe.model.Result;
+import com.hewuzhe.model.ScreenList;
 import com.hewuzhe.model.ShopCar;
 import com.hewuzhe.model.Site;
 import com.hewuzhe.model.StudyOnlineCatItem;
@@ -491,4 +492,7 @@ public interface ApiService {
 
     @GET("Hewuzhe.asmx/CancelJoinLessonRecordById")
     Observable<Res> CancelJoinLessonRecordById(@Query("joinlessonrecordid") int joinlessonrecordid);
+
+    @GET("Hewuzhe.asmx/SelectTeacherCateList")
+    Observable<Res<ArrayList<ScreenList>>> SelectTeacherCateList(@Query("lat") double lat,@Query("lng") double lng,@Query("length") int length );
 }

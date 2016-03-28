@@ -77,6 +77,7 @@ public class TrainerLessonTwoActivity extends ToolBarActivity<TrainerLessonPrese
     CheckBox cb_female;
     @Bind(R.id.sub_info)
     TextView sub_info;
+    //城市选择========================================
     private Site site;
     private ArrayList<Address> provinces, citys;
     private Dialog dialog;
@@ -119,7 +120,7 @@ public class TrainerLessonTwoActivity extends ToolBarActivity<TrainerLessonPrese
     protected String mCurrentAreaId = "";
 
     private ArrayList<String> arrayList;
-
+    //end城市选择========================================
     @Override
     protected CharSequence provideTitle() {
         return "报名详情";
@@ -149,6 +150,7 @@ public class TrainerLessonTwoActivity extends ToolBarActivity<TrainerLessonPrese
         presenter.GetJoinLessonRecordByUserIdAndLessonId(Integer.parseInt(arrayList.get(0)));
         usr_name.setText(new SessionUtil(this).getUser().NicName);
         usr_phone.setText(new SessionUtil(this).getUser().Phone);
+        //查省
         presenter.getProvince();
     }
 

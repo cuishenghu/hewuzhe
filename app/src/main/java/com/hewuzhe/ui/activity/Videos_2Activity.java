@@ -31,6 +31,7 @@ public class Videos_2Activity extends SwipeRecycleViewActivity<Videos2Presenter,
     @Bind(R.id.swicth_button)
     CheckBox swicthButton;
     String where = "";
+    private boolean isChecked = true;
 
     private GridLayoutManager gridLayoutManager;
     private GridItemDecoration decoration;
@@ -51,10 +52,11 @@ public class Videos_2Activity extends SwipeRecycleViewActivity<Videos2Presenter,
         this.where = getIntent().getStringExtra("where");
         refresh(true);
         if (!StringUtil.isEmpty(where)) {
-            if (where.equals("five"))
-                presenter.getData(page, count);
             if (where.equals("six"))
-                presenter.SelectVideoByRecommendCategory(page, count, new SessionUtil(this).getUserId());
+//                presenter.getData(page, count);
+                presenter.SelectVideoByRecommendCategory(new SessionUtil(Videos_2Activity.this).getUserId(), page, count);
+            if (where.equals("five"))
+                presenter.SelectVideoByCategory(page, count);
             imgSearch.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
@@ -112,6 +114,7 @@ public class Videos_2Activity extends SwipeRecycleViewActivity<Videos2Presenter,
         swicthButton.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                Videos_2Activity.this.isChecked = isChecked;
                 decoration.setSpanCount(isChecked ? 1 : 2);
                 gridLayoutManager.setSpanCount(isChecked ? 1 : 2);
                 adapter.changeViewHeight(isChecked);

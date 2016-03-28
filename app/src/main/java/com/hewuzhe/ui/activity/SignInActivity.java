@@ -27,6 +27,7 @@ import com.hewuzhe.ui.widget.LoadingDialog;
 import com.hewuzhe.utils.Bun;
 import com.hewuzhe.utils.SessionUtil;
 import com.hewuzhe.view.SignInView;
+import com.socks.library.KLog;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -289,7 +290,7 @@ public class SignInActivity extends BaseActivity<SignInPresenter> implements Sig
 
     public void onError(Platform platform, int action, Throwable t) {
         dismissDialog();
-
+        KLog.json(t.getMessage());
         if (action == Platform.ACTION_USER_INFOR) {
             handler.sendEmptyMessage(MSG_AUTH_ERROR);
         }
@@ -323,12 +324,9 @@ public class SignInActivity extends BaseActivity<SignInPresenter> implements Sig
                 Toast.makeText(this, R.string.auth_complete, Toast.LENGTH_SHORT).show();
                 Object[] objs = (Object[]) msg.obj;
                 String platform = (String) objs[0];
-                HashMap<String, Object> res = (HashMap<String, Object>) objs[1];
 
-                String nickName = (String) res.get("nickname");
-                String openid = (String) res.get("openid");
-
-                presenter.otherSigin(nickName, openid, layWx);
+                Platform plat = ShareSDK.getPlatform(platform);
+                presenter.otherSigin(plat.getDb().getUserName(), plat.getDb().getUserId(), plat.getDb().getUserIcon(), layWx);
 
             }
             break;

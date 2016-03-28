@@ -79,8 +79,8 @@ public interface ApiService {
     @GET("LoginAndRegister.asmx/Register")
     Observable<Res> RegisterAndLogin(@Query("phone") String usernmae, @Query("password") String password);
 
-    @GET("LoginAndRegister.asmx/LoginByOther")
-    Observable<Res<User>> LoginByOther(@Query("openid") String openid, @Query("nicname") String nicname);
+    @GET("LoginAndRegister.asmx/LoginByOtherWithInfor")
+    Observable<Res<User>> LoginByOther(@Query("openid") String openid, @Query("nicname") String nicname, @Query("photopath") String photopath);
 
     @FormUrlEncoded
     @POST("LoginAndRegister.asmx/UpLoadPhoto")

@@ -50,8 +50,9 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="临沂"
+                        android:maxLines="1"
                         android:textColor="@android:color/white"
-                        android:textSize="20sp"/>
+                        android:textSize="14sp"/>
 
                     <ImageView android:layout_width="30px"
                         android:layout_height="30px"

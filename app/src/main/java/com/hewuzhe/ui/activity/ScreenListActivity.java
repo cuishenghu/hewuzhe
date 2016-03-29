@@ -42,6 +42,8 @@ public class ScreenListActivity extends RecycleViewNoMoreActivity<ScreenListPres
     RelativeLayout s_location;
     @Bind(R.id.user_address)
     TextView user_address;
+    @Bind(R.id.sl_count)
+    TextView sl_count;
 
     private String _cityName = "";
     private String _address = "";
@@ -99,7 +101,7 @@ public class ScreenListActivity extends RecycleViewNoMoreActivity<ScreenListPres
 
     @Override
     public void onItemClick(View view, int pos, ScreenList item) {
-        startActivity(PrivateTrainerListActivity.class, new Bun().putInt("proid", item.Id).ok());
+        startActivity(PrivateTrainerListActivity.class, new Bun().putString("classes", item.Id+"").putString("lat", _Lat + "").putString("lng", _Lng+"").putString("address", _address).ok());
 
     }
     @OnClick(R.id.s_location)
@@ -156,6 +158,11 @@ public class ScreenListActivity extends RecycleViewNoMoreActivity<ScreenListPres
 
     @Override
     public void bindData(ArrayList<ScreenList> data) {
+        int count=0;
+        for (int i=0;i<data.size();i++){
+            count+=Integer.parseInt(data.get(i).StudentCount);
+        }
+        sl_count.setText("附近2km共"+count+"名私教");
         bd(data);
     }
 }

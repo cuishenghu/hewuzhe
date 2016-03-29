@@ -472,8 +472,8 @@ public interface ApiService {
     @GET("Hezhuangbei.asmx/SelectProductPhone")
     Observable<Res<ArrayList<Tel>>> SelectProductPhone();
 
-    @GET("Hewuzhe.asmx/SelectTeacherList")
-    Observable<Res<ArrayList<PrivateTrainerList>>> SelectTeacherList(@Query("userid") int userid,@Query("startRowIndex") int startRowIndex,@Query("maximumRows") int maximumRows,@Query("areaname") String areaname,@Query("lat") String lat,@Query("lng") String lng,@Query("search") String search);
+    @GET("Hewuzhe.asmx/SelectTeacherListNew")
+    Observable<Res<ArrayList<PrivateTrainerList>>> SelectTeacherListNew(@Query("userid") int userid,@Query("startRowIndex") int startRowIndex,@Query("maximumRows") int maximumRows,@Query("areaname") String areaname,@Query("lat") String lat,@Query("lng") String lng,@Query("search") String search,@Query("cateid") String cateid,@Query("length") int length);
 
     @GET("Hewuzhe.asmx/SelectLessonById")
     Observable<Res<TrainerLessonTwo>> SelectLessonById(@Query("userid") int userid, @Query("lessonid") int lessonid);

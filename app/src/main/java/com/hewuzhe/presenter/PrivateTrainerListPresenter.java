@@ -27,10 +27,10 @@ public class PrivateTrainerListPresenter extends RefreshAndLoadMorePresenter<Pri
      * @param count
      * @desc 获取数据
      */
-    public void getData(String areaname, String lat, String lng, final int page, final int count) {
+    public void getData(String areaname, String lat, String lng, String cateid,int length,final int page, final int count) {
         int id = new SessionUtil(view.getContext()).getUser().Id;
         Subscription subscription = NetEngine.getService()
-                .SelectTeacherList(new SessionUtil(view.getContext()).getUser().Id,(page - 1) * count, count, areaname, lat, lng,"")
+                .SelectTeacherListNew(new SessionUtil(view.getContext()).getUser().Id, (page - 1) * count, count, areaname, lat, lng, "",cateid,length)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new SB<Res<ArrayList<PrivateTrainerList>>>() {
@@ -63,7 +63,7 @@ public class PrivateTrainerListPresenter extends RefreshAndLoadMorePresenter<Pri
     public void getData(final int page, final int count) {
         String []cityName = view.getStringData();
         Subscription subscription = NetEngine.getService()
-                .SelectTeacherList(new SessionUtil(view.getContext()).getUser().Id, (page - 1) * count, count, cityName[0], cityName[1], cityName[2], "")
+                .SelectTeacherListNew(new SessionUtil(view.getContext()).getUser().Id, (page - 1) * count, count, cityName[0], cityName[1], cityName[2], "",cityName[3],Integer.parseInt(cityName[4]))
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new SB<Res<ArrayList<PrivateTrainerList>>>() {

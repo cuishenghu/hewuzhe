@@ -8,6 +8,7 @@
         <item>27-35岁</item>
         <item>35以上</item>
     </string-array>
+
     <string-array name="gender">
         <item>全部</item>
         <item>男</item>

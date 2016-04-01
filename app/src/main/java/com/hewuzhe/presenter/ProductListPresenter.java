@@ -56,6 +56,11 @@ public class ProductListPresenter extends RefreshAndLoadMoreForListPresenter<Pro
         addSubscription(subscription);
     }
 
+    @Override
+    public void getData(int page, int count, int userid, double lat, double lng, int lenght, int age, int sexuality) {
+
+    }
+
 
     public void getData(int page, int count) {
         getData(page,count,"",0,0,0,0,0,0,0);

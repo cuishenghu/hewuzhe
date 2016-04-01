@@ -8,17 +8,20 @@
 
     <include layout="@layout/toolbar_chat" />
 
-        <LinearLayout
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/colorListBg">
+
+        <com.hewuzhe.ui.widget.MultiSwipeRefreshLayout
+            android:id="@+id/swipe_refresh_layout"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:background="@color/colorListBg">
+            android:layout_height="match_parent">
 
             <android.support.v7.widget.RecyclerView
-                android:id="@+id/list_good_dongtai"
+                android:id="@+id/recycler_view"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-/>
-
-
+                android:layout_height="match_parent" />
+        </com.hewuzhe.ui.widget.MultiSwipeRefreshLayout>
     </LinearLayout>
 </LinearLayout>

@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_height="wrap_content"
+    android:layout_width="match_parent"
+    android:background="@color/hwz_bg_black"
+    android:orientation="vertical" >
+<RelativeLayout
+
+    android:layout_width="match_parent"
+    android:layout_height="55dp"
+    android:background="@color/hwz_bg_black"
+    android:paddingLeft="15dp">
+
+    <TextView
+        android:id="@+id/si_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="@color/white"
+        android:layout_centerVertical="true"
+        android:textSize="16sp"
+        android:text="跆拳道"/>
+
+    <ImageView
+        android:id="@+id/iv_no_icon"
+        android:layout_width="20dp"
+        android:layout_height="20dp"
+        android:layout_alignParentRight="true"
+        android:layout_centerVertical="true"
+        android:layout_marginRight="10dp"
+        android:src="@mipmap/prolistright" />
+
+    <TextView android:id="@+id/tv_count"
+        android:layout_centerVertical="true"
+        android:layout_toLeftOf="@+id/iv_no_icon"
+        android:layout_width="20dp"
+        android:layout_height="20dp"
+        android:background="@drawable/circle_red"
+        android:gravity="center"
+        android:layout_marginRight="10dp"
+        android:text="1"
+        tools:visibility="visible"
+        android:textColor="@color/white"
+        android:textSize="10sp"
+        />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/hwz_background"
+        android:layout_alignParentBottom="true"/>
+
+</RelativeLayout>
+</LinearLayout>

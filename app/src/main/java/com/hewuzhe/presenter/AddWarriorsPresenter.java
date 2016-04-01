@@ -29,7 +29,7 @@ public class AddWarriorsPresenter extends RefreshAndLoadMorePresenter<AddWarrior
          */
         Friend friend = view.getData();
         Subscription subscription = NetEngine.getService()
-                .SelectRecommendUser((page - 1) * count, count, new SessionUtil(view.getContext()).getUserId(), 1, friend.nicName)
+                .GetRecommendUser((page - 1) * count, count, new SessionUtil(view.getContext()).getUserId(), 1, friend.nicName)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new SB<Res<ArrayList<Friend>>>() {

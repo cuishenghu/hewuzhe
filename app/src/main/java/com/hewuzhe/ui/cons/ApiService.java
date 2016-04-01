@@ -7,6 +7,7 @@ import com.hewuzhe.model.Article;
 import com.hewuzhe.model.ArticleCollection;
 import com.hewuzhe.model.Cate;
 import com.hewuzhe.model.Charge;
+import com.hewuzhe.model.ChatList;
 import com.hewuzhe.model.Classification;
 import com.hewuzhe.model.Comment;
 import com.hewuzhe.model.ConditionComment;
@@ -21,6 +22,7 @@ import com.hewuzhe.model.MegaComment;
 import com.hewuzhe.model.MegaGame;
 import com.hewuzhe.model.MegaGameVideo;
 import com.hewuzhe.model.MyDream;
+import com.hewuzhe.model.NearPeople;
 import com.hewuzhe.model.New;
 import com.hewuzhe.model.OtherImage;
 import com.hewuzhe.model.OverTime;
@@ -29,9 +31,11 @@ import com.hewuzhe.model.PrivateTrainerList;
 import com.hewuzhe.model.Product;
 import com.hewuzhe.model.ProductCollection;
 import com.hewuzhe.model.ProductComment;
+import com.hewuzhe.model.RecommendUser;
 import com.hewuzhe.model.Record;
 import com.hewuzhe.model.Res;
 import com.hewuzhe.model.Result;
+import com.hewuzhe.model.ScreenList;
 import com.hewuzhe.model.ShopCar;
 import com.hewuzhe.model.Site;
 import com.hewuzhe.model.StudyOnlineCatItem;
@@ -79,8 +83,8 @@ public interface ApiService {
     @GET("LoginAndRegister.asmx/Register")
     Observable<Res> RegisterAndLogin(@Query("phone") String usernmae, @Query("password") String password);
 
-    @GET("LoginAndRegister.asmx/LoginByOther")
-    Observable<Res<User>> LoginByOther(@Query("openid") String openid, @Query("nicname") String nicname);
+    @GET("LoginAndRegister.asmx/LoginByOtherWithInfor")
+    Observable<Res<User>> LoginByOther(@Query("openid") String openid, @Query("nicname") String nicname, @Query("photopath") String photopath);
 
     @FormUrlEncoded
     @POST("LoginAndRegister.asmx/UpLoadPhoto")
@@ -494,11 +498,28 @@ public interface ApiService {
     Observable<Res> CancelJoinLessonRecordById(@Query("joinlessonrecordid") int joinlessonrecordid);
 
     @GET("Helianmeng.asmx/SelectRecommendUser")
-    Observable<Res<ArrayList<Friend>>> SelectRecommendUser(@Query("startRowIndex") int startRowIndex, @Query("maximumRows") int maximumRows,@Query("userid") int userid, @Query("isindexshow") int isindexshow,@Query("search") String search );
+    Observable<Res<ArrayList<Friend>>> GetRecommendUser(@Query("startRowIndex") int startRowIndex, @Query("maximumRows") int maximumRows,@Query("userid") int userid, @Query("isindexshow") int isindexshow,@Query("search") String search );
 
     @GET("Helianmeng.asmx/SelectZixun")
     Observable<Res<ArrayList<New>>> SelectRecommendZiXun(@Query("startRowIndex") int startRowIndex, @Query("maximumRows") int maximumRows,@Query("userid") int userid ,@Query("search") String search);
 
     @GET("Helianmeng.asmx/SelectZixunPicList")
     Observable<Res<ArrayList<New>>> SelectZixunPicList();
+
+    @GET("Hewuzhe.asmx/SelectTeacherListNew")
+    Observable<Res<ArrayList<PrivateTrainerList>>> SelectTeacherListNew(@Query("userid") int userid,@Query("startRowIndex") int startRowIndex,@Query("maximumRows") int maximumRows,@Query("areaname") String areaname,@Query("lat") String lat,@Query("lng") String lng,@Query("search") String search,@Query("cateid") String cateid,@Query("length") int length);
+
+    @GET("Hewuzhe.asmx/SelectTeacherCateList")
+    Observable<Res<ArrayList<ScreenList>>> SelectTeacherCateList(@Query("lat") double lat,@Query("lng") double lng,@Query("length") int length );
+
+    @GET("Helianmeng.asmx/SelectRecommendDongTai")
+    Observable<Res<ArrayList<ChatList>>> SelectRecommendDongTai(@Query("startRowIndex") int startRowIndex, @Query("maximumRows") int maximumRows,@Query("userid") int userid);
+
+    @GET("Helianmeng.asmx/SelectRecommendUser")
+    Observable<Res<ArrayList<RecommendUser>>> SelectRecommendUser(@Query("userid") int userid,@Query("isindexshow") int isindexshow,@Query("startRowIndex") int startRowIndex, @Query("maximumRows") int maximumRows,@Query("search") String search);
+
+    @GET("Helianmeng.asmx/SelectNearbyUser")
+    Observable<Res<ArrayList<NearPeople>>> SelectNearbyUser(@Query("startRowIndex") int startRowIndex,@Query("maximumRows") int maximumRows,@Query("userid") int userid, @Query("lat") String lat,@Query("lng") String lng,@Query("length") int length,@Query("age") int age,@Query("sexuality") int sexuality);
+
+
 }

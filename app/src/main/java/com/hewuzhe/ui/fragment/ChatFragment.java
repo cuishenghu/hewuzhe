@@ -3,17 +3,14 @@ package com.hewuzhe.ui.fragment;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Handler;
-import android.support.design.widget.AppBarLayout;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.support.v7.widget.Toolbar;
 import android.view.Display;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.WindowManager;
-import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
@@ -23,19 +20,16 @@ import com.hewuzhe.model.ChatList;
 import com.hewuzhe.model.RecommendUser;
 import com.hewuzhe.presenter.ChatPresenter;
 import com.hewuzhe.rongc.provider.VideoInputProvider;
+import com.hewuzhe.ui.activity.AddWarriorsActivity2;
 import com.hewuzhe.ui.activity.ContactsActivity;
 import com.hewuzhe.ui.activity.ConversationListActivity;
 import com.hewuzhe.ui.activity.FriendsConditionActivity;
 import com.hewuzhe.ui.activity.GroupConditionActivity;
 import com.hewuzhe.ui.activity.JoinGroupActivity;
-import com.hewuzhe.ui.activity.MakeWarriorsActivity;
 import com.hewuzhe.ui.activity.NearPeopleActivity;
-import com.hewuzhe.ui.activity.PublishConditionActivity;
 import com.hewuzhe.ui.adapter.BindUserAdapter;
 import com.hewuzhe.ui.adapter.ChatAdapter;
-import com.hewuzhe.ui.base.RecycleViewFragment;
 import com.hewuzhe.ui.base.SwipeRecycleViewFragment;
-import com.hewuzhe.ui.base.SyLinearLayoutManager;
 import com.hewuzhe.ui.cons.C;
 import com.hewuzhe.utils.Bun;
 import com.hewuzhe.utils.NotiMsg;
@@ -108,7 +102,7 @@ public class ChatFragment extends SwipeRecycleViewFragment<ChatPresenter,ChatAda
         action_1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startActivity(MakeWarriorsActivity.class);
+                startActivity(AddWarriorsActivity2.class);
                 popupWindowHelper.dismiss();
             }
         });

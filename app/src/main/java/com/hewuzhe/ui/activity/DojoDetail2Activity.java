@@ -36,6 +36,7 @@ import com.hewuzhe.ui.adapter.DojoAdapter;
 import com.hewuzhe.ui.adapter.OtherVideosAdapter;
 import com.hewuzhe.ui.adapter.common.OtherImgsAdapter;
 import com.hewuzhe.ui.base.RecycleViewActivity;
+import com.hewuzhe.ui.base.RecycleViewNoMoreActivity;
 import com.hewuzhe.ui.cons.C;
 import com.hewuzhe.ui.http.UrlContants;
 import com.hewuzhe.ui.inter.OnItemClickListener;
@@ -62,7 +63,7 @@ import materialdialogs.MaterialDialog;
 /**
  * Created by zycom on 2016/3/17.
  */
-public class DojoDetail2Activity extends RecycleViewActivity<DojoDetail2Presenter, DojoAdapter, Comment> implements DojoDetailView {
+public class DojoDetail2Activity extends RecycleViewNoMoreActivity<DojoDetail2Presenter, DojoAdapter, Comment> implements DojoDetailView {
 
     private static final String TAG = "video";
     private static int HEITH_VIDEO = 200;
@@ -238,7 +239,7 @@ public class DojoDetail2Activity extends RecycleViewActivity<DojoDetail2Presente
             ViewGroup.LayoutParams params = mVDVideoView.getLayoutParams();
             params.width = ViewGroup.LayoutParams.MATCH_PARENT;
 
-            HEITH_VIDEO = 320;
+            HEITH_VIDEO = 250;
             params.height = StringUtil.dip2px(getContext(), HEITH_VIDEO);
 
             mVDVideoView.setLayoutParams(params);

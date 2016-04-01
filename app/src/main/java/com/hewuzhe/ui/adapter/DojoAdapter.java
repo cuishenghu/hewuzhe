@@ -15,6 +15,7 @@ import com.hewuzhe.presenter.DojoDetail2Presenter;
 import com.hewuzhe.presenter.DojoDetailPresenter;
 import com.hewuzhe.presenter.VideoDetailPresenter;
 import com.hewuzhe.ui.adapter.base.BaseAdapter;
+import com.hewuzhe.ui.adapter.base.BaseNoMoreAdapter;
 import com.hewuzhe.ui.cons.C;
 import com.hewuzhe.ui.widget.GlideCircleTransform;
 import com.hewuzhe.utils.TimeUtil;
@@ -25,13 +26,14 @@ import butterknife.ButterKnife;
 /**
  * Created by zycom on 2016/3/17.
  */
-public class DojoAdapter extends BaseAdapter<DojoAdapter.ViewHolder, Comment, DojoDetail2Presenter> {
+public class DojoAdapter extends BaseNoMoreAdapter<DojoAdapter.ViewHolder, Comment, DojoDetail2Presenter> {
 
     private int whitch = C.WHITCH_DEFAUT;
 
     public DojoAdapter(Context context, DojoDetail2Presenter videoDetailPresenter, View header, int whitch) {
         super(context, videoDetailPresenter, header);
         this.whitch = whitch;
+        isAddFooter = false;
 
     }
 

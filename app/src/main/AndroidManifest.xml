@@ -667,7 +667,9 @@
         </activity>
         <activity android:name=".ui.activity.VideoAllActivity">
         </activity>
-        <activity android:name=".ui.activity.DojoDetail2Activity">
+        <activity android:name=".ui.activity.DojoDetail2Activity"
+            android:configChanges="orientation|screenSize|keyboardHidden"
+            android:windowSoftInputMode="adjustPan">
         </activity>
         <activity android:name=".ui.activity.TrainerLessonActivity">
         </activity>

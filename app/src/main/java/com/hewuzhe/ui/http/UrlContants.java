@@ -94,6 +94,8 @@ public class UrlContants {
 
     public static final String SELECTJOINRECORD =  "Hewuzhe.asmx/SelectJoinRecord?";   // 分页查询报名记录
 
+    public static final String GETABOUTUS =  "AboutUs.asmx/GetAuoutUs?";   // 获取关于我们
+
 
 
     public static String getUrl(String token) {

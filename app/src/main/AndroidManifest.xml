@@ -244,6 +244,9 @@
         <activity android:name=".ui.activity.PrivateTrainerInfoActivity"></activity>
         <activity android:name=".ui.activity.PrivateTrainerInfoActivity2"></activity>
         <activity android:name=".ui.activity.MySignLessonListActivity"></activity>
+        <activity android:name=".ui.activity.MoreActivity"></activity>
+        <activity android:name=".ui.activity.AddWarriorsActivity"></activity>
+        <activity android:name=".ui.activity.AddWarriorsActivity2"></activity>
 
 
 

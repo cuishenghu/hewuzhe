@@ -7,11 +7,15 @@ import android.support.annotation.Nullable;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.ActivityOptionsCompat;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentTransaction;
+import android.support.v7.app.ActionBar;
+import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.View;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.baidu.location.BDLocation;
@@ -35,11 +39,10 @@ import com.hewuzhe.ui.activity.FriendProfileActivity;
 import com.hewuzhe.ui.activity.IntegralActivity;
 import com.hewuzhe.ui.activity.LiveVideoListActivity;
 import com.hewuzhe.ui.activity.LocationActivity;
+import com.hewuzhe.ui.activity.MoreActivity;
 import com.hewuzhe.ui.activity.MyCollectionsActivity;
 import com.hewuzhe.ui.activity.MyScoreActivity;
 import com.hewuzhe.ui.activity.PhotoActivity;
-import com.hewuzhe.ui.activity.PrivateTrainerInfoActivity;
-import com.hewuzhe.ui.activity.PrivateTrainerInfoActivity2;
 import com.hewuzhe.ui.activity.PrivateTrainerListActivity;
 import com.hewuzhe.ui.activity.ProfileActivity;
 import com.hewuzhe.ui.activity.RecordActivity;
@@ -85,7 +88,10 @@ import okhttp3.Request;
  * A simple {@link Fragment} subclass.
  */
 public class WarriorFragment extends ToolBarFragment<WarriorFragmentPresenter> implements WarriorFragmentView, RongIM.LocationProvider, RongIM.UserInfoProvider, RongIM.GroupInfoProvider, RongIM.ConversationBehaviorListener {
-
+    protected Toolbar toolBar;
+    protected ActionBar actionBar;
+    protected TextView tv_action;
+    private TextView tvTitle;
     @Bind(R.id.img_avatar)
     ImageView imgAvatar;
     @Bind(R.id.tv_train)
@@ -109,6 +115,9 @@ public class WarriorFragment extends ToolBarFragment<WarriorFragmentPresenter> i
     @Bind(R.id.lay_level)
     LinearLayout layLevel;//会员
 
+    @Nullable
+    @Bind(R.id.lay_more)
+    RelativeLayout layMore;
     @Nullable
     @Bind(R.id.tv_air_quality)
     TextView tvAirQuality;
@@ -139,7 +148,9 @@ public class WarriorFragment extends ToolBarFragment<WarriorFragmentPresenter> i
     private View rootView;
     private User user;
     private boolean isHasSetRongIM = false;
-//    private AMapLocationClient locationClient;
+    //    private AMapLocationClient locationClient;
+    private Fragment curFragment;
+    private MoreFragment moreFragment;
 
     private String _cityName = "临沂市";
     private String _Lat;
@@ -289,107 +300,166 @@ public class WarriorFragment extends ToolBarFragment<WarriorFragmentPresenter> i
     }
 
     @Override
+    public void initToolBar(View rootView) {
+        toolBar = (Toolbar) rootView.findViewById(R.id.toolbar);
+//        tv_action = (TextView) rootView.findViewById(R.id.tv_action);
+        tvTitle=(TextView) rootView.findViewById(R.id.tv_title);
+//        tv_action.setText("设置");
+        tvTitle.setText("训练");
+    }
+
+
+
+    @Override
     public void initListeners() {
+        layMore.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(getActivity(), MoreActivity.class));
+            }
+        });
+
+
         /**
          * 个人资料
          */
-        imgAvatar.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                try {
-                    Intent intent = new Intent(getActivity(), ProfileActivity.class);
-                    ActivityOptionsCompat optionsCompat = ActivityOptionsCompat.makeSceneTransitionAnimation(getActivity(), imgAvatar, "imgAvatar");
-                    ActivityCompat.startActivity(getActivity(), intent, optionsCompat.toBundle());
-                } catch (IllegalArgumentException e) {
-                    startActivity(new Intent(getActivity(), ProfileActivity.class));
-                }
-            }
-        });
+        imgAvatar.setOnClickListener(new View.OnClickListener()
+
+                                     {
+                                         @Override
+                                         public void onClick(View view) {
+                                             try {
+                                                 Intent intent = new Intent(getActivity(), ProfileActivity.class);
+                                                 ActivityOptionsCompat optionsCompat = ActivityOptionsCompat.makeSceneTransitionAnimation(getActivity(), imgAvatar, "imgAvatar");
+                                                 ActivityCompat.startActivity(getActivity(), intent, optionsCompat.toBundle());
+                                             } catch (IllegalArgumentException e) {
+                                                 startActivity(new Intent(getActivity(), ProfileActivity.class));
+                                             }
+                                         }
+                                     }
+
+        );
         /**
          * 私教
          */
-        tvFlyDream.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                startActivity(new Intent(getActivity(), PrivateTrainerListActivity.class));
+        tvFlyDream.setOnClickListener(new View.OnClickListener()
+
+                                      {
+                                          @Override
+                                          public void onClick(View view) {
+                                              startActivity(new Intent(getActivity(), PrivateTrainerListActivity.class));
 
 //                startActivity(SignupProfileActivity.class);
 
 
-            }
-        });
+                                          }
+                                      }
+
+        );
         /**
          * 学习计划
          */
-        layStudyOnline.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                startActivity(new Intent(getActivity(), TrainActivity.class));
-            }
-        });
+        layStudyOnline.setOnClickListener(new View.OnClickListener()
+
+                                          {
+                                              @Override
+                                              public void onClick(View view) {
+                                                  startActivity(new Intent(getActivity(), TrainActivity.class));
+                                              }
+                                          }
+
+        );
         /**
          * 精品收藏
          */
-        layMyCollections.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                startActivity(new Intent(getActivity(), MyCollectionsActivity.class));
-            }
-        });
+        layMyCollections.setOnClickListener(new View.OnClickListener()
+
+                                            {
+                                                @Override
+                                                public void onClick(View view) {
+                                                    startActivity(new Intent(getActivity(), MyCollectionsActivity.class));
+                                                }
+                                            }
+
+        );
         /**
          *课程
          */
-        tvTrain.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                startActivity(new Intent(getActivity(), StudyOnlineActivity.class));
-            }
-        });
+        tvTrain.setOnClickListener(new View.OnClickListener()
+
+                                   {
+                                       @Override
+                                       public void onClick(View view) {
+                                           startActivity(new Intent(getActivity(), StudyOnlineActivity.class));
+                                       }
+                                   }
+
+        );
         /**
          * 成长记录
          */
-        layRecord.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                startActivity(new Intent(getActivity(), RecordActivity.class));
-            }
-        });
+        layRecord.setOnClickListener(new View.OnClickListener()
+
+                                     {
+                                         @Override
+                                         public void onClick(View view) {
+                                             startActivity(new Intent(getActivity(), RecordActivity.class));
+                                         }
+                                     }
+
+        );
         /**
          * 积分兑换
          */
-        layExchange.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                startActivity(new Intent(getActivity(), MyScoreActivity.class));
-            }
-        });
+        layExchange.setOnClickListener(new View.OnClickListener()
+
+                                       {
+                                           @Override
+                                           public void onClick(View view) {
+                                               startActivity(new Intent(getActivity(), MyScoreActivity.class));
+                                           }
+                                       }
+
+        );
         /**
          * 直播
          */
-        tvLive.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                startActivity(new Intent(getActivity(), LiveVideoListActivity.class));
-            }
-        });
+        tvLive.setOnClickListener(new View.OnClickListener()
+
+                                  {
+                                      @Override
+                                      public void onClick(View view) {
+                                          startActivity(new Intent(getActivity(), LiveVideoListActivity.class));
+                                      }
+                                  }
+
+        );
         /**
          * 场馆
          */
-        tvDojoRecommend.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                startActivity(new Intent(getActivity(), DoJoRecommendActivity.class));
-            }
-        });
+        tvDojoRecommend.setOnClickListener(new View.OnClickListener()
+
+                                           {
+                                               @Override
+                                               public void onClick(View view) {
+                                                   startActivity(new Intent(getActivity(), DoJoRecommendActivity.class));
+                                               }
+                                           }
+
+        );
         /**
          * 积分
          */
-        getLayIntegralOne.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                startActivity(IntegralActivity.class);
-            }
-        });
+        getLayIntegralOne.setOnClickListener(new View.OnClickListener()
+
+                                             {
+                                                 @Override
+                                                 public void onClick(View view) {
+                                                     startActivity(IntegralActivity.class);
+                                                 }
+                                             }
+
+        );
 
     }
 
@@ -472,6 +542,7 @@ public class WarriorFragment extends ToolBarFragment<WarriorFragmentPresenter> i
 
     /**
      * 中间广告链接
+     *
      * @param data
      */
     @Override
@@ -665,14 +736,13 @@ public class WarriorFragment extends ToolBarFragment<WarriorFragmentPresenter> i
             Log.d("Begavior", "extra:" + mRichContentMessage.getExtra());
 
         } else if (message.getContent() instanceof ImageMessage) {
-            if(((ImageMessage) message.getContent()).getExtra()!=null){
-            String path = ((ImageMessage) message.getContent()).getExtra().toString().substring(0,7);
-            String video = ((ImageMessage) message.getContent()).getExtra().toString().substring(7);
-            if(path.equals("123456;")){
-                context.startActivity(new Intent(context, VideoMessageActivity.class).putExtra("videoPath",video));
-            }
-            }
-            else{
+            if (((ImageMessage) message.getContent()).getExtra() != null) {
+                String path = ((ImageMessage) message.getContent()).getExtra().toString().substring(0, 7);
+                String video = ((ImageMessage) message.getContent()).getExtra().toString().substring(7);
+                if (path.equals("123456;")) {
+                    context.startActivity(new Intent(context, VideoMessageActivity.class).putExtra("videoPath", video));
+                }
+            } else {
                 ImageMessage imageMessage = (ImageMessage) message.getContent();
                 Intent intent = new Intent(context, PhotoActivity.class);
 
@@ -732,8 +802,6 @@ public class WarriorFragment extends ToolBarFragment<WarriorFragmentPresenter> i
 
         }
     }
-
-
 
 
 }

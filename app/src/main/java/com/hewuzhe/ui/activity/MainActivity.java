@@ -18,9 +18,11 @@ import com.hewuzhe.R;
 import com.hewuzhe.presenter.base.BasePresenterImp;
 import com.hewuzhe.ui.base.BaseActivity;
 import com.hewuzhe.ui.cons.C;
+import com.hewuzhe.ui.fragment.ChatFragment;
 import com.hewuzhe.ui.fragment.EquipmentFragment2;
 import com.hewuzhe.ui.fragment.EquipmentFragment3;
 import com.hewuzhe.ui.fragment.FederalFragment;
+import com.hewuzhe.ui.fragment.MatchFragment;
 import com.hewuzhe.ui.fragment.MoreFragment;
 import com.hewuzhe.ui.fragment.PowerFragment;
 import com.hewuzhe.ui.fragment.WarriorFragment;
@@ -52,6 +54,8 @@ public class MainActivity extends BaseActivity {
     private PowerFragment powerFragment;
     private EquipmentFragment3 equipmentFragment3;
     private MoreFragment moreFragment;
+    private ChatFragment chatFragment;
+    private MatchFragment matchFragment;
 
     @Override
     protected int provideContentViewId() {
@@ -104,6 +108,9 @@ public class MainActivity extends BaseActivity {
 
 
     private void setMenu() {
+        /**
+         * 训练
+         */
         menuOne.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -116,8 +123,9 @@ public class MainActivity extends BaseActivity {
                 switchContent(curFragment, homeFragment);
             }
         });
-
-
+        /**
+         * 聊天
+         */
         menuTwo.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -128,17 +136,17 @@ public class MainActivity extends BaseActivity {
                 menuFive.setBackgroundColor(primary);
 
 
-                if (null == federalFragment) {
-                    federalFragment = new FederalFragment();
+                if (null == chatFragment) {
+                    chatFragment = new ChatFragment();
                 }
 
-                switchContent(curFragment, federalFragment);
-
+                switchContent(curFragment, chatFragment);
 
             }
         });
-
-
+        /**
+         * 视频
+         */
         menuThree.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -156,8 +164,9 @@ public class MainActivity extends BaseActivity {
                 switchContent(curFragment, powerFragment);
             }
         });
-
-
+        /**
+         * 购物
+         */
         menuFour.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -178,8 +187,9 @@ public class MainActivity extends BaseActivity {
 
             }
         });
-
-
+        /**
+         * 赛事
+         */
         menuFive.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -192,10 +202,10 @@ public class MainActivity extends BaseActivity {
 
 
                 if (null == moreFragment) {
-                    moreFragment = new MoreFragment();
+                    matchFragment = new MatchFragment();
                 }
 
-                switchContent(curFragment, moreFragment);
+                switchContent(curFragment, matchFragment);
 
 
             }

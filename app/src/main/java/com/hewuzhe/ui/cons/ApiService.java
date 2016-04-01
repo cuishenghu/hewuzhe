@@ -21,6 +21,7 @@ import com.hewuzhe.model.MegaComment;
 import com.hewuzhe.model.MegaGame;
 import com.hewuzhe.model.MegaGameVideo;
 import com.hewuzhe.model.MyDream;
+import com.hewuzhe.model.New;
 import com.hewuzhe.model.OtherImage;
 import com.hewuzhe.model.OverTime;
 import com.hewuzhe.model.Plan;
@@ -484,11 +485,20 @@ public interface ApiService {
     Observable<Res<ArrayList<StudyOnlineCatItem>>> SelectCategory();
 
     @GET("Hedongli.asmx/SelectVideoByRecommendCategory")
-    Observable<Res<ArrayList<Video>>> SelectVideoByRecommendCategory(@Query("userid") int userid,@Query("startRowIndex") int startRowIndex, @Query("maximumRows") int maximumRows, @Query("cateid") int categoryid, @Query("search") String search);
+    Observable<Res<ArrayList<Video>>> SelectVideoByRecommendCategory(@Query("userid") int userid,@Query("startRowIndex") int startRowIndex, @Query("maximumRows") int maximumRows, @Query("cateid") int catId, @Query("search") String search);
 
     @GET("Hewuzhe.asmx/GetJoinLessonRecordByUserIdAndLessonId")
     Observable<Res<TrainerLessonInfo>> GetJoinLessonRecordByUserIdAndLessonId(@Query("userid") int userid, @Query("lessonid") int lessonid);
 
     @GET("Hewuzhe.asmx/CancelJoinLessonRecordById")
     Observable<Res> CancelJoinLessonRecordById(@Query("joinlessonrecordid") int joinlessonrecordid);
+
+    @GET("Helianmeng.asmx/SelectRecommendUser")
+    Observable<Res<ArrayList<Friend>>> SelectRecommendUser(@Query("startRowIndex") int startRowIndex, @Query("maximumRows") int maximumRows,@Query("userid") int userid, @Query("isindexshow") int isindexshow,@Query("search") String search );
+
+    @GET("Helianmeng.asmx/SelectZixun")
+    Observable<Res<ArrayList<New>>> SelectRecommendZiXun(@Query("startRowIndex") int startRowIndex, @Query("maximumRows") int maximumRows,@Query("userid") int userid ,@Query("search") String search);
+
+    @GET("Helianmeng.asmx/SelectZixunPicList")
+    Observable<Res<ArrayList<New>>> SelectZixunPicList();
 }

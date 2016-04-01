@@ -124,12 +124,12 @@
                       android:paddingTop="10px">
             <ImageView android:layout_width="45px"
                        android:layout_height="45px"
-                       android:src="@mipmap/menu_more"/>
+                       android:src="@drawable/icon_saishi"/>
 
             <TextView android:layout_width="wrap_content"
                       android:layout_height="wrap_content"
                       android:layout_marginTop="5px"
-                      android:text="更多"
+                      android:text="赛事"
 
                       android:textColor="@color/white"/>
 

@@ -90,6 +90,9 @@ public class EquipmentFragment3 extends BaseFragment implements IXListViewListen
      */
     @Override
     public void initListeners() {
+        /**
+         * 搜索
+         */
         llAction.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -97,24 +100,36 @@ public class EquipmentFragment3 extends BaseFragment implements IXListViewListen
                 startActivity(new Intent(getActivity(), ProductListActivity.class));
             }
         });
+        /**
+         * 分类
+         */
         ll_all_sort.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 startActivity(new Intent(getActivity(), ProductClassifiActivity.class));
             }
         });
+        /**
+         * 推荐
+         */
         ll_recommend.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 startActivity(new Intent(getActivity(), ProductListActivity.class).putExtra("recommend", "1"));
             }
         });
+        /**
+         * 我的订单
+         */
         ll_my_order.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 startActivity(new Intent(getActivity(), OrderCenterActivity2.class));
             }
         });
+        /**
+         * 购物车
+         */
         ll_shopping_cart.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

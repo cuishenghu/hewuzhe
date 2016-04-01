@@ -8,6 +8,7 @@ import android.view.ViewGroup;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.ImageView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
@@ -31,7 +32,7 @@ import butterknife.ButterKnife;
  */
 public class Videos3Adapter extends BaseAdapter<Videos3Adapter.ViewHolder, Video, BasePresenterImp> {
 
-    private boolean isChecked = false;
+    private boolean isChecked = true;
     private int screenWidth = 10;
 
     public Videos3Adapter(Context context) {
@@ -71,57 +72,18 @@ public class Videos3Adapter extends BaseAdapter<Videos3Adapter.ViewHolder, Video
      */
     @Override
     public void bindData(ViewHolder holder, int position) {
+
         final Video video = data.get(position);
-//        ViewGroup.LayoutParams pageParms = holder.imgBg.getLayoutParams();
-//        pageParms.height = isChecked ? screenWidth * 3 / 5 : screenWidth * 3 / 10;
 
-        Glide.with(context)
-                .load(C.BASE_URL + video.ImagePath)
-                .crossFade()
-                .placeholder(R.mipmap.img_default)
-                .into(holder.imgBg);
-
-        Glide.with(context)
-                .load(R.mipmap.ic_launcher)
-                .crossFade()
-                .placeholder(R.mipmap.ic_launcher)
-                .transform(new GlideCircleTransform(context))
-                .into(holder.img_avatar);
-
-        holder.tvAddTime.setText(TimeUtil.timeAgo(video.OperateTime));
-        holder.tvCollectCount.setText(video.FavoriteNum + "");
-        holder.tvPraiseCount.setText(video.LikeNum + "");
-        holder.tvRepeatCount.setText(video.RepeatNum + "");
-        holder.tvTitle.setText(video.Title);
-        holder.tvDesc.setText(video.Content);
-
-        if (video.IsFree) {
-            holder.tvIsFree.setVisibility(View.GONE);
-            holder.tvRepeatCount.setVisibility(View.VISIBLE);
-            holder.imgRepeat.setVisibility(View.VISIBLE);
+        if (isChecked) {
+            holder.ll_single_item.setVisibility(View.VISIBLE);
+            holder.ll_double_item.setVisibility(View.GONE);
+            getData1(holder, video);
         } else {
-            holder.tvIsFree.setVisibility(View.VISIBLE);
+            holder.ll_double_item.setVisibility(View.VISIBLE);
+            holder.ll_single_item.setVisibility(View.GONE);
+            getData2(holder, video);
         }
-        if (video.Islike) {
-            holder.imgPraise.setImageResource(R.mipmap.icon_praise_focus);
-        } else {
-            holder.imgPraise.setImageResource(R.mipmap.icon_praise);
-        }
-
-        if (video.IsFavorite) {
-            holder.imgCollect.setImageResource(R.mipmap.icon_collect_focus);
-        } else {
-            holder.imgCollect.setImageResource(R.mipmap.icon_collect);
-        }
-        holder.imgRepeat.setVisibility(View.GONE);
-        holder.tvRepeatCount.setVisibility(View.GONE);
-
-//        if (video.IsRepeat) {
-//            holder.imgRepeat.setImageResource(R.mipmap.icon_share);
-//        } else {
-//            holder.imgRepeat.setImageResource(R.mipmap.icon_share_focus);
-//        }
-
         holder._CbPlan.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
@@ -138,13 +100,167 @@ public class Videos3Adapter extends BaseAdapter<Videos3Adapter.ViewHolder, Video
                 }
             }
         });
-
         if (this.isNeedShow) {
             holder._CbPlan.setVisibility(View.VISIBLE);
         } else {
             holder._CbPlan.setVisibility(View.GONE);
         }
     }
+
+    private void getData1(ViewHolder holder, Video video) {
+        holder.tvTitle1.setText(video.Title);
+        holder.tvAddTime1.setText(TimeUtil.timeAgo(video.PublishTime) + "发布");
+        holder.tvVisitSum1.setText(video.VisitNum + "人已浏览");
+        if (StringUtil.isEmpty(video.NicName)) {
+            holder.tvUsername1.setText(video.UserNicName);
+        } else {
+            holder.tvUsername1.setText(video.NicName);
+        }
+
+        ViewGroup.LayoutParams pageParms = holder.imgBg1.getLayoutParams();
+        pageParms.height = isChecked ? screenWidth * 2 / 3 : screenWidth / 3;
+        Glide.with(context)
+                .load(C.BASE_URL + video.ImagePath)
+                .crossFade()
+                .placeholder(R.mipmap.img_bg_videio)
+                .into(holder.imgBg1);
+
+        if (video.UserId == 0) {
+//            holder.imgAvatar.setImageResource(R.mipmap.ic_launcher);
+
+            Glide.with(context)
+                    .load(R.mipmap.ic_launcher)
+                    .centerCrop()
+                    .crossFade()
+                    .transform(new GlideCircleTransform(context))
+                    .placeholder(R.mipmap.img_avatar)
+                    .into(holder.imgAvatar1);
+
+
+        } else {
+            Glide.with(context)
+                    .load(C.BASE_URL + video.PhotoPath)
+                    .centerCrop()
+                    .crossFade()
+                    .transform(new GlideCircleTransform(context))
+                    .placeholder(R.mipmap.img_avatar)
+                    .into(holder.imgAvatar1);
+        }
+    }
+
+    private void getData2(ViewHolder holder, Video video) {
+        holder.tvTitle2.setText(video.Title);
+//        holder.tvAddTime2.setText(TimeUtil.timeAgo(video.PublishTime) + "发布");
+        holder.tvVisitSum2.setText(video.VisitNum + "人已浏览");
+        if (StringUtil.isEmpty(video.NicName)) {
+            holder.tvUsername2.setText(video.UserNicName);
+        } else {
+            holder.tvUsername2.setText(video.NicName);
+        }
+
+        ViewGroup.LayoutParams pageParms = holder.imgBg2.getLayoutParams();
+        pageParms.height = isChecked ? screenWidth * 2 / 3 : screenWidth / 3;
+        Glide.with(context)
+                .load(C.BASE_URL + video.ImagePath)
+                .crossFade()
+                .placeholder(R.mipmap.img_bg_videio)
+                .into(holder.imgBg2);
+
+        if (video.UserId == 0) {
+//            holder.imgAvatar.setImageResource(R.mipmap.ic_launcher);
+
+            Glide.with(context)
+                    .load(R.mipmap.ic_launcher)
+                    .centerCrop()
+                    .crossFade()
+                    .transform(new GlideCircleTransform(context))
+                    .placeholder(R.mipmap.img_avatar)
+                    .into(holder.imgAvatar2);
+
+
+        } else {
+            Glide.with(context)
+                    .load(C.BASE_URL + video.PhotoPath)
+                    .centerCrop()
+                    .crossFade()
+                    .transform(new GlideCircleTransform(context))
+                    .placeholder(R.mipmap.img_avatar)
+                    .into(holder.imgAvatar2);
+        }
+    }
+//        ViewGroup.LayoutParams pageParms = holder.imgBg.getLayoutParams();
+//        pageParms.height = isChecked ? screenWidth * 3 / 5 : screenWidth * 3 / 10;
+
+//        Glide.with(context)
+//                .load(C.BASE_URL + video.ImagePath)
+//                .crossFade()
+//                .placeholder(R.mipmap.img_default)
+//                .into(holder.imgBg);
+//
+//        Glide.with(context)
+//                .load(R.mipmap.ic_launcher)
+//                .crossFade()
+//                .placeholder(R.mipmap.ic_launcher)
+//                .transform(new GlideCircleTransform(context))
+//                .into(holder.img_avatar);
+//
+//        holder.tvAddTime.setText(TimeUtil.timeAgo(video.OperateTime));
+//        holder.tvCollectCount.setText(video.FavoriteNum + "");
+//        holder.tvPraiseCount.setText(video.LikeNum + "");
+//        holder.tvRepeatCount.setText(video.RepeatNum + "");
+//        holder.tvTitle.setText(video.Title);
+//        holder.tvDesc.setText(video.Content);
+//
+//        if (video.IsFree) {
+//            holder.tvIsFree.setVisibility(View.GONE);
+//            holder.tvRepeatCount.setVisibility(View.VISIBLE);
+//            holder.imgRepeat.setVisibility(View.VISIBLE);
+//        } else {
+//            holder.tvIsFree.setVisibility(View.VISIBLE);
+//        }
+//        if (video.Islike) {
+//            holder.imgPraise.setImageResource(R.mipmap.icon_praise_focus);
+//        } else {
+//            holder.imgPraise.setImageResource(R.mipmap.icon_praise);
+//        }
+//
+//        if (video.IsFavorite) {
+//            holder.imgCollect.setImageResource(R.mipmap.icon_collect_focus);
+//        } else {
+//            holder.imgCollect.setImageResource(R.mipmap.icon_collect);
+//        }
+//        holder.imgRepeat.setVisibility(View.GONE);
+//        holder.tvRepeatCount.setVisibility(View.GONE);
+//
+////        if (video.IsRepeat) {
+////            holder.imgRepeat.setImageResource(R.mipmap.icon_share);
+////        } else {
+////            holder.imgRepeat.setImageResource(R.mipmap.icon_share_focus);
+////        }
+//
+//        holder._CbPlan.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+//            @Override
+//            public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
+//                if (b) {
+//                    if (!Videos3Adapter.this.checkedList.contains(video)) {
+//                        video.isChecked = true;
+//                        Videos3Adapter.this.checkedList.add(video);
+//                    }
+//                } else {
+//                    if (Videos3Adapter.this.checkedList.contains(video)) {
+//                        video.isChecked = false;
+//                        Videos3Adapter.this.checkedList.remove(video);
+//                    }
+//                }
+//            }
+//        });
+//
+//        if (this.isNeedShow) {
+//            holder._CbPlan.setVisibility(View.VISIBLE);
+//        } else {
+//            holder._CbPlan.setVisibility(View.GONE);
+//        }
+//    }
 
 
     /**
@@ -155,20 +271,54 @@ public class Videos3Adapter extends BaseAdapter<Videos3Adapter.ViewHolder, Video
      */
     class ViewHolder extends RecyclerView.ViewHolder {
         @Nullable
-        @Bind(R.id.img_bg)
-        ImageView imgBg;
+        @Bind(R.id.img_bg1)//视频封面图片
+                ImageView imgBg1;
         @Nullable
-        @Bind(R.id.img_avatar)
-        ImageView img_avatar;
+        @Bind(R.id.img_bg2)//视频封面图片
+                ImageView imgBg2;
         @Nullable
-        @Bind(R.id.tv_add_time)
-        TextView tvAddTime;
+        @Bind(R.id.tv_title1)//视频标题
+                TextView tvTitle1;
+        @Nullable
+        @Bind(R.id.tv_title2)//视频标题
+                TextView tvTitle2;
+        @Nullable
+        @Bind(R.id.img_avatar1)//发布者头像
+                ImageView imgAvatar1;
+        @Nullable
+        @Bind(R.id.img_avatar2)//发布者头像
+                ImageView imgAvatar2;
+        @Nullable
+        @Bind(R.id.tv_username1)//发布者昵称
+                TextView tvUsername1;
+        @Nullable
+        @Bind(R.id.tv_username2)//发布者昵称
+                TextView tvUsername2;
+
+        @Nullable
+        @Bind(R.id.tv_add_time1)//发布时间
+                TextView tvAddTime1;
+        @Nullable
+        @Bind(R.id.tv_add_time2)//发布时间
+                TextView tvAddTime2;
+        @Nullable
+        @Bind(R.id.tv_visit_sum1)//浏览量
+                TextView tvVisitSum1;
+        @Nullable
+        @Bind(R.id.tv_visit_sum2)//浏览量
+                TextView tvVisitSum2;
+        @Nullable
+        @Bind(R.id.ll_single_item)//单列显示布局
+                RelativeLayout ll_single_item;
+        @Nullable
+        @Bind(R.id.ll_double_item)//双列显示布局
+                RelativeLayout ll_double_item;
+
+
         @Nullable
         @Bind(R.id.tv_is_free)
         TextView tvIsFree;
-        @Nullable
-        @Bind(R.id.tv_title)
-        TextView tvTitle;
+
         @Nullable
         @Bind(R.id.tv_desc)
         TextView tvDesc;
@@ -193,6 +343,7 @@ public class Videos3Adapter extends BaseAdapter<Videos3Adapter.ViewHolder, Video
         @Nullable
         @Bind(R.id.cb_plan)
         CheckBox _CbPlan;
+
 
         ViewHolder(View view) {
             super(view);

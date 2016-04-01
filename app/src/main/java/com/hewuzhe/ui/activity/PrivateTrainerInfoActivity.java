@@ -96,10 +96,12 @@ public class PrivateTrainerInfoActivity extends BaseActivity2 implements OnItemC
         getTrainerInfoById();
 //        requestData();
         if (mType == 1) {
-            mGridView.setColumnWidth(2);
 //            mListView.setNumColumns(2);
-            initData(mType);
             getVideoByTeancherId();
+            mGridView.setNumColumns(2);
+            initData(mType);
+            trainerVideos.clear();
+            requestData(mType);
 //            setListViewHeightBasedOnChildren(mListView, 2,this);
         }
     }

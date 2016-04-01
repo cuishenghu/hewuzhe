@@ -1,0 +1,176 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/colorBg"
+    android:orientation="vertical">
+
+
+    <LinearLayout
+        android:id="@+id/lay_search"
+        android:layout_width="match_parent"
+        android:layout_height="90px"
+        android:layout_marginBottom="10px"
+        android:layout_marginTop="10px"
+        android:background="@color/colorListBg"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        android:paddingRight="10dp">
+
+        <EditText
+            android:id="@+id/edt_search_content"
+            android:layout_width="0dp"
+            android:layout_height="70px"
+            android:layout_marginLeft="10px"
+            android:layout_weight="1"
+            android:background="@null"
+            android:hint="搜索用户昵称、手机号"
+            android:imeActionId="@+id/edt_search_content_actionid"
+            android:imeOptions="actionSearch"
+            android:inputType="text"
+            android:textColor="@color/colorLine"
+            android:textColorHint="@color/colorLine" />
+
+        <ImageView
+            android:id="@+id/img_search"
+            android:layout_width="70px"
+            android:layout_height="70px"
+            android:layout_marginLeft="10px"
+            android:layout_marginRight="10px"
+            android:padding="15px"
+
+            android:src="@mipmap/icon_search" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/ll_middle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="10px"
+        android:background="@color/colorListBg"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:id="@+id/lay_tongxunlu"
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:gravity="center_vertical"
+            android:orientation="horizontal"
+            android:paddingLeft="20px">
+
+            <ImageView
+                android:layout_width="25dp"
+                android:layout_height="25dp"
+                android:contentDescription="@string/action_settings"
+                android:src="@drawable/icon_tongxunlu" />
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="75px"
+                android:layout_marginLeft="20dp"
+                android:layout_weight="1"
+                android:gravity="center_vertical"
+                android:text="添加手机联系人"
+                android:textColor="@color/white"
+                android:textSize="31px" />
+
+            <ImageView
+                android:layout_width="10dp"
+                android:layout_height="25dp"
+                android:layout_gravity="center_vertical"
+                android:layout_marginRight="10dp"
+                android:contentDescription="@string/app_name"
+                android:src="@drawable/symbol_right"
+                android:visibility="visible" />
+        </LinearLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_marginLeft="25dp"
+            android:background="@color/colorBg" />
+
+        <LinearLayout
+            android:id="@+id/ll_select_by_condition"
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:gravity="center_vertical"
+            android:orientation="horizontal"
+            android:paddingLeft="20px">
+
+            <ImageView
+                android:layout_width="25dp"
+                android:layout_height="25dp"
+                android:contentDescription="@string/action_settings"
+                android:src="@drawable/icon_select_by_tiaojian" />
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="75px"
+                android:layout_marginLeft="20dp"
+                android:layout_weight="1"
+                android:gravity="center_vertical"
+                android:text="按条件查找陌生人"
+                android:textColor="@color/white"
+                android:textSize="31px" />
+
+            <ImageView
+                android:layout_width="10dp"
+                android:layout_height="25dp"
+                android:layout_gravity="center_vertical"
+                android:layout_marginRight="10dp"
+                android:contentDescription="@string/app_name"
+                android:src="@drawable/symbol_right"
+                android:visibility="visible" />
+        </LinearLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_marginLeft="25dp"
+            android:background="@color/colorBg" />
+
+        <LinearLayout
+            android:id="@+id/lay_select_near_person"
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:gravity="center_vertical"
+            android:orientation="horizontal"
+            android:paddingLeft="20px">
+
+            <ImageView
+                android:layout_width="25dp"
+                android:layout_height="25dp"
+                android:contentDescription="@string/action_settings"
+                android:src="@drawable/icon_check_fujinren" />
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="75px"
+                android:layout_marginLeft="20dp"
+                android:layout_weight="1"
+                android:gravity="center_vertical"
+                android:text="查看附近人"
+                android:textColor="@color/white"
+                android:textSize="31px" />
+
+            <ImageView
+                android:layout_width="10dp"
+                android:layout_height="25dp"
+                android:layout_gravity="center_vertical"
+                android:layout_marginRight="10dp"
+                android:contentDescription="@string/app_name"
+                android:src="@drawable/symbol_right"
+                android:visibility="visible" />
+        </LinearLayout>
+    </LinearLayout>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="30dp"
+        android:gravity="center_vertical"
+        android:paddingLeft="20dp"
+        android:text="AiT KungFu推荐"
+        android:textColor="@color/white" />
+</LinearLayout>

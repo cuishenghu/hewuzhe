@@ -6,7 +6,7 @@
     android:orientation="vertical"
     tools:context="com.hewuzhe.ui.fragment.WarriorFragment">
 
-    <include layout="@layout/toolbar_layout" />
+    <include layout="@layout/toolbar_xunlian" />
     <!-- TODO: Update blank fragment layout -->
 
 

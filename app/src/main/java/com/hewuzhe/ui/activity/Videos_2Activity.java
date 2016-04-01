@@ -51,10 +51,11 @@ public class Videos_2Activity extends SwipeRecycleViewActivity<Videos2Presenter,
         this.where = getIntent().getStringExtra("where");
         refresh(true);
         if (!StringUtil.isEmpty(where)) {
-            if (where.equals("five"))
-                presenter.getData(page, count);
             if (where.equals("six"))
-                presenter.SelectVideoByRecommendCategory(page, count, new SessionUtil(this).getUserId());
+//                presenter.getData(page, count);
+            presenter.SelectVideoByRecommendCategory(new SessionUtil(Videos_2Activity.this).getUserId(),page,count);
+            if (where.equals("five"))
+                presenter.SelectVideoByCategory(page, count);
             imgSearch.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {

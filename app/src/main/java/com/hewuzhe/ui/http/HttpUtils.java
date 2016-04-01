@@ -173,4 +173,9 @@ public class HttpUtils {
     public static void selectJoinRecord(AsyncHttpResponseHandler handler, RequestParams params) {
         client.post(UrlContants.getUrl(UrlContants.SELECTJOINRECORD), params, handler);
     }
+
+    /* 获取关于我们*/
+    public static void getAboutUs(AsyncHttpResponseHandler handler) {
+        client.post(UrlContants.getUrl(UrlContants.GETABOUTUS), handler);
+    }
 }

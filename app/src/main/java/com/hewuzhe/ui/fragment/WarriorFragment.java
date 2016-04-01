@@ -576,7 +576,10 @@ public class WarriorFragment extends ToolBarFragment<WarriorFragmentPresenter> i
 //                            return false;
                         }
                     });
-                }
+
+
+
+                    }
 
                 /**
                  * 连接融云失败

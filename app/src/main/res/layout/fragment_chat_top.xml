@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/ll_saishi_top"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_height="wrap_content"
     android:background="@color/colorBg"
     android:orientation="vertical">
 
@@ -13,62 +13,68 @@
         android:layout_marginTop="3dp"
         android:orientation="vertical">
 
-       <LinearLayout
-           android:layout_width="match_parent"
-           android:layout_height="60dp"
-           android:gravity="center_vertical"
-           android:orientation="horizontal"
-           android:background="@color/colorListBg">
-           <LinearLayout
-               android:layout_width="0dp"
-               android:layout_weight="1"
-               android:layout_height="60dp"
-               android:orientation="vertical">
-               <LinearLayout
-                   android:id="@+id/ll_msg_center"
-                   android:layout_width="match_parent"
-                   android:layout_height="match_parent"
-                   android:gravity="center"
-                   android:orientation="vertical">
+        <LinearLayout
+            android:id="@+id/chat_list_op"
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:background="@color/colorListBg"
+            android:gravity="center_vertical"
+            android:orientation="horizontal">
 
-                   <ImageView
-                       android:layout_width="25dp"
-                       android:layout_height="25dp"
-                       android:contentDescription="@string/action_settings"
-                       android:src="@mipmap/icon_msg" />
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="60dp"
+                android:layout_weight="1"
+                android:orientation="vertical">
 
-                   <TextView
-                       android:layout_width="wrap_content"
-                       android:layout_height="wrap_content"
-                       android:layout_marginTop="5dp"
-                       android:text="消息中心"
-                       android:textColor="@color/white"
-                       android:textSize="14dp" />
+                <LinearLayout
+                    android:id="@+id/ll_msg_center"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:gravity="center"
+                    android:orientation="vertical">
 
-               </LinearLayout>
-           </LinearLayout>
-           <View
-               android:layout_width="2dp"
-               android:layout_height="match_parent"
-               android:background="@color/colorBg"/>
-           <TextView
-               android:layout_width="0dp"
-               android:layout_weight="3"
-               android:layout_height="match_parent"
-               android:text="您共有100条消息未读"
-               android:gravity="center"
-               android:textColor="@color/white"
-               android:textSize="14dp" />
-       </LinearLayout>
+                    <ImageView
+                        android:layout_width="25dp"
+                        android:layout_height="25dp"
+                        android:contentDescription="@string/action_settings"
+                        android:src="@mipmap/icon_msg" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="5dp"
+                        android:text="消息中心"
+                        android:textColor="@color/white"
+                        android:textSize="14dp" />
+
+                </LinearLayout>
+            </LinearLayout>
+
+            <View
+                android:layout_width="2dp"
+                android:layout_height="match_parent"
+                android:background="@color/colorBg" />
+
+            <TextView
+                android:id="@+id/chat_count"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="3"
+                android:gravity="center"
+                android:text="暂无消息"
+                android:textColor="@color/white"
+                android:textSize="14dp" />
+        </LinearLayout>
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="70dp"
+            android:layout_marginTop="3dp"
             android:background="@color/colorListBg"
             android:gravity="center_vertical"
             android:orientation="horizontal"
             android:paddingBottom="3dp"
-            android:layout_marginTop="3dp"
             android:paddingTop="3dp">
 
 
@@ -152,18 +158,22 @@
                     android:textSize="14dp" />
             </LinearLayout>
         </LinearLayout>
+
         <LinearLayout
+            android:id="@+id/chat_friends_list"
             android:layout_width="match_parent"
             android:layout_height="60dp"
-            android:gravity="center_vertical"
-            android:orientation="horizontal"
             android:layout_marginTop="3dp"
-            android:background="@color/colorListBg">
+            android:background="@color/colorListBg"
+            android:gravity="center_vertical"
+            android:orientation="horizontal">
+
             <LinearLayout
                 android:layout_width="0dp"
-                android:layout_weight="1"
                 android:layout_height="60dp"
+                android:layout_weight="1"
                 android:orientation="vertical">
+
                 <LinearLayout
                     android:id="@+id/ll_friend_center"
                     android:layout_width="match_parent"
@@ -187,16 +197,19 @@
 
                 </LinearLayout>
             </LinearLayout>
+
             <View
                 android:layout_width="2dp"
                 android:layout_height="match_parent"
-                android:background="@color/colorBg"/>
+                android:background="@color/colorBg" />
+
             <TextView
+                android:id="@+id/chat_friends"
                 android:layout_width="0dp"
-                android:layout_weight="3"
                 android:layout_height="match_parent"
-                android:text="您共有100个好友"
+                android:layout_weight="3"
                 android:gravity="center"
+                android:text="暂无好友"
                 android:textColor="@color/white"
                 android:textSize="14dp" />
         </LinearLayout>
@@ -204,19 +217,83 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
         android:layout_marginTop="5dp"
-        android:background="@color/colorListBg">
+        android:background="@color/colorListBg"
+        android:orientation="vertical"
+        android:paddingLeft="10dp">
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="15dp"
+            android:layout_marginLeft="7dp"
             android:layout_marginTop="5dp"
-            android:paddingBottom="5dp"
+            android:paddingBottom="10dp"
             android:paddingTop="5dp"
             android:text="精选动态"
             android:textColor="@color/white"
             android:textSize="16dp" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@color/hwz_background"></View>
+
+
     </LinearLayout>
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/recycler_view_one"
+        android:layout_width="match_parent"
+        android:background="@color/colorListBg"
+        android:layout_height="100dp" />
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="5dp"
+        android:background="@color/hwz_background"></View>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/colorListBg"
+        android:orientation="vertical"
+        android:paddingLeft="15dp"
+        android:paddingRight="10dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="80px"
+            android:background="@color/colorListBg"
+            android:gravity="center_vertical"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="为您推荐"
+                android:textColor="@color/white"
+                android:textSize="16dp" />
+
+            <ImageView
+                android:id="@+id/img_back"
+                android:layout_width="14dp"
+                android:layout_height="14dp"
+                android:layout_gravity="center_vertical"
+                android:src="@mipmap/symbol_right" />
+
+
+        </LinearLayout>
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/re_others"
+            android:layout_width="match_parent"
+            android:layout_height="105dp"
+            android:background="@color/colorListBg">
+
+        </android.support.v7.widget.RecyclerView>
+    </LinearLayout>
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="5dp"
+        android:background="@color/hwz_background"></View>
 </LinearLayout>

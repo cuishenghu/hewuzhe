@@ -674,6 +674,8 @@
         </activity>
         <activity android:name=".ui.activity.GDMapLocationActivity">
             </activity>
+        <activity android:name=".ui.activity.NearPeopleActivity">
+        </activity>
     </application>
 
 </manifest>

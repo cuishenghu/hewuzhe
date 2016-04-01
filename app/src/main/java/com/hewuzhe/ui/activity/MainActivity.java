@@ -18,6 +18,7 @@ import com.hewuzhe.R;
 import com.hewuzhe.presenter.base.BasePresenterImp;
 import com.hewuzhe.ui.base.BaseActivity;
 import com.hewuzhe.ui.cons.C;
+import com.hewuzhe.ui.fragment.ChatFragment;
 import com.hewuzhe.ui.fragment.EquipmentFragment2;
 import com.hewuzhe.ui.fragment.EquipmentFragment3;
 import com.hewuzhe.ui.fragment.FederalFragment;
@@ -48,7 +49,7 @@ public class MainActivity extends BaseActivity {
     private int primary = Color.parseColor("#1e1d22");
     private WarriorFragment homeFragment;
     private Fragment curFragment;
-    private FederalFragment federalFragment;
+    private ChatFragment chatFragment;
     private PowerFragment powerFragment;
     private EquipmentFragment3 equipmentFragment3;
     private MoreFragment moreFragment;
@@ -128,11 +129,11 @@ public class MainActivity extends BaseActivity {
                 menuFive.setBackgroundColor(primary);
 
 
-                if (null == federalFragment) {
-                    federalFragment = new FederalFragment();
+                if (null == chatFragment) {
+                    chatFragment = new ChatFragment();
                 }
 
-                switchContent(curFragment, federalFragment);
+                switchContent(curFragment, chatFragment);
 
 
             }

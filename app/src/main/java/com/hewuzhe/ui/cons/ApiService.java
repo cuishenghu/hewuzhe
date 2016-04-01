@@ -7,6 +7,7 @@ import com.hewuzhe.model.Article;
 import com.hewuzhe.model.ArticleCollection;
 import com.hewuzhe.model.Cate;
 import com.hewuzhe.model.Charge;
+import com.hewuzhe.model.ChatList;
 import com.hewuzhe.model.Classification;
 import com.hewuzhe.model.Comment;
 import com.hewuzhe.model.ConditionComment;
@@ -21,6 +22,7 @@ import com.hewuzhe.model.MegaComment;
 import com.hewuzhe.model.MegaGame;
 import com.hewuzhe.model.MegaGameVideo;
 import com.hewuzhe.model.MyDream;
+import com.hewuzhe.model.NearPeople;
 import com.hewuzhe.model.OtherImage;
 import com.hewuzhe.model.OverTime;
 import com.hewuzhe.model.Plan;
@@ -28,6 +30,7 @@ import com.hewuzhe.model.PrivateTrainerList;
 import com.hewuzhe.model.Product;
 import com.hewuzhe.model.ProductCollection;
 import com.hewuzhe.model.ProductComment;
+import com.hewuzhe.model.RecommendUser;
 import com.hewuzhe.model.Record;
 import com.hewuzhe.model.Res;
 import com.hewuzhe.model.Result;
@@ -495,4 +498,13 @@ public interface ApiService {
 
     @GET("Hewuzhe.asmx/SelectTeacherCateList")
     Observable<Res<ArrayList<ScreenList>>> SelectTeacherCateList(@Query("lat") double lat,@Query("lng") double lng,@Query("length") int length );
+
+    @GET("Helianmeng.asmx/SelectRecommendDongTai")
+    Observable<Res<ArrayList<ChatList>>> SelectRecommendDongTai(@Query("startRowIndex") int startRowIndex, @Query("maximumRows") int maximumRows,@Query("userid") int userid);
+
+    @GET("Helianmeng.asmx/SelectRecommendUser")
+    Observable<Res<ArrayList<RecommendUser>>> SelectRecommendUser(@Query("userid") int userid,@Query("isindexshow") int isindexshow,@Query("startRowIndex") int startRowIndex, @Query("maximumRows") int maximumRows,@Query("search") String search);
+
+    @GET("Helianmeng.asmx/SelectNearbyUser")
+    Observable<Res<ArrayList<NearPeople>>> SelectNearbyUser(@Query("startRowIndex") int startRowIndex,@Query("maximumRows") int maximumRows,@Query("userid") int userid, @Query("lat") String lat,@Query("lng") String lng,@Query("length") int length,@Query("age") int age,@Query("sexuality") int sexuality);
 }

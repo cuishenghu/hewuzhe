@@ -15,6 +15,7 @@ public abstract class RefreshAndLoadMoreForListPresenter<V extends LoadMoreView>
      * @param count
      */
     public abstract void getData(int page, int count,String search, int categoryId, int isPriceAsc, int isSalesAsc, int CommentAsc, int isNewAsc, int isCredit, int isRecommend);
+    public abstract void getData(int page, int count,int userid, double lat, double lng, int lenght, int age, int sexuality);
 
     /**
      * 设置数据状态

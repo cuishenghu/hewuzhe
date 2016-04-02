@@ -73,7 +73,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="5dp"
-                    android:text="比赛"
+                    android:text="赛事"
                     android:textColor="@color/white"
                     android:textSize="14dp" />
 
@@ -90,7 +90,8 @@
                 android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:gravity="center"
-                android:orientation="vertical">
+                android:orientation="vertical"
+                android:visibility="gone">
 
                 <ImageView
                     android:layout_width="25dp"
@@ -185,18 +186,18 @@
             android:textSize="16dp" />
 
         <!--<View-->
-            <!--android:layout_width="match_parent"-->
-            <!--android:layout_height="2dp"-->
-            <!--android:layout_marginLeft="25dp"-->
-            <!--android:layout_marginTop="5dp"-->
-            <!--android:background="@color/colorBg" />-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="2dp"-->
+        <!--android:layout_marginLeft="25dp"-->
+        <!--android:layout_marginTop="5dp"-->
+        <!--android:background="@color/colorBg" />-->
 
 
         <!--<android.support.v7.widget.RecyclerView-->
-            <!--android:id="@+id/recycler_view"-->
-            <!--android:layout_width="match_parent"-->
-            <!--android:layout_height="match_parent"-->
-            <!--android:layout_marginTop="10dp"-->
-            <!--android:background="@color/colorBg" />-->
+        <!--android:id="@+id/recycler_view"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="match_parent"-->
+        <!--android:layout_marginTop="10dp"-->
+        <!--android:background="@color/colorBg" />-->
     </LinearLayout>
 </LinearLayout>

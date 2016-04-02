@@ -141,19 +141,19 @@ public class LiveVideoActivity extends ToolBarActivity<LiveVideoPresenter> imple
 
         if (!TimeUtil.timeComparedNow(liveVideo.TimeEnd)) {
             //比赛已经结束
-            if(StringUtil.isEmpty(liveVideo.LiveBack)){
+            if (StringUtil.isEmpty(liveVideo.LiveBack)) {
                 _BtnOthers.setText("直播已结束");
                 _BtnOthers.setOnClickListener(null);
-            }else{
+            } else {
                 _BtnOthers.setText("查看回放");
                 _BtnOthers.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
-                        Uri uri = Uri.parse(C.BASE_URL+liveVideo.LiveBack);
+                        Uri uri = Uri.parse(C.BASE_URL + liveVideo.LiveBack);
                         //调用系统自带的播放器
                         Intent intent = new Intent(Intent.ACTION_VIEW);
                         String extStr = liveVideo.LiveBack.substring(liveVideo.LiveBack.lastIndexOf("."));
-                        intent.setDataAndType(uri, "video/"+extStr);
+                        intent.setDataAndType(uri, "video/" + extStr);
                         startActivity(intent);
                     }
                 });
@@ -163,7 +163,6 @@ public class LiveVideoActivity extends ToolBarActivity<LiveVideoPresenter> imple
 
     @Override
     public void bindData(ArrayList<LiveVideo> data) {
-
     }
 
     @Override

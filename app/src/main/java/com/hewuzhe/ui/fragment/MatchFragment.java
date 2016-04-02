@@ -144,7 +144,7 @@ public class MatchFragment extends SwipeRecycleViewFragment<MatchFragmentPresent
         re_zixun = (RecyclerView) rootView.findViewById(R.id.recycler_view);
 //        llAction = (RelativeLayout) rootView.findViewById(R.id.ll_search);
         appBar = (AppBarLayout) rootView.findViewById(R.id.app_bar_layout);
-        tvTitle.setText("赛事");
+        tvTitle.setText("资讯");
         imgBack.setVisibility(View.GONE);
     }
 

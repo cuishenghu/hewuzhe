@@ -98,7 +98,6 @@ public class SaishiAdapter extends BaseAdapter<SaishiAdapter.ViewHolder, New, Ba
     /**
      * This class contains all butterknife-injected Views & Layouts from layout file 'video_item.xml'
      * for easy to all layout elements.
-     *
      * @author ButterKnifeZelezny, plugin for Android Studio by Avast Developers (http://github.com/avast)
      */
     class ViewHolder extends RecyclerView.ViewHolder {

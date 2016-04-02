@@ -78,20 +78,20 @@
                           android:layout_width="wrap_content"
                           android:layout_height="wrap_content"
                           android:layout_weight="1"
-                          android:text="100"/>
+                          android:text="0"/>
 
                 <TextView android:id="@+id/tv_page_views"
                           style="@style/text_25_white"
                           android:layout_width="wrap_content"
                           android:layout_height="wrap_content"
-                          android:text="阅读 100"/>
+                          android:text="阅读 0"/>
 
                 <TextView android:id="@+id/tv_comment_count"
                           style="@style/text_25_white"
                           android:layout_width="wrap_content"
                           android:layout_height="wrap_content"
                           android:layout_marginLeft="15px"
-                          android:text="评论 100"/>
+                          android:text="评论 0"/>
 
 
             </LinearLayout>

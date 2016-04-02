@@ -10,28 +10,21 @@ import java.util.List;
 
 import android.content.Context;
 import android.content.Intent;
-import android.graphics.Bitmap;
-import android.os.Bundle;
-import android.text.TextUtils;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.ImageView;
-import android.widget.Toast;
 
 import com.google.gson.Gson;
 import com.hewuzhe.model.Bannar;
-import com.hewuzhe.model.FriendCondition;
 import com.hewuzhe.model.New;
 import com.hewuzhe.model.Pic;
 import com.hewuzhe.model.ProductPic;
-import com.hewuzhe.model.SaiShiPic;
+import com.hewuzhe.ui.activity.MegaGameDetailActivity;
 import com.hewuzhe.ui.activity.PicsActivity;
 import com.hewuzhe.ui.activity.ProductInfoActivity;
 import com.hewuzhe.utils.Bun;
-import com.hewuzhe.utils.StringUtil;
-import com.hewuzhe.utils.Tools;
 import com.nostra13.universalimageloader.core.DisplayImageOptions;
 import com.nostra13.universalimageloader.core.ImageLoader;
 import com.nostra13.universalimageloader.core.ImageLoaderConfiguration;
@@ -238,14 +231,12 @@ public class ImagePagerAdapter extends BaseAdapter {
                     addImg(getPosition(position));
                 else if (bannar != null) {//点击购物里面的轮播图跳转
                     context.startActivity(new Intent(context, ProductInfoActivity.class).putExtra("data", new Bun().putInt("proid", bannar.get(getPosition(position)).getProductId()).ok()));
-                } else {//点击赛事轮播图没有跳转,如需要添加至此
-                    Tools.toast(context, "");
+                } else if (saiShiPics != null) {//点击赛事轮播图进入赛事详情
+//                    int id = saiShiPics.get(getPosition(position)).Id;
+                    context.startActivity(new Intent(context, MegaGameDetailActivity.class).putExtra("data", new Bun().putInt("id", saiShiPics.get(getPosition(position)).Id).ok()));
                 }
-
-
             }
         });
-
         return view;
     }
 
@@ -253,7 +244,6 @@ public class ImagePagerAdapter extends BaseAdapter {
 
         ImageView imageView;
     }
-
     /**
      * @return the isInfiniteLoop
      */

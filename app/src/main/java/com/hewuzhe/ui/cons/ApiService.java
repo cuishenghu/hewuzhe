@@ -118,7 +118,7 @@ public interface ApiService {
     Observable<Res<ArrayList<Video>>> getVideos(@Path("path") String path, @Query("startRowIndex") int startRowIndex, @Query("maximumRows") int maximumRows, @Query("search") String search);
 
     @GET("Hedongli.asmx/{path}")
-    Observable<Res<ArrayList<Video>>> SelectGuanzhuVideoList(@Path("path") String path,@Query("startRowIndex") int startRowIndex, @Query("maximumRows") int maximumRows, @Query("userid") int userId);
+    Observable<Res<ArrayList<Video>>> SelectGuanzhuVideoList(@Path("path") String path, @Query("startRowIndex") int startRowIndex, @Query("maximumRows") int maximumRows, @Query("userid") int userId);
 
 
     @GET("Hewuzhe.asmx/GetPlanByCate")
@@ -477,19 +477,19 @@ public interface ApiService {
     Observable<Res<ArrayList<Tel>>> SelectProductPhone();
 
     @GET("Hewuzhe.asmx/SelectTeacherList")
-    Observable<Res<ArrayList<PrivateTrainerList>>> SelectTeacherList(@Query("userid") int userid,@Query("startRowIndex") int startRowIndex,@Query("maximumRows") int maximumRows,@Query("areaname") String areaname,@Query("lat") String lat,@Query("lng") String lng,@Query("search") String search);
+    Observable<Res<ArrayList<PrivateTrainerList>>> SelectTeacherList(@Query("userid") int userid, @Query("startRowIndex") int startRowIndex, @Query("maximumRows") int maximumRows, @Query("areaname") String areaname, @Query("lat") String lat, @Query("lng") String lng, @Query("search") String search);
 
     @GET("Hewuzhe.asmx/SelectLessonById")
     Observable<Res<TrainerLessonTwo>> SelectLessonById(@Query("userid") int userid, @Query("lessonid") int lessonid);
 
     @GET("Hewuzhe.asmx/JoinLessonByLessonId")
-    Observable<Res> JoinLessonByLessonId(@Query("userid") int userid, @Query("Lessonid") int Lessonid, @Query("realname") String realname, @Query("phone") String phone , @Query("age") int age, @Query("sex") int sex, @Query("areaid") String areaid);
+    Observable<Res> JoinLessonByLessonId(@Query("userid") int userid, @Query("Lessonid") int Lessonid, @Query("realname") String realname, @Query("phone") String phone, @Query("age") int age, @Query("sex") int sex, @Query("areaid") String areaid);
 
     @GET("Hedongli.asmx/SelectCategory")
     Observable<Res<ArrayList<StudyOnlineCatItem>>> SelectCategory();
 
     @GET("Hedongli.asmx/SelectVideoByRecommendCategory")
-    Observable<Res<ArrayList<Video>>> SelectVideoByRecommendCategory(@Query("userid") int userid,@Query("startRowIndex") int startRowIndex, @Query("maximumRows") int maximumRows, @Query("cateid") int catId, @Query("search") String search);
+    Observable<Res<ArrayList<Video>>> SelectVideoByRecommendCategory(@Query("userid") int userid, @Query("startRowIndex") int startRowIndex, @Query("maximumRows") int maximumRows, @Query("cateid") int catId, @Query("search") String search);
 
     @GET("Hewuzhe.asmx/GetJoinLessonRecordByUserIdAndLessonId")
     Observable<Res<TrainerLessonInfo>> GetJoinLessonRecordByUserIdAndLessonId(@Query("userid") int userid, @Query("lessonid") int lessonid);
@@ -498,28 +498,28 @@ public interface ApiService {
     Observable<Res> CancelJoinLessonRecordById(@Query("joinlessonrecordid") int joinlessonrecordid);
 
     @GET("Helianmeng.asmx/SelectRecommendUser")
-    Observable<Res<ArrayList<Friend>>> GetRecommendUser(@Query("startRowIndex") int startRowIndex, @Query("maximumRows") int maximumRows,@Query("userid") int userid, @Query("isindexshow") int isindexshow,@Query("search") String search );
+    Observable<Res<ArrayList<Friend>>> GetRecommendUser(@Query("startRowIndex") int startRowIndex, @Query("maximumRows") int maximumRows, @Query("userid") int userid, @Query("isindexshow") int isindexshow, @Query("search") String search);
 
     @GET("Helianmeng.asmx/SelectZixun")
-    Observable<Res<ArrayList<New>>> SelectRecommendZiXun(@Query("startRowIndex") int startRowIndex, @Query("maximumRows") int maximumRows,@Query("userid") int userid ,@Query("search") String search);
+    Observable<Res<ArrayList<New>>> SelectRecommendZiXun(@Query("startRowIndex") int startRowIndex, @Query("maximumRows") int maximumRows, @Query("userid") int userid, @Query("search") String search);
 
     @GET("Helianmeng.asmx/SelectZixunPicList")
-    Observable<Res<ArrayList<New>>> SelectZixunPicList();
+    Observable<Res<ArrayList<New>>> SelectZixunPicList(@Query("userid") int userid, @Query("num") int num);
 
     @GET("Hewuzhe.asmx/SelectTeacherListNew")
-    Observable<Res<ArrayList<PrivateTrainerList>>> SelectTeacherListNew(@Query("userid") int userid,@Query("startRowIndex") int startRowIndex,@Query("maximumRows") int maximumRows,@Query("areaname") String areaname,@Query("lat") String lat,@Query("lng") String lng,@Query("search") String search,@Query("cateid") String cateid,@Query("length") int length);
+    Observable<Res<ArrayList<PrivateTrainerList>>> SelectTeacherListNew(@Query("userid") int userid, @Query("startRowIndex") int startRowIndex, @Query("maximumRows") int maximumRows, @Query("areaname") String areaname, @Query("lat") String lat, @Query("lng") String lng, @Query("search") String search, @Query("cateid") String cateid, @Query("length") int length);
 
     @GET("Hewuzhe.asmx/SelectTeacherCateList")
-    Observable<Res<ArrayList<ScreenList>>> SelectTeacherCateList(@Query("lat") double lat,@Query("lng") double lng,@Query("length") int length );
+    Observable<Res<ArrayList<ScreenList>>> SelectTeacherCateList(@Query("lat") double lat, @Query("lng") double lng, @Query("length") int length);
 
     @GET("Helianmeng.asmx/SelectRecommendDongTai")
-    Observable<Res<ArrayList<ChatList>>> SelectRecommendDongTai(@Query("startRowIndex") int startRowIndex, @Query("maximumRows") int maximumRows,@Query("userid") int userid);
+    Observable<Res<ArrayList<ChatList>>> SelectRecommendDongTai(@Query("startRowIndex") int startRowIndex, @Query("maximumRows") int maximumRows, @Query("userid") int userid);
 
     @GET("Helianmeng.asmx/SelectRecommendUser")
-    Observable<Res<ArrayList<RecommendUser>>> SelectRecommendUser(@Query("userid") int userid,@Query("isindexshow") int isindexshow,@Query("startRowIndex") int startRowIndex, @Query("maximumRows") int maximumRows,@Query("search") String search);
+    Observable<Res<ArrayList<RecommendUser>>> SelectRecommendUser(@Query("userid") int userid, @Query("isindexshow") int isindexshow, @Query("startRowIndex") int startRowIndex, @Query("maximumRows") int maximumRows, @Query("search") String search);
 
     @GET("Helianmeng.asmx/SelectNearbyUser")
-    Observable<Res<ArrayList<NearPeople>>> SelectNearbyUser(@Query("startRowIndex") int startRowIndex,@Query("maximumRows") int maximumRows,@Query("userid") int userid, @Query("lat") String lat,@Query("lng") String lng,@Query("length") int length,@Query("age") int age,@Query("sexuality") int sexuality);
+    Observable<Res<ArrayList<NearPeople>>> SelectNearbyUser(@Query("startRowIndex") int startRowIndex, @Query("maximumRows") int maximumRows, @Query("userid") int userid, @Query("lat") String lat, @Query("lng") String lng, @Query("length") int length, @Query("age") int age, @Query("sexuality") int sexuality);
 
 
 }

@@ -37,6 +37,7 @@ import com.hewuzhe.ui.cons.C;
 import com.hewuzhe.ui.http.EntityHandler;
 import com.hewuzhe.ui.http.HttpUtils;
 import com.hewuzhe.utils.Bun;
+import com.hewuzhe.utils.SessionUtil;
 import com.hewuzhe.utils.StringUtil;
 import com.hewuzhe.view.MatchFragmentView;
 import com.loopj.android.http.AsyncHttpResponseHandler;
@@ -286,16 +287,18 @@ public class MatchFragment extends SwipeRecycleViewFragment<MatchFragmentPresent
      * 查询资讯轮播图
      */
     private void getBannarList() {
-        presenter.SelectZixunPicList();
+        presenter.SelectZixunPicList(9);
     }
 
     @Override
     public void getZixunPicList(ArrayList<New> picList) {
+        saiShiPics = picList;
         for (int i = 0; i < picList.size(); i++) {
-            imageUrlList.add(C.BASE_URL + picList.get(i).Path);
+            imageUrlList.add(C.BASE_URL + picList.get(i).MatchImage);
             linkUrlArray.add("");
             titleList.add(picList.get(i).Name);
             initBanner(imageUrlList);
+
         }
     }
 

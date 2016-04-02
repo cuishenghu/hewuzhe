@@ -2,12 +2,14 @@ package com.hewuzhe.ui.adapter;
 
 import android.content.Context;
 import android.support.annotation.Nullable;
+import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
@@ -31,16 +33,33 @@ import butterknife.ButterKnife;
  * Created by xianguangjin on 15/12/22.
  */
 public class Videos3Adapter extends BaseAdapter<Videos3Adapter.ViewHolder, Video, BasePresenterImp> {
-
+//    public static final int TYPE_HEADER = 0;
     private boolean isChecked = true;
     private int screenWidth = 10;
+    private String who="";
+    private int i;
 
-    public Videos3Adapter(Context context) {
+    public Videos3Adapter(Context context, String who) {
         super(context);
         isAddFooter = true;
+        this.who = who;
         this.screenWidth = StringUtil.getScreenWidth((BaseActivity) context);
     }
-
+//    @Override
+//    public void onAttachedToRecyclerView(RecyclerView recyclerView) {
+//        super.onAttachedToRecyclerView(recyclerView);
+//        RecyclerView.LayoutManager manager = recyclerView.getLayoutManager();
+//        if (manager instanceof GridLayoutManager) {
+//            final GridLayoutManager gridManager = ((GridLayoutManager) manager);
+//            gridManager.setSpanSizeLookup(new GridLayoutManager.SpanSizeLookup() {
+//                @Override
+//                public int getSpanSize(int position) {
+//                    i = getItemViewType(position);
+//                    return getItemViewType(position) == TYPE_HEADER ? gridManager.getSpanCount():1;
+//                }
+//            });
+//        }
+//    }
     /**
      * 是否显示checkBox
      */
@@ -109,6 +128,19 @@ public class Videos3Adapter extends BaseAdapter<Videos3Adapter.ViewHolder, Video
 
     private void getData1(ViewHolder holder, Video video) {
         holder.tvTitle1.setText(video.Title);
+
+        if (!StringUtil.isEmpty(who)&&who.equals("kecheng")) {
+            holder.tvBlank.setVisibility(View.VISIBLE);
+            holder.layKeCheng.setVisibility(View.VISIBLE);
+//            holder.imgPraise.setVisibility(View.VISIBLE);
+//            holder.imgCollect.setVisibility(View.VISIBLE);
+//            holder.tvPraiseCount.setVisibility(View.VISIBLE);
+//            holder.tvCollectCount.setVisibility(View.VISIBLE);
+            holder.tvUsername1.setVisibility(View.GONE);
+            holder.tvVisitSum1.setVisibility(View.GONE);
+            holder.tvPraiseCount.setText(video.LikeNum+"");
+            holder.tvCollectCount.setText(video.FavoriteNum+"");
+        }
         holder.tvAddTime1.setText(TimeUtil.timeAgo(video.PublishTime) + "发布");
         holder.tvVisitSum1.setText(video.VisitNum + "人已浏览");
         if (StringUtil.isEmpty(video.NicName)) {
@@ -150,6 +182,19 @@ public class Videos3Adapter extends BaseAdapter<Videos3Adapter.ViewHolder, Video
 
     private void getData2(ViewHolder holder, Video video) {
         holder.tvTitle2.setText(video.Title);
+        if (!StringUtil.isEmpty(who)&&who.equals("kecheng")) {
+            holder.tvBlank.setVisibility(View.VISIBLE);
+            holder.layKeCheng2.setVisibility(View.VISIBLE);
+//            holder.imgPraise2.setVisibility(View.VISIBLE);
+//            holder.imgCollect2.setVisibility(View.VISIBLE);
+//            holder.tvPraiseCount2.setVisibility(View.VISIBLE);
+//            holder.tvCollectCount2.setVisibility(View.VISIBLE);
+            holder.tvUsername2.setVisibility(View.GONE);
+            holder.tvVisitSum2.setVisibility(View.GONE);
+            holder.tvPraiseCount2.setText(video.LikeNum+"");
+            holder.tvCollectCount2.setText(video.FavoriteNum+"");
+        }
+
 //        holder.tvAddTime2.setText(TimeUtil.timeAgo(video.PublishTime) + "发布");
         holder.tvVisitSum2.setText(video.VisitNum + "人已浏览");
         if (StringUtil.isEmpty(video.NicName)) {
@@ -335,6 +380,18 @@ public class Videos3Adapter extends BaseAdapter<Videos3Adapter.ViewHolder, Video
         @Bind(R.id.tv_collect_count)
         TextView tvCollectCount;
         @Nullable
+        @Bind(R.id.img_praise2)
+        ImageView imgPraise2;
+        @Nullable
+        @Bind(R.id.tv_praise_count2)
+        TextView tvPraiseCount2;
+        @Nullable
+        @Bind(R.id.img_collect2)
+        ImageView imgCollect2;
+        @Nullable
+        @Bind(R.id.tv_collect_count2)
+        TextView tvCollectCount2;
+        @Nullable
         @Bind(R.id.img_repeat)
         ImageView imgRepeat;
         @Nullable
@@ -343,7 +400,15 @@ public class Videos3Adapter extends BaseAdapter<Videos3Adapter.ViewHolder, Video
         @Nullable
         @Bind(R.id.cb_plan)
         CheckBox _CbPlan;
-
+        @Nullable
+        @Bind(R.id.tv_blank)
+        TextView tvBlank;
+        @Nullable
+        @Bind(R.id.ll_kecheng)
+        LinearLayout layKeCheng;
+        @Nullable
+        @Bind(R.id.ll_kecheng2)
+        LinearLayout layKeCheng2;
 
         ViewHolder(View view) {
             super(view);

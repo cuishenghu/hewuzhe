@@ -17,6 +17,7 @@ public class New {
      */
 
     public int Id;
+    public String MatchImage;
     public String Title;
     public String ImagePath;
     public String Content;

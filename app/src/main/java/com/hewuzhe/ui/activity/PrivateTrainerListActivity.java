@@ -50,6 +50,7 @@ public class PrivateTrainerListActivity extends SwipeRecycleViewNoMoreActivity<P
     private String _cityName = "临沂";
     private double _Lat = 34;
     private double _Lng = 120;
+    private int length=2000;
 
     private String classes;
 
@@ -85,9 +86,9 @@ public class PrivateTrainerListActivity extends SwipeRecycleViewNoMoreActivity<P
         _Lat = Double.parseDouble(getIntentData().getString("lat"));
         _Lng = Double.parseDouble(getIntentData().getString("lng"));
         _cityName = getIntentData().getString("title");
-
+        length = getIntentData().getInt("length");
         tvTitle.setText(_cityName);
-        presenter.getData(_cityName, _Lat + "", _Lng + "",classes,2000, page, count);
+        presenter.getData(_cityName, _Lat + "", _Lng + "",classes,length, page, count);
     }
 
     /**
@@ -148,7 +149,7 @@ public class PrivateTrainerListActivity extends SwipeRecycleViewNoMoreActivity<P
             super.requestDataRefresh();
         } else {
             page = 1;
-            presenter.getData(_cityName, _Lat + "", _Lng + "",classes,2000, page, count);
+            presenter.getData(_cityName, _Lat + "", _Lng + "",classes,length, page, count);
         }
 
     }
@@ -160,7 +161,7 @@ public class PrivateTrainerListActivity extends SwipeRecycleViewNoMoreActivity<P
         }
         if (adapter.getStatus() == BaseAdapter.STATUS_HASMORE) {
             page++;
-            presenter.getData(_cityName, _Lat + "", _Lng + "",classes,2000, page, count);
+            presenter.getData(_cityName, _Lat + "", _Lng + "",classes,length, page, count);
             adapter.loading();
         }
     }
@@ -171,7 +172,7 @@ public class PrivateTrainerListActivity extends SwipeRecycleViewNoMoreActivity<P
         if (resultCode == C.RESULT_TWO) {
             tvTitle.setText(_cityName);
             cityId = -1;
-            presenter.getData(_cityName, _Lat + "", _Lng + "",classes,2000, page, count);
+            presenter.getData(_cityName, _Lat + "", _Lng + "",classes,length, page, count);
 
         }
     }
@@ -184,7 +185,7 @@ public class PrivateTrainerListActivity extends SwipeRecycleViewNoMoreActivity<P
 
     @Override
     public String []getStringData() {
-        String []s = {_cityName,_Lat+"",_Lng+"",classes,2000+""};
+        String []s = {_cityName,_Lat+"",_Lng+"",classes,length+""};
         return s;
     }
 

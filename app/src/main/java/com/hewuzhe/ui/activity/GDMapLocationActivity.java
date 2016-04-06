@@ -79,6 +79,8 @@ public class GDMapLocationActivity extends Activity implements OnGeocodeSearchLi
     EditText edt_search_content;
     @Bind(R.id.product_list_search)
     ImageView product_list_search;
+    @Bind(R.id.img_back)
+    ImageView img_back;
     @Bind(R.id.add_click)
     LinearLayout add_click;
     @Bind(R.id.gdm_newaddr)
@@ -102,6 +104,10 @@ public class GDMapLocationActivity extends Activity implements OnGeocodeSearchLi
     public void newClick() {
 //        setResult(2048, new Intent().putExtra("data", new Bun().putString("address", addressName).putString("lng", Lng).putString("lat", Lat).ok()));
 //        finish();
+
+    }@OnClick(R.id.img_back)
+    public void backClick() {
+        finish();
 
     }@OnClick(R.id.product_list_search)
     public void searchClick() {
@@ -206,7 +212,7 @@ public class GDMapLocationActivity extends Activity implements OnGeocodeSearchLi
     }
 
     @OnClick(R.id.gdm_back)
-    public void backClick() {
+    public void cbackClick() {
         finish();
     }
 
@@ -361,7 +367,7 @@ public class GDMapLocationActivity extends Activity implements OnGeocodeSearchLi
                 regeoMarker.setPositionByPixels(StringUtil.getScreenWidth(this) / 2, (StringUtil.getScreenHeight(this) - StringUtil.dip2px(this, 137)) / 2 - 45);
                 aMap.setOnCameraChangeListener(this);// 对amap添加移动地图事件监听器
                 circleOptions = new CircleOptions().center(new LatLng(Double.parseDouble(Lat), Double.parseDouble(Lng)))
-                        .radius(length).strokeColor(Color.parseColor("#818181")).fillColor(Color.parseColor("#50494A4F"))
+                        .radius(length).strokeColor(Color.parseColor("#f4821c")).fillColor(Color.parseColor("#40f4821c"))
                         .strokeWidth(2);
                 aMap.addCircle(circleOptions);
                 addressName = result.getRegeocodeAddress().getFormatAddress().toString().replace(result.getRegeocodeAddress().getTownship(), "")

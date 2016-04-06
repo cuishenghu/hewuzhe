@@ -103,13 +103,13 @@ public class ScreenListActivity extends RecycleViewNoMoreActivity<ScreenListPres
 
     @Override
     public void onItemClick(View view, int pos, ScreenList item) {
-        startActivity(PrivateTrainerListActivity.class, new Bun().putString("classes", item.Id + "").putString("lat", _Lat + "").putString("lng", _Lng+"").putString("address", _address).putString("title", item.Name).ok());
+        startActivity(PrivateTrainerListActivity.class, new Bun().putString("classes", item.Id + "").putString("lat", _Lat + "").putString("lng", _Lng+"").putString("address", _address).putString("title", item.Name).putInt("length", length).ok());
 
     }
     @OnClick(R.id.s_location)
     public void locationOnClick(){
         startActivityForResult(new Intent(this,
-                GDMapLocationActivity.class).putExtra("lat", _Lat).putExtra("lng", _Lng) ,1025);
+                GDMapLocationActivity.class).putExtra("lat", _Lat).putExtra("lng", _Lng).putExtra("length", length) ,1025);
     }
 
     @Override

@@ -73,7 +73,7 @@ public class PrivateTrainerListAdapter extends BaseNoMoreAdapter<PrivateTrainerL
         if(l<1000.0)
             return "1千米内";
         else if(l>1000)
-            return df.format(l*1000)+"千米";
+            return df.format(l/1000)+"千米";
         return "";
     }
 

@@ -521,5 +521,7 @@ public interface ApiService {
     @GET("Helianmeng.asmx/SelectNearbyUser")
     Observable<Res<ArrayList<NearPeople>>> SelectNearbyUser(@Query("startRowIndex") int startRowIndex,@Query("maximumRows") int maximumRows,@Query("userid") int userid, @Query("lat") String lat,@Query("lng") String lng,@Query("length") int length,@Query("age") int age,@Query("sexuality") int sexuality);
 
+    @GET("LoginAndRegister.asmx/GetProvinceByCity")
+    Observable<Res> GetProvinceByCity(@Query("cityname") String cityname);
 
 }

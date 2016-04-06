@@ -52,12 +52,13 @@
                         android:text="临沂"
                         android:maxLines="1"
                         android:textColor="@android:color/white"
-                        android:textSize="14sp"/>
+                        android:textSize="18sp"/>
 
                     <ImageView android:layout_width="30px"
                         android:layout_height="30px"
                         android:layout_marginLeft="10px"
-                        android:src="@drawable/icon_address"/>
+                        android:src="@drawable/icon_address"
+                        android:visibility="gone"/>
 
 
                 </LinearLayout>

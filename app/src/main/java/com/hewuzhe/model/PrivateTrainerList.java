@@ -8,6 +8,7 @@ public class PrivateTrainerList {
     public String PhotoPath;
     public String Phone;
     public String NicName;
+    public String Speciality;
     public String Distance;
 
 }

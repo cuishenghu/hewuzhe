@@ -29,7 +29,7 @@
             android:layout_marginLeft="5dp"
             android:text="跆拳道教练"
             android:textColor="@color/colorYellow"
-            android:textSize="16sp" />
+            android:textSize="14sp" />
 
         <RelativeLayout
             android:layout_width="match_parent"
@@ -44,7 +44,7 @@
                 android:layout_marginLeft="5dp"
                 android:text="某某某"
                 android:textColor="@color/white"
-                android:textSize="16sp" />
+                android:textSize="12sp" />
 
             <TextView
                 android:id="@+id/pt_juli"
@@ -55,7 +55,7 @@
                 android:maxLines="1"
                 android:text="500"
                 android:textColor="@color/white"
-                android:textSize="16sp" />
+                android:textSize="12sp" />
         </RelativeLayout>
     </LinearLayout>
 </LinearLayout>

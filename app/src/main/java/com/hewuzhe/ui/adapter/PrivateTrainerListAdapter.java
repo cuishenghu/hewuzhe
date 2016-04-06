@@ -20,6 +20,8 @@ import com.hewuzhe.ui.adapter.base.BaseNoMoreAdapter;
 import com.hewuzhe.ui.cons.C;
 import com.hewuzhe.utils.StringUtil;
 
+import java.text.DecimalFormat;
+
 import butterknife.Bind;
 import butterknife.ButterKnife;
 
@@ -61,8 +63,18 @@ public class PrivateTrainerListAdapter extends BaseNoMoreAdapter<PrivateTrainerL
                 .placeholder(R.mipmap.img_bg)
                 .into(holder.pt_photo);
         holder.pt_name.setText(privateTrainerList.NicName);
-        holder.pt_juli.setText(privateTrainerList.Distance+"");
+        holder.pt_juli.setText(getLength(Double.parseDouble(privateTrainerList.Distance)));
+        holder.pt_work.setText(privateTrainerList.Speciality);
 
+    }
+
+    private String getLength(double l){
+        DecimalFormat df = new DecimalFormat("######0.0");
+        if(l<1000.0)
+            return "1千米内";
+        else if(l>1000)
+            return df.format(l*1000)+"千米";
+        return "";
     }
 
     class ViewHolder extends RecyclerView.ViewHolder {

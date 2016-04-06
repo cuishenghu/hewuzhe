@@ -158,7 +158,6 @@ public class ImagePagerAdapter extends BaseAdapter {
                 .cacheOnDisc(true) // 设置下载的图片是否缓存在SD卡中
                 .build();
 
-
     }
 
     //图片合集

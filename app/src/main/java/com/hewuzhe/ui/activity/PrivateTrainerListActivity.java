@@ -84,7 +84,7 @@ public class PrivateTrainerListActivity extends SwipeRecycleViewNoMoreActivity<P
         classes = getIntentData().getString("classes");
         _Lat = Double.parseDouble(getIntentData().getString("lat"));
         _Lng = Double.parseDouble(getIntentData().getString("lng"));
-        _cityName = getIntentData().getString("address");
+        _cityName = getIntentData().getString("title");
 
         tvTitle.setText(_cityName);
         presenter.getData(_cityName, _Lat + "", _Lng + "",classes,2000, page, count);

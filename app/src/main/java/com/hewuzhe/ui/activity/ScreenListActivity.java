@@ -46,9 +46,11 @@ public class ScreenListActivity extends RecycleViewNoMoreActivity<ScreenListPres
     TextView sl_count;
 
     private String _cityName = "";
+    private String sheng;
     private String _address = "";
     private double _Lat = 0;
     private double _Lng = 0;
+    private int length=2000;
 
 
     private AMap aMap;
@@ -101,13 +103,13 @@ public class ScreenListActivity extends RecycleViewNoMoreActivity<ScreenListPres
 
     @Override
     public void onItemClick(View view, int pos, ScreenList item) {
-        startActivity(PrivateTrainerListActivity.class, new Bun().putString("classes", item.Id+"").putString("lat", _Lat + "").putString("lng", _Lng+"").putString("address", _address).ok());
+        startActivity(PrivateTrainerListActivity.class, new Bun().putString("classes", item.Id + "").putString("lat", _Lat + "").putString("lng", _Lng+"").putString("address", _address).putString("title", item.Name).ok());
 
     }
     @OnClick(R.id.s_location)
     public void locationOnClick(){
         startActivityForResult(new Intent(this,
-                GDMapLocationActivity.class).putExtra("lat", _Lat).putExtra("lng", _Lng), 1025);
+                GDMapLocationActivity.class).putExtra("lat", _Lat).putExtra("lng", _Lng) ,1025);
     }
 
     @Override
@@ -118,7 +120,8 @@ public class ScreenListActivity extends RecycleViewNoMoreActivity<ScreenListPres
             _address = data.getBundleExtra("data").getString("address");
             _Lat = Double.parseDouble(data.getBundleExtra("data").getString("lat"));
             _Lng = Double.parseDouble(data.getBundleExtra("data").getString("lng"));
-            presenter.SelectTeacherCateList(_Lat,_Lng,2000);
+            length = data.getBundleExtra("data").getInt("length");
+            presenter.SelectTeacherCateList(_Lat,_Lng,length);
         }
     }
 
@@ -151,8 +154,10 @@ public class ScreenListActivity extends RecycleViewNoMoreActivity<ScreenListPres
         _Lng = aMapLocation.getLongitude();
         _Lat = aMapLocation.getLatitude();
         _address = aMapLocation.getAddress();
+        _cityName=aMapLocation.getCity();
+        sheng = aMapLocation.getProvince();
         user_address.setText(_address);
-        presenter.SelectTeacherCateList(_Lat,_Lng,2000);
+        presenter.SelectTeacherCateList(_Lat,_Lng,length);
         mlocationClient.stopLocation();
     }
 
@@ -162,7 +167,7 @@ public class ScreenListActivity extends RecycleViewNoMoreActivity<ScreenListPres
         for (int i=0;i<data.size();i++){
             count+=Integer.parseInt(data.get(i).StudentCount);
         }
-        sl_count.setText("附近2km共"+count+"名私教");
+        sl_count.setText("附近"+length+"米共"+count + "名私教");
         bd(data);
     }
 }

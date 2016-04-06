@@ -109,7 +109,7 @@ public class GroupConditionActivity extends SwipeRecycleViewActivity<GroupCondit
 
     @Override
     protected String provideTitle() {
-        return "圈子";
+        return "兴趣圈";
     }
 
 
@@ -391,7 +391,7 @@ public class GroupConditionActivity extends SwipeRecycleViewActivity<GroupCondit
             _LayChat.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    snb("您还不是该圈子的成员", _LayChat);
+                    snb("您还不是该兴趣圈的成员", _LayChat);
                 }
             });
 

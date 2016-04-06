@@ -8,6 +8,7 @@ import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Handler;
+import android.support.annotation.NonNull;
 import android.view.Display;
 import android.view.View;
 import android.view.ViewGroup;
@@ -30,6 +31,7 @@ import com.hewuzhe.ui.adapter.TrainerSignAdapter;
 import com.hewuzhe.ui.adapter.TrainerVideoAdapter;
 import com.hewuzhe.ui.adapter.TrainerVideoAndFocusAndFansAdapter;
 import com.hewuzhe.ui.base.BaseActivity2;
+import com.hewuzhe.ui.cons.C;
 import com.hewuzhe.ui.http.AbstractHttpHandler;
 import com.hewuzhe.ui.http.EntityHandler;
 import com.hewuzhe.ui.http.HttpErrorHandler;
@@ -52,6 +54,9 @@ import java.util.Arrays;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
+
+import materialdialogs.DialogAction;
+import materialdialogs.MaterialDialog;
 
 /**
  * Created by Administrator on 2016/3/11 0011.
@@ -268,8 +273,29 @@ public class PrivateTrainerInfoActivity extends BaseActivity2 implements OnItemC
                 }
                 break;
             case R.id.tv_contact://联系他,拨打电话
-//                startActivity(new Intent(PrivateTrainerInfoActivity.this,MySignLessonListActivity.class));
-                startActivity(new Intent(Intent.ACTION_CALL, Uri.parse("tel:" + phoneNumber)));
+//                startActivity(new Intent(Intent.ACTION_CALL, Uri.parse("tel:" + phoneNumber)));
+                new MaterialDialog.Builder(PrivateTrainerInfoActivity.this)
+                        .title("拨打客服电话")
+                        .titleColor(Color.WHITE)
+                        .content("确定拨打客服电话？")
+                        .contentColor(Color.WHITE)
+                        .positiveColor(C.COLOR_YELLOW)
+                        .negativeColor(C.COLOR_YELLOW)
+                        .positiveText("确定")
+                        .negativeText("取消")
+                        .backgroundColor(C.COLOR_BG)
+                        .onNegative(new MaterialDialog.SingleButtonCallback() {
+                            @Override
+                            public void onClick(@NonNull MaterialDialog dialog, @NonNull DialogAction which) {
+                                dialog.dismiss();
+                            }
+                        })
+                        .onPositive(new MaterialDialog.SingleButtonCallback() {
+                            @Override
+                            public void onClick(@NonNull MaterialDialog dialog, @NonNull DialogAction which) {
+                                startActivity(new Intent(Intent.ACTION_CALL, Uri.parse("tel:" + phoneNumber)));
+                            }
+                        }).show();
             case R.id.tv_video:
                 mType = 1;
                 tv_video.setTextColor(getResources().getColor(R.color.colorYellow));

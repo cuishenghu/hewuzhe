@@ -86,6 +86,14 @@ public class MyScoretDuiHuanSuccessInfoActivity extends BaseActivity2 {
 
         setListener(tv_check_logtic);
 
+        if(StringUtil.isEmpty(billDetailId)){
+            tv_product_name.setText(product.getName());
+            tv_product_score.setText(product.getCreditTotal()+"积分");
+            tv_product_person.setText(product.getCreditNum() + "人已兑换");
+            tv_product_remain.setText("剩余：" + product.getStockNum()+"件");
+            tv_end_time.setText("兑换时间："+product.getPublishTime());////////////////待修改,由OrderConfirmSecondActivity传值
+            tv_content.setText(product.getContent());
+        }
 
         //banner轮播图
 //        imageUrlList.add("http://image17-c.poco.cn/mypoco/myphoto/20160108/21/5598520120160108215204039_640.jpg");

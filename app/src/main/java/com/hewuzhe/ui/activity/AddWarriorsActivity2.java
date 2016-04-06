@@ -85,7 +85,7 @@ public class AddWarriorsActivity2 extends RecycleViewActivity<AddWarriorsPresent
         lay_select_near.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                startActivity(new Intent(AddWarriorsActivity2.this, NearPeopleActivity.class));
             }
         });
     }

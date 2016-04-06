@@ -195,6 +195,7 @@ public class StudyOnlineOneFragment extends BaseFragment<StudyOnlineFragPresente
                 Intent intent = new Intent(getActivity(), Videos_2Activity.class);
                 intent.putExtra("title", item.Name);
                 intent.putExtra("id", item.Id);
+                intent.putExtra("who","kecheng");
                 getActivity().startActivity(intent);
             }
         });

@@ -1,9 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:background="@color/colorListBg"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    >
 
     <RelativeLayout
         android:id="@+id/ll_single_item"
@@ -12,7 +14,7 @@
 
         <FrameLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="180dp">
 
             <ImageView
                 android:id="@+id/img_bg1"
@@ -21,20 +23,47 @@
                 android:scaleType="fitXY"
                 android:src="@mipmap/img_bg_videio" />
 
+            <TextView
+                android:id="@+id/tv_add_time"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10px"
+                android:layout_marginTop="18px"
+                android:text=""
+                android:textColor="@color/white"
+                android:textSize="25px" />
+
+            <TextView
+                android:id="@+id/tv_is_free"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="right"
+                android:layout_marginRight="10px"
+                android:layout_marginTop="18px"
+                android:background="@color/colorYellow"
+                android:paddingBottom="5px"
+                android:paddingLeft="8px"
+                android:paddingRight="8px"
+                android:paddingTop="5px"
+                android:text="会员"
+                android:textColor="@color/white"
+                android:textSize="25px"
+                android:visibility="gone" />
+
+
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="70dp"
-                android:layout_gravity="bottom"
-                android:background="#60000000"
-                android:orientation="vertical"
+                android:layout_height="match_parent"
                 android:paddingLeft="15px"
+                android:layout_marginTop="125dp"
+                android:background="#00000000"
+                android:orientation="vertical"
                 android:paddingRight="10px">
 
                 <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_height="25dp"
-                    android:paddingTop="5dp"
-                    android:paddingBottom="5dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="2dp"
                     android:orientation="horizontal">
 
                     <TextView
@@ -63,25 +92,27 @@
                         android:textSize="20px" />
                 </LinearLayout>
 
+
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="1dp"
-                    android:layout_marginLeft="15px"
+                    android:layout_marginTop="5dp"
+                    android:layout_marginLeft="30px"
                     android:background="@color/colorLine" />
-
 
                 <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_height="0dp"
-                    android:layout_weight="1"
+                    android:layout_height="match_parent"
                     android:gravity="center_vertical"
-                    android:orientation="horizontal">
+                    android:orientation="horizontal"
+                    android:paddingLeft="20px"
+                    android:paddingRight="30px">
 
                     <ImageView
                         android:id="@+id/img_avatar1"
-                        android:layout_width="35dp"
-                        android:layout_height="35dp"
-                        android:src="@mipmap/img_avatar" />
+                        android:layout_width="50px"
+                        android:layout_height="50px"
+                        android:src="@mipmap/ic_launcher" />
 
                     <TextView
                         android:id="@+id/tv_username1"
@@ -95,6 +126,7 @@
                         android:textSize="20px" />
 
                     <ImageView
+                        android:id="@+id/img_comment_count"
                         android:layout_width="20px"
                         android:layout_height="20px"
                         android:layout_marginLeft="18px"
@@ -113,6 +145,7 @@
 
 
                     <ImageView
+                        android:id="@+id/img_visit_sum"
                         android:layout_width="25px"
                         android:layout_height="25px"
                         android:layout_marginLeft="38px"
@@ -127,10 +160,87 @@
                         android:text="100人浏览"
                         android:textColor="@color/white"
                         android:textSize="20px" />
+
+                    <ImageView
+                        android:id="@+id/img_collect"
+                        android:layout_width="30px"
+                        android:layout_height="30px"
+                        android:layout_gravity="center_vertical"
+                        android:layout_marginLeft="38px"
+                        android:src="@mipmap/icon_collect"
+                        android:visibility="gone" />
+
+                    <TextView
+                        android:id="@+id/tv_collect_count"
+                        style="@style/text_25_white"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical"
+                        android:layout_marginLeft="10px"
+                        android:text="100"
+                        android:visibility="gone" />
+
+                    <ImageView
+                        android:id="@+id/img_praise"
+                        android:layout_width="30px"
+                        android:layout_height="30px"
+                        android:layout_gravity="center_vertical"
+                        android:layout_marginLeft="38px"
+                        android:src="@mipmap/icon_praise"
+                        android:visibility="gone" />
+
+                    <TextView
+                        android:id="@+id/tv_praise_count"
+                        style="@style/text_25_white"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical"
+                        android:layout_marginLeft="10px"
+                        android:text="100"
+                        android:visibility="gone" />
+
+                    <ImageView
+                        android:id="@+id/img_repeat"
+                        android:layout_width="30px"
+                        android:layout_height="30px"
+                        android:layout_marginLeft="38px"
+                        android:src="@mipmap/icon_share_gray"
+                        android:visibility="gone" />
+
+                    <TextView
+                        android:id="@+id/tv_repeat_count"
+                        style="@style/text_25_colorLine"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="10px"
+                        android:text="100"
+                        android:visibility="gone" />
+
+
+                    <CheckBox
+                        android:id="@+id/cb_plan"
+                        android:layout_width="30px"
+                        android:layout_height="30px"
+                        android:layout_centerVertical="true"
+                        android:layout_marginLeft="8px"
+                        android:background="@drawable/icon_cb_selector_two"
+                        android:button="@null"
+                        android:visibility="gone" />
                 </LinearLayout>
             </LinearLayout>
         </FrameLayout>
+
     </RelativeLayout>
+
+    <TextView
+        android:id="@+id/tv_desc"
+        style="@style/text_27_colorLine"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="20px"
+        android:lines="2"
+        android:text="跆拳道。。。。。"
+        android:visibility="gone" />
 
     <RelativeLayout
         android:id="@+id/ll_double_item"
@@ -226,7 +336,7 @@
                             android:id="@+id/img_avatar2"
                             android:layout_width="45px"
                             android:layout_height="45px"
-                            android:src="@mipmap/img_avatar" />
+                            android:src="@mipmap/ic_launcher" />
 
                         <TextView
                             android:id="@+id/tv_username2"
@@ -256,6 +366,43 @@
                             android:textSize="20px"
                             android:visibility="gone" />
 
+                        <ImageView
+                            android:id="@+id/img_collect2"
+                            android:layout_width="30px"
+                            android:layout_height="30px"
+                            android:layout_gravity="center_vertical"
+                            android:layout_marginLeft="38px"
+                            android:src="@mipmap/icon_collect"
+                            android:visibility="gone" />
+
+                        <TextView
+                            android:id="@+id/tv_collect_count2"
+                            style="@style/text_25_white"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_vertical"
+                            android:layout_marginLeft="10px"
+                            android:text="100"
+                            android:visibility="gone" />
+
+                        <ImageView
+                            android:id="@+id/img_praise2"
+                            android:layout_width="30px"
+                            android:layout_height="30px"
+                            android:layout_gravity="center_vertical"
+                            android:layout_marginLeft="38px"
+                            android:src="@mipmap/icon_praise"
+                            android:visibility="gone" />
+
+                        <TextView
+                            android:id="@+id/tv_praise_count2"
+                            style="@style/text_25_white"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_vertical"
+                            android:layout_marginLeft="10px"
+                            android:text="100"
+                            android:visibility="gone" />
 
                         <ImageView
                             android:layout_width="25px"

@@ -182,8 +182,10 @@ public class ChatFragment extends SwipeRecycleViewFragment<ChatPresenter,ChatAda
                 startActivity(ConversationListActivity.class);
             }
         });
-
-        //打开好友列表
+        /**
+         * 武友列表
+         */
+        //
         chat_friends_list.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -207,14 +209,16 @@ public class ChatFragment extends SwipeRecycleViewFragment<ChatPresenter,ChatAda
             @Override
             public void onClick(View v) {
                 if (new SessionUtil(getContext()).getUser().TeamId == 0) {
-                    snb("请先加入圈子", ll_xingququan);
+                    snb("请先加入兴趣圈", ll_xingququan);
                     startActivity(new Intent(getActivity(), JoinGroupActivity.class));
                 } else {
                     startActivity(GroupConditionActivity.class, new Bun().putInt("teamid", new SessionUtil(getContext()).getUser().TeamId).ok());
                 }
             }
         });
-
+        /**
+         * 附近人
+         */
         ll_near_person.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

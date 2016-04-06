@@ -1,6 +1,7 @@
 package com.hewuzhe.ui.activity;
 
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
@@ -31,6 +32,7 @@ public class Videos_2Activity extends SwipeRecycleViewActivity<Videos2Presenter,
     @Bind(R.id.swicth_button)
     CheckBox swicthButton;
     String where = "";
+    String who="";
 
     private GridLayoutManager gridLayoutManager;
     private GridItemDecoration decoration;
@@ -49,22 +51,29 @@ public class Videos_2Activity extends SwipeRecycleViewActivity<Videos2Presenter,
         super.initThings(savedInstanceState);
         catId = getIntent().getIntExtra("id", 0);
         this.where = getIntent().getStringExtra("where");
+        this.who=getIntent().getStringExtra("who");//有课程传值过来
         refresh(true);
         if (!StringUtil.isEmpty(where)) {
             if (where.equals("six"))
 //                presenter.getData(page, count);
             presenter.SelectVideoByRecommendCategory(new SessionUtil(Videos_2Activity.this).getUserId(),page,count);
-            if (where.equals("five"))
+
+            if (where.equals("five"))//交流
                 presenter.SelectVideoByCategory(page, count);
-            imgSearch.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    startActivity(SearchOnlineVideosActivity.class, new Bun().putString("title", "搜索").putInt("catId", catId).ok());
-                }
-            });
+            /**
+             * 搜索功能
+             * 因为搜索点击事件放在视频的交流里面,因为课程和交流用的一个activity,现在把搜索点击事件移至initListener里面
+             */
+//            imgSearch.setOnClickListener(new View.OnClickListener() {
+//                @Override
+//                public void onClick(View view) {
+//                    startActivity(SearchOnlineVideosActivity.class, new Bun().putString("title", "搜索").putInt("catId", catId).ok());
+//                }
+//            });
         } else {
             presenter.getData(page, count);
         }
+
     }
 
     /**
@@ -80,9 +89,10 @@ public class Videos_2Activity extends SwipeRecycleViewActivity<Videos2Presenter,
      */
     @Override
     protected Videos3Adapter provideAdapter() {
-        decoration = new GridItemDecoration(10, 2);
+        this.who=getIntent().getStringExtra("who");
+        decoration = new GridItemDecoration(10, 1);
         recyclerView.addItemDecoration(decoration);
-        return new Videos3Adapter(getContext());
+        return new Videos3Adapter(getContext(),who);
     }
 
     /**
@@ -90,13 +100,13 @@ public class Videos_2Activity extends SwipeRecycleViewActivity<Videos2Presenter,
      */
     @Override
     protected RecyclerView.LayoutManager provideLayoutManager() {
-        gridLayoutManager = new GridLayoutManager(getContext(), 2);
-
+        gridLayoutManager = new GridLayoutManager(getContext(), 1);
         gridLayoutManager.setSpanSizeLookup(new GridLayoutManager.SpanSizeLookup() {
             @Override
             public int getSpanSize(int position) {
-                if (position == adapter.getItemCount() - 1) {
-                    return swicthButton.isChecked() ? 1 : 2;
+                if (position == adapter.getItemCount()) {
+                    return swicthButton.isChecked() ? 2 :1;
+
                 }
                 return 1;
             }
@@ -110,6 +120,18 @@ public class Videos_2Activity extends SwipeRecycleViewActivity<Videos2Presenter,
      */
     @Override
     public void initListeners() {
+        /**
+         * 搜索按钮
+         */
+        imgSearch.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(SearchOnlineVideosActivity.class, new Bun().putString("title", "搜索").putInt("catId", catId).ok());
+            }
+        });
+        /**
+         * 控制单双列显示按钮
+         */
         swicthButton.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
@@ -119,6 +141,7 @@ public class Videos_2Activity extends SwipeRecycleViewActivity<Videos2Presenter,
                 adapter.notifyDataSetChanged();
             }
         });
+
     }
 
 

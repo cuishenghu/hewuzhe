@@ -7,6 +7,7 @@ import com.hewuzhe.R;
 import com.hewuzhe.presenter.TeamManagerPresenter;
 import com.hewuzhe.ui.base.ToolBarActivity;
 import com.hewuzhe.ui.cons.C;
+import com.hewuzhe.utils.Tools;
 import com.hewuzhe.view.TeamManagerView;
 
 import butterknife.Bind;
@@ -42,6 +43,7 @@ public class TeamManagerActivity extends ToolBarActivity<TeamManagerPresenter> i
             @Override
             public void onClick(View view) {
                 presenter.quitGroup(getIntentData().getInt("id"));
+                Tools.toast(TeamManagerActivity.this,"退出成功");
             }
         });
     }

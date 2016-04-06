@@ -49,9 +49,9 @@ public class MatchFragmentPresenter extends RefreshAndLoadMorePresenter<MatchFra
         addSubscription(subscription);
     }
 
-    public void SelectZixunPicList() {
+    public void SelectZixunPicList(final int num) {
         Subscription subscription = NetEngine.getService()
-                .SelectZixunPicList()
+                .SelectZixunPicList(new SessionUtil(view.getContext()).getUserId(),num)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new SB<Res<ArrayList<New>>>() {

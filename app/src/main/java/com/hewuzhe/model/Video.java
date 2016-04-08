@@ -61,6 +61,7 @@ public class Video {
     public boolean Islike = false;
     public boolean IsFavorite = false;
     public int IsGuanzhu;
+    public int GuanzhuNum;
 
 
     /**

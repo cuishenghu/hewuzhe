@@ -68,6 +68,8 @@ public class ChatFragment extends SwipeRecycleViewFragment<ChatPresenter,ChatAda
     @Bind(R.id.tv_action)
     TextView tv_action;
 
+    ArrayList<ChatList> chatLists;
+
     private RecyclerView re_others;
     private RecyclerView recycler_view_one;
 
@@ -86,6 +88,7 @@ public class ChatFragment extends SwipeRecycleViewFragment<ChatPresenter,ChatAda
         presenter.SelectFriends(this.getContext());
         presenter.getData(page, count);
         presenter.SelectRecommendUser();
+        presenter.getTopFourData();
 
     }
 
@@ -264,34 +267,30 @@ public class ChatFragment extends SwipeRecycleViewFragment<ChatPresenter,ChatAda
         chat_friends.setText(count == 0 ? "暂无好友" : "您有" + count + "个好友");
     }
 
+
     @Override
     public void bindTuijian(ArrayList<ChatList> data) {
-        if(isfirst) {
-            ArrayList<ChatList> chatLists = new ArrayList<>();
-            for (int i = 0; i < 4; i++) {
-                chatLists.add(data.get(i));
-                data.remove(i);
-            }
-            recycler_view_one.setLayoutManager(new GridLayoutManager(getContext(),2));
-            ChatAdapter chatAdapter=new ChatAdapter(getContext());
-            //设置imageview宽高
-            WindowManager manager = (WindowManager)getContext().getSystemService(Context.WINDOW_SERVICE);
-            Display display = manager.getDefaultDisplay();
-            int width =display.getWidth();
-            ViewGroup.LayoutParams para;
-            para = recycler_view_one.getLayoutParams();
-
-            para.height = (((width- StringUtil.dip2px(getContext(), 20))/2)+StringUtil.dip2px(getContext(),125))*2;
-            recycler_view_one.setLayoutParams(para);
-
-            recycler_view_one.setAdapter(chatAdapter);
-
-            chatAdapter.data.addAll(chatLists);
-            isfirst = false;
-        }
-
         bd(data);
+    }
 
+    @Override
+    public void bindTopFourTuijian(ArrayList<ChatList> data) {
+        recycler_view_one.setLayoutManager(new GridLayoutManager(getContext(),2));
+        ChatAdapter chatAdapter=new ChatAdapter(getContext());
+        //设置imageview宽高
+        WindowManager manager = (WindowManager)getContext().getSystemService(Context.WINDOW_SERVICE);
+        Display display = manager.getDefaultDisplay();
+        int width =display.getWidth();
+        ViewGroup.LayoutParams para;
+        para = recycler_view_one.getLayoutParams();
+
+        para.height = (((width- StringUtil.dip2px(getContext(), 20))/2)+StringUtil.dip2px(getContext(),125))*2;
+        recycler_view_one.setLayoutParams(para);
+
+        recycler_view_one.setAdapter(chatAdapter);
+
+        chatAdapter.data.addAll(data);
+        isfirst = false;
     }
 
     @Override

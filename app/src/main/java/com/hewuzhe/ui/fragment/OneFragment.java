@@ -24,7 +24,7 @@ import java.util.ArrayList;
 public class OneFragment extends SwipeRecycleViewFragment<OneFragmentPresenter, VideoAdapter, Video> implements OneFragmentView {
 
     private String path;
-    private boolean isChecked = true;
+    private boolean isChecked = false;
 
     private GridLayoutManager gridLayoutManager;
     private GridItemDecoration decoration;
@@ -77,7 +77,7 @@ public class OneFragment extends SwipeRecycleViewFragment<OneFragmentPresenter, 
      */
     @Override
     protected RecyclerView.LayoutManager provideLayoutManager() {
-        gridLayoutManager = new GridLayoutManager(getContext(), 1);
+        gridLayoutManager = new GridLayoutManager(getContext(), 2);
 
         gridLayoutManager.setSpanSizeLookup(new GridLayoutManager.SpanSizeLookup() {
             @Override

@@ -68,11 +68,11 @@ public class GDMapLocationActivity extends Activity implements OnGeocodeSearchLi
     private Marker regeoMarker;
     private LatLonPoint latLonPoint;
     private RegeocodeQuery query;
-    private float zoom = 15f;
+    private float zoom = 13f;
     private String _cityName;
     private String _sheng;
     CircleOptions circleOptions;
-    private int length=2000;
+    private int length=5000;
     private int i;
 
     @Bind(R.id.edt_search_content)
@@ -97,6 +97,8 @@ public class GDMapLocationActivity extends Activity implements OnGeocodeSearchLi
     TextView zoom_small;
     @Bind(R.id.add_c)
     TextView add_c;
+    @Bind(R.id.zoom_text)
+    TextView zoom_text;
     @Bind(R.id.map)
     MapView map;
 
@@ -128,6 +130,7 @@ public class GDMapLocationActivity extends Activity implements OnGeocodeSearchLi
         if(length<50000)
             length+=1000;
         Tools.toast(this, "搜索附近"+length+"米的距离");
+        zoom_text.setText(length/1000+"km");
         zoom = aMap.getCameraPosition().zoom;
         initView();
     }
@@ -137,6 +140,7 @@ public class GDMapLocationActivity extends Activity implements OnGeocodeSearchLi
         if(length>1000)
             length-=1000;
         Tools.toast(this, "搜索附近" + length + "米的距离");
+        zoom_text.setText(length/1000+"km");
         zoom = aMap.getCameraPosition().zoom;
         initView();
 
@@ -225,13 +229,14 @@ public class GDMapLocationActivity extends Activity implements OnGeocodeSearchLi
         mapView.onCreate(savedInstanceState);// 此方法必须重写
         double latitude = getIntent().getDoubleExtra("lat", 35.106334);
         double longitude = getIntent().getDoubleExtra("lng", 118.356544);
-        length = getIntent().getIntExtra("length",2000);
+        length = getIntent().getIntExtra("length",5000);
         Lat = latitude+"";
         Lng = longitude+"";
         latLonPoint = new LatLonPoint(latitude, longitude);
         ButterKnife.bind(this);
         tv_title.setText("选择地址");
         tv_action.setText("完成");
+        zoom_text.setText("5km");
         initView();
     }
 

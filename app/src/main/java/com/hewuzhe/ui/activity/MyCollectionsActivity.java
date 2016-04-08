@@ -94,7 +94,7 @@ public class MyCollectionsActivity extends TabToolBarActivity {
         viewPagerAdapter.addFragment(ProductCollectionsFragment.newInstance(), "商品");//添加Fragment
         viewPagerAdapter.addFragment(ArticleCollectionsFragment.newInstance(), "文章");
         mViewPager.setAdapter(viewPagerAdapter);
-
+        mViewPager.setOffscreenPageLimit(5);
         TabLayout mTabLayout = (TabLayout) findViewById(R.id.tabLayout);
         mTabLayout.addTab(mTabLayout.newTab());//给TabLayout添加Tab
         mTabLayout.addTab(mTabLayout.newTab());

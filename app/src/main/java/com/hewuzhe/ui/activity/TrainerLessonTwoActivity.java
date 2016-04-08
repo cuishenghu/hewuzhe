@@ -31,7 +31,9 @@ import com.hewuzhe.ui.widgeter.adapters.ArrayWheelAdapter;
 import com.hewuzhe.utils.SessionUtil;
 import com.hewuzhe.utils.StringUtil;
 import com.hewuzhe.utils.TimeUtil;
+import com.hewuzhe.view.CircleImageView;
 import com.hewuzhe.view.TrainerLessonView;
+import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -53,7 +55,7 @@ public class TrainerLessonTwoActivity extends ToolBarActivity<TrainerLessonPrese
     @Bind(R.id.user_content)
     TextView user_content;
     @Bind(R.id.head_portrait)
-    ImageView head_portrait;
+    CircleImageView head_portrait;
     @Bind(R.id.usr_name)
     TextView usr_name;
     @Bind(R.id.usr_phone)
@@ -178,13 +180,13 @@ public class TrainerLessonTwoActivity extends ToolBarActivity<TrainerLessonPrese
         product_title.setText(trainerLessonTwo.Title);
         user_name.setText(arrayList.get(1));
         user_content.setText(arrayList.get(2));
-        Glide.with(this)
+        Picasso.with(this)
                 .load(C.BASE_URL + arrayList.get(3))
+                .placeholder(R.mipmap.img_avatar)
+                .resize(50, 50)
+                .error(R.mipmap.img_avatar)
                 .centerCrop()
-                .crossFade()
-                .placeholder(R.mipmap.img_bg)
-                .transform(new GlideCircleTransform(this))
-                .into(head_portrait);
+                .into(head_portrait); //imagview 布局
 
     }
 

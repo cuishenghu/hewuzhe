@@ -48,18 +48,27 @@
 
             </View>
 
-
+            <com.hewuzhe.view.CircleImageView
+                android:id="@+id/head_portrait"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:layout_centerVertical="true"
+                android:layout_gravity="center"
+                android:layout_marginLeft="12dp"
+                android:layout_marginRight="10dp"
+                android:layout_marginTop="4dp"
+                android:visibility="visible"
+                android:src="@mipmap/img_avatar" />
 
             <ImageView
-                android:id="@+id/head_portrait"
+                android:id="@+id/head_portrait_old"
                 android:layout_width="50dp"
                 android:layout_height="50dp"
                 android:layout_marginLeft="12dp"
                 android:layout_marginRight="10dp"
                 android:layout_marginTop="4dp"
-                android:layout_gravity="center"
-                android:src="@mipmap/icon" />
-
+                android:visibility="invisible"
+                android:src="@mipmap/img_avatar" />
 
             <TextView
                 android:id="@+id/user_name"

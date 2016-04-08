@@ -55,6 +55,8 @@ public class MegaGameFragment extends SwipeRecycleViewFragment<MegaGamePresenter
 
     }
 
+
+
     /**
      * @return 提供LayoutId
      */
@@ -68,7 +70,7 @@ public class MegaGameFragment extends SwipeRecycleViewFragment<MegaGamePresenter
      */
     @Override
     public MegaGamePresenter createPresenter() {
-        return new MegaGamePresenter();
+        return new MegaGamePresenter(this);
     }
 
     @Override

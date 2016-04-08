@@ -36,6 +36,17 @@ public class ArticleCollectionsFragment extends SwipeRecycleViewFragment<Article
 
     }
 
+    @Override
+    public void onResume() {
+        super.onResume();
+        requestDataRefresh();
+    }
+    @Override
+    public void requestDataRefresh() {
+        super.requestDataRefresh();
+        page = 1;
+        presenter.getData(page, count);
+    }
 
     /**
      * 初始化事件监听者
@@ -49,7 +60,7 @@ public class ArticleCollectionsFragment extends SwipeRecycleViewFragment<Article
     protected void initThings(View view) {
         super.initThings(view);
 
-        presenter.getData(page, count);
+
 
     }
 

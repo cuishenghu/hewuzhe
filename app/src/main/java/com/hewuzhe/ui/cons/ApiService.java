@@ -18,6 +18,7 @@ import com.hewuzhe.model.FriendCondition;
 import com.hewuzhe.model.Group;
 import com.hewuzhe.model.IntegralRecord;
 import com.hewuzhe.model.LiveVideo;
+import com.hewuzhe.model.MatchCategory;
 import com.hewuzhe.model.MegaComment;
 import com.hewuzhe.model.MegaGame;
 import com.hewuzhe.model.MegaGameVideo;
@@ -266,8 +267,8 @@ public interface ApiService {
     @GET("Helianmeng.asmx/SelectTeamPage")
     Observable<Res<ArrayList<Group>>> SelectTeamPage(@Query("startRowIndex") int startRowIndex, @Query("maximumRows") int maximumRows, @Query("citycode") int citycode, @Query("name") String name);
 
-    @GET("Helianmeng.asmx/{path}")
-    Observable<Res<ArrayList<MegaGame>>> getGames(@Path("path") String path, @Query("startRowIndex") int startRowIndex, @Query("maximumRows") int maximumRows);
+//    @GET("Helianmeng.asmx/{path}")
+//    Observable<Res<ArrayList<MegaGame>>> getGames(@Path("path") String path, @Query("startRowIndex") int startRowIndex, @Query("maximumRows") int maximumRows);
 
     @GET("Helianmeng.asmx/SelectMatchDetail")
     Call<Res<MegaGame>> SelectMatchDetail(@Query("matchId") int matchId);
@@ -524,4 +525,9 @@ public interface ApiService {
     @GET("LoginAndRegister.asmx/GetProvinceByCity")
     Observable<Res> GetProvinceByCity(@Query("cityname") String cityname);
 
+    @GET("Helianmeng.asmx/SelectMatchCategory")
+    Observable<Res<ArrayList<MatchCategory>>> SelectMatchCategory();
+
+    @GET("Helianmeng.asmx/SelectMatchPageByCategory")
+    Observable<Res<ArrayList<MegaGame>>> getGames( @Query("startRowIndex") int startRowIndex, @Query("maximumRows") int maximumRows,@Query("userid") String userid ,@Query("categoryid") String categoryid,@Query("matchproperty") String matchproperty);
 }

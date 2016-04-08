@@ -104,7 +104,7 @@
             android:layout_marginRight="20dp"
             android:background="@drawable/bg_switch_button"
             android:button="@null"
-            android:checked="true"/>
+            android:checked="false"/>
 
     </RelativeLayout>
 

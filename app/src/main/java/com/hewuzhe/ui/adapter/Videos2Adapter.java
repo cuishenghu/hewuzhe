@@ -83,7 +83,7 @@ public class Videos2Adapter extends BaseAdapter<Videos2Adapter.ViewHolder, Video
 
         holder.tvAddTime.setText(TimeUtil.timeAgo(video.OperateTime));
         holder.tvCollectCount.setText(video.FavoriteNum + "");
-        holder.tvPraiseCount.setText(video.LikeNum + "");
+        holder.tvPraiseCount.setText(video.GuanzhuNum + "");
         holder.tvRepeatCount.setText(video.RepeatNum + "");
         holder.tvTitle.setText(video.Title);
         holder.tvDesc.setText(video.Content);
@@ -95,7 +95,7 @@ public class Videos2Adapter extends BaseAdapter<Videos2Adapter.ViewHolder, Video
         } else {
             holder.tvIsFree.setVisibility(View.VISIBLE);
         }
-        if (video.Islike) {
+        if (video.IsGuanzhu==1) {
             holder.imgPraise.setImageResource(R.mipmap.icon_praise_focus);
         } else {
             holder.imgPraise.setImageResource(R.mipmap.icon_praise_gray);

@@ -8,6 +8,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.hewuzhe.R;
 import com.hewuzhe.model.Address;
 import com.hewuzhe.model.TrainerLessonInfo;
@@ -16,7 +17,9 @@ import com.hewuzhe.presenter.TrainerLessonPresenter;
 import com.hewuzhe.ui.base.ToolBarActivity;
 import com.hewuzhe.ui.cons.C;
 import com.hewuzhe.ui.widget.GlideCircleTransform;
+import com.hewuzhe.view.CircleImageView;
 import com.hewuzhe.view.TrainerLessonView;
+import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 
@@ -91,13 +94,19 @@ public class TrainerLessonActivity extends ToolBarActivity<TrainerLessonPresente
         }
         user_name.setText(arrayList.get(1));
         user_content.setText(arrayList.get(2));
-        Glide.with(this)
+        Picasso.with(this)
                 .load(C.BASE_URL + arrayList.get(3))
+                .placeholder(R.mipmap.img_avatar)
+                .resize(50,50)
+                .error(R.mipmap.img_avatar)
                 .centerCrop()
-                .crossFade()
-                .placeholder(R.mipmap.img_bg)
-                .transform(new GlideCircleTransform(this))
-                .into(head_portrait);
+                .into(head_portrait); //imagview 布局
+//        Picasso.with(this)
+//                .load(C.BASE_URL + arrayList.get(3))
+//                .centerCrop()
+////                .placeholder(R.mipmap.img_bg)
+//                .error(R.mipmap.img_bg)
+//                .into(head_portrait);
         web_content.loadDataWithBaseURL(C.BASE_URL, getHtmlData(trainerLessonTwo.Content), "text/html", "UTF-8", "");
 
     }

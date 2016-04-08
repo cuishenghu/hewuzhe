@@ -169,6 +169,11 @@ public class HttpUtils {
         client.post(UrlContants.getUrl(UrlContants.GUANZHUTEACHER), params, handler);
     }
 
+    /* 取消关注私教*/
+    public static void cguanzhuTeacher(AsyncHttpResponseHandler handler, RequestParams params) {
+        client.post(UrlContants.getUrl(UrlContants.CGUANZHUTEACHER), params, handler);
+    }
+
     /* 分页查询报名记录*/
     public static void selectJoinRecord(AsyncHttpResponseHandler handler, RequestParams params) {
         client.post(UrlContants.getUrl(UrlContants.SELECTJOINRECORD), params, handler);

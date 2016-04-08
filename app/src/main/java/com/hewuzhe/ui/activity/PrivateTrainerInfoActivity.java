@@ -27,6 +27,7 @@ import com.hewuzhe.model.PrivateTrainer;
 import com.hewuzhe.model.TrainerLesson;
 import com.hewuzhe.model.TrainerVideo;
 import com.hewuzhe.model.WuYou;
+import com.hewuzhe.presenter.PrivateTrainerInfoPresenter;
 import com.hewuzhe.ui.adapter.TrainerSignAdapter;
 import com.hewuzhe.ui.adapter.TrainerVideoAdapter;
 import com.hewuzhe.ui.adapter.TrainerVideoAndFocusAndFansAdapter;
@@ -90,6 +91,7 @@ public class PrivateTrainerInfoActivity extends BaseActivity2 implements OnItemC
     private String[] names = {"张三", "李四", "王五", "张三", "李四", "王五", "张三", "李四", "王五"};
     private int[] avatars = {R.mipmap.img_avatar, R.mipmap.img_avatar, R.mipmap.img_avatar, R.mipmap.img_avatar, R.mipmap.img_avatar, R.mipmap.img_avatar, R.mipmap.img_avatar, R.mipmap.img_avatar, R.mipmap.img_avatar};
     private List<Map<String, String>> list = new ArrayList<Map<String, String>>();
+    private boolean isMyWuyou;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -109,8 +111,12 @@ public class PrivateTrainerInfoActivity extends BaseActivity2 implements OnItemC
             requestData(mType);
 //            setListViewHeightBasedOnChildren(mListView, 2,this);
         }
+        PrivateTrainerInfoPresenter privateTrainerInfoPresenter = new PrivateTrainerInfoPresenter(this);
+        privateTrainerInfoPresenter.isWuyou(Id);
     }
-
+    public void getIsWuYou(boolean iswy){
+        isMyWuyou = iswy;
+    }
     private void initView() {
 
         myCommonTitle = (MyCommonTitle) findViewById(R.id.aci_mytitle);
@@ -152,7 +158,7 @@ public class PrivateTrainerInfoActivity extends BaseActivity2 implements OnItemC
 //        mListView.setXListViewListener(this);
         mGridView.setOnItemClickListener(this);
 
-        setListener(tv_focus, tv_contact, tv_video, tv_sign, tv_focused, tv_fans);
+        setListener(tv_focus, tv_contact, tv_video, tv_sign, tv_focused, tv_fans,img_avatar);
 
         mHandler = new Handler();
 
@@ -254,7 +260,19 @@ public class PrivateTrainerInfoActivity extends BaseActivity2 implements OnItemC
         super.onClick(view);
         switch (view.getId()) {
             case R.id.img_avatar://头像跳转个人资料
-                startActivity(new Intent(PrivateTrainerInfoActivity.this, ProfileActivity.class).putExtra("data", new Bun().putInt("id", Id).ok()));
+//                startActivity(new Intent(PrivateTrainerInfoActivity.this, ProfileActivity.class).putExtra("data", new Bun().putInt("id", Id).ok()));
+                if(Id==new SessionUtil(getApplicationContext()).getUserId()){
+                    startActivity(new Intent(PrivateTrainerInfoActivity.this, ProfileActivity.class));
+                }else{
+                    if (isMyWuyou) {
+
+                        startActivity(new Intent(PrivateTrainerInfoActivity.this, FriendProfileActivity.class)
+                                .putExtra("data", new Bun().putInt("id", Id).ok()));
+                    } else {
+                        startActivity(new Intent(PrivateTrainerInfoActivity.this, StrangerProfileSettingsActivity.class)
+                                .putExtra("data", new Bun().putInt("id", Id).ok()));
+                    }
+                }
                 break;
             case R.id.tv_focus://关注,如果关注过了,提示已关注
                 if (!tv_focus.getText().toString().trim().equals("已关注")) {
@@ -269,15 +287,24 @@ public class PrivateTrainerInfoActivity extends BaseActivity2 implements OnItemC
                         }
                     }, params);
                 } else {
-                    Tools.toast(PrivateTrainerInfoActivity.this, "您已经关注!");
+                    params = new RequestParams();
+                    params.put("userid", new SessionUtil(PrivateTrainerInfoActivity.this).getUser().Id);
+                    params.put("teacherid", Id);
+                    HttpUtils.cguanzhuTeacher(new HttpErrorHandler() {
+                        @Override
+                        public void onRecevieSuccess(JSONObject json) {
+                            tv_focus.setText("关注Ta");
+                            Tools.toast(PrivateTrainerInfoActivity.this, "取消关注成功");
+                        }
+                    }, params);
                 }
                 break;
             case R.id.tv_contact://联系他,拨打电话
 //                startActivity(new Intent(Intent.ACTION_CALL, Uri.parse("tel:" + phoneNumber)));
                 new MaterialDialog.Builder(PrivateTrainerInfoActivity.this)
-                        .title("拨打客服电话")
+                        .title("拨打私教电话")
                         .titleColor(Color.WHITE)
-                        .content("确定拨打客服电话？")
+                        .content("确定拨打私教电话："+phoneNumber+"？")
                         .contentColor(Color.WHITE)
                         .positiveColor(C.COLOR_YELLOW)
                         .negativeColor(C.COLOR_YELLOW)
@@ -515,12 +542,17 @@ public class PrivateTrainerInfoActivity extends BaseActivity2 implements OnItemC
                 }.getType());
 //                json.getString("data");
                 boolean is = wuYou.isData();
+                if(privateTrainers.get(position).getId()==new SessionUtil(getApplicationContext()).getUserId()){
+                    startActivity(new Intent(PrivateTrainerInfoActivity.this, ProfileActivity.class));
+                }else{
                 if (is) {
+
                     startActivity(new Intent(PrivateTrainerInfoActivity.this, FriendProfileActivity.class)
                             .putExtra("data", new Bun().putInt("id", privateTrainers.get(position).getId()).ok()));
                 } else {
                     startActivity(new Intent(PrivateTrainerInfoActivity.this, StrangerProfileSettingsActivity.class)
                             .putExtra("data", new Bun().putInt("id", privateTrainers.get(position).getId()).ok()));
+                }
                 }
 
             }

@@ -92,6 +92,8 @@ public class UrlContants {
 
     public static final String GUANZHUTEACHER =  "Hewuzhe.asmx/GuanzhuTeacher?";   // 关注私教 */
 
+    public static final String CGUANZHUTEACHER =  "Hewuzhe.asmx/CancelGuanzhuTeacher?";   // 取消关注私教 */
+
     public static final String SELECTJOINRECORD =  "Hewuzhe.asmx/SelectJoinRecord?";   // 分页查询报名记录
 
     public static final String GETABOUTUS =  "AboutUs.asmx/GetAuoutUs?";   // 获取关于我们

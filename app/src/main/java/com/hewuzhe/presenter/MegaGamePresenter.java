@@ -5,6 +5,7 @@ import com.hewuzhe.model.Res;
 import com.hewuzhe.presenter.base.RefreshAndLoadMorePresenter;
 import com.hewuzhe.ui.activity.MegaGameActivity;
 import com.hewuzhe.ui.cons.C;
+import com.hewuzhe.ui.fragment.MegaGameFragment;
 import com.hewuzhe.utils.NetEngine;
 import com.hewuzhe.utils.SB;
 import com.hewuzhe.utils.SessionUtil;
@@ -20,11 +21,15 @@ import rx.schedulers.Schedulers;
  * Created by xianguangjin on 15/12/31.
  */
 public class MegaGamePresenter extends RefreshAndLoadMorePresenter<MegaGameView> {
+    MegaGameFragment megaGameFragment;
+    public MegaGamePresenter(MegaGameFragment megaGameFragment){
+        this.megaGameFragment = megaGameFragment;
+    }
 
     public void getData(final int page, final int count) {
         String path = view.getData();
         Subscription subscription = NetEngine.getService()
-                .getGames(path, (page - 1) * count, count)
+                .getGames( (page - 1) * count, count,new SessionUtil(megaGameFragment.getContext()).getUserId()+"",path,0+"")
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new SB<Res<ArrayList<MegaGame>>>() {

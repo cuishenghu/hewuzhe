@@ -28,7 +28,7 @@ import butterknife.ButterKnife;
  */
 public class VideoAdapter extends BaseAdapter<VideoAdapter.ViewHolder, Video, BasePresenterImp> {
 
-    private boolean isChecked = true;
+    private boolean isChecked = false;
     private int screenWidth = 10;
 
     /**

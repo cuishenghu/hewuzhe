@@ -79,6 +79,7 @@ public class VideoDetail2Activity extends RecycleViewActivity<VideoDetailPresent
     private TextView tvCommentCount;
     private ImageView imgAvatar2;
     private TextView tv_focus_praise;
+    private int state=0;
 
     private int id;
     private boolean isFulllScreen = false;
@@ -407,23 +408,30 @@ public class VideoDetail2Activity extends RecycleViewActivity<VideoDetailPresent
             tv_focus_praise.setText("关注");
             if (video.IsGuanzhu == 1) {
                 imgPraise.setImageResource(R.mipmap.icon_praise_focus);
-                imgPraise.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View view) {
-                        presenter.cancelGuanzhuTeacher(_Video.UserId, view);
-                        imgPraise.setImageResource(R.mipmap.icon_praise);
-                    }
-                });
+                state = R.mipmap.icon_praise_focus;
+
             } else {
                 imgPraise.setImageResource(R.mipmap.icon_praise);
-                imgPraise.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View view) {
+                state = R.mipmap.icon_praise;
+
+            }
+            imgPraise.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    if(state == R.mipmap.icon_praise_focus){
+                        presenter.cancelGuanzhuTeacher(_Video.UserId, view);
+                        imgPraise.setImageResource(R.mipmap.icon_praise);
+                        state = R.mipmap.icon_praise;
+                    }else{
                         presenter.guanzhuTeacher(_Video.UserId, view);
                         imgPraise.setImageResource(R.mipmap.icon_praise_focus);
+                        state = R.mipmap.icon_praise_focus;
                     }
-                });
-            }
+
+
+                }
+            });
+
         }
 
 

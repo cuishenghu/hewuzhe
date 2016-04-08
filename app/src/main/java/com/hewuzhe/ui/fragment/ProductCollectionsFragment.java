@@ -50,7 +50,7 @@ public class ProductCollectionsFragment extends SwipeRecycleViewFragment<Product
     protected void initThings(View view) {
         super.initThings(view);
 
-        presenter.getData(page, count);
+
 
     }
 
@@ -121,6 +121,17 @@ public class ProductCollectionsFragment extends SwipeRecycleViewFragment<Product
         return new SessionUtil(getContext()).getUserId();
     }
 
+    @Override
+    public void onResume() {
+        super.onResume();
+        requestDataRefresh();
+    }
+    @Override
+    public void requestDataRefresh() {
+        super.requestDataRefresh();
+        page = 1;
+        presenter.getData(page, count);
+    }
     @Override
     public void onReceive(Integer msg) {
         if (msg == C.MSG_DEFAUT) {

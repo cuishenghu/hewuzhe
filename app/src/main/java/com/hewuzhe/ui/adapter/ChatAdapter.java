@@ -23,6 +23,7 @@ import com.hewuzhe.ui.activity.StrangerProfileSettingsActivity;
 import com.hewuzhe.ui.adapter.base.BaseAdapter;
 import com.hewuzhe.ui.adapter.base.BaseNoMoreAdapter;
 import com.hewuzhe.ui.cons.C;
+import com.hewuzhe.ui.fragment.ChatFragment;
 import com.hewuzhe.ui.widget.GlideCircleTransform;
 import com.hewuzhe.utils.Bun;
 import com.hewuzhe.utils.StringUtil;
@@ -69,6 +70,9 @@ public class ChatAdapter extends BaseAdapter<ChatAdapter.ViewHolder, ChatList, B
     @Override
     public void bindData(ViewHolder holder, int position) {
         final ChatList chatList = data.get(position);
+
+
+
         Glide.with(context)
                 .load(C.BASE_URL + chatList.PhotoPath)
                 .centerCrop()
@@ -131,6 +135,7 @@ public class ChatAdapter extends BaseAdapter<ChatAdapter.ViewHolder, ChatList, B
 
             }
         });
+
     }
     @Override
     public void onAttachedToRecyclerView(RecyclerView recyclerView) {
@@ -166,6 +171,8 @@ public class ChatAdapter extends BaseAdapter<ChatAdapter.ViewHolder, ChatList, B
         LinearLayout chat_user_select;
         @Nullable @Bind(R.id.chat_dongtai)
         LinearLayout chat_dongtai;
+        @Nullable @Bind(R.id.chat_item)
+        LinearLayout chat_item;
 
         ViewHolder(View view) {
             super(view);

@@ -46,14 +46,25 @@ public class VideoCollectionsFragment extends SwipeRecycleViewFragment<VideoColl
 
     }
 
+    @Override
+    public void onResume() {
+        super.onResume();
+        recyclerView.addItemDecoration(new GridItemDecoration(10, 2));
+        requestDataRefresh();
+    }
+    @Override
+    public void requestDataRefresh() {
+        super.requestDataRefresh();
+        page = 1;
+        presenter.getData(page, count);
+    }
     /**
      * @param view
      */
     @Override
     protected void initThings(View view) {
         super.initThings(view);
-        recyclerView.addItemDecoration(new GridItemDecoration(10, 2));
-        presenter.getData(page, count);
+
     }
 
     /**

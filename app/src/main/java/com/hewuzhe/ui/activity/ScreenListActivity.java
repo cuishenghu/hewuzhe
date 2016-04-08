@@ -50,7 +50,7 @@ public class ScreenListActivity extends RecycleViewNoMoreActivity<ScreenListPres
     private String _address = "";
     private double _Lat = 0;
     private double _Lng = 0;
-    private int length=2000;
+    private int length=5000;
 
 
     private AMap aMap;
@@ -167,7 +167,7 @@ public class ScreenListActivity extends RecycleViewNoMoreActivity<ScreenListPres
         for (int i=0;i<data.size();i++){
             count+=Integer.parseInt(data.get(i).StudentCount);
         }
-        sl_count.setText("附近"+length+"米共"+count + "名私教");
+        sl_count.setText("附近"+length/1000+"km共"+count + "名私教");
         bd(data);
     }
 }

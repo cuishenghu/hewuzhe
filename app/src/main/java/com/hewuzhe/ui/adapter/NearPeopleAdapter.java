@@ -24,6 +24,7 @@ import com.hewuzhe.ui.cons.C;
 import com.hewuzhe.ui.widget.GlideCircleTransform;
 import com.hewuzhe.utils.Bun;
 
+import java.text.DecimalFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
@@ -75,7 +76,7 @@ public class NearPeopleAdapter extends BaseAdapter<NearPeopleAdapter.VHolder, Ne
         }
         String ages = date!=null?getAgeByBirthday(date)+"":"";
         holder.up_sa.setText(nearPeople.Sexuality+"  "+ages);
-        holder.np_length.setText(nearPeople.Distance+"米");
+        holder.np_length.setText(getLength(nearPeople.Distance));
         SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
         Date curDate = new Date(System.currentTimeMillis());//获取当前时间
         String str = formatter.format(curDate);
@@ -93,6 +94,32 @@ public class NearPeopleAdapter extends BaseAdapter<NearPeopleAdapter.VHolder, Ne
             }
         });
 
+    }
+
+    private String getLength(double l){
+        if(l<100.0)
+            return "100米内";
+        else if(l>=100.0&&l<200.0)
+            return "200米内";
+        else if(l>=200.0&&l<300.0)
+            return "300米内";
+        else if(l>=300.0&&l<400.0)
+            return "400米内";
+        else if(l>=400.0&&l<500.0)
+            return "500米内";
+        else if(l>=500.0&&l<600.0)
+            return "600米内";
+        else if(l>=600.0&&l<700.0)
+            return "700米内";
+        else if(l>=700.0&&l<800.0)
+            return "800米内";
+        else if(l>=800.0&&l<900.0)
+            return "900米内";
+        else if(l>=900.0&&l<1000.0)
+            return "1000米内";
+        else if(l>=1000.0&&l<2000.0)
+            return "2000米内";
+        return "";
     }
 
     public static String getCompareDate(String startDate,String endDate) {

@@ -14,5 +14,6 @@ import java.util.ArrayList;
 public interface ChatView extends LoadMoreView, ListView<ChatList> ,SwipeRefreshView{
     void bindCount(int count);
     void bindTuijian(ArrayList<ChatList> data);
+    void bindTopFourTuijian(ArrayList<ChatList> data);
     void bindUsers(ArrayList<RecommendUser> data);
 }

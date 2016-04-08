@@ -7,30 +7,29 @@
 
     <TextView
     android:id="@+id/tv_local_video"
-        android:layout_width="wrap_content"
+        android:layout_width="90dp"
         android:layout_height="wrap_content"
         android:background="@color/colorListBg"
-        android:paddingBottom="15px"
-        android:paddingLeft="28px"
-        android:paddingRight="28px"
-        android:paddingTop="15px"
+        android:paddingBottom="8dp"
+        android:paddingLeft="14dp"
+        android:paddingRight="14dp"
+        android:paddingTop="8dp"
         android:text="本地视频"
         android:textColor="@color/white"
-        android:textSize="28px"/>
+        android:textSize="14sp"/>
 
     <TextView
         android:id="@+id/tv_take_video"
-        android:layout_width="wrap_content"
+        android:layout_width="90dp"
               android:layout_height="wrap_content"
               android:layout_marginTop="1dp"
               android:background="@color/colorListBg"
-              android:paddingBottom="15px"
-              android:paddingLeft="28px"
-              android:paddingRight="28px"
-              android:paddingTop="15px"
+              android:paddingBottom="8dp"
+              android:paddingLeft="14dp"
+              android:paddingRight="14dp"
+              android:paddingTop="8dp"
               android:text="拍摄视频"
               android:textColor="@color/white"
-              android:textSize="28px"/>
-
+              android:textSize="14sp"/>
 
 </LinearLayout>

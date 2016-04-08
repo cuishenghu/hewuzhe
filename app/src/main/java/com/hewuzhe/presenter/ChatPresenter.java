@@ -26,9 +26,9 @@ import rx.schedulers.Schedulers;
  */
 public class ChatPresenter extends RefreshAndLoadMorePresenter<ChatView> {
     @Override
-    public void getData(final int page, final int count) {
+     public void getData(final int page, final int count) {
         Subscription subscription = NetEngine.getService()
-                .SelectRecommendDongTai((page - 1) * count, count, new SessionUtil(view.getContext()).getUserId())
+                .SelectRecommendDongTai(((page - 1) * count)+4, count, new SessionUtil(view.getContext()).getUserId())
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new SB<Res<ArrayList<ChatList>>>() {
@@ -37,6 +37,33 @@ public class ChatPresenter extends RefreshAndLoadMorePresenter<ChatView> {
                         if (res.code == C.OK) {
                             view.bindTuijian(res.data);
                             setDataStatus(page, count, res);
+
+                        }
+                    }
+
+                    @Override
+                    public void onCompleted() {
+                        view.refresh(false);
+                    }
+
+                    @Override
+                    public void onError(Throwable e) {
+                        view.refresh(false);
+                    }
+                });
+
+        addSubscription(subscription);
+    }
+     public void getTopFourData() {
+        Subscription subscription = NetEngine.getService()
+                .SelectRecommendDongTai(0, 4, new SessionUtil(view.getContext()).getUserId())
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new SB<Res<ArrayList<ChatList>>>() {
+                    @Override
+                    public void next(Res<ArrayList<ChatList>> res) {
+                        if (res.code == C.OK) {
+                            view.bindTopFourTuijian(res.data);
 
                         }
                     }

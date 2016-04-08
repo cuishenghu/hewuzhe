@@ -96,13 +96,13 @@ public class WarriorFragment extends ToolBarFragment<WarriorFragmentPresenter> i
     @Bind(R.id.img_avatar)
     ImageView imgAvatar;
     @Bind(R.id.tv_train)
-    TextView tvTrain;//课程
+    LinearLayout tvTrain;//课程
     @Bind(R.id.tv_dojo_recommend)
-    TextView tvDojoRecommend;//场馆
+    LinearLayout tvDojoRecommend;//场馆
     @Bind(R.id.tv_fly_dream)
-    TextView tvFlyDream;//私教
+    LinearLayout tvFlyDream;//私教
     @Bind(R.id.tv_live)
-    TextView tvLive;//直播
+    LinearLayout tvLive;//直播
     @Bind(R.id.lay_study_online)
     LinearLayout layStudyOnline;//学习计划
     @Bind(R.id.lay_record)

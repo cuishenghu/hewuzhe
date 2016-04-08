@@ -63,10 +63,11 @@
                 android:orientation="vertical">
 
                 <ImageView
-                    android:layout_width="30dp"
-                    android:layout_height="30dp"
+                    android:layout_width="25dp"
+                    android:layout_height="25dp"
                     android:contentDescription="@string/action_settings"
-                    android:src="@drawable/icon_all_sort" />
+                    android:layout_marginTop="5dp"
+                    android:src="@drawable/fenlei" />
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -92,10 +93,11 @@
                 android:orientation="vertical">
 
                 <ImageView
-                    android:layout_width="30dp"
-                    android:layout_height="30dp"
+                    android:layout_width="25dp"
+                    android:layout_height="25dp"
+                    android:layout_marginTop="5dp"
                     android:contentDescription="@string/action_settings"
-                    android:src="@drawable/icon_recommend" />
+                    android:src="@drawable/tuijianshangpin" />
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -121,10 +123,11 @@
                 android:orientation="vertical">
 
                 <ImageView
-                    android:layout_width="30dp"
-                    android:layout_height="30dp"
+                    android:layout_width="25dp"
+                    android:layout_height="25dp"
+                    android:layout_marginTop="5dp"
                     android:contentDescription="@string/action_settings"
-                    android:src="@drawable/icon_my_order" />
+                    android:src="@drawable/wodedingdan" />
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -149,10 +152,11 @@
                 android:orientation="vertical">
 
                 <ImageView
-                    android:layout_width="30dp"
-                    android:layout_height="30dp"
+                    android:layout_width="25dp"
+                    android:layout_marginTop="5dp"
+                    android:layout_height="25dp"
                     android:contentDescription="@string/action_settings"
-                    android:src="@drawable/icon_shopping_cart" />
+                    android:src="@drawable/gouwuche" />
 
                 <TextView
                     android:layout_width="wrap_content"

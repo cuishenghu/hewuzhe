@@ -17,9 +17,13 @@ import com.nostra13.universalimageloader.core.ImageLoader;
 
 import android.content.Context;
 import android.content.Intent;
+import android.support.v7.widget.GridLayoutManager;
+import android.support.v7.widget.RecyclerView;
+import android.view.Display;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.WindowManager;
 import android.widget.AdapterView;
 import android.widget.BaseAdapter;
 import android.widget.ImageView;
@@ -31,6 +35,8 @@ public class EquipmentSortRecommendAdapter2 extends BaseAdapter {
     private LayoutInflater mLayoutInflater;
     private List<ProductSort> productSorts;
     private Context context;
+
+    public RecyclerView.LayoutManager layoutManager;
 
     public EquipmentSortRecommendAdapter2(Context context, List<ProductSort> productSorts) {
         super();
@@ -63,7 +69,7 @@ public class EquipmentSortRecommendAdapter2 extends BaseAdapter {
 
             holder.ll_sort_name = (LinearLayout) convertView.findViewById(R.id.ll_item_sort_name);
             holder.tv_sort_name = (TextView) convertView.findViewById(R.id.tv_equip_sort_name);
-            holder.list_product = (ListView) convertView.findViewById(R.id.list_product);
+            holder.recyclerView = (RecyclerView) convertView.findViewById(R.id.recycler_view);
             convertView.setTag(holder);
         } else {
             holder = (ViewHolder) convertView.getTag();
@@ -71,29 +77,31 @@ public class EquipmentSortRecommendAdapter2 extends BaseAdapter {
         ProductSort productSort = productSorts.get(position);//外层商品分类的JSONObject对象
         holder.tv_sort_name.setText(productSort.getName());//商品分类名
 //        final Product product = productSort.getProductList().get(position);
-        final List<ProductScore> list = productSort.getProductList();//内层商品的JSONArray数组
+        final ArrayList<ProductScore> list =(ArrayList) productSort.getProductList();//内层商品的JSONArray数组
 //        list.add(product);
-        EquipmentRecommendAdapter2 equipmentRecommendAdapter2 = new EquipmentRecommendAdapter2(context, list);
-        holder.list_product.setAdapter(equipmentRecommendAdapter2);
-        /**
-         * ListView自适应高度
-         */
-        StringUtil.listAutoHeight(holder.list_product);
+        this.layoutManager = new GridLayoutManager(context,2);
+        holder.recyclerView.setLayoutManager(layoutManager);
+//        EquipmentRecommendAdapter2 equipmentRecommendAdapter2 = new EquipmentRecommendAdapter2(context, list);
+        EquipmentClass2Adapter equipmentClass2Adapter = new EquipmentClass2Adapter(context);
+        holder.recyclerView.setAdapter(equipmentClass2Adapter);
+        equipmentClass2Adapter.addDatas(list);
+        WindowManager manager = (WindowManager)context.getSystemService(Context.WINDOW_SERVICE);
+        ViewGroup.LayoutParams para;
+        para = holder.recyclerView.getLayoutParams();
+        Display display = manager.getDefaultDisplay();
+        int width =display.getWidth();
+        width = (width- StringUtil.dip2px(context, 24))/2;
+        int height = width+StringUtil.dip2px(context, 76);
+        para.height = (int)(Math.ceil(list.size() / 2.0))*height;
+        holder.recyclerView.setLayoutParams(para);
 
-        holder.list_product.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                new Bun().putInt("proid", Integer.parseInt(list.get(position).getId())).ok();
-                context.startActivity(new Intent(context, ProductInfoActivity.class).putExtra("data", new Bun().putInt("proid", Integer.parseInt(list.get(position).getId())).ok()));
-            }
-        });
         return convertView;
     }
 
     class ViewHolder {
         LinearLayout ll_sort_name;//商品分类名的线性布局(名称和顶部条)
         TextView tv_sort_name;//商品分类名称
-        ListView list_product;//商品的listview
+        RecyclerView recyclerView;//商品的listview
 
     }
 }

@@ -49,12 +49,12 @@ public class EquipmentRecommendAdapter2 extends BaseAdapter {
         ViewHolder holder = null;
         if (convertView == null) {
             holder = new ViewHolder();
-            convertView = mLayoutInflater.inflate(R.layout.item_equipment_child_recommend, parent, false);
-            holder.img_product_pic = (ImageView) convertView.findViewById(R.id.img_equip_pic);
-            holder.tv_product_name = (TextView) convertView.findViewById(R.id.tv_equip_name);
-            holder.tv_product_price = (TextView) convertView.findViewById(R.id.tv_equip_price);
-            holder.tv_product_visit_sum = (TextView) convertView.findViewById(R.id.tv_equip_visit_sum);
-            holder.tv_product_sale_sum = (TextView) convertView.findViewById(R.id.tv_equip_sale_num);
+            convertView = mLayoutInflater.inflate(R.layout.product_item_new, parent, false);
+            holder.img_product_pic = (ImageView) convertView.findViewById(R.id.pt_photo);
+            holder.tv_product_name = (TextView) convertView.findViewById(R.id.chat_title);
+            holder.tv_product_price = (TextView) convertView.findViewById(R.id.chat_f_count);
+//            holder.tv_product_visit_sum = (TextView) convertView.findViewById(R.id.tv_equip_visit_sum);
+            holder.tv_product_sale_sum = (TextView) convertView.findViewById(R.id.chat_c_count);
             convertView.setTag(holder);
         } else {
             holder = (ViewHolder) convertView.getTag();
@@ -65,7 +65,7 @@ public class EquipmentRecommendAdapter2 extends BaseAdapter {
                 holder.img_product_pic);//图片
         holder.tv_product_name.setText(product.getName());//商品名称
         holder.tv_product_price.setText("¥" + product.getPrice());//商品价格
-        holder.tv_product_visit_sum.setText(product.getVisitNum()+"人");//商品关注度
+//        holder.tv_product_visit_sum.setText(product.getVisitNum()+"人");//商品关注度
         holder.tv_product_sale_sum.setText("销量："+product.getSaleNum());//商品销售量
 
         return convertView;
@@ -75,7 +75,7 @@ public class EquipmentRecommendAdapter2 extends BaseAdapter {
         ImageView img_product_pic;//商品图片
         TextView tv_product_name;//商品名称
         TextView tv_product_price;//商品价格
-        TextView tv_product_visit_sum;//商品关注度
+//        TextView tv_product_visit_sum;//商品关注度
         TextView tv_product_sale_sum;//商品销售量
 
     }

@@ -41,7 +41,7 @@ public class Video {
     public String VideoPath;
     public String VideoDuration;
     public int UserId;
-    public String UserNicName;
+    public String NicName;
     public String PhotoPath;
     public int VisitNum;
     public int CommentNum;
@@ -49,7 +49,7 @@ public class Video {
      * NicName : hdhdjsjsnnsn
      */
 
-    public String NicName;
+//    public String NicName;
 
     public String IsOriginal;
 

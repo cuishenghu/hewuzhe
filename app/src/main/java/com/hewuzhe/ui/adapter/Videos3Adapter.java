@@ -34,7 +34,7 @@ import butterknife.ButterKnife;
  */
 public class Videos3Adapter extends BaseAdapter<Videos3Adapter.ViewHolder, Video, BasePresenterImp> {
 //    public static final int TYPE_HEADER = 0;
-    private boolean isChecked = true;
+    private boolean isChecked = false;
     private int screenWidth = 10;
     private String who="";
     private int i;
@@ -144,7 +144,7 @@ public class Videos3Adapter extends BaseAdapter<Videos3Adapter.ViewHolder, Video
         holder.tvAddTime1.setText(TimeUtil.timeAgo(video.PublishTime) + "发布");
         holder.tvVisitSum1.setText(video.VisitNum + "人已浏览");
         if (StringUtil.isEmpty(video.NicName)) {
-            holder.tvUsername1.setText(video.UserNicName);
+            holder.tvUsername1.setText(video.NicName);
         } else {
             holder.tvUsername1.setText(video.NicName);
         }
@@ -198,7 +198,7 @@ public class Videos3Adapter extends BaseAdapter<Videos3Adapter.ViewHolder, Video
 //        holder.tvAddTime2.setText(TimeUtil.timeAgo(video.PublishTime) + "发布");
         holder.tvVisitSum2.setText(video.VisitNum + "人已浏览");
         if (StringUtil.isEmpty(video.NicName)) {
-            holder.tvUsername2.setText(video.UserNicName);
+            holder.tvUsername2.setText(video.NicName);
         } else {
             holder.tvUsername2.setText(video.NicName);
         }

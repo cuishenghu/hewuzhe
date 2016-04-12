@@ -33,6 +33,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 import butterknife.Bind;
+import butterknife.OnClick;
 import cn.sharesdk.framework.Platform;
 import cn.sharesdk.framework.PlatformActionListener;
 import cn.sharesdk.framework.ShareSDK;
@@ -58,6 +59,8 @@ public class SignInActivity extends BaseActivity<SignInPresenter> implements Sig
     TextView tvSignUp;
     @Bind(R.id.tv_sign_in)
     TextView tvSignIn;
+    @Bind(R.id.youkelogin)
+    TextView youkelogin;
     @Bind(R.id.lay_qq)
     LinearLayout layQq;
     @Bind(R.id.lay_wx)
@@ -144,6 +147,11 @@ public class SignInActivity extends BaseActivity<SignInPresenter> implements Sig
             }
         });
 
+    }
+
+    @OnClick(R.id.youkelogin)
+    public void youkeLogin(){
+        startActivity(new Intent(SignInActivity.this, MainActivity.class));
     }
 
     private void dismissUPs() {

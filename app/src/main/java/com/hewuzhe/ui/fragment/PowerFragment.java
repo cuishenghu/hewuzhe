@@ -23,12 +23,14 @@ import com.hewuzhe.presenter.base.BasePresenterImp;
 import com.hewuzhe.ui.activity.MainActivity;
 import com.hewuzhe.ui.activity.PublishVideoActivity;
 import com.hewuzhe.ui.activity.SearchVideosActivity;
+import com.hewuzhe.ui.activity.SignInActivity;
 import com.hewuzhe.ui.adapter.MyViewPagerAdapter;
 import com.hewuzhe.ui.base.BaseFragment;
 import com.hewuzhe.ui.cons.C;
 import com.hewuzhe.ui.cons.Contant;
 import com.hewuzhe.ui.cons.FileUtils;
 import com.hewuzhe.utils.Bun;
+import com.hewuzhe.utils.SessionUtil;
 import com.hewuzhe.view.PowerView;
 
 import butterknife.Bind;
@@ -76,7 +78,11 @@ public class PowerFragment extends BaseFragment implements PowerView, VideoChoos
         imgAdd.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                showPopView();
+                if(new SessionUtil(getContext()).isLogin())
+                    showPopView();
+                else
+                    startActivity(SignInActivity.class);
+
             }
         });
         swicthButton.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {

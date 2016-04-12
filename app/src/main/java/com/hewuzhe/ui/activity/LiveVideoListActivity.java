@@ -74,7 +74,8 @@ public class LiveVideoListActivity extends SwipeRecycleViewActivity<LiveVideoPre
         if (!TimeUtil.timeComparedNow(item.TimeStart) && TimeUtil.timeComparedNow(item.TimeEnd)) {
             presenter.SelectVideoLive(item.Id);
         } else {
-            startActivity(LiveVideoActivity.class, new Bun().putInt("Id", item.Id).ok());
+            startActivity(LiveVideoActivity.class, new Bun().putInt("Id", item.Id)
+                    .putString("title", TimeUtil.timeComparedNow(item.TimeStart) ? "视频直播" : "直播回放").ok());
         }
     }
 

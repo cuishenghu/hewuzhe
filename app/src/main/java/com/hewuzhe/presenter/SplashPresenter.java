@@ -22,11 +22,11 @@ public class SplashPresenter extends BasePresenterImp<SplashView> {
         } else {
             /**
              * 判断进入登录还是首页*/
-            if (new SessionUtil(view.getContext()).isLogin()) {
+//            if (new SessionUtil(view.getContext()).isLogin()) {
                 view.startActivity(MainActivity.class);
-            } else {
-                view.startActivity(SignInActivity.class);
-            }
+//            } else {
+//                view.startActivity(SignInActivity.class);
+//            }
         }
     }
 }

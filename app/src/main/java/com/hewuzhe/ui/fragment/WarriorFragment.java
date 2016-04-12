@@ -12,6 +12,7 @@ import android.support.v7.app.ActionBar;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -47,6 +48,7 @@ import com.hewuzhe.ui.activity.PrivateTrainerListActivity;
 import com.hewuzhe.ui.activity.ProfileActivity;
 import com.hewuzhe.ui.activity.RecordActivity;
 import com.hewuzhe.ui.activity.ScreenListActivity;
+import com.hewuzhe.ui.activity.SignInActivity;
 import com.hewuzhe.ui.activity.StrangerProfileSettingsActivity;
 import com.hewuzhe.ui.activity.StudyOnlineActivity;
 import com.hewuzhe.ui.activity.TrainActivity;
@@ -328,13 +330,17 @@ public class WarriorFragment extends ToolBarFragment<WarriorFragmentPresenter> i
                                      {
                                          @Override
                                          public void onClick(View view) {
-                                             try {
-                                                 Intent intent = new Intent(getActivity(), ProfileActivity.class);
-                                                 ActivityOptionsCompat optionsCompat = ActivityOptionsCompat.makeSceneTransitionAnimation(getActivity(), imgAvatar, "imgAvatar");
-                                                 ActivityCompat.startActivity(getActivity(), intent, optionsCompat.toBundle());
-                                             } catch (IllegalArgumentException e) {
-                                                 startActivity(new Intent(getActivity(), ProfileActivity.class));
-                                             }
+                                             if(new SessionUtil(getContext()).isLogin())
+                                                 try {
+                                                     Intent intent = new Intent(getActivity(), ProfileActivity.class);
+                                                     ActivityOptionsCompat optionsCompat = ActivityOptionsCompat.makeSceneTransitionAnimation(getActivity(), imgAvatar, "imgAvatar");
+                                                     ActivityCompat.startActivity(getActivity(), intent, optionsCompat.toBundle());
+                                                 } catch (IllegalArgumentException e) {
+                                                     startActivity(new Intent(getActivity(), ProfileActivity.class));
+                                                 }
+                                             else
+                                             startActivity(SignInActivity.class);
+
                                          }
                                      }
 
@@ -347,7 +353,11 @@ public class WarriorFragment extends ToolBarFragment<WarriorFragmentPresenter> i
                                       {
                                           @Override
                                           public void onClick(View view) {
-                                              startActivity(new Intent(getActivity(), ScreenListActivity.class));
+                                              if(new SessionUtil(getContext()).isLogin())
+                                                  startActivity(new Intent(getActivity(), ScreenListActivity.class));
+                                              else
+                                              startActivity(SignInActivity.class);
+
 
 //                startActivity(SignupProfileActivity.class);
 
@@ -364,7 +374,11 @@ public class WarriorFragment extends ToolBarFragment<WarriorFragmentPresenter> i
                                           {
                                               @Override
                                               public void onClick(View view) {
-                                                  startActivity(new Intent(getActivity(), TrainActivity.class));
+                                                  if(new SessionUtil(getContext()).isLogin())
+                                                      startActivity(new Intent(getActivity(), TrainActivity.class));
+                                                  else
+                                                  startActivity(SignInActivity.class);
+
                                               }
                                           }
 
@@ -377,7 +391,10 @@ public class WarriorFragment extends ToolBarFragment<WarriorFragmentPresenter> i
                                             {
                                                 @Override
                                                 public void onClick(View view) {
-                                                    startActivity(new Intent(getActivity(), MyCollectionsActivity.class));
+                                                    if(new SessionUtil(getContext()).isLogin())
+                                                        startActivity(new Intent(getActivity(), MyCollectionsActivity.class));
+                                                    else
+                                                    startActivity(SignInActivity.class);
                                                 }
                                             }
 
@@ -390,7 +407,10 @@ public class WarriorFragment extends ToolBarFragment<WarriorFragmentPresenter> i
                                    {
                                        @Override
                                        public void onClick(View view) {
-                                           startActivity(new Intent(getActivity(), StudyOnlineActivity.class));
+                                           if(new SessionUtil(getContext()).isLogin())
+                                               startActivity(new Intent(getActivity(), StudyOnlineActivity.class));
+                                           else
+                                           startActivity(SignInActivity.class);
                                        }
                                    }
 
@@ -403,7 +423,10 @@ public class WarriorFragment extends ToolBarFragment<WarriorFragmentPresenter> i
                                      {
                                          @Override
                                          public void onClick(View view) {
-                                             startActivity(new Intent(getActivity(), RecordActivity.class));
+                                             if(new SessionUtil(getContext()).isLogin())
+                                                 startActivity(new Intent(getActivity(), RecordActivity.class));
+                                             else
+                                             startActivity(SignInActivity.class);
                                          }
                                      }
 
@@ -416,7 +439,10 @@ public class WarriorFragment extends ToolBarFragment<WarriorFragmentPresenter> i
                                        {
                                            @Override
                                            public void onClick(View view) {
-                                               startActivity(new Intent(getActivity(), MyScoreActivity.class));
+                                               if(new SessionUtil(getContext()).isLogin())
+                                                   startActivity(new Intent(getActivity(), MyScoreActivity.class));
+                                               else
+                                               startActivity(SignInActivity.class);
                                            }
                                        }
 
@@ -429,7 +455,10 @@ public class WarriorFragment extends ToolBarFragment<WarriorFragmentPresenter> i
                                   {
                                       @Override
                                       public void onClick(View view) {
-                                          startActivity(new Intent(getActivity(), LiveVideoListActivity.class));
+                                          if(new SessionUtil(getContext()).isLogin())
+                                              startActivity(new Intent(getActivity(), LiveVideoListActivity.class));
+                                          else
+                                          startActivity(SignInActivity.class);
                                       }
                                   }
 
@@ -442,7 +471,10 @@ public class WarriorFragment extends ToolBarFragment<WarriorFragmentPresenter> i
                                            {
                                                @Override
                                                public void onClick(View view) {
-                                                   startActivity(new Intent(getActivity(), DoJoRecommendActivity.class));
+                                                   if(new SessionUtil(getContext()).isLogin())
+                                                       startActivity(new Intent(getActivity(), DoJoRecommendActivity.class));
+                                                   else
+                                                   startActivity(SignInActivity.class);
                                                }
                                            }
 
@@ -455,7 +487,10 @@ public class WarriorFragment extends ToolBarFragment<WarriorFragmentPresenter> i
                                              {
                                                  @Override
                                                  public void onClick(View view) {
-                                                     startActivity(IntegralActivity.class);
+                                                     if(new SessionUtil(getContext()).isLogin())
+                                                        startActivity(IntegralActivity.class);
+                                                     else
+                                                         startActivity(SignInActivity.class);
                                                  }
                                              }
 
@@ -564,7 +599,10 @@ public class WarriorFragment extends ToolBarFragment<WarriorFragmentPresenter> i
 
             }
         });
-
+        ViewGroup.LayoutParams para;
+        para = _LayIndexImg.getLayoutParams();
+        para.height = StringUtil.getScreenWidth(this.getActivity()) / 2;
+        _LayIndexImg.setLayoutParams(para);
         _ImgIndexDel.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

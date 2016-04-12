@@ -62,7 +62,10 @@ public class MoreActivity extends BaseActivity2 {
         ll_onLineService = (LinearLayout) findViewById(R.id.lay_service);
         tvTel = (TextView) findViewById(R.id.tele_more);
         btn_exit = (Button) findViewById(R.id.btn_exit);
-
+        if(new SessionUtil(this).isLogin())
+            btn_exit.setText("退出");
+        else
+            btn_exit.setText("登录");
         setListener(ll_noticeSetting, ll_clearCache, ll_about, ll_address, ll_onLineService, btn_exit);
     }
 
@@ -85,7 +88,10 @@ public class MoreActivity extends BaseActivity2 {
         super.onClick(view);
         switch (view.getId()) {
             case R.id.lay_settings://聊天通知设置
-                startActivity(new Intent(MoreActivity.this, SettingsActivity.class));
+                if(new SessionUtil(this).isLogin()) {
+                    startActivity(new Intent(MoreActivity.this, SettingsActivity.class));
+                }else
+                    startActivity(new Intent(MoreActivity.this,SignInActivity.class));
                 break;
             case R.id.lay_clear_data://清除缓存
                 new MaterialDialog.Builder(MoreActivity.this)
@@ -120,7 +126,10 @@ public class MoreActivity extends BaseActivity2 {
             case R.id.lay_feedback://反馈
                 startActivity(new Intent(MoreActivity.this, FeedBackActivity.class));
             case R.id.lay_address://收货地址
-                startActivity(new Intent(MoreActivity.this, SiteActivity.class).putExtra("sel", 1));
+                if(new SessionUtil(this).isLogin()) {
+                    startActivity(new Intent(MoreActivity.this, SiteActivity.class).putExtra("sel", 1));
+                }else
+                    startActivity(new Intent(MoreActivity.this,SignInActivity.class));
                 break;
             case R.id.lay_service://在线服务
                 new MaterialDialog.Builder(MoreActivity.this)

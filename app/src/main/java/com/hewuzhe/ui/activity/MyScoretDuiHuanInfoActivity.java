@@ -83,9 +83,7 @@ public class MyScoretDuiHuanInfoActivity extends BaseActivity2 {
         imageUrlList.add(UrlContants.IMAGE_URL + product.getImagePath());
 
         linkUrlArray.add("");
-        linkUrlArray.add("");
 
-        titleList.add("图片信息");
         titleList.add("图片信息");
 
         ViewGroup.LayoutParams para;
@@ -180,7 +178,7 @@ public class MyScoretDuiHuanInfoActivity extends BaseActivity2 {
 
     private void initBanner(ArrayList<String> imageUrlList) {
 
-        mViewFlow.setAdapter(new ImagePagerAdapter(this, imageUrlList, linkUrlArray, titleList).setInfiniteLoop(true));
+        mViewFlow.setAdapter(new ImagePagerAdapter(this, imageUrlList, linkUrlArray, titleList,null,false).setInfiniteLoop(true));
         mViewFlow.setmSideBuffer(imageUrlList.size()); // 实际图片张数，
         // 我的ImageAdapter实际图片张数为3
 

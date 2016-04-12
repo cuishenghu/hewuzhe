@@ -36,6 +36,7 @@ import com.hewuzhe.ui.base.ToolBarActivity;
 import com.hewuzhe.ui.cons.C;
 import com.hewuzhe.ui.inter.OnItemClickListener;
 import com.hewuzhe.utils.Bun;
+import com.hewuzhe.utils.SessionUtil;
 import com.hewuzhe.utils.StringUtil;
 import com.hewuzhe.utils.TagGroup;
 import com.hewuzhe.view.ProductInfoView;
@@ -181,6 +182,11 @@ public class ProductInfoActivity extends ToolBarActivity<ProductInfoPresenter> i
 
     @Override
     protected void initThings(Bundle savedInstanceState) {
+        if(!new SessionUtil(getContext()).isLogin()) {
+
+            startActivity(SignInActivity.class);
+            finish();
+        }
         super.initThings(savedInstanceState);
 
         presenter.getData();

@@ -1,12 +1,15 @@
 package com.hewuzhe.utils;
 
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
 
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import com.hewuzhe.model.UP;
 import com.hewuzhe.model.User;
+import com.hewuzhe.ui.activity.MainActivity;
+import com.hewuzhe.ui.activity.SignInActivity;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -58,6 +61,8 @@ public class SessionUtil {
         SharedPreferences share = context.getSharedPreferences("user", 0);
         String userInfo = share.getString("userInfo", "");
         if ("".equals(userInfo)) {
+//            context.startActivity(new Intent());
+//            context.startActivity(new Intent(context, MainActivity.class));
             return null;
         } else {
             Gson gson = new Gson();

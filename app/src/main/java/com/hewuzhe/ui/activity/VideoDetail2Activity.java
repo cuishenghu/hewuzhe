@@ -104,6 +104,11 @@ public class VideoDetail2Activity extends RecycleViewActivity<VideoDetailPresent
      */
     @Override
     protected void initThings(Bundle savedInstanceState) {
+        if(!new SessionUtil(getContext()).isLogin()) {
+
+            startActivity(SignInActivity.class);
+            finish();
+        }
         io.vov.vitamio.LibsChecker.checkVitamioLibs(this);
         super.initThings(savedInstanceState);
         // 手动这是播放窗口父类，横屏的时候，会用这个做为容器使用，如果不设置，那么默认直接跳转到DecorView
@@ -380,7 +385,7 @@ public class VideoDetail2Activity extends RecycleViewActivity<VideoDetailPresent
                 .transform(new GlideCircleTransform(getContext()))
                 .into(imgAvatar2);
 
-        tvUsername.setText(video.UserNicName);
+        tvUsername.setText(video.NicName);
 
         /**
          * 点赞和取消点赞
@@ -501,7 +506,7 @@ public class VideoDetail2Activity extends RecycleViewActivity<VideoDetailPresent
         });
 
         tvTitle.setText(video.Title);
-        tvUsername.setText(video.UserNicName);
+        tvUsername.setText(video.NicName);
         tvDesc.setText("简介：" + video.Content);
         if (video.CommentNum <= 0) {
             tvCommentCount.setText("暂无评论");

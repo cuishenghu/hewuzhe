@@ -5,6 +5,7 @@ import android.app.ProgressDialog;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -12,9 +13,14 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.ZoomButtonsController;
 
+import com.amap.api.location.AMapLocation;
+import com.amap.api.location.AMapLocationClient;
+import com.amap.api.location.AMapLocationClientOption;
+import com.amap.api.location.AMapLocationListener;
 import com.amap.api.maps2d.AMap;
 import com.amap.api.maps2d.AMap.OnCameraChangeListener;
 import com.amap.api.maps2d.CameraUpdateFactory;
+import com.amap.api.maps2d.LocationSource;
 import com.amap.api.maps2d.MapView;
 import com.amap.api.maps2d.model.BitmapDescriptorFactory;
 import com.amap.api.maps2d.model.CameraPosition;
@@ -40,6 +46,7 @@ import com.hewuzhe.ui.http.HttpUtils;
 import com.hewuzhe.utils.Bun;
 import com.hewuzhe.utils.StringUtil;
 import com.hewuzhe.utils.Tools;
+import com.hewuzhe.view.CircleImageView;
 import com.hewuzhe.view.ScreenListView;
 import com.socks.library.KLog;
 import com.zhy.http.okhttp.OkHttpUtils;
@@ -54,9 +61,11 @@ import java.util.List;
 import butterknife.Bind;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
+import materialdialogs.DialogAction;
+import materialdialogs.MaterialDialog;
 import okhttp3.Request;
 
-public class GDMapLocationActivity extends Activity implements OnGeocodeSearchListener, OnCameraChangeListener {
+public class GDMapLocationActivity extends Activity implements OnGeocodeSearchListener, OnCameraChangeListener,LocationSource,AMapLocationListener {
 
     private ProgressDialog progDialog = null;
     private AMap aMap;
@@ -74,7 +83,11 @@ public class GDMapLocationActivity extends Activity implements OnGeocodeSearchLi
     CircleOptions circleOptions;
     private int length=5000;
     private int i;
+    private AMapLocationClient mlocationClient;
+    private AMapLocationClientOption mLocationOption;
 
+    @Bind(R.id.dingwei_icon)
+    LinearLayout dingwei_icon;
     @Bind(R.id.edt_search_content)
     EditText edt_search_content;
     @Bind(R.id.product_list_search)
@@ -102,6 +115,22 @@ public class GDMapLocationActivity extends Activity implements OnGeocodeSearchLi
     @Bind(R.id.map)
     MapView map;
 
+    private  MaterialDialog materialDialog;
+
+    @OnClick(R.id.dingwei_icon)
+    public void dingwei(){
+        materialDialog = new MaterialDialog.Builder(GDMapLocationActivity.this)
+                .title("定位中...")
+                .titleColor(Color.WHITE)
+                .contentColor(Color.WHITE)
+                .positiveColor(C.COLOR_YELLOW)
+                .negativeColor(C.COLOR_YELLOW)
+                .content("正在等位...")
+                .backgroundColor(C.COLOR_BG)
+                .show();
+        mlocationClient.startLocation();
+
+    }
     @OnClick(R.id.gdm_newaddr)
     public void newClick() {
 //        setResult(2048, new Intent().putExtra("data", new Bun().putString("address", addressName).putString("lng", Lng).putString("lat", Lat).ok()));
@@ -256,6 +285,9 @@ public class GDMapLocationActivity extends Activity implements OnGeocodeSearchLi
             regeoMarker.setPositionByPixels(StringUtil.getScreenWidth(this) / 2, (StringUtil.getScreenHeight(this) - StringUtil.dip2px(this, 137)) / 2 - 45);
             aMap.setOnCameraChangeListener(this);// 对amap添加移动地图事件监听器
             aMap.getUiSettings().setZoomControlsEnabled(false);
+            aMap.setLocationSource(this);// 设置定位监听
+            aMap.getUiSettings().setMyLocationButtonEnabled(false);// 设置默认定位按钮是否显示
+            aMap.setMyLocationEnabled(true);
         }
 
 
@@ -369,14 +401,18 @@ public class GDMapLocationActivity extends Activity implements OnGeocodeSearchLi
                 myLocationStyle.strokeWidth(1.0f);// 设置圆形的边框粗细
                 aMap.setMyLocationStyle(myLocationStyle);
                 aMap.getUiSettings().setZoomControlsEnabled(false);
+                aMap.setLocationSource(this);// 设置定位监听
+                aMap.getUiSettings().setMyLocationButtonEnabled(false);// 设置默认定位按钮是否显示
                 regeoMarker.setPositionByPixels(StringUtil.getScreenWidth(this) / 2, (StringUtil.getScreenHeight(this) - StringUtil.dip2px(this, 137)) / 2 - 45);
                 aMap.setOnCameraChangeListener(this);// 对amap添加移动地图事件监听器
+                aMap.setMyLocationEnabled(true);
                 circleOptions = new CircleOptions().center(new LatLng(Double.parseDouble(Lat), Double.parseDouble(Lng)))
                         .radius(length).strokeColor(Color.parseColor("#f4821c")).fillColor(Color.parseColor("#40f4821c"))
                         .strokeWidth(2);
                 aMap.addCircle(circleOptions);
                 addressName = result.getRegeocodeAddress().getFormatAddress().toString().replace(result.getRegeocodeAddress().getTownship(), "")
                         + "附近";
+                edt_search_content.setText(result.getRegeocodeAddress().getFormatAddress().toString().replace(result.getRegeocodeAddress().getProvince(), "").replace(result.getRegeocodeAddress().getCity(), ""));
                 aMap.animateCamera(CameraUpdateFactory.newLatLngZoom(
                         new LatLng(latLonPoint.getLatitude(), latLonPoint.getLongitude()), zoom));
                 Tools.toast(this, addressName);
@@ -428,4 +464,37 @@ public class GDMapLocationActivity extends Activity implements OnGeocodeSearchLi
     }
 
 
+    @Override
+    public void activate(OnLocationChangedListener onLocationChangedListener) {
+        if (mlocationClient == null) {
+            mlocationClient = new AMapLocationClient(this);
+            mLocationOption = new AMapLocationClientOption();
+            //设置定位监听
+            mlocationClient.setLocationListener(this);
+            //设置为高精度定位模式
+            mLocationOption.setLocationMode(AMapLocationClientOption.AMapLocationMode.Hight_Accuracy);
+            //设置定位参数
+            mlocationClient.setLocationOption(mLocationOption);
+            // 此方法为每隔固定时间会发起一次定位请求，为了减少电量消耗或网络流量消耗，
+            // 注意设置合适的定位时间的间隔（最小间隔支持为2000ms），并且在合适时间调用stopLocation()方法来取消定位请求
+            // 在定位结束后，在合适的生命周期调用onDestroy()方法
+            // 在单次定位情况下，定位无论成功与否，都无需调用stopLocation()方法移除请求，定位sdk内部会移除
+
+        }
+    }
+
+    @Override
+    public void deactivate() {
+
+    }
+
+    @Override
+    public void onLocationChanged(AMapLocation aMapLocation) {
+        Lng = aMapLocation.getLongitude()+"";
+        Lat = aMapLocation.getLatitude()+"";
+        latLonPoint = new LatLonPoint(Double.parseDouble(Lat), Double.parseDouble(Lng));
+        initView();
+        materialDialog.dismiss();
+        mlocationClient.stopLocation();
+    }
 }

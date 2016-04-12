@@ -30,6 +30,7 @@ import com.hewuzhe.ui.activity.OrderCenterActivity2;
 import com.hewuzhe.ui.activity.ProductClassifiActivity;
 import com.hewuzhe.ui.activity.ProductListActivity;
 import com.hewuzhe.ui.activity.ShopCarActivity;
+import com.hewuzhe.ui.activity.SignInActivity;
 import com.hewuzhe.ui.adapter.EquipmentSortRecommendAdapter2;
 import com.hewuzhe.ui.base.BaseFragment;
 import com.hewuzhe.ui.cons.C;
@@ -106,7 +107,10 @@ public class EquipmentFragment3 extends BaseFragment implements IXListViewListen
         ll_all_sort.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(getActivity(), ProductClassifiActivity.class));
+                    startActivity(new Intent(getActivity(), ProductClassifiActivity.class));
+
+
+
             }
         });
         /**
@@ -115,7 +119,9 @@ public class EquipmentFragment3 extends BaseFragment implements IXListViewListen
         ll_recommend.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(getActivity(), ProductListActivity.class).putExtra("recommend", "1"));
+                    startActivity(new Intent(getActivity(), ProductListActivity.class).putExtra("recommend", "1"));
+
+
             }
         });
         /**
@@ -124,7 +130,11 @@ public class EquipmentFragment3 extends BaseFragment implements IXListViewListen
         ll_my_order.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(getActivity(), OrderCenterActivity2.class));
+                if(new SessionUtil(getContext()).isLogin())
+                    startActivity(new Intent(getActivity(), OrderCenterActivity2.class));
+                else
+                startActivity(SignInActivity.class);
+
             }
         });
         /**
@@ -134,7 +144,11 @@ public class EquipmentFragment3 extends BaseFragment implements IXListViewListen
             @Override
             public void onClick(View v) {
                 //购物车
-                startActivity(new Intent(getActivity(), ShopCarActivity.class));
+                if(new SessionUtil(getContext()).isLogin())
+                    startActivity(new Intent(getActivity(), ShopCarActivity.class));
+                else
+                startActivity(SignInActivity.class);
+
             }
         });
 

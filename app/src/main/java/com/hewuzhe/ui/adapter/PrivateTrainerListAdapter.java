@@ -28,7 +28,7 @@ import butterknife.ButterKnife;
 /**
  * Created by zycom on 2016/3/16.
  */
-public class PrivateTrainerListAdapter extends BaseNoMoreAdapter<PrivateTrainerListAdapter.ViewHolder, PrivateTrainerList, PrivateTrainerListPresenter> {
+public class PrivateTrainerListAdapter extends BaseAdapter<PrivateTrainerListAdapter.ViewHolder, PrivateTrainerList, PrivateTrainerListPresenter> {
     public PrivateTrainerListAdapter(Context context, PrivateTrainerListPresenter privateTrainerListPresenter) {
         super(context, privateTrainerListPresenter);
     }

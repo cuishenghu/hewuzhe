@@ -34,7 +34,7 @@ import butterknife.ButterKnife;
  */
 public class Videos3Adapter extends BaseAdapter<Videos3Adapter.ViewHolder, Video, BasePresenterImp> {
 //    public static final int TYPE_HEADER = 0;
-    private boolean isChecked = true;
+    private boolean isChecked = false;
     private int screenWidth = 10;
     private String who="";
     private int i;

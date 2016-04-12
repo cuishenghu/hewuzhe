@@ -85,10 +85,10 @@ public class ChatFragment extends SwipeRecycleViewFragment<ChatPresenter,ChatAda
     protected void initThings(View view) {
         super.initThings(view);
         initHeader();
-        presenter.SelectFriends(this.getContext());
-        presenter.getData(page, count);
-        presenter.SelectRecommendUser();
-        presenter.getTopFourData();
+//        presenter.SelectFriends(this.getContext());
+//        presenter.getData(page, count);
+//        presenter.SelectRecommendUser();
+//        presenter.getTopFourData();
 
     }
 
@@ -237,9 +237,7 @@ public class ChatFragment extends SwipeRecycleViewFragment<ChatPresenter,ChatAda
     @Override
     public void onResume() {
         super.onResume();
-        presenter.SelectFriends(this.getContext());
-        presenter.getData(page, count);
-        presenter.SelectRecommendUser();
+        requestDataRefresh();
     }
 
     @Override
@@ -312,6 +310,7 @@ public class ChatFragment extends SwipeRecycleViewFragment<ChatPresenter,ChatAda
         presenter.SelectFriends(this.getContext());
         presenter.getData(page, count);
         presenter.SelectRecommendUser();
+        presenter.getTopFourData();
 
     }
 

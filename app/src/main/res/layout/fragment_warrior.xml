@@ -80,6 +80,7 @@
                     android:layout_height="122px"
                     android:layout_gravity="center"
                     android:src="@mipmap/img_avatar"
+                    android:layout_marginTop="-8dp"
                     android:textSize="22px" />
 
 
@@ -88,11 +89,11 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
-                    android:layout_marginTop="75px"
+                    android:layout_marginTop="71px"
                     android:maxEms="12"
                     android:maxLines="1"
                     android:padding="18px"
-                    android:text=""
+                    android:text="未登录"
                     android:textColor="@color/colorYellow"
                     android:textSize="25px" />
 
@@ -104,8 +105,9 @@
                     android:layout_gravity="center"
                     android:layout_marginTop="105px"
                     android:padding="18px"
-                    android:text="ID: 122345667890"
+                    android:text=""
                     android:textColor="@color/white"
+                    android:layout_marginBottom="4dp"
                     android:textSize="22px" />
 
                 <LinearLayout
@@ -124,7 +126,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="18px"
-                        android:text="lv1"
+                        android:text="lv0"
                         android:textColor="@color/white"
                         android:textSize="22px" />
 
@@ -163,7 +165,7 @@
                         android:id="@+id/tv_integral"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="一级"
+                        android:text="零级"
                         android:textColor="@color/colorYellow"
 
                         android:textSize="20px" />
@@ -286,12 +288,12 @@
             <FrameLayout
                 android:id="@+id/lay_index_img"
                 android:layout_width="match_parent"
-                android:layout_height="360px">
+                android:layout_height="180dp">
 
                 <ImageView
                     android:id="@+id/img_index"
                     android:layout_width="match_parent"
-                    android:layout_height="360px"
+                    android:layout_height="match_parent"
                     android:scaleType="fitXY"
                     android:src="@mipmap/img_warrior_bg" />
 

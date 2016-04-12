@@ -318,11 +318,11 @@ public class ProfileActivity extends ToolBarActivity<ProfilePresenter> implement
         tvUsername.setText("昵称：" + user.NicName);
         tvId.setText("ID：" + getUserId());
         tvIntegral.setText("积分：" + user.Credit + "");
-        Glide.with(getContext())
-                .load(C.BASE_URL + user.PhotoPath)
-                .placeholder(R.mipmap.img_avatar)
-                .crossFade()
+        Glide.with(this)
+                .load(user.PhotoPath.contains("UpLoad/Photo/")?C.BASE_URL + user.PhotoPath:user.PhotoPath)
                 .centerCrop()
+                .crossFade()
+                .placeholder(R.mipmap.img_avatar)
                 .transform(new GlideCircleTransform(getContext()))
                 .into(imgAvatar);
 

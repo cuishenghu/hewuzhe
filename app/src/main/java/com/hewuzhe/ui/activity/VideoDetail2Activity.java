@@ -5,6 +5,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
 import android.content.res.Configuration;
+import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.GridLayoutManager;
@@ -104,6 +105,11 @@ public class VideoDetail2Activity extends RecycleViewActivity<VideoDetailPresent
      */
     @Override
     protected void initThings(Bundle savedInstanceState) {
+        if(!new SessionUtil(getContext()).isLogin()) {
+
+            startActivity(SignInActivity.class);
+            finish();
+        }
         io.vov.vitamio.LibsChecker.checkVitamioLibs(this);
         super.initThings(savedInstanceState);
         // 手动这是播放窗口父类，横屏的时候，会用这个做为容器使用，如果不设置，那么默认直接跳转到DecorView
@@ -300,21 +306,23 @@ public class VideoDetail2Activity extends RecycleViewActivity<VideoDetailPresent
 // 分享时Notification的图标和文字  2.5.9以后的版本不调用此方法
         //oks.setNotification(R.drawable.ic_launcher, getString(R.string.app_name));
         // title标题，印象笔记、邮箱、信息、微信、人人网和QQ空间使用
-        oks.setTitle("分享");
+        oks.setTitle("@功夫");
         // titleUrl是标题的网络链接，仅在人人网和QQ空间使用
-        oks.setTitleUrl("http://sharesdk.cn");
+        oks.setTitleUrl("http://www.aitkungfu.com/");
         // text是分享文本，所有平台都需要这个字段
-        oks.setText("我是分享文本");
+        oks.setText("@功夫上线啦!快来乐享降龙十八掌");
         // imagePath是图片的本地路径，Linked-In以外的平台都支持此参数
-        oks.setImagePath("/sdcard/test.jpg");//确保SDcard下面存在此张图片
+//        oks.setImagePath("/sdcard/test.jpg");//确保SDcard下面存在此张图片
+        oks.setImageUrl("http://120.27.115.235/ic_launcher.png");
+//        oks.setCustomerLogo(BitmapFactory.decodeResource(this.getContext().getResources(), R.drawable.ic_launcher),BitmapFactory.decodeResource(this.getContext().getResources(), R.drawable.ic_launcher),"@功夫",null);
         // url仅在微信（包括好友和朋友圈）中使用
-        oks.setUrl("http://sharesdk.cn");
+        oks.setUrl("http://www.aitkungfu.com/");
         // comment是我对这条分享的评论，仅在人人网和QQ空间使用
-        oks.setComment("我是测试评论文本");
+        oks.setComment("@功夫");
         // site是分享此内容的网站名称，仅在QQ空间使用
         oks.setSite(getString(R.string.app_name));
         // siteUrl是分享此内容的网站地址，仅在QQ空间使用
-        oks.setSiteUrl("http://sharesdk.cn");
+        oks.setSiteUrl("http://www.aitkungfu.com/");
 
 // 启动分享GUI
         oks.show(this);
@@ -339,11 +347,11 @@ public class VideoDetail2Activity extends RecycleViewActivity<VideoDetailPresent
         ViewGroup.LayoutParams params = mVDVideoView.getLayoutParams();
         params.width = ViewGroup.LayoutParams.MATCH_PARENT;
 
-        if (video.UserId == 0) {
+//        if (video.UserId == 0) {
             HEITH_VIDEO = 200;
-        } else {
-            HEITH_VIDEO = 320;
-        }
+//        } else {
+//            HEITH_VIDEO = 320;
+//        }
         params.height = StringUtil.dip2px(getContext(), HEITH_VIDEO);
 
         mVDVideoView.setLayoutParams(params);
@@ -784,7 +792,6 @@ public class VideoDetail2Activity extends RecycleViewActivity<VideoDetailPresent
     @Override
     public void onConfigurationChanged(Configuration newConfig) {
         super.onConfigurationChanged(newConfig);
-
         if (newConfig.orientation == Configuration.ORIENTATION_LANDSCAPE) {
             mLayout = VideoView.VIDEO_LAYOUT_STRETCH;//全屏
             ViewGroup.LayoutParams params = mVDVideoView.getLayoutParams();

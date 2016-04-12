@@ -20,6 +20,7 @@ import com.hewuzhe.presenter.DojoRecommendPresenter;
 import com.hewuzhe.presenter.PrivateTrainerListPresenter;
 import com.hewuzhe.ui.App;
 import com.hewuzhe.ui.adapter.DojoRecommendAdapter;
+import com.hewuzhe.ui.adapter.GridItemDecoration;
 import com.hewuzhe.ui.adapter.PrivateTrainerListAdapter;
 import com.hewuzhe.ui.adapter.base.BaseAdapter;
 import com.hewuzhe.ui.base.SwipeRecycleViewActivity;
@@ -37,12 +38,14 @@ import butterknife.Bind;
 /**
  * Created by zycom on 2016/3/14.
  */
-public class PrivateTrainerListActivity extends SwipeRecycleViewNoMoreActivity<PrivateTrainerListPresenter, PrivateTrainerListAdapter, PrivateTrainerList> implements PrivateTrainerListView{
+public class PrivateTrainerListActivity extends SwipeRecycleViewActivity<PrivateTrainerListPresenter, PrivateTrainerListAdapter, PrivateTrainerList> implements PrivateTrainerListView{
 
     @Bind(R.id.lay_city)
     LinearLayout _LayCity;
     @Bind(R.id.lay_no_loc)
     LinearLayout _LayNoLoc;
+    private GridLayoutManager gridLayoutManager;
+    private GridItemDecoration decoration;
 
 
     private int cityId = -1;
@@ -112,6 +115,8 @@ public class PrivateTrainerListActivity extends SwipeRecycleViewNoMoreActivity<P
      */
     @Override
     protected PrivateTrainerListAdapter provideAdapter() {
+        decoration = new GridItemDecoration(10, 1);
+        recyclerView.addItemDecoration(decoration);
         return new PrivateTrainerListAdapter(getContext(),presenter);
     }
 
@@ -120,7 +125,19 @@ public class PrivateTrainerListActivity extends SwipeRecycleViewNoMoreActivity<P
      */
     @Override
     protected RecyclerView.LayoutManager provideLayoutManager() {
-        return new GridLayoutManager(this,2);
+        gridLayoutManager = new GridLayoutManager(getContext(), 2);
+
+        gridLayoutManager.setSpanSizeLookup(new GridLayoutManager.SpanSizeLookup() {
+            @Override
+            public int getSpanSize(int position) {
+                if (position == adapter.getItemCount() - 1) {
+                    return 2;
+                }
+                return 1;
+            }
+        });
+        layoutManager = gridLayoutManager;
+        return layoutManager;
     }
 
 

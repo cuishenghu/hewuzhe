@@ -54,7 +54,7 @@ public class FollowedFriendsActivity extends RecycleViewActivity<FollowedFriends
         tvAction.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(FollowedFriendsActivity.this, MakeWarriorsActivity.class));
+                startActivity(new Intent(FollowedFriendsActivity.this, AddWarriorsActivity2.class));
             }
         });
 
@@ -128,7 +128,7 @@ public class FollowedFriendsActivity extends RecycleViewActivity<FollowedFriends
     @Override
     protected void initThings(Bundle savedInstanceState) {
         super.initThings(savedInstanceState);
-        tvAction.setText("添加武友");
+        tvAction.setText("添加好友");
         initHeader();
         presenter.getData(page, count);
         /**
@@ -188,7 +188,7 @@ public class FollowedFriendsActivity extends RecycleViewActivity<FollowedFriends
      */
     @Override
     protected String provideTitle() {
-        return "新添加武友";
+        return "新添加好友";
     }
 
     /**

@@ -303,11 +303,11 @@ public class SignupProfileActivity extends ToolBarActivity<ProfilePresenter> imp
         user = new SessionUtil(getContext()).getUser();
         tvId.setText(user.Phone);
 
-        Glide.with(getContext())
-                .load(C.BASE_URL + user.PhotoPath)
-                .placeholder(R.mipmap.img_avatar)
-                .crossFade()
+        Glide.with(this)
+                .load(user.PhotoPath.contains("UpLoad/Photo/")?C.BASE_URL + user.PhotoPath:user.PhotoPath)
                 .centerCrop()
+                .crossFade()
+                .placeholder(R.mipmap.img_avatar)
                 .transform(new GlideCircleTransform(getContext()))
                 .into(imgAvatar);
 

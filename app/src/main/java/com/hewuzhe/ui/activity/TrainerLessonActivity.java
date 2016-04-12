@@ -52,6 +52,17 @@ public class TrainerLessonActivity extends ToolBarActivity<TrainerLessonPresente
     }
 
     @Override
+    public boolean canAction() {
+        return true;
+    }
+
+    @Override
+    protected void action() {
+        startActivity(MySignLessonListActivity.class);
+        finish();
+    }
+
+    @Override
     protected int provideContentViewId() {
         return R.layout.activity_trainer_lesson;
     }

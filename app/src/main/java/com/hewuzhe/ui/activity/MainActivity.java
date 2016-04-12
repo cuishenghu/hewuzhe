@@ -27,6 +27,7 @@ import com.hewuzhe.ui.fragment.MoreFragment;
 import com.hewuzhe.ui.fragment.PowerFragment;
 import com.hewuzhe.ui.fragment.WarriorFragment;
 import com.hewuzhe.utils.Bun;
+import com.hewuzhe.utils.SessionUtil;
 import com.socks.library.KLog;
 
 import butterknife.Bind;
@@ -129,18 +130,23 @@ public class MainActivity extends BaseActivity {
         menuTwo.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                menuTwo.setBackgroundColor(yellow);
-                menuOne.setBackgroundColor(primary);
-                menuThree.setBackgroundColor(primary);
-                menuFour.setBackgroundColor(primary);
-                menuFive.setBackgroundColor(primary);
+                if(new SessionUtil(getContext()).isLogin()){
+                    menuTwo.setBackgroundColor(yellow);
+                    menuOne.setBackgroundColor(primary);
+                    menuThree.setBackgroundColor(primary);
+                    menuFour.setBackgroundColor(primary);
+                    menuFive.setBackgroundColor(primary);
 
 
-                if (null == chatFragment) {
-                    chatFragment = new ChatFragment();
+                    if (null == chatFragment) {
+                        chatFragment = new ChatFragment();
+                    }
+
+                    switchContent(curFragment, chatFragment);
+
                 }
-
-                switchContent(curFragment, chatFragment);
+                else
+                startActivity(SignInActivity.class);
 
             }
         });
@@ -193,19 +199,24 @@ public class MainActivity extends BaseActivity {
         menuFive.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                menuFive.setBackgroundColor(yellow);
+                if(new SessionUtil(getContext()).isLogin()){
+                    menuFive.setBackgroundColor(yellow);
 
-                menuTwo.setBackgroundColor(primary);
-                menuThree.setBackgroundColor(primary);
-                menuFour.setBackgroundColor(primary);
-                menuOne.setBackgroundColor(primary);
+                    menuTwo.setBackgroundColor(primary);
+                    menuThree.setBackgroundColor(primary);
+                    menuFour.setBackgroundColor(primary);
+                    menuOne.setBackgroundColor(primary);
 
 
-                if (null == moreFragment) {
-                    matchFragment = new MatchFragment();
+                    if (null == moreFragment) {
+                        matchFragment = new MatchFragment();
+                    }
+
+                    switchContent(curFragment, matchFragment);
+
                 }
-
-                switchContent(curFragment, matchFragment);
+                else
+                    startActivity(SignInActivity.class);
 
 
             }

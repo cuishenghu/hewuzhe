@@ -100,12 +100,12 @@ public class Videos_2Activity extends SwipeRecycleViewActivity<Videos2Presenter,
      */
     @Override
     protected RecyclerView.LayoutManager provideLayoutManager() {
-        gridLayoutManager = new GridLayoutManager(getContext(), 1);
+        gridLayoutManager = new GridLayoutManager(getContext(), 2);
         gridLayoutManager.setSpanSizeLookup(new GridLayoutManager.SpanSizeLookup() {
             @Override
             public int getSpanSize(int position) {
-                if (position == adapter.getItemCount()) {
-                    return swicthButton.isChecked() ? 2 :1;
+                if (position == adapter.getItemCount()-1) {
+                    return swicthButton.isChecked() ? 1 :2;
 
                 }
                 return 1;

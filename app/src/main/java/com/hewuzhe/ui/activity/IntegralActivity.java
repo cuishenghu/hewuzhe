@@ -51,11 +51,11 @@ public class IntegralActivity extends RecycleViewActivity<IntegralPresenter, Int
         tvIntegral.setText("积分：" + user.Credit + "个");
 
         Glide.with(getContext())
-                .load(C.BASE_URL + user.PhotoPath)
+                .load(user.PhotoPath.contains("UpLoad/Photo/")?C.BASE_URL + user.PhotoPath:user.PhotoPath)
                 .centerCrop()
                 .crossFade()
-                .transform(new GlideCircleTransform(getContext()))
                 .placeholder(R.mipmap.img_avatar)
+                .transform(new GlideCircleTransform(getContext()))
                 .into(imgAvatar);
         imgAvatar.setOnClickListener(new View.OnClickListener() {
             @Override

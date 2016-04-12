@@ -36,6 +36,7 @@ import com.hewuzhe.ui.cons.C;
 import com.hewuzhe.ui.cons.Contant;
 import com.hewuzhe.ui.cons.FileUtils;
 import com.hewuzhe.ui.fragment.PowerFragment;
+import com.hewuzhe.ui.widget.GlideCircleTransform;
 import com.hewuzhe.utils.Bun;
 import com.hewuzhe.utils.SPUtil;
 import com.hewuzhe.utils.SessionUtil;
@@ -176,11 +177,18 @@ public class FriendsConditionActivity extends SwipeRecycleViewActivity<FriendCon
         user = new SessionUtil(getContext()).getUser();
         if (user != null) {
             Glide.with(getContext())
-                    .load(C.BASE_URL + user.PhotoPath)
+                    .load(user.PhotoPath.contains("UpLoad/Photo/")?C.BASE_URL + user.PhotoPath:user.PhotoPath)
                     .centerCrop()
                     .crossFade()
+                    .placeholder(R.mipmap.img_avatar)
+                    .transform(new GlideCircleTransform(getContext()))
                     .into(_ImgAvatar);
-            _TvUsername.setText(user.NicName);
+//            Glide.with(getContext())
+//                    .load(C.BASE_URL + user.PhotoPath)
+//                    .centerCrop()
+//                    .crossFade()
+//                    .into(_ImgAvatar);
+//            _TvUsername.setText(user.NicName);
 
             _ImgAvatar.setOnClickListener(new View.OnClickListener() {
                 @Override

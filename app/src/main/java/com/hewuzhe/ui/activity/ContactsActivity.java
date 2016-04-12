@@ -63,7 +63,7 @@ public class ContactsActivity extends RecycleViewActivity<FriendsPresenter, Frie
      */
     @Override
     protected String provideTitle() {
-        return "我的武友";
+        return "我的好友";
     }
 
     /**

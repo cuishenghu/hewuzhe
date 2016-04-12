@@ -15,6 +15,7 @@ import com.hewuzhe.model.Video;
 import com.hewuzhe.presenter.SearchCatVideosPresenter;
 import com.hewuzhe.ui.adapter.GridItemDecoration;
 import com.hewuzhe.ui.adapter.Videos2Adapter;
+import com.hewuzhe.ui.adapter.Videos3Adapter;
 import com.hewuzhe.ui.base.SwipeRecycleViewActivity;
 import com.hewuzhe.utils.Bun;
 import com.hewuzhe.view.SearchVideosView;
@@ -23,7 +24,7 @@ import java.util.ArrayList;
 
 import butterknife.Bind;
 
-public class SearchCatVideosActivity extends SwipeRecycleViewActivity<SearchCatVideosPresenter, Videos2Adapter, Video> implements SearchVideosView {
+public class SearchCatVideosActivity extends SwipeRecycleViewActivity<SearchCatVideosPresenter, Videos3Adapter, Video> implements SearchVideosView {
 
     public static int CAT_ID = 0;
     @Bind(R.id.edt_search_content)
@@ -38,8 +39,8 @@ public class SearchCatVideosActivity extends SwipeRecycleViewActivity<SearchCatV
      * @return 提供Adapter
      */
     @Override
-    protected Videos2Adapter provideAdapter() {
-        return new Videos2Adapter(getContext());
+    protected Videos3Adapter provideAdapter() {
+        return new Videos3Adapter(getContext(),"guannishishei");
     }
 
     /**

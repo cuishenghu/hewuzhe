@@ -86,6 +86,22 @@
         android:layout_height="fill_parent"
         android:layout_marginTop="148dp"></com.amap.api.maps2d.MapView>
 
+    <LinearLayout
+        android:id="@+id/dingwei_icon"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:layout_marginBottom="10dp"
+        android:gravity="center"
+        android:layout_marginLeft="10dp"
+        android:background="@drawable/circle_white"
+        android:layout_alignParentBottom="true">
+
+        <ImageView
+            android:layout_width="25dp"
+            android:layout_height="25dp"
+            android:src="@drawable/gpsnormal"/>
+    </LinearLayout>
+
     <TextView
         android:id="@+id/zoom_small"
         android:layout_width="40dp"

@@ -117,11 +117,11 @@ public class NavigateActivity extends BaseActivity implements View.OnTouchListen
 
                 /**
                  * 判断进入登录还是首页*/
-                if (new SessionUtil(getContext()).isLogin()) {
+//                if (new SessionUtil(getContext()).isLogin()) {
                     startActivity(MainActivity.class);
-                } else {
-                    startActivity(SignInActivity.class);
-                }
+//                } else {
+//                    startActivity(SignInActivity.class);
+//                }
 
             }
         }

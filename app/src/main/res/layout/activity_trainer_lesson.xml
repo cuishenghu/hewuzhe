@@ -8,7 +8,7 @@
 
     <include
         android:id="@+id/title"
-        layout="@layout/toolbar_layout" />
+        layout="@layout/toolbar_lesson" />
 
     <RelativeLayout
         android:layout_width="match_parent"

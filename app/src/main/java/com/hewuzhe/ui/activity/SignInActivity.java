@@ -33,6 +33,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 import butterknife.Bind;
+import butterknife.OnClick;
 import cn.sharesdk.framework.Platform;
 import cn.sharesdk.framework.PlatformActionListener;
 import cn.sharesdk.framework.ShareSDK;
@@ -58,6 +59,8 @@ public class SignInActivity extends BaseActivity<SignInPresenter> implements Sig
     TextView tvSignUp;
     @Bind(R.id.tv_sign_in)
     TextView tvSignIn;
+    @Bind(R.id.youkelogin)
+    TextView youkelogin;
     @Bind(R.id.lay_qq)
     LinearLayout layQq;
     @Bind(R.id.lay_wx)
@@ -69,6 +72,10 @@ public class SignInActivity extends BaseActivity<SignInPresenter> implements Sig
     @Bind(R.id.cb_remember_pwd)
     CheckBox _CbRememberPwd;
     private LoadingDialog loadingDialog;
+
+    String username ="";
+    String userid = "";
+    String usericon = "";
 
     private Handler handler;
     private LinearLayout popView;
@@ -144,6 +151,11 @@ public class SignInActivity extends BaseActivity<SignInPresenter> implements Sig
             }
         });
 
+    }
+
+    @OnClick(R.id.youkelogin)
+    public void youkeLogin(){
+        startActivity(new Intent(SignInActivity.this, MainActivity.class));
     }
 
     private void dismissUPs() {
@@ -283,6 +295,10 @@ public class SignInActivity extends BaseActivity<SignInPresenter> implements Sig
         if (action == Platform.ACTION_USER_INFOR) {
             Message msg = new Message();
             msg.what = MSG_AUTH_COMPLETE;
+            if(platform.getName().equals("QZone"))
+                usericon = res.get("figureurl_qq_2").toString();
+            else
+                usericon = platform.getDb().getUserIcon();
             msg.obj = new Object[]{platform.getName(), res};
             handler.sendMessage(msg);
         }
@@ -326,7 +342,11 @@ public class SignInActivity extends BaseActivity<SignInPresenter> implements Sig
                 String platform = (String) objs[0];
 
                 Platform plat = ShareSDK.getPlatform(platform);
-                presenter.otherSigin(plat.getDb().getUserName(), plat.getDb().getUserId(), plat.getDb().getUserIcon(), layWx);
+
+                userid = plat.getDb().getUserId();
+                username = plat.getDb().getUserName();
+
+                presenter.otherSigin(username, userid, usericon, layWx);
 
             }
             break;

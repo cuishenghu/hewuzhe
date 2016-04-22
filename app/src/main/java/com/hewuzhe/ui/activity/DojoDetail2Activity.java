@@ -54,6 +54,7 @@ import com.nostra13.universalimageloader.core.ImageLoader;
 import java.util.ArrayList;
 
 import butterknife.Bind;
+import butterknife.OnClick;
 import cn.sharesdk.framework.ShareSDK;
 import cn.sharesdk.onekeyshare.OnekeyShare;
 import io.vov.vitamio.widget.VideoView;
@@ -75,6 +76,8 @@ public class DojoDetail2Activity extends RecycleViewNoMoreActivity<DojoDetail2Pr
     Button _BtnToMember;
     @Bind(R.id.img)
     ImageView _Img;
+    @Bind(R.id.play)
+    LinearLayout play;
 
     TextView _TvName;
     ImageView _ImgCollect;
@@ -107,7 +110,7 @@ public class DojoDetail2Activity extends RecycleViewNoMoreActivity<DojoDetail2Pr
 
     /**
      * @param savedInstanceState 缓存数据
-     *                           <p>
+     *                           <p/>
      */
     @Override
     protected void initThings(Bundle savedInstanceState) {
@@ -119,6 +122,12 @@ public class DojoDetail2Activity extends RecycleViewNoMoreActivity<DojoDetail2Pr
         id = getIntentData().getInt("id");
         presenter.getDetail();
         presenter.getOthers();
+    }
+
+    @OnClick(R.id.play)
+    public void playClick() {
+        mVDVideoView.start();
+        play.setVisibility(View.GONE);
     }
 
     private void initHeader() {
@@ -214,7 +223,7 @@ public class DojoDetail2Activity extends RecycleViewNoMoreActivity<DojoDetail2Pr
     @Override
     public void setData(final Dojo dojo) {
         this.dojo = dojo;
-        if(dojo.VideoPath.trim().equals("")) {
+        if (dojo.VideoPath.trim().equals("")) {
             mVDVideoView.setVisibility(View.GONE);
             _Img.setVisibility(View.VISIBLE);
             Glide.with(getContext())
@@ -233,20 +242,19 @@ public class DojoDetail2Activity extends RecycleViewNoMoreActivity<DojoDetail2Pr
                     startActivity(PicsActivity.class, new Bun().putString("pics", new Gson().toJson(pics)).ok());
                 }
             });
-        }else{
+        } else {
             mVDVideoView.setVisibility(View.VISIBLE);
             _Img.setVisibility(View.GONE);
             ViewGroup.LayoutParams params = mVDVideoView.getLayoutParams();
             params.width = ViewGroup.LayoutParams.MATCH_PARENT;
 
-            HEITH_VIDEO = 250;
+            HEITH_VIDEO = 200;
             params.height = StringUtil.dip2px(getContext(), HEITH_VIDEO);
 
             mVDVideoView.setLayoutParams(params);
-            startPlay(C.BASE_URL+dojo.VideoPath);
+            startPlay(C.BASE_URL + dojo.VideoPath);
 
         }
-
 
 
         _TvName.setText(dojo.Title);
@@ -284,8 +292,7 @@ public class DojoDetail2Activity extends RecycleViewNoMoreActivity<DojoDetail2Pr
         });
 //       mVDVideoView.btnFullScreen.setVisibility(View.GONE);
         mVDVideoView.setVideoPath(videoPath);
-        mVDVideoView.start();
-
+        play.setVisibility(View.VISIBLE);
     }
 
     @Override

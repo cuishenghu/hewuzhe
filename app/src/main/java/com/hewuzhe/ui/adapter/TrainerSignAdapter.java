@@ -59,6 +59,7 @@ public class TrainerSignAdapter extends BaseAdapter {
             holder.tv_sign_title = (TextView) convertView.findViewById(R.id.tv_sign_title);//报名科目标题
             holder.tv_sign_date = (TextView) convertView.findViewById(R.id.tv_sign_date);//报名科目开始日期
             holder.tv_sign_num = (TextView) convertView.findViewById(R.id.tv_sign_num);//报名该科目的人数
+            holder.tv_sign_join = (TextView) convertView.findViewById(R.id.tv_sign_join);//是否报名
             convertView.setTag(holder);
         } else {
             holder = (ViewHolder) convertView.getTag();
@@ -68,6 +69,7 @@ public class TrainerSignAdapter extends BaseAdapter {
         holder.tv_sign_title.setText(trainerLesson.getTitle());
         holder.tv_sign_date.setText("开始时间："+trainerLesson.getStartTime());
         holder.tv_sign_num.setText(trainerLesson.getJoinNum()+"人参加");
+        holder.tv_sign_join.setText(trainerLesson.getIsJoin()==1?"已报名":"尚未报名");
 
 
         return convertView;
@@ -78,6 +80,7 @@ public class TrainerSignAdapter extends BaseAdapter {
         TextView tv_sign_title;
         TextView tv_sign_date;
         TextView tv_sign_num;
+        TextView tv_sign_join;
 
     }
 

@@ -26,7 +26,7 @@
                   android:layout_marginLeft="20px"
                   android:layout_weight="1"
                   android:background="@null"
-                  android:hint="搜索战队昵称、id号"
+                  android:hint="搜索成员昵称、id号"
                   android:imeActionId="@+id/edt_search_content_actionid"
                   android:imeOptions="actionSearch"
                   android:inputType="text"

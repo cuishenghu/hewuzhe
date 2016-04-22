@@ -2,7 +2,10 @@ package com.hewuzhe.ui.fragment;
 
 
 import android.content.Intent;
+import android.graphics.Color;
+import android.net.Uri;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,14 +18,18 @@ import com.bumptech.glide.Glide;
 import com.hewuzhe.R;
 import com.hewuzhe.model.StudyOnlineCatItem;
 import com.hewuzhe.presenter.StudyOnlineFragPresenter;
+import com.hewuzhe.ui.activity.MemberActivity;
 import com.hewuzhe.ui.activity.Videos_2Activity;
 import com.hewuzhe.ui.base.BaseFragment;
 import com.hewuzhe.ui.cons.C;
+import com.hewuzhe.utils.SessionUtil;
 import com.hewuzhe.view.StudyOnlineFragView;
 
 import java.util.ArrayList;
 
 import butterknife.Bind;
+import materialdialogs.DialogAction;
+import materialdialogs.MaterialDialog;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -192,11 +199,36 @@ public class StudyOnlineOneFragment extends BaseFragment<StudyOnlineFragPresente
         child.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(getActivity(), Videos_2Activity.class);
-                intent.putExtra("title", item.Name);
-                intent.putExtra("id", item.Id);
-                intent.putExtra("who","kecheng");
-                getActivity().startActivity(intent);
+//                if (new SessionUtil(getContext()).getUser().isVip()) {
+                    Intent intent = new Intent(getActivity(), Videos_2Activity.class);
+                    intent.putExtra("title", item.Name);
+                    intent.putExtra("id", item.Id);
+                    intent.putExtra("who", "kecheng");
+                    getActivity().startActivity(intent);
+//                }else{
+//                    new MaterialDialog.Builder(getActivity())
+//                            .title("会员提示")
+//                            .titleColor(Color.WHITE)
+//                            .content("您还不是会员，没有进入该页面浏览的权限，是否现在成为会员？")
+//                            .contentColor(Color.WHITE)
+//                            .positiveColor(C.COLOR_YELLOW)
+//                            .negativeColor(C.COLOR_YELLOW)
+//                            .positiveText("是")
+//                            .negativeText("否")
+//                            .backgroundColor(C.COLOR_BG)
+//                            .onNegative(new MaterialDialog.SingleButtonCallback() {
+//                                @Override
+//                                public void onClick(@NonNull MaterialDialog dialog, @NonNull DialogAction which) {
+//                                    dialog.dismiss();
+//                                }
+//                            })
+//                            .onPositive(new MaterialDialog.SingleButtonCallback() {
+//                                @Override
+//                                public void onClick(@NonNull MaterialDialog dialog, @NonNull DialogAction which) {
+//                                    startActivity(new Intent(getActivity(), MemberActivity.class));
+//                                }
+//                            }).show();
+//                }
             }
         });
 

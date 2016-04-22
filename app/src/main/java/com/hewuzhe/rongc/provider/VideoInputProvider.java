@@ -118,7 +118,7 @@ public class VideoInputProvider extends InputProvider.ExtendProvider implements 
                     .setBeautySkinOn(false)
                     .setCameraFacing(
                             Camera.CameraInfo.CAMERA_FACING_BACK)
-                    .setVideoSize(480, 480)
+                    .setVideoSize(400, 250)
                     .setCaptureHeight(view.getContext().getResources().getDimension(com.hewuzhe.R.dimen.qupai_recorder_capture_height_size))
                     .setBeautySkinViewOn(false)
                     .setFlashLightOn(true)

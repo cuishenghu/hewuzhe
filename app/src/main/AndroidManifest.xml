@@ -681,6 +681,8 @@
             </activity>
         <activity android:name=".ui.activity.NearPeopleActivity">
         </activity>
+        <activity android:name=".ui.activity.LiveVideo2Activity" android:configChanges="orientation|screenSize|keyboardHidden">
+        </activity>
     </application>
 
 </manifest>

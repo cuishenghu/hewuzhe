@@ -38,7 +38,7 @@ public class AddWarriorsActivity extends BaseActivity2 {
 
     private void initView() {
         myCommonTitle = (MyCommonTitle) findViewById(R.id.aci_mytitle);
-        myCommonTitle.setTitle("添加武友");
+        myCommonTitle.setTitle("添加好友");
         mRecyclerView = (RecyclerView) findViewById(R.id.recycler_view);
         //2代表The number of columns in the grid 列数
         final GridLayoutManager manager = new GridLayoutManager(AddWarriorsActivity.this, 2);

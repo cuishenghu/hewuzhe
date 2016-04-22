@@ -3,9 +3,11 @@ package com.hewuzhe.ui.activity;
 import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
+import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
+import android.support.annotation.NonNull;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -23,9 +25,11 @@ import com.hewuzhe.model.UP;
 import com.hewuzhe.model.User;
 import com.hewuzhe.presenter.SignInPresenter;
 import com.hewuzhe.ui.base.BaseActivity;
+import com.hewuzhe.ui.cons.C;
 import com.hewuzhe.ui.widget.LoadingDialog;
 import com.hewuzhe.utils.Bun;
 import com.hewuzhe.utils.SessionUtil;
+import com.hewuzhe.utils.Tools;
 import com.hewuzhe.view.SignInView;
 import com.socks.library.KLog;
 
@@ -41,6 +45,8 @@ import cn.sharesdk.tencent.qzone.QZone;
 import cn.sharesdk.wechat.friends.Wechat;
 import cn.xm.weidongjian.popuphelper.PopupWindowHelper;
 import io.rong.imkit.RongIM;
+import materialdialogs.DialogAction;
+import materialdialogs.MaterialDialog;
 
 
 public class SignInActivity extends BaseActivity<SignInPresenter> implements SignInView, PlatformActionListener, Handler.Callback {
@@ -81,6 +87,7 @@ public class SignInActivity extends BaseActivity<SignInPresenter> implements Sig
     private LinearLayout popView;
     private PopupWindowHelper popupWindowHelper;
     private ArrayList<UP> ups;
+    private HashMap<String, Object> res;
     private PopupWindow popupWindow;
     private boolean isRememberPwd = true;
 
@@ -293,13 +300,19 @@ public class SignInActivity extends BaseActivity<SignInPresenter> implements Sig
     public void onComplete(Platform platform, int action, HashMap<String, Object> res) {
         dismissDialog();
         if (action == Platform.ACTION_USER_INFOR) {
+            this.res = res;
             Message msg = new Message();
             msg.what = MSG_AUTH_COMPLETE;
             if(platform.getName().equals("QZone"))
                 usericon = res.get("figureurl_qq_2").toString();
-            else
+            else{
                 usericon = platform.getDb().getUserIcon();
+//                usericon=res.get("profile_image_url").toString();//头像链接
+            }
             msg.obj = new Object[]{platform.getName(), res};
+            String s = platform.getDb().getToken().toString();
+            String ss = platform.getDb().getTokenSecret().toString();
+
             handler.sendMessage(msg);
         }
     }
@@ -342,10 +355,9 @@ public class SignInActivity extends BaseActivity<SignInPresenter> implements Sig
                 String platform = (String) objs[0];
 
                 Platform plat = ShareSDK.getPlatform(platform);
-
                 userid = plat.getDb().getUserId();
                 username = plat.getDb().getUserName();
-
+//                edtUsername.setText(usericon);
                 presenter.otherSigin(username, userid, usericon, layWx);
 
             }

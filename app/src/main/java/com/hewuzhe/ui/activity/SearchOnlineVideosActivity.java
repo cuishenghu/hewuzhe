@@ -6,6 +6,8 @@ import android.support.v7.widget.RecyclerView;
 import android.view.KeyEvent;
 import android.view.View;
 import android.view.inputmethod.EditorInfo;
+import android.widget.CheckBox;
+import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -33,12 +35,20 @@ public class SearchOnlineVideosActivity extends SwipeRecycleViewActivity<SearchO
     TextView _TvTip;
     @Bind(R.id.lay_no_data)
     LinearLayout _LayNoData;
+    @Bind(R.id.swicth_button)
+    CheckBox swicthButton;
 
+    private boolean isChecked = false;
+
+    private GridLayoutManager gridLayoutManager;
+    private GridItemDecoration decoration;
     /**
      * @return 提供Adapter
      */
     @Override
     protected Videos3Adapter provideAdapter() {
+        decoration = new GridItemDecoration(10, 1);
+        recyclerView.addItemDecoration(decoration);
         return new Videos3Adapter(getContext(),"sheitemezhidaowoshishei");
 //        return new Videos2Adapter(getContext());
     }
@@ -48,20 +58,33 @@ public class SearchOnlineVideosActivity extends SwipeRecycleViewActivity<SearchO
      */
     @Override
     protected RecyclerView.LayoutManager provideLayoutManager() {
-        GridLayoutManager gridLayoutManager = new GridLayoutManager(getContext(), 2);
+        gridLayoutManager = new GridLayoutManager(getContext(), 2);
         gridLayoutManager.setSpanSizeLookup(new GridLayoutManager.SpanSizeLookup() {
             @Override
             public int getSpanSize(int position) {
-                if (position == adapter.getItemCount() - 1) {
-                    return 2;
+                if (position == adapter.getItemCount()-1) {
+                    return swicthButton.isChecked() ? 1 :2;
+
                 }
                 return 1;
             }
         });
-
         layoutManager = gridLayoutManager;
-
-        return gridLayoutManager;
+        return layoutManager;
+//        GridLayoutManager gridLayoutManager = new GridLayoutManager(getContext(), 2);
+//        gridLayoutManager.setSpanSizeLookup(new GridLayoutManager.SpanSizeLookup() {
+//            @Override
+//            public int getSpanSize(int position) {
+//                if (position == adapter.getItemCount() - 1) {
+//                    return 2;
+//                }
+//                return 1;
+//            }
+//        });
+//
+//        layoutManager = gridLayoutManager;
+//
+//        return gridLayoutManager;
     }
 
     /**
@@ -106,6 +129,19 @@ public class SearchOnlineVideosActivity extends SwipeRecycleViewActivity<SearchO
                 page = 1;
                 hideSoftMethod(_EdtSearchContent);
                 presenter.getData(page, count);
+            }
+        });
+
+        /**
+         * 控制单双列显示按钮
+         */
+        swicthButton.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                decoration.setSpanCount(isChecked ? 1 : 2);
+                gridLayoutManager.setSpanCount(isChecked ? 1 : 2);
+                adapter.changeViewHeight(isChecked);
+                adapter.notifyDataSetChanged();
             }
         });
 

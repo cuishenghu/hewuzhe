@@ -48,7 +48,7 @@ public class ProductCommentAdapter extends BaseAdapter<ProductCommentAdapter.VHo
         productComment =(ProductComment) data.get(position);
 
         Glide.with(context)
-                .load(C.BASE_URL + productComment.PhotoPath)
+                .load(productComment.PhotoPath.contains("UpLoad/Photo/")?C.BASE_URL + productComment.PhotoPath:productComment.PhotoPath)
                 .centerCrop()
                 .crossFade()
                 .placeholder(R.mipmap.img_bg)

@@ -62,6 +62,8 @@ public class VideoDetail2Activity extends RecycleViewActivity<VideoDetailPresent
     @Bind(R.id.btn_to_member)
     Button _BtnToMember;
 
+    private String who="";
+
     private ImageView imgAvatar;
     private TextView tvUsername;
     private TextView tvAddTime;
@@ -114,6 +116,17 @@ public class VideoDetail2Activity extends RecycleViewActivity<VideoDetailPresent
         super.initThings(savedInstanceState);
         // 手动这是播放窗口父类，横屏的时候，会用这个做为容器使用，如果不设置，那么默认直接跳转到DecorView
         initHeader();
+
+
+        //如果从课程进来，隐藏掉转发分享
+        if(!who.trim().equals("")){
+            layTranspond.setVisibility(View.GONE);
+            layShare.setVisibility(View.GONE);
+        }else{
+            layTranspond.setVisibility(View.VISIBLE);
+            layShare.setVisibility(View.VISIBLE);
+        }
+
         windowManager = (WindowManager) getSystemService(Context.WINDOW_SERVICE);
         id = getIntentData().getInt("Id");
         presenter.getVideoDetail(id);
@@ -381,14 +394,14 @@ public class VideoDetail2Activity extends RecycleViewActivity<VideoDetailPresent
         }
 
         Glide.with(getContext())
-                .load(C.BASE_URL + new SessionUtil(getContext()).getUser().PhotoPath)
+                .load(new SessionUtil(getContext()).getUser().PhotoPath.contains("UpLoad/Photo/")?C.BASE_URL + new SessionUtil(getContext()).getUser().PhotoPath:new SessionUtil(getContext()).getUser().PhotoPath)
                 .placeholder(R.mipmap.img_avatar)
                 .centerCrop()
                 .crossFade()
                 .transform(new GlideCircleTransform(getContext()))
                 .into(imgAvatar2);
 
-        tvUsername.setText(video.UserNicName);
+        tvUsername.setText(video.NicName);
 
         /**
          * 点赞和取消点赞
@@ -509,7 +522,7 @@ public class VideoDetail2Activity extends RecycleViewActivity<VideoDetailPresent
         });
 
         tvTitle.setText(video.Title);
-        tvUsername.setText(video.UserNicName);
+        tvUsername.setText(video.NicName);
         tvDesc.setText("简介：" + video.Content);
         if (video.CommentNum <= 0) {
             tvCommentCount.setText("暂无评论");

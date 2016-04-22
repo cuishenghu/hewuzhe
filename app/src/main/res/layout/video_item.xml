@@ -21,6 +21,23 @@
                 android:scaleType="fitXY"
                 android:src="@mipmap/img_bg_videio" />
 
+            <TextView
+                android:id="@+id/tv_is_free"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="right"
+                android:layout_marginRight="10px"
+                android:layout_marginTop="18px"
+                android:background="@color/colorYellow"
+                android:paddingBottom="5px"
+                android:paddingLeft="8px"
+                android:paddingRight="8px"
+                android:paddingTop="5px"
+                android:text="会员"
+                android:textColor="@color/white"
+                android:textSize="25px"
+                android:visibility="gone" />
+
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="70dp"
@@ -130,6 +147,7 @@
                 </LinearLayout>
             </LinearLayout>
         </FrameLayout>
+
     </RelativeLayout>
 
     <RelativeLayout
@@ -276,5 +294,22 @@
                 </LinearLayout>
             </LinearLayout>
         </FrameLayout>
+        <TextView
+            android:id="@+id/tv_is_free_t"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="right"
+            android:layout_marginRight="10px"
+            android:layout_marginTop="18px"
+            android:layout_alignParentRight="true"
+            android:background="@color/colorYellow"
+            android:paddingBottom="5px"
+            android:paddingLeft="8px"
+            android:paddingRight="8px"
+            android:paddingTop="5px"
+            android:text="会员"
+            android:textColor="@color/white"
+            android:textSize="25px"
+            android:visibility="gone" />
     </RelativeLayout>
 </LinearLayout>

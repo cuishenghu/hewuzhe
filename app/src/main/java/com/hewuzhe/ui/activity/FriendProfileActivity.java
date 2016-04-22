@@ -42,6 +42,8 @@ public class FriendProfileActivity extends ToolBarActivity<FriendProfilePresente
     TextView _TvWeight;
     @Bind(R.id.tv_height)
     TextView _TvHeight;
+    @Bind(R.id.text_32_white)
+    TextView text_32_white;
     @Bind(R.id.tv_time)
     TextView _TvTime;
     @Bind(R.id.tv_desc)
@@ -73,7 +75,7 @@ public class FriendProfileActivity extends ToolBarActivity<FriendProfilePresente
      */
     @Override
     protected String provideTitle() {
-        return "武友资料";
+        return "好友资料";
     }
 
     /**
@@ -124,6 +126,7 @@ public class FriendProfileActivity extends ToolBarActivity<FriendProfilePresente
         _TvWeight.setText(friend.Weight + "kg");
         _TvTime.setText(friend.Experience + "年");
 
+        text_32_white.setText((StringUtil.getGender(friend.Sexuality)=="男"?"他":StringUtil.getGender(friend.Sexuality)=="女"?"她":"Ta")+"的记录");
         _TvInfo.setText(StringUtil.getGender(friend.Sexuality) + " " + TimeUtil.timeHaved(friend.Birthday) + "岁 " + "   " + friend.HomeAreaprovinceName + " " + friend.HomeAreaCityName + " " + friend.HomeAreaCountyName);
 
         /**

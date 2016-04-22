@@ -28,7 +28,7 @@
             android:layout_weight="1"
             android:text="聊天通知设置"
             android:textColor="@color/white"
-            android:textSize="30px" />
+            android:textSize="14sp" />
 
         <ImageView
             android:layout_width="40dp"
@@ -62,7 +62,7 @@
                 android:layout_weight="1"
                 android:text="清除缓存"
                 android:textColor="@color/white"
-                android:textSize="30px" />
+                android:textSize="14sp" />
 
             <ImageView
                 android:layout_width="40dp"
@@ -76,7 +76,7 @@
         <TextView
             android:layout_width="match_parent"
             android:layout_height="1dp"
-            android:layout_marginLeft="8dp"
+            android:layout_marginLeft="0dp"
             android:background="@color/colorBg" />
 
         <LinearLayout
@@ -92,7 +92,7 @@
                 android:layout_weight="1"
                 android:text="关于AiT KungFu"
                 android:textColor="@color/white"
-                android:textSize="30px" />
+                android:textSize="14sp" />
 
             <ImageView
                 android:layout_width="40dp"
@@ -106,7 +106,7 @@
         <TextView
             android:layout_width="match_parent"
             android:layout_height="1dp"
-            android:layout_marginLeft="8dp"
+            android:layout_marginLeft="0dp"
             android:background="@color/colorBg" />
 
 
@@ -123,7 +123,7 @@
                 android:layout_weight="1"
                 android:text="收货地址"
                 android:textColor="@color/white"
-                android:textSize="30px" />
+                android:textSize="14sp" />
 
             <ImageView
                 android:layout_width="40dp"
@@ -142,7 +142,7 @@
         android:id="@+id/lay_service"
         android:layout_width="match_parent"
         android:layout_height="80px"
-        android:layout_marginTop="5dp"
+        android:layout_marginTop="8dp"
         android:background="@color/colorListBg"
         android:gravity="center_vertical"
         android:orientation="horizontal"
@@ -155,7 +155,7 @@
             android:layout_weight="1"
             android:text="联系客服"
             android:textColor="@color/white"
-            android:textSize="30px" />
+            android:textSize="14sp" />
 
 
     </LinearLayout>

@@ -89,7 +89,7 @@ public class MemberBuyActivity extends ToolBarActivity<BuyPresenter> implements 
         _TvVipPrice2.setText(list.get(1).Price + "");
         _TvVipPrice3.setText(list.get(2).Price + "");
         _TvVipPrice4.setText(list.get(3).Price + "");
-        _anount = list.get(3).Price;
+        _anount = list.get(3).Price * 10 * 10;
 
         _ImgOne.setOnClickListener(new View.OnClickListener() {
             @Override

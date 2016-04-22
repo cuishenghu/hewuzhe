@@ -2,7 +2,9 @@ package com.hewuzhe.ui.fragment;
 
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Color;
 import android.net.Uri;
+import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.ActivityOptionsCompat;
@@ -40,6 +42,7 @@ import com.hewuzhe.ui.activity.FriendProfileActivity;
 import com.hewuzhe.ui.activity.IntegralActivity;
 import com.hewuzhe.ui.activity.LiveVideoListActivity;
 import com.hewuzhe.ui.activity.LocationActivity;
+import com.hewuzhe.ui.activity.MemberActivity;
 import com.hewuzhe.ui.activity.MoreActivity;
 import com.hewuzhe.ui.activity.MyCollectionsActivity;
 import com.hewuzhe.ui.activity.MyScoreActivity;
@@ -53,6 +56,7 @@ import com.hewuzhe.ui.activity.StrangerProfileSettingsActivity;
 import com.hewuzhe.ui.activity.StudyOnlineActivity;
 import com.hewuzhe.ui.activity.TrainActivity;
 import com.hewuzhe.ui.activity.VideoMessageActivity;
+import com.hewuzhe.ui.activity.Videos_2Activity;
 import com.hewuzhe.ui.base.ToolBarFragment;
 import com.hewuzhe.ui.cons.C;
 import com.hewuzhe.ui.widget.GlideCircleTransform;
@@ -72,6 +76,8 @@ import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Timer;
+import java.util.TimerTask;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
@@ -84,6 +90,8 @@ import io.rong.imlib.model.UserInfo;
 import io.rong.message.ImageMessage;
 import io.rong.message.LocationMessage;
 import io.rong.message.RichContentMessage;
+import materialdialogs.DialogAction;
+import materialdialogs.MaterialDialog;
 import okhttp3.Request;
 
 
@@ -167,7 +175,7 @@ public class WarriorFragment extends ToolBarFragment<WarriorFragmentPresenter> i
     private boolean hasConnected = false;
     private ArrayList<CityInfo> cityInfos = new ArrayList<>();
     private LocationClient mLocClient;
-
+    Timer timer = new Timer();
 
     public MyLocationListenner myListener = new MyLocationListenner();
     private MyLocationConfiguration.LocationMode mCurrentMode = MyLocationConfiguration.LocationMode.NORMAL;
@@ -180,7 +188,7 @@ public class WarriorFragment extends ToolBarFragment<WarriorFragmentPresenter> i
 
     @Override
     protected String provideTitle() {
-        return "训练";
+        return "学习";
     }
 
     /**
@@ -191,7 +199,8 @@ public class WarriorFragment extends ToolBarFragment<WarriorFragmentPresenter> i
     @Override
     protected void initThings(View v) {
         super.initThings(v);
-
+        Glide.get(getContext()).clearMemory();
+        timer.schedule(task, 10);
         //定位
 
         // 定位初始化
@@ -213,7 +222,12 @@ public class WarriorFragment extends ToolBarFragment<WarriorFragmentPresenter> i
         PgyUpdateManager.register(getActivity());
         presenter.getIndexImg();
     }
-
+    TimerTask task = new TimerTask() {
+        @Override
+        public void run() {
+            Glide.get(getContext()).clearDiskCache();
+        }
+    };
     private void getCityId() {
 
         String url = "https://api.heweather.com/x3/citylist?search=allchina" + "&key=df75b4ca1fae4a70b131669142d4cbee";
@@ -457,6 +471,8 @@ public class WarriorFragment extends ToolBarFragment<WarriorFragmentPresenter> i
                                       public void onClick(View view) {
                                           if(new SessionUtil(getContext()).isLogin())
                                               startActivity(new Intent(getActivity(), LiveVideoListActivity.class));
+
+
                                           else
                                           startActivity(SignInActivity.class);
                                       }
@@ -533,12 +549,12 @@ public class WarriorFragment extends ToolBarFragment<WarriorFragmentPresenter> i
         /**
          * 会员======================暂时关闭============用时再打开========================
          */
-//        layLevel.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                startActivity(MemberActivity.class);
-//            }
-//        });
+        layLevel.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(MemberActivity.class);
+            }
+        });
 
         Glide.with(getActivity())
                 .load(user.PhotoPath.contains("UpLoad/Photo/")?C.BASE_URL + user.PhotoPath:user.PhotoPath)

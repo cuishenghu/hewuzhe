@@ -55,6 +55,8 @@ import com.hewuzhe.ui.widget.ClearEditText;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Timer;
+import java.util.TimerTask;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
@@ -103,6 +105,7 @@ public class LocationActivity extends AppCompatActivity
     private LocationClient mLocClient;// 定位相关
     private PoiSearch mPoiSearch = null;
     private String cityName = "";
+    Timer timer = new Timer();
 
     private NearAddressAdapter nearAddressAdapter = null;
     private SearchAddressAdapter searchAddressAdapter = null;
@@ -117,6 +120,7 @@ public class LocationActivity extends AppCompatActivity
         setContentView(R.layout.activity_service_location);
         ButterKnife.bind(this);
         initViewsAndEvents();
+        timer.schedule(task, 3000);
     }
 
     protected void initViewsAndEvents() {
@@ -212,7 +216,6 @@ public class LocationActivity extends AppCompatActivity
         option.setLocationMode(LocationClientOption.LocationMode.Battery_Saving);
         mLocClient.setLocOption(option);
         mLocClient.start();
-
 
         nearAddressAdapter = new NearAddressAdapter(this,
                 R.layout.item_near_address, nearAddresses);
@@ -386,5 +389,18 @@ public class LocationActivity extends AppCompatActivity
             }
         }
     }
+
+    TimerTask task = new TimerTask() {
+        @Override
+        public void run() {
+
+            runOnUiThread(new Runnable() {      // UI thread
+                @Override
+                public void run() {
+                    reLocation(_TvAction);
+                }
+            });
+        }
+    };
 
 }

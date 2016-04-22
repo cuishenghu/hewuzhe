@@ -32,7 +32,7 @@ public class Videos_2Activity extends SwipeRecycleViewActivity<Videos2Presenter,
     @Bind(R.id.swicth_button)
     CheckBox swicthButton;
     String where = "";
-    String who="";
+    String who = "";
 
     private GridLayoutManager gridLayoutManager;
     private GridItemDecoration decoration;
@@ -51,12 +51,12 @@ public class Videos_2Activity extends SwipeRecycleViewActivity<Videos2Presenter,
         super.initThings(savedInstanceState);
         catId = getIntent().getIntExtra("id", 0);
         this.where = getIntent().getStringExtra("where");
-        this.who=getIntent().getStringExtra("who");//有课程传值过来
+        this.who = getIntent().getStringExtra("who");//有课程传值过来
         refresh(true);
         if (!StringUtil.isEmpty(where)) {
             if (where.equals("six"))
 //                presenter.getData(page, count);
-            presenter.SelectVideoByRecommendCategory(new SessionUtil(Videos_2Activity.this).getUserId(),page,count);
+                presenter.SelectVideoByRecommendCategory(new SessionUtil(Videos_2Activity.this).getUserId(), page, count);
 
             if (where.equals("five"))//交流
                 presenter.SelectVideoByCategory(page, count);
@@ -89,10 +89,10 @@ public class Videos_2Activity extends SwipeRecycleViewActivity<Videos2Presenter,
      */
     @Override
     protected Videos3Adapter provideAdapter() {
-        this.who=getIntent().getStringExtra("who");
+        this.who = getIntent().getStringExtra("who");
         decoration = new GridItemDecoration(10, 1);
         recyclerView.addItemDecoration(decoration);
-        return new Videos3Adapter(getContext(),who);
+        return new Videos3Adapter(getContext(), who);
     }
 
     /**
@@ -104,8 +104,8 @@ public class Videos_2Activity extends SwipeRecycleViewActivity<Videos2Presenter,
         gridLayoutManager.setSpanSizeLookup(new GridLayoutManager.SpanSizeLookup() {
             @Override
             public int getSpanSize(int position) {
-                if (position == adapter.getItemCount()-1) {
-                    return swicthButton.isChecked() ? 1 :2;
+                if (position == adapter.getItemCount() - 1) {
+                    return swicthButton.isChecked() ? 1 : 2;
 
                 }
                 return 1;
@@ -170,7 +170,26 @@ public class Videos_2Activity extends SwipeRecycleViewActivity<Videos2Presenter,
     public void requestDataRefresh() {
         super.requestDataRefresh();
         page = 1;
-        presenter.getData(page, count);
+        if (!StringUtil.isEmpty(where)) {
+            if (where.equals("six"))
+//                presenter.getData(page, count);
+                presenter.SelectVideoByRecommendCategory(new SessionUtil(Videos_2Activity.this).getUserId(), page, count);
+
+            if (where.equals("five"))//交流
+                presenter.SelectVideoByCategory(page, count);
+            /**
+             * 搜索功能
+             * 因为搜索点击事件放在视频的交流里面,因为课程和交流用的一个activity,现在把搜索点击事件移至initListener里面
+             */
+//            imgSearch.setOnClickListener(new View.OnClickListener() {
+//                @Override
+//                public void onClick(View view) {
+//                    startActivity(SearchOnlineVideosActivity.class, new Bun().putString("title", "搜索").putInt("catId", catId).ok());
+//                }
+//            });
+        } else {
+            presenter.getData(page, count);
+        }
     }
 
     /**

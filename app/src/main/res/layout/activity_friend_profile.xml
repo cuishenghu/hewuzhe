@@ -59,6 +59,7 @@
                         android:paddingRight="10px">
 
                         <TextView
+                            android:id="@+id/text_32_white"
                             style="@style/text_32_white"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
@@ -98,7 +99,7 @@
                             style="@style/text_32_white"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="武友动态" />
+                            android:text="好友动态" />
 
                         <TextView
                             style="@style/text_27_colorLine"
@@ -136,7 +137,7 @@
                             style="@style/text_32_white"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="武友圈子" />
+                            android:text="好友兴趣圈" />
 
                         <TextView
                             style="@style/text_27_colorLine"

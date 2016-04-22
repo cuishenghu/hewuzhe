@@ -9,6 +9,7 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.hewuzhe.R;
+import com.hewuzhe.model.Friend;
 import com.hewuzhe.presenter.base.BasePresenterImp;
 import com.hewuzhe.ui.cons.C;
 import com.hewuzhe.ui.inter.OnItemClickListener;

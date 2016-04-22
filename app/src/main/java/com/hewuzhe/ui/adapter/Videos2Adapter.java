@@ -33,7 +33,7 @@ import butterknife.ButterKnife;
 public class Videos2Adapter extends BaseAdapter<Videos2Adapter.ViewHolder, Video, BasePresenterImp> {
 
     private boolean isChecked = false;
-    private int screenWidth = 10;
+    private int screenWidth = 4;
 
     public Videos2Adapter(Context context) {
         super(context);
@@ -90,8 +90,6 @@ public class Videos2Adapter extends BaseAdapter<Videos2Adapter.ViewHolder, Video
 
         if (video.IsFree) {
             holder.tvIsFree.setVisibility(View.GONE);
-//            holder.tvRepeatCount.setVisibility(View.VISIBLE);//转发次数不显示
-//            holder.imgRepeat.setVisibility(View.VISIBLE);
         } else {
             holder.tvIsFree.setVisibility(View.VISIBLE);
         }

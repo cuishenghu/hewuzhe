@@ -72,7 +72,7 @@ public class CommentAdapter extends BaseAdapter<CommentAdapter.ViewHolder, Comme
             holder.tvPraiseCount.setText(10 + "");
 
             Glide.with(context)
-                    .load(C.BASE_URL + comment.CommenterPhotoPath)
+                    .load(comment.CommenterPhotoPath.contains("UpLoad/Photo/")?C.BASE_URL + comment.CommenterPhotoPath:comment.CommenterPhotoPath)
                     .centerCrop()
                     .crossFade()
                     .transform(new GlideCircleTransform(context))
@@ -86,7 +86,7 @@ public class CommentAdapter extends BaseAdapter<CommentAdapter.ViewHolder, Comme
             holder.tvPraiseCount.setText(10 + "");
 
             Glide.with(context)
-                    .load(C.BASE_URL + comment.PhotoPath)
+                    .load(comment.CommenterPhotoPath.contains("UpLoad/Photo/")?C.BASE_URL + comment.CommenterPhotoPath:comment.CommenterPhotoPath)
                     .centerCrop()
                     .crossFade()
                     .transform(new GlideCircleTransform(context))

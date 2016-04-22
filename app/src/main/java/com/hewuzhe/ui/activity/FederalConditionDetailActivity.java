@@ -154,7 +154,7 @@ public class FederalConditionDetailActivity extends RecycleViewActivity<ArticleP
     @Override
     protected ArticleCommentAdapter provideAdapter() {
         header = getLayoutInflater().inflate(R.layout.header_article_detail, null);
-        return new ArticleCommentAdapter(getContext(), presenter, header, C.WHITCH_ONE);
+        return new ArticleCommentAdapter(getContext(), presenter, header, 0);
     }
 
     /**
@@ -237,7 +237,7 @@ public class FederalConditionDetailActivity extends RecycleViewActivity<ArticleP
         }
 
         Glide.with(getContext())
-                .load(C.BASE_URL + new SessionUtil(getContext()).getUser().PhotoPath)
+                .load(new SessionUtil(getContext()).getUser().PhotoPath.contains("UpLoad/Photo/")?C.BASE_URL + new SessionUtil(getContext()).getUser().PhotoPath:new SessionUtil(getContext()).getUser().PhotoPath)
                 .placeholder(R.mipmap.img_avatar)
                 .centerCrop()
                 .crossFade()

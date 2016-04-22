@@ -83,7 +83,7 @@ public class VideoAdapter extends BaseAdapter<VideoAdapter.ViewHolder, Video, Ba
         holder.tvAddTime1.setText(TimeUtil.timeAgo(video.PublishTime) + "发布");
         holder.tvVisitSum1.setText(video.VisitNum + "人已浏览");
         if (StringUtil.isEmpty(video.NicName)) {
-            holder.tvUsername1.setText(video.UserNicName);
+            holder.tvUsername1.setText(video.NicName);
         } else {
             holder.tvUsername1.setText(video.NicName);
         }
@@ -117,6 +117,11 @@ public class VideoAdapter extends BaseAdapter<VideoAdapter.ViewHolder, Video, Ba
                     .placeholder(R.mipmap.img_avatar)
                     .into(holder.imgAvatar1);
         }
+        if (video.IsFree) {
+            holder.tvIsFree.setVisibility(View.GONE);
+        } else {
+            holder.tvIsFree.setVisibility(View.VISIBLE);
+        }
     }
 
     private void getData2(ViewHolder holder, Video video) {
@@ -124,7 +129,7 @@ public class VideoAdapter extends BaseAdapter<VideoAdapter.ViewHolder, Video, Ba
 //        holder.tvAddTime2.setText(TimeUtil.timeAgo(video.PublishTime) + "发布");
         holder.tvVisitSum2.setText(video.VisitNum+"人已浏览");
         if (StringUtil.isEmpty(video.NicName)) {
-            holder.tvUsername2.setText(video.UserNicName);
+            holder.tvUsername2.setText(video.NicName);
         } else {
             holder.tvUsername2.setText(video.NicName);
         }
@@ -157,6 +162,11 @@ public class VideoAdapter extends BaseAdapter<VideoAdapter.ViewHolder, Video, Ba
                     .transform(new GlideCircleTransform(context))
                     .placeholder(R.mipmap.img_avatar)
                     .into(holder.imgAvatar2);
+        }
+        if (video.IsFree) {
+            holder.tvIsFree_t.setVisibility(View.GONE);
+        } else {
+            holder.tvIsFree_t.setVisibility(View.VISIBLE);
         }
     }
 
@@ -215,6 +225,12 @@ public class VideoAdapter extends BaseAdapter<VideoAdapter.ViewHolder, Video, Ba
         @Nullable
         @Bind(R.id.ll_double_item)//双列显示布局
         RelativeLayout ll_double_item;
+        @Nullable
+        @Bind(R.id.tv_is_free)
+        TextView tvIsFree;
+        @Nullable
+        @Bind(R.id.tv_is_free_t)
+        TextView tvIsFree_t;
 
         ViewHolder(View view) {
             super(view);

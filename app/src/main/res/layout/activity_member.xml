@@ -41,7 +41,7 @@
             android:layout_height="wrap_content"
             android:layout_marginLeft="80px"
             android:layout_marginTop="10px"
-            android:text="套餐一：充值300元，时间1个月" />
+            android:text="套餐一：充值60元 ，时间1个月" />
 
         <TextView
             android:id="@+id/tv_vip_price2"
@@ -50,7 +50,7 @@
             android:layout_height="wrap_content"
             android:layout_marginLeft="80px"
             android:layout_marginTop="10px"
-            android:text="套餐二：充值600元，时间3个月" />
+            android:text="套餐二：充值150元，时间3个月" />
 
         <TextView
             android:id="@+id/tv_vip_price3"
@@ -59,7 +59,7 @@
             android:layout_height="wrap_content"
             android:layout_marginLeft="80px"
             android:layout_marginTop="10px"
-            android:text="套餐三：充值900元，时间半年" />
+            android:text="套餐三：充值240元，时间半年" />
 
         <TextView
             android:id="@+id/tv_vip_price4"
@@ -68,7 +68,7 @@
             android:layout_height="wrap_content"
             android:layout_marginLeft="80px"
             android:layout_marginTop="10px"
-            android:text="套餐四：充值1200元，时间一年" />
+            android:text="套餐四：充值360元，时间一年" />
 
 
         <Button

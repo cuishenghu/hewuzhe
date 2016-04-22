@@ -97,7 +97,7 @@ public class FollowedFriendAdapter extends BaseAdapter<RecyclerView.ViewHolder, 
                 .into(holder._ImgAvatar);
 
         if (friend.IsFriend) {
-            holder._TvFollow.setText("删除武友");
+            holder._TvFollow.setText("删除好友");
             holder._TvFollow.setBackgroundResource(R.color.colorBg);
             holder._TvFollow.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -107,13 +107,13 @@ public class FollowedFriendAdapter extends BaseAdapter<RecyclerView.ViewHolder, 
             });
 
         } else {
-            holder._TvFollow.setText("添加武友");
+            holder._TvFollow.setText("添加好友");
             holder._TvFollow.setBackgroundResource(R.color.colorYellow);
             holder._TvFollow.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
                     _presenter.follow(friend.UserId, position);
-                    context.startActivity(new Intent(context,FriendProfileActivity.class), new Bun().putInt("id", friend.UserId).ok());
+                    context.startActivity(new Intent(context,FriendProfileActivity.class).putExtra("data", new Bun().putInt("id", friend.UserId).ok()));
                 }
             });
         }

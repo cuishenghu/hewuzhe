@@ -79,8 +79,8 @@
                     android:layout_width="122px"
                     android:layout_height="122px"
                     android:layout_gravity="center"
-                    android:src="@mipmap/img_avatar"
                     android:layout_marginTop="-8dp"
+                    android:src="@mipmap/img_avatar"
                     android:textSize="22px" />
 
 
@@ -103,11 +103,11 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
+                    android:layout_marginBottom="4dp"
                     android:layout_marginTop="105px"
                     android:padding="18px"
                     android:text=""
                     android:textColor="@color/white"
-                    android:layout_marginBottom="4dp"
                     android:textSize="22px" />
 
                 <LinearLayout
@@ -156,7 +156,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="18px"
-                        android:text="勋章"
+                        android:text="积分"
 
                         android:textColor="@color/white"
                         android:textSize="22px" />
@@ -252,7 +252,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="5dp"
-                        android:text="私教"
+                        android:text="教练"
                         android:textColor="@color/white"
                         android:textSize="14dp" />
                 </LinearLayout>
@@ -340,7 +340,7 @@
                             android:layout_height="wrap_content"
                             android:gravity="center"
                             android:padding="12dp"
-                            android:text="学习计划"
+                            android:text="训练计划"
                             android:textColor="@color/white"
                             android:textSize="26px" />
 
@@ -382,11 +382,38 @@
                     android:background="@color/colorBg"
                     android:orientation="horizontal">
 
+
+                    <LinearLayout
+                        android:id="@+id/lay_exchange"
+                        android:layout_width="match_parent"
+                        android:layout_height="120px"
+                        android:layout_marginRight="1dp"
+                        android:layout_weight="1"
+                        android:background="@color/colorListBg"
+                        android:gravity="center">
+
+                        <ImageView
+                            android:layout_width="80px"
+                            android:layout_height="80px"
+                            android:padding="6dp"
+                            android:src="@drawable/jingpinshoucang" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:gravity="center"
+                            android:padding="12dp"
+                            android:text="积分兑换"
+                            android:textColor="@color/white"
+                            android:textSize="26px" />
+
+
+                    </LinearLayout>
+
                     <LinearLayout
                         android:id="@+id/lay_my_collections"
                         android:layout_width="match_parent"
                         android:layout_height="120px"
-                        android:layout_marginRight="1dp"
                         android:layout_weight="1"
                         android:background="@color/colorListBg"
                         android:gravity="center">
@@ -410,31 +437,7 @@
 
                     </LinearLayout>
 
-                    <LinearLayout
-                        android:id="@+id/lay_exchange"
-                        android:layout_width="match_parent"
-                        android:layout_height="120px"
-                        android:layout_weight="1"
-                        android:background="@color/colorListBg"
-                        android:gravity="center">
 
-                        <ImageView
-                            android:layout_width="80px"
-                            android:layout_height="80px"
-                            android:padding="6dp"
-                            android:src="@drawable/jingpinshoucang" />
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:gravity="center"
-                            android:padding="12dp"
-                            android:text="积分兑换"
-                            android:textColor="@color/white"
-                            android:textSize="26px" />
-
-
-                    </LinearLayout>
                 </LinearLayout>
             </LinearLayout>
 

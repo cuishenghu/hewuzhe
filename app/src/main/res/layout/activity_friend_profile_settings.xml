@@ -246,7 +246,7 @@
                     android:layout_weight="1"
                     android:background="@drawable/select_yellow"
                     android:clickable="true"
-                    android:text="删除武友"/>
+                    android:text="删除好友"/>
 
         </LinearLayout>
     </LinearLayout>

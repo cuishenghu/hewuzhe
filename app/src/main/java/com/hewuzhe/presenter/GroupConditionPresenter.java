@@ -122,7 +122,7 @@ public class GroupConditionPresenter extends ConditionPresenter<GroupConditionVi
 
         User user = new SessionUtil(view.getContext()).getUser();
         if (user.TeamId != 0) {
-            view.toast("请先退出当前战队");
+            view.toast("请先退出当前兴趣圈");
             return;
         }
 

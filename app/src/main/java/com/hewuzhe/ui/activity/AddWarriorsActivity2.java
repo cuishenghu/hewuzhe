@@ -8,6 +8,7 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.TextView;
 
 import com.hewuzhe.R;
 import com.hewuzhe.model.Friend;
@@ -26,6 +27,7 @@ public class AddWarriorsActivity2 extends RecycleViewActivity<AddWarriorsPresent
     private LinearLayout lay_select_near;
     private EditText _EdtSearchContent;
     private ImageView imgSearch;
+    private TextView hide_view;
     private Friend _item;
     private View headView;
     private boolean isFirstRun = true;
@@ -36,7 +38,7 @@ public class AddWarriorsActivity2 extends RecycleViewActivity<AddWarriorsPresent
 
         initHeader();
 
-        presenter.getData(page, count);
+        presenter.getDataTuijian(page, count);
     }
 
     private void initHeader() {
@@ -45,6 +47,7 @@ public class AddWarriorsActivity2 extends RecycleViewActivity<AddWarriorsPresent
         lay_tongxunlu = (LinearLayout) headView.findViewById(R.id.lay_tongxunlu);
         lay_select_condition = (LinearLayout) headView.findViewById(R.id.ll_select_by_condition);
         lay_select_near = (LinearLayout) headView.findViewById(R.id.lay_select_near_person);
+        hide_view = (TextView) headView.findViewById(R.id.hide_view);
     }
 
     @Override
@@ -59,6 +62,8 @@ public class AddWarriorsActivity2 extends RecycleViewActivity<AddWarriorsPresent
                 hideSoftMethod(_EdtSearchContent);
                 page = 1;
                 presenter.getData(page, count);
+                hide_view.setVisibility(View.GONE);
+
             }
         });
         /**
@@ -115,7 +120,7 @@ public class AddWarriorsActivity2 extends RecycleViewActivity<AddWarriorsPresent
 
     @Override
     protected CharSequence provideTitle() {
-        return "添加武友";
+        return "添加好友";
     }
 
     @Override

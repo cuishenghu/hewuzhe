@@ -161,7 +161,11 @@ public class MoreActivity extends BaseActivity2 {
                  * 退出融云
                  * */
                 RongIM.getInstance().logout();
-                startActivity(new Intent(MoreActivity.this, SignInActivity.class));
+                if(btn_exit.getText().toString().trim().equals("退出"))
+                    startActivity(new Intent(MoreActivity.this, MainActivity.class));
+                else
+                    startActivity(new Intent(MoreActivity.this, SignInActivity.class));
+//                finish();
                 break;
         }
     }

@@ -76,7 +76,7 @@ public class ArticlePresenter extends CommentPresenter<ArticleView> {
         }
 
         Subscription subscription = NetEngine.getService()
-                .MessageCommentDT(id, new SessionUtil(view.getContext()).getUser().Id, content)
+                .MessageComment(id, new SessionUtil(view.getContext()).getUser().Id, content)
                 .subscribeOn(Schedulers.io())
                 .doOnSubscribe(new Action0() {
                     @Override

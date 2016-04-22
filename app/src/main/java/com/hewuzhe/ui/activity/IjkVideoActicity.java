@@ -39,10 +39,10 @@ public class IjkVideoActicity extends Activity {
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.video_small2);
-		
+
 		Bundle e = getIntent().getBundleExtra("data");
-		String uid = e.getString("uid");
-		String vid = e.getString("vid");
+		String uid = e.getString("uid");//"e668hzrydq";
+		String vid = e.getString("vid");//"100657";
 		findViewById(R.id.img_back).setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
@@ -60,7 +60,7 @@ public class IjkVideoActicity extends Activity {
 		((TextView)findViewById(R.id.tv_apply_end)).setText(e.getString("end"));
 		((TextView)findViewById(R.id.tv_require)).setText(e.getString("content"));
 
-		
+
 		Point point = new Point();
 		WindowManager wm = this.getWindowManager();
 		wm.getDefaultDisplay().getSize(point);
@@ -99,9 +99,9 @@ public class IjkVideoActicity extends Activity {
 
 			}
 		});
-		
+
 		videoview.setOnVideoPlayErrorLisener(new IjkVideoView.OnVideoPlayErrorLisener() {
-			
+
 			@Override
 			public boolean onVideoPlayError(ErrorReason errorReason) {
 				//直播只需要处理这三个事件类型
@@ -113,21 +113,21 @@ public class IjkVideoActicity extends Activity {
 					case M3U8_URL_EMPTY:
 						break;
 				}
-				
+
 				return false;
 			}
 		});
-		
+
 		videoview.setOnErrorListener(new IMediaPlayer.OnErrorListener() {
-			
+
 			@Override
 			public boolean onError(IMediaPlayer arg0, int arg1, int arg2) {
 				return false;
 			}
 		});
-		
+
 		videoview.setLivePlay(uid, vid);
-		
+
 		// 设置切屏事件
 		mediaController.setOnBoardChangeListener(new MediaController.OnBoardChangeListener() {
 
@@ -145,6 +145,10 @@ public class IjkVideoActicity extends Activity {
 
 	// 切换到横屏
 	public void changeToLandscape() {
+		WindowManager.LayoutParams attrs = getWindow().getAttributes();
+		attrs.flags |= WindowManager.LayoutParams.FLAG_FULLSCREEN;
+		getWindow().setAttributes(attrs);
+
 		RelativeLayout.LayoutParams p = new RelativeLayout.LayoutParams(h, w);
 		rl.setLayoutParams(p);
 		stopPosition = videoview.getCurrentPosition();
@@ -156,6 +160,10 @@ public class IjkVideoActicity extends Activity {
 
 	// 切换到竖屏
 	public void changeToPortrait() {
+		WindowManager.LayoutParams attrs = getWindow().getAttributes();
+		attrs.flags &= (~WindowManager.LayoutParams.FLAG_FULLSCREEN);
+		getWindow().setAttributes(attrs);
+
 		RelativeLayout.LayoutParams p = new RelativeLayout.LayoutParams(w, adjusted_h);
 		rl.setLayoutParams(p);
 		stopPosition = videoview.getCurrentPosition();
@@ -164,7 +172,6 @@ public class IjkVideoActicity extends Activity {
 		top_toolbar.setVisibility(View.VISIBLE);
 		video_content.setVisibility(View.VISIBLE);
 	}
-
 
 	// 配置文件设置congfigchange 切屏调用一次该方法，hide()之后再次show才会出现在正确位置
 	@Override

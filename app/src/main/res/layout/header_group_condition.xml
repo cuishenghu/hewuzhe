@@ -47,7 +47,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:padding="5px"
-                    android:text="战队"
+                    android:text="兴趣圈"
                     android:textColor="@color/white"
                     android:textSize="30px"/>
 
@@ -205,7 +205,7 @@
                 android:layout_marginLeft="50px"
                 android:layout_marginRight="50px"
                 android:background="@drawable/select_yellow"
-                android:text="加入战队"
+                android:text="加入兴趣圈"
                 android:visibility="gone"/>
 
         <TextView android:id="@+id/tv_tip"
@@ -215,7 +215,7 @@
                   android:background="@color/colorBg"
                   android:gravity="center"
                   android:padding="15px"
-                  android:text="每人仅限加入一个战队"
+                  android:text="每人仅限加入一个兴趣圈"
                   android:visibility="gone"/>
 
     </LinearLayout>

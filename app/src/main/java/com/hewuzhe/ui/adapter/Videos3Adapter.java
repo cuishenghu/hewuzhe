@@ -144,7 +144,7 @@ public class Videos3Adapter extends BaseAdapter<Videos3Adapter.ViewHolder, Video
         holder.tvAddTime1.setText(TimeUtil.timeAgo(video.PublishTime) + "发布");
         holder.tvVisitSum1.setText(video.VisitNum + "人已浏览");
         if (StringUtil.isEmpty(video.NicName)) {
-            holder.tvUsername1.setText(video.UserNicName);
+            holder.tvUsername1.setText(video.NicName);
         } else {
             holder.tvUsername1.setText(video.NicName);
         }
@@ -178,6 +178,12 @@ public class Videos3Adapter extends BaseAdapter<Videos3Adapter.ViewHolder, Video
                     .placeholder(R.mipmap.img_avatar)
                     .into(holder.imgAvatar1);
         }
+
+        if (video.IsFree) {
+            holder.tvIsFree.setVisibility(View.GONE);
+        } else {
+            holder.tvIsFree.setVisibility(View.VISIBLE);
+        }
     }
 
     private void getData2(ViewHolder holder, Video video) {
@@ -198,7 +204,7 @@ public class Videos3Adapter extends BaseAdapter<Videos3Adapter.ViewHolder, Video
 //        holder.tvAddTime2.setText(TimeUtil.timeAgo(video.PublishTime) + "发布");
         holder.tvVisitSum2.setText(video.VisitNum + "人已浏览");
         if (StringUtil.isEmpty(video.NicName)) {
-            holder.tvUsername2.setText(video.UserNicName);
+            holder.tvUsername2.setText(video.NicName);
         } else {
             holder.tvUsername2.setText(video.NicName);
         }
@@ -231,6 +237,12 @@ public class Videos3Adapter extends BaseAdapter<Videos3Adapter.ViewHolder, Video
                     .transform(new GlideCircleTransform(context))
                     .placeholder(R.mipmap.img_avatar)
                     .into(holder.imgAvatar2);
+        }
+
+        if (video.IsFree) {
+            holder.tvIsFree_t.setVisibility(View.GONE);
+        } else {
+            holder.tvIsFree_t.setVisibility(View.VISIBLE);
         }
     }
 //        ViewGroup.LayoutParams pageParms = holder.imgBg.getLayoutParams();
@@ -352,6 +364,7 @@ public class Videos3Adapter extends BaseAdapter<Videos3Adapter.ViewHolder, Video
         @Nullable
         @Bind(R.id.tv_visit_sum2)//浏览量
                 TextView tvVisitSum2;
+
         @Nullable
         @Bind(R.id.ll_single_item)//单列显示布局
                 RelativeLayout ll_single_item;
@@ -363,6 +376,9 @@ public class Videos3Adapter extends BaseAdapter<Videos3Adapter.ViewHolder, Video
         @Nullable
         @Bind(R.id.tv_is_free)
         TextView tvIsFree;
+        @Nullable
+        @Bind(R.id.tv_is_free_t)
+        TextView tvIsFree_t;
 
         @Nullable
         @Bind(R.id.tv_desc)

@@ -81,7 +81,7 @@ public class AddWarriorsAdapter extends BaseAdapter<AddWarriorsAdapter.VHolder, 
             holder._TvAddFri.setOnClickListener(null);
 
         } else {
-            holder._TvAddFri.setText("添加武友");
+            holder._TvAddFri.setText("添加好友");
             holder._TvAddFri.setBackgroundResource(R.color.colorBg);
             holder._TvAddFri.setOnClickListener(new View.OnClickListener() {
                 @Override

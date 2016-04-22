@@ -91,38 +91,38 @@ public class FollowedFriendsActivity extends RecycleViewActivity<FollowedFriends
             }
         });
 
-        edt_search_content.addTextChangedListener(new TextWatcher() {
-            @Override
-            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-
-            }
-
-            @Override
-            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-
-            }
-
-            @Override
-            public void afterTextChanged(Editable editable) {
-                if (edt_search_content.getText().toString().trim().length() == 0) {
-                    if (_Friends.size() > 0) {
-                        adapter.addDatas(_Friends);
-                    }
-                }
-            }
-        });
+//        edt_search_content.addTextChangedListener(new TextWatcher() {
+//            @Override
+//            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+//
+//            }
+//
+//            @Override
+//            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+//
+//            }
+//
+//            @Override
+//            public void afterTextChanged(Editable editable) {
+//                if (edt_search_content.getText().toString().trim().length() == 0) {
+//                    if (_Friends.size() > 0) {
+//                        adapter.addDatas(_Friends);
+//                    }
+//                }
+//            }
+//        });
     }
 
     private void search(String keyWord) {
-        hideSoftMethod(edt_search_content);
         _NewFriends.clear();
-        for (Friend friend : _Friends) {
+        for (int i = 0; i<this._Friends.size(); i++){
+            Friend friend = (Friend)this._Friends.get(i);
             if (friend.NicName.contains(keyWord)) {
                 _NewFriends.add(friend);
             }
         }
-        recyclerView.setAdapter(adapter);
-        adapter.addDatas(_NewFriends);
+        bd(_NewFriends);
+
     }
 
     @Override
@@ -163,6 +163,7 @@ public class FollowedFriendsActivity extends RecycleViewActivity<FollowedFriends
 
     @Override
     public void bindData(ArrayList<Friend> data) {
+        _Friends = data;
         bd(data);
 
     }
@@ -201,9 +202,9 @@ public class FollowedFriendsActivity extends RecycleViewActivity<FollowedFriends
         _Item = item;
         presenter.isWuyou(item.Id);
         if (item.IsFriend) {
-            startActivity(FriendProfileActivity.class, new Bun().putInt("id", _Item.UserId).ok());
+            startActivity(FriendProfileActivity.class, new Bun().putInt("id", item.UserId).ok());
         } else {
-            startActivity(StrangerProfileSettingsActivity.class, new Bun().putInt("id", _Item.UserId).ok());
+            startActivity(StrangerProfileSettingsActivity.class, new Bun().putInt("id", item.UserId).ok());
         }
 
     }

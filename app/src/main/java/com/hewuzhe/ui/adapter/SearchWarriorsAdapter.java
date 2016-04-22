@@ -79,7 +79,7 @@ public class SearchWarriorsAdapter extends BaseAdapter<SearchWarriorsAdapter.VHo
             holder._TvFollow.setOnClickListener(null);
 
         } else {
-            holder._TvFollow.setText("添加武友");
+            holder._TvFollow.setText("添加好友");
             holder._TvFollow.setBackgroundResource(R.color.colorBg);
             holder._TvFollow.setOnClickListener(new View.OnClickListener() {
                 @Override

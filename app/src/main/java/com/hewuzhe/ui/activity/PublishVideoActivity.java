@@ -102,7 +102,10 @@ public class PublishVideoActivity extends ToolBarActivity<PublisVideoPresenter> 
     @Override
     protected void action() {
         super.action();
-        presenter.UpLoadVideo(tvAction, fileName, catId, getIntentData().getInt("uploadType"));
+        if(tvName.getText().toString().trim().equals("")||catId==-1||tvDesc.getText().toString().trim().equals(""))
+            snb("请确保视频信息已全部填写！",tvAction);
+        else
+            presenter.UpLoadVideo(tvAction, fileName, catId, getIntentData().getInt("uploadType"));
     }
 
     @Override

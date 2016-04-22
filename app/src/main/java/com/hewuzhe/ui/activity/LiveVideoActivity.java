@@ -88,7 +88,7 @@ public class LiveVideoActivity extends ToolBarActivity<LiveVideoPresenter> imple
 
     @Override
     protected String provideTitle() {
-        return "视频直播";
+        return getIntentData().getString("title");//"视频直播";
     }
 
 

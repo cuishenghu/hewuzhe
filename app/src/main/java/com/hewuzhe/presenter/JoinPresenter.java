@@ -91,14 +91,14 @@ public class JoinPresenter extends AreaPresenter<JoinGroupView> {
 
     public void joinGroup(final int id, final String name, final int pos) {
 
-        view.showDefautInfoDialog("提示", "确定加入战队？", new MaterialDialog.SingleButtonCallback() {
+        view.showDefautInfoDialog("提示", "确定加入此兴趣圈？", new MaterialDialog.SingleButtonCallback() {
             @Override
             public void onClick(@NonNull MaterialDialog dialog, @NonNull DialogAction which) {
 
 
                 User user = new SessionUtil(view.getContext()).getUser();
                 if (user.TeamId != 0) {
-                    view.toast("请先退出当前战队");
+                    view.toast("请先退出当前兴趣圈");
                     return;
                 }
 
@@ -130,7 +130,7 @@ public class JoinPresenter extends AreaPresenter<JoinGroupView> {
                                         }
                                     });
 
-                                    view.updateItem(true, pos);
+                                    view.updateItem(true, user.TeamId);
                                 }
                             }
 
@@ -156,7 +156,7 @@ public class JoinPresenter extends AreaPresenter<JoinGroupView> {
     }
 
     public void quitGroup(final int id, final int position) {
-        view.showDefautInfoDialog("提示", "确定退出战队？", new MaterialDialog.SingleButtonCallback() {
+        view.showDefautInfoDialog("提示", "确定退出此兴趣圈？", new MaterialDialog.SingleButtonCallback() {
             @Override
             public void onClick(@NonNull MaterialDialog dialog, @NonNull DialogAction which) {
                 Subscription subscription = NetEngine.getService()

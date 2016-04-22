@@ -33,6 +33,7 @@ import com.hewuzhe.utils.Bun;
 import com.hewuzhe.utils.SessionUtil;
 import com.hewuzhe.utils.StringUtil;
 import com.hewuzhe.utils.TimeUtil;
+import com.hewuzhe.utils.Tools;
 import com.hewuzhe.view.CondtionDetailView;
 
 import java.util.ArrayList;
@@ -166,6 +167,25 @@ public class ConditionDetialTwoActivity extends SwipeRecycleViewActivity<Condito
 
     @Override
     public void setData(final FriendCondition condition) {
+        if(condition==null){
+            new MaterialDialog.Builder(ConditionDetialTwoActivity.this)
+                    .title("消息提示")
+                    .titleColor(Color.WHITE)
+                    .contentColor(Color.WHITE)
+                    .positiveColor(C.COLOR_YELLOW)
+                    .negativeColor(C.COLOR_YELLOW)
+                    .content("您要查看的动态已被删除！")
+                    .positiveText("确定")
+                    .backgroundColor(C.COLOR_BG)
+                    .onPositive(new MaterialDialog.SingleButtonCallback() {
+                        @Override
+                        public void onClick(@NonNull MaterialDialog dialog, @NonNull DialogAction which) {
+                            dialog.dismiss();
+                        }
+                    })
+                    .show();
+            finish();
+        }
         this._condition = condition;
         _TvContent.setText(condition.Content);
         _TvAddTime.setText(TimeUtil.timeAgo(condition.PublishTime));

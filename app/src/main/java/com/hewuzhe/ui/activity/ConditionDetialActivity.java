@@ -171,7 +171,7 @@ public class ConditionDetialActivity extends SwipeRecycleViewActivity<ConditonDe
         _TvPraise.setText(condition.LikeNum + "");
 
         if (getIntentData().getInt("whitch") == C.WHITCH_TWO) {
-            tvTitle.setText("战队动态详情");
+            tvTitle.setText("兴趣圈动态详情");
 
             _TvUsername.setText(getIntentData().getString("_NickName"));
             Glide.with(getContext())

@@ -322,7 +322,7 @@ public class WarriorFragment extends ToolBarFragment<WarriorFragmentPresenter> i
 //        tv_action = (TextView) rootView.findViewById(R.id.tv_action);
         tvTitle = (TextView) rootView.findViewById(R.id.tv_title);
 //        tv_action.setText("设置");
-        tvTitle.setText("训练");
+        tvTitle.setText("学习");
     }
 
 

@@ -2,14 +2,11 @@ package com.hewuzhe.ui.fragment;
 
 import android.content.Context;
 import android.content.Intent;
-import android.graphics.Color;
 import android.net.Uri;
-import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.ActivityOptionsCompat;
 import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.ActionBar;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
@@ -20,6 +17,7 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.ViewFlipper;
 
 import com.baidu.location.BDLocation;
 import com.baidu.location.BDLocationListener;
@@ -30,14 +28,19 @@ import com.bumptech.glide.Glide;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import com.hewuzhe.R;
+import com.hewuzhe.banner.CircleFlowIndicator;
+import com.hewuzhe.banner.ImagePagerAdapter;
+import com.hewuzhe.banner.ViewFlow;
 import com.hewuzhe.model.AboutUs;
 import com.hewuzhe.model.CityInfo;
+import com.hewuzhe.model.Images;
 import com.hewuzhe.model.User;
 import com.hewuzhe.model.Weather;
 import com.hewuzhe.presenter.WarriorFragmentPresenter;
 import com.hewuzhe.ui.App;
 import com.hewuzhe.ui.activity.BasicMapActivity;
 import com.hewuzhe.ui.activity.DoJoRecommendActivity;
+import com.hewuzhe.ui.activity.DojoRecommend2Activity;
 import com.hewuzhe.ui.activity.FriendProfileActivity;
 import com.hewuzhe.ui.activity.IntegralActivity;
 import com.hewuzhe.ui.activity.LiveVideoListActivity;
@@ -47,7 +50,7 @@ import com.hewuzhe.ui.activity.MoreActivity;
 import com.hewuzhe.ui.activity.MyCollectionsActivity;
 import com.hewuzhe.ui.activity.MyScoreActivity;
 import com.hewuzhe.ui.activity.PhotoActivity;
-import com.hewuzhe.ui.activity.PrivateTrainerListActivity;
+import com.hewuzhe.ui.activity.PrivateTrainerList2Activity;
 import com.hewuzhe.ui.activity.ProfileActivity;
 import com.hewuzhe.ui.activity.RecordActivity;
 import com.hewuzhe.ui.activity.ScreenListActivity;
@@ -56,7 +59,6 @@ import com.hewuzhe.ui.activity.StrangerProfileSettingsActivity;
 import com.hewuzhe.ui.activity.StudyOnlineActivity;
 import com.hewuzhe.ui.activity.TrainActivity;
 import com.hewuzhe.ui.activity.VideoMessageActivity;
-import com.hewuzhe.ui.activity.Videos_2Activity;
 import com.hewuzhe.ui.base.ToolBarFragment;
 import com.hewuzhe.ui.cons.C;
 import com.hewuzhe.ui.widget.GlideCircleTransform;
@@ -90,8 +92,6 @@ import io.rong.imlib.model.UserInfo;
 import io.rong.message.ImageMessage;
 import io.rong.message.LocationMessage;
 import io.rong.message.RichContentMessage;
-import materialdialogs.DialogAction;
-import materialdialogs.MaterialDialog;
 import okhttp3.Request;
 
 
@@ -148,12 +148,12 @@ public class WarriorFragment extends ToolBarFragment<WarriorFragmentPresenter> i
     TextView tvIntegral;
     @Bind(R.id.tv_level_name)
     TextView tvLevelName;
-    @Bind(R.id.img_index)
-    ImageView _ImgIndex;
-    @Bind(R.id.img_index_del)
-    ImageView _ImgIndexDel;
-    @Bind(R.id.lay_index_img)
-    FrameLayout _LayIndexImg;
+//    @Bind(R.id.img_index)
+//    ImageView _ImgIndex;
+//    @Bind(R.id.img_index_del)
+//    ImageView _ImgIndexDel;
+//    @Bind(R.id.lay_index_img)
+//    FrameLayout _LayIndexImg;
     @Bind(R.id.img_weather)
     ImageView _ImgWeather;
     private View rootView;
@@ -180,6 +180,19 @@ public class WarriorFragment extends ToolBarFragment<WarriorFragmentPresenter> i
     public MyLocationListenner myListener = new MyLocationListenner();
     private MyLocationConfiguration.LocationMode mCurrentMode = MyLocationConfiguration.LocationMode.NORMAL;
     private String city = "";
+
+    @Bind(R.id.viewflow)
+    ViewFlow mViewFlow;
+    @Bind(R.id.viewflowindic)
+    CircleFlowIndicator mFlowIndicator;
+    @Bind(R.id.framelayout)
+    FrameLayout framelayout;
+
+    private int mCurrPos;
+    private ViewFlipper notice_vf;
+    ArrayList<String> imageUrlList = new ArrayList<String>();
+    ArrayList<String> linkUrlArray = new ArrayList<String>();
+    ArrayList<String> titleList = new ArrayList<String>();
 
     public WarriorFragment() {
         // Required empty public constructor
@@ -220,7 +233,7 @@ public class WarriorFragment extends ToolBarFragment<WarriorFragmentPresenter> i
                 .open("settings");
 
         PgyUpdateManager.register(getActivity());
-        presenter.getIndexImg();
+        presenter.getBannerImg();
     }
     TimerTask task = new TimerTask() {
         @Override
@@ -368,7 +381,7 @@ public class WarriorFragment extends ToolBarFragment<WarriorFragmentPresenter> i
                                           @Override
                                           public void onClick(View view) {
                                               if(new SessionUtil(getContext()).isLogin())
-                                                  startActivity(new Intent(getActivity(), ScreenListActivity.class));
+                                                  startActivity(new Intent(getActivity(), PrivateTrainerList2Activity.class));
                                               else
                                               startActivity(SignInActivity.class);
 
@@ -488,7 +501,7 @@ public class WarriorFragment extends ToolBarFragment<WarriorFragmentPresenter> i
                                                @Override
                                                public void onClick(View view) {
                                                    if(new SessionUtil(getContext()).isLogin())
-                                                       startActivity(new Intent(getActivity(), DoJoRecommendActivity.class));
+                                                       startActivity(new Intent(getActivity(), DojoRecommend2Activity.class));
                                                    else
                                                    startActivity(SignInActivity.class);
                                                }
@@ -591,41 +604,92 @@ public class WarriorFragment extends ToolBarFragment<WarriorFragmentPresenter> i
         }
     }
 
+    @Override
+    public void setIndexImg(ArrayList<Images> list) {
+//        多张轮播图
+//        banner轮播图
+        for (int i = 0; i < list.size(); i++) {
+            imageUrlList.add(C.BASE_URL + list.get(i).Path);
+            linkUrlArray.add(list.get(i).Url);
+            titleList.add("商品图片");
+
+        }
+        ViewGroup.LayoutParams para;
+        para = framelayout.getLayoutParams();
+        para.height = StringUtil.getScreenWidth(getActivity()) / 2;
+        framelayout.setLayoutParams(para);
+
+        initBanner(imageUrlList);
+
+    }
+
     /**
      * 中间广告链接
      *
      * @param data
      */
-    @Override
+
     public void setIndexImg(final AboutUs data) {
-        Glide.with(getActivity())
-                .load(C.BASE_URL + data.IndexImage)
-                .fitCenter()
-                .crossFade()
-                .into(_ImgIndex);
 
-        _LayIndexImg.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-//                startActivity(BasicWebActivity.class, new Bun().putString("url", data.ImageUrl).putString("title", "首页广告").ok());
+        //多张轮播图
+        //banner轮播图
+//        for (int i = 0; i < product.PicList.size(); i++) {
+//            imageUrlList.add(C.BASE_URL + product.PicList.get(i).Path);
+//            linkUrlArray.add("");
+//            titleList.add("商品图片");
+//
+//        }
+        //单张轮播图
 
-                Intent intent = new Intent(Intent.ACTION_VIEW);
-                intent.setData(Uri.parse(data.ImageUrl));
-                startActivity(intent);
+//        imageUrlList.add(C.BASE_URL +  data.IndexImage);
+//        linkUrlArray.add(data.ImageUrl);
+//        titleList.add("商品图片");
 
-            }
-        });
-        ViewGroup.LayoutParams para;
-        para = _LayIndexImg.getLayoutParams();
-        para.height = StringUtil.getScreenWidth(this.getActivity()) / 2;
-        _LayIndexImg.setLayoutParams(para);
-        _ImgIndexDel.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                _LayIndexImg.setVisibility(View.GONE);
-            }
-        });
+//        Glide.with(getActivity())
+//                .load(C.BASE_URL + data.IndexImage)
+//                .fitCenter()
+//                .crossFade()
+//                .into(_ImgIndex);
+
+//        _LayIndexImg.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+////                startActivity(BasicWebActivity.class, new Bun().putString("url", data.ImageUrl).putString("title", "首页广告").ok());
+//
+//                Intent intent = new Intent(Intent.ACTION_VIEW);
+//                intent.setData(Uri.parse(data.ImageUrl));
+//                startActivity(intent);
+//
+//            }
+//        });
+//        ViewGroup.LayoutParams para;
+//        para = _LayIndexImg.getLayoutParams();
+//        para.height = StringUtil.getScreenWidth(this.getActivity()) / 2;
+//        _LayIndexImg.setLayoutParams(para);
+//        _ImgIndexDel.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                _LayIndexImg.setVisibility(View.GONE);
+//            }
+//        });
     }
+
+    //轮播图sssssssssssssssssssssssssssssssssssssssssssssssssssssssssssss
+
+    private void initBanner(ArrayList<String> imageUrlList) {
+
+        mViewFlow.setAdapter(new ImagePagerAdapter(getContext(), imageUrlList, linkUrlArray, titleList).setInfiniteLoop(true));
+        mViewFlow.setmSideBuffer(imageUrlList.size()); // 实际图片张数，
+        // 我的ImageAdapter实际图片张数为3
+
+        mViewFlow.setFlowIndicator(mFlowIndicator);
+        mViewFlow.setTimeSpan(4500);
+        mViewFlow.setSelection(imageUrlList.size() * 1000); // 设置初始位置
+        mViewFlow.startAutoFlowTimer(); // 启动自动播放
+    }
+
+    //轮播图eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee
+
 
     @Override
     public boolean canBack() {

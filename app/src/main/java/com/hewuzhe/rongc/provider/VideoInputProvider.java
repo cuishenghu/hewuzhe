@@ -118,7 +118,7 @@ public class VideoInputProvider extends InputProvider.ExtendProvider implements 
                     .setBeautySkinOn(false)
                     .setCameraFacing(
                             Camera.CameraInfo.CAMERA_FACING_BACK)
-                    .setVideoSize(400, 250)
+                    .setVideoSize(400, 400)
                     .setCaptureHeight(view.getContext().getResources().getDimension(com.hewuzhe.R.dimen.qupai_recorder_capture_height_size))
                     .setBeautySkinViewOn(false)
                     .setFlashLightOn(true)
@@ -127,7 +127,7 @@ public class VideoInputProvider extends InputProvider.ExtendProvider implements 
 
             _CreateInfo.setSessionCreateInfo(create_info);
             _CreateInfo.setNextIntent(null);
-            _CreateInfo.setOutputThumbnailSize(360, 640);//输出图片宽高
+            _CreateInfo.setOutputThumbnailSize(400, 400);//输出图片宽高
             videoPath = FileUtils.newOutgoingFilePath(view.getContext());
             _CreateInfo.setOutputVideoPath(videoPath);//输出视频路径
             _CreateInfo.setOutputThumbnailPath(videoPath + ".png");//输出图片路径

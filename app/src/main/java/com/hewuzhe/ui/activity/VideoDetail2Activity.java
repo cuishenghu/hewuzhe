@@ -6,12 +6,14 @@ import android.content.Intent;
 import android.content.pm.ActivityInfo;
 import android.content.res.Configuration;
 import android.graphics.BitmapFactory;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.StaggeredGridLayoutManager;
+import android.view.Display;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.WindowManager;
@@ -354,18 +356,40 @@ public class VideoDetail2Activity extends RecycleViewActivity<VideoDetailPresent
      */
     @Override
     public void setData(final Video video) {
+        if(video==null){
+            new MaterialDialog.Builder(VideoDetail2Activity.this)
+                    .title("消息提示")
+                    .titleColor(Color.WHITE)
+                    .contentColor(Color.WHITE)
+                    .positiveColor(C.COLOR_YELLOW)
+                    .negativeColor(C.COLOR_YELLOW)
+                    .content("您要查看的视频已被视频管理员删除！")
+                    .positiveText("确定")
+                    .backgroundColor(C.COLOR_BG)
+                    .onPositive(new MaterialDialog.SingleButtonCallback() {
+                        @Override
+                        public void onClick(@NonNull MaterialDialog dialog, @NonNull DialogAction which) {
+                            dialog.dismiss();
+                        }
+                    })
+                    .show();
+            finish();
+        }
         _Video = video;
         presenter.getOtherVideos(_Video.UserId, id);
 
         ViewGroup.LayoutParams params = mVDVideoView.getLayoutParams();
         params.width = ViewGroup.LayoutParams.MATCH_PARENT;
-
+        //设置imageview宽高
+        WindowManager manager = (WindowManager)this.getSystemService(Context.WINDOW_SERVICE);
+        Display display = manager.getDefaultDisplay();
+        int width =display.getWidth();
 //        if (video.UserId == 0) {
-            HEITH_VIDEO = 200;
+            HEITH_VIDEO = width;
 //        } else {
 //            HEITH_VIDEO = 320;
 //        }
-        params.height = StringUtil.dip2px(getContext(), HEITH_VIDEO);
+        params.height = HEITH_VIDEO;//StringUtil.dip2px(getContext(), HEITH_VIDEO);
 
         mVDVideoView.setLayoutParams(params);
 
@@ -815,7 +839,7 @@ public class VideoDetail2Activity extends RecycleViewActivity<VideoDetailPresent
         } else if (newConfig.orientation == Configuration.ORIENTATION_PORTRAIT) {
             mLayout = VideoView.VIDEO_LAYOUT_FIT_PARENT;//原始尺寸
             ViewGroup.LayoutParams params = mVDVideoView.getLayoutParams();
-            params.height = StringUtil.dip2px(getContext(), HEITH_VIDEO);
+            params.height = HEITH_VIDEO;//StringUtil.dip2px(getContext(), HEITH_VIDEO);
             params.width = windowManager.getDefaultDisplay().getWidth();
             mVDVideoView.setLayoutParams(params);
         }

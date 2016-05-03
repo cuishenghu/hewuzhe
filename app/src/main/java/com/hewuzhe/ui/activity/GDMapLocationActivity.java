@@ -258,7 +258,7 @@ public class GDMapLocationActivity extends Activity implements OnGeocodeSearchLi
         mapView.onCreate(savedInstanceState);// 此方法必须重写
         double latitude = getIntent().getDoubleExtra("lat", 35.106334);
         double longitude = getIntent().getDoubleExtra("lng", 118.356544);
-        length = getIntent().getIntExtra("length",5000);
+//        length = getIntent().getIntExtra("length",5000);
         Lat = latitude+"";
         Lng = longitude+"";
         latLonPoint = new LatLonPoint(latitude, longitude);

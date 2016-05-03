@@ -14,6 +14,8 @@ import com.baidu.location.BDLocationListener;
 import com.baidu.location.LocationClient;
 import com.baidu.location.LocationClientOption;
 import com.hewuzhe.R;
+import com.hewuzhe.model.Address;
+import com.hewuzhe.model.Classification;
 import com.hewuzhe.model.Dojo;
 import com.hewuzhe.model.PrivateTrainerList;
 import com.hewuzhe.presenter.DojoRecommendPresenter;
@@ -206,6 +208,10 @@ public class PrivateTrainerListActivity extends SwipeRecycleViewActivity<Private
         return s;
     }
 
+    @Override
+    public void bindList(ArrayList<Address> classifications) {
+
+    }
 
 
     @Override

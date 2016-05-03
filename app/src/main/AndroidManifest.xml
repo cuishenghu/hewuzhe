@@ -209,6 +209,8 @@
         </activity>
         <activity android:name=".ui.activity.DoJoRecommendActivity">
         </activity>
+        <activity android:name=".ui.activity.DojoRecommend2Activity">
+        </activity>
         <!--<activity android:name=".ui.activity.DojoDetailActivity">-->
         <!--</activity>-->
         <activity android:name=".ui.activity.EdtPwdActivity">
@@ -682,6 +684,13 @@
         <activity android:name=".ui.activity.NearPeopleActivity">
         </activity>
         <activity android:name=".ui.activity.LiveVideo2Activity" android:configChanges="orientation|screenSize|keyboardHidden">
+        </activity>
+
+        <activity android:name=".ui.activity.PrivateTrainerList2Activity">
+        </activity>
+        <activity android:name=".ui.activity.SearchPtlActivity">
+        </activity>
+        <activity android:name=".ui.activity.SearchDojoActivity">
         </activity>
     </application>
 

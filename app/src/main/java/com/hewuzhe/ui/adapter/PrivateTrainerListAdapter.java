@@ -33,6 +33,10 @@ public class PrivateTrainerListAdapter extends BaseAdapter<PrivateTrainerListAda
         super(context, privateTrainerListPresenter);
     }
 
+    public PrivateTrainerListAdapter(Context context) {
+        super(context);
+    }
+
     @Override
     public int provideItemLayoutId() {
         return R.layout.private_item;

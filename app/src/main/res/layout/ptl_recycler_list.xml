@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#00000000">
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/hwz_background">
+        <ListView
+            android:scrollbars="none"
+            android:id="@+id/classification_one"
+            android:layout_width="1dp"
+            android:layout_weight="1"
+            android:divider="@color/divider_one"
+            android:dividerHeight="0.6dp"
+            android:layout_height="match_parent">
+        </ListView>
+        <ListView
+            android:scrollbars="none"
+            android:id="@+id/classification_two"
+            android:layout_width="1dp"
+            android:layout_weight="1"
+            android:divider="@color/divider_two"
+            android:dividerHeight="0.4dp"
+            android:layout_height="match_parent">
+        </ListView>
+    </LinearLayout>
+    <!--<LinearLayout-->
+        <!--android:id="@+id/click_hide"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="match_parent"-->
+        <!--android:orientation="horizontal"-->
+        <!--android:background="#00000000">-->
+
+        <!--<android.support.v7.widget.RecyclerView-->
+            <!--android:id="@+id/ptl_o"-->
+            <!--android:layout_weight="20"-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="wrap_content">-->
+        <!--</android.support.v7.widget.RecyclerView>-->
+
+        <!--<android.support.v7.widget.RecyclerView-->
+            <!--android:id="@+id/ptl_t"-->
+            <!--android:layout_weight="17"-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="wrap_content">-->
+        <!--</android.support.v7.widget.RecyclerView>-->
+    <!--</LinearLayout>-->
+</LinearLayout>

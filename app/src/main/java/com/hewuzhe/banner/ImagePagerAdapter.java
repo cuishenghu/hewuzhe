@@ -10,6 +10,9 @@ import java.util.List;
 
 import android.content.Context;
 import android.content.Intent;
+import android.net.Uri;
+import android.os.Bundle;
+import android.text.TextUtils;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
@@ -21,6 +24,7 @@ import com.hewuzhe.model.Bannar;
 import com.hewuzhe.model.New;
 import com.hewuzhe.model.Pic;
 import com.hewuzhe.model.ProductPic;
+import com.hewuzhe.ui.activity.BasicWebActivity;
 import com.hewuzhe.ui.activity.MegaGameDetailActivity;
 import com.hewuzhe.ui.activity.PicsActivity;
 import com.hewuzhe.ui.activity.ProductInfoActivity;
@@ -216,16 +220,19 @@ public class ImagePagerAdapter extends BaseAdapter {
                  * if (TextUtils.isEmpty(url)) {
 				 * holder.imageView.setEnabled(false); return; }
 				 */
-//				Bundle bundle = new Bundle();
-//
-//				bundle.putString("url", url);
-//				bundle.putString("title", title);
-//				Intent intent = new Intent(context, BaseWebActivity.class);
-//				intent.putExtras(bundle);
-//
-//				context.startActivity(intent);
+
+                if (!TextUtils.isEmpty(url)) {
+                    Intent intent = new Intent(Intent.ACTION_VIEW);
+                    if (!url.contains("http://"))
+                        url="http://"+url;
+                    intent.setData(Uri.parse(url));
+                    context.startActivity(intent);
+                    return;
+                }
 //				Toast.makeText(context, "点击了第" + getPosition(position) + "个图片",
 //						Toast.LENGTH_SHORT).show();
+
+
                 if (isshow)
                     addImg(getPosition(position));
                 else if (bannar != null) {//点击购物里面的轮播图跳转
@@ -243,6 +250,7 @@ public class ImagePagerAdapter extends BaseAdapter {
 
         ImageView imageView;
     }
+
     /**
      * @return the isInfiniteLoop
      */

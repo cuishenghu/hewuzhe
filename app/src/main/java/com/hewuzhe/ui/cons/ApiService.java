@@ -16,6 +16,7 @@ import com.hewuzhe.model.FlyDreamHeader;
 import com.hewuzhe.model.Friend;
 import com.hewuzhe.model.FriendCondition;
 import com.hewuzhe.model.Group;
+import com.hewuzhe.model.Images;
 import com.hewuzhe.model.IntegralRecord;
 import com.hewuzhe.model.LiveVideo;
 import com.hewuzhe.model.MatchCategory;
@@ -27,6 +28,7 @@ import com.hewuzhe.model.NearPeople;
 import com.hewuzhe.model.New;
 import com.hewuzhe.model.OtherImage;
 import com.hewuzhe.model.OverTime;
+import com.hewuzhe.model.Pic;
 import com.hewuzhe.model.Plan;
 import com.hewuzhe.model.PrivateTrainerList;
 import com.hewuzhe.model.Product;
@@ -530,4 +532,13 @@ public interface ApiService {
 
     @GET("Helianmeng.asmx/SelectMatchPageByCategory")
     Observable<Res<ArrayList<MegaGame>>> getGames( @Query("startRowIndex") int startRowIndex, @Query("maximumRows") int maximumRows,@Query("userid") String userid ,@Query("categoryid") String categoryid,@Query("matchproperty") String matchproperty);
+
+    @GET("Hewuzhe.asmx/SelectIndexImageList")
+    Observable<Res<ArrayList<Images>>> GetBannerUs(@Query("userid") int userid);
+
+    @GET("Hewuzhe.asmx/SelectTeacherListNewNew")
+    Observable<Res<ArrayList<PrivateTrainerList>>> SelectTeacherListNewNew(@Query("userid") int userid, @Query("lat") String lat, @Query("lng") String lng, @Query("startRowIndex") int startRowIndex, @Query("maximumRows") int maximumRows, @Query("search") String search, @Query("areaid") String areaid, @Query("length") String length, @Query("isrecommend") String isrecommend, @Query("flg") String flg);
+
+    @GET("Hewuzhe.asmx/SelectWuGuanPageBySearchNew")
+    Observable<Res<ArrayList<Dojo>>> SelectWuGuanPageBySearchNew(@Query("userid") int userid, @Query("lat") String lat, @Query("lng") String lng, @Query("startRowIndex") int startRowIndex, @Query("maximumRows") int maximumRows, @Query("search") String search, @Query("areaid") String areaid, @Query("length") String length, @Query("isrecommend") String isrecommend, @Query("flg") String flg);
 }

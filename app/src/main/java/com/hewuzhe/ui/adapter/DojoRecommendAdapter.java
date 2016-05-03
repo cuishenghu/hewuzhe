@@ -1,5 +1,6 @@
 package com.hewuzhe.ui.adapter;
 
+import android.app.Activity;
 import android.content.Context;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.RecyclerView;
@@ -12,9 +13,12 @@ import com.bumptech.glide.Glide;
 import com.hewuzhe.R;
 import com.hewuzhe.model.Dojo;
 import com.hewuzhe.presenter.DojoRecommendPresenter;
+import com.hewuzhe.ui.activity.DojoRecommend2Activity;
 import com.hewuzhe.ui.adapter.base.BaseAdapter;
 import com.hewuzhe.ui.cons.C;
 import com.hewuzhe.utils.StringUtil;
+
+import java.text.DecimalFormat;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
@@ -24,8 +28,15 @@ import butterknife.ButterKnife;
  */
 public class DojoRecommendAdapter extends BaseAdapter<DojoRecommendAdapter.ViewHolder, Dojo, DojoRecommendPresenter> {
 
+    public Activity activity;
+    public DojoRecommendAdapter(Context context, Activity activity) {
+        super(context);
+        this.activity = activity;
+
+    }
     public DojoRecommendAdapter(Context context) {
         super(context);
+
     }
 
     /**
@@ -55,19 +66,35 @@ public class DojoRecommendAdapter extends BaseAdapter<DojoRecommendAdapter.ViewH
     public void bindData(ViewHolder holder, int position) {
         Dojo dojo = data.get(position);
 
-        holder.tvDesc.setText(dojo.Content);
-        holder.tvLoc.setText("地址：" + dojo.Address);
-        holder.tvName.setText(dojo.Title);
-        holder.tvCall.setText("电话：" + dojo.TelePhone);
+        ViewGroup.LayoutParams pageParms = holder.imgBg1.getLayoutParams();
+        pageParms.height = StringUtil.getScreenWidth(activity)/2;
         Glide.with(context)
                 .load(C.BASE_URL + dojo.ImagePath)
-                .centerCrop()
                 .crossFade()
-                .placeholder(R.mipmap.img_bg)
-                .into(holder.img);
+                .placeholder(R.mipmap.img_bg_videio)
+                .into(holder.imgBg1);
+        holder.tvTitle1.setText(dojo.Title);
+        holder.tvAddTime1.setText(getLength(Double.parseDouble(dojo.Distance)));
+//        holder.tvDesc.setText(dojo.Content);
+//        holder.tvLoc.setText("地址：" + dojo.Address);
+//        holder.tvName.setText(dojo.Title);
+//        holder.tvCall.setText("电话：" + dojo.TelePhone);
+//        Glide.with(context)
+//                .load(C.BASE_URL + dojo.ImagePath)
+//                .centerCrop()
+//                .crossFade()
+//                .placeholder(R.mipmap.img_bg)
+//                .into(holder.img);
 
     }
-
+    private String getLength(double l){
+        DecimalFormat df = new DecimalFormat("######0.0");
+        if(l<1000.0)
+            return "1千米内";
+        else if(l>1000)
+            return df.format(l/1000)+"千米";
+        return "";
+    }
     private String getAddress(String address) {
 
         if (!StringUtil.isEmpty(address)) {
@@ -95,20 +122,29 @@ public class DojoRecommendAdapter extends BaseAdapter<DojoRecommendAdapter.ViewH
      */
     class ViewHolder extends RecyclerView.ViewHolder {
         @Nullable
-        @Bind(R.id.img)
-        ImageView img;
+        @Bind(R.id.img_bg1)//视频封面图片
+                ImageView imgBg1;
         @Nullable
-        @Bind(R.id.tv_name)
-        TextView tvName;
+        @Bind(R.id.tv_title1)//视频标题
+                TextView tvTitle1;
         @Nullable
-        @Bind(R.id.tv_desc)
-        TextView tvDesc;
-        @Nullable
-        @Bind(R.id.tv_loc)
-        TextView tvLoc;
-        @Nullable
-        @Bind(R.id.tv_call)
-        TextView tvCall;
+        @Bind(R.id.tv_add_time1)//发布时间
+                TextView tvAddTime1;
+//        @Nullable
+//        @Bind(R.id.img)
+//        ImageView img;
+//        @Nullable
+//        @Bind(R.id.tv_name)
+//        TextView tvName;
+//        @Nullable
+//        @Bind(R.id.tv_desc)
+//        TextView tvDesc;
+//        @Nullable
+//        @Bind(R.id.tv_loc)
+//        TextView tvLoc;
+//        @Nullable
+//        @Bind(R.id.tv_call)
+//        TextView tvCall;
 
         ViewHolder(View view) {
             super(view);

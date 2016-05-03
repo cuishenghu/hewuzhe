@@ -12,6 +12,7 @@ import com.baidu.location.BDLocationListener;
 import com.baidu.location.LocationClient;
 import com.baidu.location.LocationClientOption;
 import com.hewuzhe.R;
+import com.hewuzhe.model.Address;
 import com.hewuzhe.model.Dojo;
 import com.hewuzhe.presenter.DojoRecommendPresenter;
 import com.hewuzhe.ui.App;
@@ -206,6 +207,16 @@ public class DoJoRecommendActivity extends SwipeRecycleViewActivity<DojoRecommen
         }
 
         super.onStop();
+    }
+
+    @Override
+    public String[] getStringData() {
+        return new String[0];
+    }
+
+    @Override
+    public void bindList(ArrayList<Address> classifications) {
+
     }
 
     @Override

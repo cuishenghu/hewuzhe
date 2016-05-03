@@ -4,6 +4,7 @@ import android.net.Uri;
 
 import com.hewuzhe.model.AboutUs;
 import com.hewuzhe.model.Group;
+import com.hewuzhe.model.Images;
 import com.hewuzhe.model.Res;
 import com.hewuzhe.model.User;
 import com.hewuzhe.presenter.base.BasePresenterImp;
@@ -12,6 +13,8 @@ import com.hewuzhe.utils.NetEngine;
 import com.hewuzhe.utils.SB;
 import com.hewuzhe.utils.SessionUtil;
 import com.hewuzhe.view.WarriorFragmentView;
+
+import java.util.ArrayList;
 
 import io.rong.imkit.RongIM;
 import io.rong.imlib.model.UserInfo;
@@ -159,6 +162,33 @@ public class WarriorFragmentPresenter extends BasePresenterImp<WarriorFragmentVi
                 .subscribe(new SB<Res<AboutUs>>() {
                     @Override
                     public void next(Res<AboutUs> res) {
+                        if (res.code == C.OK) {
+                            view.setIndexImg(res.data);
+                        }
+
+                    }
+
+                    @Override
+                    public void onCompleted() {
+
+                    }
+
+                    @Override
+                    public void onError(Throwable e) {
+
+                    }
+                });
+        addSubscription(subscription);
+    }
+
+    public void getBannerImg() {
+        Subscription subscription = NetEngine.getService()
+                .GetBannerUs(new SessionUtil(view.getContext()).getUserId())
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new SB<Res<ArrayList<Images>>>() {
+                    @Override
+                    public void next(Res<ArrayList<Images>> res) {
                         if (res.code == C.OK) {
                             view.setIndexImg(res.data);
                         }

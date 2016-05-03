@@ -11,6 +11,7 @@ import android.widget.TextView;
 
 import com.hewuzhe.R;
 import com.hewuzhe.model.AboutUs;
+import com.hewuzhe.model.Images;
 import com.hewuzhe.presenter.WarriorFragmentPresenter;
 import com.hewuzhe.presenter.base.BasePresenterImp;
 import com.hewuzhe.ui.activity.AboutActivity;
@@ -23,6 +24,8 @@ import com.hewuzhe.ui.cons.C;
 import com.hewuzhe.ui.widget.Line;
 import com.hewuzhe.utils.SessionUtil;
 import com.hewuzhe.view.WarriorFragmentView;
+
+import java.util.ArrayList;
 
 import butterknife.Bind;
 import io.rong.imkit.RongIM;
@@ -215,5 +218,10 @@ public class MoreFragment extends ToolBarFragment<WarriorFragmentPresenter> impl
     public void setIndexImg(AboutUs data) {
         this.au=data;
         tele_more.setText("联系客服（"+au.TelePhone+"）");
+    }
+
+    @Override
+    public void setIndexImg(ArrayList<Images> list) {
+
     }
 }

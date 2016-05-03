@@ -133,6 +133,7 @@ public class StringUtil {
         return metrics.widthPixels;
     }
 
+
     public static int getScreenHeight(Activity activity){
         WindowManager windowManager = activity.getWindowManager();
         Display display = windowManager.getDefaultDisplay();

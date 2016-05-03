@@ -52,6 +52,8 @@ import com.hewuzhe.view.VideoDetailView;
 import com.nostra13.universalimageloader.core.ImageLoader;
 
 import java.util.ArrayList;
+import java.util.Timer;
+import java.util.TimerTask;
 
 import butterknife.Bind;
 import butterknife.OnClick;
@@ -102,7 +104,7 @@ public class DojoDetail2Activity extends RecycleViewNoMoreActivity<DojoDetail2Pr
     private EditText edtComment;
     private TextView tvReport;
     private Video _Video;
-
+    Timer timer = new Timer();
     @Override
     protected int provideContentViewId() {
         return R.layout.activity_dojo_2_detail;
@@ -292,8 +294,24 @@ public class DojoDetail2Activity extends RecycleViewNoMoreActivity<DojoDetail2Pr
         });
 //       mVDVideoView.btnFullScreen.setVisibility(View.GONE);
         mVDVideoView.setVideoPath(videoPath);
-        play.setVisibility(View.VISIBLE);
+        mVDVideoView.start();
+        timer.schedule(task, 600);
+//        play.setVisibility(View.VISIBLE);
     }
+
+    TimerTask task = new TimerTask() {
+        @Override
+        public void run() {
+
+            runOnUiThread(new Runnable() {      // UI thread
+                @Override
+                public void run() {
+                    mVDVideoView.pause();
+                    play.setVisibility(View.VISIBLE);
+                }
+            });
+        }
+    };
 
     @Override
     public void setOthers(ArrayList<OtherImage> data) {
